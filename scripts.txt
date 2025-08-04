@@ -1,0 +1,10 @@
+dotnet tool install --global dotnet-ef
+
+dotnet add package Microsoft.EntityFrameworkCore.Design
+dotnet add package Microsoft.EntityFrameworkCore.SqlServer
+
+dotnet ef migrations add Inicial --project DAO --startup-project UI
+dotnet ef database update --project DAO --startup-project UI
+
+dotnet ef migrations add Inicial
+dotnet ef database update
