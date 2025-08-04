@@ -1,0 +1,51 @@
+# Carpetas de Visual Studio
+.vs/
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# Artefactos de compilación
+bin/
+obj/
+[Bb]in/
+[Oo]bj/
+
+# Paquetes NuGet
+packages/
+*.nupkg
+# Evitar versionar el directorio global de paquetes
+# (alternativa: configurar nuget.config)
+~/.nuget/packages/
+
+# Resultados de pruebas
+TestResults/
+*.trx
+
+# Archivos de Visual Studio Code (si coexisten)
+.vscode/
+
+# Archivos de cobertura de código
+coverage/
+
+# Archivos de ReSharper
+_ReSharper*/
+*.DotSettings.user
+
+# Rider
+.idea/
+
+# Archivos de TeamCity
+*.teamcity
+
+# Logs y bases de datos temporales
+*.log
+*.mdf
+*.ldf
+
+# Otros archivos de usuario / OS
+*.psess
+*.vsp
+*.vspx
+Thumbs.db
+.DS_Store
