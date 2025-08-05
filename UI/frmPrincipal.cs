@@ -1,4 +1,6 @@
-using Services;
+
+
+using Entities;
 
 namespace UI
 {
@@ -43,6 +45,11 @@ namespace UI
         private void frmPrincipal_Load(object sender, EventArgs e)
         {
            
+            clsProducto prod = new clsProducto("manzanas",500,6);
+
+
+
+
             frmLogin frmLogin = new frmLogin();
             frmLogin.StartPosition = FormStartPosition.CenterParent;
             frmLogin.ShowDialog();
