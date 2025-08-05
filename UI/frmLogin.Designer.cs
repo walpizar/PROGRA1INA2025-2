@@ -29,12 +29,12 @@
         private void InitializeComponent()
         {
             gbxLogin = new GroupBox();
-            label1 = new Label();
-            label2 = new Label();
-            txtUusario = new TextBox();
-            txtPassword = new TextBox();
-            btnAceptar = new Button();
             btnCancelar = new Button();
+            btnAceptar = new Button();
+            txtPassword = new TextBox();
+            txtUusario = new TextBox();
+            label2 = new Label();
+            label1 = new Label();
             gbxLogin.SuspendLayout();
             SuspendLayout();
             // 
@@ -52,39 +52,16 @@
             gbxLogin.TabIndex = 0;
             gbxLogin.TabStop = false;
             // 
-            // label1
+            // btnCancelar
             // 
-            label1.AutoSize = true;
-            label1.Font = new Font("Trebuchet MS", 12F, FontStyle.Bold);
-            label1.Location = new Point(81, 46);
-            label1.Name = "label1";
-            label1.Size = new Size(74, 22);
-            label1.TabIndex = 0;
-            label1.Text = "Usuario:";
-            // 
-            // label2
-            // 
-            label2.AutoSize = true;
-            label2.Font = new Font("Trebuchet MS", 12F, FontStyle.Bold);
-            label2.Location = new Point(54, 90);
-            label2.Name = "label2";
-            label2.Size = new Size(101, 22);
-            label2.TabIndex = 1;
-            label2.Text = "Contraseña:";
-            // 
-            // txtUusario
-            // 
-            txtUusario.Location = new Point(161, 46);
-            txtUusario.Name = "txtUusario";
-            txtUusario.Size = new Size(259, 23);
-            txtUusario.TabIndex = 2;
-            // 
-            // txtPassword
-            // 
-            txtPassword.Location = new Point(161, 89);
-            txtPassword.Name = "txtPassword";
-            txtPassword.Size = new Size(259, 23);
-            txtPassword.TabIndex = 3;
+            btnCancelar.BackColor = Color.AliceBlue;
+            btnCancelar.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
+            btnCancelar.Location = new Point(177, 130);
+            btnCancelar.Name = "btnCancelar";
+            btnCancelar.Size = new Size(112, 34);
+            btnCancelar.TabIndex = 5;
+            btnCancelar.Text = "Cancelar";
+            btnCancelar.UseVisualStyleBackColor = false;
             // 
             // btnAceptar
             // 
@@ -96,17 +73,41 @@
             btnAceptar.TabIndex = 4;
             btnAceptar.Text = "Aceptar";
             btnAceptar.UseVisualStyleBackColor = false;
+            btnAceptar.Click += btnAceptar_Click;
             // 
-            // btnCancelar
+            // txtPassword
             // 
-            btnCancelar.BackColor = Color.AliceBlue;
-            btnCancelar.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
-            btnCancelar.Location = new Point(177, 130);
-            btnCancelar.Name = "btnCancelar";
-            btnCancelar.Size = new Size(112, 34);
-            btnCancelar.TabIndex = 5;
-            btnCancelar.Text = "Cancelar";
-            btnCancelar.UseVisualStyleBackColor = false;
+            txtPassword.Location = new Point(161, 89);
+            txtPassword.Name = "txtPassword";
+            txtPassword.Size = new Size(259, 23);
+            txtPassword.TabIndex = 3;
+            // 
+            // txtUusario
+            // 
+            txtUusario.Location = new Point(161, 46);
+            txtUusario.Name = "txtUusario";
+            txtUusario.Size = new Size(259, 23);
+            txtUusario.TabIndex = 2;
+            // 
+            // label2
+            // 
+            label2.AutoSize = true;
+            label2.Font = new Font("Trebuchet MS", 12F, FontStyle.Bold);
+            label2.Location = new Point(54, 90);
+            label2.Name = "label2";
+            label2.Size = new Size(101, 22);
+            label2.TabIndex = 1;
+            label2.Text = "Contraseña:";
+            // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Font = new Font("Trebuchet MS", 12F, FontStyle.Bold);
+            label1.Location = new Point(81, 46);
+            label1.Name = "label1";
+            label1.Size = new Size(74, 22);
+            label1.TabIndex = 0;
+            label1.Text = "Usuario:";
             // 
             // frmLogin
             // 
