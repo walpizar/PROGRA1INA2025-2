@@ -44,8 +44,31 @@ namespace UI
 
         private void frmPrincipal_Load(object sender, EventArgs e)
         {
-           
-            clsProducto prod = new clsProducto("manzanas",500,6);
+
+            //clsProducto prod = new clsProducto();
+
+            //prod.setNombre("Camisa");
+            //prod.precio = 15;
+            //prod.cantidad = 2;
+
+            //clsProducto prod1 = new clsProducto();
+            //clsProducto prod2 = new clsProducto();
+            //clsProducto prod3 = new clsProducto();
+            clsProducto prodX = new clsProducto();
+
+
+
+
+            for (int j = 0; j < 10; j++)
+            {
+                //clsProducto prodX = new clsProducto();
+            
+                prodX.setNombre("");             
+      
+
+            }
+
+
 
 
 
