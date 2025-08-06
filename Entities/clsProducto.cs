@@ -9,8 +9,6 @@ namespace Entities
 {
     public class clsProducto
     {
-
-
         //atributos
         public int id { get; set; }
         //atributos

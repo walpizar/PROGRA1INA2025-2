@@ -42,12 +42,7 @@ namespace Services
             if (producto.precio <= 0)
             {
                 throw new Exception("El precio debe ser mayor a 0");
-            }
-            // regla de negocio valida queno exista un producto con el mismo id
-            if (_prodDao.consultarPorID(producto.id) == null)
-            {
-                throw new Exception("El producto no existe");
-            }
+            }            
             // regla de negocio valida que el nombre    
             if (_prodDao.consultarPorNombre(producto.getNombre()) != null)
             {
@@ -80,9 +75,6 @@ namespace Services
         {
            return _prodDao.consultarTodos();
         }
-
-
-
 
     }
 }
