@@ -17,6 +17,9 @@ namespace UI
     public partial class frmProducto : Form
     {
 
+        public clsProducto productoSelected { get; set; }
+
+
 
         private readonly ProductoService _productoService;
         public frmProducto(ProductoService _proServ)
@@ -37,9 +40,17 @@ namespace UI
                 {
 
                     //creo la instancia del producto nuevo
-                    clsProducto producto = new clsProducto();
-
-                    //seteo los valores del producto
+                    clsProducto producto = productoSelected == null ? new clsProducto() : productoSelected;
+                    
+                   /* if (productoSelected == null)
+                    {
+                        producto = new clsProducto();
+                    }
+                    else
+                    {
+                        producto = productoSelected;
+                    }*/
+                        //seteo los valores del producto
                     producto.id = Convert.ToInt32(txtId.Text);
                     // producto.id = int.Parse(txtId.Text);
                     producto.setNombre(txtNombre.Text);
@@ -47,9 +58,20 @@ namespace UI
                     producto.cantidad = (int)txtCantidad.Value;
 
                     //llamo a mi capa de servicios para guardar/ crear el producto
-                    _productoService.crear(producto);
-                    //muestro mensaje de exito
-                    MessageBox.Show("Producto creado correctamente");
+                    if (productoSelected == null)
+                    {
+                        _productoService.crear(producto);
+                        //muestro mensaje de exito
+                        MessageBox.Show("Producto creado correctamente");
+                    }
+                    else
+                    {
+                        _productoService.modificar(producto);
+                        //muestro mensaje de exito
+                        MessageBox.Show("Producto modificado correctamente");
+                    }
+
+                    
                     //limpio los campos
                     limpiarForm(); //ya no tiene duncionalidad xq se cierra el form
                     this.Close();
@@ -115,6 +137,35 @@ namespace UI
 
         private void frmProducto_Load(object sender, EventArgs e)
         {
+
+            if (productoSelected != null) //accion de modificar
+            {
+               this.lblTitulo.Text = "Modificar Producto";
+               this.Text="Modificar Producto";
+               this.txtId.Enabled = false; //no se puede modificar el id
+               btnGuardar.Text = "Modificar";
+               cargarForm();
+
+            }
+            else //producto es null, accion es crear
+            {
+                this.lblTitulo.Text = "Crear Producto";
+                this.Text = "Crear Producto";
+                this.txtId.Enabled = true; //se puede ingresar el id
+                btnGuardar.Text = "Guardar";
+                limpiarForm();
+            }
+
+
+
+        }
+        //carga el form con lo datos pasados por la propiedad
+        private void cargarForm()
+        {
+            txtId.Text = productoSelected.id.ToString();
+            txtNombre.Text = productoSelected.getNombre();
+            txtPrecio.Text = productoSelected.precio.ToString();
+            txtCantidad.Value = productoSelected.cantidad;
 
         }
 
