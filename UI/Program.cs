@@ -1,3 +1,6 @@
+using DAO;
+using Services;
+
 namespace UI
 {
     internal static class Program
@@ -8,13 +11,22 @@ namespace UI
         [STAThread]
         static void Main()
         {
-            // To customize application configuration such as set high DPI settings or default font,
-            // see https://aka.ms/applicationconfiguration.
-            ApplicationConfiguration.Initialize();
-            Application.Run(new frmProductoLista());
+           
 
-            //solo ejemplo
-            //Application.Run(new frmLogin());
+
+
+            
+            ProductoService _productoServ = new ProductoService();
+           
+
+
+        // To customize application configuration such as set high DPI settings or default font,
+        // see https://aka.ms/applicationconfiguration.
+        ApplicationConfiguration.Initialize();
+        Application.Run(new frmProductoLista(_productoServ));
+
+        //solo ejemplo
+        //Application.Run(new frmLogin());
 
         }
     }

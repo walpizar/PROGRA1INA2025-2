@@ -66,7 +66,7 @@
             txtCantidad.Location = new Point(78, 124);
             txtCantidad.Name = "txtCantidad";
             txtCantidad.Size = new Size(85, 23);
-            txtCantidad.TabIndex = 7;
+            txtCantidad.TabIndex = 4;
             // 
             // lblCantidad
             // 
@@ -82,7 +82,7 @@
             txtPrecio.Location = new Point(78, 94);
             txtPrecio.Name = "txtPrecio";
             txtPrecio.Size = new Size(125, 23);
-            txtPrecio.TabIndex = 5;
+            txtPrecio.TabIndex = 3;
             // 
             // lblPrecio
             // 
@@ -96,9 +96,10 @@
             // txtNombre
             // 
             txtNombre.Location = new Point(78, 65);
+            txtNombre.MaxLength = 50;
             txtNombre.Name = "txtNombre";
             txtNombre.Size = new Size(301, 23);
-            txtNombre.TabIndex = 3;
+            txtNombre.TabIndex = 2;
             // 
             // lblNombre
             // 
@@ -140,7 +141,7 @@
             btnGuardar.Location = new Point(294, 249);
             btnGuardar.Name = "btnGuardar";
             btnGuardar.Size = new Size(113, 36);
-            btnGuardar.TabIndex = 2;
+            btnGuardar.TabIndex = 5;
             btnGuardar.Text = "Guardar";
             btnGuardar.UseVisualStyleBackColor = true;
             btnGuardar.Click += btnGuardar_Click;
@@ -150,7 +151,7 @@
             btnCancelar.Location = new Point(172, 249);
             btnCancelar.Name = "btnCancelar";
             btnCancelar.Size = new Size(113, 36);
-            btnCancelar.TabIndex = 3;
+            btnCancelar.TabIndex = 6;
             btnCancelar.Text = "Cancelar";
             btnCancelar.UseVisualStyleBackColor = true;
             // 
@@ -165,6 +166,7 @@
             Controls.Add(gbxDatosProducto);
             Name = "frmProducto";
             Text = "Matentenimiento: Crear Producto";
+            Load += frmProducto_Load;
             gbxDatosProducto.ResumeLayout(false);
             gbxDatosProducto.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)txtCantidad).EndInit();

@@ -7,9 +7,12 @@ namespace Services
     public class ProductoService
     {
         //capa de servicio viaja o accede a capa de datos    
-        ProductoDao _prodDao= new ProductoDao();
+        private readonly ProductoDao _prodDao= new ProductoDao();
 
-        public ProductoService() { }
+        public ProductoService() {
+
+      
+        }
 
         public void crear(clsProducto producto)
         {
