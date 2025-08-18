@@ -41,16 +41,16 @@ namespace UI
 
                     //creo la instancia del producto nuevo
                     clsProducto producto = productoSelected == null ? new clsProducto() : productoSelected;
-                    
-                   /* if (productoSelected == null)
-                    {
-                        producto = new clsProducto();
-                    }
-                    else
-                    {
-                        producto = productoSelected;
-                    }*/
-                        //seteo los valores del producto
+
+                    /* if (productoSelected == null)
+                     {
+                         producto = new clsProducto();
+                     }
+                     else
+                     {
+                         producto = productoSelected;
+                     }*/
+                    //seteo los valores del producto
                     producto.id = Convert.ToInt32(txtId.Text);
                     // producto.id = int.Parse(txtId.Text);
                     producto.setNombre(txtNombre.Text);
@@ -71,7 +71,7 @@ namespace UI
                         MessageBox.Show("Producto modificado correctamente");
                     }
 
-                    
+
                     //limpio los campos
                     limpiarForm(); //ya no tiene duncionalidad xq se cierra el form
                     this.Close();
@@ -110,7 +110,7 @@ namespace UI
                 return false;
             }
 
-            if (txtNombre.Text.Length == 0 )
+            if (txtNombre.Text.Length == 0)
             {
                 MessageBox.Show("El nombre es obligatorio");
                 txtNombre.Focus();
@@ -140,11 +140,12 @@ namespace UI
 
             if (productoSelected != null) //accion de modificar
             {
-               this.lblTitulo.Text = "Modificar Producto";
-               this.Text="Modificar Producto";
-               this.txtId.Enabled = false; //no se puede modificar el id
-               btnGuardar.Text = "Modificar";
-               cargarForm();
+                this.lblTitulo.Text = "Modificar Producto";
+                this.Text = "Modificar Producto";
+                this.txtId.Enabled = false; //no se puede modificar el id
+                btnGuardar.Text = "Modificar";
+                btnEliminar.Visible = true; //muestro el boton de eliminar
+                cargarForm();
 
             }
             else //producto es null, accion es crear
@@ -153,6 +154,7 @@ namespace UI
                 this.Text = "Crear Producto";
                 this.txtId.Enabled = true; //se puede ingresar el id
                 btnGuardar.Text = "Guardar";
+                btnEliminar.Visible = false; //oculto el boton de eliminar
                 limpiarForm();
             }
 
@@ -172,6 +174,33 @@ namespace UI
         private void btnCancelar_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        private void btnEliminar_Click(object sender, EventArgs e)
+        {
+            try
+            {
+
+               DialogResult resp = MessageBox.Show("¿Está seguro que desea eliminar el producto?", "Confirmación", 
+                    MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+                if(resp == DialogResult.Yes)
+                {
+                    _productoService.eliminar(productoSelected.id);
+                    MessageBox.Show("Producto eliminado correctamente");
+                    this.Close(); //cierro el formulario
+                }
+
+
+            }
+            catch (Exception)
+            {
+
+                MessageBox.Show("Error al eliminar el producto.");
+            }
+
+
+
         }
     }
 }

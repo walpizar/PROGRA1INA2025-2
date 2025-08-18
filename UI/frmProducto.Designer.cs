@@ -40,6 +40,7 @@
             lblTitulo = new Label();
             btnGuardar = new Button();
             btnCancelar = new Button();
+            btnEliminar = new Button();
             gbxDatosProducto.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)txtCantidad).BeginInit();
             SuspendLayout();
@@ -138,7 +139,7 @@
             // 
             // btnGuardar
             // 
-            btnGuardar.Location = new Point(294, 249);
+            btnGuardar.Location = new Point(175, 249);
             btnGuardar.Name = "btnGuardar";
             btnGuardar.Size = new Size(113, 36);
             btnGuardar.TabIndex = 5;
@@ -148,7 +149,7 @@
             // 
             // btnCancelar
             // 
-            btnCancelar.Location = new Point(172, 249);
+            btnCancelar.Location = new Point(294, 249);
             btnCancelar.Name = "btnCancelar";
             btnCancelar.Size = new Size(113, 36);
             btnCancelar.TabIndex = 6;
@@ -156,11 +157,22 @@
             btnCancelar.UseVisualStyleBackColor = true;
             btnCancelar.Click += btnCancelar_Click;
             // 
+            // btnEliminar
+            // 
+            btnEliminar.Location = new Point(56, 249);
+            btnEliminar.Name = "btnEliminar";
+            btnEliminar.Size = new Size(113, 36);
+            btnEliminar.TabIndex = 7;
+            btnEliminar.Text = "Eliminar";
+            btnEliminar.UseVisualStyleBackColor = true;
+            btnEliminar.Click += btnEliminar_Click;
+            // 
             // frmProducto
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(421, 293);
+            Controls.Add(btnEliminar);
             Controls.Add(btnCancelar);
             Controls.Add(btnGuardar);
             Controls.Add(lblTitulo);
@@ -189,5 +201,6 @@
         private TextBox txtId;
         private Label lblId;
         private NumericUpDown txtCantidad;
+        private Button btnEliminar;
     }
 }
