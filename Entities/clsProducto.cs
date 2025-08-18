@@ -20,12 +20,12 @@ namespace Entities
 
         public void setNombre(string nombre)
         {
-            //validacion y comprobacion del dato, transformacion de datos
-            if (nombre.Length <= 5)
-            {
-                throw new Exception("El nombre debe tener mas de 5 caracteres");
+            ////validacion y comprobacion del dato, transformacion de datos
+            //if (nombre.Length <= 5)
+            //{
+            //    throw new Exception("El nombre debe tener mas de 5 caracteres");
 
-            }
+            //}
             this.nombre = nombre.ToUpper();
         }
 
