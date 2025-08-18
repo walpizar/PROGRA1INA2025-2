@@ -56,12 +56,6 @@ namespace UI
                 lstvLista.Items.Add(item);
             }
 
-
-
-
-
-
-
         }
     }
 }

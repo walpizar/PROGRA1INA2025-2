@@ -51,7 +51,8 @@ namespace UI
                     //muestro mensaje de exito
                     MessageBox.Show("Producto creado correctamente");
                     //limpio los campos
-                    limpiarForm();
+                    limpiarForm(); //ya no tiene duncionalidad xq se cierra el form
+                    this.Close();
 
                 }
 
@@ -87,9 +88,9 @@ namespace UI
                 return false;
             }
 
-            if (txtNombre.Text.Length == 0 || txtNombre.Text.Length < 5)
+            if (txtNombre.Text.Length == 0 )
             {
-                MessageBox.Show("El nombre es obligatorio y debe tener mas de 5 caracteres");
+                MessageBox.Show("El nombre es obligatorio");
                 txtNombre.Focus();
                 return false;
 
@@ -115,6 +116,11 @@ namespace UI
         private void frmProducto_Load(object sender, EventArgs e)
         {
 
+        }
+
+        private void btnCancelar_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
     }
 }
