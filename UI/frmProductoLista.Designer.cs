@@ -89,13 +89,14 @@
             txtBusqueda.Name = "txtBusqueda";
             txtBusqueda.Size = new Size(554, 23);
             txtBusqueda.TabIndex = 3;
+            txtBusqueda.TextChanged += txtBusqueda_TextChanged;
             // 
             // lstvLista
             // 
             lstvLista.Columns.AddRange(new ColumnHeader[] { colId, colNombre, colPrecio });
             lstvLista.FullRowSelect = true;
             lstvLista.GridLines = true;
-            lstvLista.Location = new Point(18, 88);
+            lstvLista.Location = new Point(15, 88);
             lstvLista.MultiSelect = false;
             lstvLista.Name = "lstvLista";
             lstvLista.Size = new Size(557, 293);

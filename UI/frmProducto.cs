@@ -39,7 +39,7 @@ namespace UI
                 if (validarDatos())
                 {
 
-                    //creo la instancia del producto nuevo
+                    //creo la instancia del producto nuevo, 
                     clsProducto producto = productoSelected == null ? new clsProducto() : productoSelected;
 
                     /* if (productoSelected == null)
