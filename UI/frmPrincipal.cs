@@ -63,7 +63,7 @@ namespace UI
             {
                 //clsProducto prodX = new clsProducto();
             
-                prodX.setNombre("");             
+                prodX.nombre="";             
       
 
             }

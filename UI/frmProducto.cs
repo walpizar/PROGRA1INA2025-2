@@ -53,7 +53,7 @@ namespace UI
                     //seteo los valores del producto
                     producto.id = Convert.ToInt32(txtId.Text);
                     // producto.id = int.Parse(txtId.Text);
-                    producto.setNombre(txtNombre.Text);
+                    producto.nombre = txtNombre.Text;
                     producto.precio = Convert.ToInt32(txtPrecio.Text);
                     producto.cantidad = (int)txtCantidad.Value;
 
@@ -165,7 +165,7 @@ namespace UI
         private void cargarForm()
         {
             txtId.Text = productoSelected.id.ToString();
-            txtNombre.Text = productoSelected.getNombre();
+            txtNombre.Text = productoSelected.nombre;
             txtPrecio.Text = productoSelected.precio.ToString();
             txtCantidad.Value = productoSelected.cantidad;
 

@@ -54,7 +54,7 @@ namespace UI
             foreach (clsProducto producto in lista)
             {
                 ListViewItem item = new ListViewItem(producto.id.ToString());
-                item.SubItems.Add(producto.getNombre());
+                item.SubItems.Add(producto.nombre);
                 item.SubItems.Add(producto.precio.ToString());
                 lstvLista.Items.Add(item);
             }
@@ -110,7 +110,7 @@ namespace UI
             //FILTRAR POR NOMBRE Y POR EL ID
             var listaFiltrada = this.lista.Where(p => p.id.ToString().ToUpper()
             .Contains(txtBusqueda.Text.ToUpper()) || 
-            p.getNombre().ToUpper().Contains(txtBusqueda.Text.ToUpper())).ToList();
+            p.nombre.ToUpper().Contains(txtBusqueda.Text.ToUpper())).ToList();
 
             cargarLista(listaFiltrada);
 

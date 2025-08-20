@@ -13,34 +13,13 @@ namespace Entities
     {
         //atributos
         [Key]
-        // [DatabaseGenerated(DatabaseGeneratedOption.Identity)] //para que sea autonumerico
+        [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int id { get; set; }
-        //atributos
-
+       
         [Required]
         [StringLength(50, ErrorMessage = "El nombre no puede tener mas de 50 caracteres")]
-        private string nombre;
-        //private decimal precio;
-        //private int cantidad;
-
-        //propiedades
-
-        public void setNombre(string nombre)
-        {
-            ////validacion y comprobacion del dato, transformacion de datos
-            //if (nombre.Length <= 5)
-            //{
-            //    throw new Exception("El nombre debe tener mas de 5 caracteres");
-
-            //}
-            this.nombre = nombre.ToUpper();
-        }
-
-        public string getNombre()
-        {
-            return this.nombre;
-        }
-
+        public string nombre { get; set; }
+        
         [Required]
         [Range(0, 1000000, ErrorMessage = "El precio debe estar entre 0 y 1000000")]
         public int precio { get; set; }

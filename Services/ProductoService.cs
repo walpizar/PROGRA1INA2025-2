@@ -29,7 +29,7 @@ namespace Services
                 throw new Exception("El producto ya existe");
             }
             // regla de negocio valida que el nombre    
-            if (_prodDao.consultarPorNombre(producto.getNombre())!= null)
+            if (_prodDao.consultarPorNombre(producto.nombre)!= null)
             {
                 throw new Exception("Ya existe un producto con ese nombre");
             }
