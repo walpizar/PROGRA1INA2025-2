@@ -15,12 +15,12 @@ namespace DAO
         private dbContextINA _context;  
 
 
-        public List<clsProducto> listaProducto { get; set; }
+        //public List<clsProducto> listaProducto { get; set; }
 
         public ProductoDao()
         {
             _context= new dbContextINA();
-            listaProducto = new List<clsProducto>();
+           // listaProducto = new List<clsProducto>();
         }
 
         public void crear(clsProducto producto)

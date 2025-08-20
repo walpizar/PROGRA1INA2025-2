@@ -16,14 +16,14 @@ namespace UI
 
 
             
-            ProductoService _productoServ = new ProductoService();
+            //ProductoService _productoServ = new ProductoService();
            
 
 
         // To customize application configuration such as set high DPI settings or default font,
         // see https://aka.ms/applicationconfiguration.
         ApplicationConfiguration.Initialize();
-        Application.Run(new frmProductoLista(_productoServ));
+        Application.Run(new frmProductoLista());
 
         //solo ejemplo
         //Application.Run(new frmLogin());

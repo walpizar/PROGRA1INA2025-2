@@ -18,10 +18,10 @@ namespace UI
         List<clsProducto> lista;
 
         private readonly ProductoService _productoService;
-        public frmProductoLista(ProductoService _proServ)
+        public frmProductoLista()
         {
             InitializeComponent();
-            _productoService = _proServ;
+            _productoService = new ProductoService();
         }
 
         private void frmProductoLista_Load(object sender, EventArgs e)
@@ -33,7 +33,7 @@ namespace UI
 
         private void btnNuevo_Click(object sender, EventArgs e)
         {
-            frmProducto frmProducto = new frmProducto(_productoService);
+            frmProducto frmProducto = new frmProducto();
             frmProducto.ShowDialog();
 
 
@@ -83,7 +83,7 @@ namespace UI
                     if (producto != null)
                     {
                         //creo una instancia del formulario de producto
-                        frmProducto frmProducto = new frmProducto(_productoService);
+                        frmProducto frmProducto = new frmProducto();
                         //le asigno a la propiedad el producto seleccionado
                         frmProducto.productoSelected = producto;
                         //abro el formulario

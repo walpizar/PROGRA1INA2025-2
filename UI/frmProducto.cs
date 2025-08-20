@@ -22,11 +22,11 @@ namespace UI
 
 
         private readonly ProductoService _productoService;
-        public frmProducto(ProductoService _proServ)
+        public frmProducto()
         {
             InitializeComponent();
 
-            _productoService = _proServ;
+            _productoService = new ProductoService();
         }
 
         private void btnGuardar_Click(object sender, EventArgs e)
