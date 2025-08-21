@@ -31,8 +31,6 @@ namespace UI
 
         private void btnGuardar_Click(object sender, EventArgs e)
         {
-
-
             try
             {
                 //validar datos de entrada
