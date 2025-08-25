@@ -1,4 +1,5 @@
-﻿using DAO;
+﻿using Common.Interfaces;
+using DAO;
 using Entities;
 using System;
 using System.Collections.Generic;
@@ -8,14 +9,14 @@ using System.Threading.Tasks;
 
 namespace Services
 {
-    public class ClienteService
+    public class ClienteService: IGenerica<clsCliente>
     {
         //capa de servicio viaja o accede a capa de datos    
-        ProductoDao _clienteDao = new ProductoDao();
+        ClienteDao _clienteDao = new ClienteDao();
 
         public ClienteService() { }
 
-        public void crear(clsProducto cliente)
+        public void crear(clsCliente cliente)
         {
 
             //regals de negocio           
@@ -31,7 +32,7 @@ namespace Services
 
         }
 
-        public void modificar(clsProducto cliente)
+        public void modificar(clsCliente cliente)
         {
             //reglasd de negocio
            
@@ -52,15 +53,24 @@ namespace Services
 
 
         }
-        public clsProducto consultarPorID(int id)
+        public clsCliente consultarPorID(int id)
         {
             return _clienteDao.consultarPorID(id);
         }
 
-        public List<clsProducto> consultarTodos()
+        public List<clsCliente> consultarTodos()
         {
             return _clienteDao.consultarTodos();
         }
 
+        public clsProducto consultarPorNombre(string nombre)
+        {
+            throw new NotImplementedException();
+        }
+
+        clsCliente IGenerica<clsCliente>.consultarPorNombre(string nombre)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

@@ -1,4 +1,5 @@
-﻿using Entities;
+﻿using Common.Interfaces;
+using Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace DAO
 {
-    public class ClienteDao
+    public class ClienteDao: IGenerica<clsCliente>
     {
         public List<clsCliente> listaCliente { get; set; }
 
@@ -55,8 +56,9 @@ namespace DAO
             return listaCliente;
         }
 
-
-
-
+        public clsCliente consultarPorNombre(string nombre)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

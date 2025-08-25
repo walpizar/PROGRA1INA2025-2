@@ -1,17 +1,16 @@
-﻿using DAO;
+﻿using Common.Interfaces;
+using DAO;
 using Entities;
 
 namespace Services
 {
     //reglas de negocio
-    public class ProductoService
+    public class ProductoService: IGenerica<clsProducto>
     {
         //capa de servicio viaja o accede a capa de datos    
         private readonly ProductoDao _prodDao= new ProductoDao();
 
-        public ProductoService() {
-
-      
+        public ProductoService() {      
         }
 
         public void crear(clsProducto producto)
@@ -79,5 +78,9 @@ namespace Services
            return _prodDao.consultarTodos();
         }
 
+        public clsProducto consultarPorNombre(string nombre)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

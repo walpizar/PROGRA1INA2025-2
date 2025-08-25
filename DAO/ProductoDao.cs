@@ -6,10 +6,11 @@ using System.ComponentModel.Design;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Common.Interfaces;
 
 namespace DAO
 {
-    public class ProductoDao
+    public class ProductoDao: IGenerica<clsProducto>
     {
         //CRUD
         private dbContextINA _context;  
@@ -25,7 +26,7 @@ namespace DAO
 
         public void crear(clsProducto producto)
         {
-           // listaProducto.Add(producto);
+            // listaProducto.Add(producto);
 
             _context.Producto.Add(producto);
             _context.SaveChanges();
@@ -86,6 +87,6 @@ namespace DAO
             return _context.Producto.ToList();
         }
 
-
+       
     }
 }
