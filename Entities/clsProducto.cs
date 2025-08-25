@@ -29,6 +29,12 @@ namespace Entities
         [Column("cantidad", TypeName = "int")]      
         public int cantidad { get; set; }
 
+        [Required]
+        public int familia { get; set; }
+
+        public clsCategoria Categoria { get; set; }
+
+
 
         //constructor
         //sobrecarga de constructores

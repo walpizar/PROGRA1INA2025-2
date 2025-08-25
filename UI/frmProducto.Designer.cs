@@ -29,6 +29,8 @@
         private void InitializeComponent()
         {
             gbxDatosProducto = new GroupBox();
+            lblFamilia = new Label();
+            cboFamilia = new ComboBox();
             txtCantidad = new NumericUpDown();
             lblCantidad = new Label();
             txtPrecio = new TextBox();
@@ -41,12 +43,18 @@
             btnGuardar = new Button();
             btnCancelar = new Button();
             btnEliminar = new Button();
+            lblCategoria = new Label();
+            cboCategoria = new ComboBox();
             gbxDatosProducto.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)txtCantidad).BeginInit();
             SuspendLayout();
             // 
             // gbxDatosProducto
             // 
+            gbxDatosProducto.Controls.Add(lblCategoria);
+            gbxDatosProducto.Controls.Add(cboCategoria);
+            gbxDatosProducto.Controls.Add(lblFamilia);
+            gbxDatosProducto.Controls.Add(cboFamilia);
             gbxDatosProducto.Controls.Add(txtCantidad);
             gbxDatosProducto.Controls.Add(lblCantidad);
             gbxDatosProducto.Controls.Add(txtPrecio);
@@ -57,10 +65,28 @@
             gbxDatosProducto.Controls.Add(lblId);
             gbxDatosProducto.Location = new Point(12, 46);
             gbxDatosProducto.Name = "gbxDatosProducto";
-            gbxDatosProducto.Size = new Size(395, 197);
+            gbxDatosProducto.Size = new Size(395, 233);
             gbxDatosProducto.TabIndex = 0;
             gbxDatosProducto.TabStop = false;
             gbxDatosProducto.Text = "Datos de producto";
+            // 
+            // lblFamilia
+            // 
+            lblFamilia.AutoSize = true;
+            lblFamilia.Location = new Point(24, 156);
+            lblFamilia.Name = "lblFamilia";
+            lblFamilia.Size = new Size(48, 15);
+            lblFamilia.TabIndex = 8;
+            lblFamilia.Text = "Familia:";
+            // 
+            // cboFamilia
+            // 
+            cboFamilia.DropDownStyle = ComboBoxStyle.DropDownList;
+            cboFamilia.FormattingEnabled = true;
+            cboFamilia.Location = new Point(78, 153);
+            cboFamilia.Name = "cboFamilia";
+            cboFamilia.Size = new Size(198, 23);
+            cboFamilia.TabIndex = 7;
             // 
             // txtCantidad
             // 
@@ -139,7 +165,7 @@
             // 
             // btnGuardar
             // 
-            btnGuardar.Location = new Point(175, 249);
+            btnGuardar.Location = new Point(177, 306);
             btnGuardar.Name = "btnGuardar";
             btnGuardar.Size = new Size(113, 36);
             btnGuardar.TabIndex = 5;
@@ -149,7 +175,7 @@
             // 
             // btnCancelar
             // 
-            btnCancelar.Location = new Point(294, 249);
+            btnCancelar.Location = new Point(296, 306);
             btnCancelar.Name = "btnCancelar";
             btnCancelar.Size = new Size(113, 36);
             btnCancelar.TabIndex = 6;
@@ -159,7 +185,7 @@
             // 
             // btnEliminar
             // 
-            btnEliminar.Location = new Point(56, 249);
+            btnEliminar.Location = new Point(58, 306);
             btnEliminar.Name = "btnEliminar";
             btnEliminar.Size = new Size(113, 36);
             btnEliminar.TabIndex = 7;
@@ -167,11 +193,29 @@
             btnEliminar.UseVisualStyleBackColor = true;
             btnEliminar.Click += btnEliminar_Click;
             // 
+            // lblCategoria
+            // 
+            lblCategoria.AutoSize = true;
+            lblCategoria.Location = new Point(11, 185);
+            lblCategoria.Name = "lblCategoria";
+            lblCategoria.Size = new Size(61, 15);
+            lblCategoria.TabIndex = 10;
+            lblCategoria.Text = "Categoría:";
+            // 
+            // cboCategoria
+            // 
+            cboCategoria.DropDownStyle = ComboBoxStyle.DropDownList;
+            cboCategoria.FormattingEnabled = true;
+            cboCategoria.Location = new Point(78, 182);
+            cboCategoria.Name = "cboCategoria";
+            cboCategoria.Size = new Size(198, 23);
+            cboCategoria.TabIndex = 9;
+            // 
             // frmProducto
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(421, 293);
+            ClientSize = new Size(421, 354);
             Controls.Add(btnEliminar);
             Controls.Add(btnCancelar);
             Controls.Add(btnGuardar);
@@ -202,5 +246,9 @@
         private Label lblId;
         private NumericUpDown txtCantidad;
         private Button btnEliminar;
+        private Label lblFamilia;
+        private ComboBox cboFamilia;
+        private Label lblCategoria;
+        private ComboBox cboCategoria;
     }
 }

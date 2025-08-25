@@ -1,4 +1,5 @@
-﻿using Common.Utils;
+﻿using Common.Enums;
+using Common.Utils;
 using Entities;
 using Services;
 using System;
@@ -11,6 +12,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static Common.Enums.Enums;
 
 namespace UI
 {
@@ -55,6 +57,8 @@ namespace UI
                     producto.precio = Convert.ToInt32(txtPrecio.Text);
                     producto.cantidad = (int)txtCantidad.Value;
 
+                    producto.familia = (int)cboFamilia.SelectedItem;
+
                     //llamo a mi capa de servicios para guardar/ crear el producto
                     if (productoSelected == null)
                     {
@@ -75,12 +79,6 @@ namespace UI
                     this.Close();
 
                 }
-
-
-
-
-
-
 
             }
             catch (Exception ex)
@@ -135,7 +133,7 @@ namespace UI
 
         private void frmProducto_Load(object sender, EventArgs e)
         {
-
+            cargarCombos();
             if (productoSelected != null) //accion de modificar
             {
                 this.lblTitulo.Text = "Modificar Producto";
@@ -156,9 +154,22 @@ namespace UI
                 limpiarForm();
             }
 
+          
+
 
 
         }
+
+        private void cargarCombos()
+        {
+            
+            cboFamilia.DataSource = Enum.GetValues(typeof(Enums.FamiliaProducto));
+
+            //cargar el combo de las cateogiras
+            //dessde la base datos.
+
+        }
+
         //carga el form con lo datos pasados por la propiedad
         private void cargarForm()
         {
@@ -167,6 +178,7 @@ namespace UI
             txtPrecio.Text = productoSelected.precio.ToString();
             txtCantidad.Value = productoSelected.cantidad;
 
+            cboFamilia.SelectedItem = (FamiliaProducto)productoSelected.familia;
         }
 
         private void btnCancelar_Click(object sender, EventArgs e)

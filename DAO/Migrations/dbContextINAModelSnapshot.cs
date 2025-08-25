@@ -22,6 +22,32 @@ namespace DAO.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
+            modelBuilder.Entity("Entities.clsCategoria", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Nombre")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<string>("descripcion")
+                        .IsRequired()
+                        .HasMaxLength(200)
+                        .HasColumnType("nvarchar(200)");
+
+                    b.Property<bool>("estado")
+                        .HasColumnType("bit");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("tbCategorias");
+                });
+
             modelBuilder.Entity("Entities.clsCliente", b =>
                 {
                     b.Property<int>("id")
@@ -66,9 +92,15 @@ namespace DAO.Migrations
                     b.Property<int>("id")
                         .HasColumnType("int");
 
+                    b.Property<int>("CategoriaId")
+                        .HasColumnType("int");
+
                     b.Property<int>("cantidad")
                         .HasColumnType("int")
                         .HasColumnName("cantidad");
+
+                    b.Property<int>("familia")
+                        .HasColumnType("int");
 
                     b.Property<string>("nombre")
                         .IsRequired()
@@ -80,7 +112,25 @@ namespace DAO.Migrations
 
                     b.HasKey("id");
 
+                    b.HasIndex("CategoriaId");
+
                     b.ToTable("tbProductos");
+                });
+
+            modelBuilder.Entity("Entities.clsProducto", b =>
+                {
+                    b.HasOne("Entities.clsCategoria", "Categoria")
+                        .WithMany("Productos")
+                        .HasForeignKey("CategoriaId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Categoria");
+                });
+
+            modelBuilder.Entity("Entities.clsCategoria", b =>
+                {
+                    b.Navigation("Productos");
                 });
 #pragma warning restore 612, 618
         }
