@@ -1,4 +1,5 @@
 ﻿using Common.Enums;
+using Common.Exceptions;
 using Common.Utils;
 using Entities;
 using Services;
@@ -38,7 +39,7 @@ namespace UI
             try
             {
                 //validar datos de entrada
-                if (validarDatos())
+                if (true)
                 {
 
                     //creo la instancia del producto nuevo, 
@@ -86,9 +87,21 @@ namespace UI
                 }
 
             }
-            catch (Exception ex)
+            catch (EntityExistDBException ex)
             {
                 MessageBox.Show(ex.Message);
+            }
+            catch (NameProductExistDBException ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            catch (PriceNegativeException ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error desconocido. Contante con el administrador.");
             }
 
         }

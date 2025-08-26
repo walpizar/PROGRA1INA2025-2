@@ -26,21 +26,41 @@ namespace UI
 
         private void frmProductoLista_Load(object sender, EventArgs e)
         {
-            this.lista = _productoService.consultarTodos();
-            cargarLista(lista);
+            try
+            {
+                this.lista = _productoService.consultarTodos();
+                cargarLista(lista);
+            }
+            catch (Exception)
+            {
+
+                MessageBox.Show("Error al cargar la lista de productos");
+            }
 
         }
 
         private void btnNuevo_Click(object sender, EventArgs e)
         {
-            frmProducto frmProducto = new frmProducto();
-            frmProducto.ShowDialog();
+            try
+            {
+                frmProducto frmProducto = new frmProducto();
+                frmProducto.ShowDialog();
 
 
-            //actualiar la lista
-            this.lista = _productoService.consultarTodos();
-            cargarLista(lista);
+                //actualiar la lista
+                this.lista = _productoService.consultarTodos();
+                cargarLista(lista);
 
+
+               
+
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+           
 
         }
 

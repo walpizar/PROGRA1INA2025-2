@@ -1,4 +1,5 @@
-﻿using Common.Interfaces;
+﻿using Common.Exceptions;
+using Common.Interfaces;
 using DAO;
 using Entities;
 
@@ -20,17 +21,17 @@ namespace Services
             //el precio debe ser mayor a 0
             if (producto.precio <= 0)
             {
-                throw new Exception("El precio debe ser mayor a 0");
+                throw new PriceNegativeException();
             }
             // regla de negocio valida queno exista un producto con el mismo id
             if (_prodDao.consultarPorID(producto.id)!= null)
             {
-                throw new Exception("El producto ya existe");
+                throw new EntityExistDBException();
             }
             // regla de negocio valida que el nombre    
             if (_prodDao.consultarPorNombre(producto.nombre)!= null)
             {
-                throw new Exception("Ya existe un producto con ese nombre");
+                throw new NameProductExistDBException();
             }
 
             _prodDao.crear(producto);

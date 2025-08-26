@@ -33,7 +33,16 @@ namespace Services
 
         public List<clsCategoria> consultarTodos()
         {
-            return _categoriaDAO.consultarTodos();
+            try
+            {
+                return _categoriaDAO.consultarTodos();
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+          
         }
 
         public void crear(clsCategoria entidad)

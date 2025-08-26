@@ -3,6 +3,7 @@ using Common.Interfaces;
 using Entities;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -32,7 +33,22 @@ namespace DAO
 
         public List<clsCategoria> consultarTodos()
         {
-            return _context.Categoria.Where(c=>c.estado == true).ToList();
+            try
+            {
+             
+                return _context.Categoria.Where(c => c.estado == true).ToList();
+            }
+            catch (Exception)
+            {
+
+                throw new Exception();
+            }
+
+
+   
+         
+           
+       
         }
 
         public void crear(clsCategoria entidad)

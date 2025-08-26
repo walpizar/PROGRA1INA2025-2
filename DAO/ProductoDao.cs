@@ -84,6 +84,7 @@ namespace DAO
 
         public List<clsProducto> consultarTodos()
         {
+          
             return _context.Producto.ToList();
         }
 
