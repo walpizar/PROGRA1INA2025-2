@@ -1,4 +1,5 @@
-﻿using Common.Interfaces;
+﻿using Common.Enums;
+using Common.Interfaces;
 using Entities;
 using System;
 using System.Collections.Generic;
@@ -10,8 +11,17 @@ namespace DAO
 {
     public class CategoriaDAO : IGenerica<clsCategoria>
     {
+        private dbContextINA _context;
+
+        public CategoriaDAO()
+        {
+            _context = new dbContextINA();
+        }
+
+
         public clsCategoria consultarPorID(int id)
         {
+            //_context.facturas.Where(f => f.tipopago == (int)Enums.MetodoPago.PayPal).ToList();
             throw new NotImplementedException();
         }
 
@@ -22,7 +32,7 @@ namespace DAO
 
         public List<clsCategoria> consultarTodos()
         {
-            throw new NotImplementedException();
+            return _context.Categoria.Where(c=>c.estado == true).ToList();
         }
 
         public void crear(clsCategoria entidad)

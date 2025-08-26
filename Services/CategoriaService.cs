@@ -1,8 +1,10 @@
-﻿using Common.Interfaces;
+﻿using Common.Enums;
+using Common.Interfaces;
 using Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection.Metadata;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -12,7 +14,10 @@ namespace Services
     {
         public clsCategoria consultarPorID(int id)
         {
+
             throw new NotImplementedException();
+
+
         }
 
         public clsCategoria consultarPorNombre(string nombre)

@@ -162,7 +162,7 @@ namespace UI
 
         private void cargarCombos()
         {
-            
+            //cargar el combo de las familiar con el enumerador definido
             cboFamilia.DataSource = Enum.GetValues(typeof(Enums.FamiliaProducto));
 
             //cargar el combo de las cateogiras
@@ -177,7 +177,7 @@ namespace UI
             txtNombre.Text = productoSelected.nombre;
             txtPrecio.Text = productoSelected.precio.ToString();
             txtCantidad.Value = productoSelected.cantidad;
-
+            //obtiene el valor que el usuario selecciono en el combo
             cboFamilia.SelectedItem = (FamiliaProducto)productoSelected.familia;
         }
 
