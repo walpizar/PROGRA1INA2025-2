@@ -32,6 +32,7 @@ namespace Entities
         [Required]
         public int familia { get; set; }
 
+        public int CategoriaId { get; set; }
         public clsCategoria Categoria { get; set; }
 
 

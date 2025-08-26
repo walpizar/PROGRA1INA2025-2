@@ -30,5 +30,9 @@ namespace Entities
 
         public ICollection<clsProducto> Productos { get; set; } = new List<clsProducto>();
 
+        //string tamplate para mostrar en el combo
+        public string display => $" {Id} - {Nombre}"; 
+
+
     }
 }

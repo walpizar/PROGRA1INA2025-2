@@ -24,11 +24,13 @@ namespace UI
 
 
         private readonly ProductoService _productoService;
+        private readonly CategoriaService _CategoriaService;
         public frmProducto()
         {
             InitializeComponent();
 
             _productoService = new ProductoService();
+            _CategoriaService  = new CategoriaService();
         }
 
         private void btnGuardar_Click(object sender, EventArgs e)
@@ -58,6 +60,9 @@ namespace UI
                     producto.cantidad = (int)txtCantidad.Value;
 
                     producto.familia = (int)cboFamilia.SelectedItem;
+                    producto.CategoriaId = (int)cboCategoria.SelectedValue;
+
+
 
                     //llamo a mi capa de servicios para guardar/ crear el producto
                     if (productoSelected == null)
@@ -167,6 +172,16 @@ namespace UI
 
             //cargar el combo de las cateogiras
             //dessde la base datos.
+            //obtengo las categorias de la base de datos        
+            List<clsCategoria> listaCat = _CategoriaService.consultarTodos();
+
+            //cargo el combo de categorias
+            cboCategoria.DataSource = listaCat;
+            cboCategoria.DisplayMember = "display"; //lo que se muestra
+            cboCategoria.ValueMember = "Id"; //el valor real
+
+
+
 
         }
 
@@ -179,6 +194,7 @@ namespace UI
             txtCantidad.Value = productoSelected.cantidad;
             //obtiene el valor que el usuario selecciono en el combo
             cboFamilia.SelectedItem = (FamiliaProducto)productoSelected.familia;
+            cboCategoria.SelectedValue = (int)productoSelected.CategoriaId;
         }
 
         private void btnCancelar_Click(object sender, EventArgs e)

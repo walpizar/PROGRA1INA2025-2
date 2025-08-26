@@ -1,5 +1,6 @@
 ﻿using Common.Enums;
 using Common.Interfaces;
+using DAO;
 using Entities;
 using System;
 using System.Collections.Generic;
@@ -12,6 +13,11 @@ namespace Services
 {
     public class CategoriaService : IGenerica<clsCategoria>
     {
+        private readonly CategoriaDAO _categoriaDAO;
+        public CategoriaService() {
+            _categoriaDAO =  new CategoriaDAO();
+
+        }
         public clsCategoria consultarPorID(int id)
         {
 
@@ -27,7 +33,7 @@ namespace Services
 
         public List<clsCategoria> consultarTodos()
         {
-            throw new NotImplementedException();
+            return _categoriaDAO.consultarTodos();
         }
 
         public void crear(clsCategoria entidad)
