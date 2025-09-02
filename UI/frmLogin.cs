@@ -24,18 +24,14 @@ namespace UI
         }
 
 
-<<<<<<< HEAD
-=======
 
->>>>>>> develop
         //evento click del boton cancelar
         private void btnCancelar_Click(object sender, EventArgs e)
         {
             //aqui cierro el formulario
             this.Close();
         }
-<<<<<<< HEAD
-=======
+
 
 
         //evento linkclicked del linklabel olvido contraseña
@@ -44,13 +40,10 @@ namespace UI
             //muestro el formulario de recuperar contraseña
             frmRecuperarContra frmRecuperar = new frmRecuperarContra();
             frmRecuperar.ShowDialog();
-            //esto hace que el formulario de login se oculte mientras se muestra el de recuperar contraseña
-            this.Show();
-            //cuando se cierre el formulario de recuperar contraseña, el de login se vuelve a mostrar
-            this.Hide();
+           
 
         }
 
->>>>>>> develop
+
     }
 }

@@ -2,15 +2,8 @@
 {
     partial class frmRecuperarContra
     {
-        /// <summary>
-        /// Required designer variable.
-        /// </summary>
         private System.ComponentModel.IContainer components = null;
 
-        /// <summary>
-        /// Clean up any resources being used.
-        /// </summary>
-        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
         protected override void Dispose(bool disposing)
         {
             if (disposing && (components != null))
@@ -22,146 +15,126 @@
 
         #region Windows Form Designer generated code
 
-        /// <summary>
-        /// Required method for Designer support - do not modify
-        /// the contents of this method with the code editor.
-        /// </summary>
         private void InitializeComponent()
         {
-<<<<<<< HEAD
-            this.components = new System.ComponentModel.Container();
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Text = "frmRecuperarContra";
-        }
-
-        #endregion
-=======
-            gbxRecuperarContra = new GroupBox();
-            lblRecuperarContra = new Label();
-            btnCancelarRecuperarContra = new Button();
-            btnAceptarRecuperarContra = new Button();
-            txtConfirmarContra = new TextBox();
-            txtNuevaContra = new TextBox();
-            lblConfirmarContra = new Label();
-            lblNuevaContra = new Label();
-            gbxRecuperarContra.SuspendLayout();
-            SuspendLayout();
+            this.gbxRecuperarContra = new System.Windows.Forms.GroupBox();
+            this.btnCancelarRecuperarContra = new System.Windows.Forms.Button();
+            this.btnAceptarRecuperarContra = new System.Windows.Forms.Button();
+            this.txtConfirmarContra = new System.Windows.Forms.TextBox();
+            this.txtNuevaContra = new System.Windows.Forms.TextBox();
+            this.lblConfirmarContra = new System.Windows.Forms.Label();
+            this.lblNuevaContra = new System.Windows.Forms.Label();
+            this.lblRecuperarContra = new System.Windows.Forms.Label();
+            this.gbxRecuperarContra.SuspendLayout();
+            this.SuspendLayout();
             // 
             // gbxRecuperarContra
             // 
-            gbxRecuperarContra.Controls.Add(btnCancelarRecuperarContra);
-            gbxRecuperarContra.Controls.Add(btnAceptarRecuperarContra);
-            gbxRecuperarContra.Controls.Add(txtConfirmarContra);
-            gbxRecuperarContra.Controls.Add(txtNuevaContra);
-            gbxRecuperarContra.Controls.Add(lblConfirmarContra);
-            gbxRecuperarContra.Controls.Add(lblNuevaContra);
-            gbxRecuperarContra.Location = new Point(12, 61);
-            gbxRecuperarContra.Name = "gbxRecuperarContra";
-            gbxRecuperarContra.Size = new Size(469, 186);
-            gbxRecuperarContra.TabIndex = 0;
-            gbxRecuperarContra.TabStop = false;
-            // 
-            // lblRecuperarContra
-            // 
-            lblRecuperarContra.AutoSize = true;
-            lblRecuperarContra.Font = new Font("Segoe UI", 15.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            lblRecuperarContra.Location = new Point(103, 18);
-            lblRecuperarContra.Name = "lblRecuperarContra";
-            lblRecuperarContra.Size = new Size(288, 30);
-            lblRecuperarContra.TabIndex = 1;
-            lblRecuperarContra.Text = "Recuperacion de contraseña";
-            lblRecuperarContra.Click += label1_Click;
+            this.gbxRecuperarContra.Controls.Add(this.btnCancelarRecuperarContra);
+            this.gbxRecuperarContra.Controls.Add(this.btnAceptarRecuperarContra);
+            this.gbxRecuperarContra.Controls.Add(this.txtConfirmarContra);
+            this.gbxRecuperarContra.Controls.Add(this.txtNuevaContra);
+            this.gbxRecuperarContra.Controls.Add(this.lblConfirmarContra);
+            this.gbxRecuperarContra.Controls.Add(this.lblNuevaContra);
+            this.gbxRecuperarContra.Location = new System.Drawing.Point(12, 61);
+            this.gbxRecuperarContra.Name = "gbxRecuperarContra";
+            this.gbxRecuperarContra.Size = new System.Drawing.Size(469, 186);
+            this.gbxRecuperarContra.TabIndex = 0;
+            this.gbxRecuperarContra.TabStop = false;
             // 
             // btnCancelarRecuperarContra
             // 
-            btnCancelarRecuperarContra.BackColor = Color.AliceBlue;
-            btnCancelarRecuperarContra.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
-            btnCancelarRecuperarContra.Location = new Point(210, 127);
-            btnCancelarRecuperarContra.Name = "btnCancelarRecuperarContra";
-            btnCancelarRecuperarContra.Size = new Size(112, 34);
-            btnCancelarRecuperarContra.TabIndex = 11;
-            btnCancelarRecuperarContra.Text = "Cancelar";
-            btnCancelarRecuperarContra.UseVisualStyleBackColor = false;
-            btnCancelarRecuperarContra.Click += btnCancelar_Click;
+            this.btnCancelarRecuperarContra.BackColor = System.Drawing.Color.AliceBlue;
+            this.btnCancelarRecuperarContra.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold);
+            this.btnCancelarRecuperarContra.Location = new System.Drawing.Point(210, 127);
+            this.btnCancelarRecuperarContra.Name = "btnCancelarRecuperarContra";
+            this.btnCancelarRecuperarContra.Size = new System.Drawing.Size(112, 34);
+            this.btnCancelarRecuperarContra.TabIndex = 11;
+            this.btnCancelarRecuperarContra.Text = "Cancelar";
+            this.btnCancelarRecuperarContra.UseVisualStyleBackColor = false;
+            this.btnCancelarRecuperarContra.Click += new System.EventHandler(this.btnCancelar_Click);
             // 
             // btnAceptarRecuperarContra
             // 
-            btnAceptarRecuperarContra.BackColor = Color.AliceBlue;
-            btnAceptarRecuperarContra.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
-            btnAceptarRecuperarContra.Location = new Point(341, 127);
-            btnAceptarRecuperarContra.Name = "btnAceptarRecuperarContra";
-            btnAceptarRecuperarContra.Size = new Size(112, 34);
-            btnAceptarRecuperarContra.TabIndex = 10;
-            btnAceptarRecuperarContra.Text = "Aceptar";
-            btnAceptarRecuperarContra.UseVisualStyleBackColor = false;
-            btnAceptarRecuperarContra.Click += this.btnAceptar_Click;
+            this.btnAceptarRecuperarContra.BackColor = System.Drawing.Color.AliceBlue;
+            this.btnAceptarRecuperarContra.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold);
+            this.btnAceptarRecuperarContra.Location = new System.Drawing.Point(341, 127);
+            this.btnAceptarRecuperarContra.Name = "btnAceptarRecuperarContra";
+            this.btnAceptarRecuperarContra.Size = new System.Drawing.Size(112, 34);
+            this.btnAceptarRecuperarContra.TabIndex = 10;
+            this.btnAceptarRecuperarContra.Text = "Aceptar";
+            this.btnAceptarRecuperarContra.UseVisualStyleBackColor = false;
             // 
             // txtConfirmarContra
             // 
-            txtConfirmarContra.Location = new Point(194, 88);
-            txtConfirmarContra.Name = "txtConfirmarContra";
-            txtConfirmarContra.Size = new Size(259, 23);
-            txtConfirmarContra.TabIndex = 9;
-            txtConfirmarContra.TextChanged += this.txtPassword_TextChanged;
+            this.txtConfirmarContra.Location = new System.Drawing.Point(194, 88);
+            this.txtConfirmarContra.Name = "txtConfirmarContra";
+            this.txtConfirmarContra.Size = new System.Drawing.Size(259, 23);
+            this.txtConfirmarContra.TabIndex = 9;
             // 
             // txtNuevaContra
             // 
-            txtNuevaContra.Location = new Point(194, 48);
-            txtNuevaContra.Name = "txtNuevaContra";
-            txtNuevaContra.Size = new Size(259, 23);
-            txtNuevaContra.TabIndex = 8;
-            txtNuevaContra.TextChanged += this.txtUusario_TextChanged;
+            this.txtNuevaContra.Location = new System.Drawing.Point(194, 48);
+            this.txtNuevaContra.Name = "txtNuevaContra";
+            this.txtNuevaContra.Size = new System.Drawing.Size(259, 23);
+            this.txtNuevaContra.TabIndex = 8;
             // 
             // lblConfirmarContra
             // 
-            lblConfirmarContra.AutoSize = true;
-            lblConfirmarContra.Font = new Font("Trebuchet MS", 12F, FontStyle.Bold);
-            lblConfirmarContra.Location = new Point(6, 89);
-            lblConfirmarContra.Name = "lblConfirmarContra";
-            lblConfirmarContra.Size = new Size(182, 22);
-            lblConfirmarContra.TabIndex = 7;
-            lblConfirmarContra.Text = "Confirmar contraseña:";
-            lblConfirmarContra.Click += this.label2_Click;
+            this.lblConfirmarContra.AutoSize = true;
+            this.lblConfirmarContra.Font = new System.Drawing.Font("Trebuchet MS", 12F, System.Drawing.FontStyle.Bold);
+            this.lblConfirmarContra.Location = new System.Drawing.Point(6, 89);
+            this.lblConfirmarContra.Name = "lblConfirmarContra";
+            this.lblConfirmarContra.Size = new System.Drawing.Size(182, 22);
+            this.lblConfirmarContra.TabIndex = 7;
+            this.lblConfirmarContra.Text = "Confirmar contraseña:";
             // 
             // lblNuevaContra
             // 
-            lblNuevaContra.AutoSize = true;
-            lblNuevaContra.Font = new Font("Trebuchet MS", 12F, FontStyle.Bold);
-            lblNuevaContra.Location = new Point(37, 46);
-            lblNuevaContra.Name = "lblNuevaContra";
-            lblNuevaContra.Size = new Size(151, 22);
-            lblNuevaContra.TabIndex = 6;
-            lblNuevaContra.Text = "Nueva contraseña:";
-            lblNuevaContra.Click += this.label1_Click_1;
+            this.lblNuevaContra.AutoSize = true;
+            this.lblNuevaContra.Font = new System.Drawing.Font("Trebuchet MS", 12F, System.Drawing.FontStyle.Bold);
+            this.lblNuevaContra.Location = new System.Drawing.Point(37, 46);
+            this.lblNuevaContra.Name = "lblNuevaContra";
+            this.lblNuevaContra.Size = new System.Drawing.Size(151, 22);
+            this.lblNuevaContra.TabIndex = 6;
+            this.lblNuevaContra.Text = "Nueva contraseña:";
+            // 
+            // lblRecuperarContra
+            // 
+            this.lblRecuperarContra.AutoSize = true;
+            this.lblRecuperarContra.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblRecuperarContra.Location = new System.Drawing.Point(103, 18);
+            this.lblRecuperarContra.Name = "lblRecuperarContra";
+            this.lblRecuperarContra.Size = new System.Drawing.Size(288, 30);
+            this.lblRecuperarContra.TabIndex = 1;
+            this.lblRecuperarContra.Text = "Recuperacion de contraseña";
             // 
             // frmRecuperarContra
             // 
-            AutoScaleDimensions = new SizeF(7F, 15F);
-            AutoScaleMode = AutoScaleMode.Font;
-            BackColor = SystemColors.InactiveCaption;
-            ClientSize = new Size(493, 269);
-            Controls.Add(lblRecuperarContra);
-            Controls.Add(gbxRecuperarContra);
-            FormBorderStyle = FormBorderStyle.None;
-            Name = "frmRecuperarContra";
-            Text = "frmRecuperarContra";
-            gbxRecuperarContra.ResumeLayout(false);
-            gbxRecuperarContra.PerformLayout();
-            ResumeLayout(false);
-            PerformLayout();
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.SystemColors.InactiveCaption;
+            this.ClientSize = new System.Drawing.Size(493, 269);
+            this.Controls.Add(this.lblRecuperarContra);
+            this.Controls.Add(this.gbxRecuperarContra);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.Name = "frmRecuperarContra";
+            this.Text = "frmRecuperarContra";
+            this.gbxRecuperarContra.ResumeLayout(false);
+            this.gbxRecuperarContra.PerformLayout();
+            this.ResumeLayout(false);
+            this.PerformLayout();           
         }
 
         #endregion
 
-        private GroupBox gbxRecuperarContra;
-        private Label lblRecuperarContra;
-        private Button btnCancelarRecuperarContra;
-        private Button btnAceptarRecuperarContra;
-        private TextBox txtConfirmarContra;
-        private TextBox txtNuevaContra;
-        private Label lblConfirmarContra;
-        private Label lblNuevaContra;
->>>>>>> develop
+        private System.Windows.Forms.GroupBox gbxRecuperarContra;
+        private System.Windows.Forms.Label lblRecuperarContra;
+        private System.Windows.Forms.Button btnCancelarRecuperarContra;
+        private System.Windows.Forms.Button btnAceptarRecuperarContra;
+        private System.Windows.Forms.TextBox txtConfirmarContra;
+        private System.Windows.Forms.TextBox txtNuevaContra;
+        private System.Windows.Forms.Label lblConfirmarContra;
+        private System.Windows.Forms.Label lblNuevaContra;
     }
 }
