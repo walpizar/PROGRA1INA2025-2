@@ -21,8 +21,7 @@ namespace UI
         {
 
         }
-<<<<<<< Updated upstream
-=======
+
 
 
         //evento click del boton cancelar
@@ -45,6 +44,6 @@ namespace UI
             this.Hide();
 
         }
->>>>>>> Stashed changes
+
     }
 }
