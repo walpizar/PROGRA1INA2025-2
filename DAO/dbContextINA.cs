@@ -22,7 +22,7 @@ namespace DAO
             {
                 // 🔹 Conexión a SQL Express con autenticación de Windows
                 optionsBuilder.UseSqlServer(
-                    @"Server=localhost\sqlexpress;Database=dbINA;Trusted_Connection=True;MultipleActiveResultSets=True;TrustServerCertificate=True;");
+                    @"Server=localhost\sqlexpress;Database=dbPaleativoGarabito;Trusted_Connection=True;MultipleActiveResultSets=True;TrustServerCertificate=True;");
             }
         }
 
