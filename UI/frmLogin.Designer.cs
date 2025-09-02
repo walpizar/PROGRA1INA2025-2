@@ -36,13 +36,11 @@
             txtUusario = new TextBox();
             label2 = new Label();
             label1 = new Label();
-            linklblOlvidoContra = new LinkLabel();
             gbxLogin.SuspendLayout();
             SuspendLayout();
             // 
             // gbxLogin
             // 
-            gbxLogin.Controls.Add(linklblOlvidoContra);
             gbxLogin.Controls.Add(btnCancelar);
             gbxLogin.Controls.Add(btnAceptar);
             gbxLogin.Controls.Add(txtPassword);
@@ -51,7 +49,7 @@
             gbxLogin.Controls.Add(label1);
             gbxLogin.Location = new Point(12, 12);
             gbxLogin.Name = "gbxLogin";
-            gbxLogin.Size = new Size(448, 218);
+            gbxLogin.Size = new Size(448, 170);
             gbxLogin.TabIndex = 0;
             gbxLogin.TabStop = false;
             // 
@@ -76,7 +74,6 @@
             btnCancelar.TabIndex = 5;
             btnCancelar.Text = "Cancelar";
             btnCancelar.UseVisualStyleBackColor = false;
-            btnCancelar.Click += btnCancelar_Click;
             // 
             // btnAceptar
             // 
@@ -124,22 +121,12 @@
             label1.TabIndex = 0;
             label1.Text = "Usuario:";
             // 
-            // linklblOlvidoContra
-            // 
-            linklblOlvidoContra.AutoSize = true;
-            linklblOlvidoContra.Location = new Point(292, 184);
-            linklblOlvidoContra.Name = "linklblOlvidoContra";
-            linklblOlvidoContra.Size = new Size(128, 15);
-            linklblOlvidoContra.TabIndex = 6;
-            linklblOlvidoContra.TabStop = true;
-            linklblOlvidoContra.Text = "¿Olvidó su contraseña?";
-            // 
             // frmLogin
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = SystemColors.InactiveCaption;
-            ClientSize = new Size(473, 249);
+            ClientSize = new Size(473, 199);
             Controls.Add(gbxLogin);
             FormBorderStyle = FormBorderStyle.None;
             Name = "frmLogin";
@@ -158,6 +145,5 @@
         private Button btnCancelar;
         private Button btnAceptar;
         private TextBox txtPassword;
-        private LinkLabel linklblOlvidoContra;
     }
 }
