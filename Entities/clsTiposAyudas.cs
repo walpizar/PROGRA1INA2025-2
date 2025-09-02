@@ -25,8 +25,5 @@ namespace Entities
         //Fk a reponsable
         public int id_responsable { get; set; }//Id reponsable
         public clsPersona clsPersona { get; set; }//Responsable
-
-        //Un tipo de ayuda puede estar en muchas ayudas asignadas
-        public ICollection<clsAyuda> clsAyuda { get; set; } = new List<clsAyuda>();
     }
 }
