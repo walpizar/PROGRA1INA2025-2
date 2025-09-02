@@ -12,13 +12,13 @@ namespace Services
     public class ActivosServices : IGenerica<clsActivos>
     {
         private readonly ActivosDAO _actiDAO = new ActivosDAO();
-        
+
         public ActivosServices()
         {
         }
         public clsActivos consultarPorID(int id)
         {
-           return _actiDAO.consultarPorID(id);
+            return _actiDAO.consultarPorID(id);
         }
 
         public clsActivos consultarPorNombre(string nombre)

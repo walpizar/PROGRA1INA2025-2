@@ -4,7 +4,6 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace DAO
@@ -33,18 +32,22 @@ namespace DAO
         public void eliminar(int id)
         {
             var activo = consultarPorID(id);
-            _context.Activos.Remove(activo);
-            _context.SaveChanges();
+            if (activo != null)
+            {
+                _context.Activos.Remove(activo);
+                _context.SaveChanges();
+            }
         }
 
         public clsActivos consultarPorID(int id)
         {
-            return _context.Activos.Where(p => p.IdActivo == id).SingleOrDefault();
+            return _context.Activos.SingleOrDefault(p => p.IdActivo == id);
         }
 
         public clsActivos consultarPorNombre(string nombre)
         {
-            return _context.Activos.Where(p => p.NombreActivo.Trim().ToUpper() == nombre.Trim().ToUpper()).SingleOrDefault();
+            return _context.Activos
+                .SingleOrDefault(p => p.NombreActivo.Trim().ToUpper() == nombre.Trim().ToUpper());
         }
 
         public List<clsActivos> consultarTodos()
@@ -52,6 +55,4 @@ namespace DAO
             return _context.Activos.ToList();
         }
     }
-
 }
-
