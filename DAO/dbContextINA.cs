@@ -15,6 +15,7 @@ namespace DAO
         public DbSet<clsCliente> Clientes { get; set; }
         public DbSet<clsCategoria> Categoria { get; set; }
 
+        public DbSet<clsActivos> Activos { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
