@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             gbxLogin = new GroupBox();
+            linklblOlvidoContra = new LinkLabel();
             btnCancelar = new Button();
             btnAceptar = new Button();
             txtPassword = new TextBox();
@@ -53,6 +54,17 @@
             gbxLogin.Size = new Size(448, 218);
             gbxLogin.TabIndex = 0;
             gbxLogin.TabStop = false;
+            // 
+            // linklblOlvidoContra
+            // 
+            linklblOlvidoContra.AutoSize = true;
+            linklblOlvidoContra.Location = new Point(292, 184);
+            linklblOlvidoContra.Name = "linklblOlvidoContra";
+            linklblOlvidoContra.Size = new Size(128, 15);
+            linklblOlvidoContra.TabIndex = 6;
+            linklblOlvidoContra.TabStop = true;
+            linklblOlvidoContra.Text = "¿Olvidó su contraseña?";
+            linklblOlvidoContra.LinkClicked += linklblOlvidoContra_LinkClicked;
             // 
             // btnCancelar
             // 
