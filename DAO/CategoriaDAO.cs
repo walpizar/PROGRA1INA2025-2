@@ -43,12 +43,6 @@ namespace DAO
 
                 throw new Exception();
             }
-
-
-   
-         
-           
-       
         }
 
         public void crear(clsCategoria entidad)
