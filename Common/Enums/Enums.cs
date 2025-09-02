@@ -39,7 +39,27 @@ namespace Common.Enums
             Deportes=4,
             Juguetes=7
         }
+        public enum Frecuencia
+        {
+            Mensual = 1,
+            Anual = 2
+        }
 
+        public enum TipoTransaccion
+        {
+            Efectivo = 1,
+            Transferencia = 2,
+            Cheque = 3,
+            Tarjeta = 4
+            // Agrega otros tipos según las necesidades del sistema
+        }
+
+        public enum TipoDonacion
+        {
+            Dinero = 1,
+            Articulo = 2
+            // Puedes agregar más tipos si el sistema lo requiere
+        }
 
     }
 }
