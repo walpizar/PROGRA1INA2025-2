@@ -35,7 +35,14 @@ namespace Entities
 
         //Llave foranea si el tipo de ayuda necesita un activo
         public int id_activo { get; set; }
-        //public clsActivo activo { get; set; }
+        public clsActivos activo { get; set; }
+
+
+        //Llave foranea de paciente
+        [Required]
+        public int id_paciente { get; set; }
+        //[Required]
+        //public clsPaciente paciente { get; set; }
 
     }
 }
