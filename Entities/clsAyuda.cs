@@ -22,7 +22,7 @@ namespace Entities
         [Required]
         public int id_tipoAyuda { get; set; }
         [Required]
-        public clsTipoAyuda clsTipoAyudaTipo { get; set; }
+        public clsTiposAyudas clsTipoAyudaTipo { get; set; }
 
         [StringLength(300,ErrorMessage ="La descripción no puede tener mas de 300 caracteres")]
         public string descripcion { get; set; }
@@ -36,13 +36,6 @@ namespace Entities
         //Llave foranea si el tipo de ayuda necesita un activo
         public int id_activo { get; set; }
         public clsActivos activo { get; set; }
-
-
-        //Llave foranea de paciente
-        [Required]
-        public int id_paciente { get; set; }
-        //[Required]
-        //public clsPaciente paciente { get; set; }
 
     }
 }

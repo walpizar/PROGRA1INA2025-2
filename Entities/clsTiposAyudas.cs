@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 namespace Entities
 {
     [Table("tb_tipoAyuda")]//Nombre de la tabla
-    public class clsTipoAyuda
+    public class clsTiposAyudas
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
@@ -25,11 +25,6 @@ namespace Entities
         //Fk a reponsable
         public int id_responsable { get; set; }//Id reponsable
         public clsPersona clsPersona { get; set; }//Responsable
-
-        //Fk a categoria
-        public int idCategoria { get; set; }
-        public clsCategoria clsCategoria { get; set; }
-
 
         //Un tipo de ayuda puede estar en muchas ayudas asignadas
         public ICollection<clsAyuda> clsAyuda { get; set; } = new List<clsAyuda>();
