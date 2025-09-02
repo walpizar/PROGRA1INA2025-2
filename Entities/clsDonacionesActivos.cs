@@ -25,7 +25,9 @@ namespace Entities
 
         // Relación: Una DonacionActivo pertenece a una Donacion y a un Activo
         public clsDonacion Donacion { get; set; }
-        public clsActivo1 Activo { get; set; }
+
+        public clsActivos Activo { get; set; }
+
 
         // Constructor vacío
         public clsDonacionActivo() { }
