@@ -24,11 +24,13 @@ namespace Services
 
         //CRUD de pacientes
         //METODOS DE LA INTERFAZ
-        public clsPaciente consultarPorID(int id)
+        public clsPaciente consultarPorID(string id)
         {
             //llamo al metodo consultarPorID del dao para que me devuelva el paciente
             return _pacientDao.consultarPorID(id);
         }
+
+
 
 
         //METODO NO IMPLEMENTADO pero para cumplir con la interfaz
@@ -61,7 +63,7 @@ namespace Services
 
 
             // regla de negocio valida que no exista un paciente con el mismo id (cedula)
-            if (_pacientDao.consultarPorID(paciente.IdPaciente) != null)
+            if (_pacientDao.consultarPorID(paciente.id) != null)
             {
                 throw new EntityExistDBException();
             }
@@ -79,7 +81,7 @@ namespace Services
 
 
         //eliminar un paciente
-        public void eliminar(int id)
+        public void eliminar(string id)
         {
             //validar que el paciente exista
             if (_pacientDao.consultarPorID(id) == null)
@@ -93,12 +95,17 @@ namespace Services
 
         }
 
+        public void eliminar(int id)
+        {
+            throw new NotImplementedException();
+        }
+
 
         //modificar un paciente
         public void modificar(clsPaciente paciente)
         {
             //validar que el paciente exista
-            if (_pacientDao.consultarPorID(paciente.IdPaciente) == null)
+            if (_pacientDao.consultarPorID(paciente.id) == null)
             {
                 //si no existe lanzo una excepcion personalizada
                 throw new EntityExistDBException();

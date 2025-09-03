@@ -26,6 +26,11 @@ namespace Services
 
         }
 
+        public clsCategoria consultarPorID(string id)
+        {
+            throw new NotImplementedException();
+        }
+
         public clsCategoria consultarPorNombre(string nombre)
         {
             throw new NotImplementedException();
@@ -51,6 +56,11 @@ namespace Services
         }
 
         public void eliminar(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void eliminar(string id)
         {
             throw new NotImplementedException();
         }

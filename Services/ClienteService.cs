@@ -72,5 +72,15 @@ namespace Services
         {
             throw new NotImplementedException();
         }
+
+        public void eliminar(string id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public clsCliente consultarPorID(string id)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

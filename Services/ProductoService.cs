@@ -83,5 +83,15 @@ namespace Services
         {
             throw new NotImplementedException();
         }
+
+        public void eliminar(string id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public clsProducto consultarPorID(string id)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

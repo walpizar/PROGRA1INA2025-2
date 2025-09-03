@@ -36,7 +36,7 @@ namespace UI
         private void frmPaciente_Load(object sender, EventArgs e)
         {
 
-            try 
+            try
             {
                 if (pacienteSelected != null) //accion de modificar
                 {
@@ -87,7 +87,8 @@ namespace UI
         private void cargarForm()
         {
             //cargo los datos del paciente en el formulario
-            txtIdPaciente.Text = pacienteSelected.IdPaciente.ToString();
+            txtIdPaciente.Text = pacienteSelected.id;
+            txtTipoId.Text = pacienteSelected.Persona.tipoId.ToString();
             txtNombre.Text = pacienteSelected.Persona.nombre;
             txtApellido1.Text = pacienteSelected.Persona.apellido1;
             txtApellido2.Text = pacienteSelected.Persona.apellido2;
@@ -120,7 +121,8 @@ namespace UI
 
                     //creo la instancia de persona para setear los datos de persona
                     clsPersona persona = new clsPersona();
-                    persona.id = Convert.ToInt32(txtIdPaciente.Text);
+                    persona.id = txtIdPaciente.Text;
+                    persona.tipoId = int.Parse(txtTipoId.Text);
                     persona.nombre = txtNombre.Text;
                     persona.apellido1 = txtApellido1.Text;
                     persona.apellido2 = txtApellido2.Text;
@@ -133,7 +135,7 @@ namespace UI
 
                     //creo instancia de paciente para setear los valores del paciente
                     clsPaciente pacie = new clsPaciente();
-                    pacie.IdPaciente = Convert.ToInt32(txtIdPaciente.Text);
+                    pacie.id = txtIdPaciente.Text;
                     pacie.referencia = txtReferencia.Text;
                     pacie.estadoCivil = txtEstadoCivil.Text;
 
@@ -190,6 +192,14 @@ namespace UI
             {
                 MessageBox.Show("El ID es obligatorio y debe ser un número.");
                 txtIdPaciente.Focus();
+                return false;
+            }
+
+            //valido que el tipo de id no este vacio
+            if (string.IsNullOrEmpty(txtTipoId.Text) || !int.TryParse(txtTipoId.Text, out int tipoId))
+            {
+                MessageBox.Show("El tipo de ID es obligatorio y debe ser un número.");
+                txtTipoId.Focus();
                 return false;
             }
 
@@ -312,7 +322,7 @@ namespace UI
                 //si el usuario dice que si, entonces elimino
                 if (resp == DialogResult.Yes)
                 {
-                    _pacienteService.eliminar(pacienteSelected.IdPaciente);
+                    _pacienteService.eliminar(pacienteSelected.id);
                     MessageBox.Show("Paciente eliminado correctamente");
                     this.Close(); //cierro el formulario
                 }
@@ -325,5 +335,7 @@ namespace UI
                 MessageBox.Show("Error al eliminar el paciente.");
             }
         }
+
+       
     }
 }

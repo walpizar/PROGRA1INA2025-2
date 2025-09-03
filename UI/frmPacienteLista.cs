@@ -59,7 +59,7 @@ namespace UI
             foreach (clsPaciente paciente in lista)
             {
                 //creo un item para cada paciente
-                ListViewItem item = new ListViewItem(paciente.IdPaciente.ToString());
+                ListViewItem item = new ListViewItem(paciente.id.ToString());
 
                 //añado las subitems al item, el subItem es como una columna de una misma fila
                 item.SubItems.Add(paciente.Persona.nombre);
@@ -107,7 +107,7 @@ namespace UI
                     int id = int.Parse(lstvListaPaciente.SelectedItems[0].SubItems[0].Text);
 
                     //aqui busco el paciente en la lista que tengo cargada en memoria
-                    clsPaciente paciente = lista.Where(p => p.IdPaciente == id).SingleOrDefault();
+                    clsPaciente paciente = lista.Where(p => p.id.Equals(id)).SingleOrDefault();
 
                     //valido que el paciente no sea nulo
                     if (paciente != null)
@@ -144,7 +144,7 @@ namespace UI
         {
             //filtro la lista de pacientes por nombre o id
             var listaFiltrada = this.lista.Where(p => p.Persona.nombre.ToLower().Contains(txtBusqueda.Text.ToLower()) ||
-            p.IdPaciente.ToString().Contains(txtBusqueda.Text)).ToList();
+            p.id.ToString().Contains(txtBusqueda.Text)).ToList();
 
             //llamo al metodo cargar lista y le paso por parametro la listaFiltrada para que me cargue la lista filtrada
             cargarLista(listaFiltrada);

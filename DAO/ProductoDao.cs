@@ -96,6 +96,14 @@ namespace DAO
             //return _context.Producto.ToList();
         }
 
-       
+        public void eliminar(string id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public clsProducto consultarPorID(string id)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

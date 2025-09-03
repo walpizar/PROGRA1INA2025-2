@@ -24,11 +24,11 @@ namespace DAO
 
 
         //CRUD de pacientes
-        public clsPaciente consultarPorID(int id)
+        public clsPaciente consultarPorID(string id)
         {
 
             //retorno una esxpresion lambda que busca en la tabla paciente el id que le paso por parametro
-            return _context.Paciente.Where(p => p.IdPaciente == id).SingleOrDefault();
+            return _context.Paciente.Where(p => p.id == id).SingleOrDefault();
 
         }
 
@@ -62,7 +62,7 @@ namespace DAO
 
 
         //eliminar un paciente
-        public void eliminar(int id)
+        public void eliminar(string id)
         {
             //primero busco el paciente por id y lo guardo en la variable pacient
             var pacient = consultarPorID(id);

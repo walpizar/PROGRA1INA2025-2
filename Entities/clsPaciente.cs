@@ -11,9 +11,8 @@ namespace Entities
     public class clsPaciente
     {
 
-        [Key]// Llave primaria
-        [DatabaseGenerated(DatabaseGeneratedOption.None)] // No autoIncremental
-        public int IdPaciente { get; set; }
+        public string id { get; set; }
+        public int tipoId { get; set; }
 
         [Required]//obligatorio
         [StringLength(100, ErrorMessage = "El nombre no puede tener mas de 100 caracteres")]//longitud maxima
@@ -23,13 +22,12 @@ namespace Entities
         [StringLength(500, ErrorMessage = "El genero no puede tener mas de 500 caracteres")]//longitud maxima
         public string referencia { get; set; }
 
+
         //campo de llave foranea
         [Required]//obligatorio
-        public int IdPersona { get; set; }
+        public int idPersona { get; set; }
 
-        //propiedad de navegacion hacia la clase persona
-        //el decorador foreign key indica la relacion de llave foranea
-        [ForeignKey("IdPersona")]
+        
         public clsPersona Persona { get; set; }
 
 
@@ -56,13 +54,14 @@ namespace Entities
 
 
         
-        public clsPaciente(int idPaciente, string estadoCivil, string referencia, int idPersona, 
+        public clsPaciente(string idPaciente, string estadoCivil, string referencia, int IdPersona, 
             bool estado, DateTime fecha_crea, string usuario_crea, DateTime fecha_ult_mod, string usuario_ult_mod)
         {
-            IdPaciente = idPaciente;
+            this.id = idPaciente;
+            this.tipoId = tipoId;
             this.estadoCivil = estadoCivil;
             this.referencia = referencia;
-            IdPersona = idPersona;
+            this.idPersona = IdPersona;
             this.estado = estado;
             this.fecha_crea = fecha_crea;
             this.usuario_crea = usuario_crea;
