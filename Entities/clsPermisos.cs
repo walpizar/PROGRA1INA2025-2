@@ -35,5 +35,4 @@ namespace Entities
             [DefaultValue(false)]
             public bool eliminar { get; set; }
         }
-
 }

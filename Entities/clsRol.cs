@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 
 namespace Entities
 {
+
     [Table("tb_Roles")]
     public class clsRol
     {
@@ -20,12 +21,16 @@ namespace Entities
         [StringLength(20, ErrorMessage = "El nombre no puede tener mas de 20 caracteres")]
         public string nombre_rol { get; set; }
 
+
         [StringLength(200, ErrorMessage = "La descripcion no puede tener mas de 200 caracteres")]
         public string descripcion_rol { get; set; }
 
         [Required]
         [DefaultValue(true)]
         public bool estado_rol { get; set; }
+
+
+
 
     }
 }

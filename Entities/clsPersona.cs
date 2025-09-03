@@ -12,9 +12,10 @@ namespace Entities
     public class clsPersona
     {
         //atributos con decoradores
-        [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.None)]
-        public int id { get; set; }
+   
+        public string id { get; set; }
+        public int tipoId { get; set; }
+
 
         [Required(ErrorMessage = "El nombre es obligatorio.")]
         [StringLength(50, ErrorMessage = "El nombre no puede superar los 50 caracteres.")]
@@ -48,7 +49,7 @@ namespace Entities
         public clsPersona() { }
 
         //constructor con parametros
-        public clsPersona(int id, string nombre, string apellido1, string apellido2, DateTime fechaNac, string email, string direccion, string telefono, bool estado)
+        public clsPersona(string id, string nombre, string apellido1, string apellido2, DateTime fechaNac, string email, string direccion, string telefono, bool estado)
         {
             this.id = id;
             this.nombre = nombre;
@@ -66,5 +67,7 @@ namespace Entities
         {
             return $"ID: {id}, Nombre: {nombre}, Apellido1: {apellido1}, Apellido2: {apellido2}, FechaNac: {fechaNac.ToShortDateString()}, Email: {email}, Direccion: {direccion}, Telefono: {telefono}, Estado: {estado}";
         }
+        //relacion 1 a 1 con donante
+        public clsDonante Donante { get; set; }
     }
 }
