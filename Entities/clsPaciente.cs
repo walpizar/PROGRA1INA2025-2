@@ -67,6 +67,7 @@ namespace Entities
             this.usuario_crea = usuario_crea;
             this.fecha_ult_mod = fecha_ult_mod;
             this.usuario_ult_mod = usuario_ult_mod;
+
         }
 
         public clsPaciente() { }

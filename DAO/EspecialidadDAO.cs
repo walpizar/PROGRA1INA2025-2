@@ -52,5 +52,15 @@ namespace DAO
         {
             return _context.EspecialidadMedica.ToList();
         }
+
+        public void eliminar(string id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public clsEspecialidadMedica consultarPorID(string id)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
