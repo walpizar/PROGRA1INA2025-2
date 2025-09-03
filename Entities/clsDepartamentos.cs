@@ -15,34 +15,37 @@ namespace Entities
         public int idDepartamento { get; set; }
 
         [Required]
-        public string Nombre { get; set; }
+        [StringLength(100, ErrorMessage = "El nombre del departamento no puede tener más de 100 caracteres")]
+        public string nombreDepartamento { get; set; }
 
+        [StringLength(200, ErrorMessage = "La descripción no puede tener más de 200 caracteres")]
+        public string descripcion { get; set; }
+
+        public bool estado { get; set; }
+        
         [Required]
-        public string descripcionDepartamento { get; set; }
-
-        // auditoria
+        public string usuarioCreacion { get; set; }
         [Required]
-        public DateTime fecha_crea { get; set; }
+        public DateTime fechaCreacion { get; set; }
 
-        [Required]
-        [StringLength(50)]
-        public string usuario_crea { get; set; } = "system";
+        public string usuarioModificacion { get; set; }
+        public DateTime? fechaModificacion { get; set; }
 
-        public DateTime? fecha_ult_mod { get; set; }
-
-        [StringLength(50)]
-        public string? usuario_ult_mod { get; set; }
-
-
-        // constructor
         public clsDepartamentos() { }
 
-        public clsDepartamentos(string nombre, string usuario)
+        public clsDepartamentos(DateTime fechaCreacion,string usuarioCreacion, int idDepartamento, string nombreDepartamento, string descripcion, bool estado)
         {
-            this.Nombre = nombre;
-            this.usuario_crea = usuario;
+            this.idDepartamento = idDepartamento;
+            this.nombreDepartamento = nombreDepartamento;
+            this.descripcion = descripcion;
+            this.estado = estado;
+            this.fechaCreacion = fechaCreacion;
+            this.usuarioCreacion = usuarioCreacion;
         }
 
-        public ICollection<clsPuestos> Puestos { get; set; } = new List<clsPuestos>();
+        public override string ToString()
+        {
+            return $"idDepartamento: {idDepartamento}, nombreDepartamento: {nombreDepartamento}, descripcion: {descripcion}, estado: {estado}";
+        }
     }
 }

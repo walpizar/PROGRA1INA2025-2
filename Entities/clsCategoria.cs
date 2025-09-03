@@ -11,28 +11,36 @@ namespace Entities
 {
     [Table("tbCategorias")]
     public class clsCategoria
-
     {
-
         [Key]
-        public int Id { get; set; }
+        public int idCategoria { get; set; }
 
         [Required]
-        [StringLength(50, ErrorMessage = "El nombre no puede tener mas de 50 caracteres")]
-        public string Nombre { get; set; }
+        [StringLength(100, ErrorMessage = "El nombre no puede tener más de 100 caracteres")]
+        public string nombreCategoria { get; set; }
 
-        [StringLength(200, ErrorMessage = "La descripcion no puede tener mas de 200 caracteres")]
+        [StringLength(200, ErrorMessage = "La descripción no puede tener más de 200 caracteres")]
         public string descripcion { get; set; }
 
         [Required]
         [DefaultValue(true)]
         public bool estado { get; set; }
 
-        public ICollection<clsProducto> Productos { get; set; } = new List<clsProducto>();
+        public clsCategoria(int idCategoria, string nombreCategoria, string descripcion)
+        {
+            this.idCategoria = idCategoria;
+            this.nombreCategoria = nombreCategoria;
+            this.descripcion = descripcion;
+            this.estado = true; // Valor predeterminado, puedes ajustarlo si es necesario
+        }
 
         //string tamplate para mostrar en el combo
-        public string display => $" {Id} - {Nombre}"; 
+        public string display => $" {idCategoria} - {nombreCategoria}"; 
 
 
+        public override string ToString()
+        {
+            return $"idCategoria: {idCategoria}, nombreCategoria: {nombreCategoria}, descripcion: {descripcion}";
+        }
     }
 }

@@ -1,51 +1,45 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Entities
 {
     [Table("tbDonacionesActivos")]
-    public class clsDonacionActivo
+    public class clsDonacionesActivos
     {
         [Key]
-        public int IdDonacionActivo { get; set; }
-        [ForeignKey("Donacion")]
-        public int IdDonacion { get; set; }
-        [ForeignKey("Activo")]
-        public int IdActivo { get; set; }
-        public int Cantidad { get; set; }
+        public int idDonacionActivo { get; set; }
+
+        [ForeignKey("donacion")]
+        public int idDonacion { get; set; }
+
+        [ForeignKey("activo")]
+        public int idActivo { get; set; }
+
+        public int cantidad { get; set; }
+
         [StringLength(30)]
-        public string EstadoActivo { get; set; }
-        public string Observaciones { get; set; }
+        public string estadoActivo { get; set; }
 
-        // Relación: Una DonacionActivo pertenece a una Donacion y a un Activo
-        public clsDonacion Donacion { get; set; }
+        public string observaciones { get; set; }
 
-        public clsActivos Activo { get; set; }
+        public clsDonacion donacion { get; set; }
+        public clsActivos activo { get; set; }
 
+        public clsDonacionesActivos() { }
 
-        // Constructor vacío
-        public clsDonacionActivo() { }
-
-        // Constructor con parámetros
-        public clsDonacionActivo(int idDonacion, int idActivo, int cantidad, string estadoActivo, string observaciones)
+        public clsDonacionesActivos(int idDonacion, int idActivo, int cantidad, string estadoActivo, string observaciones)
         {
-            IdDonacion = idDonacion;
-            IdActivo = idActivo;
-            Cantidad = cantidad;
-            EstadoActivo = estadoActivo;
-            Observaciones = observaciones;
+            this.idDonacion = idDonacion;
+            this.idActivo = idActivo;
+            this.cantidad = cantidad;
+            this.estadoActivo = estadoActivo;
+            this.observaciones = observaciones;
         }
 
-        // Método ToString
         public override string ToString()
         {
-            return $"IdDonacionActivo: {IdDonacionActivo}, IdDonacion: {IdDonacion}, IdActivo: {IdActivo}, Cantidad: {Cantidad}, EstadoActivo: {EstadoActivo}, Observaciones: {Observaciones}";
+            return $"idDonacionActivo: {idDonacionActivo}, idDonacion: {idDonacion}, idActivo: {idActivo}, cantidad: {cantidad}, estadoActivo: {estadoActivo}, observaciones: {observaciones}";
         }
     }
 }

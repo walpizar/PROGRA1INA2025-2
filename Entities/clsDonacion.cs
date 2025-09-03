@@ -1,49 +1,40 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Entities
 {
-    
-
     [Table("tbDonaciones")]
     public class clsDonacion
     {
         [Key]
-        public int IdDonacion { get; set; }
-        [ForeignKey("Donante")]
-        public int IdDonante { get; set; }
-        public DateTime FechaDonacion { get; set; }
-        public int TipoDonacion { get; set; }
-        public string Observaciones { get; set; }
+        public int idDonacion { get; set; }
 
-        // Relación: Una Donación pertenece a un Donante
-        public clsDonante Donante { get; set; }
+        [ForeignKey("donante")]
+        public int idDonante { get; set; }
 
-        // Relación: Una Donación puede tener DonacionDinero y/o DonacionArticulo
-        public clsDonacionDinero DonacionDinero { get; set; }
-        public ICollection<clsDonacionActivo> DonacionActivos { get; set; }
+        public DateTime fechaDonacion { get; set; }
+        public int tipoDonacion { get; set; }
+        public string observaciones { get; set; }
 
-        // Constructor vacío
+        public clsDonante donante { get; set; }
+        public clsDonacionDinero donacionDinero { get; set; }
+        public ICollection<clsDonacionesActivos> donacionesActivos { get; set; }
+
         public clsDonacion() { }
 
-        // Constructor con parámetros
         public clsDonacion(int idDonante, DateTime fechaDonacion, int tipoDonacion, string observaciones)
         {
-            IdDonante = idDonante;
-            FechaDonacion = fechaDonacion;
-            TipoDonacion = tipoDonacion;
-            Observaciones = observaciones;
+            this.idDonante = idDonante;
+            this.fechaDonacion = fechaDonacion;
+            this.tipoDonacion = tipoDonacion;
+            this.observaciones = observaciones;
         }
 
-        // Método ToString
         public override string ToString()
         {
-            return $"IdDonacion: {IdDonacion}, IdDonante: {IdDonante}, FechaDonacion: {FechaDonacion.ToShortDateString()}, TipoDonacion: {TipoDonacion}, Observaciones: {Observaciones}";
+            return $"idDonacion: {idDonacion}, idDonante: {idDonante}, fechaDonacion: {fechaDonacion.ToShortDateString()}, tipoDonacion: {tipoDonacion}, observaciones: {observaciones}";
         }
     }
 }

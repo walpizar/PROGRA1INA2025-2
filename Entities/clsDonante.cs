@@ -1,53 +1,43 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-
 namespace Entities
 {
-    
     [Table("tbDonantes")]
     public class clsDonante
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
-        public int IdDonante { get; set; }
+        public int idDonante { get; set; }
 
-        [ForeignKey("Persona")]
-        public int IdPersona { get; set; }
+        [ForeignKey("persona")]
+        public int idPersona { get; set; }
 
         [Required]
-        public bool Estado { get; set; }
+        public bool estado { get; set; }
         
         [Required]
-        public DateTime FechaRegistro { get; set; }
+        public DateTime fechaRegistro { get; set; }
 
-        // Relación: Un Donante es una Persona
-        public clsPersona Persona { get; set; }
+        public clsPersona persona { get; set; }
 
-        // Relación: Un Donante puede tener muchas Donaciones
-        public ICollection<clsDonacion> Donaciones { get; set; }
+        public ICollection<clsDonacion> donaciones { get; set; }
 
-        // Constructor vacío
         public clsDonante() { }
 
-        // Constructor con parámetros
-        public clsDonante( int idPersona, bool estado, DateTime fechaRegistro)
+        public clsDonante(int idPersona, bool estado, DateTime fechaRegistro)
         {
-            IdDonante = IdPersona;
-            IdPersona = idPersona;
-            Estado = estado;
-            FechaRegistro = fechaRegistro;
+            idDonante = idPersona;
+            this.idPersona = idPersona;
+            this.estado = estado;
+            this.fechaRegistro = fechaRegistro;
         }
 
-        // Método ToString
         public override string ToString()
         {
-            return $"IdDonante: {IdDonante}, IdPersona: {IdPersona}, Estado: {Estado}, FechaRegistro: {FechaRegistro.ToShortDateString()}";
+            return $"idDonante: {idDonante}, idPersona: {idPersona}, estado: {estado}, fechaRegistro: {fechaRegistro.ToShortDateString()}";
         }
     }
 }

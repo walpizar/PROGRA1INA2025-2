@@ -1,34 +1,37 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Entities
 {
-    [Table("tb_Permisos")]
-    public class clsPermiso
+    [Table("tbPermisos")]
+    public class clsPermisos
     {
         [Key]
-        public int id_permiso { get; set; }
+        public int idPermiso { get; set; }
 
         [Required]
-        [StringLength(20, ErrorMessage = "El nombre no puede tener mas de 20 caracteres")]
-        public string nombre_permiso { get; set; }
+        [StringLength(100, ErrorMessage = "El nombre del permiso no puede tener más de 100 caracteres")]
+        public string nombrePermiso { get; set; }
 
-        [StringLength(200, ErrorMessage = "La descripcion no puede tener mas de 200 caracteres")]
-        public string descripcion_permiso { get; set; }
+        [StringLength(200, ErrorMessage = "La descripción no puede tener más de 200 caracteres")]
+        public string descripcion { get; set; }
 
-        [Required]
-        [DefaultValue(true)]
-        public bool estado_permiso { get; set; }
+        public bool estado { get; set; }
 
+        public clsPermisos() { }
 
+        public clsPermisos(int idPermiso, string nombrePermiso, string descripcion, bool estado)
+        {
+            this.idPermiso = idPermiso;
+            this.nombrePermiso = nombrePermiso;
+            this.descripcion = descripcion;
+            this.estado = estado;
+        }
 
-        // Relación muchos a muchos
-        public ICollection<clsRolPermiso> RolPermisos { get; set; }
+        public override string ToString()
+        {
+            return $"idPermiso: {idPermiso}, nombrePermiso: {nombrePermiso}, descripcion: {descripcion}, estado: {estado}";
+        }
     }
 }

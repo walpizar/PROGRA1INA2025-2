@@ -1,23 +1,36 @@
 ﻿using System;
-using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Entities
 {
-
-    [Table("tb_RolesPermisos")]
+    [Table("tbRolPermiso")]
     public class clsRolPermiso
     {
-        //LLAVE COMPUESTA
-        public int IdRol { get; set; }
-        public int IdPermiso { get; set; }
+        //llave primaria compuesta
+        public int idRol { get; set; }
+        public int idPermiso { get; set; }
 
+        public bool estado { get; set; }
 
-        ///PROPIEDADES DE NAVEGACION//
+        //relaciones con clsRol y clsPermisos
         public clsRol Rol { get; set; }
-        public clsPermiso Permiso { get; set; }
+        public clsPermisos Permiso { get; set; }
+
+        //constructores
+        public clsRolPermiso() { }
+
+        public clsRolPermiso(int idRol, int idPermiso, bool estado)
+        {
+            this.idRol = idRol;
+            this.idPermiso = idPermiso;
+            this.estado = estado;
+        }
+
+
+        public override string ToString()
+        {
+            return $"idRol: {idRol}, idPermiso: {idPermiso}, estado: {estado}";
+        }
     }
 }

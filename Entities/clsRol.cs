@@ -1,35 +1,37 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Entities
 {
-
-    [Table("tb_Roles")]
+    [Table("tbRoles")]
     public class clsRol
     {
         [Key]
-        public int id_rol { get; set; }
+        public int idRol { get; set; }
 
         [Required]
-        [StringLength(20, ErrorMessage = "El nombre no puede tener mas de 20 caracteres")]
-        public string nombre_rol { get; set; }
+        [StringLength(100, ErrorMessage = "El nombre del rol no puede tener más de 100 caracteres")]
+        public string nombreRol { get; set; }
 
-        [StringLength(200, ErrorMessage = "La descripcion no puede tener mas de 200 caracteres")]
-        public string descripcion_rol { get; set; }
+        [StringLength(200, ErrorMessage = "La descripción no puede tener más de 200 caracteres")]
+        public string descripcion { get; set; }
 
-        [Required]
-        [DefaultValue(true)]
-        public bool estado_rol { get; set; }
+        public bool estado { get; set; }
 
+        public clsRol() { }
 
+        public clsRol(int idRol, string nombreRol, string descripcion, bool estado)
+        {
+            this.idRol = idRol;
+            this.nombreRol = nombreRol;
+            this.descripcion = descripcion;
+            this.estado = estado;
+        }
 
-        // Relación muchos a muchos
-        public ICollection<clsRolPermiso> RolPermisos { get; set; }
+        public override string ToString()
+        {
+            return $"idRol: {idRol}, nombreRol: {nombreRol}, descripcion: {descripcion}, estado: {estado}";
+        }
     }
 }
