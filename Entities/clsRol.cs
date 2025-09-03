@@ -28,9 +28,8 @@ namespace Entities
         [DefaultValue(true)]
         public bool estado_rol { get; set; }
 
-
-
         // Relación muchos a muchos
         public ICollection<clsRolPermiso> RolPermisos { get; set; }
+
     }
 }

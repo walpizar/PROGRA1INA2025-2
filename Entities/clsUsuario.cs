@@ -13,7 +13,7 @@ namespace Entities
     {
         [Key]
         [ForeignKey("Persona")] // Esta es la clave primaria y a la vez la clave foránea a la tabla tbPersonas
-        public int id {  get; set; }
+        public string id {  get; set; }
 
         [Required(ErrorMessage = "El nombre de usuario es obligatorio.")]
         [StringLength(50, ErrorMessage = "El nombre de usuario no puede tener más de 50 caracteres.")]
@@ -36,7 +36,7 @@ namespace Entities
 
         // Constructor con parámetros
 
-        public clsUsuario(int id, string nombre_usuario, string contraseña, int rol_id)
+        public clsUsuario(string id, string nombre_usuario, string contraseña, int rol_id)
         {
             this.id = id;
             this.nombre_usuario = nombre_usuario;

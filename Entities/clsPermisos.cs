@@ -34,8 +34,8 @@ namespace Entities
     }
 
     
-        [Table("tb_Permisos")]//TABLA INTERMEDIA
-        public class clsPermiso
+        [Table("tb_RolPermisos")]//TABLA INTERMEDIA
+        public class clsRolPermiso  
         {
             //LLAVE PRIMARIA COMPUESTA
             public int id_modulo { get; set; } // Relación con módulo
