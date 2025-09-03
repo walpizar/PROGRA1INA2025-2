@@ -8,13 +8,13 @@ using System.Threading.Tasks;
 
 namespace DAO
 {
-    internal class dbContextINA: DbContext
+    public class dbContextINA : DbContext
     {
-        //definir la entidades de dominio que desea mapear a la base de datos
+        // Definir las entidades de dominio que desea mapear a la base de datos
         public DbSet<clsProducto> Producto { get; set; }
         public DbSet<clsCliente> Clientes { get; set; }
         public DbSet<clsCategoria> Categoria { get; set; }
-
+        public DbSet<clsEspecialidadMedica> EspecialidadMedica { get; set; }  // 🔹 Agregada la nueva entidad
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -25,6 +25,5 @@ namespace DAO
                     @"Server=localhost\sqlexpress;Database=dbINA;Trusted_Connection=True;MultipleActiveResultSets=True;TrustServerCertificate=True;");
             }
         }
-
     }
 }
