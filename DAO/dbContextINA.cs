@@ -8,12 +8,14 @@ using System.Threading.Tasks;
 
 namespace DAO
 {
-    internal class dbContextINA: DbContext
+    internal class dbContextINA : DbContext
     {
         //definir la entidades de dominio que desea mapear a la base de datos
         //public DbSet<clsProducto> Producto { get; set; }
         //public DbSet<clsCliente> Clientes { get; set; }
         public DbSet<clsCategoria> Categoria { get; set; }
+        public DbSet<clsActivos> Activos { get; set; }
+
 
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -25,6 +27,5 @@ namespace DAO
                     @"Server=localhost\sqlexpress;Database=dbPaleativoGarabito;Trusted_Connection=True;MultipleActiveResultSets=True;TrustServerCertificate=True;");
             }
         }
-
     }
 }

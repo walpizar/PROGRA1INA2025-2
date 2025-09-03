@@ -20,7 +20,11 @@ namespace Entities
         public string nombre_usuario { get; set; }
 
         [Required(ErrorMessage = "La contraseña es obligatoria.")]
+<<<<<<< HEAD
         [StringLength(255, ErrorMessage= "La contraseña debe tener al menos 255 caracteres.")] 
+=======
+        [StringLength(8, ErrorMessage= "La contraseña debe tener al menos 8 caracteres.")] 
+>>>>>>> origin/feature/mantenimientoActivos
         public string contraseña { get; set; }
 
         [Required(ErrorMessage = "El rol del usuario es obligatorio.")]
@@ -34,11 +38,19 @@ namespace Entities
         public clsUsuario() { }
 
         // Constructor con parámetros
+<<<<<<< HEAD
         public clsUsuario(int id, string nombre_usuario, string contraseña, int rol_id)
         {
             this.id = id;
             this.nombre_usuario = nombre_usuario;
             this.contraseña = contraseña;
+=======
+        public clsUsuario(int id, string nombre_usuario, string password, int rol_id)
+        {
+            this.id = id;
+            this.nombre_usuario = nombre_usuario;
+            this.contraseña = password;
+>>>>>>> origin/feature/mantenimientoActivos
             this.rol_id = rol_id;
         }
 
