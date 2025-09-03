@@ -31,33 +31,40 @@ namespace Entities
         [Column(TypeName = "date")]
         public DateTime FechaAdquisicion { get; set; }
 
-        
-
         [StringLength(100, ErrorMessage = "El proveedor no puede tener más de 100 caracteres")]
         public string Proveedor { get; set; }
 
         [StringLength(100, ErrorMessage = "La ubicación no puede tener más de 100 caracteres")]
         public string Ubicacion { get; set; }
 
-        //Relación con Categoría de Activos (FK)
+        // Campos de auditoría
+        [Column(TypeName = "datetime")]
+        public DateTime FechaCreacion { get; set; }
+
+        [StringLength(50, ErrorMessage = "El usuario de creación no puede tener más de 50 caracteres")]
+        public string UsuarioCreacion { get; set; }
+
+        [Column(TypeName = "datetime")]
+        public DateTime? FechaModificacion { get; set; }
+
+        [StringLength(50, ErrorMessage = "El usuario de modificación no puede tener más de 50 caracteres")]
+        public string UsuarioModificacion { get; set; }
+
+        // Relación con Categoría de Activos (FK)
         [Required]
         public int IdCategoria { get; set; }
 
         [ForeignKey("IdCategoria")]
         public clsCategoriaActivos Categoria { get; set; }
 
-        //Relación con Devoluciones (uno a muchos)
+        // Relación con Devoluciones (uno a muchos)
         public List<clsDevolucion> Devoluciones { get; set; }
-
-
-        // Relación: Un Activo puede estar en muchas DonacionActivos
-        public ICollection<clsDonacionActivo> DonacionActivos { get; set; }
-
 
         // Constructores
         public clsActivos(int idActivo, string nombreActivo, string descripcion,
                           int cantidadDisponible, string estado, DateTime fechaAdquisicion,
-                          string proveedor, string ubicacion, int idCategoria)
+                          string proveedor, string ubicacion, int idCategoria,
+                          string usuarioCreacion)
         {
             this.IdActivo = idActivo;
             this.NombreActivo = nombreActivo;
@@ -68,13 +75,15 @@ namespace Entities
             this.Proveedor = proveedor;
             this.Ubicacion = ubicacion;
             this.IdCategoria = idCategoria;
+            this.FechaCreacion = DateTime.Now;
+            this.UsuarioCreacion = usuarioCreacion;
             this.Devoluciones = new List<clsDevolucion>();
         }
 
         public clsActivos()
         {
             this.Devoluciones = new List<clsDevolucion>();
+            this.FechaCreacion = DateTime.Now;
         }
     }
 }
-
