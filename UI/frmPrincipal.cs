@@ -21,15 +21,6 @@ namespace UI
 
 
 
-            int i = 0;
-
-            bool reslt = i > 5 && i < 10 || i == 20;
-
-
-
-
-
-
         }
 
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
