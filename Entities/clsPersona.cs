@@ -12,9 +12,8 @@ namespace Entities
     public class clsPersona
     {
         //atributos con decoradores
-        [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.None)]
-        public int id { get; set; }
+        public string id { get; set; }
+        public int tipoId { get; set; }
 
         [Required(ErrorMessage = "El nombre es obligatorio.")]
         [StringLength(50, ErrorMessage = "El nombre no puede superar los 50 caracteres.")]
@@ -48,9 +47,10 @@ namespace Entities
         public clsPersona() { }
 
         //constructor con parametros
-        public clsPersona(int id, string nombre, string apellido1, string apellido2, DateTime fechaNac, string email, string direccion, string telefono, bool estado)
+        public clsPersona(string id, int tipoId, string nombre, string apellido1, string apellido2, DateTime fechaNac, string email, string direccion, string telefono, bool estado)
         {
             this.id = id;
+            this.tipoId = tipoId; 
             this.nombre = nombre;
             this.apellido1 = apellido1;
             this.apellido2 = apellido2;

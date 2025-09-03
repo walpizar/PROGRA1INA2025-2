@@ -33,22 +33,23 @@ namespace DAO
 
         public List<clsCategoria> consultarTodos()
         {
-            try
-            {
+            //try
+            //{
              
-                return _context.Categoria.Where(c => c.estado == true).ToList();
-            }
-            catch (Exception)
-            {
+            //    return _context.Categoria.Where(c => c.estado == true).ToList();
+            //}
+            //catch (Exception)
+            //{
 
-                throw new Exception();
-            }
+            //    throw new Exception();
+            //}
+            throw new NotImplementedException();
 
 
-   
-         
-           
-       
+
+
+
+
         }
 
         public void crear(clsCategoria entidad)
