@@ -16,14 +16,39 @@ namespace Entities
         public int id_tipoAyuda { get; set; }//Llave primaria autoincremental
 
         [Required]
-        [StringLength(100,ErrorMessage ="El nombre no puede tener mas de 100 caracteres")]
-        public string nombre { get;set; }//Nombre del tipo de ayuda
+        [StringLength(100, ErrorMessage = "El nombre no puede tener mas de 100 caracteres")]
+        public string nombre { get; set; }//Nombre del tipo de ayuda
 
         [StringLength(300, ErrorMessage = "La descripción no puede tener mas de 300 caracteres")]
-        public string descripcion {  get; set; }//Descripción del tipo de ayuda
+        public string descripcion { get; set; }//Descripción del tipo de ayuda
 
         //Fk a reponsable
+        [Required]
         public int id_responsable { get; set; }//Id reponsable
+        [Required]
         public clsPersona clsPersona { get; set; }//Responsable
+
+        //Campos de audioria
+        [Required]
+        public DateTime fecha_crea { get; set; }//Fecha de creación
+
+        //Fk de campos de auditoria a tabla persona crea
+        [Required]
+        public int id_usuarioCrea { get; set; }
+        [Required]
+        public clsPersona usuario_crea { get; set; }
+
+        [Required]
+        public DateTime fecha_ultimaModificacion { get; set; }//Fecha ultima modificación
+
+
+        //Fk de campos de auditoria a tabla persona ultima modificación
+        [Required]
+        public int id_usuarioUltimaModificacion { get; set; }//Id de usuario de ultima modificación
+        [Required]
+        public clsPersona usuario_ultimaModificacion { get; set; }
+
+        [Required]
+        public bool estado { get; set; } //Estado del tipo de ayuda
     }
 }
