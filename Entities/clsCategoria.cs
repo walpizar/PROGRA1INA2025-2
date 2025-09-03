@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Entities
+/*namespace Entities
 {
     [Table("tbCategorias")]
     public class clsCategoria
@@ -35,4 +35,4 @@ namespace Entities
 
 
     }
-}
+}*/

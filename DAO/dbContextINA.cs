@@ -11,8 +11,8 @@ namespace DAO
     internal class dbContextINA: DbContext
     {
         //definir la entidades de dominio que desea mapear a la base de datos
-        public DbSet<clsProducto> Producto { get; set; }
-        public DbSet<clsCliente> Clientes { get; set; }
+        //public DbSet<clsProducto> Producto { get; set; }
+        //public DbSet<clsCliente> Clientes { get; set; }
         public DbSet<clsCategoria> Categoria { get; set; }
 
 
@@ -22,7 +22,7 @@ namespace DAO
             {
                 // 🔹 Conexión a SQL Express con autenticación de Windows
                 optionsBuilder.UseSqlServer(
-                    @"Server=localhost\sqlexpress;Database=dbINA;Trusted_Connection=True;MultipleActiveResultSets=True;TrustServerCertificate=True;");
+                    @"Server=localhost\sqlexpress;Database=dbPaleativoGarabito;Trusted_Connection=True;MultipleActiveResultSets=True;TrustServerCertificate=True;");
             }
         }
 
