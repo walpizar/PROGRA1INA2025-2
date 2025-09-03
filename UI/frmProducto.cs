@@ -54,6 +54,18 @@ namespace UI
                          producto = productoSelected;
                      }*/
                     //seteo los valores del producto
+
+                    //clsMedico medico = new clsMedico();
+                    //medico.Especialidad = 343243;
+
+                    //clsPersona persona = new clsPersona();
+                    //persona.nombre = "Juan";
+                    //persona.apellido1 = "Perez"; 
+
+                    //medico.Persona = persona;
+
+
+
                     producto.id = Convert.ToInt32(txtId.Text);
                     // producto.id = int.Parse(txtId.Text);
                     producto.nombre = txtNombre.Text;

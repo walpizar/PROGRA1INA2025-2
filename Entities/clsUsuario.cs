@@ -8,25 +8,26 @@ using System.Threading.Tasks;
 
 namespace Entities
 {
+    [Table("usuarios")]
     public class clsUsuario
     {
         [Key]
         [ForeignKey("Persona")] // Esta es la clave primaria y a la vez la clave foránea a la tabla tbPersonas
-        public int id { get; set; }
+        public int id {  get; set; }
 
         [Required(ErrorMessage = "El nombre de usuario es obligatorio.")]
         [StringLength(50, ErrorMessage = "El nombre de usuario no puede tener más de 50 caracteres.")]
         public string nombre_usuario { get; set; }
 
         [Required(ErrorMessage = "La contraseña es obligatoria.")]
-        [StringLength(255, ErrorMessage = "La contraseña no puede exceder los 255 caracteres.")] 
-        public string password { get; set; }
+        [StringLength(8, ErrorMessage= "La contraseña debe tener al menos 8 caracteres.")] 
+        public string contraseña { get; set; }
 
         [Required(ErrorMessage = "El rol del usuario es obligatorio.")]
         public int rol_id { get; set; }
 
         // Propiedad de navegación para acceder a los datos de la persona vinculada.
-        // Esto crea un enlace al código a la clase clsPersona.
+        // Esto crea un enlace a la clase clsPersona.
         public clsPersona Persona { get; set; }
 
         // Constructor vacío
@@ -37,9 +38,10 @@ namespace Entities
         {
             this.id = id;
             this.nombre_usuario = nombre_usuario;
-            this.password = password;
+            this.contraseña = password;
             this.rol_id = rol_id;
         }
+
+
     }
 }
-
