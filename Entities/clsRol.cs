@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Entities
 {
-    [Table("tbRoles")]
+    [Table("tb_Roles")]
     public class clsRol
     {
         [Key]
@@ -25,5 +25,6 @@ namespace Entities
         [Required]
         [DefaultValue(true)]
         public bool estado_rol { get; set; }
+
     }
 }
