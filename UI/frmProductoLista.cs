@@ -66,8 +66,7 @@ namespace UI
 
         private void cargarLista(List<clsProducto> lista)
         {
-
-           
+            if (lista == null) lista = new List<clsProducto>();
 
             lstvLista.Items.Clear();
 
@@ -78,7 +77,6 @@ namespace UI
                 item.SubItems.Add(producto.precio.ToString());
                 lstvLista.Items.Add(item);
             }
-
         }
 
         private void lstvLista_SelectedIndexChanged(object sender, EventArgs e)
