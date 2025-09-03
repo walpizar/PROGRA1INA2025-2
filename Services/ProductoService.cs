@@ -8,7 +8,7 @@ namespace Services
     //reglas de negocio
     public class ProductoService: IGenerica<clsProducto>
     {
-        //capa de servicio viaja o accede a capa de datos    
+        //capa de servicio viaja a capa de datos    
         private readonly ProductoDao _prodDao= new ProductoDao();
 
         public ProductoService() {      
