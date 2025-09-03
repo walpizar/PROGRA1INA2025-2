@@ -31,8 +31,7 @@ namespace Entities
         [Column(TypeName = "date")]
         public DateTime FechaAdquisicion { get; set; }
 
-        [Range(0, 1000000, ErrorMessage = "El costo debe estar entre 0 y 1,000,000")]
-        public decimal CostoUnitario { get; set; }
+        
 
         [StringLength(100, ErrorMessage = "El proveedor no puede tener más de 100 caracteres")]
         public string Proveedor { get; set; }
@@ -50,13 +49,15 @@ namespace Entities
         //Relación con Devoluciones (uno a muchos)
         public List<clsDevolucion> Devoluciones { get; set; }
 
+
         // Relación: Un Activo puede estar en muchas DonacionActivos
         public ICollection<clsDonacionActivo> DonacionActivos { get; set; }
+
 
         // Constructores
         public clsActivos(int idActivo, string nombreActivo, string descripcion,
                           int cantidadDisponible, string estado, DateTime fechaAdquisicion,
-                          decimal costoUnitario, string proveedor, string ubicacion, int idCategoria)
+                          string proveedor, string ubicacion, int idCategoria)
         {
             this.IdActivo = idActivo;
             this.NombreActivo = nombreActivo;
@@ -64,7 +65,6 @@ namespace Entities
             this.CantidadDisponible = cantidadDisponible;
             this.Estado = estado;
             this.FechaAdquisicion = fechaAdquisicion;
-            this.CostoUnitario = costoUnitario;
             this.Proveedor = proveedor;
             this.Ubicacion = ubicacion;
             this.IdCategoria = idCategoria;
