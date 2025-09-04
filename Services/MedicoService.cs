@@ -12,15 +12,16 @@ namespace Services
     public class MedicoService : IGenerica<clsMedico>
     {
         private readonly MedicoDAO _medicoDAO;
-        public MedicoService()
+        private string _usuarioActual;
+        public MedicoService(string _usuarioActual = null)
         {
             _medicoDAO = new MedicoDAO();
+            _usuarioActual = _usuarioActual ?? Environment.UserName;
         }
 
         //Reglas de negocio para crear, eliminar, modificar, consultar medicos
         public void crear(clsMedico medico)
         {
-            ValidacionMedico(medico);
             //El id no puede ser vacio o nulo
             if (string.IsNullOrWhiteSpace(medico.id))
             {
@@ -76,41 +77,17 @@ namespace Services
             {
                 throw new ArgumentException("Error de servicio: La especialidad no puede tener más de 300 caracteres.");
             }
-            // La fecha de creación no puede ser una fecha futura
-            if (medico.fecha_crea > DateTime.Now)
-            {
-                throw new ArgumentException("Error de servicio: La fecha de creación no puede ser una fecha futura.");
-            }
-            // El usuario de creación no puede ser vacío o nulo
-            if (string.IsNullOrWhiteSpace(medico.usuario_crea))
-            {
-                throw new ArgumentException("Error de servicio: El usuario de creación no puede estar vacío.");
-            }
-            // El usuario de creación no puede tener más de 100 caracteres
-            if (medico.usuario_crea.Length > 100)
-            {
-                throw new ArgumentException("Error de servicio: El usuario de creación no puede tener más de 100 caracteres.");
-            }
-            // La fecha de la última modificación no puede ser una fecha futura
-            if (medico.fecha_ult_mod > DateTime.Now)
-            {
-                throw new ArgumentException("Error de servicio: La fecha de la última modificación no puede ser una fecha futura.");
-            }
-            // El usuario de la última modificación no puede ser vacío o nulo
-            if (string.IsNullOrWhiteSpace(medico.usuario_ult_mod))
-            {
-                throw new ArgumentException("Error de servicio: El usuario de la última modificación no puede estar vacío.");
-            }
-            // El usuario de la última modificación no puede tener más de 100 caracteres
-            if (medico.usuario_ult_mod.Length > 100)
-            {
-                throw new ArgumentException("Error de servicio: El usuario de la última modificación no puede tener más de 100 caracteres.");
-            }
             // La entidad Persona asociada no puede ser nula
             if (medico.persona == null)
             {
                 throw new ArgumentException("Error de servicio: La entidad Persona asociada no puede ser nula.");
             }
+
+            //Datos de auditoria
+            medico.usuario_crea = _usuarioActual;
+            medico.fecha_crea = DateTime.Now;
+            medico.usuario_ult_mod = _usuarioActual;
+            medico.fecha_ult_mod = DateTime.Now;
 
             // Llamar al DAO para crear el médico
             _medicoDAO.crear(medico);
@@ -118,10 +95,9 @@ namespace Services
 
         public void modificar(clsMedico medico)
         {
+            var medicoExistente = _medicoDAO.consultarPorID(medico.id, medico.idPersona);
             try
             {
-                // Validaciones de negocio
-                ValidacionMedico(medico);
                 // La especialidad no puede ser vacia o nula
                 if (string.IsNullOrWhiteSpace(medico.especialidad))
                 {
@@ -163,6 +139,10 @@ namespace Services
                     throw new ArgumentException("Error de servicio: La dirección no puede estar vacía.");
                 }
 
+                medico.usuario_crea = medicoExistente.usuario_crea;
+                medico.fecha_crea = medicoExistente.fecha_crea;
+                medico.usuario_ult_mod = _usuarioActual;
+                medico.fecha_ult_mod = DateTime.Now;
 
                 // Llamar al DAO para modificar el médico
                 _medicoDAO.modificar(medico);
@@ -227,24 +207,6 @@ namespace Services
             {
                 throw new Exception($"Error en servicio al consultar todos los médicos: {ex.Message}", ex);
             }
-        }
-
-        private void ValidacionMedico(clsMedico medico)
-        {
-            if (medico.persona == null)
-                throw new Exception("Los datos de persona son requeridos");
-
-            if (string.IsNullOrWhiteSpace(medico.persona.nombre))
-                throw new Exception("El nombre es requerido");
-
-            if (string.IsNullOrWhiteSpace(medico.persona.apellido1))
-                throw new Exception("El primer apellido es requerido");
-
-            if (string.IsNullOrWhiteSpace(medico.persona.apellido2))
-                throw new Exception("El segundo apellido es requerido");
-
-            if (string.IsNullOrWhiteSpace(medico.especialidad))
-                throw new Exception("La especialidad es requerida");
         }
     }
 }

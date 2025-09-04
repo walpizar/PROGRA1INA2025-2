@@ -21,10 +21,10 @@ namespace Entities
  
 
 
-        public string especialidad { get; set; }
+        
         [Required]
         [StringLength(300, ErrorMessage = "La especialidad no puede tener mas de 300 caracteres")]
-        public string Especialidad { get; set; }
+        public string especialidad { get; set; }
 
         //Atributos de auditoria
         [Required]
@@ -46,13 +46,14 @@ namespace Entities
         public clsPersona persona { get; set; }
 
         //Constructor con parametros
-        public clsMedico(string Id, int tipoId, string especialidad, DateTime fecha_crea, string usuario_crea, DateTime fecha_ult_mod, string usuario_ult_mod, bool estado, int idPersona)
+        public clsMedico(string id, int tipoId, string especialidad, DateTime fecha_crea, string usuario_crea, DateTime fecha_ult_mod, string usuario_ult_mod, bool estado, int idPersona)
         {
             this.id = id;
             this.tipoId = tipoId;
             this.especialidad = especialidad;
             this.fecha_crea = fecha_crea;
             this.usuario_crea = usuario_crea;
+            this.fecha_ult_mod = fecha_ult_mod;
             this.usuario_ult_mod = usuario_ult_mod;
             this.estado = estado;
             idPersona = idPersona;

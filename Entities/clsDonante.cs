@@ -27,10 +27,10 @@ namespace Entities
         public DateTime FechaRegistro { get; set; }
 
         // Relación: Un Donante es una Persona
-        public clsPersona Persona { get; set; }
+        //public clsPersona Persona { get; set; }
 
-        // Relación: Un Donante puede tener muchas Donaciones
-        public ICollection<clsDonacion> Donaciones { get; set; }
+        //// Relación: Un Donante puede tener muchas Donaciones
+        //public ICollection<clsDonacion> Donaciones { get; set; }
 
         // Constructor vacío
         public clsDonante() { }

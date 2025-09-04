@@ -54,6 +54,18 @@ namespace UI
                          producto = productoSelected;
                      }*/
                     //seteo los valores del producto
+
+                    //clsMedico medico = new clsMedico();
+                    //medico.Especialidad = 343243;
+
+                    //clsPersona persona = new clsPersona();
+                    //persona.nombre = "Juan";
+                    //persona.apellido1 = "Perez"; 
+
+                    //medico.Persona = persona;
+
+
+
                     producto.id = Convert.ToInt32(txtId.Text);
                     // producto.id = int.Parse(txtId.Text);
                     producto.nombre = txtNombre.Text;
@@ -225,7 +237,7 @@ namespace UI
 
                 if(resp == DialogResult.Yes)
                 {
-                    _productoService.eliminar(productoSelected.id);
+                    //_productoService.eliminar(productoSelected.id);
                     MessageBox.Show("Producto eliminado correctamente");
                     this.Close(); //cierro el formulario
                 }

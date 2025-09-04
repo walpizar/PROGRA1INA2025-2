@@ -76,6 +76,8 @@
             lstvLista.TabIndex = 5;
             lstvLista.UseCompatibleStateImageBehavior = false;
             lstvLista.View = View.Details;
+            lstvLista.SelectedIndexChanged += lstvLista_SelectedIndexChanged;
+            lstvLista.MouseDoubleClick += lstvLista_MouseDoubleClick;
             // 
             // Id
             // 
@@ -108,6 +110,7 @@
             txtBusqueda.PlaceholderText = "Escriba datos para buscar...";
             txtBusqueda.Size = new Size(341, 23);
             txtBusqueda.TabIndex = 4;
+            txtBusqueda.TextChanged += txtBusqueda_TextChanged;
             // 
             // lblBusqueda
             // 

@@ -60,6 +60,7 @@
             btnNuevo.TabIndex = 3;
             btnNuevo.Text = "Nuevo";
             btnNuevo.UseVisualStyleBackColor = true;
+            btnNuevo.Click += btnNuevo_Click;
             // 
             // gbxListaEnfermeros
             // 
@@ -85,6 +86,7 @@
             lstvLista.TabIndex = 5;
             lstvLista.UseCompatibleStateImageBehavior = false;
             lstvLista.View = View.Details;
+            lstvLista.MouseDoubleClick += lstvLista_MouseDoubleClick;
             // 
             // Id
             // 
@@ -117,6 +119,7 @@
             txtBusqueda.PlaceholderText = "Escriba datos para buscar...";
             txtBusqueda.Size = new Size(341, 23);
             txtBusqueda.TabIndex = 4;
+            txtBusqueda.TextChanged += txtBusqueda_TextChanged;
             // 
             // lblBusqueda
             // 

@@ -83,7 +83,109 @@ namespace UI
 
         private void btnGuardar_Click(object sender, EventArgs e)
         {
+            try
+            {
+                string usuarioActual = obtenerUsuario();
+                var medicoService = new MedicoService(usuarioActual);
 
+                if (ValidarDatos())
+                {
+                    //Asignacion de los datos a la entidad cliente
+                    clsMedico medico = medicoSelected == null ? new clsMedico { persona = new clsPersona() } : _medicoService.consultarPorID(medicoSelected.id, medicoSelected.tipoId);
+                    medico.id = txtId.Text;
+                    medico.tipoId = Convert.ToInt32(txtTipoId.Text);
+                    medico.persona.nombre = txtNombre.Text;
+                    medico.persona.apellido1 = txtPrimerApellido.Text;
+                    medico.persona.apellido2 = txtSegundoApellido.Text;
+                    medico.especialidad = txtEspecialidad.Text;
+                    medico.persona.fechaNac = dtpFechaNacimiento.Value;
+                    medico.persona.email = txtEmail.Text;
+                    medico.persona.direccion = txtDireccion.Text;
+                    medico.persona.telefono = txtTelefono.Text;
+                    medico.estado = Convert.ToBoolean(txtEstado.Text);
+
+                    if (medicoSelected == null)
+                    {
+                        _medicoService.crear(medico);
+                        //Mensaje de exito
+                        MessageBox.Show("Medico creado con exito");
+                    }
+                    else
+                    {
+                        medico.idPersona = medicoSelected.idPersona; // Mantener el idPersona existente
+                        _medicoService.modificar(medico);
+                        //Mensaje de exito
+                        MessageBox.Show("Medico modificado con exito");
+                    }
+                    this.Close();
+                }
+            }
+            catch (Exception ex)
+            {
+                //Mensaje de error en caso de que algo falle
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        private string obtenerUsuario()
+        {
+            return Environment.UserName;
+        }
+
+        private bool ValidarDatos()
+        {
+            // Validación de datos de entrada
+            if (string.IsNullOrEmpty(txtId.Text))
+            {
+                MessageBox.Show("El campo ID es obligatorio.");
+                return false;
+            }
+            if (string.IsNullOrEmpty(txtTipoId.Text))
+            {
+                MessageBox.Show("El campo Tipo ID es obligatorio y debe ser un valor válido.");
+                return false;
+            }
+            if (string.IsNullOrEmpty(txtNombre.Text))
+            {
+                MessageBox.Show("El campo Nombre es obligatorio.");
+                return false;
+            }
+            if (string.IsNullOrEmpty(txtPrimerApellido.Text))
+            {
+                MessageBox.Show("El campo Primer Apellido es obligatorio.");
+                return false;
+            }
+            if (string.IsNullOrEmpty(txtSegundoApellido.Text))
+            {
+                MessageBox.Show("El campo Segundo Apellido es obligatorio.");
+                return false;
+            }
+            if (string.IsNullOrEmpty(txtEspecialidad.Text))
+            {
+                MessageBox.Show("El campo Especialidad es obligatorio.");
+                return false;
+            }
+            if (string.IsNullOrEmpty(txtEmail.Text) || !txtEmail.Text.Contains("@") || !txtEmail.Text.Contains(".com"))
+            {
+                MessageBox.Show("El correo es obligatorio y debe tener un formato válido.");
+                return false;
+            }
+            if (string.IsNullOrEmpty(txtDireccion.Text))
+            {
+                MessageBox.Show("El campo Dirección es obligatorio.");
+                return false;
+            }
+            if (string.IsNullOrEmpty(txtTelefono.Text))
+            {
+                MessageBox.Show("El campo Teléfono es obligatorio.");
+                return false;
+            }
+            if (string.IsNullOrEmpty(txtEstado.Text) || !bool.TryParse(txtEstado.Text, out bool estado))
+            {
+                MessageBox.Show("El campo Estado es obligatorio y debe ser 'true' o 'false'.");
+                return false;
+            }
+            return true;
         }
 
         private void btnCancelar_Click(object sender, EventArgs e)

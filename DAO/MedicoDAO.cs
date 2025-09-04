@@ -28,6 +28,7 @@ namespace DAO
                     tipoId = medico.tipoId,
                     nombre = medico.persona.nombre,
                     apellido1 = medico.persona.apellido1,
+                    apellido2 = medico.persona.apellido2,
                     fechaNac = medico.persona.fechaNac,
                     email = medico.persona.email,
                     direccion = medico.persona.direccion,

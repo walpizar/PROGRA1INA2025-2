@@ -27,6 +27,7 @@ namespace DAO
         public void crear(clsProducto producto)
         {
             // listaProducto.Add(producto);
+            //_context.Entry(clsMedico.Persona).State = EntityState.Added;
 
             //_context.Producto.Add(producto);
             //_context.SaveChanges();
@@ -56,18 +57,18 @@ namespace DAO
 
         }
 
-        public void eliminar(int id)
+        public void eliminar(string id, int tipoId)
         {
             //var prod = consultarPorID(id);
             //_context.Producto.Remove(prod);
             //_context.SaveChanges();
 
-           // clsProducto prodEliminar = listaProducto.Where(p => p.id
-                                               // == id).SingleOrDefault();
+           //// clsProducto prodEliminar = listaProducto.Where(p => p.id
+           //                                    // == id).SingleOrDefault();
            // listaProducto.Remove(prodEliminar);
 
         }
-        public clsProducto consultarPorID(int id)
+        public clsProducto consultarPorID(string id, int tipoId)
         {
             //return  _context.Producto.Where(p => p.id == id).SingleOrDefault();
             return null;

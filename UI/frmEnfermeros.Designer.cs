@@ -30,7 +30,9 @@
         {
             lblTitulo = new Label();
             gbxDatosMedico = new GroupBox();
-            txtEspecialidad = new TextBox();
+            txtTipoId = new TextBox();
+            lblTipoId = new Label();
+            txtArea = new TextBox();
             lblArea = new Label();
             txtEstado = new TextBox();
             txtTelefono = new TextBox();
@@ -53,8 +55,6 @@
             btnGuardar = new Button();
             btnCancelar = new Button();
             btnEliminar = new Button();
-            lblTipoId = new Label();
-            txtTipoId = new TextBox();
             gbxDatosMedico.SuspendLayout();
             SuspendLayout();
             // 
@@ -72,7 +72,7 @@
             // 
             gbxDatosMedico.Controls.Add(txtTipoId);
             gbxDatosMedico.Controls.Add(lblTipoId);
-            gbxDatosMedico.Controls.Add(txtEspecialidad);
+            gbxDatosMedico.Controls.Add(txtArea);
             gbxDatosMedico.Controls.Add(lblArea);
             gbxDatosMedico.Controls.Add(txtEstado);
             gbxDatosMedico.Controls.Add(txtTelefono);
@@ -99,12 +99,29 @@
             gbxDatosMedico.TabStop = false;
             gbxDatosMedico.Text = "Datos de Enfermero";
             // 
-            // txtEspecialidad
+            // txtTipoId
             // 
-            txtEspecialidad.Location = new Point(141, 173);
-            txtEspecialidad.Name = "txtEspecialidad";
-            txtEspecialidad.Size = new Size(232, 23);
-            txtEspecialidad.TabIndex = 22;
+            txtTipoId.Location = new Point(141, 57);
+            txtTipoId.Name = "txtTipoId";
+            txtTipoId.Size = new Size(232, 23);
+            txtTipoId.TabIndex = 24;
+            // 
+            // lblTipoId
+            // 
+            lblTipoId.AutoSize = true;
+            lblTipoId.Font = new Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            lblTipoId.Location = new Point(83, 63);
+            lblTipoId.Name = "lblTipoId";
+            lblTipoId.Size = new Size(52, 17);
+            lblTipoId.TabIndex = 23;
+            lblTipoId.Text = "Tipo Id:";
+            // 
+            // txtArea
+            // 
+            txtArea.Location = new Point(141, 173);
+            txtArea.Name = "txtArea";
+            txtArea.Size = new Size(232, 23);
+            txtArea.TabIndex = 22;
             // 
             // lblArea
             // 
@@ -277,6 +294,7 @@
             btnGuardar.TabIndex = 4;
             btnGuardar.Text = "Guardar";
             btnGuardar.UseVisualStyleBackColor = true;
+            btnGuardar.Click += btnGuardar_Click;
             // 
             // btnCancelar
             // 
@@ -286,6 +304,7 @@
             btnCancelar.TabIndex = 5;
             btnCancelar.Text = "Cancelar";
             btnCancelar.UseVisualStyleBackColor = true;
+            btnCancelar.Click += btnCancelar_Click;
             // 
             // btnEliminar
             // 
@@ -295,23 +314,7 @@
             btnEliminar.TabIndex = 6;
             btnEliminar.Text = "Eliminar";
             btnEliminar.UseVisualStyleBackColor = true;
-            // 
-            // lblTipoId
-            // 
-            lblTipoId.AutoSize = true;
-            lblTipoId.Font = new Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            lblTipoId.Location = new Point(83, 63);
-            lblTipoId.Name = "lblTipoId";
-            lblTipoId.Size = new Size(52, 17);
-            lblTipoId.TabIndex = 23;
-            lblTipoId.Text = "Tipo Id:";
-            // 
-            // txtTipoId
-            // 
-            txtTipoId.Location = new Point(141, 57);
-            txtTipoId.Name = "txtTipoId";
-            txtTipoId.Size = new Size(232, 23);
-            txtTipoId.TabIndex = 24;
+            btnEliminar.Click += btnEliminar_Click;
             // 
             // frmEnfermeros
             // 
@@ -336,7 +339,7 @@
 
         private Label lblTitulo;
         private GroupBox gbxDatosMedico;
-        private TextBox txtEspecialidad;
+        private TextBox txtArea;
         private Label lblArea;
         private TextBox txtEstado;
         private TextBox txtTelefono;

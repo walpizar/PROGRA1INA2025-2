@@ -24,10 +24,10 @@ namespace Services
                 throw new PriceNegativeException();
             }
             // regla de negocio valida queno exista un producto con el mismo id
-            if (_prodDao.consultarPorID(producto.id)!= null)
-            {
-                throw new EntityExistDBException();
-            }
+            //if (_prodDao.consultarPorID(producto.id)!= null)
+            //{
+            //    throw new EntityExistDBException();
+            //}
             // regla de negocio valida que el nombre    
             if (_prodDao.consultarPorNombre(producto.nombre)!= null)
             {
@@ -57,21 +57,21 @@ namespace Services
 
         }
 
-        public void eliminar(int id)
+        public void eliminar(string id, int tipoId)
         {
             //reglas de negocio
             //validar que el producto exista
-            if (_prodDao.consultarPorID(id) == null)
+            if (_prodDao.consultarPorID(id,tipoId) == null)
             {
                 throw new Exception("El producto no existe");
             }
-            _prodDao.eliminar(id);
+            _prodDao.eliminar(id,tipoId);
 
 
         }
-        public clsProducto consultarPorID(int id)
+        public clsProducto consultarPorID(string id, int tipoId)
         {
-          return _prodDao.consultarPorID(id);
+          return _prodDao.consultarPorID(id,tipoId);
         }
 
         public List<clsProducto> consultarTodos()

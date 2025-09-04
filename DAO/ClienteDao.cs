@@ -38,17 +38,19 @@ namespace DAO
 
         }
 
-        public void eliminar(int id)
+        public void eliminar(string id, int tipoId)
         {
-            clsCliente clienteEliminar = listaCliente.Where(p => p.id
-                                                == id).SingleOrDefault();
-            listaCliente.Remove(clienteEliminar);
+            //clsCliente clienteEliminar = listaCliente.Where(p => p.id
+            //                                    == id).SingleOrDefault();
+            //listaCliente.Remove(clienteEliminar);
+            
 
         }
-        public clsCliente consultarPorID(int id)
+        public clsCliente consultarPorID(string id, int tipoId)
         {
-            return listaCliente.Where(p => p.id
-                                                 == id).SingleOrDefault();
+            //return listaCliente.Where(p => p.id
+            //                                     == id).SingleOrDefault();
+            return null;
         }
 
         public List<clsCliente> consultarTodos()

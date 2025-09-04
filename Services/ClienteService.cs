@@ -22,10 +22,10 @@ namespace Services
             //regals de negocio           
            
             // regla de negocio valida queno exista un cliente con el mismo id
-            if (_clienteDao.consultarPorID(cliente.id) != null)
-            {
-                throw new Exception("El cliente ya existe");
-            }
+            //if (_clienteDao.consultarPorID(cliente.id) != null)
+            //{
+            //    throw new Exception("El cliente ya existe");
+            //}
            
 
             _clienteDao.crear(cliente);
@@ -45,17 +45,18 @@ namespace Services
         {
             //reglas de negocio
             //validar que el cliente exista
-            if (_clienteDao.consultarPorID(id) == null)
-            {
-                throw new Exception("El cliente no existe");
-            }
-            _clienteDao.eliminar(id);
+            //if (_clienteDao.consultarPorID(id) == null)
+            //{
+            //    throw new Exception("El cliente no existe");
+            //}
+            //_clienteDao.eliminar(id);
 
 
         }
         public clsCliente consultarPorID(int id)
         {
-            return _clienteDao.consultarPorID(id);
+            //return _clienteDao.consultarPorID(id);
+            return null;
         }
 
         public List<clsCliente> consultarTodos()
@@ -69,6 +70,16 @@ namespace Services
         }
 
         clsCliente IGenerica<clsCliente>.consultarPorNombre(string nombre)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void eliminar(string id, int tipoId)
+        {
+            throw new NotImplementedException();
+        }
+
+        public clsCliente consultarPorID(string id, int tipoId)
         {
             throw new NotImplementedException();
         }
