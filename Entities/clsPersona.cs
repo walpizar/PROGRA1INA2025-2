@@ -12,18 +12,11 @@ namespace Entities
     public class clsPersona
     {
         //atributos con decoradores
-<<<<<<< HEAD
+
        
         public string id { get; set; }
 
         public int tipoId {  get; set; }
-=======
-   
-        public string id { get; set; }
-        public int tipoId { get; set; }
-
->>>>>>> 998e13816e8bb6bea2cd372fe6f73590bd5a67ac
-
         [Required(ErrorMessage = "El nombre es obligatorio.")]
         [StringLength(50, ErrorMessage = "El nombre no puede superar los 50 caracteres.")]
         public string nombre { get; set; }

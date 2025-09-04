@@ -1,6 +1,7 @@
 ﻿namespace DAO
 {
-    internal class clsUsuario
+    public class clsUsuario
     {
+
     }
 }
