@@ -18,15 +18,16 @@ namespace UI
         }
 
 
-        private void label1_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private void btnCancelar_Click(object sender, EventArgs e)
         {
+            //cierro el formulario
+            this.Close();
 
         }
 
+        private void btnAceptarRecuperarContra_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

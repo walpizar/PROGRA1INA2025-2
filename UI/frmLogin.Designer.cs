@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             gbxLogin = new GroupBox();
-           
+            linkLblOlvidoContra = new LinkLabel();
             btnCancelar = new Button();
             btnAceptar = new Button();
             txtPassword = new TextBox();
@@ -41,6 +41,7 @@
             // 
             // gbxLogin
             // 
+            gbxLogin.Controls.Add(linkLblOlvidoContra);
             gbxLogin.Controls.Add(btnCancelar);
             gbxLogin.Controls.Add(btnAceptar);
             gbxLogin.Controls.Add(txtPassword);
@@ -49,19 +50,29 @@
             gbxLogin.Controls.Add(label1);
             gbxLogin.Location = new Point(12, 12);
             gbxLogin.Name = "gbxLogin";
-            gbxLogin.Size = new Size(448, 170);
+            gbxLogin.Size = new Size(448, 228);
             gbxLogin.TabIndex = 0;
             gbxLogin.TabStop = false;
+          
             // 
-            // linklblOlvidoContra
+            // linkLblOlvidoContra
             // 
-           
+            linkLblOlvidoContra.AutoSize = true;
+            linkLblOlvidoContra.Font = new Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            linkLblOlvidoContra.Location = new Point(257, 188);
+            linkLblOlvidoContra.Name = "linkLblOlvidoContra";
+            linkLblOlvidoContra.Size = new Size(143, 17);
+            linkLblOlvidoContra.TabIndex = 6;
+            linkLblOlvidoContra.TabStop = true;
+            linkLblOlvidoContra.Text = "¿Olvidó su contraseña?";
+            linkLblOlvidoContra.VisitedLinkColor = Color.Blue;
+            linkLblOlvidoContra.LinkClicked += linkLblOlvidoContra_LinkClicked_1;
             // 
             // btnCancelar
             // 
             btnCancelar.BackColor = Color.AliceBlue;
             btnCancelar.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
-            btnCancelar.Location = new Point(177, 130);
+            btnCancelar.Location = new Point(157, 139);
             btnCancelar.Name = "btnCancelar";
             btnCancelar.Size = new Size(112, 34);
             btnCancelar.TabIndex = 5;
@@ -72,7 +83,7 @@
             // 
             btnAceptar.BackColor = Color.AliceBlue;
             btnAceptar.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
-            btnAceptar.Location = new Point(308, 130);
+            btnAceptar.Location = new Point(288, 139);
             btnAceptar.Name = "btnAceptar";
             btnAceptar.Size = new Size(112, 34);
             btnAceptar.TabIndex = 4;
@@ -82,14 +93,15 @@
             // 
             // txtPassword
             // 
-            txtPassword.Location = new Point(161, 89);
+            txtPassword.Location = new Point(141, 98);
             txtPassword.Name = "txtPassword";
+            txtPassword.PasswordChar = '*';
             txtPassword.Size = new Size(259, 23);
             txtPassword.TabIndex = 3;
             // 
             // txtUusario
             // 
-            txtUusario.Location = new Point(161, 46);
+            txtUusario.Location = new Point(141, 55);
             txtUusario.Name = "txtUusario";
             txtUusario.Size = new Size(259, 23);
             txtUusario.TabIndex = 2;
@@ -98,7 +110,7 @@
             // 
             label2.AutoSize = true;
             label2.Font = new Font("Trebuchet MS", 12F, FontStyle.Bold);
-            label2.Location = new Point(54, 90);
+            label2.Location = new Point(34, 99);
             label2.Name = "label2";
             label2.Size = new Size(101, 22);
             label2.TabIndex = 1;
@@ -108,7 +120,7 @@
             // 
             label1.AutoSize = true;
             label1.Font = new Font("Trebuchet MS", 12F, FontStyle.Bold);
-            label1.Location = new Point(81, 46);
+            label1.Location = new Point(61, 55);
             label1.Name = "label1";
             label1.Size = new Size(74, 22);
             label1.TabIndex = 0;
@@ -119,7 +131,7 @@
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = SystemColors.InactiveCaption;
-            ClientSize = new Size(473, 199);
+            ClientSize = new Size(473, 252);
             Controls.Add(gbxLogin);
             FormBorderStyle = FormBorderStyle.None;
             Name = "frmLogin";
@@ -138,5 +150,6 @@
         private Button btnCancelar;
         private Button btnAceptar;
         private TextBox txtPassword;
+        private LinkLabel linkLblOlvidoContra;
     }
 }
