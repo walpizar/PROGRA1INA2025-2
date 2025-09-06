@@ -25,8 +25,9 @@ namespace Entities
         //Fk a reponsable
         [Required]
         public int id_responsable { get; set; }//Id reponsable
+
         [Required]
-        public clsPersona clsPersona { get; set; }//Responsable
+        public clsPersona responsable { get; set; }//Responsable
 
         //Campos de audioria
         [Required]
@@ -35,8 +36,9 @@ namespace Entities
         //Fk de campos de auditoria a tabla persona crea
         [Required]
         public int id_usuarioCrea { get; set; }
+
         [Required]
-        public clsPersona usuario_crea { get; set; }
+        public clsUsuario usuario_crea { get; set; }
 
         [Required]
         public DateTime fecha_ultimaModificacion { get; set; }//Fecha ultima modificación
@@ -45,8 +47,9 @@ namespace Entities
         //Fk de campos de auditoria a tabla persona ultima modificación
         [Required]
         public int id_usuarioUltimaModificacion { get; set; }//Id de usuario de ultima modificación
+
         [Required]
-        public clsPersona usuario_ultimaModificacion { get; set; }
+        public clsUsuario usuario_ultimaModificacion { get; set; }
 
         [Required]
         public bool estado { get; set; } //Estado del tipo de ayuda

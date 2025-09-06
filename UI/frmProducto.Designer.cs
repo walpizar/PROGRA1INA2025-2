@@ -29,6 +29,8 @@
         private void InitializeComponent()
         {
             gbxDatosProducto = new GroupBox();
+            lblCategoria = new Label();
+            cboCategoria = new ComboBox();
             lblFamilia = new Label();
             cboFamilia = new ComboBox();
             txtCantidad = new NumericUpDown();
@@ -43,8 +45,6 @@
             btnGuardar = new Button();
             btnCancelar = new Button();
             btnEliminar = new Button();
-            lblCategoria = new Label();
-            cboCategoria = new ComboBox();
             gbxDatosProducto.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)txtCantidad).BeginInit();
             SuspendLayout();
@@ -69,6 +69,24 @@
             gbxDatosProducto.TabIndex = 0;
             gbxDatosProducto.TabStop = false;
             gbxDatosProducto.Text = "Datos de producto";
+            // 
+            // lblCategoria
+            // 
+            lblCategoria.AutoSize = true;
+            lblCategoria.Location = new Point(11, 185);
+            lblCategoria.Name = "lblCategoria";
+            lblCategoria.Size = new Size(61, 15);
+            lblCategoria.TabIndex = 10;
+            lblCategoria.Text = "Categoría:";
+            // 
+            // cboCategoria
+            // 
+            cboCategoria.DropDownStyle = ComboBoxStyle.DropDownList;
+            cboCategoria.FormattingEnabled = true;
+            cboCategoria.Location = new Point(78, 182);
+            cboCategoria.Name = "cboCategoria";
+            cboCategoria.Size = new Size(198, 23);
+            cboCategoria.TabIndex = 9;
             // 
             // lblFamilia
             // 
@@ -143,6 +161,7 @@
             txtId.Name = "txtId";
             txtId.Size = new Size(125, 23);
             txtId.TabIndex = 1;
+            txtId.TextChanged += txtId_TextChanged;
             // 
             // lblId
             // 
@@ -192,24 +211,6 @@
             btnEliminar.Text = "Eliminar";
             btnEliminar.UseVisualStyleBackColor = true;
             btnEliminar.Click += btnEliminar_Click;
-            // 
-            // lblCategoria
-            // 
-            lblCategoria.AutoSize = true;
-            lblCategoria.Location = new Point(11, 185);
-            lblCategoria.Name = "lblCategoria";
-            lblCategoria.Size = new Size(61, 15);
-            lblCategoria.TabIndex = 10;
-            lblCategoria.Text = "Categoría:";
-            // 
-            // cboCategoria
-            // 
-            cboCategoria.DropDownStyle = ComboBoxStyle.DropDownList;
-            cboCategoria.FormattingEnabled = true;
-            cboCategoria.Location = new Point(78, 182);
-            cboCategoria.Name = "cboCategoria";
-            cboCategoria.Size = new Size(198, 23);
-            cboCategoria.TabIndex = 9;
             // 
             // frmProducto
             // 
