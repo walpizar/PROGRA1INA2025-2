@@ -10,28 +10,94 @@ namespace DAO
 {
     public class LoginDao : IGenerica<clsUsuario>
     {
+        //declaro el contexto
+        private readonly dbContextINA _context;
 
         public LoginDao()
         {
 
+            //aqui instancio el contexto
+            _context = new dbContextINA();
+        }
+
+        //metodo obtener correo por usuario
+        public string ObtenerCorreoPorUsuario(string correo)
+        {
+            try
+            {
+                //busco el usuario en la base de datos (tablaPersona)
+                var persona = _context.Personas.FirstOrDefault(p => p.email == correo);
+                //si el usuario no existe, retorno null
+                if (persona == null)
+                {
+                    return null;
+                }
+                //retorno el correo del usuario encontrado
+                return persona.email;
+            }
+            catch (Exception ex)
+            {
+                //manejo de excepciones
+                throw new Exception("Error al obtener el correo del usuario: " + ex.Message);
+            }
+        }
+
+        //metodo para actualizar la contraseña en la base de datos
+        public void ActualizarContraseña(string correo, string nuevaContraseña)
+        {
+            try
+            {
+                //busco el email usuario en la base de datos
+                var persona = _context.Personas.FirstOrDefault(c => c.email == correo);
+
+                //si el usuario no existe, lanzo una excepcion
+                if (persona == null)
+                {
+                    throw new Exception("El correo no existe");
+                }
+
+                //obtengo la persona asociada al correo
+                var usuario = _context.Usuarios.FirstOrDefault(u => u.id == persona.id);
+
+                if (usuario == null) {  
+                    throw new Exception("El usuario no existe");
+                }
+
+                //actualizo la contraseña
+                usuario.contraseña = nuevaContraseña;
+                //guardo los cambios en la base de datos
+                _context.SaveChanges();
+            }
+            catch (Exception)
+            {
+                //manejo de excepciones
+                throw new Exception("Error al actualizar la contraseña");
+            }
         }
 
         public clsUsuario consultarPorID(int id)
         {
-            throw new NotImplementedException();
+            //obetengo el id de la persona que es el mismo id de usuario
+            return _context.Usuarios.FirstOrDefault(u => u.id == id);//falta la propiedad usuarios en el dbContex
         }
 
+
+        //metodo para consultar por nombr
         public clsUsuario consultarPorNombre(string nombre)
         {
-            throw new NotImplementedException();
+            //busco el usuario por nombre en la base de datos
+            return _context.Usuarios.FirstOrDefault(u => u.nombre_usuario == nombre);
         }
 
-        public List<clsUsuario> consultarTodos()
+
+
+
+        public void crear(clsUsuario entidad)
         {
             throw new NotImplementedException();
         }
 
-        public void crear(clsUsuario entidad)
+        public void modificar(clsUsuario entidad)
         {
             throw new NotImplementedException();
         }
@@ -41,7 +107,7 @@ namespace DAO
             throw new NotImplementedException();
         }
 
-        public void modificar(clsUsuario entidad)
+        public List<clsUsuario> consultarTodos()
         {
             throw new NotImplementedException();
         }

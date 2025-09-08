@@ -36,7 +36,7 @@
             gbxRecuperarContra.Controls.Add(txtNuevaContra);
             gbxRecuperarContra.Controls.Add(lblConfirmarContra);
             gbxRecuperarContra.Controls.Add(lblNuevaContra);
-            gbxRecuperarContra.Location = new Point(29, 72);
+            gbxRecuperarContra.Location = new Point(23, 82);
             gbxRecuperarContra.Name = "gbxRecuperarContra";
             gbxRecuperarContra.Size = new Size(469, 218);
             gbxRecuperarContra.TabIndex = 0;
@@ -49,7 +49,7 @@
             btnCancelarRecuperarContra.Location = new Point(211, 144);
             btnCancelarRecuperarContra.Name = "btnCancelarRecuperarContra";
             btnCancelarRecuperarContra.Size = new Size(112, 34);
-            btnCancelarRecuperarContra.TabIndex = 11;
+            btnCancelarRecuperarContra.TabIndex = 4;
             btnCancelarRecuperarContra.Text = "Cancelar";
             btnCancelarRecuperarContra.UseVisualStyleBackColor = false;
             btnCancelarRecuperarContra.Click += btnCancelar_Click;
@@ -61,7 +61,7 @@
             btnAceptarRecuperarContra.Location = new Point(342, 144);
             btnAceptarRecuperarContra.Name = "btnAceptarRecuperarContra";
             btnAceptarRecuperarContra.Size = new Size(112, 34);
-            btnAceptarRecuperarContra.TabIndex = 10;
+            btnAceptarRecuperarContra.TabIndex = 3;
             btnAceptarRecuperarContra.Text = "Aceptar";
             btnAceptarRecuperarContra.UseVisualStyleBackColor = false;
             btnAceptarRecuperarContra.Click += btnAceptarRecuperarContra_Click;
@@ -71,14 +71,14 @@
             txtConfirmarContra.Location = new Point(195, 100);
             txtConfirmarContra.Name = "txtConfirmarContra";
             txtConfirmarContra.Size = new Size(259, 23);
-            txtConfirmarContra.TabIndex = 9;
+            txtConfirmarContra.TabIndex = 2;
             // 
             // txtNuevaContra
             // 
             txtNuevaContra.Location = new Point(195, 60);
             txtNuevaContra.Name = "txtNuevaContra";
             txtNuevaContra.Size = new Size(259, 23);
-            txtNuevaContra.TabIndex = 8;
+            txtNuevaContra.TabIndex = 1;
             // 
             // lblConfirmarContra
             // 
@@ -104,7 +104,7 @@
             // 
             lblRecuperarContra.AutoSize = true;
             lblRecuperarContra.Font = new Font("Segoe UI", 15.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            lblRecuperarContra.Location = new Point(116, 27);
+            lblRecuperarContra.Location = new Point(110, 34);
             lblRecuperarContra.Name = "lblRecuperarContra";
             lblRecuperarContra.Size = new Size(288, 30);
             lblRecuperarContra.TabIndex = 1;
@@ -115,7 +115,7 @@
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = SystemColors.InactiveCaption;
-            ClientSize = new Size(538, 322);
+            ClientSize = new Size(516, 322);
             Controls.Add(lblRecuperarContra);
             Controls.Add(gbxRecuperarContra);
             FormBorderStyle = FormBorderStyle.None;

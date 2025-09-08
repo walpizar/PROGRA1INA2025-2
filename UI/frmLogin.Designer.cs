@@ -33,9 +33,10 @@
             btnCancelar = new Button();
             btnAceptar = new Button();
             txtPassword = new TextBox();
-            txtUusario = new TextBox();
+            txtUsuario = new TextBox();
             label2 = new Label();
             label1 = new Label();
+            lblLogin = new Label();
             gbxLogin.SuspendLayout();
             SuspendLayout();
             // 
@@ -45,15 +46,14 @@
             gbxLogin.Controls.Add(btnCancelar);
             gbxLogin.Controls.Add(btnAceptar);
             gbxLogin.Controls.Add(txtPassword);
-            gbxLogin.Controls.Add(txtUusario);
+            gbxLogin.Controls.Add(txtUsuario);
             gbxLogin.Controls.Add(label2);
             gbxLogin.Controls.Add(label1);
-            gbxLogin.Location = new Point(12, 12);
+            gbxLogin.Location = new Point(24, 64);
             gbxLogin.Name = "gbxLogin";
             gbxLogin.Size = new Size(448, 228);
             gbxLogin.TabIndex = 0;
             gbxLogin.TabStop = false;
-          
             // 
             // linkLblOlvidoContra
             // 
@@ -62,7 +62,7 @@
             linkLblOlvidoContra.Location = new Point(257, 188);
             linkLblOlvidoContra.Name = "linkLblOlvidoContra";
             linkLblOlvidoContra.Size = new Size(143, 17);
-            linkLblOlvidoContra.TabIndex = 6;
+            linkLblOlvidoContra.TabIndex = 5;
             linkLblOlvidoContra.TabStop = true;
             linkLblOlvidoContra.Text = "¿Olvidó su contraseña?";
             linkLblOlvidoContra.VisitedLinkColor = Color.Blue;
@@ -75,7 +75,7 @@
             btnCancelar.Location = new Point(157, 139);
             btnCancelar.Name = "btnCancelar";
             btnCancelar.Size = new Size(112, 34);
-            btnCancelar.TabIndex = 5;
+            btnCancelar.TabIndex = 4;
             btnCancelar.Text = "Cancelar";
             btnCancelar.UseVisualStyleBackColor = false;
             // 
@@ -86,7 +86,7 @@
             btnAceptar.Location = new Point(288, 139);
             btnAceptar.Name = "btnAceptar";
             btnAceptar.Size = new Size(112, 34);
-            btnAceptar.TabIndex = 4;
+            btnAceptar.TabIndex = 3;
             btnAceptar.Text = "Aceptar";
             btnAceptar.UseVisualStyleBackColor = false;
             btnAceptar.Click += btnAceptar_Click;
@@ -97,14 +97,14 @@
             txtPassword.Name = "txtPassword";
             txtPassword.PasswordChar = '*';
             txtPassword.Size = new Size(259, 23);
-            txtPassword.TabIndex = 3;
+            txtPassword.TabIndex = 2;
             // 
-            // txtUusario
+            // txtUsuario
             // 
-            txtUusario.Location = new Point(141, 55);
-            txtUusario.Name = "txtUusario";
-            txtUusario.Size = new Size(259, 23);
-            txtUusario.TabIndex = 2;
+            txtUsuario.Location = new Point(141, 55);
+            txtUsuario.Name = "txtUsuario";
+            txtUsuario.Size = new Size(259, 23);
+            txtUsuario.TabIndex = 1;
             // 
             // label2
             // 
@@ -126,12 +126,23 @@
             label1.TabIndex = 0;
             label1.Text = "Usuario:";
             // 
+            // lblLogin
+            // 
+            lblLogin.AutoSize = true;
+            lblLogin.Font = new Font("Segoe UI", 15.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblLogin.Location = new Point(204, 22);
+            lblLogin.Name = "lblLogin";
+            lblLogin.Size = new Size(69, 30);
+            lblLogin.TabIndex = 2;
+            lblLogin.Text = "Login";
+            // 
             // frmLogin
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = SystemColors.InactiveCaption;
-            ClientSize = new Size(473, 252);
+            ClientSize = new Size(500, 318);
+            Controls.Add(lblLogin);
             Controls.Add(gbxLogin);
             FormBorderStyle = FormBorderStyle.None;
             Name = "frmLogin";
@@ -139,17 +150,19 @@
             gbxLogin.ResumeLayout(false);
             gbxLogin.PerformLayout();
             ResumeLayout(false);
+            PerformLayout();
         }
 
         #endregion
 
         private GroupBox gbxLogin;
-        private TextBox txtUusario;
+        private TextBox txtUsuario;
         private Label label2;
         private Label label1;
         private Button btnCancelar;
         private Button btnAceptar;
         private TextBox txtPassword;
         private LinkLabel linkLblOlvidoContra;
+        private Label lblLogin;
     }
 }
