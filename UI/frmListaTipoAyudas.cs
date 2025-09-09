@@ -25,7 +25,6 @@ namespace UI
 
         private void btnNuevo_Click(object sender, EventArgs e)
         {
-
             frmTipoAyuda fmrTipoAyuda = new frmTipoAyuda();
             fmrTipoAyuda.ShowDialog();
 
