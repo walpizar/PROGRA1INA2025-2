@@ -27,10 +27,11 @@ namespace UI
 
         private void btnAceptar_Click(object sender, EventArgs e)
         {
+            //variables para obtener los valores de los textbox de usuario y contraseña
             string usuario = txtUsuario.Text;
             string contraseña = txtPassword.Text;
 
-            //Valido que los campos no esten vacios
+            //Valido que los campos no esten null o vacios
             if (string.IsNullOrEmpty(usuario) || string.IsNullOrEmpty(contraseña))
             {
                 MessageBox.Show("Por favor, ingrese usuario y contraseña.", "Campos requeridos",
