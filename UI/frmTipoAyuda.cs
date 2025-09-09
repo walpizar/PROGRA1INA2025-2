@@ -49,6 +49,13 @@ namespace UI
 
         private void InitializeComponent()
         {
+            SuspendLayout();
+            // 
+            // frmTipoAyuda
+            // 
+            ClientSize = new Size(380, 227);
+            Name = "frmTipoAyuda";
+            ResumeLayout(false);
 
         }
     }

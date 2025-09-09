@@ -7,9 +7,7 @@ namespace DAO
 {
     public class TipoAyudaDAO
     {
-        // Cambia la declaración del campo _context de:
-        // private readonly dbPaleativoGarabito _context;
-        // a:
+        // Contexto de la base de datos
         private readonly dbContextINA _context;
 
         // Constructor - recibe el contexto por inyección de dependencias
@@ -68,7 +66,7 @@ namespace DAO
                 _context.SaveChanges();
             }
         }
-        
     }
 }
+
 
