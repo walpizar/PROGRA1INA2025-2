@@ -16,7 +16,7 @@ namespace UI
     {
         public clsActivos activosSelected { get; set; }
         private readonly ActivosServices _activoService;
-        // private readonly CategoriaActivosService _catActivosService;
+        //private readonly CategoriaActivosService _catActivosService;
         // private readonly devolucionesService _devolucionesService;
 
         public frmActivos()
