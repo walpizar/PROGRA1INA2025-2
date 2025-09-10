@@ -8,8 +8,15 @@ using System.Threading.Tasks;
 
 namespace DAO
 {
-    internal class dbContextINA: DbContext
+    public class dbContextINA : DbContext
     {
+
+        // Definir las entidades de dominio que desea mapear a la base de datos
+        public DbSet<clsProducto> Producto { get; set; }
+        public DbSet<clsCliente> Clientes { get; set; }
+        public DbSet<clsCategoria> Categoria { get; set; }
+        public DbSet<clsEspecialidadMedica> EspecialidadMedica { get; set; }  // 🔹 Agregada la nueva entidad
+
         //definir la entidades de dominio que desea mapear a la base de datos
 
         public DbSet<clsProducto> Producto { get; set; }
@@ -28,6 +35,7 @@ namespace DAO
 
         
 
+
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             if (!optionsBuilder.IsConfigured)
@@ -37,6 +45,7 @@ namespace DAO
                     @"Server=localhost\sqlexpress;Database=dbPaleativoGarabito;Trusted_Connection=True;MultipleActiveResultSets=True;TrustServerCertificate=True;");
             }
         }
+
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -75,6 +84,7 @@ namespace DAO
 
 
         }
+
 
     }
 }
