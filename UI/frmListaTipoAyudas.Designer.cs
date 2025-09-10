@@ -119,7 +119,7 @@
             Controls.Add(btnNuevo);
             Controls.Add(groupBox1);
             Name = "frmListaTipoAyudas";
-            Text = "frmTipoAyuda";
+            Text = "Mantenimientos Tipos de Ayudas";
             Load += frmListaTipoAyudas_Load;
             groupBox1.ResumeLayout(false);
             groupBox1.PerformLayout();

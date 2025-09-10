@@ -51,12 +51,12 @@ namespace UI
         {
             lblTiposAyudas = new Label();
             grbTiposAyudas = new GroupBox();
-            lblNombre = new Label();
-            lblDescripcion = new Label();
-            lblResponsable = new Label();
-            txtNombre = new TextBox();
-            txtDescripcion = new TextBox();
             cboxResponsable = new ComboBox();
+            txtDescripcion = new TextBox();
+            txtNombre = new TextBox();
+            lblResponsable = new Label();
+            lblDescripcion = new Label();
+            lblNombre = new Label();
             btnGuardar = new Button();
             btnEliminar = new Button();
             grbTiposAyudas.SuspendLayout();
@@ -88,23 +88,29 @@ namespace UI
             grbTiposAyudas.TabStop = false;
             grbTiposAyudas.Text = "Datos tipos de ayudas";
             // 
-            // lblNombre
+            // cboxResponsable
             // 
-            lblNombre.AutoSize = true;
-            lblNombre.Location = new Point(54, 42);
-            lblNombre.Name = "lblNombre";
-            lblNombre.Size = new Size(54, 15);
-            lblNombre.TabIndex = 0;
-            lblNombre.Text = "Nombre:";
+            cboxResponsable.DropDownStyle = ComboBoxStyle.DropDownList;
+            cboxResponsable.FormattingEnabled = true;
+            cboxResponsable.Location = new Point(114, 139);
+            cboxResponsable.Name = "cboxResponsable";
+            cboxResponsable.Size = new Size(212, 23);
+            cboxResponsable.TabIndex = 5;
             // 
-            // lblDescripcion
+            // txtDescripcion
             // 
-            lblDescripcion.AutoSize = true;
-            lblDescripcion.Location = new Point(36, 91);
-            lblDescripcion.Name = "lblDescripcion";
-            lblDescripcion.Size = new Size(72, 15);
-            lblDescripcion.TabIndex = 1;
-            lblDescripcion.Text = "Descripcion:";
+            txtDescripcion.Location = new Point(114, 78);
+            txtDescripcion.Multiline = true;
+            txtDescripcion.Name = "txtDescripcion";
+            txtDescripcion.Size = new Size(212, 49);
+            txtDescripcion.TabIndex = 4;
+            // 
+            // txtNombre
+            // 
+            txtNombre.Location = new Point(114, 39);
+            txtNombre.Name = "txtNombre";
+            txtNombre.Size = new Size(212, 23);
+            txtNombre.TabIndex = 3;
             // 
             // lblResponsable
             // 
@@ -116,29 +122,23 @@ namespace UI
             lblResponsable.Text = "Responsable:";
             lblResponsable.Click += label1_Click;
             // 
-            // txtNombre
+            // lblDescripcion
             // 
-            txtNombre.Location = new Point(114, 39);
-            txtNombre.Name = "txtNombre";
-            txtNombre.Size = new Size(212, 23);
-            txtNombre.TabIndex = 3;
+            lblDescripcion.AutoSize = true;
+            lblDescripcion.Location = new Point(36, 91);
+            lblDescripcion.Name = "lblDescripcion";
+            lblDescripcion.Size = new Size(72, 15);
+            lblDescripcion.TabIndex = 1;
+            lblDescripcion.Text = "Descripcion:";
             // 
-            // txtDescripcion
+            // lblNombre
             // 
-            txtDescripcion.Location = new Point(114, 78);
-            txtDescripcion.Multiline = true;
-            txtDescripcion.Name = "txtDescripcion";
-            txtDescripcion.Size = new Size(212, 49);
-            txtDescripcion.TabIndex = 4;
-            // 
-            // cboxResponsable
-            // 
-            cboxResponsable.DropDownStyle = ComboBoxStyle.DropDownList;
-            cboxResponsable.FormattingEnabled = true;
-            cboxResponsable.Location = new Point(114, 139);
-            cboxResponsable.Name = "cboxResponsable";
-            cboxResponsable.Size = new Size(212, 23);
-            cboxResponsable.TabIndex = 5;
+            lblNombre.AutoSize = true;
+            lblNombre.Location = new Point(54, 42);
+            lblNombre.Name = "lblNombre";
+            lblNombre.Size = new Size(54, 15);
+            lblNombre.TabIndex = 0;
+            lblNombre.Text = "Nombre:";
             // 
             // btnGuardar
             // 
@@ -172,6 +172,7 @@ namespace UI
             Controls.Add(grbTiposAyudas);
             Controls.Add(lblTiposAyudas);
             Name = "frmTipoAyuda";
+            Text = "Agregar Tipo de ayuda";
             grbTiposAyudas.ResumeLayout(false);
             grbTiposAyudas.PerformLayout();
             ResumeLayout(false);
