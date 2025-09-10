@@ -19,9 +19,7 @@ namespace DAO
 
         //definir la entidades de dominio que desea mapear a la base de datos
 
-        public DbSet<clsProducto> Producto { get; set; }
-        public DbSet<clsCliente> Clientes { get; set; }
-        public DbSet<clsCategoria> Categoria { get; set; }
+       
         public DbSet<clsActivos> Activos { get; set; }
 
         public DbSet<clsCategoriaActivos> CategoriaActivos { get; set; }
@@ -80,8 +78,13 @@ namespace DAO
                 .HasForeignKey<clsMedico>(m => new { m.id, m.tipoId })
                 .OnDelete(DeleteBehavior.Restrict); // Evita el borrado en cascada
 
-
-
+            //relacion 1 a 1 entre donante y persona
+            modelBuilder.Entity<clsDonante>()
+                .HasOne(d => d.Persona)
+                .WithOne(p => p.Donante)
+                .HasForeignKey<clsDonante>(d => new { d.PersonaId, d.PersonaTipoId })
+                .HasPrincipalKey<clsPersona>(p => new { p.id, p.tipoId })
+                .OnDelete(DeleteBehavior.Restrict);
 
         }
 
