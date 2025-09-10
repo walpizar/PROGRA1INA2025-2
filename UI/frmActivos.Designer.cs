@@ -29,6 +29,13 @@
         private void InitializeComponent()
         {
             gbxClientes = new GroupBox();
+            txtCantidad = new NumericUpDown();
+            cbxCategorias = new ComboBox();
+            label6 = new Label();
+            txtUbicacion = new TextBox();
+            label5 = new Label();
+            txtProveedor = new TextBox();
+            label1 = new Label();
             btnEliminar = new Button();
             btnGuardar = new Button();
             btnCancelar = new Button();
@@ -44,13 +51,6 @@
             txtIdActivo = new TextBox();
             lblId = new Label();
             lblTitulo = new Label();
-            txtProveedor = new TextBox();
-            label1 = new Label();
-            textBox1 = new TextBox();
-            label5 = new Label();
-            label6 = new Label();
-            cbxCategorias = new ComboBox();
-            txtCantidad = new NumericUpDown();
             gbxClientes.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)txtCantidad).BeginInit();
             SuspendLayout();
@@ -60,7 +60,7 @@
             gbxClientes.Controls.Add(txtCantidad);
             gbxClientes.Controls.Add(cbxCategorias);
             gbxClientes.Controls.Add(label6);
-            gbxClientes.Controls.Add(textBox1);
+            gbxClientes.Controls.Add(txtUbicacion);
             gbxClientes.Controls.Add(label5);
             gbxClientes.Controls.Add(txtProveedor);
             gbxClientes.Controls.Add(label1);
@@ -85,6 +85,67 @@
             gbxClientes.TabIndex = 5;
             gbxClientes.TabStop = false;
             gbxClientes.Text = "Datos Activos:";
+            // 
+            // txtCantidad
+            // 
+            txtCantidad.Location = new Point(121, 163);
+            txtCantidad.Name = "txtCantidad";
+            txtCantidad.Size = new Size(256, 29);
+            txtCantidad.TabIndex = 31;
+            // 
+            // cbxCategorias
+            // 
+            cbxCategorias.FormattingEnabled = true;
+            cbxCategorias.Location = new Point(121, 372);
+            cbxCategorias.Name = "cbxCategorias";
+            cbxCategorias.Size = new Size(256, 29);
+            cbxCategorias.TabIndex = 30;
+            // 
+            // label6
+            // 
+            label6.AutoSize = true;
+            label6.Font = new Font("Segoe UI", 9.75F);
+            label6.Location = new Point(36, 378);
+            label6.Name = "label6";
+            label6.Size = new Size(74, 17);
+            label6.TabIndex = 29;
+            label6.Text = "Categorias:";
+            // 
+            // txtUbicacion
+            // 
+            txtUbicacion.Font = new Font("Segoe UI", 9.75F);
+            txtUbicacion.Location = new Point(121, 323);
+            txtUbicacion.Name = "txtUbicacion";
+            txtUbicacion.Size = new Size(256, 25);
+            txtUbicacion.TabIndex = 28;
+            // 
+            // label5
+            // 
+            label5.AutoSize = true;
+            label5.Font = new Font("Segoe UI", 9.75F);
+            label5.Location = new Point(42, 326);
+            label5.Name = "label5";
+            label5.Size = new Size(68, 17);
+            label5.TabIndex = 27;
+            label5.Text = "Ubicacion:";
+            // 
+            // txtProveedor
+            // 
+            txtProveedor.Font = new Font("Segoe UI", 9.75F);
+            txtProveedor.Location = new Point(121, 279);
+            txtProveedor.Name = "txtProveedor";
+            txtProveedor.Size = new Size(256, 25);
+            txtProveedor.TabIndex = 26;
+            // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Font = new Font("Segoe UI", 9.75F);
+            label1.Location = new Point(42, 282);
+            label1.Name = "label1";
+            label1.Size = new Size(72, 17);
+            label1.TabIndex = 25;
+            label1.Text = "Proveedor:";
             // 
             // btnEliminar
             // 
@@ -224,67 +285,6 @@
             lblTitulo.Text = "Crear Activos";
             lblTitulo.TextAlign = ContentAlignment.TopCenter;
             // 
-            // txtProveedor
-            // 
-            txtProveedor.Font = new Font("Segoe UI", 9.75F);
-            txtProveedor.Location = new Point(121, 279);
-            txtProveedor.Name = "txtProveedor";
-            txtProveedor.Size = new Size(256, 25);
-            txtProveedor.TabIndex = 26;
-            // 
-            // label1
-            // 
-            label1.AutoSize = true;
-            label1.Font = new Font("Segoe UI", 9.75F);
-            label1.Location = new Point(42, 282);
-            label1.Name = "label1";
-            label1.Size = new Size(72, 17);
-            label1.TabIndex = 25;
-            label1.Text = "Proveedor:";
-            // 
-            // textBox1
-            // 
-            textBox1.Font = new Font("Segoe UI", 9.75F);
-            textBox1.Location = new Point(121, 323);
-            textBox1.Name = "textBox1";
-            textBox1.Size = new Size(256, 25);
-            textBox1.TabIndex = 28;
-            // 
-            // label5
-            // 
-            label5.AutoSize = true;
-            label5.Font = new Font("Segoe UI", 9.75F);
-            label5.Location = new Point(42, 326);
-            label5.Name = "label5";
-            label5.Size = new Size(68, 17);
-            label5.TabIndex = 27;
-            label5.Text = "Ubicacion:";
-            // 
-            // label6
-            // 
-            label6.AutoSize = true;
-            label6.Font = new Font("Segoe UI", 9.75F);
-            label6.Location = new Point(36, 378);
-            label6.Name = "label6";
-            label6.Size = new Size(74, 17);
-            label6.TabIndex = 29;
-            label6.Text = "Categorias:";
-            // 
-            // cbxCategorias
-            // 
-            cbxCategorias.FormattingEnabled = true;
-            cbxCategorias.Location = new Point(121, 372);
-            cbxCategorias.Name = "cbxCategorias";
-            cbxCategorias.Size = new Size(256, 29);
-            cbxCategorias.TabIndex = 30;
-            // 
-            // txtCantidad
-            // 
-            txtCantidad.Location = new Point(121, 163);
-            txtCantidad.Name = "txtCantidad";
-            txtCantidad.Size = new Size(256, 29);
-            txtCantidad.TabIndex = 31;
-            // 
             // frmActivos
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -324,7 +324,7 @@
         private Label label1;
         private ComboBox cbxCategorias;
         private Label label6;
-        private TextBox textBox1;
+        private TextBox txtUbicacion;
         private Label label5;
         private NumericUpDown txtCantidad;
     }
