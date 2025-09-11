@@ -17,16 +17,15 @@ namespace Entities
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int IdDonante { get; set; }
 
-        [ForeignKey("Persona")]
-        public int IdPersona { get; set; }
-
+        public string PersonaId { get; set; }
+        public int PersonaTipoId { get; set; }
         [Required]
         public bool Estado { get; set; }
         
         [Required]
         public DateTime FechaRegistro { get; set; }
-
         // Relación: Un Donante es una Persona
+        [ForeignKey("PersonaId,PersonaTipoId")]
         public clsPersona Persona { get; set; }
 
         // Relación: Un Donante puede tener muchas Donaciones
@@ -36,10 +35,10 @@ namespace Entities
         public clsDonante() { }
 
         // Constructor con parámetros
-        public clsDonante( int idPersona, bool estado, DateTime fechaRegistro)
+        public clsDonante(string personaId, int personaTipoId, bool estado, DateTime fechaRegistro)
         {
-            IdDonante = IdPersona;
-            IdPersona = idPersona;
+            PersonaId = personaId;
+            PersonaTipoId = personaTipoId;
             Estado = estado;
             FechaRegistro = fechaRegistro;
         }
@@ -47,7 +46,7 @@ namespace Entities
         // Método ToString
         public override string ToString()
         {
-            return $"IdDonante: {IdDonante}, IdPersona: {IdPersona}, Estado: {Estado}, FechaRegistro: {FechaRegistro.ToShortDateString()}";
+            return $"PersonaId: {PersonaId}, PersonaTipoId: {PersonaTipoId}, Estado: {Estado}, FechaRegistro: {FechaRegistro.ToShortDateString()}";
         }
     }
 }
