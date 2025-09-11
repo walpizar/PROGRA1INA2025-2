@@ -62,7 +62,7 @@ namespace UI
                 }
                 else
                 {
-                    MessageBox.Show("Error al actualizar la contraseña.",
+                    MessageBox.Show("Error al actualizar la contraseña. Contacte con su administrador.",
                         "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
