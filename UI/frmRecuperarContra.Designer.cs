@@ -86,11 +86,10 @@
             btnAceptarRecuperarContra.TabIndex = 10;
             btnAceptarRecuperarContra.Text = "Aceptar";
             btnAceptarRecuperarContra.UseVisualStyleBackColor = false;
-<<<<<<< HEAD
+
           
-=======
-           
->>>>>>> develop
+          
+
             // 
             // txtConfirmarContra
             // 
@@ -98,11 +97,7 @@
             txtConfirmarContra.Name = "txtConfirmarContra";
             txtConfirmarContra.Size = new Size(259, 23);
             txtConfirmarContra.TabIndex = 9;
-<<<<<<< HEAD
-          
-=======
-            
->>>>>>> develop
+
             // 
             // txtNuevaContra
             // 
@@ -110,11 +105,7 @@
             txtNuevaContra.Name = "txtNuevaContra";
             txtNuevaContra.Size = new Size(259, 23);
             txtNuevaContra.TabIndex = 8;
-<<<<<<< HEAD
-        
-=======
-           
->>>>>>> develop
+
             // 
             // lblConfirmarContra
             // 
@@ -125,13 +116,7 @@
             lblConfirmarContra.Size = new Size(182, 22);
             lblConfirmarContra.TabIndex = 7;
             lblConfirmarContra.Text = "Confirmar contraseña:";
-<<<<<<< HEAD
-            
-            // 
-=======
-           
-            //
->>>>>>> develop
+
             // lblNuevaContra
             // 
             lblNuevaContra.AutoSize = true;

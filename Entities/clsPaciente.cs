@@ -8,11 +8,12 @@ using System.Threading.Tasks;
 
 namespace Entities
 {
+    [Table("tbPaciente")]
     public class clsPaciente
     {
 
-        public string id { get; set; }
-        public int tipoId { get; set; }
+        public string id { get; set; }//llave primaria compuesta 
+        public int tipoId { get; set; }//llave primaria compuesta
 
         [Required]//obligatorio
         [StringLength(100, ErrorMessage = "El nombre no puede tener mas de 100 caracteres")]//longitud maxima
@@ -25,9 +26,12 @@ namespace Entities
 
         //campo de llave foranea
         [Required]//obligatorio
-        public int idPersona { get; set; }
+        public string idPersona { get; set; }
 
-        
+        //campo de llave foranea
+        [Required]
+        public int tipoIdPersona { get; set; }
+
         public clsPersona Persona { get; set; }
 
 
@@ -54,7 +58,7 @@ namespace Entities
 
 
         
-        public clsPaciente(string idPaciente, string estadoCivil, string referencia, int IdPersona, 
+        public clsPaciente(string idPaciente, string estadoCivil, string referencia, string IdPersona, int TipoIdPersona,
             bool estado, DateTime fecha_crea, string usuario_crea, DateTime fecha_ult_mod, string usuario_ult_mod)
         {
             this.id = idPaciente;
@@ -62,6 +66,7 @@ namespace Entities
             this.estadoCivil = estadoCivil;
             this.referencia = referencia;
             this.idPersona = IdPersona;
+            this.tipoIdPersona = TipoIdPersona;
             this.estado = estado;
             this.fecha_crea = fecha_crea;
             this.usuario_crea = usuario_crea;

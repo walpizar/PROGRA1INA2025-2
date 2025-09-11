@@ -62,7 +62,7 @@ namespace Services
             paciente.usuario_ult_mod = "Jumira"; //X mientras luego lo cambio por el usuario logueado
 
 
-            // regla de negocio valida que no exista un paciente con el mismo id (cedula)
+            //valido que no exista un paciente con el mismo id (cedula)
             if (_pacientDao.consultarPorID(paciente.id) != null)
             {
                 throw new EntityExistDBException();

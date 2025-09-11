@@ -28,7 +28,10 @@ namespace DAO
         {
 
             //retorno una esxpresion lambda que busca en la tabla paciente el id que le paso por parametro
-            return _context.Paciente.Where(p => p.id == id).SingleOrDefault();
+            return _context.Paciente
+                .AsNoTracking()//esto es para que no haga seguimiento de los cambios en los objetos, mejora el rendimiento en consultas de solo lectura
+                .Include(p => p.Persona)//esto es para traer los datos de la tabla persona que esta relacionada con paciente
+                .Where(p => p.id == id).SingleOrDefault();
 
         }
 
@@ -46,7 +49,10 @@ namespace DAO
         {
             //retorno todos los pacientes de la tabla paciente
             //el include es para traer los datos de la tabla persona que esta relacionada con paciente
-            return _context.Paciente.Include(p => p.Persona).ToList();
+            return _context.Paciente
+                .AsNoTracking()//esto es para que no haga seguimiento de los cambios en los objetos, mejora el rendimiento en consultas de solo lectura
+                .Include(p => p.Persona)
+                .ToList();
 
         }
 
@@ -54,10 +60,32 @@ namespace DAO
         //crear un paciente
         public void crear(clsPaciente paciente)
         {
-            //agrego el paciente a la tabla paciente
-            _context.Paciente.Add(paciente);
-            //y guardo los cambios
-            _context.SaveChanges();
+            //valido si lapersona existe
+            if (paciente.Persona != null)
+            {
+                //asigno la persona encontrada a la variable personaExistente
+                var personaExistente = _context.Personas
+                    .FirstOrDefault(p => p.id == paciente.Persona.id && p.tipoId == paciente.Persona.tipoId);
+
+                //si persona no existe 
+                if (personaExistente == null)
+                {
+                    //si no existe, agregarla
+                    _context.Personas.Add(paciente.Persona);
+                }
+                else
+                {
+                    //si existe, usar la existente, es decir no agrega nada a tbPersona y usa esa persona de referencia al insertar en tbPaciente
+                    paciente.Persona = personaExistente;
+                }
+
+                //luego agrego el paciente
+                _context.Paciente.Add(paciente);
+
+                //guardo ambos cambios
+                _context.SaveChanges();
+
+            }   
         }
 
 
@@ -76,6 +104,12 @@ namespace DAO
         //modificar un paciente
         public void modificar(clsPaciente paciente)
         {
+            //verifico que la persona no sea nula, solo actualizo si la persona viene modificada o existe
+            if (paciente.Persona != null)
+            {
+                //paciente.Persona es la persona que viene modificada del formulario
+                _context.Personas.Update(paciente.Persona);
+            }
             //modifico el paciente
             _context.Paciente.Update(paciente);
             //y guardo los cambios

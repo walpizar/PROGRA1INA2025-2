@@ -47,6 +47,7 @@ namespace UI
                     this.Text = "Modificar Paciente";
 
                     this.txtIdPaciente.Enabled = false; //no se puede modificar el id
+                    this.txtTipoId.Enabled = false; //no se puede modificar el tipo de id
 
                     //al boton guardar pongale modificar
                     btnGuardarPaciente.Text = "Modificar";
@@ -73,7 +74,7 @@ namespace UI
                     btnEliminarPaciente.Visible = false; //oculto el boton de eliminar
 
                     //cierro el formulario
-                    this.Close();
+                    //this.Close();
                 }
             }
             catch (Exception)
@@ -96,18 +97,14 @@ namespace UI
             txtEmail.Text = pacienteSelected.Persona.email;
             txtDireccion.Text = pacienteSelected.Persona.direccion;
             txtTelefono.Text = pacienteSelected.Persona.telefono;
-            txtEstado.Text = pacienteSelected.Persona.estado ? "Activo" : "Inactivo"; //si es true, activo, si no, inactivo
-            txtReferencia.Text = pacienteSelected.referencia;
             txtEstadoCivil.Text = pacienteSelected.estadoCivil;
+            txtReferencia.Text = pacienteSelected.referencia;
+            txtEstado.Text = pacienteSelected.Persona.estado ? "Activo" : "Inactivo"; //si es true, activo, si no, inactivo
+
 
         }
 
-        private void label5_Click(object sender, EventArgs e)
-        {
-
-        }
-
-
+     
         //evento click del boton guardar
         private void btnGuardarPaciente_Click(object sender, EventArgs e)
         {
@@ -135,29 +132,38 @@ namespace UI
 
                     //creo instancia de paciente para setear los valores del paciente
                     clsPaciente pacie = new clsPaciente();
-                    pacie.id = txtIdPaciente.Text;
+                    pacie.id = persona.id;
+                    pacie.tipoId = persona.tipoId;
+                    pacie.idPersona = persona.id;//esto es para agregar el campo de FK y conecte con tbPersona
+                    pacie.tipoIdPersona = persona.tipoId; //esto es para agregar el campo de FK y conecte con tbPersona
                     pacie.referencia = txtReferencia.Text;
                     pacie.estadoCivil = txtEstadoCivil.Text;
+                    pacie.estado = persona.estado; //el estado del paciente es el mismo que el de la persona
 
-                    pacie.Persona = persona; //asigno la persona al paciente
+                    pacie.Persona = persona; //asigno la persona al paciente (relacion de navegacioon)
 
                     //llamo a mi capa de servicios para guardar/ crear el PACIENTE
                     if (pacienteSelected == null)
                     {
-                        //si estoy en modo creacion, llamo al metodo crear
-                        _pacienteService.crear(paciente);
+                        //si estoy en modo creacion, llamo al metodo crear y le poaso la imstancia de pacie que tiene los datos seteado
+                        _pacienteService.crear(pacie);
                         //muestro mensaje de exito
                         MessageBox.Show("Paciente creado correctamente");
                     }
                     else
                     {
-                        _pacienteService.modificar(paciente);
+
+                        //al modificar, debo conservar los datos de auditoria que ya tenia de cuando se creo el paciente
+                        pacie.fecha_crea = pacienteSelected.fecha_crea;
+                        pacie.usuario_crea = pacienteSelected.usuario_crea;
+
+                        _pacienteService.modificar(pacie);
                         //muestro mensaje de exito
                         MessageBox.Show("Paciente modificado correctamente");
                     }
 
                     //cierro el formulario
-                    this.Close(); //cierro el formulariO
+                    this.Close();
 
                     //cierre del if ValidarDatos
                 }
@@ -178,7 +184,7 @@ namespace UI
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error al guardar el paciente, contacte con soporte o con su administrador");
+                MessageBox.Show("Error al guardar el paciente, contacte con soporte o con su administrador" + ex.Message);
             }
 
         }

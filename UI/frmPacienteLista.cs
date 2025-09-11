@@ -49,6 +49,29 @@ namespace UI
         }
 
 
+        //evento click del boton nuevo
+        private void btnNuevo_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                //instancio el formulario de paciente para poder mostrarlo
+                frmPaciente frmPaciente = new frmPaciente();
+                //Aqui lo muestro 
+                frmPaciente.ShowDialog();
+
+                //actualizo la lista de pacientes
+                this.lista = _pacienteService.consultarTodos();
+                //y llamo al metodo cargar lista para que me cargue la lista
+                cargarLista(lista);
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Error al abrir el formulario de paciente");
+            }
+
+        }
+
+
         //metodo para cargar la lista de pacientes 
         private void cargarLista(List<clsPaciente> lista)
         {
@@ -72,31 +95,8 @@ namespace UI
             }
         }
 
-
-        //evento click del boton nuevo
-        private void btnNuevo_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                //instancio el formulario de paciente para poder mostrarlo
-                frmPaciente frmPaciente = new frmPaciente();
-                //Aqui lo muestro 
-                frmPaciente.ShowDialog();
-
-                //actualizo la lista de pacientes
-                this.lista = _pacienteService.consultarTodos();
-                //y llamo al metodo cargar lista para que me cargue la lista
-                cargarLista(lista);
-            }
-            catch (Exception)
-            {
-                MessageBox.Show("Error al abrir el formulario de paciente");
-            }
-
-        }
-
         //evento doble click en el listbox
-        private void lstvListaPaciente_MouseDoubleClick(object sender, MouseEventArgs e)
+        private void lstvListaPaciente_MouseDoubleClick(object sender, MouseEventArgs e) 
         {
             try
             {
@@ -104,7 +104,7 @@ namespace UI
                 if (lstvListaPaciente.SelectedItems.Count > 0)
                 {
                     //extraigo el id del paciente seleccionado del listview los [0] son para que me coja la primera columna que es donde esta el id
-                    int id = int.Parse(lstvListaPaciente.SelectedItems[0].SubItems[0].Text);
+                    string id = lstvListaPaciente.SelectedItems[0].SubItems[0].Text;
 
                     //aqui busco el paciente en la lista que tengo cargada en memoria
                     clsPaciente paciente = lista.Where(p => p.id.Equals(id)).SingleOrDefault();

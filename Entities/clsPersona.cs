@@ -69,5 +69,8 @@ namespace Entities
         }
         //relacion 1 a 1 con donante
         public clsDonante Donante { get; set; }
+
+        //relacion 1 a 1 con paciente
+        public clsPaciente Paciente { get; set; }
     }
 }

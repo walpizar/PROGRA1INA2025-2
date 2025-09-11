@@ -4,6 +4,7 @@ using DAO;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DAO.Migrations
 {
     [DbContext(typeof(dbContextINA))]
-    partial class dbContextINAModelSnapshot : ModelSnapshot
+    [Migration("20250911200411_AgregoClsPacienteEntbPerson")]
+    partial class AgregoClsPacienteEntbPerson
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -484,17 +487,13 @@ namespace DAO.Migrations
                     b.Property<DateTime>("fecha_ult_mod")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("idPersona")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(20)");
+                    b.Property<int>("idPersona")
+                        .HasColumnType("int");
 
                     b.Property<string>("referencia")
                         .IsRequired()
                         .HasMaxLength(500)
                         .HasColumnType("nvarchar(500)");
-
-                    b.Property<int>("tipoIdPersona")
-                        .HasColumnType("int");
 
                     b.Property<string>("usuario_crea")
                         .IsRequired()
@@ -508,9 +507,6 @@ namespace DAO.Migrations
 
                     b.HasKey("id", "tipoId");
 
-                    b.HasIndex("idPersona", "tipoIdPersona")
-                        .IsUnique();
-
                     b.ToTable("tbPaciente");
                 });
 
@@ -521,6 +517,13 @@ namespace DAO.Migrations
                         .HasColumnType("nvarchar(20)");
 
                     b.Property<int>("tipoId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Pacienteid")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(20)");
+
+                    b.Property<int>("PacientetipoId")
                         .HasColumnType("int");
 
                     b.Property<string>("apellido1")
@@ -560,6 +563,8 @@ namespace DAO.Migrations
                         .HasColumnType("nvarchar(20)");
 
                     b.HasKey("id", "tipoId");
+
+                    b.HasIndex("Pacienteid", "PacientetipoId");
 
                     b.ToTable("tbPersonas");
                 });
@@ -747,12 +752,23 @@ namespace DAO.Migrations
             modelBuilder.Entity("Entities.clsPaciente", b =>
                 {
                     b.HasOne("Entities.clsPersona", "Persona")
-                        .WithOne("Paciente")
-                        .HasForeignKey("Entities.clsPaciente", "idPersona", "tipoIdPersona")
+                        .WithOne()
+                        .HasForeignKey("Entities.clsPaciente", "id", "tipoId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.Navigation("Persona");
+                });
+
+            modelBuilder.Entity("Entities.clsPersona", b =>
+                {
+                    b.HasOne("Entities.clsPaciente", "Paciente")
+                        .WithMany()
+                        .HasForeignKey("Pacienteid", "PacientetipoId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Paciente");
                 });
 
             modelBuilder.Entity("Entities.clsProducto", b =>
@@ -810,9 +826,6 @@ namespace DAO.Migrations
             modelBuilder.Entity("Entities.clsPersona", b =>
                 {
                     b.Navigation("Donante")
-                        .IsRequired();
-
-                    b.Navigation("Paciente")
                         .IsRequired();
                 });
 #pragma warning restore 612, 618

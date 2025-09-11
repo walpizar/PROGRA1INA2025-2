@@ -31,12 +31,12 @@ namespace DAO
         public DbSet<clsEspecialidadMedica> EspecialidadesMedicas { get; set; }
         public DbSet<clsPuestos> Puestos { get; set; }
 
-<<<<<<< HEAD
+
         public DbSet<clsPaciente> Paciente { get; set; }
 
-=======
+
         
->>>>>>> develop
+
 
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -45,7 +45,8 @@ namespace DAO
             {
                 // 🔹 Conexión a SQL Express con autenticación de Windows
                 optionsBuilder.UseSqlServer(
-                    @"Server=localhost\sqlexpress;Database=dbPaleativoGarabito;Trusted_Connection=True;MultipleActiveResultSets=True;TrustServerCertificate=True;");
+                    @"Server=.;Database=dbPaleativoGarabito;Trusted_Connection=True;MultipleActiveResultSets=True;TrustServerCertificate=True;");
+                //colocar esto al hacer el push localhost\sqlexpress           
             }
         }
 
@@ -83,7 +84,7 @@ namespace DAO
                 .HasForeignKey<clsMedico>(m => new { m.id, m.tipoId })
                 .OnDelete(DeleteBehavior.Restrict); // Evita el borrado en cascada
 
-<<<<<<< HEAD
+
 
             //clsPaciente configuracion de llave primaria compuesta
             modelBuilder.Entity<clsPaciente>().HasKey(p => new { p.id, p.tipoId });
@@ -95,19 +96,21 @@ namespace DAO
                 .ValueGeneratedNever();//no se genera automaticamente
 
             //configuro las propiedades de la llave primaria compuesta para tipoId
-            modelBuilder.Entity<clsPaciente>().Property(p => p.tipoId).IsRequired()
+            modelBuilder.Entity<clsPaciente>().Property(p => p.tipoId)
+                .IsRequired()
                 .ValueGeneratedNever();
 
             //relacion 1 a 1 entre paciente y persona
             modelBuilder.Entity<clsPaciente>()
                 .HasOne(p => p.Persona)//navegacion desde paciente a persona
-                .WithOne()//relacion 1 a 1
-                .HasForeignKey<clsPaciente>(p => new { p.id, p.tipoId })//llave foranea en paciente compuesta por id y tipoId
+                .WithOne(per => per.Paciente)//relacion 1 a 1 con persona
+
+                .HasForeignKey<clsPaciente>(p => new { p.idPersona, p.tipoIdPersona })//FK en paciente
+                .HasPrincipalKey<clsPersona>(per => new { per.id, per.tipoId })//PK en persona que es la misma que la FK en paciente
                 .OnDelete(DeleteBehavior.Restrict); // Evita el borrado en cascada
 
 
 
-=======
             //relacion 1 a 1 entre donante y persona
             modelBuilder.Entity<clsDonante>()
                 .HasOne(d => d.Persona)
@@ -115,7 +118,7 @@ namespace DAO
                 .HasForeignKey<clsDonante>(d => new { d.PersonaId, d.PersonaTipoId })
                 .HasPrincipalKey<clsPersona>(p => new { p.id, p.tipoId })
                 .OnDelete(DeleteBehavior.Restrict);
->>>>>>> develop
+
 
         }
 

@@ -29,11 +29,11 @@
         private void InitializeComponent()
         {
             gbxLogin = new GroupBox();
-<<<<<<< HEAD
+
             
-=======
-           
->>>>>>> develop
+
+       
+
             btnCancelar = new Button();
             btnAceptar = new Button();
             txtPassword = new TextBox();
