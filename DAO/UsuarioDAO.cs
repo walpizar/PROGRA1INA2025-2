@@ -3,7 +3,7 @@ using Entities;
 
 namespace DAO
 {
-    public class UsuarioDAO : IGenerica<clsUsuario, string>
+    public class UsuarioDAO : IGenerica<clsUsuario>
     {
         private dbContextINA _context;
 

@@ -8,36 +8,19 @@ using System.Threading.Tasks;
 
 namespace DAO
 {
-<<<<<<< HEAD
-    internal class dbContextINA : DbContext
-    {
-        //definir la entidades de dominio que desea mapear a la base de datos
-        //public DbSet<clsProducto> Producto { get; set; }
-        //public DbSet<clsCliente> Clientes { get; set; }
-        public DbSet<clsCategoria> Categoria { get; set; }
-        public DbSet<clsActivos> Activos { get; set; }
-
-        //public DbSet<clsProducto> Producto { get; set; }
-        //public DbSet<clsCliente> Clientes { get; set; }
-        //public DbSet<clsCategoria> Categoria { get; set; }
-
-
-
-        ///ENTIDADES ASOCIACION / PROPIEDADES DE NAVEGACION
-        public DbSet<clsRol> roles{ get; set; }
-        public DbSet<clsModulo> modulos { get; set; }
-        public DbSet<clsPermiso> permisos { get; set; }
-=======
+ 
     public class dbContextINA : DbContext
     {
 
         // Definir las entidades de dominio que desea mapear a la base de datos
-        public DbSet<clsProducto> Producto { get; set; }
-        public DbSet<clsCliente> Clientes { get; set; }
-        public DbSet<clsCategoria> Categoria { get; set; }
-        public DbSet<clsEspecialidadMedica> EspecialidadMedica { get; set; }  // 🔹 Agregada la nueva entidad
+        //public DbSet<clsProducto> Producto { get; set; }
+        //public DbSet<clsCliente> Clientes { get; set; }
+        //public DbSet<clsCategoria> Categoria { get; set; }
+        //public DbSet<clsEspecialidadMedica> EspecialidadMedica { get; set; }  // 🔹 Agregada la nueva entidad
 
         //definir la entidades de dominio que desea mapear a la base de datos
+
+       
         public DbSet<clsActivos> Activos { get; set; }
         public DbSet<clsCategoriaActivos> CategoriaActivos { get; set; }
         public DbSet<clsPersona> Personas { get; set; }
@@ -47,7 +30,7 @@ namespace DAO
         public DbSet<clsEnfermero> Enfermeros { get; set; }
         public DbSet<clsEspecialidadMedica> EspecialidadesMedicas { get; set; }
         public DbSet<clsPuestos> Puestos { get; set; }
->>>>>>> 998e13816e8bb6bea2cd372fe6f73590bd5a67ac
+        public DbSet<clsUsuario> Usuarios { get; set; }
 
 
 
@@ -60,19 +43,6 @@ namespace DAO
                     @"Server=localhost\sqlexpress;Database=dbPaleativoGarabito;Trusted_Connection=True;MultipleActiveResultSets=True;TrustServerCertificate=True;");
             }
         }
-
-<<<<<<< HEAD
-        protected override void OnModelCreating(ModelBuilder modelBuilder)//LLAVES COMPUESTAS
-        {
-            base.OnModelCreating(modelBuilder);
-
-            modelBuilder.Entity<clsPermiso>().HasKey(p => new { p.id_rol, p.id_modulo });
-
-            modelBuilder.Entity<clsPermiso>().Property(p => p.id_rol).IsRequired();
-            modelBuilder.Entity<clsPermiso>().Property(p => p.id_modulo).IsRequired();
-
-        }
-=======
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -107,12 +77,17 @@ namespace DAO
                 .HasForeignKey<clsMedico>(m => new { m.id, m.tipoId })
                 .OnDelete(DeleteBehavior.Restrict); // Evita el borrado en cascada
 
-
-
+            //relacion 1 a 1 entre donante y persona
+            modelBuilder.Entity<clsDonante>()
+                .HasOne(d => d.Persona)
+                .WithOne(p => p.Donante)
+                .HasForeignKey<clsDonante>(d => new { d.PersonaId, d.PersonaTipoId })
+                .HasPrincipalKey<clsPersona>(p => new { p.id, p.tipoId })
+                .OnDelete(DeleteBehavior.Restrict);
 
         }
 
 
->>>>>>> 998e13816e8bb6bea2cd372fe6f73590bd5a67ac
+
     }
 }
