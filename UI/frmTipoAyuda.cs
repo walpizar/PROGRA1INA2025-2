@@ -30,7 +30,7 @@ namespace UI
 
                     tiposAyudas.nombre = txtNombre.Text;
                     tiposAyudas.descripcion = txtDescripcion.Text;
-                    tiposAyudas.responsable = (int)cboResponsable.SelectedItem;
+                    tiposAyudas.responsable = (clsPersona)cboResponsable.SelectedItem;
                 }
 
             }
@@ -51,7 +51,7 @@ namespace UI
         {
             lblTiposAyudas = new Label();
             grbTiposAyudas = new GroupBox();
-            cboxResponsable = new ComboBox();
+            cboResponsable = new ComboBox();
             txtDescripcion = new TextBox();
             txtNombre = new TextBox();
             lblResponsable = new Label();
@@ -75,7 +75,7 @@ namespace UI
             // 
             // grbTiposAyudas
             // 
-            grbTiposAyudas.Controls.Add(cboxResponsable);
+            grbTiposAyudas.Controls.Add(cboResponsable);
             grbTiposAyudas.Controls.Add(txtDescripcion);
             grbTiposAyudas.Controls.Add(txtNombre);
             grbTiposAyudas.Controls.Add(lblResponsable);
@@ -88,14 +88,14 @@ namespace UI
             grbTiposAyudas.TabStop = false;
             grbTiposAyudas.Text = "Datos tipos de ayudas";
             // 
-            // cboxResponsable
+            // cboResponsable
             // 
-            cboxResponsable.DropDownStyle = ComboBoxStyle.DropDownList;
-            cboxResponsable.FormattingEnabled = true;
-            cboxResponsable.Location = new Point(114, 139);
-            cboxResponsable.Name = "cboxResponsable";
-            cboxResponsable.Size = new Size(212, 23);
-            cboxResponsable.TabIndex = 5;
+            cboResponsable.DropDownStyle = ComboBoxStyle.DropDownList;
+            cboResponsable.FormattingEnabled = true;
+            cboResponsable.Location = new Point(114, 139);
+            cboResponsable.Name = "cboResponsable";
+            cboResponsable.Size = new Size(212, 23);
+            cboResponsable.TabIndex = 5;
             // 
             // txtDescripcion
             // 
@@ -194,7 +194,7 @@ namespace UI
         {
 
         }
-        private ComboBox cboxResponsable;
+        private ComboBox cboResponsable;
         private TextBox txtDescripcion;
         private TextBox txtNombre;
         private Button btnGuardar;

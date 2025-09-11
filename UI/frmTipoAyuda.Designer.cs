@@ -1,6 +1,6 @@
 ﻿namespace UI
 {
-    partial class fmrTipoAyuda
+    partial class fmrTipoAyuda : Form // <-- Asegúrate de heredar de Form
     {
         /// <summary>
         /// Required designer variable.

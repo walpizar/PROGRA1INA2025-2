@@ -19,7 +19,10 @@ namespace DAO
         public DbSet<clsTiposAyudas> TiposAyudas { get; set; }
 
         //definir la entidades de dominio que desea mapear a la base de datos
+
+       
         public DbSet<clsActivos> Activos { get; set; }
+
         public DbSet<clsCategoriaActivos> CategoriaActivos { get; set; }
         public DbSet<clsPersona> Personas { get; set; }
         public DbSet<clsMedico> Medicos { get; set; }
@@ -29,6 +32,7 @@ namespace DAO
         public DbSet<clsEspecialidadMedica> EspecialidadesMedicas { get; set; }
         public DbSet<clsPuestos> Puestos { get; set; }
 
+        
 
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -75,8 +79,13 @@ namespace DAO
                 .HasForeignKey<clsMedico>(m => new { m.id, m.tipoId })
                 .OnDelete(DeleteBehavior.Restrict); // Evita el borrado en cascada
 
-
-
+            //relacion 1 a 1 entre donante y persona
+            modelBuilder.Entity<clsDonante>()
+                .HasOne(d => d.Persona)
+                .WithOne(p => p.Donante)
+                .HasForeignKey<clsDonante>(d => new { d.PersonaId, d.PersonaTipoId })
+                .HasPrincipalKey<clsPersona>(p => new { p.id, p.tipoId })
+                .OnDelete(DeleteBehavior.Restrict);
 
         }
 
