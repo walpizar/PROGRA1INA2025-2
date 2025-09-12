@@ -75,7 +75,54 @@ namespace DAO
                 }
                 else
                 {
-                    //si existe, usar la existente, es decir no agrega nada a tbPersona y usa esa persona de referencia al insertar en tbPaciente
+                    //si existe la persona, varianble para validar si hay cambios en los datos y actualizarlos
+                    bool haycambios = false;
+
+                    //valido si el email guardado es diferente al de crear paciente que lo actualice y deje el nuevo
+                    if (!string.Equals(personaExistente.email, paciente.Persona.email, StringComparison.OrdinalIgnoreCase))
+                    {
+                        //aqui le digo dele prioridad al email de crear paciente
+                        personaExistente.email = paciente.Persona.email;
+                        //cambio a true
+                        haycambios = true;
+                    }
+
+                    //valido si la dirrecion guardada en persona es diferente al de crear paciente que lo actualice y deje el nuevo
+                    if (!string.Equals(personaExistente.direccion, paciente.Persona.direccion, StringComparison.OrdinalIgnoreCase))
+                    {
+                        //aqui le digo dele prioridad a la direccion de crear paciente
+                        personaExistente.direccion = paciente.Persona.direccion;
+                        //cambio a true
+                        haycambios = true;
+                    }
+
+                    //valido si el telef guardado en persona es diferente al de crear paciente que lo actualice y deje el nuevo
+                    if (!string.Equals(personaExistente.telefono, paciente.Persona.telefono, StringComparison.OrdinalIgnoreCase))
+                    {
+                        //aqui le digo dele prioridad al telefono de crear paciente
+                        personaExistente.telefono = paciente.Persona.telefono;
+                        //cambio a true
+                        haycambios = true;
+                    }
+
+                    //valido si el estado guardado en persona es diferente al de crear paciente que lo actualice y deje el nuevo
+                    if (personaExistente.estado != paciente.Persona.estado)
+                    {
+                        //aqui le digo dele prioridad al estado de crear paciente
+                        personaExistente.estado = paciente.Persona.estado;
+                        //cambio a true
+                        haycambios = true;
+                    }
+
+                    //si hubo cambios que entre y actualice en los campos de tbPersona
+                    if (haycambios)
+                    {
+                        //actualice
+                        _context.Personas.Update(personaExistente);
+                    }
+
+                    //si existela persona que use esa de referencia, es decir no agrega nada a tbPersona a menos que tenga que actualizar arriba
+                    //y usa esa persona de referencia al insertar en tbPaciente
                     paciente.Persona = personaExistente;
                 }
 
