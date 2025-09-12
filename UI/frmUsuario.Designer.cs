@@ -303,7 +303,7 @@
             btnBuscarPersona.BackColor = Color.BurlyWood;
             btnBuscarPersona.BackgroundImageLayout = ImageLayout.Stretch;
             btnBuscarPersona.ForeColor = SystemColors.MenuHighlight;
-            btnBuscarPersona.Image = UI._Designer.lupa2;
+            btnBuscarPersona.Image = UI._Designer.lupa;
             btnBuscarPersona.ImageAlign = ContentAlignment.BottomCenter;
             btnBuscarPersona.Location = new Point(378, 30);
             btnBuscarPersona.Name = "btnBuscarPersona";
