@@ -78,7 +78,8 @@ namespace DAO
                     //si existe la persona, varianble para validar si hay cambios en los datos y actualizarlos
                     bool haycambios = false;
 
-                    //valido si el email guardado es diferente al de crear paciente que lo actualice y deje el nuevo
+                    //valido si el email guardado es diferente al de crear paciente que entre
+                    //el StringComparison.OrdinalIgnoreCase es para comparar letra (valor) por letra ignorando mayusculas o minusculas
                     if (!string.Equals(personaExistente.email, paciente.Persona.email, StringComparison.OrdinalIgnoreCase))
                     {
                         //aqui le digo dele prioridad al email de crear paciente
@@ -87,7 +88,7 @@ namespace DAO
                         haycambios = true;
                     }
 
-                    //valido si la dirrecion guardada en persona es diferente al de crear paciente que lo actualice y deje el nuevo
+                    //valido si la dirrecion guardada en persona es diferente al de crear paciente que entre
                     if (!string.Equals(personaExistente.direccion, paciente.Persona.direccion, StringComparison.OrdinalIgnoreCase))
                     {
                         //aqui le digo dele prioridad a la direccion de crear paciente
@@ -96,7 +97,7 @@ namespace DAO
                         haycambios = true;
                     }
 
-                    //valido si el telef guardado en persona es diferente al de crear paciente que lo actualice y deje el nuevo
+                    //valido si el telef guardado en persona es diferente al de crear paciente que entre
                     if (!string.Equals(personaExistente.telefono, paciente.Persona.telefono, StringComparison.OrdinalIgnoreCase))
                     {
                         //aqui le digo dele prioridad al telefono de crear paciente
@@ -105,7 +106,7 @@ namespace DAO
                         haycambios = true;
                     }
 
-                    //valido si el estado guardado en persona es diferente al de crear paciente que lo actualice y deje el nuevo
+                    //valido si el estado guardado en persona es diferente al de crear paciente que entre
                     if (personaExistente.estado != paciente.Persona.estado)
                     {
                         //aqui le digo dele prioridad al estado de crear paciente
