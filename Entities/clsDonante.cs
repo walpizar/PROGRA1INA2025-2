@@ -17,8 +17,16 @@ namespace Entities
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int IdDonante { get; set; }
 
+<<<<<<< HEAD
         public string PersonaId { get; set; }
         public int PersonaTipoId { get; set; }
+=======
+        public string PersonaTipoId { get; set; }
+        public int IdPersona { get; set; }
+
+        
+
+>>>>>>> feature/mantenimientoDeUsuarioAct_Inact
         [Required]
         public bool Estado { get; set; }
         
@@ -37,8 +45,13 @@ namespace Entities
         // Constructor con parámetros
         public clsDonante(string personaId, int personaTipoId, bool estado, DateTime fechaRegistro)
         {
+<<<<<<< HEAD
             PersonaId = personaId;
             PersonaTipoId = personaTipoId;
+=======
+            IdDonante = idPersona;
+            IdPersona = idPersona;
+>>>>>>> feature/mantenimientoDeUsuarioAct_Inact
             Estado = estado;
             FechaRegistro = fechaRegistro;
         }

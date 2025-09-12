@@ -44,6 +44,12 @@ namespace DAO.Migrations
                     b.Property<DateTime>("FechaAdquisicion")
                         .HasColumnType("date");
 
+                    b.Property<DateTime>("FechaCreacion")
+                        .HasColumnType("datetime");
+
+                    b.Property<DateTime?>("FechaModificacion")
+                        .HasColumnType("datetime");
+
                     b.Property<int>("IdCategoria")
                         .HasColumnType("int");
 
@@ -61,6 +67,16 @@ namespace DAO.Migrations
                         .IsRequired()
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
+
+                    b.Property<string>("UsuarioCreacion")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<string>("UsuarioModificacion")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
 
                     b.HasKey("IdActivo");
 
@@ -343,8 +359,17 @@ namespace DAO.Migrations
 
                     b.HasKey("IdDonante");
 
-                    b.HasIndex("PersonaId", "PersonaTipoId")
-                        .IsUnique();
+                    b.HasIndex("PersonaId", "PersonaTipoId");
+                   
+
+                    b.Property<string>("PersonaTipoId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(20)");
+
+                    b.HasKey("IdDonante");
+
+                    b.HasIndex("PersonaTipoId", "IdPersona");
+
 
                     b.ToTable("tbDonantes");
                 });
@@ -459,6 +484,59 @@ namespace DAO.Migrations
                     b.HasKey("id", "tipoId");
 
                     b.ToTable("tbMedico");
+                });
+
+            modelBuilder.Entity("Entities.clsModulo", b =>
+                {
+                    b.Property<int>("id_modulo")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("id_modulo"));
+
+                    b.Property<string>("descripcion_modulo")
+                        .HasMaxLength(200)
+                        .HasColumnType("nvarchar(200)");
+
+                    b.Property<string>("nombre_modulo")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.HasKey("id_modulo");
+
+                    b.ToTable("tb_Modulo");
+                });
+
+            modelBuilder.Entity("Entities.clsPermiso", b =>
+                {
+                    b.Property<int>("id_permiso")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("id_permiso"));
+
+                    b.Property<int?>("clsModuloid_modulo")
+                        .HasColumnType("int");
+
+                    b.Property<string>("descripcion_permiso")
+                        .IsRequired()
+                        .HasMaxLength(200)
+                        .HasColumnType("nvarchar(200)");
+
+                    b.Property<bool>("estado_permiso")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("nombre_permiso")
+                        .IsRequired()
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
+
+                    b.HasKey("id_permiso");
+
+                    b.HasIndex("clsModuloid_modulo");
+
+                    b.ToTable("tb_Permisos");
                 });
 
             modelBuilder.Entity("Entities.clsPersona", b =>
@@ -597,6 +675,96 @@ namespace DAO.Migrations
                     b.ToTable("tbPuestos");
                 });
 
+            modelBuilder.Entity("Entities.clsRol", b =>
+                {
+                    b.Property<int>("id_rol")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("id_rol"));
+
+                    b.Property<string>("descripcion_rol")
+                        .IsRequired()
+                        .HasMaxLength(200)
+                        .HasColumnType("nvarchar(200)");
+
+                    b.Property<bool>("estado_rol")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("nombre_rol")
+                        .IsRequired()
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
+
+                    b.HasKey("id_rol");
+
+                    b.ToTable("tb_Roles");
+                });
+
+            modelBuilder.Entity("Entities.clsRolPermiso", b =>
+                {
+                    b.Property<int>("IdRol")
+                        .HasColumnType("int");
+
+                    b.Property<int>("IdPermiso")
+                        .HasColumnType("int");
+
+                    b.Property<int>("IdModulo")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Permisoid_permiso")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Rolid_rol")
+                        .HasColumnType("int");
+
+                    b.Property<bool>("consultar")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("crear")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("editar")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("eliminar")
+                        .HasColumnType("bit");
+
+                    b.HasKey("IdRol", "IdPermiso");
+
+                    b.HasIndex("Permisoid_permiso");
+
+                    b.HasIndex("Rolid_rol");
+
+                    b.ToTable("tb_RolesPermisos");
+                });
+
+            modelBuilder.Entity("Entities.clsUsuario", b =>
+                {
+                    b.Property<string>("personaId")
+                        .HasColumnType("nvarchar(20)");
+
+                    b.Property<int>("personaTipoId")
+                        .HasMaxLength(50)
+                        .HasColumnType("int");
+
+                    b.Property<string>("contraseña")
+                        .IsRequired()
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)");
+
+                    b.Property<string>("nombre_usuario")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("rol_id")
+                        .HasColumnType("int");
+
+                    b.HasKey("personaId", "personaTipoId");
+
+                    b.ToTable("usuarios");
+                });
+
             modelBuilder.Entity("Entities.clsActivos", b =>
                 {
                     b.HasOne("Entities.clsCategoriaActivos", "Categoria")
@@ -664,7 +832,9 @@ namespace DAO.Migrations
                 {
                     b.HasOne("Entities.clsPersona", "Persona")
                         .WithOne("Donante")
+
                         .HasForeignKey("Entities.clsDonante", "PersonaId", "PersonaTipoId")
+
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
@@ -700,6 +870,7 @@ namespace DAO.Migrations
                         .IsRequired();
 
                     b.Navigation("Categoria");
+
                 });
 
             modelBuilder.Entity("Entities.clsPuestos", b =>
@@ -713,6 +884,36 @@ namespace DAO.Migrations
                     b.Navigation("Departamento");
                 });
 
+            modelBuilder.Entity("Entities.clsRolPermiso", b =>
+                {
+                    b.HasOne("Entities.clsPermiso", "Permiso")
+                        .WithMany("RolPermisos")
+                        .HasForeignKey("Permisoid_permiso")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Entities.clsRol", "Rol")
+                        .WithMany("RolPermisos")
+                        .HasForeignKey("Rolid_rol")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Permiso");
+
+                    b.Navigation("Rol");
+                });
+
+            modelBuilder.Entity("Entities.clsUsuario", b =>
+                {
+                    b.HasOne("Entities.clsPersona", "Persona")
+                        .WithOne()
+                        .HasForeignKey("Entities.clsUsuario", "personaId", "personaTipoId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Persona");
+                });
+
             modelBuilder.Entity("Entities.clsActivos", b =>
                 {
                     b.Navigation("Devoluciones");
@@ -723,6 +924,7 @@ namespace DAO.Migrations
             modelBuilder.Entity("Entities.clsCategoria", b =>
                 {
                     b.Navigation("Productos");
+
                 });
 
             modelBuilder.Entity("Entities.clsDepartamentos", b =>
@@ -748,7 +950,7 @@ namespace DAO.Migrations
                     b.Navigation("Donante")
                         .IsRequired();
                 });
-#pragma warning restore 612, 618
+
         }
     }
 }

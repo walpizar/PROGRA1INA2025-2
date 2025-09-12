@@ -3,7 +3,7 @@ using Common.Interfaces;
 using DAO;
 using Entities;
 
-namespace Services
+/*namespace Services
 {
     //reglas de negocio
     public class ProductoService: IGenerica<clsProducto>
@@ -84,4 +84,4 @@ namespace Services
             throw new NotImplementedException();
         }
     }
-}
+}*/

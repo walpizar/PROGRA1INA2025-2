@@ -12,15 +12,20 @@ namespace Entities
     public class clsUsuario
     {
         [Key]
-        [ForeignKey("Persona")] // Esta es la clave primaria y a la vez la clave foránea a la tabla tbPersonas
-        public int id {  get; set; }
+        public string personaId {  get; set; }
 
         [Required(ErrorMessage = "El nombre de usuario es obligatorio.")]
         [StringLength(50, ErrorMessage = "El nombre de usuario no puede tener más de 50 caracteres.")]
+
+        public int personaTipoId {  get; set; }
+
+       
+
         public string nombre_usuario { get; set; }
 
         [Required(ErrorMessage = "La contraseña es obligatoria.")]
-        [StringLength(8, ErrorMessage= "La contraseña debe tener al menos 8 caracteres.")] 
+
+        [StringLength(255, ErrorMessage= "La contraseña no puede tener más de 255 caracteres.")]
         public string contraseña { get; set; }
 
         [Required(ErrorMessage = "El rol del usuario es obligatorio.")]
@@ -34,14 +39,13 @@ namespace Entities
         public clsUsuario() { }
 
         // Constructor con parámetros
-        public clsUsuario(int id, string nombre_usuario, string password, int rol_id)
+
+        public clsUsuario(string personaId, string nombre_usuario, string contraseña, int rol_id)
         {
-            this.id = id;
+            this.personaId = personaId;
             this.nombre_usuario = nombre_usuario;
-            this.contraseña = password;
-            this.rol_id = rol_id;
+            this.contraseña = contraseña;
+
         }
-
-
     }
 }

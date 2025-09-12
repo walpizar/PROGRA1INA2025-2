@@ -9,7 +9,7 @@ using System.Reflection.Metadata;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Services
+/*namespace Services
 {
     public class CategoriaService : IGenerica<clsCategoria>
     {
@@ -60,4 +60,4 @@ namespace Services
             throw new NotImplementedException();
         }
     }
-}
+}*/
