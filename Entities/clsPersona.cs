@@ -12,8 +12,6 @@ namespace Entities
     public class clsPersona
     {
         //atributos con decoradores
-
-       
         public string id { get; set; }
 
         public int tipoId {  get; set; }

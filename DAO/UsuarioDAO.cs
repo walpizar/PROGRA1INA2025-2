@@ -28,7 +28,7 @@ namespace DAO
         public void eliminar(string id)
         {
             // Se busca el usuario primero para evitar un error de referencia nula
-            var usua = _context.Usuarios.SingleOrDefault(u => u.id == id);
+            var usua = _context.Usuarios.SingleOrDefault(u => u.personaId == id);
             if (usua != null)
             {
                 _context.Usuarios.Remove(usua);

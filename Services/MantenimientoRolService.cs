@@ -1,5 +1,6 @@
 ﻿using DAO;
 using Entities;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -24,9 +25,7 @@ namespace Services
         // Ejemplo: Validar si un rol tiene permiso para una acción
         public async Task<bool> TienePermisoAsync(int idRol, int idModulo, string accion)
         {
-            var permiso = await _permisoDao.GetAllAsync();
-            var p = permiso.FirstOrDefault(x => x.id_rol == idRol
-                                              && x.id_modulo == idModulo);
+            var p = await _permisoDao.GetPermisoByRolAndModuleAsync(idRol, idModulo);
 
             if (p == null) return false;
 
@@ -44,7 +43,10 @@ namespace Services
         public async Task<List<clsPermiso>> ObtenerPermisosPorRolYModulo(int idRol, int idModulo)
         {
             var permisos = await _permisoDao.GetAllAsync();
-            return permisos.Where(p => p.id_rol == idRol && p.id_modulo == idModulo).ToList();
+           
+            return permisos
+                         .Where(p => p.RolPermisos.Any(rp => rp.IdRol == idRol && rp.IdModulo == idModulo))
+                         .ToList();
         }
     }
 }

@@ -21,6 +21,11 @@ namespace Services
             return _actiDAO.consultarPorID(id);
         }
 
+        public clsActivos consultarPorID(string id)
+        {
+            throw new NotImplementedException();
+        }
+
         public clsActivos consultarPorNombre(string nombre)
         {
             throw new NotImplementedException();
@@ -46,6 +51,11 @@ namespace Services
                 throw new Exception("El activo no existe");
             }
             _actiDAO.eliminar(id);
+        }
+
+        public void eliminar(string id)
+        {
+            throw new NotImplementedException();
         }
 
         public void modificar(clsActivos activos)

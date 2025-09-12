@@ -18,30 +18,39 @@ namespace DAO
         }
 
         public async Task<List<clsPermiso>> GetAllAsync() =>
-            await _context.permisos.Include(p => p.rol)
-                                    .Include(p => p.modulo)
-                                    .ToListAsync();
+            await _context.Permisos.Include(p => p.RolPermisos) // Incluye la colección de la tabla de unión
+                          .ThenInclude(rp => rp.Rol) // Luego, desde ahí, incluye el Rol
+                          .Include(p => p.RolPermisos) // Vuelve a incluir la colección de unión
+                          .ThenInclude(rp => rp.Permiso) // Y luego el Permiso
+                          .ToListAsync();
+
 
         public async Task AddAsync(clsPermiso permiso)
         {
-            _context.permisos.Add(permiso);
+            _context.Permisos.Add(permiso);
             await _context.SaveChangesAsync();
         }
 
         public async Task UpdateAsync(clsPermiso permiso)
         {
-            _context.permisos.Update(permiso);
+            _context.Permisos.Update(permiso);
             await _context.SaveChangesAsync();
         }
 
         public async Task DeleteAsync(int id)
         {
-            var permiso = await _context.permisos.FindAsync(id);
+            var permiso = await _context.Permisos.FindAsync(id);
             if (permiso != null)
             {
-                _context.permisos.Remove(permiso);
+                _context.Permisos.Remove(permiso);
                 await _context.SaveChangesAsync();
             }
+        }
+
+        public async Task<clsRolPermiso?> GetPermisoByRolAndModuleAsync(int idRol, int idModulo)
+        {
+            return await _context.RolPermisos
+                         .FirstOrDefaultAsync(rp => rp.IdRol == idRol && rp.IdModulo == idModulo);
         }
     }
 }

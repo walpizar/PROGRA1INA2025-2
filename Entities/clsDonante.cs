@@ -17,8 +17,10 @@ namespace Entities
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int IdDonante { get; set; }
 
-        [ForeignKey("Persona")]
+        public string PersonaTipoId { get; set; }
         public int IdPersona { get; set; }
+
+        
 
         [Required]
         public bool Estado { get; set; }
@@ -38,7 +40,7 @@ namespace Entities
         // Constructor con parámetros
         public clsDonante( int idPersona, bool estado, DateTime fechaRegistro)
         {
-            IdDonante = IdPersona;
+            IdDonante = idPersona;
             IdPersona = idPersona;
             Estado = estado;
             FechaRegistro = fechaRegistro;

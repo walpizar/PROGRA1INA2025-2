@@ -15,7 +15,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using static Common.Enums.Enums;
 
-namespace UI
+/*namespace UI
 {
     public partial class frmProducto : Form
     {
@@ -66,7 +66,7 @@ namespace UI
 
 
 
-                    producto.id = Convert.ToInt32(txtId.Text);
+                    /*producto.id = Convert.ToInt32(txtId.Text);
                     // producto.id = int.Parse(txtId.Text);
                     producto.nombre = txtNombre.Text;
                     producto.precio = Convert.ToInt32(txtPrecio.Text);
@@ -118,7 +118,7 @@ namespace UI
 
         }
 
-        private void limpiarForm()
+        /*private void limpiarForm()
         {
             txtId.ResetText();
             txtNombre.ResetText();
@@ -254,4 +254,4 @@ namespace UI
 
         }
     }
-}
+}*/

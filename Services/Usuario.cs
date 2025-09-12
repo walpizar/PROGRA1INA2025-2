@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Services
 {
-    public class UsuarioService : IGenerica<clsUsuario, string>
+    public class UsuarioService : IGenerica<clsUsuario>
     {
       
         UsuarioDAO _usuarioDAO= new UsuarioDAO();
@@ -19,7 +19,7 @@ namespace Services
         public void crear(clsUsuario usuario)
         {
             // regla de negocio valida queno exista un Usuario con el mismo id
-            if (_usuarioDAO.consultarPorID(usuario.id) != null)
+            if (_usuarioDAO.consultarPorID(usuario.personaId) != null)
             {
                 throw new Exception("El cliente ya existe");
             }
