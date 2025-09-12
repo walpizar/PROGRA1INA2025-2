@@ -25,6 +25,9 @@ namespace UI
         {
             InitializeComponent();
 
+            //centro el form en la pantalla
+            this.StartPosition = FormStartPosition.CenterScreen;
+
             //aqui lo inicializo la instancia
             _pacienteService = new PacienteService();
         }

@@ -27,6 +27,9 @@ namespace UI
         {
             InitializeComponent();
 
+            //centro el form en la pantalla
+            this.StartPosition = FormStartPosition.CenterScreen;
+
             //instancio el pacienteService
             _pacienteService = new PacienteService();
         }
@@ -98,7 +101,7 @@ namespace UI
             txtTelefono.Text = pacienteSelected.Persona.telefono;
             txtEstadoCivil.Text = pacienteSelected.estadoCivil;
             txtReferencia.Text = pacienteSelected.referencia;
-            txtEstado.Text = pacienteSelected.Persona.estado ? "1" : "2"; //si el estado es true, pongo 1, si es false, pongo 2
+            txtEstado.Text = pacienteSelected.Persona.estado ? "Activo" : "Inactivo"; //si el estado es true, ponga activo, si es false, ponga inactivo
 
 
         }
