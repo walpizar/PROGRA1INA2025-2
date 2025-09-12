@@ -51,7 +51,7 @@ namespace DAO
             //el include es para traer los datos de la tabla persona que esta relacionada con paciente
             return _context.Paciente
                 .AsNoTracking()//esto es para que no haga seguimiento de los cambios en los objetos, mejora el rendimiento en consultas de solo lectura
-                .Include(p => p.Persona)
+                .Include(p => p.Persona)//esto es para traer los datos de la tabla persona que esta relacionada con paciente
                 .ToList();
 
         }

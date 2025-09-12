@@ -73,13 +73,12 @@ namespace UI
 
                     btnEliminarPaciente.Visible = false; //oculto el boton de eliminar
 
-                    //cierro el formulario
-                    //this.Close();
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                MessageBox.Show("Error al cargar el formulario, contacte con soporte o con su administrador");
+                MessageBox.Show("Error al cargar el formulario, contacte con soporte o con su administrador" +
+                    "\n" + "Error: " + "\n" + ex.Message);
             }
         }
 
@@ -99,7 +98,7 @@ namespace UI
             txtTelefono.Text = pacienteSelected.Persona.telefono;
             txtEstadoCivil.Text = pacienteSelected.estadoCivil;
             txtReferencia.Text = pacienteSelected.referencia;
-            txtEstado.Text = pacienteSelected.Persona.estado ? "Activo" : "Inactivo"; //si es true, activo, si no, inactivo
+            txtEstado.Text = pacienteSelected.Persona.estado ? "1" : "2"; //si el estado es true, pongo 1, si es false, pongo 2
 
 
         }
@@ -127,15 +126,13 @@ namespace UI
                     persona.email = txtEmail.Text;
                     persona.direccion = txtDireccion.Text;
                     persona.telefono = txtTelefono.Text;
-                    //si el estado es "activo" (sin importar mayusculas o minusculas) entonces es true, si no, es false
-                    persona.estado = txtEstado.Text.ToLower() == "activo" ? true : false;
+                    //si el estado es "1" (ignora espacios en blanco) entonces es true, si no, es false
+                    persona.estado = txtEstado.Text.Trim() == "1" ? true : false;
 
                     //creo instancia de paciente para setear los valores del paciente
                     clsPaciente pacie = new clsPaciente();
                     pacie.id = persona.id;
                     pacie.tipoId = persona.tipoId;
-                    pacie.idPersona = persona.id;//esto es para agregar el campo de FK y conecte con tbPersona
-                    pacie.tipoIdPersona = persona.tipoId; //esto es para agregar el campo de FK y conecte con tbPersona
                     pacie.referencia = txtReferencia.Text;
                     pacie.estadoCivil = txtEstadoCivil.Text;
                     pacie.estado = persona.estado; //el estado del paciente es el mismo que el de la persona
@@ -182,9 +179,14 @@ namespace UI
             {
                 MessageBox.Show(ex.Message);
             }
+            catch (NotImplementedException ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
             catch (Exception ex)
             {
-                MessageBox.Show("Error al guardar el paciente, contacte con soporte o con su administrador" + ex.Message);
+                MessageBox.Show("Error al guardar el paciente, contacte con soporte o con su administrador" +
+                    "\n" + "Error: " + "\n" + ex.Message);
             }
 
         }
@@ -196,7 +198,7 @@ namespace UI
             //valido que el id no este vacio y sea un numero
             if (string.IsNullOrEmpty(txtIdPaciente.Text) || !int.TryParse(txtIdPaciente.Text, out int id))
             {
-                MessageBox.Show("El ID es obligatorio y debe ser un número.");
+                MessageBox.Show("El ID (Cedula) es obligatorio.");
                 txtIdPaciente.Focus();
                 return false;
             }
@@ -247,9 +249,9 @@ namespace UI
 
 
             //valido que el email no este vacio y tenga formato de email
-            if (string.IsNullOrEmpty(txtEmail.Text) || !txtEmail.Text.Contains("@"))
+            if (string.IsNullOrEmpty(txtEmail.Text) || !txtEmail.Text.Contains("@") || !txtEmail.Text.Contains("."))
             {
-                MessageBox.Show("El email es obligatorio y debe tener un formato válido.");
+                MessageBox.Show("El email es obligatorio y debe tener un formato válido (Debe contener . y @).");
                 txtEmail.Focus();
                 return false;
             }
@@ -270,19 +272,20 @@ namespace UI
                 return false;
             }
 
-            // Validar que la fecha de nacimiento no sea la mínima (obligatorio)
+            //valido que la fecha de nacimiento no sea menor a 1900-01-01 y sea obligatoria
             DateTime fechaMinima = new DateTime(1900, 1, 1);
             if (dtpFechaNacimiento.Value <= fechaMinima)
             {
-                MessageBox.Show("La fecha de nacimiento es obligatoria.");
+                MessageBox.Show("La fecha de nacimiento es obligatoria y debe ser mayor a 1/1/1900.");
                 dtpFechaNacimiento.Focus();
                 return false;
             }
 
-            //valido que el estado no este vacio
-            if (string.IsNullOrEmpty(txtEstado.Text))
+            //valido que el estado no este vacio y solo pueda ser 1 o 2 (1=activo, 2=inactivo)
+            if (string.IsNullOrEmpty(txtEstado.Text) || (txtEstado.Text.Trim() != "1"
+                && txtEstado.Text.Trim() != "2"))
             {
-                MessageBox.Show("El estado es obligatorio.");
+                MessageBox.Show("El estado es obligatorio y debe ser 1 para activo o 2 para inactivo.");
                 txtEstado.Focus();
                 return false;
             }
@@ -295,10 +298,14 @@ namespace UI
                 return false;
             }
 
-            //valido que el estado civil no este vacio
-            if (string.IsNullOrEmpty(txtEstadoCivil.Text))
+            //valido que el estado civil no este vacio y sea soltero, casado, viudo o n/a
+            if (string.IsNullOrEmpty(txtEstadoCivil.Text) || (txtEstadoCivil.Text.Trim().ToLower() != "soltero" 
+                && txtEstadoCivil.Text.Trim().ToLower() != "soltera" && txtEstadoCivil.Text.Trim().ToLower() != "casado" 
+                && txtEstadoCivil.Text.Trim().ToLower() != "casada" && txtEstadoCivil.Text.Trim().ToLower() != "viudo"
+                && txtEstadoCivil.Text.Trim().ToLower() != "viuda" && txtEstadoCivil.Text.Trim().ToLower() != "divorciado" 
+                && txtEstadoCivil.Text.Trim().ToLower() != "divorciada" && txtEstadoCivil.Text.Trim().ToLower() != "n/a"))
             {
-                MessageBox.Show("El estado civil es obligatorio.");
+                MessageBox.Show("El estado civil es obligatorio y solo puede colocar soltero(@), casado(@), viudo(@), divorciado(@) o n/a.");
                 txtEstadoCivil.Focus();
                 return false;
             }
@@ -324,21 +331,23 @@ namespace UI
                 //esto es que miuestre un mensaje de confirmacion antes de eliminar
                 DialogResult resp = MessageBox.Show("¿Está seguro que desea eliminar el paciente?", "Confirmación",
                      MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-
+                
                 //si el usuario dice que si, entonces elimino
                 if (resp == DialogResult.Yes)
                 {
+
                     _pacienteService.eliminar(pacienteSelected.id);
                     MessageBox.Show("Paciente eliminado correctamente");
                     this.Close(); //cierro el formulario
-                }
+                } 
 
 
             }
-            catch (Exception)
+            catch (Exception ex)
             {
 
-                MessageBox.Show("Error al eliminar el paciente.");
+                MessageBox.Show("Error al eliminar el paciente. Contacte con soporte o con su administrador." + 
+                    "\n" + "Error: " + "\n" + ex.Message);
             }
         }
 

@@ -23,15 +23,7 @@ namespace Entities
         [StringLength(500, ErrorMessage = "El genero no puede tener mas de 500 caracteres")]//longitud maxima
         public string referencia { get; set; }
 
-
-        //campo de llave foranea
-        [Required]//obligatorio
-        public string idPersona { get; set; }
-
-        //campo de llave foranea
-        [Required]
-        public int tipoIdPersona { get; set; }
-
+        //propiedad de navegacion
         public clsPersona Persona { get; set; }
 
 
@@ -58,15 +50,15 @@ namespace Entities
 
 
         
-        public clsPaciente(string idPaciente, string estadoCivil, string referencia, string IdPersona, int TipoIdPersona,
+        public clsPaciente(string idPaciente, string estadoCivil, string referencia, int tipoId,
             bool estado, DateTime fecha_crea, string usuario_crea, DateTime fecha_ult_mod, string usuario_ult_mod)
         {
             this.id = idPaciente;
             this.tipoId = tipoId;
             this.estadoCivil = estadoCivil;
             this.referencia = referencia;
-            this.idPersona = IdPersona;
-            this.tipoIdPersona = TipoIdPersona;
+            //this.idPersona = IdPersona;
+            //this.tipoIdPersona = TipoIdPersona;
             this.estado = estado;
             this.fecha_crea = fecha_crea;
             this.usuario_crea = usuario_crea;

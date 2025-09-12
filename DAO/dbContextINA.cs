@@ -85,7 +85,7 @@ namespace DAO
                 .OnDelete(DeleteBehavior.Restrict); // Evita el borrado en cascada
 
 
-
+            /*------------------------------------------------------------*/
             //clsPaciente configuracion de llave primaria compuesta
             modelBuilder.Entity<clsPaciente>().HasKey(p => new { p.id, p.tipoId });
 
@@ -105,10 +105,10 @@ namespace DAO
                 .HasOne(p => p.Persona)//navegacion desde paciente a persona
                 .WithOne(per => per.Paciente)//relacion 1 a 1 con persona
 
-                .HasForeignKey<clsPaciente>(p => new { p.idPersona, p.tipoIdPersona })//FK en paciente
+                .HasForeignKey<clsPaciente>(p => new { p.id, p.tipoId })//FK en paciente
                 .HasPrincipalKey<clsPersona>(per => new { per.id, per.tipoId })//PK en persona que es la misma que la FK en paciente
                 .OnDelete(DeleteBehavior.Restrict); // Evita el borrado en cascada
-
+            /*------------------------------------------------------------*/
 
 
             //relacion 1 a 1 entre donante y persona

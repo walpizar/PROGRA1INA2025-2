@@ -108,7 +108,7 @@ namespace Services
             if (_pacientDao.consultarPorID(paciente.id) == null)
             {
                 //si no existe lanzo una excepcion personalizada
-                throw new EntityExistDBException();
+                throw new EntityNotExistDBException();
             }
 
             // Asignar fecha de última modificación automáticamente

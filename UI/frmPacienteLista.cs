@@ -41,9 +41,10 @@ namespace UI
 
             }
 
-            catch (Exception)
+            catch (Exception ex)
             {
-                MessageBox.Show("Error al cargar la lista de pacientes");
+                MessageBox.Show("Error al cargar la lista de pacientes. Contacte con soporte o su administrador" +
+                    "\n" + "Error: " + "\n" + ex.Message);
             }
 
         }
@@ -64,9 +65,10 @@ namespace UI
                 //y llamo al metodo cargar lista para que me cargue la lista
                 cargarLista(lista);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                MessageBox.Show("Error al abrir el formulario de paciente");
+                MessageBox.Show("Error al abrir el formulario de paciente, Contacte con soporte o su administrador" +
+                    "\n" + "Error: " + "\n" + ex.Message);
             }
 
         }
@@ -131,9 +133,10 @@ namespace UI
                     //cierre del primer if
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                MessageBox.Show("Error al abrir el formulario de paciente");
+                MessageBox.Show("Error al abrir el formulario de paciente. Contacte con soporte o su administrador" +
+                    "\n" + "Error: " + "\n" + ex.Message);
             }
 
         }
@@ -142,13 +145,22 @@ namespace UI
         //evento text changed del textbox de busqueda
         private void txtBusqueda_TextChanged(object sender, EventArgs e)
         {
-            //filtro la lista de pacientes por nombre o id
-            var listaFiltrada = this.lista.Where(p => p.Persona.nombre.ToLower().Contains(txtBusqueda.Text.ToLower()) ||
-            p.id.ToString().Contains(txtBusqueda.Text)).ToList();
+            try
+            { 
+                //filtro la lista de pacientes por nombre o id
+                var listaFiltrada = this.lista.Where(p => p.Persona.nombre.ToLower().Contains(txtBusqueda.Text.ToLower()) ||
+                p.id.ToString().Contains(txtBusqueda.Text)).ToList();
 
-            //llamo al metodo cargar lista y le paso por parametro la listaFiltrada para que me cargue la lista filtrada
-            cargarLista(listaFiltrada);
+                //llamo al metodo cargar lista y le paso por parametro la listaFiltrada para que me cargue la lista filtrada
+                cargarLista(listaFiltrada);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al filtrar la lista de pacientes. Contacte con soporte o con su administrador" +
+                    "\n" + "Error: " + "\n" + ex.Message);
 
+            }
         }
+
     }
 }
