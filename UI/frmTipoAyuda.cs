@@ -161,11 +161,12 @@ namespace UI
             btnEliminar.Name = "btnEliminar";
             btnEliminar.Size = new Size(116, 36);
             btnEliminar.TabIndex = 3;
-            btnEliminar.Text = "Eliminar";
+            btnEliminar.Text = "Cancelar";
             btnEliminar.UseVisualStyleBackColor = true;
             // 
             // frmTipoAyuda
             // 
+            BackColor = SystemColors.ControlLightLight;
             ClientSize = new Size(451, 307);
             Controls.Add(btnEliminar);
             Controls.Add(btnGuardar);

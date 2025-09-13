@@ -35,7 +35,7 @@
             columnHeader3 = new ColumnHeader();
             txtBusqueda = new TextBox();
             groupBox1 = new GroupBox();
-            label1 = new Label();
+            lblTitulo = new Label();
             groupBox1.SuspendLayout();
             SuspendLayout();
             // 
@@ -99,15 +99,15 @@
             groupBox1.TabStop = false;
             groupBox1.Text = "Lista Tipos de Ayudas";
             // 
-            // label1
+            // lblTitulo
             // 
-            label1.AutoSize = true;
-            label1.Font = new Font("Segoe UI", 15.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label1.Location = new Point(148, 9);
-            label1.Name = "label1";
-            label1.Size = new Size(332, 30);
-            label1.TabIndex = 4;
-            label1.Text = "Mantenimiento Tipos de Ayudas";
+            lblTitulo.AutoSize = true;
+            lblTitulo.Font = new Font("Segoe UI", 15.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblTitulo.Location = new Point(154, 9);
+            lblTitulo.Name = "lblTitulo";
+            lblTitulo.Size = new Size(332, 30);
+            lblTitulo.TabIndex = 4;
+            lblTitulo.Text = "Mantenimiento Tipos de Ayudas";
             // 
             // frmListaTipoAyudas
             // 
@@ -115,7 +115,7 @@
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = SystemColors.HighlightText;
             ClientSize = new Size(613, 420);
-            Controls.Add(label1);
+            Controls.Add(lblTitulo);
             Controls.Add(btnNuevo);
             Controls.Add(groupBox1);
             Name = "frmListaTipoAyudas";
@@ -134,7 +134,7 @@
         private ListView lvtCatalogoTipoAyuda;
         private TextBox txtBusqueda;
         private GroupBox groupBox1;
-        private Label label1;
+        private Label lblTitulo;
         private ColumnHeader columnHeader1;
         private ColumnHeader columnHeader2;
         private ColumnHeader columnHeader3;
