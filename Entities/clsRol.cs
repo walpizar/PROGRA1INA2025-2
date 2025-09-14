@@ -14,6 +14,7 @@ namespace Entities
     public class clsRol
     {
         [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]//INCREMENTO AUTOMATICO
         public int id_rol { get; set; }
 
         [Required]
@@ -27,9 +28,8 @@ namespace Entities
         [DefaultValue(true)]
         public bool estado_rol { get; set; }
 
-
-
         // Relación muchos a muchos
         public ICollection<clsRolPermiso> RolPermisos { get; set; }
+
     }
 }

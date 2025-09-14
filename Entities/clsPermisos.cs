@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 
 namespace Entities
 {
+
     [Table("tb_Permisos")]
     public class clsPermiso
     {
@@ -30,5 +31,8 @@ namespace Entities
 
         // Relación muchos a muchos
         public ICollection<clsRolPermiso> RolPermisos { get; set; }
-    }
+    
+        }
+
+
 }
