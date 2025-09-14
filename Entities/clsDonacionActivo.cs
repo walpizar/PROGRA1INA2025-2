@@ -14,10 +14,13 @@ namespace Entities
     {
         [Key]
         public int IdDonacionActivo { get; set; }
+
         [ForeignKey("Donacion")]
         public int IdDonacion { get; set; }
+
         [ForeignKey("Activo")]
         public int IdActivo { get; set; }
+
         public int Cantidad { get; set; }
         [StringLength(30)]
         public string EstadoActivo { get; set; }

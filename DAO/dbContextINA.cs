@@ -32,7 +32,11 @@ namespace DAO
         public DbSet<clsPuestos> Puestos { get; set; }
         public DbSet<clsUsuario> Usuarios { get; set; }
 
-        public DbSet<clsModulo> Modulos { get; set; }
+        //donaciones
+        public DbSet<clsDonacion> Donaciones { get; set; }
+        public DbSet<clsDonacionActivo> DonacionesActivos { get; set; }
+        public DbSet<clsDonacionDinero> DonacionesDinero { get; set; }
+        public DbSet<clsDonante> Donantes { get; set; }
 
         public DbSet<clsPermiso> Permisos { get; set; }
 
