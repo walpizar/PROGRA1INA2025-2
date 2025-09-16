@@ -5,15 +5,16 @@ using System.Linq;
 
 namespace DAO
 {
+    //Clase de acceso a datos para la entidad clsTiposAyudas
     public class TipoAyudaDAO
     {
         // Contexto de la base de datos
         private readonly dbContextINA _context;
 
         // Constructor - recibe el contexto por inyección de dependencias
-        public TipoAyudaDAO(dbContextINA context)
+        public TipoAyudaDAO()
         {
-            _context = context;
+            _context =new dbContextINA(); // Inicializa el contexto
         }
 
         // Crear un nuevo tipo de ayuda para el catálogo

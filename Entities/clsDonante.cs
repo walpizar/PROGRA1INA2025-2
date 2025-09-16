@@ -17,25 +17,25 @@ namespace Entities
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int IdDonante { get; set; }
 
-        public string PersonaId { get; set; }
+        public int PersonaId { get; set; }
         public int PersonaTipoId { get; set; }
+
         [Required]
         public bool Estado { get; set; }
-        
+
         [Required]
         public DateTime FechaRegistro { get; set; }
-        // Relación: Un Donante es una Persona
-        [ForeignKey("PersonaId,PersonaTipoId")]
+
+        // Navegación
         public clsPersona Persona { get; set; }
 
-        // Relación: Un Donante puede tener muchas Donaciones
         public ICollection<clsDonacion> Donaciones { get; set; }
 
         // Constructor vacío
         public clsDonante() { }
 
         // Constructor con parámetros
-        public clsDonante(string personaId, int personaTipoId, bool estado, DateTime fechaRegistro)
+        public clsDonante(int personaId, int personaTipoId, bool estado, DateTime fechaRegistro)
         {
             PersonaId = personaId;
             PersonaTipoId = personaTipoId;

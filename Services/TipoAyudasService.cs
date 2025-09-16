@@ -11,11 +11,11 @@ namespace Services
 {
     public class TipoAyudasService
     {
-        private readonly TipoAyudaDAO _tipDao;
+        private readonly TipoAyudaDAO _tipDao= new TipoAyudaDAO();
 
-        public TipoAyudasService(dbContextINA context) 
+        public TipoAyudasService() 
         {
-            _tipDao = new TipoAyudaDAO(context);
+            
         }
 
         public void crear(clsTiposAyudas tiposAyudas)
@@ -32,12 +32,11 @@ namespace Services
                     throw new ArgumentException("El nombre del tipo de ayuda no puede estar vacío");
                 }
 
-                // Aquí puedes llamar a la lógica de persistencia
                 _tipDao.Crear(tiposAyudas);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                throw;
+                throw new Exception("Error al crear el tipo de ayuda", ex);
             }
         }
 

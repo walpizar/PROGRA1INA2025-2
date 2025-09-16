@@ -41,7 +41,8 @@ namespace DAO
             {
                 // 🔹 Conexión a SQL Express con autenticación de Windows
                 optionsBuilder.UseSqlServer(
-                    @"Server=localhost\sqlexpress;Database=dbPaleativoGarabito;Trusted_Connection=True;MultipleActiveResultSets=True;TrustServerCertificate=True;");
+                   @"Server=localhost;Database=dbPaleativoGarabito;Trusted_Connection=True;MultipleActiveResultSets=True;TrustServerCertificate=True;"
+);
             }
         }
 
@@ -50,42 +51,52 @@ namespace DAO
         {
             base.OnModelCreating(modelBuilder);
 
-            // Configuración para tbPersonas
-            modelBuilder.Entity<clsPersona>().HasKey(p => new { p.id, p.tipoId });
+            // PK compuesta de Persona
+            modelBuilder.Entity<clsPersona>()
+                .HasKey(p => new { p.id, p.PersonaTipoId });
 
-            modelBuilder.Entity<clsPersona>().Property(p => p.id)
-                .IsRequired()
-                .HasMaxLength(20)
-                .ValueGeneratedNever();
-
-            modelBuilder.Entity<clsPersona>().Property(p => p.tipoId)
-                .IsRequired()
-                .ValueGeneratedNever();
-
-            //clsMedico configuracion de llave primaria compuesta   
-            modelBuilder.Entity<clsMedico>().HasKey(m => new { m.id, m.tipoId });
-            modelBuilder.Entity<clsMedico>().Property(m => m.id)
-                .IsRequired()
-                .HasMaxLength(20)
-                .ValueGeneratedNever();
-            modelBuilder.Entity<clsMedico>().Property(m => m.tipoId).IsRequired()
-                .ValueGeneratedNever();
-
-            //relacion 1 a 1 entre medico y persona
-
-            modelBuilder.Entity<clsMedico>()
-                .HasOne(m => m.persona)
-                .WithOne()
-                .HasForeignKey<clsMedico>(m => new { m.id, m.tipoId })
-                .OnDelete(DeleteBehavior.Restrict); // Evita el borrado en cascada
-
-            //relacion 1 a 1 entre donante y persona
+            // Relación 1 a 1 Persona - Donante
             modelBuilder.Entity<clsDonante>()
                 .HasOne(d => d.Persona)
                 .WithOne(p => p.Donante)
-                .HasForeignKey<clsDonante>(d => new { d.PersonaId, d.PersonaTipoId })
-                .HasPrincipalKey<clsPersona>(p => new { p.id, p.tipoId })
-                .OnDelete(DeleteBehavior.Restrict);
+                .HasForeignKey<clsDonante>(d => new { d.PersonaId, d.PersonaTipoId });
+
+            // Configuración para tbPersonas
+            //modelBuilder.Entity<clsPersona>().HasKey(p => new { p.id, p.PersonaTipoId });
+
+            //modelBuilder.Entity<clsPersona>().Property(p => p.id)
+            //    .IsRequired()
+            //    .HasMaxLength(20)
+            //    .ValueGeneratedNever();
+
+            //modelBuilder.Entity<clsPersona>().Property(p => p.PersonaTipoId)
+            //    .IsRequired()
+            //    .ValueGeneratedNever();
+
+            //clsMedico configuracion de llave primaria compuesta   
+            //modelBuilder.Entity<clsMedico>().HasKey(m => new { m.id, m.tipoId });
+            //modelBuilder.Entity<clsMedico>().Property(m => m.id)
+            //    .IsRequired()
+            //    .HasMaxLength(20)
+            //    .ValueGeneratedNever();
+            //modelBuilder.Entity<clsMedico>().Property(m => m.tipoId).IsRequired()
+            //    .ValueGeneratedNever();
+
+            //relacion 1 a 1 entre medico y persona
+
+            //modelBuilder.Entity<clsMedico>()
+            //    .HasOne(m => m.persona)
+            //    .WithOne()
+            //    .HasForeignKey<clsMedico>(m => new { m.id, m.tipoId })
+            //    .OnDelete(DeleteBehavior.Restrict); // Evita el borrado en cascada
+
+            //relacion 1 a 1 entre donante y persona
+            //modelBuilder.Entity<clsDonante>()
+            //    .HasOne(d => d.Persona)
+            //    .WithOne(p => p.Donante)
+            //    .HasForeignKey<clsDonante>(d => new { d.PersonaId, d.PersonaTipoId })
+            //    .HasPrincipalKey<clsPersona>(p => new { p.id, p.PersonaTipoId })
+            //    .OnDelete(DeleteBehavior.Restrict);
 
         }
 

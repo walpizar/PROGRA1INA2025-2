@@ -11,9 +11,11 @@ namespace Entities
     [Table("usuarios")]
     public class clsUsuario
     {
-        [Key]
-        [ForeignKey("Persona")] // Esta es la clave primaria y a la vez la clave foránea a la tabla tbPersonas
-        public int id {  get; set; }
+        public int id { get; set; }
+        public int PersonaTipoId { get; set; }
+
+        [ForeignKey("PersonaId,PersonaTipoId")]
+        public clsPersona Persona { get; set; }
 
         [Required(ErrorMessage = "El nombre de usuario es obligatorio.")]
         [StringLength(50, ErrorMessage = "El nombre de usuario no puede tener más de 50 caracteres.")]
@@ -26,9 +28,7 @@ namespace Entities
         [Required(ErrorMessage = "El rol del usuario es obligatorio.")]
         public int rol_id { get; set; }
 
-        // Propiedad de navegación para acceder a los datos de la persona vinculada.
-        // Esto crea un enlace a la clase clsPersona.
-        public clsPersona Persona { get; set; }
+        
 
         // Constructor vacío
         public clsUsuario() { }

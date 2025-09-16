@@ -16,9 +16,9 @@ namespace UI
     {
         private readonly TipoAyudasService _tipoAyudasService;
 
-        public frmListaTipoAyudas(dbContextINA _context)
+        public frmListaTipoAyudas(dbContextINA context)
         {
-            _tipoAyudasService = new TipoAyudasService(_context);
+            _tipoAyudasService = new TipoAyudasService();
             InitializeComponent();
 
         }

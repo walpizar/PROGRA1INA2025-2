@@ -1,4 +1,5 @@
 ﻿using Entities;
+using Services;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -15,12 +16,15 @@ namespace UI
     {
 
         public clsTiposAyudas selectTiposAyudas { get; set; }
+
+        private readonly TipoAyudasService _tipoAyudasService;
         public frmTipoAyuda()
         {
             InitializeComponent();
+            _tipoAyudasService = new TipoAyudasService();
         }
 
-        private void btnGuardar_Click(object sender, EventArgs e)
+        private void bbtnGuardar_Click_1(object sender, EventArgs e)
         {
             try
             {
@@ -30,7 +34,26 @@ namespace UI
 
                     tiposAyudas.nombre = txtNombre.Text;
                     tiposAyudas.descripcion = txtDescripcion.Text;
-                    tiposAyudas.responsable = (clsPersona)cboResponsable.SelectedItem;
+                    tiposAyudas.responsable = (clsUsuario)cboResponsable.SelectedItem;
+
+                    if (selectTiposAyudas == null)
+                    {
+
+                        _tipoAyudasService.crear(tiposAyudas);
+                        MessageBox.Show("Tipo de ayuda creado correctamente");
+
+
+                    }
+                    //else
+                    //{
+                    //es una modificacion
+                    //_tipoAyudasService.(tiposAyudas);
+                    //MessageBox.Show("Tipo de ayuda modificado correctamente");
+                    //this.Close();
+                    //}
+
+                    limpiarForm();
+                    this.Close();
                 }
 
             }
@@ -45,6 +68,8 @@ namespace UI
         private void limpiarForm()
         {
             txtNombre.ResetText();
+            txtDescripcion.ResetText();
+            cboResponsable.SelectedIndex = 0;
         }
 
         private void InitializeComponent()
@@ -151,6 +176,7 @@ namespace UI
             btnGuardar.TabIndex = 2;
             btnGuardar.Text = "Guardar";
             btnGuardar.UseVisualStyleBackColor = true;
+            btnGuardar.Click += btnGuardar_Click;
             // 
             // btnEliminar
             // 
@@ -163,6 +189,7 @@ namespace UI
             btnEliminar.TabIndex = 3;
             btnEliminar.Text = "Cancelar";
             btnEliminar.UseVisualStyleBackColor = true;
+            btnEliminar.Click += btnEliminar_Click;
             // 
             // frmTipoAyuda
             // 
@@ -174,6 +201,7 @@ namespace UI
             Controls.Add(lblTiposAyudas);
             Name = "frmTipoAyuda";
             Text = "Agregar Tipo de ayuda";
+            Load += frmTipoAyuda_Load;
             grbTiposAyudas.ResumeLayout(false);
             grbTiposAyudas.PerformLayout();
             ResumeLayout(false);
@@ -200,5 +228,56 @@ namespace UI
         private TextBox txtNombre;
         private Button btnGuardar;
         private Button btnEliminar;
+
+        private void frmTipoAyuda_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnEliminar_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        private void btnGuardar_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (true)
+                {
+                    clsTiposAyudas tiposAyudas = selectTiposAyudas == null ? new clsTiposAyudas() : selectTiposAyudas;
+
+                    tiposAyudas.nombre = txtNombre.Text;
+                    tiposAyudas.descripcion = txtDescripcion.Text;
+                    tiposAyudas.responsable = (clsUsuario)cboResponsable.SelectedItem;
+
+                    if (selectTiposAyudas == null)
+                    {
+
+                        _tipoAyudasService.crear(tiposAyudas);
+                        MessageBox.Show("Tipo de ayuda creado correctamente");
+
+
+                    }
+                    //else
+                    //{
+                    //es una modificacion
+                    //_tipoAyudasService.(tiposAyudas);
+                    //MessageBox.Show("Tipo de ayuda modificado correctamente");
+                    //this.Close();
+                    //}
+
+                    limpiarForm();
+                    this.Close();
+                }
+
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+
+        }
     }
 }

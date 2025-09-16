@@ -8,7 +8,8 @@ using System.Threading.Tasks;
 
 namespace Entities
 {
-    [Table("tb_tipoAyuda")]//Nombre de la tabla
+    //Nombre de la tabla
+    [Table("tb_tipoAyuda")]
     public class clsTiposAyudas
     {
         [Key]
@@ -27,7 +28,7 @@ namespace Entities
         public int id_responsable { get; set; }//Id reponsable
 
         [Required]
-        public clsPersona responsable { get; set; }//Responsable
+        public clsUsuario responsable { get; set; }//Responsable
 
         //Campos de audioria
         [Required]
@@ -42,7 +43,6 @@ namespace Entities
 
         [Required]
         public DateTime fecha_ultimaModificacion { get; set; }//Fecha ultima modificación
-
 
         //Fk de campos de auditoria a tabla persona ultima modificación
         [Required]
