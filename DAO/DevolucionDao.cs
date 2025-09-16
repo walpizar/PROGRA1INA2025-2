@@ -41,7 +41,7 @@ namespace DAO
 
         public clsDevolucion consultarPorID(int id)
         {
-            var devolucion = _context.Devoluciones.Where(p => p.IdDevolucion == id).SingleOrDefault();
+            var devolucion = _context.Devoluciones.Where(p => p.idDevolucion == id).SingleOrDefault();
             return devolucion ?? throw new InvalidOperationException($"No se encontró una devolución con el ID {id}.");
         }
 

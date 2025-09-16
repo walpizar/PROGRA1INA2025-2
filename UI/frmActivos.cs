@@ -65,15 +65,15 @@ namespace UI
         {
             if (activosSelected != null)
             {
-                txtIdActivo.Text = activosSelected.IdActivo.ToString();
-                txtNombre.Text = activosSelected.NombreActivo;
-                txtDescripcion.Text = activosSelected.Descripcion;
-                txtCantidad.Value = activosSelected.CantidadDisponible;
-                txtEstado.Text = activosSelected.Estado;
-                txtfecha.Text = activosSelected.FechaAdquisicion.ToString("yyyy-MM-dd");
-                txtProveedor.Text = activosSelected.Proveedor;
-                txtUbicacion.Text = activosSelected.Ubicacion;
-                cbxCategorias.SelectedValue = activosSelected.IdCategoria;
+                txtIdActivo.Text = activosSelected.idActivo.ToString();
+                txtNombre.Text = activosSelected.nombreActivo;
+                txtDescripcion.Text = activosSelected.descripcion;
+                txtCantidad.Value = activosSelected.cantidadDisponible;
+                txtEstado.Text = activosSelected.estado;
+                txtfecha.Text = activosSelected.fechaAdquisicion.ToString("yyyy-MM-dd");
+                txtProveedor.Text = activosSelected.proveedor;
+                txtUbicacion.Text = activosSelected.ubicacion;
+                cbxCategorias.SelectedValue = activosSelected.idCategoria;
             }
         }
 
@@ -94,15 +94,15 @@ namespace UI
                 {
                     clsActivos activo = activosSelected ?? new clsActivos();
 
-                    activo.IdActivo = Convert.ToInt32(txtIdActivo.Text);
-                    activo.NombreActivo = txtNombre.Text;
-                    activo.Descripcion = txtDescripcion.Text;
-                    activo.CantidadDisponible = (int)txtCantidad.Value;
-                    activo.Estado = txtEstado.Text;
-                    activo.FechaAdquisicion = DateTime.Parse(txtfecha.Text);
-                    activo.Proveedor = txtProveedor.Text;
-                    activo.Ubicacion = txtUbicacion.Text;
-                    activo.IdCategoria = (int)cbxCategorias.SelectedValue;
+                    activo.idActivo = Convert.ToInt32(txtIdActivo.Text);
+                    activo.nombreActivo = txtNombre.Text;
+                    activo.descripcion = txtDescripcion.Text;
+                    activo.cantidadDisponible = (int)txtCantidad.Value;
+                    activo.estado = txtEstado.Text;
+                    activo.fechaAdquisicion = DateTime.Parse(txtfecha.Text);
+                    activo.proveedor = txtProveedor.Text;
+                    activo.ubicacion = txtUbicacion.Text;
+                    activo.idCategoria = (int)cbxCategorias.SelectedValue;
 
                     if (activosSelected == null)
                     {
@@ -165,7 +165,7 @@ namespace UI
 
                     if (resp == DialogResult.Yes)
                     {
-                        _activoService.eliminar(activosSelected.IdActivo);
+                        _activoService.eliminar(activosSelected.idActivo);
                         MessageBox.Show("Activo eliminado correctamente");
                         this.Close();
                     }

@@ -17,40 +17,50 @@ namespace DAO
 
         public void crear(clsEspecialidadMedica especialidad)
         {
-            _context.EspecialidadMedica.Add(especialidad);
+            _context.EspecialidadesMedicas.Add(especialidad);
             _context.SaveChanges();
         }
 
         public void modificar(clsEspecialidadMedica especialidad)
         {
-            _context.EspecialidadMedica.Update(especialidad);
+            _context.EspecialidadesMedicas.Update(especialidad);
             _context.SaveChanges();
         }
 
         public void eliminar(int id)
         {
             var esp = consultarPorID(id);
-            _context.EspecialidadMedica.Remove(esp);
+            _context.EspecialidadesMedicas.Remove(esp);
             _context.SaveChanges();
         }
 
         public clsEspecialidadMedica consultarPorID(int id)
         {
-            return _context.EspecialidadMedica
-                           .Where(e => e.id == id)
+            return _context.EspecialidadesMedicas
+                           .Where(e => e.idEspecialidadMedica == id)
                            .SingleOrDefault();
         }
 
         public clsEspecialidadMedica consultarPorNombre(string nombre)
         {
-            return _context.EspecialidadMedica
-                           .Where(e => e.nombre.Trim().ToUpper() == nombre.Trim().ToUpper())
+            return _context.EspecialidadesMedicas
+                           .Where(e => e.nombreEspecialidad.Trim().ToUpper() == nombre.Trim().ToUpper())
                            .SingleOrDefault();
         }
 
         public List<clsEspecialidadMedica> consultarTodos()
         {
-            return _context.EspecialidadMedica.ToList();
+            return _context.EspecialidadesMedicas.ToList();
+        }
+
+        public void eliminar(string id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public clsEspecialidadMedica consultarPorID(string id)
+        {
+            throw new NotImplementedException();
         }
     }
 }

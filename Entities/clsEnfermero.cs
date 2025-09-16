@@ -1,57 +1,78 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Entities
 {
-    [Table("tbEnfermero")]
+    [Table("tbEnfermeros")]
     public class clsEnfermero
     {
-        //Constructor
-        public clsEnfermero() { }
+        // Llave primaria compuesta de persona
+        [Key, Column(Order = 0)]
+        public string id { get; set; }
+        [Key, Column(Order = 1)]
+        public int tipoId { get; set; }
 
-        //Atributos principales de Enfermero
-        [Key]
-        public int Id { get; set; }
         [Required]
-        [StringLength(300, ErrorMessage = "El area no puede tener mas de 300 caracteres")]
-        public string Area { get; set; }
+        [StringLength(300, ErrorMessage = "El área no puede tener más de 300 caracteres")]
+        public string area { get; set; }
 
-        //Atributos de auditoria
+        [Required]
+        [StringLength(20, ErrorMessage = "El número de colegiado no puede tener más de 20 caracteres")]
+        public string numeroColegiado { get; set; }
+
+        // Auditoría
         [Required]
         [DataType(DataType.Date)]
-        public DateTime fecha_crea { get; set; }
+        public DateTime fechaCrea { get; set; }
+
         [Required]
-        [StringLength(100, ErrorMessage = "El usuario de creacion no puede tener mas de 100 caracteres")]
-        public string usuario_crea { get; set; }
+        [StringLength(100, ErrorMessage = "El usuario de creación no puede tener más de 100 caracteres")]
+        public string usuarioCrea { get; set; }
+
         [Required]
         [DataType(DataType.Date)]
-        public DateTime fecha_ult_mod { get; set; }
+        public DateTime fechaUltMod { get; set; }
+
         [Required]
-        [StringLength(100, ErrorMessage = "El usuario de la ultima modificacion no puede tener mas de 100 caracteres")]
-        public string usuario_ult_mod { get; set; }
+        [StringLength(100, ErrorMessage = "El usuario de la última modificación no puede tener más de 100 caracteres")]
+        public string usuarioUltMod { get; set; }
+
         [Required]
         public bool estado { get; set; }
 
-        //[Relacion 1 a 1 con Persona]
-        public int IdPersona { get; set; }
-        public clsPersona Persona { get; set; }
+        // Relación 1 a 1 con persona
+        [ForeignKey("id, tipoId")]
+        public clsPersona persona { get; set; }
 
-        //Constructor con parametros
-        public clsEnfermero(int Id, string Area, DateTime fecha_crea, string usuario_crea, DateTime fecha_ult_mod, string usuario_ult_mod, bool estado, int idPersona)
+        public clsEnfermero() { }
+
+        public clsEnfermero(string id,int tipoId,string area,
+            string numeroColegiado,
+            DateTime fechaCrea,
+            string usuarioCrea,
+            DateTime fechaUltMod,
+            string usuarioUltMod,
+            bool estado
+        )
         {
-            this.Id = Id;
-            this.Area = Area;
-            this.fecha_crea = fecha_crea;
-            this.usuario_crea = usuario_crea;
-            this.fecha_ult_mod = fecha_ult_mod;
-            this.usuario_ult_mod = usuario_ult_mod;
+            this.id = id;
+            this.tipoId = tipoId;
+            this.area = area;
+            this.numeroColegiado = numeroColegiado;
+            
+            this.usuarioCrea = usuarioCrea;
+            this.fechaUltMod = fechaUltMod;
+            this.usuarioUltMod = usuarioUltMod;
             this.estado = estado;
-            IdPersona = idPersona;
+        }
+
+        public override string ToString()
+        {
+            return $"id: {id}, tipoId: {tipoId}, area: {area}, " +
+                $"numeroColegiado: {numeroColegiado}, fechaCrea: {fechaCrea}, " +
+                $"usuarioCrea: {usuarioCrea}, fechaUltMod: {fechaUltMod}," +
+                $" usuarioUltMod: {usuarioUltMod}, estado: {estado}";
         }
     }
 }
