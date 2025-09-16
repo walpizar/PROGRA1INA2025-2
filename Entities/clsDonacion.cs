@@ -11,8 +11,8 @@ namespace Entities
         [Key]
         public int idDonacion { get; set; }
 
-        [ForeignKey("donante")]
-        public int idDonante { get; set; }
+        //[ForeignKey("donante")]
+        //public int idDonante { get; set; }
 
         public DateTime fechaDonacion { get; set; }
         public int tipoDonacion { get; set; }
@@ -24,17 +24,8 @@ namespace Entities
 
         public clsDonacion() { }
 
-        public clsDonacion(int idDonante, DateTime fechaDonacion, int tipoDonacion, string observaciones)
-        {
-            this.idDonante = idDonante;
-            this.fechaDonacion = fechaDonacion;
-            this.tipoDonacion = tipoDonacion;
-            this.observaciones = observaciones;
-        }
+       
 
-        public override string ToString()
-        {
-            return $"idDonacion: {idDonacion}, idDonante: {idDonante}, fechaDonacion: {fechaDonacion.ToShortDateString()}, tipoDonacion: {tipoDonacion}, observaciones: {observaciones}";
-        }
+       
     }
 }
