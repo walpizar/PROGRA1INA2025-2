@@ -1,14 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Entities
 {
-    [Table("usuarios")]
+    [Table("tbUsuarios")]
     public class clsUsuario
     {
         [Key]
@@ -23,29 +19,20 @@ namespace Entities
 
         public string nombre_usuario { get; set; }
 
-        [Required(ErrorMessage = "La contraseña es obligatoria.")]
+        [Required]
+        [StringLength(100, ErrorMessage = "La contraseña no puede tener más de 100 caracteres")]
+        public string contrasena { get; set; }
 
-        [StringLength(255, ErrorMessage= "La contraseña no puede tener más de 255 caracteres.")]
-        public string contraseña { get; set; }
+        [Required]
+        [StringLength(100, ErrorMessage = "El correo electrónico no puede tener más de 100 caracteres")]
+        public string email { get; set; }
 
-        [Required(ErrorMessage = "El rol del usuario es obligatorio.")]
-        public int rol_id { get; set; }
+        public bool estado { get; set; }
 
-        // Propiedad de navegación para acceder a los datos de la persona vinculada.
-        // Esto crea un enlace a la clase clsPersona.
-        public clsPersona Persona { get; set; }
+        public clsPersona persona { get; set; }
 
-        // Constructor vacío
         public clsUsuario() { }
 
-        // Constructor con parámetros
-
-        public clsUsuario(string personaId, string nombre_usuario, string contraseña, int rol_id)
-        {
-            this.personaId = personaId;
-            this.nombre_usuario = nombre_usuario;
-            this.contraseña = contraseña;
-
-        }
+       
     }
 }

@@ -19,13 +19,13 @@ namespace DAO
 
         public void crear(clsActivos activo)
         {
-            _context.Activos.Add(activo);
+            _context.activos.Add(activo);
             _context.SaveChanges();
         }
 
         public void modificar(clsActivos activo)
         {
-            _context.Activos.Update(activo);
+            _context.activos.Update(activo);
             _context.SaveChanges();
         }
 
@@ -34,25 +34,25 @@ namespace DAO
             var activo = consultarPorID(id);
             if (activo != null)
             {
-                _context.Activos.Remove(activo);
+                _context.activos.Remove(activo);
                 _context.SaveChanges();
             }
         }
 
         public clsActivos consultarPorID(int id)
         {
-            return _context.Activos.SingleOrDefault(p => p.IdActivo == id);
+            return _context.activos.SingleOrDefault(p => p.idActivo == id);
         }
 
         public clsActivos consultarPorNombre(string nombre)
         {
-            return _context.Activos
-                .SingleOrDefault(p => p.NombreActivo.Trim().ToUpper() == nombre.Trim().ToUpper());
+            return _context.activos
+                .SingleOrDefault(p => p.nombreActivo.Trim().ToUpper() == nombre.Trim().ToUpper());
         }
 
         public List<clsActivos> consultarTodos()
         {
-            return _context.Activos.ToList();
+            return _context.activos.ToList();
         }
 
         public void eliminar(string id)
