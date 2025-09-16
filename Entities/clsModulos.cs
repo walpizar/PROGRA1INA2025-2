@@ -26,6 +26,6 @@ namespace Entities
 
 
         // Navegación: un módulo puede tener muchos permisos
-        public ICollection<clsPermiso> permisos { get; set; }//LIGADO A PERMISOS
+        public ICollection<clsPermisos> permisos { get; set; }//LIGADO A PERMISOS
     }
 }

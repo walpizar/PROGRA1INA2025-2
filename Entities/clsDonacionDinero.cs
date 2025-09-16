@@ -1,58 +1,45 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Entities
 {
-   
-
     [Table("tbDonacionesDinero")]
     public class clsDonacionDinero
     {
         [Key]
-        public int IdDonacionDinero { get; set; }
+        public int idDonacionDinero { get; set; }
 
-        [ForeignKey("Donacion")]
-        public int IdDonacion { get; set; }
+        [ForeignKey("donacion")]
+        public int idDonacion { get; set; }
 
-        public decimal Monto { get; set; }
-
-        public int TipoTransaccion { get; set; }
-
-        public int Frecuencia { get; set; }
+        public decimal monto { get; set; }
+        public int tipoTransaccion { get; set; }
+        public int frecuencia { get; set; }
 
         [StringLength(5)]
-        public string Moneda { get; set; }
+        public string moneda { get; set; }
 
         [StringLength(100)]
-        public string Descripcion { get; set; }
+        public string descripcion { get; set; }
 
-        // Relación: Una DonacionDinero pertenece a una Donacion
-        public clsDonacion Donacion { get; set; }
+        public clsDonacion donacion { get; set; }
 
-        // Constructor vacío
         public clsDonacionDinero() { }
 
-        // Constructor con parámetros
         public clsDonacionDinero(int idDonacion, decimal monto, int tipoTransaccion, int frecuencia, string moneda, string descripcion)
         {
-            IdDonacion = idDonacion;
-            Monto = monto;
-            TipoTransaccion = tipoTransaccion;
-            Frecuencia = frecuencia;
-            Moneda = moneda;
-            Descripcion = descripcion;
+            this.idDonacion = idDonacion;
+            this.monto = monto;
+            this.tipoTransaccion = tipoTransaccion;
+            this.frecuencia = frecuencia;
+            this.moneda = moneda;
+            this.descripcion = descripcion;
         }
 
-        // Método ToString
         public override string ToString()
         {
-            return $"IdDonacionDinero: {IdDonacionDinero}, IdDonacion: {IdDonacion}, Monto: {Monto}, TipoTransaccion: {TipoTransaccion}, Frecuencia: {Frecuencia}, Moneda: {Moneda}, Descripcion: {Descripcion}";
+            return $"idDonacionDinero: {idDonacionDinero}, idDonacion: {idDonacion}, monto: {monto}, tipoTransaccion: {tipoTransaccion}, frecuencia: {frecuencia}, moneda: {moneda}, descripcion: {descripcion}";
         }
-
     }
 }

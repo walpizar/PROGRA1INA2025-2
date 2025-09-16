@@ -16,15 +16,16 @@ namespace Services
         public void crear(clsDevolucion devolucion)
         {
             if (devolucion == null) throw new ArgumentNullException(nameof(devolucion));
-            if (devolucion.IdActivoFK <= 0) throw new ArgumentException("El activo asociado es obligatorio.", nameof(devolucion.IdActivoFK));
+            if (devolucion.idActivoFK <= 0) throw new ArgumentException("El activo asociado es obligatorio.", 
+                nameof(devolucion.idActivoFK));
 
             // Validar que el activo exista
-            var activo = _activosService.consultarPorID(devolucion.IdActivoFK);
+            var activo = _activosService.consultarPorID(devolucion.idActivoFK);
             if (activo == null)
                 throw new Exception("El activo no existe.");
 
             // Regla de negocio: el estado del activo debe indicar que está prestado/en uso
-            var estado = (activo.Estado ?? string.Empty).Trim();
+            var estado = (activo.estado ?? string.Empty).Trim();
             if (!string.Equals(estado, "Prestado", StringComparison.OrdinalIgnoreCase) &&
                 !string.Equals(estado, "En uso", StringComparison.OrdinalIgnoreCase))
             {

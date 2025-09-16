@@ -1,3 +1,4 @@
+using Common.Exceptions;
 using Entities;
 using Services;
 using System;
@@ -170,13 +171,13 @@ namespace UI
                 this.Text = "Modificar Devolución";
                 this.btnEliminar.Visible = true;
 
-                dtpFecha.Value = devolucionSelected.FechaDevolucion == default
+                dtpFecha.Value = devolucionSelected.fechaDevolucion == default
                     ? DateTime.Today
-                    : devolucionSelected.FechaDevolucion;
+                    : devolucionSelected.fechaDevolucion;
 
-                txtObservaciones.Text = devolucionSelected.Observaciones ?? string.Empty;
+                txtObservaciones.Text = devolucionSelected.observaciones ?? string.Empty;
 
-                cboActivo.SelectedValue = devolucionSelected.IdActivoFK;
+                cboActivo.SelectedValue = devolucionSelected.idActivoFK;
             }
             else
             {
@@ -193,16 +194,16 @@ namespace UI
             // Mostrar solo activos con estado "Prestado" o "En uso"
             List<clsActivos> activos = _activosService.consultarTodos();
             var filtrados = activos
-                .Where(a => a != null && !string.IsNullOrWhiteSpace(a.Estado))
+                .Where(a => a != null && !string.IsNullOrWhiteSpace(a.estado))
                 .Where(a =>
-                    a.Estado.Equals("Prestado", StringComparison.OrdinalIgnoreCase) ||
-                    a.Estado.Equals("En uso", StringComparison.OrdinalIgnoreCase))
-                .OrderBy(a => a.NombreActivo)
+                    a.estado.Equals("Prestado", StringComparison.OrdinalIgnoreCase) ||
+                    a.estado.Equals("En uso", StringComparison.OrdinalIgnoreCase))
+                .OrderBy(a => a.nombreActivo)
                 .ToList();
 
             cboActivo.DataSource = filtrados;
-            cboActivo.DisplayMember = nameof(clsActivos.NombreActivo);
-            cboActivo.ValueMember = nameof(clsActivos.IdActivo);
+            cboActivo.DisplayMember = nameof(clsActivos.nombreActivo);
+            cboActivo.ValueMember = nameof(clsActivos.idActivo);
         }
 
         private void btnGuardar_Click(object sender, EventArgs e)
@@ -213,9 +214,9 @@ namespace UI
 
                 clsDevolucion devolucion = devolucionSelected ?? new clsDevolucion();
 
-                devolucion.IdActivoFK = (int)cboActivo.SelectedValue;
-                devolucion.FechaDevolucion = dtpFecha.Value.Date;
-                devolucion.Observaciones = txtObservaciones.Text?.Trim() ?? string.Empty;
+                devolucion.idActivoFK = (int)cboActivo.SelectedValue;
+                devolucion.fechaDevolucion = dtpFecha.Value.Date;
+                devolucion.observaciones = txtObservaciones.Text?.Trim() ?? string.Empty;
 
                 if (devolucionSelected == null)
                 {
@@ -279,7 +280,7 @@ namespace UI
 
                 if (resp == DialogResult.Yes)
                 {
-                    _devolucionService.eliminar(devolucionSelected.IdDevolucion);
+                    _devolucionService.eliminar(devolucionSelected.idDevolucion);
                     MessageBox.Show("Devolución eliminada correctamente.");
                     this.Close();
                 }
