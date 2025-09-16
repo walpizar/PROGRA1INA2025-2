@@ -8,7 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DAO
+/*namespace DAO
 {
     public class CategoriaDAO : IGenerica<clsCategoria>
     {
@@ -33,17 +33,18 @@ namespace DAO
 
         public List<clsCategoria> consultarTodos()
         {
-            try
-            {
-             
-                return _context.Categoria.Where(c => c.estado == true).ToList();
-            }
-            catch (Exception)
-            {
+            //try
+            //{
 
-                throw new Exception();
-            }
+            //    return _context.Categoria.Where(c => c.estado == true).ToList();
+            //}
+            //catch (Exception)
+            //{
 
+            //    throw new Exception();
+            //}
+
+            return null;
 
    
          
@@ -66,4 +67,4 @@ namespace DAO
             throw new NotImplementedException();
         }
     }
-}
+}*/
