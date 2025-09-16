@@ -49,7 +49,7 @@ namespace DAO
             {
                 // 🔹 Conexión a SQL Express con autenticación de Windows
                 optionsBuilder.UseSqlServer(
-                    @"Server=.;Database=dbPaleativoGarabito;Trusted_Connection=True;MultipleActiveResultSets=True;TrustServerCertificate=True;");
+                    @"Server=.\SQLEXPRESS;Database=dbPaleativoGarabito;Trusted_Connection=True;MultipleActiveResultSets=True;TrustServerCertificate=True;");
             }
         }
 

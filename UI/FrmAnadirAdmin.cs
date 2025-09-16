@@ -12,7 +12,7 @@ namespace UI
         public FrmAnadirAdmin()
         {
             InitializeComponent();
-            usuarioService = new UsuarioService(); // <-- instanciamos el Service
+            usuarioService = new UsuarioService(); //  instanciamos el Service
         }
 
         private void FrmAnadirAdmin_Load(object sender, EventArgs e)
@@ -36,7 +36,7 @@ namespace UI
                     tipoId = 1,
                     nombre = txtNombre.Text,
                     apellido1 = "-",
-                    apellido2 = "",
+                    apellido2 = "-",
                     fechaNac = txtFecha.Value,
                     email = txtEmail.Text,
                     direccion = txtDireccion.Text,

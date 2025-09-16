@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace DAO.Migrations
 {
     /// <inheritdoc />
-    public partial class InitialCreate : Migration
+    public partial class jeff : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -190,8 +190,8 @@ namespace DAO.Migrations
                 columns: table => new
                 {
                     IdDonante = table.Column<int>(type: "int", nullable: false),
-                    PersonaTipoId = table.Column<string>(type: "nvarchar(20)", nullable: false),
-                    IdPersona = table.Column<int>(type: "int", nullable: false),
+                    PersonaId = table.Column<string>(type: "nvarchar(20)", nullable: false),
+                    PersonaTipoId = table.Column<int>(type: "int", nullable: false),
                     Estado = table.Column<bool>(type: "bit", nullable: false),
                     FechaRegistro = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
@@ -199,8 +199,8 @@ namespace DAO.Migrations
                 {
                     table.PrimaryKey("PK_tbDonantes", x => x.IdDonante);
                     table.ForeignKey(
-                        name: "FK_tbDonantes_tbPersonas_PersonaTipoId_IdPersona",
-                        columns: x => new { x.PersonaTipoId, x.IdPersona },
+                        name: "FK_tbDonantes_tbPersonas_PersonaId_PersonaTipoId",
+                        columns: x => new { x.PersonaId, x.PersonaTipoId },
                         principalTable: "tbPersonas",
                         principalColumns: new[] { "id", "tipoId" },
                         onDelete: ReferentialAction.Restrict);
@@ -452,9 +452,9 @@ namespace DAO.Migrations
                 unique: true);
 
             migrationBuilder.CreateIndex(
-                name: "IX_tbDonantes_PersonaTipoId_IdPersona",
+                name: "IX_tbDonantes_PersonaId_PersonaTipoId",
                 table: "tbDonantes",
-                columns: new[] { "PersonaTipoId", "IdPersona" },
+                columns: new[] { "PersonaId", "PersonaTipoId" },
                 unique: true);
 
             migrationBuilder.CreateIndex(
