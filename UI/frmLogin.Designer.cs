@@ -147,6 +147,7 @@
             FormBorderStyle = FormBorderStyle.None;
             Name = "frmLogin";
             Text = "frmLogin";
+            
             gbxLogin.ResumeLayout(false);
             gbxLogin.PerformLayout();
             ResumeLayout(false);

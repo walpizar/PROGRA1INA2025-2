@@ -85,7 +85,7 @@ namespace UI
             if (!_loginService.ValidarCorreoExistente(correoRegistrado))
             {
                 //muestro mensaje de error si el correo no existe con botón OK y icono de error
-                MessageBox.Show("El correo electrónico no está registrado. Por favor, inténtelo de nuevo.", 
+                MessageBox.Show("El correo electrónico no está registrado. Por favor, inténtelo de nuevo.",
                     "Correo No Registrado", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return; //salgo del método
             }
@@ -94,7 +94,7 @@ namespace UI
             if (_loginService.EnviarCodigoRecuperacion(correoRegistrado))
             {
                 //muestro mensaje de exito si se envio correctamente con botón OK y icono de información
-                MessageBox.Show("Se ha enviado un código de recuperación a su correo electrónico.", 
+                MessageBox.Show("Se ha enviado un código de recuperación a su correo electrónico.",
                     "Código Enviado", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
                 string codigoIngresado = Microsoft.VisualBasic.Interaction.InputBox(//uso un cuadro de dialogo para pedir el codigo enviado
@@ -125,10 +125,10 @@ namespace UI
                 else
                 {
                     //si el codigo no es valido, muestro mensaje de error con botón OK y icono de error
-                    MessageBox.Show("El código ingresado es incorrecto. Por favor, inténtelo de nuevo.", 
+                    MessageBox.Show("El código ingresado es incorrecto. Por favor, inténtelo de nuevo.",
                         "Código Incorrecto", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
-                
+
 
             }
 
