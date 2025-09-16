@@ -15,11 +15,16 @@ namespace Entities
         public clsMedico() { }
 
         //Atributos principales de Medico
-        [Key]
-        public int Id { get; set; }
+
+        public string id { get; set; }
+        public int tipoId { get; set; }
+ 
+
+
+
         [Required]
         [StringLength(300, ErrorMessage = "La especialidad no puede tener mas de 300 caracteres")]
-        public string Especialidad { get; set; }
+        public string especialidad { get; set; }
 
         //Atributos de auditoria
         [Required]
@@ -38,20 +43,21 @@ namespace Entities
         public bool estado { get; set; }
 
         //[Relacion 1 a 1 con Persona]
-        public int IdPersona { get; set; }
-        public clsPersona Persona { get; set; }
+        public int idPersona { get; set; }
+        public clsPersona persona { get; set; }
 
         //Constructor con parametros
-        public clsMedico(int Id, string Especialidad, DateTime fecha_crea, string usuario_crea, DateTime fecha_ult_mod, string usuario_ult_mod, bool estado, int idPersona)
+        public clsMedico(string Id, int tipoId, string Especialidad, DateTime fecha_crea, string usuario_crea, DateTime fecha_ult_mod, string usuario_ult_mod, bool estado, int idPersona)
         {
-            this.Id = Id;
-            this.Especialidad = Especialidad;
+            this.id = Id;
+            this.tipoId = tipoId;
+            this.especialidad = Especialidad;
             this.fecha_crea = fecha_crea;
             this.usuario_crea = usuario_crea;
             this.fecha_ult_mod = fecha_ult_mod;
             this.usuario_ult_mod = usuario_ult_mod;
             this.estado = estado;
-            IdPersona = idPersona;
+            idPersona = idPersona;
         }
     }
 }

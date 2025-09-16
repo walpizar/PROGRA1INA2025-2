@@ -27,16 +27,18 @@ namespace DAO
         public void crear(clsProducto producto)
         {
             // listaProducto.Add(producto);
+            //_context.Entry(clsMedico.Persona).State = EntityState.Added;
 
-            _context.Producto.Add(producto);
-            _context.SaveChanges();
+
+            //_context.Producto.Add(producto);
+            //_context.SaveChanges();
         }
 
         public void modificar(clsProducto producto)
         {
            
-            _context.Producto.Update(producto);
-            _context.SaveChanges();
+            //_context.Producto.Update(producto);
+            //_context.SaveChanges();
 
 
 
@@ -58,34 +60,40 @@ namespace DAO
 
         public void eliminar(int id)
         {
-            var prod = consultarPorID(id);
-            _context.Producto.Remove(prod);
-            _context.SaveChanges();
+           // var prod = consultarPorID(id);
+           // _context.Producto.Remove(prod);
+           // _context.SaveChanges();
 
-           // clsProducto prodEliminar = listaProducto.Where(p => p.id
-                                               // == id).SingleOrDefault();
+           //// clsProducto prodEliminar = listaProducto.Where(p => p.id
+           //                                    // == id).SingleOrDefault();
            // listaProducto.Remove(prodEliminar);
 
         }
         public clsProducto consultarPorID(int id)
         {
-          return  _context.Producto.Where(p => p.id
-                                               == id).SingleOrDefault();
+          //return  _context.Producto.Where(p => p.id
+                                               //== id).SingleOrDefault();
+
+            return null;
         }
 
 
 
         public clsProducto consultarPorNombre(string nombre)
         {
-            return _context.Producto.Where(p => p.nombre.Trim().ToUpper()
-                                                 == nombre.Trim().ToUpper()).SingleOrDefault();
+            //return _context.Producto.Where(p => p.nombre.Trim().ToUpper()
+            //                                     == nombre.Trim().ToUpper()).SingleOrDefault()
+            //
+            //                                     ;
+
+            return null;
         }
 
 
         public List<clsProducto> consultarTodos()
         {
-          
-            return _context.Producto.ToList();
+          return null;
+            //return _context.Producto.ToList();
         }
 
        
