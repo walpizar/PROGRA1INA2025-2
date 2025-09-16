@@ -51,6 +51,7 @@ namespace DAO
             // Clave primaria compuesta para Persona
             modelBuilder.Entity<clsPersona>()
                 .HasKey(p => new { p.id, p.tipoId });
+
             modelBuilder.Entity<clsPersona>().Property(p => p.id)
                 .IsRequired().HasMaxLength(20).ValueGeneratedNever();
             modelBuilder.Entity<clsPersona>().Property(p => p.tipoId)
@@ -85,13 +86,16 @@ namespace DAO
                 .HasForeignKey<clsMedico>(m => new { m.id, m.tipoId })
                 .OnDelete(DeleteBehavior.Restrict); // Evita el borrado en cascada
 
-           
 
+            modelBuilder.Entity<clsDonante>()
+                .HasKey(m => new { m.personaId, m.personaTipoId });
             // Relación 1 a 1 entre Donante y Persona
             modelBuilder.Entity<clsDonante>()
                 .HasOne(d => d.persona)
                 .WithOne(p => p.donante)
-                .HasForeignKey<clsDonante>(d => new { d.personaId, d.personaTipoId });
+                .HasForeignKey<clsDonante>(d => new { d.personaId, d.personaTipoId })
+                .HasPrincipalKey<clsPersona>(p => new { p.id, p.tipoId });
+
 
             // Clave primaria compuesta para Enfermero
             modelBuilder.Entity<clsEnfermero>()
