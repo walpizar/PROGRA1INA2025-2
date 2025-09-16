@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Services
+/*namespace Services
 {
     public class ClienteService: IGenerica<clsCliente>
     {
@@ -84,4 +84,4 @@ namespace Services
             throw new NotImplementedException();
         }
     }
-}
+}*/

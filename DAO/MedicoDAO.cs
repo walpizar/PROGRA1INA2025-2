@@ -36,7 +36,7 @@ namespace DAO
                     estado = medico.persona.estado
                 };
 
-                _context.Personas.Add(varpersona);
+                _context.persona.Add(varpersona);
                 _context.SaveChanges(); //Guarda y genera el ID
 
                 // Luego creamos el médico relacionado con llave compuesta de persona
@@ -47,7 +47,7 @@ namespace DAO
                     especialidad = medico.especialidad,
                 };
 
-                _context.Medicos.Add(medico);
+                _context.medico.Add(medico);
                 _context.SaveChanges();
             }
             catch (Exception ex)
@@ -63,18 +63,18 @@ namespace DAO
             try
             {
                 // Primero se elimina el médico
-                var medico = _context.Medicos.Find(id,tipoId);
+                var medico = _context.medico.Find(id,tipoId);
                 if (medico != null)
                 {
-                    _context.Medicos.Remove(medico);
+                    _context.medico.Remove(medico);
                     _context.SaveChanges();
                 }
 
                 //Despues se elimina la persona
-                var persona = _context.Personas.Find(id, tipoId);
+                var persona = _context.persona.Find(id, tipoId);
                 if (persona != null)
                 {
-                    _context.Personas.Remove(persona);
+                    _context.persona.Remove(persona);
                     _context.SaveChanges();
                 }
             }
@@ -89,7 +89,7 @@ namespace DAO
             try
             {
                 // Buscar la persona existente
-                var persona = _context.Personas.Find(entidad.idPersona);
+                var persona = _context.persona.Find(entidad.idPersona);
                 if (persona != null)
                 {
                     // Actualizar datos de persona
@@ -103,7 +103,7 @@ namespace DAO
                 }
 
                 // Buscar el médico existente
-                var medico = _context.Medicos.Find(entidad.idPersona);
+                var medico = _context.medico.Find(entidad.idPersona);
                 if (medico != null)
                 {
                     // Actualizar datos de médico
@@ -122,17 +122,17 @@ namespace DAO
 
         public clsMedico consultarPorID(string id, int tipoId)
         {
-            return _context.Medicos.Include(m => m.persona).FirstOrDefault(m => m.id == id && m.tipoId == tipoId);
+            return _context.medico.Include(m => m.persona).FirstOrDefault(m => m.id == id && m.tipoId == tipoId);
         }
 
         public clsMedico consultarPorNombre(string nombre)
         {
-            return _context.Medicos.Include(m => m.persona).FirstOrDefault(m => m.persona.nombre.Contains(nombre));
+            return _context.medico.Include(m => m.persona).FirstOrDefault(m => m.persona.nombre.Contains(nombre));
         }
 
         public List<clsMedico> consultarTodos()
         {
-            return _context.Medicos.Include(m => m.persona).ToList();
+            return _context.medico.Include(m => m.persona).ToList();
         }
     }
 }

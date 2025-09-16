@@ -36,7 +36,7 @@ namespace DAO
                     estado = enfermero.persona.estado
                 };
 
-                _context.Personas.Add(varpersona);
+                _context.persona.Add(varpersona);
                 _context.SaveChanges(); //Guarda y genera el ID
 
                 // Luego creamos al enfermero relacionado con llave compuesta de persona
@@ -47,7 +47,7 @@ namespace DAO
                     area = enfermero.area,
                 };
 
-                _context.Enfermeros.Add(enfermero);
+                _context.enfermero.Add(enfermero);
                 _context.SaveChanges();
             }
             catch (Exception ex)
@@ -62,18 +62,18 @@ namespace DAO
             try
             {
                 // Primero se elimina el enfermero
-                var enfermero = _context.Enfermeros.Find(id, tipoId);
+                var enfermero = _context.enfermero.Find(id, tipoId);
                 if (enfermero != null)
                 {
-                    _context.Enfermeros.Remove(enfermero);
+                    _context.enfermero.Remove(enfermero);
                     _context.SaveChanges();
                 }
 
                 //Despues se elimina la persona
-                var persona = _context.Personas.Find(id, tipoId);
+                var persona = _context.persona.Find(id, tipoId);
                 if (persona != null)
                 {
-                    _context.Personas.Remove(persona);
+                    _context.persona.Remove(persona);
                     _context.SaveChanges();
                 }
             }
@@ -88,7 +88,7 @@ namespace DAO
             try
             {
                 // Buscar la persona existente
-                var persona = _context.Personas.Find(entidad.idPersona);
+                var persona = _context.persona.Find(entidad.idPersona);
                 if (persona != null)
                 {
                     // Actualizar datos de persona
@@ -102,7 +102,7 @@ namespace DAO
                 }
 
                 // Buscar el enfermero existente
-                var enfermero = _context.Enfermeros.Find(entidad.idPersona);
+                var enfermero = _context.enfermero.Find(entidad.idPersona);
                 if (enfermero != null)
                 {
                     // Actualizar datos del enfermero
@@ -121,17 +121,17 @@ namespace DAO
 
         public clsEnfermero consultarPorID(string id, int tipoId)
         {
-            return _context.Enfermeros.Include(m => m.persona).FirstOrDefault(m => m.id == id && m.tipoId == tipoId);
+            return _context.enfermero.Include(m => m.persona).FirstOrDefault(m => m.id == id && m.tipoId == tipoId);
         }
 
         public clsEnfermero consultarPorNombre(string nombre)
         {
-            return _context.Enfermeros.Include(m => m.persona).FirstOrDefault(m => m.persona.nombre.Contains(nombre));
+            return _context.enfermero.Include(m => m.persona).FirstOrDefault(m => m.persona.nombre.Contains(nombre));
         }
 
         public List<clsEnfermero> consultarTodos()
         {
-            return _context.Enfermeros.Include(m => m.persona).ToList();
+            return _context.enfermero.Include(m => m.persona).ToList();
         }
     }
 }

@@ -18,10 +18,7 @@ namespace Entities
 
         public string id { get; set; }
         public int tipoId { get; set; }
- 
 
-
-        
         [Required]
         [StringLength(300, ErrorMessage = "La especialidad no puede tener mas de 300 caracteres")]
         public string especialidad { get; set; }
@@ -42,6 +39,7 @@ namespace Entities
         [Required]
         public bool estado { get; set; }
 
+        // Relación 1 a 1 con Persona
         public int idPersona { get; set; }
         public clsPersona persona { get; set; }
 
@@ -56,7 +54,7 @@ namespace Entities
             this.fecha_ult_mod = fecha_ult_mod;
             this.usuario_ult_mod = usuario_ult_mod;
             this.estado = estado;
-            idPersona = idPersona;
+            this.idPersona = idPersona;
         }
     }
 }

@@ -15,17 +15,17 @@ namespace Services
 
         public void crear(clsEspecialidadMedica especialidad)
         {
-            if (string.IsNullOrWhiteSpace(especialidad.nombre))
+            if (string.IsNullOrWhiteSpace(especialidad.nombreEspecialidad))
             {
                 throw new Exception("El nombre de la especialidad no puede estar vacío");
             }
 
-            if (_especialidadDao.consultarPorID(especialidad.id) != null)
+            if (_especialidadDao.consultarPorID(especialidad.idEspecialidadMedica) != null)
             {
                 throw new EntityExistDBException();
             }
 
-            if (_especialidadDao.consultarPorNombre(especialidad.nombre) != null)
+            if (_especialidadDao.consultarPorNombre(especialidad.nombreEspecialidad) != null)
             {
                 throw new Exception("Ya existe una especialidad con ese nombre");
             }
@@ -35,7 +35,7 @@ namespace Services
 
         public void modificar(clsEspecialidadMedica especialidad)
         {
-            if (string.IsNullOrWhiteSpace(especialidad.nombre))
+            if (string.IsNullOrWhiteSpace(especialidad.nombreEspecialidad))
             {
                 throw new Exception("El nombre de la especialidad no puede estar vacío");
             }
@@ -65,6 +65,16 @@ namespace Services
         public clsEspecialidadMedica consultarPorNombre(string nombre)
         {
             return _especialidadDao.consultarPorNombre(nombre);
+        }
+
+        public void eliminar(string id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public clsEspecialidadMedica consultarPorID(string id)
+        {
+            throw new NotImplementedException();
         }
 
         public void eliminar(string id, int tipoId)

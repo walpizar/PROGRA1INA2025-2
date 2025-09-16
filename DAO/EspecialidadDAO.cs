@@ -17,43 +17,50 @@ namespace DAO
 
         public void crear(clsEspecialidadMedica especialidad)
         {
-            //_context.EspecialidadMedica.Add(especialidad);
-            //_context.SaveChanges();
+            _context.especialidadMedica.Add(especialidad);
+            _context.SaveChanges();
         }
 
         public void modificar(clsEspecialidadMedica especialidad)
         {
-            //_context.EspecialidadMedica.Update(especialidad);
-            //_context.SaveChanges();
+            _context.especialidadMedica.Update(especialidad);
+            _context.SaveChanges();
         }
 
         public void eliminar(int id)
         {
-            //var esp = consultarPorID(id);
-            //_context.EspecialidadMedica.Remove(esp);
-            //_context.SaveChanges();
+            var esp = consultarPorID(id);
+            _context.especialidadMedica.Remove(esp);
+            _context.SaveChanges();
         }
 
         public clsEspecialidadMedica consultarPorID(int id)
         {
-            //return _context.EspecialidadMedica
-            //               .Where(e => e.id == id)
-            //               .SingleOrDefault();
-            return null;
+            return _context.especialidadMedica
+                           .Where(e => e.idEspecialidadMedica == id)
+                           .SingleOrDefault();
         }
 
         public clsEspecialidadMedica consultarPorNombre(string nombre)
         {
-            //return _context.EspecialidadMedica
-            //               .Where(e => e.nombre.Trim().ToUpper() == nombre.Trim().ToUpper())
-            //               .SingleOrDefault();
-            return null;
+            return _context.especialidadMedica
+                           .Where(e => e.nombreEspecialidad.Trim().ToUpper() == nombre.Trim().ToUpper())
+                           .SingleOrDefault();
         }
 
         public List<clsEspecialidadMedica> consultarTodos()
         {
-            //return _context.EspecialidadMedica.ToList();
-            return null;
+            return _context.especialidadMedica.ToList();
+        }
+
+        public void eliminar(string id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public clsEspecialidadMedica consultarPorID(string id)
+        {
+            throw new NotImplementedException();
         }
 
         public void eliminar(string id, int tipoId)

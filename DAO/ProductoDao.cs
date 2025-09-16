@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Common.Interfaces;
 
-namespace DAO
+/*namespace DAO
 {
     public class ProductoDao: IGenerica<clsProducto>
     {
@@ -92,4 +92,4 @@ namespace DAO
 
        
     }
-}
+}*/
