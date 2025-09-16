@@ -21,5 +21,10 @@ namespace UI
         {
 
         }
+
+        private void btnBuscarPersona_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

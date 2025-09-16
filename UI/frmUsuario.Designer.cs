@@ -53,7 +53,6 @@
             lblPassword = new Label();
             txtUsuario = new TextBox();
             lblUusario = new Label();
-            btnBuscarPersona = new Button();
             cboPersona = new ComboBox();
             lblPersona = new Label();
             gbxUsuario.SuspendLayout();
@@ -183,7 +182,6 @@
             gbxUsuario.Controls.Add(lblPassword);
             gbxUsuario.Controls.Add(txtUsuario);
             gbxUsuario.Controls.Add(lblUusario);
-            gbxUsuario.Controls.Add(btnBuscarPersona);
             gbxUsuario.Controls.Add(cboPersona);
             gbxUsuario.Controls.Add(lblPersona);
             gbxUsuario.Location = new Point(12, 40);
@@ -298,19 +296,6 @@
             lblUusario.TabIndex = 3;
             lblUusario.Text = "Usuario:";
             // 
-            // btnBuscarPersona
-            // 
-            btnBuscarPersona.BackColor = Color.BurlyWood;
-            btnBuscarPersona.BackgroundImageLayout = ImageLayout.Stretch;
-            btnBuscarPersona.ForeColor = SystemColors.MenuHighlight;
-            btnBuscarPersona.Image = UI._Designer.lupa;
-            btnBuscarPersona.ImageAlign = ContentAlignment.BottomCenter;
-            btnBuscarPersona.Location = new Point(378, 30);
-            btnBuscarPersona.Name = "btnBuscarPersona";
-            btnBuscarPersona.Size = new Size(43, 35);
-            btnBuscarPersona.TabIndex = 2;
-            btnBuscarPersona.UseVisualStyleBackColor = false;
-            // 
             // cboPersona
             // 
             cboPersona.FormattingEnabled = true;
@@ -375,7 +360,6 @@
         private Button btnModificar;
         private GroupBox gbxUsuario;
         private ComboBox cboPersona;
-        private Button btnBuscarPersona;
         private TextBox txtPassword;
         private Label lblPassword;
         private TextBox txtConfirmar;
