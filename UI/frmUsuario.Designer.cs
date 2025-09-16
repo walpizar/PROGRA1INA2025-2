@@ -296,21 +296,9 @@
             lblUusario.TabIndex = 3;
             lblUusario.Text = "Usuario:";
             // 
-<<<<<<< HEAD
-=======
+
             // btnBuscarPersona
             // 
-            btnBuscarPersona.BackColor = Color.BurlyWood;
-            btnBuscarPersona.BackgroundImageLayout = ImageLayout.Stretch;
-            btnBuscarPersona.ForeColor = SystemColors.MenuHighlight;
-            btnBuscarPersona.ImageAlign = ContentAlignment.BottomCenter;
-            btnBuscarPersona.Location = new Point(378, 30);
-            btnBuscarPersona.Name = "btnBuscarPersona";
-            btnBuscarPersona.Size = new Size(43, 35);
-            btnBuscarPersona.TabIndex = 2;
-            btnBuscarPersona.UseVisualStyleBackColor = false;
-            // 
->>>>>>> develop
             // cboPersona
             // 
             cboPersona.FormattingEnabled = true;
