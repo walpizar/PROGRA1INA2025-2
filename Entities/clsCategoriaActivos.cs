@@ -1,30 +1,37 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Collections.Generic;
+
 namespace Entities
 {
-    [Table("tbCategoriasActivos")]
+    [Table("tbCategoriaActivos")]
     public class clsCategoriaActivos
     {
         [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)] // Autonumérico
-        public int IdCategoria { get; set; }
+        public int idCategoriaActivo { get; set; }
 
         [Required]
-        [StringLength(50, ErrorMessage = "El nombre de la categoría no puede tener más de 50 caracteres")]
-        public string Nombre { get; set; }
+        [StringLength(100, ErrorMessage = "El nombre de la categoría no puede tener más de 100 caracteres")]
+        public string nombreCategoriaActivo { get; set; }
 
-        [Required]
         [StringLength(200, ErrorMessage = "La descripción no puede tener más de 200 caracteres")]
-        public string Descripcion { get; set; }
+        public string descripcion { get; set; }
 
-        [Required]
-        public bool Estado { get; set; } // true = activa, false = inactiva
+        public bool estado { get; set; }
 
         public clsCategoriaActivos() { }
+
+        public clsCategoriaActivos(int idCategoriaActivo, string nombreCategoriaActivo, string descripcion, bool estado)
+        {
+            this.idCategoriaActivo = idCategoriaActivo;
+            this.nombreCategoriaActivo = nombreCategoriaActivo;
+            this.descripcion = descripcion;
+            this.estado = estado;
+        }
+
+        public override string ToString()
+        {
+            return $"idCategoriaActivo: {idCategoriaActivo}, nombreCategoriaActivo: {nombreCategoriaActivo}, descripcion: {descripcion}, estado: {estado}";
+        }
     }
 }
