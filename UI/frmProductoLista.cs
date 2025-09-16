@@ -11,7 +11,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace UI
+/*namespace UI
 {
     public partial class frmProductoLista : Form
     {
@@ -139,4 +139,4 @@ namespace UI
 
         }
     }
-}
+}*/

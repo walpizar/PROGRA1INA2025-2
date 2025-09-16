@@ -38,7 +38,7 @@ namespace Services
 
         public void crear(clsActivos activos)
         {
-            if (_actiDAO.consultarPorID(activos.IdActivo) != null)
+            if (_actiDAO.consultarPorID(activos.idActivo) != null)
             {
                 throw new Exception("El activo ya existe");
             }
