@@ -17,7 +17,7 @@ namespace DAO
         public DbSet<clsDonacion> donacion { get; set; }
         public DbSet<clsDonacionDinero> donacionDinero { get; set; }
         public DbSet<clsActivos> activos { get; set; }
-        public DbSet<clsDonacionesActivos> donacionesActivos { get; set; }
+        public DbSet<clsDonacionActivo> donacionesActivos { get; set; }
        // public DbSet<clsCategoria> categoria { get; set; }
         public DbSet<clsCategoriaActivos> categoriaActivos { get; set; }
         public DbSet<clsDepartamentos> departamentos { get; set; }

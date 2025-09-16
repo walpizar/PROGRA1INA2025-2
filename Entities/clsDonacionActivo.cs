@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace Entities
 {
     [Table("tbDonacionesActivos")]
-    public class clsDonacionesActivos
+    public class clsDonacionActivo
     {
         [Key]
         public int idDonacionActivo { get; set; }
@@ -26,9 +26,9 @@ namespace Entities
         public clsDonacion donacion { get; set; }
         public clsActivos activo { get; set; }
 
-        public clsDonacionesActivos() { }
+        public clsDonacionActivo() { }
 
-        public clsDonacionesActivos(int idDonacion, int idActivo, int cantidad, string estadoActivo, string observaciones)
+        public clsDonacionActivo(int idDonacion, int idActivo, int cantidad, string estadoActivo, string observaciones)
         {
             this.idDonacion = idDonacion;
             this.idActivo = idActivo;

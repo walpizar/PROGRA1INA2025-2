@@ -20,7 +20,7 @@ namespace Entities
 
         public clsDonante donante { get; set; }
         public clsDonacionDinero donacionDinero { get; set; }
-        public ICollection<clsDonacionesActivos> donacionesActivos { get; set; }
+        public ICollection<clsDonacionActivo> donacionesActivos { get; set; }
 
         public clsDonacion() { }
 

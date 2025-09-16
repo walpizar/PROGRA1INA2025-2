@@ -19,7 +19,12 @@ namespace DAO
 
         public clsDonacion consultarPorID(int id)
         {
-           return context.Donaciones.SingleOrDefault(d => d.IdDonacion == id);
+           return context.donacion.SingleOrDefault(d => d.idDonacion == id);
+        }
+
+        public clsDonacion consultarPorID(string id)
+        {
+            throw new NotImplementedException();
         }
 
         public clsDonacion consultarPorNombre(string nombre)
@@ -29,25 +34,30 @@ namespace DAO
 
         public List<clsDonacion> consultarTodos()
         {
-            return context.Donaciones.ToList();
+            return context.donacion.ToList();
         }
 
         public void crear(clsDonacion entidad)
         {
-            context.Donaciones.Add(entidad);
+            context.donacion.Add(entidad);
             context.SaveChanges();
 
         }
 
         public void eliminar(int id)
         {
-            context.Donaciones.Remove(consultarPorID(id));
+            context.donacion.Remove(consultarPorID(id));
             context.SaveChanges();
+        }
+
+        public void eliminar(string id)
+        {
+            throw new NotImplementedException();
         }
 
         public void modificar(clsDonacion entidad)
         {
-            context.Donaciones.Update(entidad);
+            context.donacion.Update(entidad);
             context.SaveChanges();
         }
     }
