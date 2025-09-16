@@ -57,8 +57,6 @@ namespace Entities
             this.tipoId = tipoId;
             this.estadoCivil = estadoCivil;
             this.referencia = referencia;
-            //this.idPersona = IdPersona;
-            //this.tipoIdPersona = TipoIdPersona;
             this.estado = estado;
             this.fecha_crea = fecha_crea;
             this.usuario_crea = usuario_crea;
