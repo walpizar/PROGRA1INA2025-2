@@ -188,6 +188,14 @@ namespace DAO.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("idDonacion"));
 
+<<<<<<< HEAD
+                    b.Property<DateTime>("fechaDonacion")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("idDonante")
+                        .HasColumnType("int");
+
+=======
                     b.Property<string>("donantepersonaId")
                         .IsRequired()
                         .HasColumnType("nvarchar(20)");
@@ -198,6 +206,7 @@ namespace DAO.Migrations
                     b.Property<DateTime>("fechaDonacion")
                         .HasColumnType("datetime2");
 
+>>>>>>> 9d6a69bbe7f4c857b2c996c148975be9f4596cb0
                     b.Property<string>("observaciones")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -207,7 +216,11 @@ namespace DAO.Migrations
 
                     b.HasKey("idDonacion");
 
+<<<<<<< HEAD
+                    b.HasIndex("idDonante");
+=======
                     b.HasIndex("donantepersonaId", "donantepersonaTipoId");
+>>>>>>> 9d6a69bbe7f4c857b2c996c148975be9f4596cb0
 
                     b.ToTable("tbDonaciones");
                 });
@@ -287,19 +300,42 @@ namespace DAO.Migrations
 
             modelBuilder.Entity("Entities.clsDonante", b =>
                 {
+<<<<<<< HEAD
+                    b.Property<int>("idDonante")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("idDonante"));
+
+=======
                     b.Property<string>("personaId")
                         .HasColumnType("nvarchar(20)");
 
                     b.Property<int>("personaTipoId")
                         .HasColumnType("int");
 
+>>>>>>> 9d6a69bbe7f4c857b2c996c148975be9f4596cb0
                     b.Property<bool>("estado")
                         .HasColumnType("bit");
 
                     b.Property<DateTime>("fechaRegistro")
                         .HasColumnType("datetime2");
 
+<<<<<<< HEAD
+                    b.Property<string>("personaId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(20)");
+
+                    b.Property<int>("personaTipoId")
+                        .HasColumnType("int");
+
+                    b.HasKey("idDonante");
+
+                    b.HasIndex("personaId", "personaTipoId")
+                        .IsUnique();
+=======
                     b.HasKey("personaId", "personaTipoId");
+>>>>>>> 9d6a69bbe7f4c857b2c996c148975be9f4596cb0
 
                     b.ToTable("tbDonantes");
                 });
@@ -653,7 +689,11 @@ namespace DAO.Migrations
                 {
                     b.HasOne("Entities.clsDonante", "donante")
                         .WithMany("donaciones")
+<<<<<<< HEAD
+                        .HasForeignKey("idDonante")
+=======
                         .HasForeignKey("donantepersonaId", "donantepersonaTipoId")
+>>>>>>> 9d6a69bbe7f4c857b2c996c148975be9f4596cb0
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 

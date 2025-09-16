@@ -8,7 +8,10 @@ namespace Entities
     [Table("tbDonantes")]
     public class clsDonante
     {
-               
+        [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public int idDonante { get; set; }
+        
         public string personaId { get; set; }
         public int personaTipoId { get; set; }
 
