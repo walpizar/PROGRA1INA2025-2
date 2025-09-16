@@ -28,9 +28,9 @@ namespace DAO
         {
 
             //retorno una esxpresion lambda que busca en la tabla paciente el id que le paso por parametro
-            return _context.Paciente
+            return _context.paciente
                 .AsNoTracking()//esto es para que no haga seguimiento de los cambios en los objetos, mejora el rendimiento en consultas de solo lectura
-                .Include(p => p.Persona)//esto es para traer los datos de la tabla persona que esta relacionada con paciente
+                .Include(p => p.persona)//esto es para traer los datos de la tabla persona que esta relacionada con paciente
                 .Where(p => p.id == id).SingleOrDefault();
 
         }
@@ -49,9 +49,9 @@ namespace DAO
         {
             //retorno todos los pacientes de la tabla paciente
             //el include es para traer los datos de la tabla persona que esta relacionada con paciente
-            return _context.Paciente
+            return _context.paciente
                 .AsNoTracking()//esto es para que no haga seguimiento de los cambios en los objetos, mejora el rendimiento en consultas de solo lectura
-                .Include(p => p.Persona)//esto es para traer los datos de la tabla persona que esta relacionada con paciente
+                .Include(p => p.persona)//esto es para traer los datos de la tabla persona que esta relacionada con paciente
                 .ToList();
 
         }
@@ -61,17 +61,17 @@ namespace DAO
         public void crear(clsPaciente paciente)
         {
             //valido si lapersona existe
-            if (paciente.Persona != null)
+            if (paciente.persona != null)
             {
                 //asigno la persona encontrada a la variable personaExistente
-                var personaExistente = _context.Personas
-                    .FirstOrDefault(p => p.id == paciente.Persona.id && p.tipoId == paciente.Persona.tipoId);
+                var personaExistente = _context.persona
+                    .FirstOrDefault(p => p.id == paciente.persona.id && p.tipoId == paciente.persona.tipoId);
 
                 //si persona no existe 
                 if (personaExistente == null)
                 {
                     //si no existe, agregarla
-                    _context.Personas.Add(paciente.Persona);
+                    _context.persona.Add(paciente.persona);
                 }
                 else
                 {
@@ -80,37 +80,37 @@ namespace DAO
 
                     //valido si el email guardado es diferente al de crear paciente que entre
                     //el StringComparison.OrdinalIgnoreCase es para comparar letra (valor) por letra ignorando mayusculas o minusculas
-                    if (!string.Equals(personaExistente.email, paciente.Persona.email, StringComparison.OrdinalIgnoreCase))
+                    if (!string.Equals(personaExistente.email, paciente.persona.email, StringComparison.OrdinalIgnoreCase))
                     {
                         //aqui le digo dele prioridad al email de crear paciente
-                        personaExistente.email = paciente.Persona.email;
+                        personaExistente.email = paciente.persona.email;
                         //cambio a true
                         haycambios = true;
                     }
 
                     //valido si la dirrecion guardada en persona es diferente al de crear paciente que entre
-                    if (!string.Equals(personaExistente.direccion, paciente.Persona.direccion, StringComparison.OrdinalIgnoreCase))
+                    if (!string.Equals(personaExistente.direccion, paciente.persona.direccion, StringComparison.OrdinalIgnoreCase))
                     {
                         //aqui le digo dele prioridad a la direccion de crear paciente
-                        personaExistente.direccion = paciente.Persona.direccion;
+                        personaExistente.direccion = paciente.persona.direccion;
                         //cambio a true
                         haycambios = true;
                     }
 
                     //valido si el telef guardado en persona es diferente al de crear paciente que entre
-                    if (!string.Equals(personaExistente.telefono, paciente.Persona.telefono, StringComparison.OrdinalIgnoreCase))
+                    if (!string.Equals(personaExistente.telefono, paciente.persona.telefono, StringComparison.OrdinalIgnoreCase))
                     {
                         //aqui le digo dele prioridad al telefono de crear paciente
-                        personaExistente.telefono = paciente.Persona.telefono;
+                        personaExistente.telefono = paciente.persona.telefono;
                         //cambio a true
                         haycambios = true;
                     }
 
                     //valido si el estado guardado en persona es diferente al de crear paciente que entre
-                    if (personaExistente.estado != paciente.Persona.estado)
+                    if (personaExistente.estado != paciente.persona.estado)
                     {
                         //aqui le digo dele prioridad al estado de crear paciente
-                        personaExistente.estado = paciente.Persona.estado;
+                        personaExistente.estado = paciente.persona.estado;
                         //cambio a true
                         haycambios = true;
                     }
@@ -119,16 +119,16 @@ namespace DAO
                     if (haycambios)
                     {
                         //actualice
-                        _context.Personas.Update(personaExistente);
+                        _context.persona.Update(personaExistente);
                     }
 
                     //si existela persona que use esa de referencia, es decir no agrega nada a tbPersona a menos que tenga que actualizar arriba
                     //y usa esa persona de referencia al insertar en tbPaciente
-                    paciente.Persona = personaExistente;
+                    paciente.persona = personaExistente;
                 }
 
                 //luego agrego el paciente
-                _context.Paciente.Add(paciente);
+                _context.paciente.Add(paciente);
 
                 //guardo ambos cambios
                 _context.SaveChanges();
@@ -143,7 +143,7 @@ namespace DAO
             //primero busco el paciente por id y lo guardo en la variable pacient
             var pacient = consultarPorID(id);
             //luego lo elimino
-            _context.Paciente.Remove(pacient);
+            _context.paciente.Remove(pacient);
             //y guardo los cambios
             _context.SaveChanges();
         }
@@ -153,13 +153,13 @@ namespace DAO
         public void modificar(clsPaciente paciente)
         {
             //verifico que la persona no sea nula, solo actualizo si la persona viene modificada o existe
-            if (paciente.Persona != null)
+            if (paciente.persona != null)
             {
                 //paciente.Persona es la persona que viene modificada del formulario
-                _context.Personas.Update(paciente.Persona);
+                _context.persona.Update(paciente.persona);
             }
             //modifico el paciente
-            _context.Paciente.Update(paciente);
+            _context.paciente.Update(paciente);
             //y guardo los cambios
             _context.SaveChanges();
         }

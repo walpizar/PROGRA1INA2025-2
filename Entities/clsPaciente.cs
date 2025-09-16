@@ -24,7 +24,7 @@ namespace Entities
         public string referencia { get; set; }
 
         //propiedad de navegacion
-        public clsPersona Persona { get; set; }
+        public clsPersona persona { get; set; }
 
 
         //Atributos de auditoria
@@ -48,24 +48,6 @@ namespace Entities
         [StringLength(100, ErrorMessage = "El usuario de la ultima modificacion no puede tener mas de 100 caracteres")]
         public string usuario_ult_mod { get; set; }
 
-
-        
-        public clsPaciente(string idPaciente, string estadoCivil, string referencia, int tipoId,
-            bool estado, DateTime fecha_crea, string usuario_crea, DateTime fecha_ult_mod, string usuario_ult_mod)
-        {
-            this.id = idPaciente;
-            this.tipoId = tipoId;
-            this.estadoCivil = estadoCivil;
-            this.referencia = referencia;
-            this.estado = estado;
-            this.fecha_crea = fecha_crea;
-            this.usuario_crea = usuario_crea;
-            this.fecha_ult_mod = fecha_ult_mod;
-            this.usuario_ult_mod = usuario_ult_mod;
-
-        }
-
-        public clsPaciente() { }
 
     }
 }

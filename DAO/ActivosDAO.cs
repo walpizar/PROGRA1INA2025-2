@@ -65,14 +65,8 @@ namespace DAO
             throw new NotImplementedException();
         }
 
-        public void eliminar(string id)
-        {
-            throw new NotImplementedException();
-        }
+    
 
-        public clsActivos consultarPorID(string id)
-        {
-            throw new NotImplementedException();
-        }
+        
     }
 }

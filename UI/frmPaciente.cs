@@ -90,18 +90,18 @@ namespace UI
         private void cargarForm()
         {
             //cargo los datos del paciente en el formulario
-            txtIdPaciente.Text = pacienteSelected.id;
-            txtTipoId.Text = pacienteSelected.Persona.tipoId.ToString();
-            txtNombre.Text = pacienteSelected.Persona.nombre;
-            txtApellido1.Text = pacienteSelected.Persona.apellido1;
-            txtApellido2.Text = pacienteSelected.Persona.apellido2;
-            dtpFechaNacimiento.Value = pacienteSelected.Persona.fechaNac;
-            txtEmail.Text = pacienteSelected.Persona.email;
-            txtDireccion.Text = pacienteSelected.Persona.direccion;
-            txtTelefono.Text = pacienteSelected.Persona.telefono;
+            txtIdPaciente.Text = pacienteSelected.persona.id;
+            txtTipoId.Text = pacienteSelected.persona.tipoId.ToString();
+            txtNombre.Text = pacienteSelected.persona.nombre;
+            txtApellido1.Text = pacienteSelected.persona.apellido1;
+            txtApellido2.Text = pacienteSelected.persona.apellido2;
+            dtpFechaNacimiento.Value = pacienteSelected.persona.fechaNac;
+            txtEmail.Text = pacienteSelected.persona.email;
+            txtDireccion.Text = pacienteSelected.persona.direccion;
+            txtTelefono.Text = pacienteSelected.persona.telefono;
             txtEstadoCivil.Text = pacienteSelected.estadoCivil;
             txtReferencia.Text = pacienteSelected.referencia;
-            txtEstado.Text = pacienteSelected.Persona.estado ? "Activo" : "Inactivo"; //si el estado es true, ponga activo, si es false, ponga inactivo
+            txtEstado.Text = pacienteSelected.persona.estado ? "Activo" : "Inactivo"; //si el estado es true, ponga activo, si es false, ponga inactivo
 
 
         }
@@ -140,7 +140,7 @@ namespace UI
                     pacie.estadoCivil = txtEstadoCivil.Text;
                     pacie.estado = persona.estado; //el estado del paciente es el mismo que el de la persona
 
-                    pacie.Persona = persona; //asigno la persona al paciente (relacion de navegacioon)
+                    pacie.persona = persona; //asigno la persona al paciente (relacion de navegacioon)
 
                     //llamo a mi capa de servicios para guardar/ crear el PACIENTE
                     if (pacienteSelected == null)
@@ -165,11 +165,11 @@ namespace UI
                     //cierro el formulario
                     this.Close();
 
-                    //cierre del if ValidarDatos
+                //cierre del if ValidarDatos
                 }
-                //cierre del try
+            //cierre del try
             }
-
+            //exepciones personalizadas
             catch (EntityExistDBException ex)
             {
                 MessageBox.Show(ex.Message);
@@ -209,7 +209,7 @@ namespace UI
             //valido que el tipo de id no este vacio
             if (string.IsNullOrEmpty(txtTipoId.Text) || !int.TryParse(txtTipoId.Text, out int tipoId))
             {
-                MessageBox.Show("El tipo de ID es obligatorio y debe ser un número.");
+                MessageBox.Show("El tipo de ID es obligatorio y debe ser un número. Coloque 1 para cedula fisica 2 para juridica");
                 txtTipoId.Focus();
                 return false;
             }
@@ -254,7 +254,7 @@ namespace UI
             //valido que el email no este vacio y tenga formato de email
             if (string.IsNullOrEmpty(txtEmail.Text) || !txtEmail.Text.Contains("@") || !txtEmail.Text.Contains("."))
             {
-                MessageBox.Show("El email es obligatorio y debe tener un formato válido (Debe contener . y @).");
+                MessageBox.Show("El email es obligatorio y debe tener un formato válido (Debe contener @ y .).");
                 txtEmail.Focus();
                 return false;
             }
@@ -288,7 +288,7 @@ namespace UI
             if (string.IsNullOrEmpty(txtEstado.Text) || (txtEstado.Text.Trim() != "1"
                 && txtEstado.Text.Trim() != "2"))
             {
-                MessageBox.Show("El estado es obligatorio y debe ser 1 para activo o 2 para inactivo.");
+                MessageBox.Show("El estado es obligatorio. Debe colocar 1 para activo o 2 para inactivo.");
                 txtEstado.Focus();
                 return false;
             }

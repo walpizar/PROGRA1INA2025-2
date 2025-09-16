@@ -90,10 +90,10 @@ namespace UI
                 ListViewItem item = new ListViewItem(paciente.id.ToString());
 
                 //añado las subitems al item, el subItem es como una columna de una misma fila
-                item.SubItems.Add(paciente.Persona.nombre);
-                item.SubItems.Add(paciente.Persona.apellido1);
-                item.SubItems.Add(paciente.Persona.apellido2);
-                item.SubItems.Add(paciente.Persona.telefono);
+                item.SubItems.Add(paciente.persona.nombre);
+                item.SubItems.Add(paciente.persona.apellido1);
+                item.SubItems.Add(paciente.persona.apellido2);
+                item.SubItems.Add(paciente.persona.telefono);
 
                 //añado el item al listbox
                 lstvListaPaciente.Items.Add(item);
@@ -151,7 +151,7 @@ namespace UI
             try
             { 
                 //filtro la lista de pacientes por nombre o id
-                var listaFiltrada = this.lista.Where(p => p.Persona.nombre.ToLower().Contains(txtBusqueda.Text.ToLower()) ||
+                var listaFiltrada = this.lista.Where(p => p.persona.nombre.ToLower().Contains(txtBusqueda.Text.ToLower()) ||
                 p.id.ToString().Contains(txtBusqueda.Text)).ToList();
 
                 //llamo al metodo cargar lista y le paso por parametro la listaFiltrada para que me cargue la lista filtrada

@@ -12,13 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DAO.Migrations
 {
     [DbContext(typeof(dbContextINA))]
-<<<<<<<< HEAD:DAO/Migrations/20250916154221_MigracionNueva.Designer.cs
-    [Migration("20250916154221_MigracionNueva")]
-    partial class MigracionNueva
-========
-    [Migration("20250916155514_incial")]
-    partial class incial
->>>>>>>> 9d6a69bbe7f4c857b2c996c148975be9f4596cb0:DAO/Migrations/20250916155514_incial.Designer.cs
+    [Migration("20250916202815_InitialCreate")]
+    partial class InitialCreate
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -196,14 +191,6 @@ namespace DAO.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("idDonacion"));
 
-<<<<<<<< HEAD:DAO/Migrations/20250916154221_MigracionNueva.Designer.cs
-                    b.Property<DateTime>("fechaDonacion")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int>("idDonante")
-                        .HasColumnType("int");
-
-========
                     b.Property<string>("donantepersonaId")
                         .IsRequired()
                         .HasColumnType("nvarchar(20)");
@@ -214,7 +201,6 @@ namespace DAO.Migrations
                     b.Property<DateTime>("fechaDonacion")
                         .HasColumnType("datetime2");
 
->>>>>>>> 9d6a69bbe7f4c857b2c996c148975be9f4596cb0:DAO/Migrations/20250916155514_incial.Designer.cs
                     b.Property<string>("observaciones")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -224,11 +210,7 @@ namespace DAO.Migrations
 
                     b.HasKey("idDonacion");
 
-<<<<<<<< HEAD:DAO/Migrations/20250916154221_MigracionNueva.Designer.cs
-                    b.HasIndex("idDonante");
-========
                     b.HasIndex("donantepersonaId", "donantepersonaTipoId");
->>>>>>>> 9d6a69bbe7f4c857b2c996c148975be9f4596cb0:DAO/Migrations/20250916155514_incial.Designer.cs
 
                     b.ToTable("tbDonaciones");
                 });
@@ -308,43 +290,25 @@ namespace DAO.Migrations
 
             modelBuilder.Entity("Entities.clsDonante", b =>
                 {
-<<<<<<<< HEAD:DAO/Migrations/20250916154221_MigracionNueva.Designer.cs
+                    b.Property<string>("personaId")
+                        .HasColumnType("nvarchar(20)");
+
+                    b.Property<int>("personaTipoId")
+                        .HasColumnType("int");
+
+                    b.Property<bool>("estado")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime>("fechaRegistro")
+                        .HasColumnType("datetime2");
+
                     b.Property<int>("idDonante")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("idDonante"));
 
-                    b.Property<bool>("estado")
-                        .HasColumnType("bit");
-
-                    b.Property<DateTime>("fechaRegistro")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("personaId")
-                        .IsRequired()
-========
-                    b.Property<string>("personaId")
->>>>>>>> 9d6a69bbe7f4c857b2c996c148975be9f4596cb0:DAO/Migrations/20250916155514_incial.Designer.cs
-                        .HasColumnType("nvarchar(20)");
-
-                    b.Property<int>("personaTipoId")
-                        .HasColumnType("int");
-
-<<<<<<<< HEAD:DAO/Migrations/20250916154221_MigracionNueva.Designer.cs
-                    b.HasKey("idDonante");
-
-                    b.HasIndex("personaId", "personaTipoId")
-                        .IsUnique();
-========
-                    b.Property<bool>("estado")
-                        .HasColumnType("bit");
-
-                    b.Property<DateTime>("fechaRegistro")
-                        .HasColumnType("datetime2");
-
                     b.HasKey("personaId", "personaTipoId");
->>>>>>>> 9d6a69bbe7f4c857b2c996c148975be9f4596cb0:DAO/Migrations/20250916155514_incial.Designer.cs
 
                     b.ToTable("tbDonantes");
                 });
@@ -480,6 +444,49 @@ namespace DAO.Migrations
                     b.HasKey("id_modulo");
 
                     b.ToTable("tb_Modulo");
+                });
+
+            modelBuilder.Entity("Entities.clsPaciente", b =>
+                {
+                    b.Property<string>("id")
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
+
+                    b.Property<int>("tipoId")
+                        .HasColumnType("int");
+
+                    b.Property<bool>("estado")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("estadoCivil")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<DateTime>("fecha_crea")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("fecha_ult_mod")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("referencia")
+                        .IsRequired()
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)");
+
+                    b.Property<string>("usuario_crea")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<string>("usuario_ult_mod")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.HasKey("id", "tipoId");
+
+                    b.ToTable("tbPaciente");
                 });
 
             modelBuilder.Entity("Entities.clsPermisos", b =>
@@ -698,11 +705,7 @@ namespace DAO.Migrations
                 {
                     b.HasOne("Entities.clsDonante", "donante")
                         .WithMany("donaciones")
-<<<<<<<< HEAD:DAO/Migrations/20250916154221_MigracionNueva.Designer.cs
-                        .HasForeignKey("idDonante")
-========
                         .HasForeignKey("donantepersonaId", "donantepersonaTipoId")
->>>>>>>> 9d6a69bbe7f4c857b2c996c148975be9f4596cb0:DAO/Migrations/20250916155514_incial.Designer.cs
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -766,6 +769,17 @@ namespace DAO.Migrations
                     b.HasOne("Entities.clsPersona", "persona")
                         .WithOne()
                         .HasForeignKey("Entities.clsMedico", "id", "tipoId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("persona");
+                });
+
+            modelBuilder.Entity("Entities.clsPaciente", b =>
+                {
+                    b.HasOne("Entities.clsPersona", "persona")
+                        .WithOne("paciente")
+                        .HasForeignKey("Entities.clsPaciente", "id", "tipoId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
@@ -842,6 +856,9 @@ namespace DAO.Migrations
             modelBuilder.Entity("Entities.clsPersona", b =>
                 {
                     b.Navigation("donante")
+                        .IsRequired();
+
+                    b.Navigation("paciente")
                         .IsRequired();
                 });
 

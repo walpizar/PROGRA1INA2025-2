@@ -32,9 +32,9 @@ namespace DAO
         public DbSet<clsRolPermiso> rolPermiso { get; set; }
         public DbSet<clsUsuario> usuario { get; set; }
         public DbSet<clsModulo> modulos { get; set; }
+        public DbSet<clsPaciente> paciente { get; set; }
 
 
-        
 
 
 
@@ -109,8 +109,8 @@ namespace DAO
 
             //relacion 1 a 1 entre paciente y persona
             modelBuilder.Entity<clsPaciente>()
-                .HasOne(p => p.Persona)//navegacion desde paciente a persona
-                .WithOne(per => per.Paciente)//relacion 1 a 1 con persona
+                .HasOne(p => p.persona)//navegacion desde paciente a persona
+                .WithOne(per => per.paciente)//relacion 1 a 1 con persona
 
                 .HasForeignKey<clsPaciente>(p => new { p.id, p.tipoId })//FK en paciente
                 .HasPrincipalKey<clsPersona>(per => new { per.id, per.tipoId })//PK en persona que es la misma que la FK en paciente
