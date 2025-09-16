@@ -6,15 +6,11 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace DAO.Migrations
 {
     /// <inheritdoc />
-<<<<<<<< HEAD:DAO/Migrations/20250916044408_jeff.cs
-    public partial class jeff : Migration
-========
 <<<<<<<< HEAD:DAO/Migrations/20250916154221_MigracionNueva.cs
     public partial class MigracionNueva : Migration
 ========
     public partial class incial : Migration
 >>>>>>>> 9d6a69bbe7f4c857b2c996c148975be9f4596cb0:DAO/Migrations/20250916155514_incial.cs
->>>>>>>> develop:DAO/Migrations/20250916154221_MigracionNueva.cs
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -187,13 +183,6 @@ namespace DAO.Migrations
                 name: "tbDonantes",
                 columns: table => new
                 {
-<<<<<<<< HEAD:DAO/Migrations/20250916044408_jeff.cs
-                    IdDonante = table.Column<int>(type: "int", nullable: false),
-                    PersonaId = table.Column<string>(type: "nvarchar(20)", nullable: false),
-                    PersonaTipoId = table.Column<int>(type: "int", nullable: false),
-                    Estado = table.Column<bool>(type: "bit", nullable: false),
-                    FechaRegistro = table.Column<DateTime>(type: "datetime2", nullable: false)
-========
 <<<<<<<< HEAD:DAO/Migrations/20250916154221_MigracionNueva.cs
                     idDonante = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
@@ -203,7 +192,6 @@ namespace DAO.Migrations
                     personaTipoId = table.Column<int>(type: "int", nullable: false),
                     estado = table.Column<bool>(type: "bit", nullable: false),
                     fechaRegistro = table.Column<DateTime>(type: "datetime2", nullable: false)
->>>>>>>> develop:DAO/Migrations/20250916154221_MigracionNueva.cs
                 },
                 constraints: table =>
                 {
@@ -213,13 +201,8 @@ namespace DAO.Migrations
                     table.PrimaryKey("PK_tbDonantes", x => new { x.personaId, x.personaTipoId });
 >>>>>>>> 9d6a69bbe7f4c857b2c996c148975be9f4596cb0:DAO/Migrations/20250916155514_incial.cs
                     table.ForeignKey(
-<<<<<<<< HEAD:DAO/Migrations/20250916044408_jeff.cs
-                        name: "FK_tbDonantes_tbPersonas_PersonaId_PersonaTipoId",
-                        columns: x => new { x.PersonaId, x.PersonaTipoId },
-========
                         name: "FK_tbDonantes_tbPersonas_personaId_personaTipoId",
                         columns: x => new { x.personaId, x.personaTipoId },
->>>>>>>> develop:DAO/Migrations/20250916154221_MigracionNueva.cs
                         principalTable: "tbPersonas",
                         principalColumns: new[] { "id", "tipoId" },
                         onDelete: ReferentialAction.Cascade);
@@ -492,62 +475,9 @@ namespace DAO.Migrations
                 column: "PermisoidPermiso");
 
             migrationBuilder.CreateIndex(
-<<<<<<<< HEAD:DAO/Migrations/20250916044408_jeff.cs
-                name: "IX_tb_RolesPermisos_Rolid_rol",
-                table: "tb_RolesPermisos",
-                column: "Rolid_rol");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_tbActivos_IdCategoria",
-                table: "tbActivos",
-                column: "IdCategoria");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_tbDevolucion_IdActivoFK",
-                table: "tbDevolucion",
-                column: "IdActivoFK");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_tbDonaciones_IdDonante",
-                table: "tbDonaciones",
-                column: "IdDonante");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_tbDonacionesActivos_IdActivo",
-                table: "tbDonacionesActivos",
-                column: "IdActivo");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_tbDonacionesActivos_IdDonacion",
-                table: "tbDonacionesActivos",
-                column: "IdDonacion");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_tbDonacionesDinero_IdDonacion",
-                table: "tbDonacionesDinero",
-                column: "IdDonacion",
-                unique: true);
-
-            migrationBuilder.CreateIndex(
-                name: "IX_tbDonantes_PersonaId_PersonaTipoId",
-                table: "tbDonantes",
-                columns: new[] { "PersonaId", "PersonaTipoId" },
-                unique: true);
-
-            migrationBuilder.CreateIndex(
-                name: "IX_tbEnfermero_Personaid_PersonatipoId",
-                table: "tbEnfermero",
-                columns: new[] { "Personaid", "PersonatipoId" });
-
-            migrationBuilder.CreateIndex(
-                name: "IX_tbPuestos_idDepartamento",
-                table: "tbPuestos",
-                column: "idDepartamento");
-========
                 name: "IX_tbRolPermiso_RolidRol",
                 table: "tbRolPermiso",
                 column: "RolidRol");
->>>>>>>> develop:DAO/Migrations/20250916154221_MigracionNueva.cs
         }
 
         /// <inheritdoc />

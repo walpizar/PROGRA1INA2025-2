@@ -22,7 +22,7 @@ namespace Services
             _permisoDao = permisoDao;
         }
 
-        // Ejemplo: Validar si un rol tiene permiso para una acción
+        /* Ejemplo: Validar si un rol tiene permiso para una acción
         public async Task<bool> TienePermisoAsync(int idRol, int idModulo, string accion)
         {
             var p = await _permisoDao.GetPermisoByRolAndModuleAsync(idRol, idModulo);
@@ -37,16 +37,16 @@ namespace Services
                 "eliminar" => p.eliminar,
                 _ => false
             };
-        }
+        }*/
 
         // Otros métodos combinados de negocio
-        public async Task<List<clsPermiso>> ObtenerPermisosPorRolYModulo(int idRol, int idModulo)
+       /* public async Task<List<clsPermisos>> ObtenerPermisosPorRolYModulo(int idRol, int idModulo)
         {
             var permisos = await _permisoDao.GetAllAsync();
            
             return permisos
-                         .Where(p => p.RolPermisos.Any(rp => rp.IdRol == idRol && rp.IdModulo == idModulo))
+                         .Where(p => p.RolPermisos.Any(rp => rp.idRol == idRol && rp.idModulo == idModulo))
                          .ToList();
-        }
+        }*/
     }
 }

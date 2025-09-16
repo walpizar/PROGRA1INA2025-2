@@ -25,8 +25,8 @@ namespace UI
         ApplicationConfiguration.Initialize();
         Application.Run(new FrmAnadirAdmin());
 
-        //solo ejemplo
-        //Application.Run(new frmLogin());
+        
+        Application.Run(new frmActivos());
 
         }
     }

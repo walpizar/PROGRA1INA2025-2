@@ -14,13 +14,13 @@ namespace DAO
 
         public void crear(clsUsuario usuario)
         {
-            _context.Usuarios.Add(usuario);
+            _context.usuario.Add(usuario);
             _context.SaveChanges();
         }
 
         public void modificar(clsUsuario usuario)
         {
-            _context.Usuarios.Update(usuario);
+            _context.usuario.Update(usuario);
             _context.SaveChanges();
 
         }
@@ -28,10 +28,10 @@ namespace DAO
         public void eliminar(string id)
         {
             // Se busca el usuario primero para evitar un error de referencia nula
-            var usua = _context.Usuarios.SingleOrDefault(u => u.personaId == id);
+            var usua = _context.usuario.SingleOrDefault(u => u.personaId == id);
             if (usua != null)
             {
-                _context.Usuarios.Remove(usua);
+                _context.usuario.Remove(usua);
                 _context.SaveChanges();
 
             }
@@ -39,7 +39,7 @@ namespace DAO
         }
         public clsUsuario consultarPorID(string id)
         {
-            return _context.Usuarios.Find(id);
+            return _context.usuario.Find(id);
         }
 
         public clsUsuario consultarPorID(int id)
@@ -49,13 +49,13 @@ namespace DAO
 
         public clsUsuario consultarPorNombre(string nombre)
         {
-            return _context.Usuarios.Where(u => u.nombre_usuario.Trim().ToUpper()
+            return _context.usuario.Where(u => u.nombre_usuario.Trim().ToUpper()
                                               == nombre.Trim().ToUpper()).SingleOrDefault();
         }
 
         public List<clsUsuario> consultarTodos()
         {
-            return _context.Usuarios.ToList();
+            return _context.usuario.ToList();
 
         }
 

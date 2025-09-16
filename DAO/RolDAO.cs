@@ -18,29 +18,29 @@ namespace DAO
             _context = context;
         }
 
-        public async Task<List<clsRol>> GetAllAsync() => await _context.Roles.ToListAsync();
+        public async Task<List<clsRol>> GetAllAsync() => await _context.rol.ToListAsync();
 
         public async Task<clsRol> GetByIdAsync(int id) =>
-            await _context.Roles.FindAsync(id);
+            await _context.rol.FindAsync(id);
 
         public async Task AddAsync(clsRol rol)
         {
-            _context.Roles.Add(rol);
+            _context.rol.Add(rol);
             await _context.SaveChangesAsync();
         }
 
         public async Task UpdateAsync(clsRol rol)
         {
-            _context.Roles.Update(rol);
+            _context.rol.Update(rol);
             await _context.SaveChangesAsync();
         }
 
         public async Task DeleteAsync(int id)
         {
-            var rol = await _context.Roles.FindAsync(id);
+            var rol = await _context.rol.FindAsync(id);
             if (rol != null)
             {
-                _context.Roles.Remove(rol);
+                _context.rol.Remove(rol);
                 await _context.SaveChangesAsync();
             }
         }
