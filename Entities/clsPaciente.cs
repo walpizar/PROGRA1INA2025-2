@@ -8,10 +8,11 @@ using System.Threading.Tasks;
 
 namespace Entities
 {
+    //defino el nombre de la tabla que va a representar esta clase en sql
     [Table("tbPaciente")]
     public class clsPaciente
     {
-
+        //llave primaria compuesta que es la misma que en clsPersona (id/tipoId)
         public string id { get; set; }//llave primaria compuesta 
         public int tipoId { get; set; }//llave primaria compuesta
 

@@ -32,7 +32,7 @@ namespace UI
             _pacienteService = new PacienteService();
         }
 
-        //evento cargar form
+        //evento cargar form pacienteLista
         private void frmPacienteLista_Load(object sender, EventArgs e)
         {
             try
@@ -83,7 +83,7 @@ namespace UI
             //limpio el listbox para evitar duplicados
             lstvListaPaciente.Items.Clear();
 
-            //recorro la lista de pacientes
+            //recorro la lista de pacientes 
             foreach (clsPaciente paciente in lista)
             {
                 //creo un item para cada paciente

@@ -35,7 +35,7 @@ namespace UI
         }
 
 
-
+        //evento load del formulario crear paciente
         private void frmPaciente_Load(object sender, EventArgs e)
         {
 
@@ -43,7 +43,7 @@ namespace UI
             {
                 if (pacienteSelected != null) //accion de modificar
                 {
-                    //esta label pongala modificar paciente
+                    //esta label pongale modificar paciente
                     this.lblTituloPaciente.Text = "Modificar Paciente";
 
                     //y al titulo del formulario pongale modificar paciente
@@ -63,7 +63,7 @@ namespace UI
                 }
                 else //paciente es null, accion es crear
                 {
-                    //esta label pongala crear paciente
+                    //esta label pongale crear paciente
                     this.lblTituloPaciente.Text = "Crear Paciente";
 
                     //y al titulo del formulario pongale crear paciente
@@ -116,10 +116,13 @@ namespace UI
                 if (ValidarDatos())
                 {
                     //creo la instancia del paciente nuevo, si pacienteSelected es null, estoy en modo creacion, si no, en modo edicion
+                    //con el operador ternario, si pacienteSelected es null, creo una nueva instancia de clsPaciente, si no, le asigno el pacienteSelected
                     clsPaciente paciente = pacienteSelected == null ? new clsPaciente() : pacienteSelected;
 
                     //creo la instancia de persona para setear los datos de persona
                     clsPersona persona = new clsPersona();
+
+                    //seteo los valores de la persona con los datos del formulario
                     persona.id = txtIdPaciente.Text;
                     persona.tipoId = int.Parse(txtTipoId.Text);
                     persona.nombre = txtNombre.Text;
@@ -134,8 +137,10 @@ namespace UI
 
                     //creo instancia de paciente para setear los valores del paciente
                     clsPaciente pacie = new clsPaciente();
-                    pacie.id = persona.id;
-                    pacie.tipoId = persona.tipoId;
+
+                    //seteo los valores del paciente con los datos del formulario
+                    pacie.id = persona.id;//el id del paciente es el mismo que el de la persona
+                    pacie.tipoId = persona.tipoId;//el tipo de id del paciente es el mismo que el de la persona
                     pacie.referencia = txtReferencia.Text;
                     pacie.estadoCivil = txtEstadoCivil.Text;
                     pacie.estado = persona.estado; //el estado del paciente es el mismo que el de la persona
@@ -157,6 +162,7 @@ namespace UI
                         pacie.fecha_crea = pacienteSelected.fecha_crea;
                         pacie.usuario_crea = pacienteSelected.usuario_crea;
 
+                        //si no es null llamo al metodo modificar y le paso la instancia de pacie que tiene los datos seteado
                         _pacienteService.modificar(pacie);
                         //muestro mensaje de exito
                         MessageBox.Show("Paciente modificado correctamente");
@@ -169,6 +175,7 @@ namespace UI
                 }
             //cierre del try
             }
+
             //exepciones personalizadas
             catch (EntityExistDBException ex)
             {
@@ -206,13 +213,14 @@ namespace UI
                 return false;
             }
 
-            //valido que el tipo de id no este vacio
-            if (string.IsNullOrEmpty(txtTipoId.Text) || !int.TryParse(txtTipoId.Text, out int tipoId))
+            //valido que el tipo de id no este vacio y sea 1 0 2
+            if (string.IsNullOrEmpty(txtTipoId.Text) || (txtTipoId.Text.Trim() != "1" && txtTipoId.Text.Trim() != "2"))
             {
-                MessageBox.Show("El tipo de ID es obligatorio y debe ser un número. Coloque 1 para cedula fisica 2 para juridica");
+                MessageBox.Show("El tipo de ID es obligatorio. Debe colocar 1 para cédula física o 2 para cédula jurídica.");
                 txtTipoId.Focus();
                 return false;
             }
+
 
             //valido que el nombre no este vacio
             if (string.IsNullOrEmpty(txtNombre.Text))
@@ -318,6 +326,7 @@ namespace UI
 
         }
 
+
         //evento click del boton cancelar
         private void btnCancelarPaciente_Click(object sender, EventArgs e)
         {
@@ -331,14 +340,14 @@ namespace UI
             try
             {
 
-                //esto es que miuestre un mensaje de confirmacion antes de eliminar
+                //esto es para q muestre un mensaje de confirmacion antes de eliminar
                 DialogResult resp = MessageBox.Show("¿Está seguro que desea eliminar el paciente?", "Confirmación",
                      MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                 
                 //si el usuario dice que si, entonces elimino
                 if (resp == DialogResult.Yes)
                 {
-
+                    //llamo a mi capa de servicios para eliminar el paciente
                     _pacienteService.eliminar(pacienteSelected.id);
                     MessageBox.Show("Paciente eliminado correctamente");
                     this.Close(); //cierro el formulario

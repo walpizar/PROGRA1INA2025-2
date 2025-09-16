@@ -10,7 +10,8 @@ using System.Threading.Tasks;
 
 namespace Services
 {
-    public class PacienteService : IGenerica<clsPaciente>
+    //Implemento la interfaz generica para obligar a tener su estructura mas lo que quiera agregar propio de esdta clase
+    public class PacienteService : IGenerica<clsPaciente> 
     {
         //declaro dao para ir de la capa de servicios a la capa de dao
         private readonly PacienteDao _pacientDao;
@@ -23,21 +24,10 @@ namespace Services
 
 
         //CRUD de pacientes
-        //METODOS DE LA INTERFAZ
         public clsPaciente consultarPorID(string id)
         {
             //llamo al metodo consultarPorID del dao para que me devuelva el paciente
             return _pacientDao.consultarPorID(id);
-        }
-
-
-
-
-        //METODO NO IMPLEMENTADO pero para cumplir con la interfaz
-        public clsPaciente consultarPorNombre(string nombre)
-        {
-            //devuelvo una excepcion de metodo no implementado
-            throw new NotImplementedException();
         }
 
 
@@ -68,6 +58,16 @@ namespace Services
                 throw new EntityExistDBException();
             }
 
+
+            //valido que el telefono no se repita si ya existe
+            var pacientesExistentes = _pacientDao.consultarTodos();
+            //el Any es para validar si algun elemento de la lista cumple la condicion
+            if (pacientesExistentes.Any(p => p.persona.telefono == paciente.persona.telefono))
+            {
+                throw new EntityExistDBException("El teléfono ya está registrado para otro paciente, NO puede ser el mismo.");
+            }
+
+
             //validar fechas de auditoria que no sean futuras
             if (paciente.fecha_crea > DateTime.Now || paciente.fecha_ult_mod > DateTime.Now)
             {
@@ -93,11 +93,6 @@ namespace Services
             //llamo al metodo eliminar del dao para que me elimine el paciente
             _pacientDao.eliminar(id);
 
-        }
-
-        public void eliminar(int id)
-        {
-            throw new NotImplementedException();
         }
 
 
@@ -128,6 +123,13 @@ namespace Services
             _pacientDao.modificar(paciente);
         }
 
+
+        //METODO NO IMPLEMENTADO pero para cumplir con la interfaz
+        public clsPaciente consultarPorNombre(string nombre)
+        {
+            //devuelvo una excepcion de metodo no implementado
+            throw new NotImplementedException();
+        }
 
 
     }

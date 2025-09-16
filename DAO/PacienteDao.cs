@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 
 namespace DAO
 {
+    //Implemento la interfaz generica para obligar a tener su estructura mas lo que quiera agregar propio de esta clase
     public class PacienteDao : IGenerica<clsPaciente>
     {
         //declaro dbcontext para conectar con la base de datos
@@ -33,14 +34,6 @@ namespace DAO
                 .Include(p => p.persona)//esto es para traer los datos de la tabla persona que esta relacionada con paciente
                 .Where(p => p.id == id).SingleOrDefault();
 
-        }
-
-
-        //METODO NO IMPLEMENTADO pero para cumplir con la interfaz
-        public clsPaciente consultarPorNombre(string nombre)
-        {
-            //devuelvo una excepcion de metodo no implementado
-            throw new NotImplementedException();
         }
 
 
@@ -75,10 +68,10 @@ namespace DAO
                 }
                 else
                 {
-                    //si existe la persona, varianble para validar si hay cambios en los datos y actualizarlos
+                    //si existe la persona, variable para almacenar si hubo cambios
                     bool haycambios = false;
 
-                    //valido si el email guardado es diferente al de crear paciente que entre
+                    //valido si el email guardado es diferente al de crear paciente, que entre al if
                     //el StringComparison.OrdinalIgnoreCase es para comparar letra (valor) por letra ignorando mayusculas o minusculas
                     if (!string.Equals(personaExistente.email, paciente.persona.email, StringComparison.OrdinalIgnoreCase))
                     {
@@ -88,7 +81,7 @@ namespace DAO
                         haycambios = true;
                     }
 
-                    //valido si la dirrecion guardada en persona es diferente al de crear paciente que entre
+                    //valido si la dirrecion guardada en persona es diferente al de crear paciente que entre al if
                     if (!string.Equals(personaExistente.direccion, paciente.persona.direccion, StringComparison.OrdinalIgnoreCase))
                     {
                         //aqui le digo dele prioridad a la direccion de crear paciente
@@ -97,7 +90,7 @@ namespace DAO
                         haycambios = true;
                     }
 
-                    //valido si el telef guardado en persona es diferente al de crear paciente que entre
+                    //valido si el telef guardado en persona es diferente al de crear paciente que entre al if
                     if (!string.Equals(personaExistente.telefono, paciente.persona.telefono, StringComparison.OrdinalIgnoreCase))
                     {
                         //aqui le digo dele prioridad al telefono de crear paciente
@@ -106,7 +99,7 @@ namespace DAO
                         haycambios = true;
                     }
 
-                    //valido si el estado guardado en persona es diferente al de crear paciente que entre
+                    //valido si el estado guardado en persona es diferente al de crear paciente que entre al if
                     if (personaExistente.estado != paciente.persona.estado)
                     {
                         //aqui le digo dele prioridad al estado de crear paciente
@@ -162,6 +155,14 @@ namespace DAO
             _context.paciente.Update(paciente);
             //y guardo los cambios
             _context.SaveChanges();
+        }
+
+
+        //METODO NO IMPLEMENTADO pero para cumplir con la interfaz
+        public clsPaciente consultarPorNombre(string nombre)
+        {
+            //devuelvo una excepcion de metodo no implementado
+            throw new NotImplementedException();
         }
 
 
