@@ -112,6 +112,14 @@ namespace Services
             // Asignar usuario de última modificación automáticamente
             paciente.usuario_ult_mod = "Jumira"; //X mientras luego lo cambio por el usuario logueado
 
+            //valido que el telefono no se repita si ya existe
+            var pacientesExistentes = _pacientDao.consultarTodos();
+            //el Any es para validar si algun elemento de la lista cumple la condicion
+            if (pacientesExistentes.Any(p => p.persona.telefono == paciente.persona.telefono))
+            {
+                throw new EntityExistDBException("El teléfono ya está registrado para otro paciente, NO puede ser el mismo.");
+            }
+
             //validar fechas de auditoria que no sean futuras
             if (paciente.fecha_crea > DateTime.Now || paciente.fecha_ult_mod > DateTime.Now)
             {
