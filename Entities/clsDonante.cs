@@ -8,13 +8,11 @@ namespace Entities
     [Table("tbDonantes")]
     public class clsDonante
     {
-        [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.None)]
-        public int idDonante { get; set; }
+               
+        public string personaId { get; set; }
+        public int personaTipoId { get; set; }
 
-        [ForeignKey("persona")]
-        public int idPersona { get; set; }
-
+       
         [Required]
         public bool estado { get; set; }
         
@@ -27,17 +25,9 @@ namespace Entities
 
         public clsDonante() { }
 
-        public clsDonante(int idPersona, bool estado, DateTime fechaRegistro)
-        {
-            idDonante = idPersona;
-            this.idPersona = idPersona;
-            this.estado = estado;
-            this.fechaRegistro = fechaRegistro;
-        }
+        
+       
 
-        public override string ToString()
-        {
-            return $"idDonante: {idDonante}, idPersona: {idPersona}, estado: {estado}, fechaRegistro: {fechaRegistro.ToShortDateString()}";
-        }
+       
     }
 }

@@ -1,4 +1,4 @@
-﻿namespace UI
+﻿/*namespace UI
 {
     partial class frmProducto
     {
@@ -251,4 +251,4 @@
         private Label lblCategoria;
         private ComboBox cboCategoria;
     }
-}
+}*/

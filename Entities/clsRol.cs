@@ -19,19 +19,8 @@ namespace Entities
 
         public bool estado { get; set; }
 
-        public clsRol() { }
+        // Relación muchos a muchos
+        public ICollection<clsRolPermiso> RolPermisos { get; set; }
 
-        public clsRol(int idRol, string nombreRol, string descripcion, bool estado)
-        {
-            this.idRol = idRol;
-            this.nombreRol = nombreRol;
-            this.descripcion = descripcion;
-            this.estado = estado;
-        }
-
-        public override string ToString()
-        {
-            return $"idRol: {idRol}, nombreRol: {nombreRol}, descripcion: {descripcion}, estado: {estado}";
-        }
     }
 }

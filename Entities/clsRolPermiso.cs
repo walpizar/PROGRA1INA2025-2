@@ -1,6 +1,9 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using Entities;
 
 namespace Entities
 {
@@ -16,21 +19,5 @@ namespace Entities
         //relaciones con clsRol y clsPermisos
         public clsRol Rol { get; set; }
         public clsPermisos Permiso { get; set; }
-
-        //constructores
-        public clsRolPermiso() { }
-
-        public clsRolPermiso(int idRol, int idPermiso, bool estado)
-        {
-            this.idRol = idRol;
-            this.idPermiso = idPermiso;
-            this.estado = estado;
-        }
-
-
-        public override string ToString()
-        {
-            return $"idRol: {idRol}, idPermiso: {idPermiso}, estado: {estado}";
-        }
     }
 }

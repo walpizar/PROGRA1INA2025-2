@@ -40,6 +40,19 @@ namespace Entities
         [StringLength(100, ErrorMessage = "La ubicación no puede tener más de 100 caracteres")]
         public string ubicacion { get; set; }
 
+        // Campos de auditoría
+        [Column(TypeName = "datetime")]
+        public DateTime fechaCreacion { get; set; }
+
+        [StringLength(50, ErrorMessage = "El usuario de creación no puede tener más de 50 caracteres")]
+        public string usuarioCreacion { get; set; }
+
+        [Column(TypeName = "datetime")]
+        public DateTime? fechaModificacion { get; set; }
+
+        [StringLength(50, ErrorMessage = "El usuario de modificación no puede tener más de 50 caracteres")]
+        public string usuarioModificacion { get; set; }
+
         // Relación con Categoría de Activos (FK)
         [Required]
         public int idCategoria { get; set; }
@@ -53,10 +66,10 @@ namespace Entities
         // Relación: Un Activo puede estar en muchas DonacionActivos
         public ICollection<clsDonacionesActivos> donacionActivos { get; set; }
 
-        // Constructores
         public clsActivos(int idActivo, string nombreActivo, string descripcion,
                           int cantidadDisponible, string estado, DateTime fechaAdquisicion,
-                          decimal costoUnitario, string proveedor, string ubicacion, int idCategoria)
+                          string proveedor, string ubicacion, int idCategoria,
+                          string usuarioCreacion)
         {
             this.idActivo = idActivo;
             this.nombreActivo = nombreActivo;
@@ -64,17 +77,18 @@ namespace Entities
             this.cantidadDisponible = cantidadDisponible;
             this.estado = estado;
             this.fechaAdquisicion = fechaAdquisicion;
-            this.costoUnitario = costoUnitario;
             this.proveedor = proveedor;
             this.ubicacion = ubicacion;
             this.idCategoria = idCategoria;
+            this.fechaCreacion = DateTime.Now;
+            this.usuarioCreacion = usuarioCreacion;
             this.devoluciones = new List<clsDevolucion>();
         }
 
         public clsActivos()
         {
             this.devoluciones = new List<clsDevolucion>();
+            this.fechaCreacion = DateTime.Now;
         }
     }
 }
-

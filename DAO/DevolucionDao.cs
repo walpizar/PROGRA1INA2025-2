@@ -22,32 +22,32 @@ namespace DAO
 
         public void crear(clsDevolucion devolucion)
         {
-            _context.Devolucion.Add(devolucion);
+            _context.devolucion.Add(devolucion);
             _context.SaveChanges();
         }
 
         public void modificar(clsDevolucion devolucion)
         {
-            _context.Devolucion.Update(devolucion);
+            _context.devolucion.Update(devolucion);
             _context.SaveChanges();
         }
 
         public void eliminar(int id)
         {
             var devolucion = consultarPorID(id);
-            _context.Devolucion.Remove(devolucion);
+            _context.devolucion.Remove(devolucion);
             _context.SaveChanges();
         }
 
         public clsDevolucion consultarPorID(int id)
         {
-            var devolucion = _context.Devolucion.Where(p => p.IdDevolucion == id).SingleOrDefault();
+            var devolucion = _context.devolucion.Where(p => p.idDevolucion == id).SingleOrDefault();
             return devolucion ?? throw new InvalidOperationException($"No se encontró una devolución con el ID {id}.");
         }
 
         public List<clsDevolucion> consultarTodos()
         {
-            return _context.Devolucion.ToList();
+            return _context.devolucion.ToList();
         }
     }
 }

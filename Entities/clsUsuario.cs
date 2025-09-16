@@ -8,11 +8,16 @@ namespace Entities
     public class clsUsuario
     {
         [Key]
-        public int idUsuario { get; set; }
+        public string personaId {  get; set; }
 
-        [Required]
-        [StringLength(100, ErrorMessage = "El nombre de usuario no puede tener más de 100 caracteres")]
-        public string nombreUsuario { get; set; }
+        [Required(ErrorMessage = "El nombre de usuario es obligatorio.")]
+        [StringLength(50, ErrorMessage = "El nombre de usuario no puede tener más de 50 caracteres.")]
+
+        public int personaTipoId {  get; set; }
+
+       
+
+        public string nombre_usuario { get; set; }
 
         [Required]
         [StringLength(100, ErrorMessage = "La contraseña no puede tener más de 100 caracteres")]
@@ -24,20 +29,10 @@ namespace Entities
 
         public bool estado { get; set; }
 
+        public clsPersona persona { get; set; }
+
         public clsUsuario() { }
 
-        public clsUsuario(int idUsuario, string nombreUsuario, string contrasena, string email, bool estado)
-        {
-            this.idUsuario = idUsuario;
-            this.nombreUsuario = nombreUsuario;
-            this.contrasena = contrasena;
-            this.email = email;
-            this.estado = estado;
-        }
-
-        public override string ToString()
-        {
-            return $"idUsuario: {idUsuario}, nombreUsuario: {nombreUsuario}, email: {email}, estado: {estado}";
-        }
+       
     }
 }

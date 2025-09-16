@@ -49,25 +49,7 @@ namespace Entities
         // constructor vacío
         public clsPersona() { }
 
-        // constructor con parámetros en camelCase
-        public clsPersona(string id, int tipoId, string nombre, string apellido1, string apellido2, DateTime fechaNac, string email, string direccion, string telefono, bool estado)
-        {
-            this.id = id;
-            this.tipoId = tipoId;
-            this.nombre = nombre;
-            this.apellido1 = apellido1;
-            this.apellido2 = apellido2;
-            this.fechaNac = fechaNac;
-            this.email = email;
-            this.direccion = direccion;
-            this.telefono = telefono;
-            this.estado = estado;
-        }
-
-        // método toString
-        public override string ToString()
-        {
-            return $"id: {id}, tipoId: {tipoId}, nombre: {nombre}, apellido1: {apellido1}, apellido2: {apellido2}, fechaNac: {fechaNac.ToShortDateString()}, email: {email}, direccion: {direccion}, telefono: {telefono}, estado: {estado}";
-        }
+       
+      
     }
 }

@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Entities
 {
+
     [Table("tbPermisos")]
     public class clsPermisos
     {
@@ -21,17 +22,15 @@ namespace Entities
 
         public clsPermisos() { }
 
-        public clsPermisos(int idPermiso, string nombrePermiso, string descripcion, bool estado)
-        {
-            this.idPermiso = idPermiso;
-            this.nombrePermiso = nombrePermiso;
-            this.descripcion = descripcion;
-            this.estado = estado;
-        }
+        // Relación muchos a muchos
+        public ICollection<clsRolPermiso> RolPermisos { get; set; }
 
-        public override string ToString()
-        {
-            return $"idPermiso: {idPermiso}, nombrePermiso: {nombrePermiso}, descripcion: {descripcion}, estado: {estado}";
-        }
+
     }
+
+        
+    
 }
+
+
+
