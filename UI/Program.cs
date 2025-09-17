@@ -3,17 +3,19 @@ using Services;
 
 namespace UI
 {
-    internal static class Program
+    namespace UI
     {
-        /// <summary>
-        ///  The main entry point for the application.
-        /// </summary>
-        [STAThread]
-        static void Main()
+        internal static class Program
         {
-           
+            [STAThread]
+            static void Main()
+            {
+                ApplicationConfiguration.Initialize();
 
+                // Pasamos los DAO al servicio
+                SeguridadService seguridadService = new SeguridadService();
 
+<<<<<<< Updated upstream
 
             
             //ProductoService _productoServ = new ProductoService();
@@ -23,11 +25,16 @@ namespace UI
         // To customize application configuration such as set high DPI settings or default font,
         // see https://aka.ms/applicationconfiguration.
         ApplicationConfiguration.Initialize();
-        Application.Run(new frmProductoLista());
+        //Application.Run(new frmProductoLista());
 
-        //solo ejemplo
-        //Application.Run(new frmLogin());
+        
+        Application.Run(new frmActivos());
 
+=======
+                // Inyectamos el servicio en el formulario
+                Application.Run(new frmMantenimientoRoles(seguridadService));
+            }
+>>>>>>> Stashed changes
         }
     }
 }

@@ -1,4 +1,10 @@
-﻿using System;
+﻿using Common.Exceptions;
+using Common.Interfaces;
+using DAO;
+using Entities;
+using Services;
+using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -7,14 +13,20 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+//EDITAR ROLES 
+//MOSTRAR MODULOS EXISTENTES
+//MOSTRAR LOS PERMISOS AQUE TIENE CADA ROL
 
 namespace UI
 {
     public partial class frmMantenimientoRoles : Form
     {
-        public frmMantenimientoRoles()
+        private readonly SeguridadService _Service;//ACCESO A SERVICE
+
+        public frmMantenimientoRoles(SeguridadService Service)
         {
-            InitializeComponent();
+            InitializeComponent();//INICIALIZACION DEL ACCESO A SERVICE
+            _Service = Service;
         }
 
         private void label2_Click(object sender, EventArgs e)
@@ -24,7 +36,185 @@ namespace UI
 
         private void frmMantenimientoRoles_Load(object sender, EventArgs e)
         {
+            cargarRolesBox();
+            cargarModulosBox();
+            cargarListaRoles();
+        }
 
+        public void cargarRolesBox()//FUNCIONA
+        {
+            try
+            {
+                var listaRoles = _Service.consultarRoles();
+                comboBox1.DataSource = listaRoles;
+                comboBox1.DisplayMember = "nombre_rol";
+                comboBox1.ValueMember = "id_rol";
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al cargar la lista de roles: " + ex.Message);
+            }
+        }
+
+        private void cargarModulosBox()//FUNCIONA
+        {
+            try
+            {
+                var listaModulos = _Service.consultarModulos();
+                comboBox2.DataSource = listaModulos;
+                comboBox2.DisplayMember = "nombre_modulo";
+                comboBox2.ValueMember = "id_modulo";
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al cargar la lista de módulos: " + ex.Message);
+            }
+        }
+
+        private void cargarListaRoles()
+        {
+            var lista = _Service.consultarRoles();
+            listView1.Items.Clear();//???
+
+            foreach (clsRol roles in lista)
+            {
+                ListViewItem item = new ListViewItem(roles.id_rol.ToString());
+                item.SubItems.Add(roles.nombre_rol);
+                item.SubItems.Add(roles.descripcion_rol);
+                listView1.Items.Add(item);
+            }
+        }
+
+        private void buttonCrearRol_Click(object sender, EventArgs e)
+        {
+            try
+            {//FALTA EXEPCION DE NULL
+                clsRol roool = new clsRol();
+
+                roool.nombre_rol = textBoxNombreRol.Text;
+                roool.descripcion_rol = richTextBoxDescripcionRol.Text;
+
+                //llamo a mi capa de servicios para crear y guardar el nuevo rol
+                _Service.crearRol(roool);
+                MessageBox.Show("ROL CREADO CORRECTAMENTE");
+
+                //LIMPIAR CAMPOS
+                textBoxNombreRol.Clear();
+                richTextBoxDescripcionRol.Clear();
+
+                cargarListaRoles();//ACTUALIZAR LISTA DE ROLES
+            }
+            catch(NullException ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            catch (EntityExistDBException ex)//EXEPCION DE ID REPETIDO 
+            {
+                MessageBox.Show(ex.Message);
+            }
+            catch (NameProductExistDBException ex)//EXEPCION DE NOMBRE REPETIDO
+            {
+                MessageBox.Show(ex.Message);
+            }
+            catch (Exception ex)//EXEPCION DESCONOCIDA
+            {
+                MessageBox.Show("Error desconocido. Contante con el administrador.");
+            }
+        }
+
+        private void buttonCrearPermiso_Click(object sender, EventArgs e)//FUNCIONA
+        {
+            try
+            {//CONSULTAR SI EXISTE EN PERMISOS
+                int idRol = Convert.ToInt32(comboBox1.SelectedValue);
+                int idModulo = Convert.ToInt32(comboBox2.SelectedValue);
+                string nombreRol = comboBox1.DisplayMember;
+                string nombreModulo = comboBox2.DisplayMember;
+
+                var permiso = _Service.consultarPermi(idRol, idModulo);
+
+                if (permiso != null)//SI EXISTE
+                {
+                    DialogResult result = MessageBox.Show("SEGURO DE QUE QUIERE GUARDAR CAMBIOS?", "CAMBIO REALIZADO", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
+                    if (result == DialogResult.Yes)
+                    {
+                        if (!chkConsultar.Checked && !chkEditar.Checked && !chkEliminar.Checked && !chkCrear.Checked)
+                        {
+                            //SI EXISTE Y SE GUARDA VACIO SE ELIMINA DEL DB
+                            MessageBox.Show($"PERMISO MODIFICADO, EL ROL {comboBox1.Text} YA NO TIENE PERMISO SOBRE EL MODULO {comboBox2.Text}");
+                            _Service.eliminarPermiso(permiso);
+                        }
+                        else
+                        {
+                            //SI EXISTE SE MODIFICA  
+                            permiso.consultar = chkConsultar.Checked;
+                            permiso.crear = chkCrear.Checked;
+                            permiso.editar = chkEditar.Checked;
+                            permiso.eliminar = chkEliminar.Checked;
+                            _Service.modificarPermiso(permiso);
+                            MessageBox.Show("PERMISO MODIFICADO");
+                        }
+                    }
+                }
+                else//SI NO EXISTE SE CREA
+                {
+                    if (!chkConsultar.Checked && !chkEditar.Checked && !chkEliminar.Checked && !chkCrear.Checked)
+                    {
+                        MessageBox.Show("MARQUE ALGUN CHECK");
+                    }
+                    else
+                    {
+                        var permi = new clsPermiso();
+                        {
+                            permi.id_rol = Convert.ToInt32(comboBox1.SelectedValue ?? 0);
+                            permi.id_modulo = Convert.ToInt32(comboBox2.SelectedValue ?? 0);
+                            permi.consultar = chkConsultar.Checked;
+                            permi.crear = chkCrear.Checked;
+                            permi.editar = chkEditar.Checked;
+                            permi.eliminar = chkEliminar.Checked;
+                        }
+                        _Service.crearPer(permi);//SE CREA Y SE GUARDA
+                        MessageBox.Show($" PERMISO DEL ROL {comboBox1.Text} SOBRE EL MODULO {comboBox2.Text} CREADO CORRECTAMENTAMENTE");
+                    }
+                }
+            }
+            catch (EntityExistDBException ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            catch (NameProductExistDBException ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        private void buscarPermiso_Click(object sender, EventArgs e)
+        {
+            // 1 VERIFICAR QUE EXISTE ID EN DB
+            int idRol = Convert.ToInt32(comboBox1.SelectedValue);
+            int idModulo = Convert.ToInt32(comboBox2.SelectedValue);
+
+            // Llamar al DAO
+            var permiso = _Service.consultarPermi(idRol, idModulo);
+
+            if (permiso != null)// 2 SII EXISTE MOSTRAR PERMISOS
+            {
+                MessageBox.Show($"EL ROL {comboBox1.Text} TIENE PERMISOS SOBRE EL MODULO {comboBox2.Text}");
+
+                chkConsultar.Checked = permiso.consultar;
+                chkCrear.Checked = permiso.crear;
+                chkEditar.Checked = permiso.editar;
+                chkEliminar.Checked = permiso.eliminar;
+            }
+            else // SI NO EXISTE INDICAR QUE NO TIENE PERMISOS SOBRE EL MODULO{
+            {
+                MessageBox.Show($"EL ROL {comboBox1.Text} NO TIENE PERMISOS SOBRE EL MODULO {comboBox2.Text} SELECIONADO");
+
+                chkConsultar.Checked = false;
+                chkCrear.Checked = false;
+                chkEditar.Checked = false;
+                chkEliminar.Checked = false;
+            }
         }
 
         private void listBox2_SelectedIndexChanged(object sender, EventArgs e)
@@ -62,11 +252,6 @@ namespace UI
 
         }
 
-        private void listBox2_SelectedIndexChanged_1(object sender, EventArgs e)
-        {
-
-        }
-
         private void tabPage3_Click(object sender, EventArgs e)
         {
 
@@ -87,37 +272,62 @@ namespace UI
 
         }
 
-        private void groupBox1_Enter_1(object sender, EventArgs e)
-        {
-
-        }
-
         private void tabPage1_Click(object sender, EventArgs e)
         {
 
         }
 
-        private void button4_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void button4_Click_1(object sender, EventArgs e)
-        {
-
-        }
-
-        private void checkBox2_CheckedChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void checkBox3_CheckedChanged(object sender, EventArgs e)
-        {
-
-        }
-
         private void button3_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void checkBox1_CheckedChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void checkBox10_CheckedChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void checkBox14_CheckedChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void checkBox16_CheckedChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label6_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button4_Click_2(object sender, EventArgs e)
+        {
+
+        }
+
+        private void checkCrear(object sender, EventArgs e)
+        {
+
+        }
+
+        private void checkConsultar(object sender, EventArgs e)
+        {
+
+        }
+
+        private void checkModificar(object sender, EventArgs e)
+        {
+
+        }
+
+        private void checkEliminar(object sender, EventArgs e)
         {
 
         }

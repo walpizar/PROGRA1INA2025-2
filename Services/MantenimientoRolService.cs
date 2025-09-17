@@ -1,50 +1,122 @@
-﻿using DAO;
+﻿using Common.Exceptions;
+using DAO;
 using Entities;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Services
+  namespace Services
 {
     public class SeguridadService
     {
         private readonly RolDAO _rolDao;
         private readonly ModuloDAO _moduloDao;
-        private readonly PermisoDAO _permisoDao;
+        private readonly PermisoDAO  _permisoDao;
 
-        public SeguridadService(RolDAO rolDao, ModuloDAO moduloDao, PermisoDAO permisoDao)
+        public SeguridadService()//ACCESOS
         {
-            _rolDao = rolDao;
-            _moduloDao = moduloDao;
-            _permisoDao = permisoDao;
+            _rolDao = new RolDAO();
+            _moduloDao = new ModuloDAO();
+            _permisoDao = new PermisoDAO();
         }
 
-        // Ejemplo: Validar si un rol tiene permiso para una acción
+<<<<<<< Updated upstream
+        /* Ejemplo: Validar si un rol tiene permiso para una acción
         public async Task<bool> TienePermisoAsync(int idRol, int idModulo, string accion)
         {
-            var permiso = await _permisoDao.GetAllAsync();
-            var p = permiso.FirstOrDefault(x => x.id_rol == idRol
-                                              && x.id_modulo == idModulo);
+            var p = await _permisoDao.GetPermisoByRolAndModuleAsync(idRol, idModulo);
+=======
+        public class PermisosDTO//OBTENER SOLO PERMISOS
+        {
+            public bool Consultar { get; set; }
+            public bool Crear { get; set; }
+            public bool Editar { get; set; }
+            public bool Eliminar { get; set; }
+>>>>>>> Stashed changes
 
-            if (p == null) return false;
-
-            return accion.ToLower() switch
-            {
-                "consultar" => p.consultar,
-                "crear" => p.crear,
-                "editar" => p.editar,
-                "eliminar" => p.eliminar,
-                _ => false
-            };
         }
 
+        public PermisosDTO TienePermiso(int idRol, int idModulo)
+        {
+            var permiso = _permisoDao.consultarPorIDs(idModulo, idRol);
+
+            if (permiso == null)
+                return new PermisosDTO(); // Todo false
+
+            return new PermisosDTO//CONSULTAR SOLO LOS PERMISOS DTO
+            {
+                Consultar = permiso.consultar,
+                Crear = permiso.crear,
+                Editar = permiso.editar,
+                Eliminar = permiso.eliminar
+            };
+        }*/
+
+<<<<<<< Updated upstream
         // Otros métodos combinados de negocio
-        public async Task<List<clsPermiso>> ObtenerPermisosPorRolYModulo(int idRol, int idModulo)
+       /* public async Task<List<clsPermisos>> ObtenerPermisosPorRolYModulo(int idRol, int idModulo)
         {
             var permisos = await _permisoDao.GetAllAsync();
-            return permisos.Where(p => p.id_rol == idRol && p.id_modulo == idModulo).ToList();
+           
+            return permisos
+                         .Where(p => p.RolPermisos.Any(rp => rp.idRol == idRol && rp.idModulo == idModulo))
+                         .ToList();
+        }*/
+=======
+        public List<clsRol> consultarRoles()
+        {
+            return _rolDao.consultarTodos();
         }
+
+        public List<clsModulo> consultarModulos()
+        {
+            return _moduloDao.consultarTodos();
+        }
+
+        public void crearRol(clsRol roool)
+        {
+            if (string.IsNullOrWhiteSpace(roool.nombre_rol)) 
+            {
+                throw new NullException();
+            }
+            if (string.IsNullOrWhiteSpace(roool.descripcion_rol))
+            {
+                throw new NullException();
+            }
+            if (_rolDao.consultarPorID(roool.id_rol) != null)
+            {
+                throw new EntityExistDBException();
+            }
+            if (_rolDao.consultarPorNombre(roool.nombre_rol) != null)
+            {
+                throw new NameProductExistDBException();
+            }
+            _rolDao.crear(roool);
+        }
+
+        public void crearPer(clsPermiso permi)//CREAR PERMISO
+        {
+            _permisoDao.crearPermiso(permi);
+        }
+
+        public clsPermiso consultarPermi(int idModulo, int idRol)//CONSULTAR PERMMISOS
+        {
+            return _permisoDao.consultarPorIDs(idModulo, idRol);
+        }
+
+
+        public void modificarPermiso(clsPermiso permi)
+        {
+            _permisoDao.modificar(permi);
+        }
+
+        public void eliminarPermiso(clsPermiso permi)
+        {
+            _permisoDao.eliminarP(permi);
+        }
+>>>>>>> Stashed changes
     }
 }

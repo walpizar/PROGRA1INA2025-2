@@ -1,4 +1,5 @@
 ﻿using Entities;
+using Common.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -8,42 +9,53 @@ using System.Threading.Tasks;
 
 namespace DAO
 {
-    public class ModuloDAO
+    public class ModuloDAO : IGenerica<clsModulo>
     {
-        private readonly dbContextINA _context;
+        private dbContextINA _context;//se le quito el readonly
 
-        private ModuloDAO(dbContextINA context)
+        // Constructor privado → nadie lo puede usar fuera
+        public ModuloDAO()
         {
-            _context = context;
+            _context = new dbContextINA();
         }
 
-        public async Task<List<clsModulo>> GetAllAsync() =>
-            await _context.modulos.Include(m => m.permisos).ToListAsync();
-
-        public async Task<clsModulo> GetByIdAsync(int id) =>
-            await _context.modulos.Include(m => m.permisos)
-                                  .FirstOrDefaultAsync(m => m.id_modulo == id);
-
-        public async Task AddAsync(clsModulo modulo)
+        public void crear(clsModulo modu)//CREAR
         {
-            _context.modulos.Add(modulo);
-            await _context.SaveChangesAsync();
+            _context.modulos.Add(modu);
+            _context.SaveChanges();
         }
 
-        public async Task UpdateAsync(clsModulo modulo)
+        public void modificar(clsModulo modu)//MODIFICAR
         {
-            _context.modulos.Update(modulo);
-            await _context.SaveChangesAsync();
+            _context.modulos.Update(modu);
+            _context.SaveChanges();
         }
 
-        public async Task DeleteAsync(int id)
+        public void eliminar(int id)//ELIMINAR
         {
-            var modulo = await _context.modulos.FindAsync(id);
-            if (modulo != null)
-            {
-                _context.modulos.Remove(modulo);
-                await _context.SaveChangesAsync();
-            }
+            var prod = consultarPorID(id);
+            _context.modulos.Remove(prod);
+            _context.SaveChanges();
         }
+
+        public clsModulo consultarPorID(int id)// CONSULTAR ID
+        {
+            return _context.modulos.Where(p => p.id_modulo == id).SingleOrDefault();//id_rol
+
+            return null;
+        }
+
+
+        public clsModulo consultarPorNombre(string nombre)
+        {
+            return _context.modulos
+                           .FirstOrDefault(r => r.nombre_modulo == nombre);//nombre_rol
+        }
+
+        public List<clsModulo> consultarTodos()
+        {
+            return _context.modulos.ToList();
+        }
+
     }
 }

@@ -8,14 +8,13 @@ using System.Threading.Tasks;
 
 namespace DAO
 {
-    internal class dbContextINA: DbContext
+ 
+    public class dbContextINA : DbContext
     {
         //definir la entidades de dominio que desea mapear a la base de datos
         //public DbSet<clsProducto> Producto { get; set; }
         //public DbSet<clsCliente> Clientes { get; set; }
         //public DbSet<clsCategoria> Categoria { get; set; }
-
-
 
         ///ENTIDADES ASOCIACION / PROPIEDADES DE NAVEGACION
         public DbSet<clsRol> roles{ get; set; }
@@ -24,29 +23,24 @@ namespace DAO
 
         public DbSet<clsActivos> Activos { get; set; }
         public DbSet<clsCategoriaActivos> CategoriaActivos { get; set; }
-        public DbSet<clsPersona> Personas { get; set; }
-        public DbSet<clsMedico> Medicos { get; set; }
         public DbSet<clsDepartamentos> Departamentos { get; set; }
         public DbSet<clsDevolucion> Devoluciones { get; set; }
-        public DbSet<clsEnfermero> Enfermeros { get; set; }
         public DbSet<clsEspecialidadMedica> EspecialidadesMedicas { get; set; }
         public DbSet<clsPuestos> Puestos { get; set; }
 
 
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)//PONER MI DIRECCION
         {
             if (!optionsBuilder.IsConfigured)
             {
                 // 🔹 Conexión a SQL Express con autenticación de Windows
                 optionsBuilder.UseSqlServer(
-                    @"Server=localhost\sqlexpress;Database=dbPaleativoGarabito;Trusted_Connection=True;MultipleActiveResultSets=True;TrustServerCertificate=True;");
+                    @"Server=localhost;Database=dbINAproyect;Trusted_Connection=True;TrustServerCertificate=True;MultipleActiveResultSets=True;");
             }
         }
-
-
-
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+<<<<<<< Updated upstream
 
             base.OnModelCreating(modelBuilder);//
 
@@ -58,17 +52,26 @@ namespace DAO
 
 
 
-            // Configuración para tbPersonas
-            modelBuilder.Entity<clsPersona>().HasKey(p => new { p.id, p.tipoId });
+            // Clave primaria compuesta para Persona
+            modelBuilder.Entity<clsPersona>()
+                .HasKey(p => new { p.id, p.tipoId });
 
             modelBuilder.Entity<clsPersona>().Property(p => p.id)
-                .IsRequired()
-                .HasMaxLength(20)
-                .ValueGeneratedNever();
-
+                .IsRequired().HasMaxLength(20).ValueGeneratedNever();
             modelBuilder.Entity<clsPersona>().Property(p => p.tipoId)
                 .IsRequired()
                 .ValueGeneratedNever();
+
+            modelBuilder.Entity<clsUsuario>()
+                //Define la clave primaria compuesta para clsUsuario
+                .HasKey(u => new { u.personaId, u.personaTipoId });
+
+            modelBuilder.Entity<clsUsuario>()
+                .HasOne(u => u.persona)//Establece la relación de 1 a 1(un usuario tiene una persona)
+                .WithOne()
+                .HasForeignKey<clsUsuario>(u => new { u.personaId, u.personaTipoId })
+                .HasPrincipalKey<clsPersona>(p => new { p.id, p.tipoId });
+  
 
             //clsMedico configuracion de llave primaria compuesta   
             modelBuilder.Entity<clsMedico>().HasKey(m => new { m.id, m.tipoId });
@@ -88,9 +91,28 @@ namespace DAO
                 .OnDelete(DeleteBehavior.Restrict); // Evita el borrado en cascada
 
 
+            modelBuilder.Entity<clsDonante>()
+                .HasKey(m => new { m.personaId, m.personaTipoId });
+            // Relación 1 a 1 entre Donante y Persona
+            modelBuilder.Entity<clsDonante>()
+                .HasOne(d => d.persona)
+                .WithOne(p => p.donante)
+                .HasForeignKey<clsDonante>(d => new { d.personaId, d.personaTipoId })
+                .HasPrincipalKey<clsPersona>(p => new { p.id, p.tipoId });
 
 
+            // Clave primaria compuesta para Enfermero
+            modelBuilder.Entity<clsEnfermero>()
+                .HasKey(e => new { e.id, e.tipoId });
+
+            // Clave primaria compuesta para RolPermiso
+            modelBuilder.Entity<clsRolPermiso>()
+                .HasKey(rp => new { rp.idRol, rp.idPermiso });
+=======
+            // LLAVE COMPUESTA DEFINIDA
+            modelBuilder.Entity<clsPermiso>()
+                .HasKey(p => new { p.id_rol, p.id_modulo });
+>>>>>>> Stashed changes
         }
-
     }
 }

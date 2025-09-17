@@ -5,6 +5,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+//LA CAPA SE LLAMA CLSMODULOS PERO LA CLASE SE LLAMA CLSMODULO SIN S
 
 namespace Entities
 {
@@ -20,12 +21,12 @@ namespace Entities
         [StringLength(100)]
         public string nombre_modulo { get; set; }
 
-        [StringLength(200)]
+        [StringLength(200)] 
         public string? descripcion_modulo { get; set; }
 
 
 
         // Navegación: un módulo puede tener muchos permisos
-        public ICollection<clsPermiso> permisos { get; set; }//LIGADO A PERMISOS
+        public ICollection<clsPermisos> permisos { get; set; }//LIGADO A PERMISOS
     }
 }

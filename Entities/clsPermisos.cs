@@ -1,27 +1,32 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+<<<<<<< Updated upstream
+=======
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
+//DONDE ESTOY USANDO LAS PROPIEDADES DE NAVEGACION???????   SI NO LAS USO NO LAS NECESITO
+>>>>>>> Stashed changes
 
 namespace Entities
 {
-    
         [Table("tb_Permisos")]//TABLA INTERMEDIA
         public class clsPermiso
         {
-            //LLAVE PRIMARIA COMPUESTA
-            public int id_modulo { get; set; } // Relación con módulo
-            public clsModulo modulo { get; set; }//PROPIEDAD DE NAVEGACION
-            public int id_rol { get; set; } // Relación con rol
-            public clsRol rol { get; set; }//PROPIEDAD DE NAVEGACION
+            //LLAVE PRIMARIA COMPUESTA POR DOS FK
+            public int id_modulo { get; set; } //RELACION CON MODULO
+            [ForeignKey("id_modulo")]
+            public clsModulo modulo { get; set; }//PROPIEDAD DE NAVEGACION PARA CONSULTAS
+
+            public int id_rol { get; set; } // RELACION CON ROL
+
+            [ForeignKey("id_rol")]
+            public clsRol rol { get; set; }//PROPIEDAD DE NAVEGACION PARA CONSULTAS
 
 
-
-            // ACCIONES DEL CRUD
+            //NO SON METODOS, SON ATRIBUTOS QUE REPRESENTAN LOS PERMISOS ASIGNADOS
             [Required]
             [DefaultValue(false)]
             public bool consultar { get; set; }

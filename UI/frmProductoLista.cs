@@ -11,7 +11,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace UI
+/*namespace UI
 {
     public partial class frmProductoLista : Form
     {
@@ -33,10 +33,8 @@ namespace UI
             }
             catch (Exception)
             {
-
                 MessageBox.Show("Error al cargar la lista de productos");
             }
-
         }
 
         private void btnNuevo_Click(object sender, EventArgs e)
@@ -66,9 +64,6 @@ namespace UI
 
         private void cargarLista(List<clsProducto> lista)
         {
-
-           
-
             lstvLista.Items.Clear();
 
             foreach (clsProducto producto in lista)
@@ -113,10 +108,7 @@ namespace UI
                         this.lista = _productoService.consultarTodos();
                         cargarLista(lista);
                     }
-
-
                 }
-
             }
             catch (Exception)
             {
@@ -133,10 +125,6 @@ namespace UI
             p.nombre.ToUpper().Contains(txtBusqueda.Text.ToUpper())).ToList();
 
             cargarLista(listaFiltrada);
-
-
-
-
         }
     }
-}
+}*/
