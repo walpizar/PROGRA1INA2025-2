@@ -6,11 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace DAO.Migrations
 {
     /// <inheritdoc />
-<<<<<<<< HEAD:DAO/Migrations/20250916154221_MigracionNueva.cs
-    public partial class MigracionNueva : Migration
-========
-    public partial class incial : Migration
->>>>>>>> 9d6a69bbe7f4c857b2c996c148975be9f4596cb0:DAO/Migrations/20250916155514_incial.cs
+    public partial class Login : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -183,23 +179,16 @@ namespace DAO.Migrations
                 name: "tbDonantes",
                 columns: table => new
                 {
-<<<<<<<< HEAD:DAO/Migrations/20250916154221_MigracionNueva.cs
-                    idDonante = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-========
->>>>>>>> 9d6a69bbe7f4c857b2c996c148975be9f4596cb0:DAO/Migrations/20250916155514_incial.cs
                     personaId = table.Column<string>(type: "nvarchar(20)", nullable: false),
                     personaTipoId = table.Column<int>(type: "int", nullable: false),
+                    idDonante = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
                     estado = table.Column<bool>(type: "bit", nullable: false),
                     fechaRegistro = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
                 constraints: table =>
                 {
-<<<<<<<< HEAD:DAO/Migrations/20250916154221_MigracionNueva.cs
-                    table.PrimaryKey("PK_tbDonantes", x => x.idDonante);
-========
                     table.PrimaryKey("PK_tbDonantes", x => new { x.personaId, x.personaTipoId });
->>>>>>>> 9d6a69bbe7f4c857b2c996c148975be9f4596cb0:DAO/Migrations/20250916155514_incial.cs
                     table.ForeignKey(
                         name: "FK_tbDonantes_tbPersonas_personaId_personaTipoId",
                         columns: x => new { x.personaId, x.personaTipoId },
@@ -334,34 +323,20 @@ namespace DAO.Migrations
                 {
                     idDonacion = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-<<<<<<<< HEAD:DAO/Migrations/20250916154221_MigracionNueva.cs
-                    idDonante = table.Column<int>(type: "int", nullable: false),
-                    fechaDonacion = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    tipoDonacion = table.Column<int>(type: "int", nullable: false),
-                    observaciones = table.Column<string>(type: "nvarchar(max)", nullable: false)
-========
                     fechaDonacion = table.Column<DateTime>(type: "datetime2", nullable: false),
                     tipoDonacion = table.Column<int>(type: "int", nullable: false),
                     observaciones = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     donantepersonaId = table.Column<string>(type: "nvarchar(20)", nullable: false),
                     donantepersonaTipoId = table.Column<int>(type: "int", nullable: false)
->>>>>>>> 9d6a69bbe7f4c857b2c996c148975be9f4596cb0:DAO/Migrations/20250916155514_incial.cs
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_tbDonaciones", x => x.idDonacion);
                     table.ForeignKey(
-<<<<<<<< HEAD:DAO/Migrations/20250916154221_MigracionNueva.cs
-                        name: "FK_tbDonaciones_tbDonantes_idDonante",
-                        column: x => x.idDonante,
-                        principalTable: "tbDonantes",
-                        principalColumn: "idDonante",
-========
                         name: "FK_tbDonaciones_tbDonantes_donantepersonaId_donantepersonaTipoId",
                         columns: x => new { x.donantepersonaId, x.donantepersonaTipoId },
                         principalTable: "tbDonantes",
                         principalColumns: new[] { "personaId", "personaTipoId" },
->>>>>>>> 9d6a69bbe7f4c857b2c996c148975be9f4596cb0:DAO/Migrations/20250916155514_incial.cs
                         onDelete: ReferentialAction.Cascade);
                 });
 
@@ -429,15 +404,9 @@ namespace DAO.Migrations
                 column: "idActivoFK");
 
             migrationBuilder.CreateIndex(
-<<<<<<<< HEAD:DAO/Migrations/20250916154221_MigracionNueva.cs
-                name: "IX_tbDonaciones_idDonante",
-                table: "tbDonaciones",
-                column: "idDonante");
-========
                 name: "IX_tbDonaciones_donantepersonaId_donantepersonaTipoId",
                 table: "tbDonaciones",
                 columns: new[] { "donantepersonaId", "donantepersonaTipoId" });
->>>>>>>> 9d6a69bbe7f4c857b2c996c148975be9f4596cb0:DAO/Migrations/20250916155514_incial.cs
 
             migrationBuilder.CreateIndex(
                 name: "IX_tbDonacionesActivos_idActivo",
@@ -456,15 +425,6 @@ namespace DAO.Migrations
                 unique: true);
 
             migrationBuilder.CreateIndex(
-<<<<<<<< HEAD:DAO/Migrations/20250916154221_MigracionNueva.cs
-                name: "IX_tbDonantes_personaId_personaTipoId",
-                table: "tbDonantes",
-                columns: new[] { "personaId", "personaTipoId" },
-                unique: true);
-
-            migrationBuilder.CreateIndex(
-========
->>>>>>>> 9d6a69bbe7f4c857b2c996c148975be9f4596cb0:DAO/Migrations/20250916155514_incial.cs
                 name: "IX_tbPermisos_clsModuloid_modulo",
                 table: "tbPermisos",
                 column: "clsModuloid_modulo");

@@ -26,7 +26,7 @@ namespace DAO
             try
             {
                 //busco el usuario en la base de datos (tablaPersona)
-                var persona = _context.Personas.FirstOrDefault(p => p.email == correo);
+                var persona = _context.persona.FirstOrDefault(p => p.email == correo);
                 //si el usuario no existe, retorno null
                 if (persona == null)
                 {
@@ -48,7 +48,7 @@ namespace DAO
             try
             {
                 //busco el email usuario en la base de datos
-                var persona = _context.Personas.FirstOrDefault(c => c.email == correo);
+                var persona = _context.persona.FirstOrDefault(c => c.email == correo);
 
                 //si el usuario no existe, lanzo una excepcion
                 if (persona == null)
@@ -57,14 +57,14 @@ namespace DAO
                 }
 
                 //obtengo la persona asociada al correo
-                var usuario = _context.Usuarios.FirstOrDefault(u => u.id == persona.id);
+                var usuario = _context.usuario.FirstOrDefault(u => u.personaId == persona.id);
 
                 if (usuario == null) {  
                     throw new Exception("El usuario no existe");
                 }
 
                 //actualizo la contraseña
-                usuario.contraseña = nuevaContraseña;
+                usuario.contrasena = nuevaContraseña;
                 //guardo los cambios en la base de datos
                 _context.SaveChanges();
             }
@@ -75,10 +75,10 @@ namespace DAO
             }
         }
 
-        public clsUsuario consultarPorID(int id)
+        public clsUsuario consultarPorID(string id)
         {
             //obetengo el id de la persona que es el mismo id de usuario
-            return _context.Usuarios.FirstOrDefault(u => u.id == id);//falta la propiedad usuarios en el dbContex
+            return _context.usuario.FirstOrDefault(u => u.personaId == id);//falta la propiedad usuarios en el dbContex
         }
 
 
@@ -86,12 +86,12 @@ namespace DAO
         public clsUsuario consultarPorNombre(string nombre)
         {
             //busco el usuario por nombre en la base de datos
-            return _context.Usuarios.FirstOrDefault(u => u.nombre_usuario == nombre);
+            return _context.usuario.FirstOrDefault(u => u.nombre_usuario == nombre);
         }
 
 
 
-
+        //metodos no implementados para cumplir con la interfaz
         public void crear(clsUsuario entidad)
         {
             throw new NotImplementedException();
@@ -102,12 +102,12 @@ namespace DAO
             throw new NotImplementedException();
         }
 
-        public void eliminar(int id)
+        public List<clsUsuario> consultarTodos()
         {
             throw new NotImplementedException();
         }
 
-        public List<clsUsuario> consultarTodos()
+        public void eliminar(string id)
         {
             throw new NotImplementedException();
         }

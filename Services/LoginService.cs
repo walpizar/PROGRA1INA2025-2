@@ -27,38 +27,48 @@ namespace Services
 
         }
 
-        //metodo para cambniar la contraseña
-        public bool CambiarContraseña(string correo, string nuevaContraseña)
+
+        //metodo para validar el login
+        public bool ValidarLogin(string usuario, string contra)
         {
-            try
+
+            //llamo al metodo de DAO para validar el login
+            clsUsuario user = _loginDao.consultarPorNombre(usuario);
+            //valido si el usuario existe y la contraseña coincide
+            if (user != null && user.contrasena == contra)
             {
-                //aqui llamo al metodo de DAO para actualizar la contraseña
-                _loginDao.ActualizarContraseña(correo, nuevaContraseña);
-
-                //limpio el código de recuperación del diccionario para ese correo
-                if (codigosRecuperacion.ContainsKey(correo))
-                {
-                    //elimino el código para que no pueda reutilizarse
-                    codigosRecuperacion.Remove(correo);
-                    
-                }
-
-                //retorno true si se actualizó correctamente
-                return true;
+                return true; //login exitoso
             }
-            catch (Exception)
+            else
             {
-                //retorno false en caso de error
-                return false;
+                return false; //login fallido
             }
-
         }
 
 
-        public clsUsuario consultarPorID(int id)
+        //metodo para consultar por nombre de usuario
+        public clsUsuario consultarPorNombre(string nombre)
         {
-            //Obtengo el id del usuario persona que es el mismo id de usuario
-            return _loginDao.consultarPorID(id);
+            //llamo a mi capoa DAO para buscar el nombre usuario
+            return _loginDao.consultarPorNombre(nombre);
+        }
+
+
+        //metodo para validar si el correo existe en la base de datos
+        public bool ValidarCorreoExistente(string correoRegistrado)
+        {
+            //llamo al metodo de DAO para obtener el correo
+            string correoEncontrado = _loginDao.ObtenerCorreoPorUsuario(correoRegistrado);
+
+            //valido si el cooreo es vacio(Empy) o nulo
+            if (string.IsNullOrEmpty(correoEncontrado))
+            {
+                return false; //correo no existe
+            }
+            else
+            {
+                return true; //correo existe
+            }
         }
 
 
@@ -72,15 +82,15 @@ namespace Services
 
                 //valido si el correo existe
                 if (string.IsNullOrEmpty(correoEncontrado))
-                { 
-                return false;//si no existe, retorno false
+                {
+                    return false;//si no existe, retorno false
                 }
 
                 //genero un código ramdom de 6 dígitos (entre 100000 y 999999)
                 string codigo = random.Next(100000, 999999).ToString();
 
                 //guardo el código en el diccionario, asociándolo al correo del usuario
-                codigosRecuperacion[correoEncontrado] = codigo;
+                codigosRecuperacion[correoRegistrado] = codigo;
 
                 //llamo al método para enviar el correo con el código de recuperación
                 EnviarCorreo(correoEncontrado, codigo);
@@ -116,11 +126,12 @@ namespace Services
                 mensaje.To.Add(correoEncontrado);
                 mensaje.Subject = "Código de recuperación de contraseña - Sistema Paliativos";
                 mensaje.Body = $"Estimado usuario,\n\n" +
-                              $"Su código de recuperación de contraseña es: {codigo}\n\n" +
+                              $"Su código de recuperación de contraseña es:\n\n {codigo}\n\n" +
                               $"Este código expira en 10 minutos por seguridad.\n\n" +
                               $"Si no solicitó este código, ignore este mensaje.\n\n" +
-                              $"Saludos,\n" +
-                              $"Equipo de Soporte";
+                              $"No resporder a este correo, es unicamente para envio de codigos de recuperacion de contraseña. \n\n " +
+                              $"Saludos.\n" +
+                              $"Sistema de Cuidados Paliativos Garabito.";
 
                 //envia el correo
                 smtp.Send(mensaje);
@@ -128,7 +139,8 @@ namespace Services
             catch (Exception ex)
             {
                 //muestra mensaje de error en caso de fallo
-                throw new Exception("Error al enviar el correo: " + ex.Message);
+                throw new Exception("Error al enviar el correo:. Contacte con su administrador"
+                    + "\n" + "Error:" + "\n" + ex.Message);
 
             }
         }
@@ -138,54 +150,49 @@ namespace Services
         public bool ValidarCodigoRecuperacion(string correoRegistrado, string codigoIngresado)
         {
             //verifico que existe un código para ese correo y que coincide
-            return codigosRecuperacion.ContainsKey(correoRegistrado) && 
+            return codigosRecuperacion.ContainsKey(correoRegistrado) &&
                    codigosRecuperacion[correoRegistrado] == codigoIngresado;
         }
 
-        //metodo para validar si el correo existe en la base de datos
-        public bool ValidarCorreoExistente(string correoRegistrado)
-        {
-            //llamo al metodo de DAO para obtener el correo
-            string correoEncontrado = _loginDao.ObtenerCorreoPorUsuario(correoRegistrado);
 
-            //valido si el cooreo es vacio(Empy) o nulo
-            if (string.IsNullOrEmpty(correoEncontrado))
+
+        //metodo para cambniar la contraseña
+        public bool CambiarContraseña(string correo, string nuevaContraseña)
+        {
+            try
             {
-                return false; //correo no existe
+                //aqui llamo al metodo de DAO para actualizar la contraseña
+                _loginDao.ActualizarContraseña(correo, nuevaContraseña);
+
+                //limpio el código de recuperación del diccionario para ese correo
+                if (codigosRecuperacion.ContainsKey(correo))
+                {
+                    //elimino el código para que no pueda reutilizarse
+                    codigosRecuperacion.Remove(correo);
+                    
+                }
+
+                //retorno true si se actualizó correctamente
+                return true;
             }
-            else
+            catch (Exception)
             {
-                return true; //correo existe
+                //retorno false en caso de error
+                return false;
             }
+
         }
 
 
-        //metodo para validar el login
-        public bool ValidarLogin(string usuario, string contraseña)
+        public clsUsuario consultarPorID(string personaId)
         {
-        
-            //llamo al metodo de DAO para validar el login
-            clsUsuario user = _loginDao.consultarPorNombre(usuario);
-            //valido si el usuario existe y la contraseña coincide
-            if (user != null && user.contraseña == contraseña)
-            {
-                return true; //login exitoso
-            }
-            else
-            {
-                return false; //login fallido
-            }
+            //Obtengo el id del usuario persona que es el mismo id de usuario
+            return _loginDao.consultarPorID(personaId);
         }
 
 
-        public clsUsuario consultarPorNombre(string nombre)
-        {
-            //llamo a mi capoa DAO para buscar el nombre usuario
-            return _loginDao.consultarPorNombre(nombre);
-        }
 
-
-        //metodos no implementados de la interfaz
+        //metodos no implementados para cumplir con la interfaz
         public List<clsUsuario> consultarTodos()
         {
             throw new NotImplementedException();
@@ -196,15 +203,14 @@ namespace Services
             throw new NotImplementedException();
         }
 
-        public void eliminar(int id)
-        {
-            throw new NotImplementedException();
-        }
-
         public void modificar(clsUsuario entidad)
         {
             throw new NotImplementedException();
         }
 
+        public void eliminar(string id)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
