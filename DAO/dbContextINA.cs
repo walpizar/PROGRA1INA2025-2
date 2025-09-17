@@ -37,12 +37,11 @@ namespace DAO
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             if (!optionsBuilder.IsConfigured)
-            {
+            
                 // 🔹 Conexión a SQL Express con autenticación de Windows
                 optionsBuilder.UseSqlServer(
-                    @"Server=localhost\sqlexpress;Database=dbPaleativoGarabito;Trusted_Connection=True;MultipleActiveResultSets=True;TrustServerCertificate=True;");
+                    @"Server=.;Database=dbPaleativoGarabito;Trusted_Connection=True;MultipleActiveResultSets=True;TrustServerCertificate=True;");
             }
-        }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
