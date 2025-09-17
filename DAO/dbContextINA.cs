@@ -38,9 +38,9 @@ namespace DAO
         {
             if (!optionsBuilder.IsConfigured)
             {
-                // 🔹 Conexión a SQL Express con autenticación de Windows
+                // 🔹 Conexión a SQL Server LocalDB usando Named Pipe
                 optionsBuilder.UseSqlServer(
-                    @"Server=localhost\sqlexpress;Database=dbPaleativoGarabito;Trusted_Connection=True;MultipleActiveResultSets=True;TrustServerCertificate=True;");
+                    @"Server=np:\\.\pipe\LOCALDB#E41FE673\tsql\query;Database=dbPaleativoGarabito;Trusted_Connection=True;MultipleActiveResultSets=True;TrustServerCertificate=True;");
             }
         }
 
