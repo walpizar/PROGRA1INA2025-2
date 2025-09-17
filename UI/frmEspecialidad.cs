@@ -24,16 +24,22 @@ namespace UI
 
         private void frmEspecialidades_Load(object sender, EventArgs e)
         {
-            if (especialidadSelected != null) // modificar
+            if (especialidadSelected != null) // Estamos modificando
             {
                 btnGuardar.Text = "Editar";
                 lblTitulo.Text = "Editar Especialidad Médica";
                 txtId.Text = especialidadSelected.idEspecialidadMedica.ToString();
                 txtNombre.Text = especialidadSelected.nombreEspecialidad;
                 txtDescripcion.Text = especialidadSelected.descripcion;
-                chkEstado.Checked = especialidadSelected.estado;
+
+                btnEliminar.Visible = true; // Mostrar botón de eliminar
+            }
+            else
+            {
+                btnEliminar.Visible = false; // Ocultar botón al crear
             }
         }
+
 
         // Validación de datos obligatorios
         private bool validarDatos()
@@ -55,8 +61,9 @@ namespace UI
                         idEspecialidadMedica = Convert.ToInt32(txtId.Text),
                         nombreEspecialidad = txtNombre.Text,
                         descripcion = txtDescripcion.Text,
-                        estado = chkEstado.Checked
+                        estado = true // Siempre activo al crear
                     };
+
 
                     if (especialidadSelected == null) // Crear
                         _especialidadService.crear(especialidad);
@@ -91,7 +98,8 @@ namespace UI
                     DialogResult resp = MessageBox.Show("¿Desea eliminar esta especialidad?", "Confirmación", MessageBoxButtons.YesNo);
                     if (resp == DialogResult.Yes)
                     {
-                        _especialidadService.eliminar(especialidadSelected.idEspecialidadMedica);
+                        especialidadSelected.estado = false; // marcar como inactivo
+                        _especialidadService.modificar(especialidadSelected);
                         MessageBox.Show("Especialidad eliminada correctamente");
                         this.Close();
                     }

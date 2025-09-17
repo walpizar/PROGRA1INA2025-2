@@ -12,7 +12,7 @@ namespace Entities
         public int idEspecialidadMedica { get; set; }
 
         [Required]
-        [StringLength(100, ErrorMessage = "El nombre de la especialidad sno puede tener más de 100 caracteres")]
+        [StringLength(100, ErrorMessage = "El nombre de la especialidad no puede tener más de 100 caracteres")]
         public string nombreEspecialidad { get; set; }
 
         [StringLength(200, ErrorMessage = "La descripción no puede tener más de 200 caracteres")]

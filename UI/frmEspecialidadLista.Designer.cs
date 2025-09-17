@@ -45,21 +45,23 @@ namespace UI
             // 
             // btnNuevaEspecialidad
             // 
+            btnNuevaEspecialidad.BackColor = SystemColors.ActiveCaption;
             btnNuevaEspecialidad.FlatAppearance.BorderColor = Color.Red;
             btnNuevaEspecialidad.FlatAppearance.BorderSize = 3;
+            btnNuevaEspecialidad.ForeColor = Color.Cornsilk;
             btnNuevaEspecialidad.Location = new Point(745, 39);
             btnNuevaEspecialidad.Margin = new Padding(4, 5, 4, 5);
             btnNuevaEspecialidad.Name = "btnNuevaEspecialidad";
             btnNuevaEspecialidad.Size = new Size(171, 67);
             btnNuevaEspecialidad.TabIndex = 4;
             btnNuevaEspecialidad.Text = "Nueva";
-            btnNuevaEspecialidad.UseVisualStyleBackColor = true;
-            btnNuevaEspecialidad.Click += btnNuevaEspecialidad_Click;
+            btnNuevaEspecialidad.UseVisualStyleBackColor = false;
             btnNuevaEspecialidad.TextChanged += btnNuevaEspecialidad_TextChanged;
-
+            btnNuevaEspecialidad.Click += btnNuevaEspecialidad_Click;
             // 
             // gbxListaEspecialidad
             // 
+            gbxListaEspecialidad.BackColor = SystemColors.Control;
             gbxListaEspecialidad.Controls.Add(label1);
             gbxListaEspecialidad.Controls.Add(txtBusquedaEspecialidad);
             gbxListaEspecialidad.Controls.Add(lstvListaEspecialidad);
@@ -72,7 +74,6 @@ namespace UI
             gbxListaEspecialidad.TabStop = false;
             gbxListaEspecialidad.Text = "Lista Especialidades";
             gbxListaEspecialidad.Enter += gbxListaEspecialidad_Enter;
-
             // 
             // label1
             // 
@@ -133,19 +134,19 @@ namespace UI
             // 
             lblTitulo.AutoSize = true;
             lblTitulo.Font = new Font("Segoe UI", 15.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            lblTitulo.Location = new Point(279, 19);
+            lblTitulo.Location = new Point(69, 44);
             lblTitulo.Margin = new Padding(4, 0, 4, 0);
             lblTitulo.Name = "lblTitulo";
-            lblTitulo.Size = new Size(415, 45);
+            lblTitulo.Size = new Size(518, 45);
             lblTitulo.TabIndex = 3;
             lblTitulo.Text = "Administración de especialidades";
             lblTitulo.TextChanged += lblTitulo_TextChanged;
-
             // 
             // frmEspecialidadLista
             // 
             AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
+            BackColor = SystemColors.GradientInactiveCaption;
             ClientSize = new Size(990, 686);
             Controls.Add(btnNuevaEspecialidad);
             Controls.Add(gbxListaEspecialidad);

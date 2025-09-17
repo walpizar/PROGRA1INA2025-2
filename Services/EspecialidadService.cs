@@ -9,10 +9,12 @@ namespace Services
 {
     public class EspecialidadService : IGenerica<clsEspecialidadMedica>
     {
-        private readonly EspecialidadDao _especialidadDao = new EspecialidadDao();
+        private readonly EspecialidadDao _especialidadDao = new EspecialidadDao(); // DAO de especialidad médica
 
+        // Constructor
         public EspecialidadService() { }
 
+        
         public void crear(clsEspecialidadMedica especialidad)
         {
             if (string.IsNullOrWhiteSpace(especialidad.nombreEspecialidad))
@@ -22,7 +24,7 @@ namespace Services
 
             if (_especialidadDao.consultarPorID(especialidad.idEspecialidadMedica) != null)
             {
-                throw new EntityExistDBException();
+                throw new EntityExistDBException();//"Ya existe una especialidad con ese ID");
             }
 
             if (_especialidadDao.consultarPorNombre(especialidad.nombreEspecialidad) != null)
@@ -30,7 +32,7 @@ namespace Services
                 throw new Exception("Ya existe una especialidad con ese nombre");
             }
 
-            _especialidadDao.crear(especialidad);
+            _especialidadDao.crear(especialidad);// Crear la especialidad
         }
 
         public void modificar(clsEspecialidadMedica especialidad)
