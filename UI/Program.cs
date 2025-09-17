@@ -25,8 +25,13 @@ namespace UI
         ApplicationConfiguration.Initialize();
         //Application.Run(new frmProductoLista());
 
+<<<<<<< HEAD
         //solo ejemplo
         Application.Run(new frmLogin());
+=======
+        
+        Application.Run(new frmActivos());
+>>>>>>> develop
 
         }
     }
