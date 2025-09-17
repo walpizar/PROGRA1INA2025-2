@@ -12,7 +12,6 @@ namespace Entities
 
         [ForeignKey("donacion")]
         public int idDonacion { get; set; }
-
         public decimal monto { get; set; }
         public int tipoTransaccion { get; set; }
         public int frecuencia { get; set; }
@@ -22,24 +21,20 @@ namespace Entities
 
         [StringLength(100)]
         public string descripcion { get; set; }
+        
+        //auditoria
+        public string usuarioCreacion { get; set; }
+        public DateTime fechaCreacion { get; set; }
+        public string usuarioModificacion { get; set; }
+        public DateTime? fechaModificacion { get; set; }
+        public bool estado { get; set; }
 
+
+        //relacion 1 a 1 con donacion
         public clsDonacion donacion { get; set; }
 
         public clsDonacionDinero() { }
 
-        public clsDonacionDinero(int idDonacion, decimal monto, int tipoTransaccion, int frecuencia, string moneda, string descripcion)
-        {
-            this.idDonacion = idDonacion;
-            this.monto = monto;
-            this.tipoTransaccion = tipoTransaccion;
-            this.frecuencia = frecuencia;
-            this.moneda = moneda;
-            this.descripcion = descripcion;
-        }
-
-        public override string ToString()
-        {
-            return $"idDonacionDinero: {idDonacionDinero}, idDonacion: {idDonacion}, monto: {monto}, tipoTransaccion: {tipoTransaccion}, frecuencia: {frecuencia}, moneda: {moneda}, descripcion: {descripcion}";
-        }
+        
     }
 }

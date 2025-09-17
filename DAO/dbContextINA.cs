@@ -86,13 +86,16 @@ namespace DAO
                 .HasForeignKey<clsMedico>(m => new { m.id, m.tipoId })
                 .OnDelete(DeleteBehavior.Restrict); // Evita el borrado en cascada
 
-
-            modelBuilder.Entity<clsDonante>()
-                .HasKey(m => new { m.personaId, m.personaTipoId });
+            //clsDonante configuracion de llave primaria compuesta
+            modelBuilder.Entity<clsDonante>().HasKey(m => new { m.personaId, m.personaTipoId });
+            modelBuilder.Entity<clsDonante>().Property(m => m.personaId)
+                .IsRequired()
+                .HasMaxLength(20)
+                .ValueGeneratedNever();
             // Relación 1 a 1 entre Donante y Persona
             modelBuilder.Entity<clsDonante>()
                 .HasOne(d => d.persona)
-                .WithOne(p => p.donante)
+                .WithOne()
                 .HasForeignKey<clsDonante>(d => new { d.personaId, d.personaTipoId })
                 .HasPrincipalKey<clsPersona>(p => new { p.id, p.tipoId });
 

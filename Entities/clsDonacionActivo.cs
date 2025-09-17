@@ -23,7 +23,17 @@ namespace Entities
 
         public string observaciones { get; set; }
 
+        //auditoria
+        public string usuarioCreacion { get; set; }
+        public DateTime fechaCreacion { get; set; }
+        public string usuarioModificacion { get; set; }
+        public DateTime? fechaModificacion { get; set; }
+        public bool estado { get; set; }
+        
+        //relacion muchos a 1 con donacion
         public clsDonacion donacion { get; set; }
+
+        //relacion muchos a 1 con activo
         public clsActivos activo { get; set; }
 
         public clsDonacionActivo() { }
@@ -37,9 +47,5 @@ namespace Entities
             this.observaciones = observaciones;
         }
 
-        public override string ToString()
-        {
-            return $"idDonacionActivo: {idDonacionActivo}, idDonacion: {idDonacion}, idActivo: {idActivo}, cantidad: {cantidad}, estadoActivo: {estadoActivo}, observaciones: {observaciones}";
-        }
     }
 }
