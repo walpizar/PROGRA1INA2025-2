@@ -40,7 +40,7 @@ namespace DAO
             {
                 // 🔹 Conexión a SQL Server LocalDB usando Named Pipe
                 optionsBuilder.UseSqlServer(
-                    @"Server=np:\\.\pipe\LOCALDB#E41FE673\tsql\query;Database=dbPaleativoGarabito;Trusted_Connection=True;MultipleActiveResultSets=True;TrustServerCertificate=True;");
+                    @"Server= np:\\.\pipe\LOCALDB#8ACAAFE2\tsql\query;Database=dbPaleativoGarabito;Trusted_Connection=True;MultipleActiveResultSets=True;TrustServerCertificate=True;");
             }
         }
 

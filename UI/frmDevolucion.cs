@@ -191,19 +191,49 @@ namespace UI
 
         private void cargarActivos()
         {
-            // Mostrar solo activos con estado "Prestado" o "En uso"
-            List<clsActivos> activos = _activosService.consultarTodos();
-            var filtrados = activos
-                .Where(a => a != null && !string.IsNullOrWhiteSpace(a.estado))
-                .Where(a =>
-                    a.estado.Equals("Prestado", StringComparison.OrdinalIgnoreCase) ||
-                    a.estado.Equals("En uso", StringComparison.OrdinalIgnoreCase))
-                .OrderBy(a => a.nombreActivo)
-                .ToList();
+            try
+            {
+                // Obtener desde BD vía servicio (DAO -> dbContext)
+                var activos = _activosService.consultarTodos() ?? new List<clsActivos>();
 
-            cboActivo.DataSource = filtrados;
-            cboActivo.DisplayMember = nameof(clsActivos.nombreActivo);
-            cboActivo.ValueMember = nameof(clsActivos.idActivo);
+                var filtrados = activos
+                    .Where(a => a != null && !string.IsNullOrWhiteSpace(a.estado))
+                    .Where(a =>
+                        a.estado.Equals("Prestado", StringComparison.OrdinalIgnoreCase) ||
+                        a.estado.Equals("En uso", StringComparison.OrdinalIgnoreCase))
+                    .OrderBy(a => a.nombreActivo)
+                    .ToList();
+
+                // Si se está editando y el activo seleccionado no cumple el filtro,
+                // lo agregamos para permitir visualizar/editar la devolución.
+                if (devolucionSelected != null &&
+                    filtrados.All(a => a.idActivo != devolucionSelected.idActivoFK))
+                {
+                    var seleccionado = _activosService.consultarPorID(devolucionSelected.idActivoFK);
+                    if (seleccionado != null)
+                    {
+                        filtrados.Insert(0, seleccionado);
+                    }
+                }
+
+                // Reasignar DataSource de forma segura
+                cboActivo.DataSource = null;
+                cboActivo.DisplayMember = nameof(clsActivos.nombreActivo);
+                cboActivo.ValueMember = nameof(clsActivos.idActivo);
+                cboActivo.DataSource = filtrados;
+
+                if (filtrados.Count == 0)
+                {
+                    cboActivo.SelectedIndex = -1;
+                    MessageBox.Show("No hay activos en estado 'Prestado' o 'En uso' disponibles para devolución.");
+                }
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Error al cargar los activos desde la base de datos.");
+                cboActivo.DataSource = null;
+                cboActivo.Items.Clear();
+            }
         }
 
         private void btnGuardar_Click(object sender, EventArgs e)
