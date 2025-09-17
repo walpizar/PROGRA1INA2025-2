@@ -25,11 +25,10 @@ namespace UI
 
         private void frmPuestosLista_Load(object sender, EventArgs e)
         {
-            // Configuración del ListView
             lstvListaPuestos.View = View.Details;
             lstvListaPuestos.FullRowSelect = true;
             lstvListaPuestos.GridLines = true;
-            lstvListaPuestos.HideSelection = false; // Mantiene selección visible
+            lstvListaPuestos.HideSelection = false;
 
             if (lstvListaPuestos.Columns.Count == 0)
             {
@@ -42,7 +41,6 @@ namespace UI
 
             CargarPuestos();
 
-            // Asegurar que el evento esté conectado
             lstvListaPuestos.MouseDoubleClick -= lstvListaPuestos_MouseDoubleClick_1;
             lstvListaPuestos.MouseDoubleClick += lstvListaPuestos_MouseDoubleClick_1;
         }
@@ -51,7 +49,7 @@ namespace UI
         {
             try
             {
-                _cache = _svc.consultarTodos(); // CORREGIDO: Sin asteriscos
+                _cache = _svc.consultarTodos();
                 RefrescarListView(_cache);
             }
             catch (Exception ex)
@@ -71,9 +69,9 @@ namespace UI
                 item.SubItems.Add(p.Nombre ?? "");
                 item.SubItems.Add(p.descripcion ?? "");
                 item.SubItems.Add(p.Estado ? "ACTIVO" : "INACTIVO");
-                item.SubItems.Add(p.Departamento?.Nombre ?? "Sin departamento");
-
-                item.Tag = p.idPuesto; // Guardamos el ID para referencia
+                item.SubItems.Add(p.Departamento?.Nombre ?? "Sin departamento")
+                // Guardamos el ID para referencia
+                item.Tag = p.idPuesto;
 
                 // Cambiar color para puestos inactivos
                 if (!p.Estado)
@@ -92,12 +90,12 @@ namespace UI
         private void btnNuevo_Click_1(object sender, EventArgs e)
         {
             try
-            {
-                using (var frm = new frmPuestos()) // Crear nuevo puesto
+            {// Crear nuevo puesto
+                using (var frm = new frmPuestos())
                 {
                     if (frm.ShowDialog(this) == DialogResult.OK)
                     {
-                        CargarPuestos(); // Refrescar lista después de crear
+                        CargarPuestos();
                     }
                 }
             }
@@ -145,11 +143,12 @@ namespace UI
 
                 int puestoId = Convert.ToInt32(lstvListaPuestos.SelectedItems[0].Tag);
 
-                using (var frm = new frmPuestos(puestoId)) // Editar puesto existente
+                // Editar puesto existente
+                using (var frm = new frmPuestos(puestoId))
                 {
                     if (frm.ShowDialog(this) == DialogResult.OK)
                     {
-                        CargarPuestos(); // Refrescar lista después de editar
+                        CargarPuestos();
                     }
                 }
             }
@@ -158,38 +157,6 @@ namespace UI
                 MessageBox.Show($"Error al abrir el editor: {ex.Message}",
                     "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-        }
-
-        // Método opcional para filtrar solo activos/inactivos
-        private void btnFiltrarActivos_Click(object sender, EventArgs e)
-        {
-            var activos = _cache.Where(p => p.Estado).ToList();
-            RefrescarListView(activos);
-        }
-
-        private void btnFiltrarInactivos_Click(object sender, EventArgs e)
-        {
-            var inactivos = _cache.Where(p => !p.Estado).ToList();
-            RefrescarListView(inactivos);
-        }
-
-        private void btnMostrarTodos_Click(object sender, EventArgs e)
-        {
-            RefrescarListView(_cache);
-        }
-
-        // Método opcional para botón de editar si lo tienes
-        private void btnEditar_Click(object sender, EventArgs e)
-        {
-            if (lstvListaPuestos.SelectedItems.Count == 0)
-            {
-                MessageBox.Show("Debe seleccionar un puesto para editar.",
-                    "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                return;
-            }
-
-            // Simular doble click
-            lstvListaPuestos_MouseDoubleClick_1(sender, null);
         }
     }
 }

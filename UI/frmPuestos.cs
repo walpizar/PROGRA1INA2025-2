@@ -48,7 +48,7 @@ namespace UI
                 btnInactivar.Visible = false;
                 btnActivar.Visible = false;
 
-                // Campo código habilitado y con placeholder
+                // Campo código habilitado y con un ejemplo
                 txtCodigo.Text = "";
                 txtCodigo.Enabled = true;
                 txtCodigo.PlaceholderText = "Ej: ADM-JEF-001, RRHH-ASI-001";
@@ -91,9 +91,9 @@ namespace UI
 
                 if (_puesto == null)
                 {
-                    // CREAR - ID será autoincremental
+                    // CREAR
                     var p = new clsPuestos(
-                        txtCodigo.Text.Trim().ToUpper(), // Normalizar a mayúsculas
+                        txtCodigo.Text.Trim().ToUpper(),
                         txtNombre.Text.Trim(),
                         Convert.ToInt32(cboDepartamento.SelectedValue),
                         "admin")
@@ -138,9 +138,8 @@ namespace UI
                     "Inactivar puesto",
                     "");
 
-                // Si el usuario cancela, motivo será "" (cadena vacía) o null según la versión.
-                // Mejor usar: if (string.IsNullOrEmpty(motivo) && motivo != null) return;
-                if (motivo == null) return; // Cancelar
+                // Si se toca cancelar, motivo será "" o null
+                if (motivo == null) return;
                 motivo = motivo.Trim();
 
                 if (motivo == "")
@@ -169,7 +168,7 @@ namespace UI
         {
             try
             {
-                // defensa: si ya está activo, no tiene sentido
+                // si ya está activo, no tiene sentido
                 if (_puesto != null && _puesto.Estado)
                 {
                     MessageBox.Show("El puesto ya está activo.");
@@ -179,7 +178,7 @@ namespace UI
                 _svc.reactivar(_puesto.idPuesto, "admin");
 
                 MessageBox.Show("Puesto reactivado.");
-                DialogResult = DialogResult.OK; // <- para que frmPuestosLista recargue
+                DialogResult = DialogResult.OK;
                 Close();
             }
             catch (Exception ex)
@@ -200,7 +199,6 @@ namespace UI
             {
                 if (frm.ShowDialog(this) == DialogResult.OK)
                 {
-                    // Recargar departamentos
                     var deps = _depSvc.consultarTodos();
                     cboDepartamento.DataSource = null;
                     cboDepartamento.DataSource = deps;

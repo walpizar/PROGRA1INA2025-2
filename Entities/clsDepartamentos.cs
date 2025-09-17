@@ -15,7 +15,7 @@ namespace Entities
     public class clsDepartamentos
     {
         [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)] // Explicitly set as IDENTITY
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int idDepartamento { get; set; }
 
         [Required]

@@ -33,7 +33,7 @@ namespace Services
         {
             ValidarCampos(d);
 
-            // Validar código funcional (NO el ID autoincremental)
+            // Validar código personalizado (NO el ID autoincremental)
             if (string.IsNullOrWhiteSpace(d.codigoDepartamento))
                 throw new Exception("El código del departamento es obligatorio.");
 
@@ -92,14 +92,14 @@ namespace Services
             if (string.IsNullOrWhiteSpace(d.descripcionDepartamento))
                 throw new Exception("La descripción del departamento es obligatoria.");
 
-            // Validación de código funcional único (excluyendo el actual)
+            // Validación de código funcional único
             var codigoDup = _dao.consultarTodos()
                 .Any(x => x.idDepartamento != d.idDepartamento &&
                           x.codigoDepartamento.Trim().ToUpper() == d.codigoDepartamento.Trim().ToUpper());
             if (codigoDup)
                 throw new Exception("Ya existe otro departamento con ese código.");
 
-            // Validación de nombre único (excluyendo el actual)
+            // Validación de nombre único
             var nombreDup = _dao.consultarTodos()
                 .Any(x => x.idDepartamento != d.idDepartamento &&
                           x.Nombre.Trim().ToUpper() == d.Nombre.Trim().ToUpper());

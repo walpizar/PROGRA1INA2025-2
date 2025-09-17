@@ -30,7 +30,7 @@ namespace Entities
 
         [StringLength(250, ErrorMessage = "La descripción no puede tener más de 250 caracteres")]
         [Column(TypeName = "NVARCHAR(250)")]
-        public string? descripcion { get; set; } // NULLABLE
+        public string? descripcion { get; set; }
 
         [Required]
         public int idDepartamento { get; set; }
@@ -38,10 +38,9 @@ namespace Entities
         [ForeignKey("idDepartamento")]
         public virtual clsDepartamentos Departamento { get; set; }
 
-        // CAMPO NULLABLE - Esta es la clave para el error que tenías
         [StringLength(300, ErrorMessage = "El motivo no puede tener más de 300 caracteres")]
         [Column(TypeName = "NVARCHAR(300)")]
-        public string? motivoInactivo { get; set; } = null; // NULLABLE - puestos activos no tienen motivo
+        public string? motivoInactivo { get; set; } = null;
 
         // Estado y auditoría
         [Required]
@@ -74,14 +73,14 @@ namespace Entities
             this.usuario_crea = usuario;
             this.fecha_crea = DateTime.UtcNow;
             this.Estado = true;
-            this.motivoInactivo = null; // NULL para puestos activos
+            this.motivoInactivo = null;
         }
 
         // Métodos
         public void Inactivar(string motivo, string usuario)
         {
             this.Estado = false;
-            this.motivoInactivo = motivo; // Aquí SÍ se asigna el motivo
+            this.motivoInactivo = motivo;
             this.usuario_ult_mod = usuario;
             this.fecha_ult_mod = DateTime.UtcNow;
         }
@@ -89,7 +88,7 @@ namespace Entities
         public void Reactivar(string usuario)
         {
             this.Estado = true;
-            this.motivoInactivo = null; // Vuelve a NULL al reactivar
+            this.motivoInactivo = null;
             this.usuario_ult_mod = usuario;
             this.fecha_ult_mod = DateTime.UtcNow;
         }

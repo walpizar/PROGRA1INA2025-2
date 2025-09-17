@@ -41,7 +41,7 @@ namespace UI
                 txtCodigo.Text = "";
                 txtCodigo.Enabled = true;
                 txtCodigo.BackColor = SystemColors.Window;
-                txtCodigo.Focus(); // Poner foco en código
+                txtCodigo.Focus();
 
                 txtNombre.Text = "";
                 txtDescripcion.Text = "";
@@ -67,7 +67,7 @@ namespace UI
                 btnEliminar.Visible = true;
             }
 
-            // Agregar placeholder o ejemplo en el campo código
+            // Agregar ejemplo en el campo código
             if (txtCodigo.Text == "")
             {
                 txtCodigo.PlaceholderText = "Ej: ADM-001, RRHH-001, IT-001";
@@ -85,7 +85,7 @@ namespace UI
             {
                 if (_dep == null)
                 {
-                    // CREAR - ID será autoincremental
+                    // CREAR 
                     var d = new clsDepartamentos
                     {
                         // idDepartamento se asigna automáticamente

@@ -80,7 +80,7 @@ namespace Services
 
             p.Inactivar(motivo.Trim(), string.IsNullOrWhiteSpace(usuario) ? "system" : usuario);
 
-            // auditoría (por si tu método de dominio no la toca)
+            // auditoría
             p.fecha_ult_mod = DateTime.UtcNow;
             p.usuario_ult_mod = string.IsNullOrWhiteSpace(usuario) ? "system" : usuario;
 
@@ -115,14 +115,14 @@ namespace Services
             if (string.IsNullOrWhiteSpace(p.Nombre))
                 throw new Exception("El nombre es obligatorio");
 
-            // Validación de código único (excluyendo el actual)
+            // Validación de código único
             var codigoDup = _dao.consultarTodos()
                     .Any(x => x.idPuesto != p.idPuesto &&
                               x.codigo.Trim().ToUpper() == p.codigo.Trim().ToUpper());
             if (codigoDup)
                 throw new Exception("Ya existe un puesto con ese código.");
 
-            // Validar nombre único en el mismo departamento (solo activos, excluyendo el actual)
+            // Validar nombre único en el mismo departamento (solo activos)
             if (p.Estado)
             {
                 var nombreDup = _dao.consultarTodos()
@@ -148,7 +148,7 @@ namespace Services
                 throw new Exception("Nombre es obligatorio y ≤ 100.");
             if (p.descripcion != null && p.descripcion.Length > 250)
                 throw new Exception("La descripción debe ser ≤ 250.");
-            // Motivo: obligatorio al INACTIVAR, prohibido cuando ACTIVO aqui solo se ve que si esta activo no cargue el motivo.
+            // Motivo: obligatorio al INACTIVAR, prohibido cuando ACTIVO aqui solo se ve que si esta activo no cargue el motivo
             if (p.Estado && !string.IsNullOrWhiteSpace(p.motivoInactivo))
                 throw new Exception("No debe indicar motivo cuando el puesto está activo.");
         }

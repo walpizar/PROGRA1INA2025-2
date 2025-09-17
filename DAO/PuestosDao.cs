@@ -34,7 +34,7 @@ namespace DAO
             return ctx.puestos
                       .AsNoTracking()
                       .Include(p => p.Departamento)
-                      .Where(p => p.Nombre != null)  // Filtrar puestos con Nombre NULL
+                      .Where(p => p.Nombre != null)
                       .ToList();
         }
 
