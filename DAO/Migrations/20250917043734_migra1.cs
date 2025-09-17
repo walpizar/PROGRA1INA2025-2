@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace DAO.Migrations
 {
     /// <inheritdoc />
-    public partial class incial : Migration
+    public partial class migra1 : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -63,8 +63,7 @@ namespace DAO.Migrations
                 name: "tbEspecialidadMedica",
                 columns: table => new
                 {
-                    idEspecialidadMedica = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
+                    idEspecialidadMedica = table.Column<int>(type: "int", nullable: false),
                     nombreEspecialidad = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
                     descripcion = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: false),
                     estado = table.Column<bool>(type: "bit", nullable: false)

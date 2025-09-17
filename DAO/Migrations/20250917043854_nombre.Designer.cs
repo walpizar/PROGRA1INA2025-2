@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DAO.Migrations
 {
     [DbContext(typeof(dbContextINA))]
-    [Migration("20250916155514_incial")]
-    partial class incial
+    [Migration("20250917043854_nombre")]
+    partial class nombre
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -354,10 +354,7 @@ namespace DAO.Migrations
             modelBuilder.Entity("Entities.clsEspecialidadMedica", b =>
                 {
                     b.Property<int>("idEspecialidadMedica")
-                        .ValueGeneratedOnAdd()
                         .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("idEspecialidadMedica"));
 
                     b.Property<string>("descripcion")
                         .IsRequired()
