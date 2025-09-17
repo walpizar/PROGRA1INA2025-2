@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DAO.Migrations
 {
     [DbContext(typeof(dbContextINA))]
-    [Migration("20250903151022_base datos1")]
-    partial class basedatos1
+    [Migration("20250917014656_Inicial")]
+    partial class Inicial
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -75,30 +75,95 @@ namespace DAO.Migrations
                     b.ToTable("tbActivos");
                 });
 
-            modelBuilder.Entity("Entities.clsCategoriaActivos", b =>
+            modelBuilder.Entity("Entities.clsCategoria", b =>
                 {
-                    b.Property<int>("IdCategoria")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("IdCategoria"));
-
-                    b.Property<string>("Descripcion")
-                        .IsRequired()
-                        .HasMaxLength(200)
-                        .HasColumnType("nvarchar(200)");
-
-                    b.Property<bool>("Estado")
-                        .HasColumnType("bit");
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("Nombre")
                         .IsRequired()
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
-                    b.HasKey("IdCategoria");
+                    b.Property<string>("descripcion")
+                        .IsRequired()
+                        .HasMaxLength(200)
+                        .HasColumnType("nvarchar(200)");
+
+                    b.Property<bool>("estado")
+                        .HasColumnType("bit");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("tbCategorias");
+                });
+
+            modelBuilder.Entity("Entities.clsCategoriaActivos", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("descripcion")
+                        .IsRequired()
+                        .HasMaxLength(200)
+                        .HasColumnType("nvarchar(200)");
+
+                    b.Property<bool>("estado")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("nombre")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.HasKey("Id");
 
                     b.ToTable("tbCategoriasActivos");
+                });
+
+            modelBuilder.Entity("Entities.clsCliente", b =>
+                {
+                    b.Property<int>("id")
+                        .HasColumnType("int");
+
+                    b.Property<string>("apellido1")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<string>("apellido2")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<string>("email")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<bool>("estado")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime>("fechaNac")
+                        .HasColumnType("datetime2");
+
+                    b.Property<short>("genero")
+                        .HasColumnType("smallint");
+
+                    b.Property<string>("nombre")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.HasKey("id");
+
+                    b.ToTable("tbClientes");
                 });
 
             modelBuilder.Entity("Entities.clsDepartamentos", b =>
@@ -325,6 +390,36 @@ namespace DAO.Migrations
                     b.ToTable("tbPersonas");
                 });
 
+            modelBuilder.Entity("Entities.clsProducto", b =>
+                {
+                    b.Property<int>("id")
+                        .HasColumnType("int");
+
+                    b.Property<int>("CategoriaId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("cantidad")
+                        .HasColumnType("int")
+                        .HasColumnName("cantidad");
+
+                    b.Property<int>("familia")
+                        .HasColumnType("int");
+
+                    b.Property<string>("nombre")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<int>("precio")
+                        .HasColumnType("int");
+
+                    b.HasKey("id");
+
+                    b.HasIndex("CategoriaId");
+
+                    b.ToTable("tbProductos");
+                });
+
             modelBuilder.Entity("Entities.clsPuestos", b =>
                 {
                     b.Property<int>("idPuesto")
@@ -384,7 +479,7 @@ namespace DAO.Migrations
             modelBuilder.Entity("Entities.clsActivos", b =>
                 {
                     b.HasOne("Entities.clsCategoriaActivos", "Categoria")
-                        .WithMany()
+                        .WithMany("Activos")
                         .HasForeignKey("IdCategoria")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -423,6 +518,17 @@ namespace DAO.Migrations
                     b.Navigation("persona");
                 });
 
+            modelBuilder.Entity("Entities.clsProducto", b =>
+                {
+                    b.HasOne("Entities.clsCategoria", "Categoria")
+                        .WithMany("Productos")
+                        .HasForeignKey("CategoriaId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Categoria");
+                });
+
             modelBuilder.Entity("Entities.clsPuestos", b =>
                 {
                     b.HasOne("Entities.clsDepartamentos", "Departamento")
@@ -437,6 +543,16 @@ namespace DAO.Migrations
             modelBuilder.Entity("Entities.clsActivos", b =>
                 {
                     b.Navigation("Devoluciones");
+                });
+
+            modelBuilder.Entity("Entities.clsCategoria", b =>
+                {
+                    b.Navigation("Productos");
+                });
+
+            modelBuilder.Entity("Entities.clsCategoriaActivos", b =>
+                {
+                    b.Navigation("Activos");
                 });
 
             modelBuilder.Entity("Entities.clsDepartamentos", b =>

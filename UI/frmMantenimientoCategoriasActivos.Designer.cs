@@ -42,13 +42,13 @@
             groupBox1 = new GroupBox();
             label7 = new Label();
             listView1 = new ListView();
-            button4 = new Button();
-            button3 = new Button();
-            button2 = new Button();
             columnid = new ColumnHeader();
             columnnombre = new ColumnHeader();
             columndescripcion = new ColumnHeader();
             columnestado = new ColumnHeader();
+            button4 = new Button();
+            button3 = new Button();
+            button2 = new Button();
             gbxLogin.SuspendLayout();
             groupBox1.SuspendLayout();
             SuspendLayout();
@@ -62,7 +62,6 @@
             label1.Size = new Size(520, 45);
             label1.TabIndex = 0;
             label1.Text = "Mantenimiente Categoria Activos";
-      
             // 
             // gbxLogin
             // 
@@ -150,6 +149,7 @@
             button1.TabIndex = 2;
             button1.Text = "Guardar";
             button1.UseVisualStyleBackColor = true;
+            button1.Click += button1_Click;
             // 
             // checkBox1
             // 
@@ -160,7 +160,6 @@
             checkBox1.TabIndex = 0;
             checkBox1.Text = "estado activo";
             checkBox1.UseVisualStyleBackColor = true;
-    
             // 
             // groupBox1
             // 
@@ -174,7 +173,6 @@
             groupBox1.Size = new Size(551, 223);
             groupBox1.TabIndex = 6;
             groupBox1.TabStop = false;
- 
             // 
             // label7
             // 
@@ -185,7 +183,7 @@
             label7.Size = new Size(169, 20);
             label7.TabIndex = 6;
             label7.Text = "Lista Categoria Activos";
-   
+            // 
             // listView1
             // 
             listView1.Columns.AddRange(new ColumnHeader[] { columnid, columnnombre, columndescripcion, columnestado });
@@ -195,34 +193,6 @@
             listView1.TabIndex = 9;
             listView1.UseCompatibleStateImageBehavior = false;
             listView1.View = View.Details;
- 
-            // 
-            // button4
-            // 
-            button4.Location = new Point(470, 101);
-            button4.Name = "button4";
-            button4.Size = new Size(75, 23);
-            button4.TabIndex = 8;
-            button4.Text = "actualizar";
-            button4.UseVisualStyleBackColor = true;
-            // 
-            // button3
-            // 
-            button3.Location = new Point(470, 72);
-            button3.Name = "button3";
-            button3.Size = new Size(75, 23);
-            button3.TabIndex = 7;
-            button3.Text = "modificar";
-            button3.UseVisualStyleBackColor = true;
-            // 
-            // button2
-            // 
-            button2.Location = new Point(470, 43);
-            button2.Name = "button2";
-            button2.Size = new Size(75, 23);
-            button2.TabIndex = 6;
-            button2.Text = "eliminar";
-            button2.UseVisualStyleBackColor = true;
             // 
             // columnid
             // 
@@ -240,6 +210,36 @@
             // columnestado
             // 
             columnestado.Text = "estado";
+            // 
+            // button4
+            // 
+            button4.Location = new Point(470, 101);
+            button4.Name = "button4";
+            button4.Size = new Size(75, 23);
+            button4.TabIndex = 8;
+            button4.Text = "actualizar";
+            button4.UseVisualStyleBackColor = true;
+            button4.Click += button4_Click;
+            // 
+            // button3
+            // 
+            button3.Location = new Point(470, 72);
+            button3.Name = "button3";
+            button3.Size = new Size(75, 23);
+            button3.TabIndex = 7;
+            button3.Text = "modificar";
+            button3.UseVisualStyleBackColor = true;
+            button3.Click += button3_Click;
+            // 
+            // button2
+            // 
+            button2.Location = new Point(470, 43);
+            button2.Name = "button2";
+            button2.Size = new Size(75, 23);
+            button2.TabIndex = 6;
+            button2.Text = "eliminar";
+            button2.UseVisualStyleBackColor = true;
+            button2.Click += button2_Click;
             // 
             // frmMantenimientoCategoriasActivos
             // 

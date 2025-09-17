@@ -6,24 +6,57 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace DAO.Migrations
 {
     /// <inheritdoc />
-    public partial class basedatos1 : Migration
+    public partial class Inicial : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "tbCategoriasActivos",
+                name: "tbCategorias",
                 columns: table => new
                 {
-                    IdCategoria = table.Column<int>(type: "int", nullable: false)
+                    Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Nombre = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
-                    Descripcion = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: false),
-                    Estado = table.Column<bool>(type: "bit", nullable: false)
+                    descripcion = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: false),
+                    estado = table.Column<bool>(type: "bit", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_tbCategoriasActivos", x => x.IdCategoria);
+                    table.PrimaryKey("PK_tbCategorias", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "tbCategoriasActivos",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    nombre = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    descripcion = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: false),
+                    estado = table.Column<bool>(type: "bit", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_tbCategoriasActivos", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "tbClientes",
+                columns: table => new
+                {
+                    id = table.Column<int>(type: "int", nullable: false),
+                    nombre = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    apellido1 = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    apellido2 = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    genero = table.Column<short>(type: "smallint", nullable: false),
+                    fechaNac = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    email = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
+                    estado = table.Column<bool>(type: "bit", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_tbClientes", x => x.id);
                 });
 
             migrationBuilder.CreateTable(
@@ -79,6 +112,28 @@ namespace DAO.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "tbProductos",
+                columns: table => new
+                {
+                    id = table.Column<int>(type: "int", nullable: false),
+                    nombre = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    precio = table.Column<int>(type: "int", nullable: false),
+                    cantidad = table.Column<int>(type: "int", nullable: false),
+                    familia = table.Column<int>(type: "int", nullable: false),
+                    CategoriaId = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_tbProductos", x => x.id);
+                    table.ForeignKey(
+                        name: "FK_tbProductos_tbCategorias_CategoriaId",
+                        column: x => x.CategoriaId,
+                        principalTable: "tbCategorias",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "tbActivos",
                 columns: table => new
                 {
@@ -100,7 +155,7 @@ namespace DAO.Migrations
                         name: "FK_tbActivos_tbCategoriasActivos_IdCategoria",
                         column: x => x.IdCategoria,
                         principalTable: "tbCategoriasActivos",
-                        principalColumn: "IdCategoria",
+                        principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
@@ -220,6 +275,11 @@ namespace DAO.Migrations
                 columns: new[] { "Personaid", "PersonatipoId" });
 
             migrationBuilder.CreateIndex(
+                name: "IX_tbProductos_CategoriaId",
+                table: "tbProductos",
+                column: "CategoriaId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_tbPuestos_idDepartamento",
                 table: "tbPuestos",
                 column: "idDepartamento");
@@ -228,6 +288,9 @@ namespace DAO.Migrations
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.DropTable(
+                name: "tbClientes");
+
             migrationBuilder.DropTable(
                 name: "tbDevolucion");
 
@@ -241,6 +304,9 @@ namespace DAO.Migrations
                 name: "tbMedico");
 
             migrationBuilder.DropTable(
+                name: "tbProductos");
+
+            migrationBuilder.DropTable(
                 name: "tbPuestos");
 
             migrationBuilder.DropTable(
@@ -248,6 +314,9 @@ namespace DAO.Migrations
 
             migrationBuilder.DropTable(
                 name: "tbPersonas");
+
+            migrationBuilder.DropTable(
+                name: "tbCategorias");
 
             migrationBuilder.DropTable(
                 name: "tbDepartamento");
