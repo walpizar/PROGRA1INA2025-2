@@ -45,19 +45,19 @@ namespace UI
             //clsProducto prod1 = new clsProducto();
             //clsProducto prod2 = new clsProducto();
             //clsProducto prod3 = new clsProducto();
-            clsProducto prodX = new clsProducto();
+            //clsProducto prodX = new clsProducto();
 
 
 
 
-            for (int j = 0; j < 10; j++)
+            /*for (int j = 0; j < 10; j++)
             {
                 //clsProducto prodX = new clsProducto();
             
                 prodX.nombre="";             
       
 
-            }
+            }*/
 
 
 
