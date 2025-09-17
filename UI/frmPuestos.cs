@@ -193,5 +193,26 @@ namespace UI
         {
 
         }
+
+        private void btnNuevoDepartamento_Click(object sender, EventArgs e)
+        {
+            using (var frm = new frmDepartamentosLista())
+            {
+                if (frm.ShowDialog(this) == DialogResult.OK)
+                {
+                    // Recargar departamentos
+                    var deps = _depSvc.consultarTodos();
+                    cboDepartamento.DataSource = null;
+                    cboDepartamento.DataSource = deps;
+                    cboDepartamento.DisplayMember = "Nombre";
+                    cboDepartamento.ValueMember = "idDepartamento";
+
+                    // Seleccionar el recién creado
+                    var ultimo = deps.OrderByDescending(d => d.idDepartamento).FirstOrDefault();
+                    if (ultimo != null)
+                        cboDepartamento.SelectedValue = ultimo.idDepartamento;
+                }
+            }
+        }
     }
 }

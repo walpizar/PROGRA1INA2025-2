@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             gbxDatosPuesto = new GroupBox();
+            btnNuevoDepartamento = new Button();
             cboDepartamento = new ComboBox();
             lblElegirDept = new Label();
             txtDescripcion = new TextBox();
@@ -47,6 +48,7 @@
             // 
             // gbxDatosPuesto
             // 
+            gbxDatosPuesto.Controls.Add(btnNuevoDepartamento);
             gbxDatosPuesto.Controls.Add(cboDepartamento);
             gbxDatosPuesto.Controls.Add(lblElegirDept);
             gbxDatosPuesto.Controls.Add(txtDescripcion);
@@ -61,6 +63,16 @@
             gbxDatosPuesto.TabIndex = 10;
             gbxDatosPuesto.TabStop = false;
             gbxDatosPuesto.Text = "Datos del Puesto";
+            // 
+            // btnNuevoDepartamento
+            // 
+            btnNuevoDepartamento.Location = new Point(346, 145);
+            btnNuevoDepartamento.Name = "btnNuevoDepartamento";
+            btnNuevoDepartamento.Size = new Size(62, 23);
+            btnNuevoDepartamento.TabIndex = 14;
+            btnNuevoDepartamento.Text = "Nuevo";
+            btnNuevoDepartamento.UseVisualStyleBackColor = true;
+            btnNuevoDepartamento.Click += btnNuevoDepartamento_Click;
             // 
             // cboDepartamento
             // 
@@ -215,5 +227,6 @@
         private Button btnCancelar;
         private Button btnGuardar;
         private Label lblTitulo;
+        private Button btnNuevoDepartamento;
     }
 }

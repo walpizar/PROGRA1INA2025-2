@@ -67,6 +67,7 @@
             txtBusqueda.Name = "txtBusqueda";
             txtBusqueda.Size = new Size(552, 23);
             txtBusqueda.TabIndex = 2;
+            txtBusqueda.TextChanged += txtBusqueda_TextChanged;
             // 
             // lstvListaDept
             // 

@@ -174,5 +174,32 @@ namespace UI
                     "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+
+        private void txtBusqueda_TextChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                string query = txtBusqueda.Text.Trim().ToUpper();
+
+                if (string.IsNullOrWhiteSpace(query))
+                {
+                    RefrescarListView(_cache);
+                    return;
+                }
+
+                var filtrados = _cache.Where(p =>
+                       p.idDepartamento.ToString().Contains(query)
+                    || (p.Nombre ?? "").ToUpper().Contains(query)
+                    || (p.descripcionDepartamento ?? "").ToUpper().Contains(query)
+                ).ToList();
+
+                RefrescarListView(filtrados);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error en la búsqueda: {ex.Message}",
+                    "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
     }
 }
