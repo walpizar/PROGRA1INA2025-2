@@ -1,7 +1,6 @@
 ﻿using Common.Exceptions;
 using DAO;
 using Entities;
-using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,19 +22,12 @@ using System.Threading.Tasks;
             _permisoDao = new PermisoDAO();
         }
 
-<<<<<<< Updated upstream
-        /* Ejemplo: Validar si un rol tiene permiso para una acción
-        public async Task<bool> TienePermisoAsync(int idRol, int idModulo, string accion)
-        {
-            var p = await _permisoDao.GetPermisoByRolAndModuleAsync(idRol, idModulo);
-=======
         public class PermisosDTO//OBTENER SOLO PERMISOS
         {
             public bool Consultar { get; set; }
             public bool Crear { get; set; }
             public bool Editar { get; set; }
             public bool Eliminar { get; set; }
->>>>>>> Stashed changes
 
         }
 
@@ -53,19 +45,8 @@ using System.Threading.Tasks;
                 Editar = permiso.editar,
                 Eliminar = permiso.eliminar
             };
-        }*/
+        }
 
-<<<<<<< Updated upstream
-        // Otros métodos combinados de negocio
-       /* public async Task<List<clsPermisos>> ObtenerPermisosPorRolYModulo(int idRol, int idModulo)
-        {
-            var permisos = await _permisoDao.GetAllAsync();
-           
-            return permisos
-                         .Where(p => p.RolPermisos.Any(rp => rp.idRol == idRol && rp.idModulo == idModulo))
-                         .ToList();
-        }*/
-=======
         public List<clsRol> consultarRoles()
         {
             return _rolDao.consultarTodos();
@@ -117,6 +98,5 @@ using System.Threading.Tasks;
         {
             _permisoDao.eliminarP(permi);
         }
->>>>>>> Stashed changes
     }
 }

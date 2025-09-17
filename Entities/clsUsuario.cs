@@ -27,14 +27,11 @@ namespace Entities
         [StringLength(100, ErrorMessage = "El correo electrónico no puede tener más de 100 caracteres")]
         public string email { get; set; }
 
-<<<<<<< Updated upstream
         public bool estado { get; set; }
 
         public clsPersona persona { get; set; }
-=======
         // Propiedad de navegación para acceder a los datos de la persona vinculada.
         // Esto crea un enlace a la clase clsPersona.
->>>>>>> Stashed changes
 
         public clsUsuario() { }
 

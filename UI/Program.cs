@@ -15,7 +15,6 @@ namespace UI
                 // Pasamos los DAO al servicio
                 SeguridadService seguridadService = new SeguridadService();
 
-<<<<<<< Updated upstream
 
             
             //ProductoService _productoServ = new ProductoService();
@@ -30,11 +29,9 @@ namespace UI
         
         Application.Run(new frmActivos());
 
-=======
                 // Inyectamos el servicio en el formulario
                 Application.Run(new frmMantenimientoRoles(seguridadService));
             }
->>>>>>> Stashed changes
         }
     }
 }

@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace DAO
 {
-    public class ModuloDAO : IGenerica<clsModulo>
+    public class ModuloDAO : IPermisosRolModulo<clsModulo>
     {
         private dbContextINA _context;//se le quito el readonly
 

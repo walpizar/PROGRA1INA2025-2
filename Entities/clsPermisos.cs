@@ -1,14 +1,14 @@
 ﻿using System;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-<<<<<<< Updated upstream
-=======
+
 using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 //DONDE ESTOY USANDO LAS PROPIEDADES DE NAVEGACION???????   SI NO LAS USO NO LAS NECESITO
->>>>>>> Stashed changes
+
 
 namespace Entities
 {

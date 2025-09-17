@@ -40,7 +40,6 @@ namespace DAO
         }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-<<<<<<< Updated upstream
 
             base.OnModelCreating(modelBuilder);//
 

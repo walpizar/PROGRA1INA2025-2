@@ -11,13 +11,6 @@ namespace Entities
         [Key]
         public int idDonacion { get; set; }
 
-<<<<<<< Updated upstream
-        //[ForeignKey("donante")]
-        //public int idDonante { get; set; }
-=======
-        // Relación: Una Donación pertenece a un Donante
->>>>>>> Stashed changes
-
         public DateTime fechaDonacion { get; set; }
         public int tipoDonacion { get; set; }
         public string observaciones { get; set; }

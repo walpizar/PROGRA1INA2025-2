@@ -7,11 +7,7 @@ using Entities;
 
 namespace Entities
 {
-<<<<<<< Updated upstream
     [Table("tbRolPermiso")]
-=======
-    [Table("tb_RolesPermisos")]//NO SE USA //NO USAR
->>>>>>> Stashed changes
     public class clsRolPermiso
     {
         //llave primaria compuesta
@@ -22,6 +18,5 @@ namespace Entities
 
         //relaciones con clsRol y clsPermisos
         public clsRol Rol { get; set; }
-        public clsPermisos Permiso { get; set; }
     }
 }
