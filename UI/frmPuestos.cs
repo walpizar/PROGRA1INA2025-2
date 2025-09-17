@@ -48,10 +48,9 @@ namespace UI
                 btnInactivar.Visible = false;
                 btnActivar.Visible = false;
 
-                // Campo código habilitado y con un ejemplo
+                // Campo código habilitado
                 txtCodigo.Text = "";
                 txtCodigo.Enabled = true;
-                txtCodigo.PlaceholderText = "Ej: ADM-JEF-001, RRHH-ASI-001";
 
                 txtNombre.Text = "";
                 txtDescripcion.Text = "";

@@ -70,7 +70,7 @@
             btnNuevoDepartamento.Name = "btnNuevoDepartamento";
             btnNuevoDepartamento.Size = new Size(62, 23);
             btnNuevoDepartamento.TabIndex = 14;
-            btnNuevoDepartamento.Text = "Nuevo";
+            btnNuevoDepartamento.Text = "Agregar";
             btnNuevoDepartamento.UseVisualStyleBackColor = true;
             btnNuevoDepartamento.Click += btnNuevoDepartamento_Click;
             // 

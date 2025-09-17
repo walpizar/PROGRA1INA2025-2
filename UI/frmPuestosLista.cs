@@ -30,19 +30,8 @@ namespace UI
             lstvListaPuestos.GridLines = true;
             lstvListaPuestos.HideSelection = false;
 
-            if (lstvListaPuestos.Columns.Count == 0)
-            {
-                lstvListaPuestos.Columns.Add("Código", 110);
-                lstvListaPuestos.Columns.Add("Nombre", 200);
-                lstvListaPuestos.Columns.Add("Descripción", 220);
-                lstvListaPuestos.Columns.Add("Estado", 100);
-                lstvListaPuestos.Columns.Add("Departamento", 180);
-            }
-
             CargarPuestos();
 
-            lstvListaPuestos.MouseDoubleClick -= lstvListaPuestos_MouseDoubleClick_1;
-            lstvListaPuestos.MouseDoubleClick += lstvListaPuestos_MouseDoubleClick_1;
         }
 
         private void CargarPuestos()
@@ -69,7 +58,7 @@ namespace UI
                 item.SubItems.Add(p.Nombre ?? "");
                 item.SubItems.Add(p.descripcion ?? "");
                 item.SubItems.Add(p.Estado ? "ACTIVO" : "INACTIVO");
-                item.SubItems.Add(p.Departamento?.Nombre ?? "Sin departamento")
+                item.SubItems.Add(p.Departamento?.Nombre ?? "Sin departamento");
                 // Guardamos el ID para referencia
                 item.Tag = p.idPuesto;
 

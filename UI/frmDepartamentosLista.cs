@@ -30,13 +30,6 @@ namespace UI
             lstvListaDept.GridLines = true;
             lstvListaDept.HideSelection = false;
 
-            if (lstvListaDept.Columns.Count == 0)
-            {
-                lstvListaDept.Columns.Add("Código", 110);
-                lstvListaDept.Columns.Add("Nombre", 200);
-                lstvListaDept.Columns.Add("Descripción", 320);
-            }
-
             CargarDepartamentos();
         }
 
