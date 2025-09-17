@@ -34,7 +34,8 @@ namespace UI
 
         private void button1_Click(object sender, EventArgs e)
         {
-
+            FrmAnadirAdmin frmAnadirAdmin = new FrmAnadirAdmin();
+            frmAnadirAdmin.ShowDialog();
         }
     }
 }
