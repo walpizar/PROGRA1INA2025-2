@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace DAO
 {
-    internal class dbContextINA : DbContext
+public class dbContextINA : DbContext
     {
         //definir la entidades de dominio que desea mapear a la base de datos
         public DbSet<clsActivos> Activos { get; set; }

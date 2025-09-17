@@ -6,7 +6,7 @@ using DAO.Interfaces;
 
 namespace DAO
 {
-    internal class CategoriaActivosDAO : ICategoriaActivosDAO
+    public class CategoriaActivosDAO : ICategoriaActivosDAO
     {
         private readonly dbContextINA _context;
 

@@ -30,21 +30,25 @@
         {
             label1 = new Label();
             gbxLogin = new GroupBox();
-            checkBox1 = new CheckBox();
-            button1 = new Button();
-            label2 = new Label();
-            label3 = new Label();
-            label4 = new Label();
-            label5 = new Label();
-            richTextBox1 = new RichTextBox();
-            textBox1 = new TextBox();
             label6 = new Label();
+            textBox1 = new TextBox();
+            richTextBox1 = new RichTextBox();
+            label5 = new Label();
+            label4 = new Label();
+            label3 = new Label();
+            label2 = new Label();
+            button1 = new Button();
+            checkBox1 = new CheckBox();
             groupBox1 = new GroupBox();
-            button2 = new Button();
-            button3 = new Button();
-            button4 = new Button();
-            listView1 = new ListView();
             label7 = new Label();
+            listView1 = new ListView();
+            button4 = new Button();
+            button3 = new Button();
+            button2 = new Button();
+            columnid = new ColumnHeader();
+            columnnombre = new ColumnHeader();
+            columndescripcion = new ColumnHeader();
+            columnestado = new ColumnHeader();
             gbxLogin.SuspendLayout();
             groupBox1.SuspendLayout();
             SuspendLayout();
@@ -58,7 +62,7 @@
             label1.Size = new Size(520, 45);
             label1.TabIndex = 0;
             label1.Text = "Mantenimiente Categoria Activos";
-            label1.Click += label1_Click;
+      
             // 
             // gbxLogin
             // 
@@ -77,52 +81,30 @@
             gbxLogin.TabIndex = 1;
             gbxLogin.TabStop = false;
             // 
-            // checkBox1
+            // label6
             // 
-            checkBox1.AutoSize = true;
-            checkBox1.Location = new Point(103, 79);
-            checkBox1.Name = "checkBox1";
-            checkBox1.Size = new Size(96, 19);
-            checkBox1.TabIndex = 0;
-            checkBox1.Text = "estado activo";
-            checkBox1.UseVisualStyleBackColor = true;
-            checkBox1.CheckedChanged += checkBox1_CheckedChanged;
+            label6.AutoSize = true;
+            label6.Font = new Font("Segoe UI", 11.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label6.Location = new Point(4, 33);
+            label6.Name = "label6";
+            label6.Size = new Size(198, 20);
+            label6.TabIndex = 2;
+            label6.Text = "Creador Categorias Activos";
             // 
-            // button1
+            // textBox1
             // 
-            button1.Location = new Point(10, 352);
-            button1.Name = "button1";
-            button1.Size = new Size(75, 23);
-            button1.TabIndex = 2;
-            button1.Text = "Guardar";
-            button1.UseVisualStyleBackColor = true;
+            textBox1.Location = new Point(6, 135);
+            textBox1.Name = "textBox1";
+            textBox1.Size = new Size(193, 23);
+            textBox1.TabIndex = 2;
             // 
-            // label2
+            // richTextBox1
             // 
-            label2.AutoSize = true;
-            label2.Location = new Point(6, 79);
-            label2.Name = "label2";
-            label2.Size = new Size(24, 15);
-            label2.TabIndex = 2;
-            label2.Text = "ID :";
-            // 
-            // label3
-            // 
-            label3.AutoSize = true;
-            label3.Location = new Point(36, 79);
-            label3.Name = "label3";
-            label3.Size = new Size(49, 15);
-            label3.TabIndex = 3;
-            label3.Text = "numero";
-            // 
-            // label4
-            // 
-            label4.AutoSize = true;
-            label4.Location = new Point(6, 117);
-            label4.Name = "label4";
-            label4.Size = new Size(55, 15);
-            label4.TabIndex = 4;
-            label4.Text = "nombre :";
+            richTextBox1.Location = new Point(6, 220);
+            richTextBox1.Name = "richTextBox1";
+            richTextBox1.Size = new Size(193, 96);
+            richTextBox1.TabIndex = 2;
+            richTextBox1.Text = "";
             // 
             // label5
             // 
@@ -133,30 +115,52 @@
             label5.TabIndex = 5;
             label5.Text = "descripcion :";
             // 
-            // richTextBox1
+            // label4
             // 
-            richTextBox1.Location = new Point(6, 220);
-            richTextBox1.Name = "richTextBox1";
-            richTextBox1.Size = new Size(193, 96);
-            richTextBox1.TabIndex = 2;
-            richTextBox1.Text = "";
+            label4.AutoSize = true;
+            label4.Location = new Point(6, 117);
+            label4.Name = "label4";
+            label4.Size = new Size(55, 15);
+            label4.TabIndex = 4;
+            label4.Text = "nombre :";
             // 
-            // textBox1
+            // label3
             // 
-            textBox1.Location = new Point(6, 135);
-            textBox1.Name = "textBox1";
-            textBox1.Size = new Size(193, 23);
-            textBox1.TabIndex = 2;
+            label3.AutoSize = true;
+            label3.Location = new Point(36, 79);
+            label3.Name = "label3";
+            label3.Size = new Size(49, 15);
+            label3.TabIndex = 3;
+            label3.Text = "numero";
             // 
-            // label6
+            // label2
             // 
-            label6.AutoSize = true;
-            label6.Font = new Font("Segoe UI", 11.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label6.Location = new Point(4, 33);
-            label6.Name = "label6";
-            label6.Size = new Size(198, 20);
-            label6.TabIndex = 2;
-            label6.Text = "Creador Categorias Activos";
+            label2.AutoSize = true;
+            label2.Location = new Point(6, 79);
+            label2.Name = "label2";
+            label2.Size = new Size(24, 15);
+            label2.TabIndex = 2;
+            label2.Text = "ID :";
+            // 
+            // button1
+            // 
+            button1.Location = new Point(10, 352);
+            button1.Name = "button1";
+            button1.Size = new Size(75, 23);
+            button1.TabIndex = 2;
+            button1.Text = "Guardar";
+            button1.UseVisualStyleBackColor = true;
+            // 
+            // checkBox1
+            // 
+            checkBox1.AutoSize = true;
+            checkBox1.Location = new Point(103, 79);
+            checkBox1.Name = "checkBox1";
+            checkBox1.Size = new Size(96, 19);
+            checkBox1.TabIndex = 0;
+            checkBox1.Text = "estado activo";
+            checkBox1.UseVisualStyleBackColor = true;
+    
             // 
             // groupBox1
             // 
@@ -170,42 +174,7 @@
             groupBox1.Size = new Size(551, 223);
             groupBox1.TabIndex = 6;
             groupBox1.TabStop = false;
-            groupBox1.Enter += groupBox1_Enter;
-            // 
-            // button2
-            // 
-            button2.Location = new Point(470, 63);
-            button2.Name = "button2";
-            button2.Size = new Size(75, 23);
-            button2.TabIndex = 6;
-            button2.Text = "eliminar";
-            button2.UseVisualStyleBackColor = true;
-            // 
-            // button3
-            // 
-            button3.Location = new Point(470, 92);
-            button3.Name = "button3";
-            button3.Size = new Size(75, 23);
-            button3.TabIndex = 7;
-            button3.Text = "modificar";
-            button3.UseVisualStyleBackColor = true;
-            // 
-            // button4
-            // 
-            button4.Location = new Point(470, 121);
-            button4.Name = "button4";
-            button4.Size = new Size(75, 23);
-            button4.TabIndex = 8;
-            button4.Text = "actualizar";
-            button4.UseVisualStyleBackColor = true;
-            // 
-            // listView1
-            // 
-            listView1.Location = new Point(6, 61);
-            listView1.Name = "listView1";
-            listView1.Size = new Size(458, 156);
-            listView1.TabIndex = 9;
-            listView1.UseCompatibleStateImageBehavior = false;
+ 
             // 
             // label7
             // 
@@ -216,7 +185,61 @@
             label7.Size = new Size(169, 20);
             label7.TabIndex = 6;
             label7.Text = "Lista Categoria Activos";
-            label7.Click += label7_Click;
+   
+            // listView1
+            // 
+            listView1.Columns.AddRange(new ColumnHeader[] { columnid, columnnombre, columndescripcion, columnestado });
+            listView1.Location = new Point(6, 44);
+            listView1.Name = "listView1";
+            listView1.Size = new Size(458, 156);
+            listView1.TabIndex = 9;
+            listView1.UseCompatibleStateImageBehavior = false;
+            listView1.View = View.Details;
+ 
+            // 
+            // button4
+            // 
+            button4.Location = new Point(470, 101);
+            button4.Name = "button4";
+            button4.Size = new Size(75, 23);
+            button4.TabIndex = 8;
+            button4.Text = "actualizar";
+            button4.UseVisualStyleBackColor = true;
+            // 
+            // button3
+            // 
+            button3.Location = new Point(470, 72);
+            button3.Name = "button3";
+            button3.Size = new Size(75, 23);
+            button3.TabIndex = 7;
+            button3.Text = "modificar";
+            button3.UseVisualStyleBackColor = true;
+            // 
+            // button2
+            // 
+            button2.Location = new Point(470, 43);
+            button2.Name = "button2";
+            button2.Size = new Size(75, 23);
+            button2.TabIndex = 6;
+            button2.Text = "eliminar";
+            button2.UseVisualStyleBackColor = true;
+            // 
+            // columnid
+            // 
+            columnid.Text = "id";
+            // 
+            // columnnombre
+            // 
+            columnnombre.Text = "nombre";
+            // 
+            // columndescripcion
+            // 
+            columndescripcion.Text = "descripcion";
+            columndescripcion.Width = 250;
+            // 
+            // columnestado
+            // 
+            columnestado.Text = "estado";
             // 
             // frmMantenimientoCategoriasActivos
             // 
@@ -228,6 +251,7 @@
             Controls.Add(label1);
             Name = "frmMantenimientoCategoriasActivos";
             Text = "frmMantenimientoCategoriasActivos";
+            Load += frmMantenimientoCategoriasActivos_Load;
             gbxLogin.ResumeLayout(false);
             gbxLogin.PerformLayout();
             groupBox1.ResumeLayout(false);
@@ -255,5 +279,9 @@
         private Button button3;
         private Button button2;
         private Label label7;
+        private ColumnHeader columnid;
+        private ColumnHeader columnnombre;
+        private ColumnHeader columndescripcion;
+        private ColumnHeader columnestado;
     }
 }
