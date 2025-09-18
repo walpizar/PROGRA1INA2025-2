@@ -30,6 +30,7 @@
             // 
             // gbxRecuperarContra
             // 
+            gbxRecuperarContra.BackColor = SystemColors.GradientActiveCaption;
             gbxRecuperarContra.Controls.Add(btnCancelarRecuperarContra);
             gbxRecuperarContra.Controls.Add(btnAceptarRecuperarContra);
             gbxRecuperarContra.Controls.Add(txtConfirmarContra);
@@ -116,7 +117,7 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            BackColor = SystemColors.InactiveCaption;
+            BackColor = SystemColors.GradientActiveCaption;
             ClientSize = new Size(516, 322);
             Controls.Add(lblRecuperarContra);
             Controls.Add(gbxRecuperarContra);
