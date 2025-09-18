@@ -55,7 +55,7 @@ namespace Services
             if (string.IsNullOrWhiteSpace(d.descripcionDepartamento))
                 throw new Exception("La descripcion del departamento es obligatoria");
 
-            d.fecha_crea = DateTime.UtcNow;
+            d.fecha_crea = DateTime.Now;
             d.usuario_crea = string.IsNullOrWhiteSpace(d.usuario_crea) ? "system" : d.usuario_crea;
 
             _dao.crear(d);
@@ -106,7 +106,7 @@ namespace Services
             if (nombreDup)
                 throw new Exception("Ya existe otro departamento con ese nombre.");
 
-            d.fecha_ult_mod = DateTime.UtcNow;
+            d.fecha_ult_mod = DateTime.Now;
             d.usuario_ult_mod = string.IsNullOrWhiteSpace(d.usuario_ult_mod) ? "system" : d.usuario_ult_mod;
 
             _dao.modificar(d);

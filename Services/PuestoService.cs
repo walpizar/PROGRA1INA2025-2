@@ -81,7 +81,7 @@ namespace Services
             p.Inactivar(motivo.Trim(), string.IsNullOrWhiteSpace(usuario) ? "system" : usuario);
 
             // auditoría
-            p.fecha_ult_mod = DateTime.UtcNow;
+            p.fecha_ult_mod = DateTime.Now;
             p.usuario_ult_mod = string.IsNullOrWhiteSpace(usuario) ? "system" : usuario;
 
             _dao.modificar(p);
@@ -96,7 +96,7 @@ namespace Services
             p.Reactivar(string.IsNullOrWhiteSpace(usuario) ? "system" : usuario);
 
             p.motivoInactivo = "";
-            p.fecha_ult_mod = DateTime.UtcNow;
+            p.fecha_ult_mod = DateTime.Now;
             p.usuario_ult_mod = string.IsNullOrWhiteSpace(usuario) ? "system" : usuario;
 
             _dao.modificar(p);
@@ -134,7 +134,7 @@ namespace Services
                     throw new Exception("Ya existe un puesto ACTIVO con ese nombre en este departamento.");
             }
 
-            p.fecha_ult_mod = DateTime.UtcNow;
+            p.fecha_ult_mod = DateTime.Now;
             p.usuario_ult_mod = string.IsNullOrWhiteSpace(p.usuario_ult_mod) ? "system" : p.usuario_ult_mod;
 
             _dao.modificar(p);
