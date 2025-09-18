@@ -16,11 +16,8 @@ namespace Entities
 
         //Atributos principales de Medico
 
-        public string id { get; set; }
+        public int id { get; set; }
         public int tipoId { get; set; }
- 
-
-
 
         [Required]
         [StringLength(300, ErrorMessage = "La especialidad no puede tener mas de 300 caracteres")]
@@ -47,7 +44,7 @@ namespace Entities
         public clsPersona persona { get; set; }
 
         //Constructor con parametros
-        public clsMedico(string Id, int tipoId, string Especialidad, DateTime fecha_crea, string usuario_crea, DateTime fecha_ult_mod, string usuario_ult_mod, bool estado, int idPersona)
+        public clsMedico(int Id, int tipoId, string Especialidad, DateTime fecha_crea, string usuario_crea, DateTime fecha_ult_mod, string usuario_ult_mod, bool estado, int idPersona)
         {
             this.id = Id;
             this.tipoId = tipoId;

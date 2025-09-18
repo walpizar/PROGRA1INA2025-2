@@ -11,20 +11,22 @@ namespace DAO
     public class dbContextINA : DbContext
     {
 
-        // Definir las entidades de dominio que desea mapear a la base de datos
+        //Definir las entidades de dominio que desea mapear a la base de datos
         public DbSet<clsProducto> Producto { get; set; }
         public DbSet<clsCliente> Clientes { get; set; }
         public DbSet<clsCategoria> Categoria { get; set; }
-        public DbSet<clsEspecialidadMedica> EspecialidadMedica { get; set; }  // 🔹 Agregada la nueva entidad
+        public DbSet<clsEspecialidadMedica> EspecialidadMedica { get; set; }
         public DbSet<clsTiposAyudas> TiposAyudas { get; set; }
+        public DbSet<clsPersona> Personas { get; set; }
+        public DbSet<clsUsuario> Usuarios { get; set; }
 
         //definir la entidades de dominio que desea mapear a la base de datos
 
-       
+
         public DbSet<clsActivos> Activos { get; set; }
 
         public DbSet<clsCategoriaActivos> CategoriaActivos { get; set; }
-        public DbSet<clsPersona> Personas { get; set; }
+
         public DbSet<clsMedico> Medicos { get; set; }
         public DbSet<clsDepartamentos> Departamentos { get; set; }
         public DbSet<clsDevolucion> Devoluciones { get; set; }
@@ -32,7 +34,7 @@ namespace DAO
         public DbSet<clsEspecialidadMedica> EspecialidadesMedicas { get; set; }
         public DbSet<clsPuestos> Puestos { get; set; }
 
-        
+
 
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -51,54 +53,58 @@ namespace DAO
         {
             base.OnModelCreating(modelBuilder);
 
+            // ===============================
             // PK compuesta de Persona
+            // ===============================
             modelBuilder.Entity<clsPersona>()
                 .HasKey(p => new { p.id, p.PersonaTipoId });
 
+            // ===============================
             // Relación 1 a 1 Persona - Donante
+            // ===============================
             modelBuilder.Entity<clsDonante>()
                 .HasOne(d => d.Persona)
                 .WithOne(p => p.Donante)
                 .HasForeignKey<clsDonante>(d => new { d.PersonaId, d.PersonaTipoId });
 
-            // Configuración para tbPersonas
-            //modelBuilder.Entity<clsPersona>().HasKey(p => new { p.id, p.PersonaTipoId });
+            // ===============================
+            // Relación 1 a 1 Medico - Persona
+            // ===============================
+            modelBuilder.Entity<clsMedico>()
+                .HasKey(m => new { m.id, m.tipoId });
 
-            //modelBuilder.Entity<clsPersona>().Property(p => p.id)
-            //    .IsRequired()
-            //    .HasMaxLength(20)
-            //    .ValueGeneratedNever();
+            modelBuilder.Entity<clsMedico>()
+                .HasOne(m => m.persona)
+                .WithOne()
+                .HasForeignKey<clsMedico>(m => new { m.id, m.tipoId })
+                .OnDelete(DeleteBehavior.Restrict);
 
-            //modelBuilder.Entity<clsPersona>().Property(p => p.PersonaTipoId)
-            //    .IsRequired()
-            //    .ValueGeneratedNever();
+            // ===============================
+            // Relaciones de clsTiposAyudas
+            // Evitar "multiple cascade paths"
+            // ===============================
+            modelBuilder.Entity<clsTiposAyudas>(entity =>
+            {
+                // Relación con responsable
+                entity.HasOne(ta => ta.responsable)
+                      .WithMany()
+                      .HasForeignKey(ta => ta.id_responsable)
+                      .OnDelete(DeleteBehavior.Restrict);
 
-            //clsMedico configuracion de llave primaria compuesta   
-            //modelBuilder.Entity<clsMedico>().HasKey(m => new { m.id, m.tipoId });
-            //modelBuilder.Entity<clsMedico>().Property(m => m.id)
-            //    .IsRequired()
-            //    .HasMaxLength(20)
-            //    .ValueGeneratedNever();
-            //modelBuilder.Entity<clsMedico>().Property(m => m.tipoId).IsRequired()
-            //    .ValueGeneratedNever();
+                // Relación con usuario_crea
+                entity.HasOne(ta => ta.usuario_crea)
+                      .WithMany()
+                      .HasForeignKey(ta => ta.id_usuarioCrea)
+                      .OnDelete(DeleteBehavior.Restrict);
 
-            //relacion 1 a 1 entre medico y persona
-
-            //modelBuilder.Entity<clsMedico>()
-            //    .HasOne(m => m.persona)
-            //    .WithOne()
-            //    .HasForeignKey<clsMedico>(m => new { m.id, m.tipoId })
-            //    .OnDelete(DeleteBehavior.Restrict); // Evita el borrado en cascada
-
-            //relacion 1 a 1 entre donante y persona
-            //modelBuilder.Entity<clsDonante>()
-            //    .HasOne(d => d.Persona)
-            //    .WithOne(p => p.Donante)
-            //    .HasForeignKey<clsDonante>(d => new { d.PersonaId, d.PersonaTipoId })
-            //    .HasPrincipalKey<clsPersona>(p => new { p.id, p.PersonaTipoId })
-            //    .OnDelete(DeleteBehavior.Restrict);
-
+                // Relación con usuario_ultimaModificacion
+                entity.HasOne(ta => ta.usuario_ultimaModificacion)
+                      .WithMany()
+                      .HasForeignKey(ta => ta.id_usuarioUltimaModificacion)
+                      .OnDelete(DeleteBehavior.Restrict);
+            });
         }
+
 
 
     }

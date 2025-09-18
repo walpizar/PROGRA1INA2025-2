@@ -24,34 +24,32 @@ namespace Entities
         public string descripcion { get; set; }//Descripción del tipo de ayuda
 
         //Fk a reponsable
-        [Required]
+        //[Required]
         public int id_responsable { get; set; }//Id reponsable
 
-        [Required]
+        //[Required]
         public clsUsuario responsable { get; set; }//Responsable
 
         //Campos de audioria
-        [Required]
+        //[Required]
         public DateTime fecha_crea { get; set; }//Fecha de creación
 
-        //Fk de campos de auditoria a tabla persona crea
-        [Required]
+        //[Required]
         public int id_usuarioCrea { get; set; }
 
-        [Required]
+        [ForeignKey("id_usuarioCrea")]
         public clsUsuario usuario_crea { get; set; }
 
-        [Required]
-        public DateTime fecha_ultimaModificacion { get; set; }//Fecha ultima modificación
+        //[Required]
+        public int id_usuarioUltimaModificacion { get; set; }
 
-        //Fk de campos de auditoria a tabla persona ultima modificación
-        [Required]
-        public int id_usuarioUltimaModificacion { get; set; }//Id de usuario de ultima modificación
-
-        [Required]
+        [ForeignKey("id_usuarioUltimaModificacion")]
         public clsUsuario usuario_ultimaModificacion { get; set; }
 
-        [Required]
+        //[Required]
+        public DateTime fecha_ultimaModificacion { get; set; }//Fecha ultima modificación
+
+        //[Required]
         public bool estado { get; set; } //Estado del tipo de ayuda
     }
 }
