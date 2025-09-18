@@ -121,7 +121,7 @@ namespace UI
 
         private void LimpiarControles()
         {
-            label3.Text = "0";
+            label3.Text = "";
             textBox1.Clear();
             richTextBox1.Clear();
             checkBox1.Checked = false;
