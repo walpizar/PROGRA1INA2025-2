@@ -27,10 +27,10 @@ namespace Entities
 
 
         // Constructor vacío
-        public clsDonacionActivo( { }
+        public clsDonacionesActivos() { }
 
         // Constructor con parámetros
-        public clsDonacionActivo(int idDonacion, int idActivo, int cantidad, string estadoActivo, string observaciones)
+        public clsDonacionesActivos(int idDonacion, int idActivo, int cantidad, string estadoActivo, string observaciones)
         {
             this.idDonacion = idDonacion;
             this.idActivo = idActivo;

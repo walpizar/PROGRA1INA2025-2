@@ -19,7 +19,7 @@ namespace Services
         public void crear(clsUsuario usuario)
         {
             // regla de negocio valida queno exista un Usuario con el mismo id
-            if (_usuarioDAO.consultarPorID(usuario.personaId) != null)
+            if (_usuarioDAO.consultarPorID(usuario.id) != null)
             {
                 throw new Exception("El cliente ya existe");
             }

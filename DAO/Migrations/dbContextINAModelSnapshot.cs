@@ -188,25 +188,12 @@ namespace DAO.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("idDonacion"));
 
-<<<<<<< HEAD
-                    b.Property<DateTime>("fechaDonacion")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int>("idDonante")
-                        .HasColumnType("int");
-
-=======
-                    b.Property<string>("donantepersonaId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(20)");
-
-                    b.Property<int>("donantepersonaTipoId")
+                    b.Property<int>("donanteIdDonante")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("fechaDonacion")
                         .HasColumnType("datetime2");
 
->>>>>>> 9d6a69bbe7f4c857b2c996c148975be9f4596cb0
                     b.Property<string>("observaciones")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -216,56 +203,11 @@ namespace DAO.Migrations
 
                     b.HasKey("idDonacion");
 
-<<<<<<< HEAD
-                    b.HasIndex("idDonante");
-=======
-                    b.HasIndex("donantepersonaId", "donantepersonaTipoId");
->>>>>>> 9d6a69bbe7f4c857b2c996c148975be9f4596cb0
+                    b.HasIndex("donanteIdDonante");
 
                     b.ToTable("tbDonaciones");
                 });
 
-<<<<<<< HEAD
-            modelBuilder.Entity("Entities.clsDonacionActivo", b =>
-                {
-                    b.Property<int>("IdDonacionActivo")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("IdDonacionActivo"));
-
-                    b.Property<int>("Cantidad")
-                        .HasColumnType("int");
-
-                    b.Property<string>("EstadoActivo")
-                        .IsRequired()
-                        .HasMaxLength(30)
-                        .HasColumnType("nvarchar(30)");
-
-                    b.Property<int>("IdActivo")
-                        .HasColumnType("int");
-
-                    b.Property<int>("IdDonacion")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Observaciones")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int?>("clsActivosIdActivo")
-                        .HasColumnType("int");
-
-                    b.HasKey("IdDonacionActivo");
-
-                    b.HasIndex("IdDonacion");
-
-                    b.HasIndex("clsActivosIdActivo");
-
-                    b.ToTable("tbDonacionesActivos");
-                });
-
-=======
->>>>>>> develop
             modelBuilder.Entity("Entities.clsDonacionDinero", b =>
                 {
                     b.Property<int>("idDonacionDinero")
@@ -312,7 +254,13 @@ namespace DAO.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("idDonacionActivo"));
 
+                    b.Property<int>("ActivoidActivo")
+                        .HasColumnType("int");
+
                     b.Property<int>("cantidad")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("clsDonacionidDonacion")
                         .HasColumnType("int");
 
                     b.Property<string>("estadoActivo")
@@ -332,56 +280,35 @@ namespace DAO.Migrations
 
                     b.HasKey("idDonacionActivo");
 
-                    b.HasIndex("idActivo");
+                    b.HasIndex("ActivoidActivo");
 
-                    b.HasIndex("idDonacion");
+                    b.HasIndex("clsDonacionidDonacion");
 
                     b.ToTable("tbDonacionesActivos");
                 });
 
             modelBuilder.Entity("Entities.clsDonante", b =>
                 {
-<<<<<<< HEAD
-                    b.Property<int>("idDonante")
-                        .ValueGeneratedOnAdd()
+                    b.Property<int>("IdDonante")
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("idDonante"));
-
-=======
-                    b.Property<string>("personaId")
-                        .HasColumnType("nvarchar(20)");
-
-                    b.Property<int>("personaTipoId")
-                        .HasColumnType("int");
-
->>>>>>> 9d6a69bbe7f4c857b2c996c148975be9f4596cb0
-                    b.Property<bool>("estado")
+                    b.Property<bool>("Estado")
                         .HasColumnType("bit");
 
-                    b.Property<DateTime>("fechaRegistro")
+                    b.Property<DateTime>("FechaRegistro")
                         .HasColumnType("datetime2");
 
-<<<<<<< HEAD
-                    b.Property<int>("PersonaId")
-                        .HasColumnType("int");
-=======
-<<<<<<< HEAD
-                    b.Property<string>("personaId")
+                    b.Property<string>("PersonaId")
                         .IsRequired()
                         .HasColumnType("nvarchar(20)");
->>>>>>> develop
 
-                    b.Property<int>("personaTipoId")
+                    b.Property<int>("PersonaTipoId")
                         .HasColumnType("int");
 
-                    b.HasKey("idDonante");
+                    b.HasKey("IdDonante");
 
-                    b.HasIndex("personaId", "personaTipoId")
+                    b.HasIndex("PersonaId", "PersonaTipoId")
                         .IsUnique();
-=======
-                    b.HasKey("personaId", "personaTipoId");
->>>>>>> 9d6a69bbe7f4c857b2c996c148975be9f4596cb0
 
                     b.ToTable("tbDonantes");
                 });
@@ -389,6 +316,7 @@ namespace DAO.Migrations
             modelBuilder.Entity("Entities.clsEnfermero", b =>
                 {
                     b.Property<string>("id")
+                        .HasMaxLength(20)
                         .HasColumnType("nvarchar(20)")
                         .HasColumnOrder(0);
 
@@ -401,18 +329,6 @@ namespace DAO.Migrations
                         .HasMaxLength(300)
                         .HasColumnType("nvarchar(300)");
 
-<<<<<<< HEAD
-                    b.Property<int>("IdPersona")
-                        .HasColumnType("int");
-
-                    b.Property<int>("PersonaTipoId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("Personaid")
-                        .HasColumnType("int");
-
-=======
->>>>>>> develop
                     b.Property<bool>("estado")
                         .HasColumnType("bit");
 
@@ -439,13 +355,7 @@ namespace DAO.Migrations
 
                     b.HasKey("id", "tipoId");
 
-<<<<<<< HEAD
-                    b.HasIndex("Personaid", "PersonaTipoId");
-
-                    b.ToTable("tbEnfermero");
-=======
                     b.ToTable("tbEnfermeros");
->>>>>>> develop
                 });
 
             modelBuilder.Entity("Entities.clsEspecialidadMedica", b =>
@@ -476,8 +386,9 @@ namespace DAO.Migrations
 
             modelBuilder.Entity("Entities.clsMedico", b =>
                 {
-                    b.Property<int>("id")
-                        .HasColumnType("int");
+                    b.Property<string>("id")
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
 
                     b.Property<int>("tipoId")
                         .HasColumnType("int");
@@ -569,10 +480,11 @@ namespace DAO.Migrations
 
             modelBuilder.Entity("Entities.clsPersona", b =>
                 {
-                    b.Property<int>("id")
-                        .HasColumnType("int");
+                    b.Property<string>("id")
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
 
-                    b.Property<int>("PersonaTipoId")
+                    b.Property<int>("tipoId")
                         .HasColumnType("int");
 
                     b.Property<string>("apellido1")
@@ -611,7 +523,7 @@ namespace DAO.Migrations
                         .HasMaxLength(20)
                         .HasColumnType("nvarchar(20)");
 
-                    b.HasKey("id", "PersonaTipoId");
+                    b.HasKey("id", "tipoId");
 
                     b.ToTable("tbPersonas");
                 });
@@ -642,20 +554,6 @@ namespace DAO.Migrations
                     b.ToTable("tbPuestos");
                 });
 
-<<<<<<< HEAD
-            modelBuilder.Entity("Entities.clsTiposAyudas", b =>
-                {
-                    b.Property<int>("id_tipoAyuda")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("id_tipoAyuda"));
-
-                    b.Property<string>("descripcion")
-                        .IsRequired()
-                        .HasMaxLength(300)
-                        .HasColumnType("nvarchar(300)");
-=======
             modelBuilder.Entity("Entities.clsRol", b =>
                 {
                     b.Property<int>("idRol")
@@ -668,46 +566,15 @@ namespace DAO.Migrations
                         .IsRequired()
                         .HasMaxLength(200)
                         .HasColumnType("nvarchar(200)");
->>>>>>> develop
 
                     b.Property<bool>("estado")
                         .HasColumnType("bit");
 
-<<<<<<< HEAD
-                    b.Property<DateTime>("fecha_crea")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime>("fecha_ultimaModificacion")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int>("id_responsable")
-                        .HasColumnType("int");
-
-                    b.Property<int>("id_usuarioCrea")
-                        .HasColumnType("int");
-
-                    b.Property<int>("id_usuarioUltimaModificacion")
-                        .HasColumnType("int");
-
-                    b.Property<string>("nombre")
-=======
                     b.Property<string>("nombreRol")
->>>>>>> develop
                         .IsRequired()
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
-<<<<<<< HEAD
-                    b.HasKey("id_tipoAyuda");
-
-                    b.HasIndex("id_responsable");
-
-                    b.HasIndex("id_usuarioCrea");
-
-                    b.HasIndex("id_usuarioUltimaModificacion");
-
-                    b.ToTable("tb_tipoAyuda");
-=======
                     b.HasKey("idRol");
 
                     b.ToTable("tbRoles");
@@ -721,65 +588,70 @@ namespace DAO.Migrations
                     b.Property<int>("idPermiso")
                         .HasColumnType("int");
 
-                    b.Property<int>("PermisoidPermiso")
-                        .HasColumnType("int");
-
-                    b.Property<int>("RolidRol")
-                        .HasColumnType("int");
-
                     b.Property<bool>("estado")
                         .HasColumnType("bit");
 
                     b.HasKey("idRol", "idPermiso");
 
-                    b.HasIndex("PermisoidPermiso");
-
-                    b.HasIndex("RolidRol");
+                    b.HasIndex("idPermiso");
 
                     b.ToTable("tbRolPermiso");
->>>>>>> develop
+                });
+
+            modelBuilder.Entity("Entities.clsTiposAyudas", b =>
+                {
+                    b.Property<int>("id_tipoAyuda")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("id_tipoAyuda"));
+
+                    b.Property<string>("descripcion")
+                        .IsRequired()
+                        .HasMaxLength(300)
+                        .HasColumnType("nvarchar(300)");
+
+                    b.Property<bool>("estado")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime>("fecha_crea")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("fecha_ultimaModificacion")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("id_responsable")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(20)");
+
+                    b.Property<string>("id_usuarioCrea")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(20)");
+
+                    b.Property<string>("id_usuarioUltimaModificacion")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(20)");
+
+                    b.Property<string>("nombre")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.HasKey("id_tipoAyuda");
+
+                    b.HasIndex("id_responsable");
+
+                    b.HasIndex("id_usuarioCrea");
+
+                    b.HasIndex("id_usuarioUltimaModificacion");
+
+                    b.ToTable("tb_tipoAyuda");
                 });
 
             modelBuilder.Entity("Entities.clsUsuario", b =>
                 {
-<<<<<<< HEAD
-                    b.Property<int>("id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("id"));
-
-                    b.Property<int>("PersonaId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("PersonaTipoId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("contraseña")
-                        .IsRequired()
-                        .HasMaxLength(8)
-                        .HasColumnType("nvarchar(8)");
-
-                    b.Property<string>("nombre_usuario")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
-
-                    b.Property<int>("rol_id")
-                        .HasColumnType("int");
-
-                    b.HasKey("id");
-
-                    b.HasIndex("PersonaId", "PersonaTipoId");
-
-                    b.ToTable("usuarios");
-=======
-                    b.Property<string>("personaId")
+                    b.Property<string>("id")
                         .HasColumnType("nvarchar(20)");
-
-                    b.Property<int>("personaTipoId")
-                        .HasMaxLength(50)
-                        .HasColumnType("int");
 
                     b.Property<string>("contrasena")
                         .IsRequired()
@@ -796,12 +668,17 @@ namespace DAO.Migrations
 
                     b.Property<string>("nombre_usuario")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
 
-                    b.HasKey("personaId", "personaTipoId");
+                    b.Property<int>("personaTipoId")
+                        .HasColumnType("int");
+
+                    b.HasKey("id");
+
+                    b.HasIndex("id", "personaTipoId");
 
                     b.ToTable("tbUsuarios");
->>>>>>> develop
                 });
 
             modelBuilder.Entity("Entities.clsActivos", b =>
@@ -829,35 +706,12 @@ namespace DAO.Migrations
             modelBuilder.Entity("Entities.clsDonacion", b =>
                 {
                     b.HasOne("Entities.clsDonante", "donante")
-                        .WithMany("donaciones")
-<<<<<<< HEAD
-                        .HasForeignKey("idDonante")
-=======
-                        .HasForeignKey("donantepersonaId", "donantepersonaTipoId")
->>>>>>> 9d6a69bbe7f4c857b2c996c148975be9f4596cb0
+                        .WithMany("Donaciones")
+                        .HasForeignKey("donanteIdDonante")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-<<<<<<< HEAD
-                    b.Navigation("Donante");
-                });
-
-            modelBuilder.Entity("Entities.clsDonacionActivo", b =>
-                {
-                    b.HasOne("Entities.clsDonacion", "Donacion")
-                        .WithMany("DonacionActivos")
-                        .HasForeignKey("IdDonacion")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Entities.clsActivos", null)
-                        .WithMany("DonacionActivos")
-                        .HasForeignKey("clsActivosIdActivo");
-
-                    b.Navigation("Donacion");
-=======
                     b.Navigation("donante");
->>>>>>> develop
                 });
 
             modelBuilder.Entity("Entities.clsDonacionDinero", b =>
@@ -873,50 +727,36 @@ namespace DAO.Migrations
 
             modelBuilder.Entity("Entities.clsDonacionesActivos", b =>
                 {
-                    b.HasOne("Entities.clsActivos", "activo")
+                    b.HasOne("Entities.clsActivos", "Activo")
                         .WithMany("donacionActivos")
-                        .HasForeignKey("idActivo")
+                        .HasForeignKey("ActivoidActivo")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Entities.clsDonacion", "donacion")
+                    b.HasOne("Entities.clsDonacion", null)
                         .WithMany("donacionesActivos")
-                        .HasForeignKey("idDonacion")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("clsDonacionidDonacion");
 
-                    b.Navigation("activo");
-
-                    b.Navigation("donacion");
+                    b.Navigation("Activo");
                 });
 
             modelBuilder.Entity("Entities.clsDonante", b =>
                 {
-<<<<<<< HEAD
                     b.HasOne("Entities.clsPersona", "Persona")
                         .WithOne("Donante")
                         .HasForeignKey("Entities.clsDonante", "PersonaId", "PersonaTipoId")
-=======
-                    b.HasOne("Entities.clsPersona", "persona")
-                        .WithOne("donante")
-                        .HasForeignKey("Entities.clsDonante", "personaId", "personaTipoId")
->>>>>>> develop
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.Navigation("persona");
+                    b.Navigation("Persona");
                 });
 
             modelBuilder.Entity("Entities.clsEnfermero", b =>
                 {
                     b.HasOne("Entities.clsPersona", "persona")
-                        .WithMany()
-<<<<<<< HEAD
-                        .HasForeignKey("Personaid", "PersonaTipoId")
-=======
-                        .HasForeignKey("id", "tipoId")
->>>>>>> develop
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .WithOne()
+                        .HasForeignKey("Entities.clsEnfermero", "id", "tipoId")
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.Navigation("persona");
@@ -944,30 +784,19 @@ namespace DAO.Migrations
                 {
                     b.HasOne("Entities.clsPermisos", "Permiso")
                         .WithMany("RolPermisos")
-                        .HasForeignKey("PermisoidPermiso")
+                        .HasForeignKey("idPermiso")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("Entities.clsRol", "Rol")
                         .WithMany("RolPermisos")
-                        .HasForeignKey("RolidRol")
+                        .HasForeignKey("idRol")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("Permiso");
 
                     b.Navigation("Rol");
-                });
-
-            modelBuilder.Entity("Entities.clsUsuario", b =>
-                {
-                    b.HasOne("Entities.clsPersona", "persona")
-                        .WithOne()
-                        .HasForeignKey("Entities.clsUsuario", "personaId", "personaTipoId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("persona");
                 });
 
             modelBuilder.Entity("Entities.clsTiposAyudas", b =>
@@ -981,13 +810,13 @@ namespace DAO.Migrations
                     b.HasOne("Entities.clsUsuario", "usuario_crea")
                         .WithMany()
                         .HasForeignKey("id_usuarioCrea")
-                        .OnDelete(DeleteBehavior.Restrict)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("Entities.clsUsuario", "usuario_ultimaModificacion")
                         .WithMany()
                         .HasForeignKey("id_usuarioUltimaModificacion")
-                        .OnDelete(DeleteBehavior.Restrict)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("responsable");
@@ -1001,7 +830,7 @@ namespace DAO.Migrations
                 {
                     b.HasOne("Entities.clsPersona", "Persona")
                         .WithMany()
-                        .HasForeignKey("PersonaId", "PersonaTipoId")
+                        .HasForeignKey("id", "personaTipoId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -1025,7 +854,7 @@ namespace DAO.Migrations
 
             modelBuilder.Entity("Entities.clsDonante", b =>
                 {
-                    b.Navigation("donaciones");
+                    b.Navigation("Donaciones");
                 });
 
             modelBuilder.Entity("Entities.clsModulo", b =>
@@ -1040,7 +869,7 @@ namespace DAO.Migrations
 
             modelBuilder.Entity("Entities.clsPersona", b =>
                 {
-                    b.Navigation("donante")
+                    b.Navigation("Donante")
                         .IsRequired();
                 });
 

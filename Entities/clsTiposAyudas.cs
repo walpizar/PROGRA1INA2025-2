@@ -53,17 +53,17 @@ namespace Entities
         public bool estado { get; set; } //Estado del tipo de ayuda
 
         //Constructor para crear un nuevo tipo de ayuda
-        public clsTiposAyudas(int id_tipoAyuda, string nombre, string descripcion, string id_responsable, DateTime fecha_crea, string id_usuarioCrea, string id_usuarioUltimaModificacion, DateTime fecha_ultimaModificacion, bool estado)
-        {
-            this.id_tipoAyuda = id_tipoAyuda;
-            this.nombre = nombre;
-            this.descripcion = descripcion;
-            this.id_responsable = id_responsable;
-            this.fecha_crea = fecha_crea;
-            this.id_usuarioCrea = id_usuarioCrea;
-            this.id_usuarioUltimaModificacion = id_usuarioUltimaModificacion;
-            this.fecha_ultimaModificacion = fecha_ultimaModificacion;
-            this.estado = true;
-        }
+        //public clsTiposAyudas(int id_tipoAyuda, string nombre, string descripcion, string id_responsable, DateTime fecha_crea, string id_usuarioCrea, string id_usuarioUltimaModificacion, DateTime fecha_ultimaModificacion, bool estado)
+        //{
+        //    this.id_tipoAyuda = id_tipoAyuda;
+        //    this.nombre = nombre;
+        //    this.descripcion = descripcion;
+        //    this.id_responsable = id_responsable;
+        //    this.fecha_crea = fecha_crea;
+        //    this.id_usuarioCrea = id_usuarioCrea;
+        //    this.id_usuarioUltimaModificacion = id_usuarioUltimaModificacion;
+        //    this.fecha_ultimaModificacion = fecha_ultimaModificacion;
+        //    this.estado = true;
+        //}
     }
 }

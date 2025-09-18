@@ -7,17 +7,11 @@ namespace Entities
     [Table("tbUsuarios")]
     public class clsUsuario
     {
-        [Key]
-        [ForeignKey("Persona")] // Esta es la clave primaria y a la vez la clave foránea a la tabla tbPersonas
-        public int id {  get; set; }
+        public string id {  get; set; }
+        public int personaTipoId {  get; set; }
 
         [Required(ErrorMessage = "El nombre de usuario es obligatorio.")]
         [StringLength(50, ErrorMessage = "El nombre de usuario no puede tener más de 50 caracteres.")]
-
-        public int personaTipoId {  get; set; }
-
-       
-
         public string nombre_usuario { get; set; }
 
         [Required]
@@ -35,7 +29,6 @@ namespace Entities
         public clsPersona Persona { get; set; }
 
         public clsUsuario() { }
-
        
     }
 }

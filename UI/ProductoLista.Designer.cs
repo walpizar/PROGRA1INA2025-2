@@ -60,7 +60,6 @@
             btnNuevo.TabIndex = 1;
             btnNuevo.Text = " Nuevo";
             btnNuevo.UseVisualStyleBackColor = true;
-            btnNuevo.Click += btnNuevo_Click;
             // 
             // gbxLista
             // 
@@ -89,7 +88,6 @@
             txtBusqueda.Name = "txtBusqueda";
             txtBusqueda.Size = new Size(554, 23);
             txtBusqueda.TabIndex = 3;
-            txtBusqueda.TextChanged += txtBusqueda_TextChanged;
             // 
             // lstvLista
             // 
@@ -103,8 +101,6 @@
             lstvLista.TabIndex = 0;
             lstvLista.UseCompatibleStateImageBehavior = false;
             lstvLista.View = View.Details;
-            lstvLista.SelectedIndexChanged += lstvLista_SelectedIndexChanged;
-            lstvLista.MouseDoubleClick += lstvLista_MouseDoubleClick;
             // 
             // colId
             // 
@@ -131,7 +127,6 @@
             Controls.Add(lblTitulo);
             Name = "frmProductoLista";
             Text = "Mantenimiento: Productos";
-            Load += frmProductoLista_Load;
             gbxLista.ResumeLayout(false);
             gbxLista.PerformLayout();
             ResumeLayout(false);

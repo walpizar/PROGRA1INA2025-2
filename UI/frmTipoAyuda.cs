@@ -24,46 +24,6 @@ namespace UI
             _tipoAyudasService = new TipoAyudasService();
         }
 
-        private void bbtnGuardar_Click_1(object sender, EventArgs e)
-        {
-            try
-            {
-                if (true)
-                {
-                    clsTiposAyudas tiposAyudas = selectTiposAyudas == null ? new clsTiposAyudas() : selectTiposAyudas;
-
-                    tiposAyudas.nombre = txtNombre.Text;
-                    tiposAyudas.descripcion = txtDescripcion.Text;
-                    tiposAyudas.responsable = (clsUsuario)cboResponsable.SelectedItem;
-
-                    if (selectTiposAyudas == null)
-                    {
-
-                        _tipoAyudasService.crear(tiposAyudas);
-                        MessageBox.Show("Tipo de ayuda creado correctamente");
-
-
-                    }
-                    //else
-                    //{
-                    //es una modificacion
-                    //_tipoAyudasService.(tiposAyudas);
-                    //MessageBox.Show("Tipo de ayuda modificado correctamente");
-                    //this.Close();
-                    //}
-
-                    limpiarForm();
-                    this.Close();
-                }
-
-            }
-            catch (Exception)
-            {
-
-                throw;
-            }
-
-        }
 
         private void limpiarForm()
         {
@@ -234,11 +194,6 @@ namespace UI
 
         }
 
-        private void btnEliminar_Click(object sender, EventArgs e)
-        {
-            this.Close();
-        }
-
         private void btnGuardar_Click(object sender, EventArgs e)
         {
             try
@@ -278,6 +233,11 @@ namespace UI
                 throw;
             }
 
+        }
+
+        private void btnEliminar_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
     }
 }
