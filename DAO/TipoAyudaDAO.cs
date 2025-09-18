@@ -20,7 +20,7 @@ namespace DAO
         // Crear un nuevo tipo de ayuda para el catálogo
         public void Crear(clsTiposAyudas tiposAyuda)
         {
-            _context.TiposAyudas.Add(tiposAyuda); // Agrega el objeto al contexto
+            _context.tiposAyudas.Add(tiposAyuda); // Agrega el objeto al contexto
             _context.SaveChanges(); // Guarda los cambios en la BD
         }
 
@@ -28,14 +28,14 @@ namespace DAO
         public clsTiposAyudas ConsultarPorID(int id)
         {
             //Uso de AsNoTracking para consultar mas rapido y FistOrDefault para que devuel el primer elemento que cumpla con las condiciones
-            return _context.TiposAyudas.AsNoTracking().FirstOrDefault(t => t.id_tipoAyuda == id);
+            return _context.tiposAyudas.AsNoTracking().FirstOrDefault(t => t.id_tipoAyuda == id);
         }
 
         // Retorna un tipo de ayuda según su nombre, o null si no existe
         public clsTiposAyudas ConsultarPorNombre(string nombre)
         {
             //Uso de AsNoTracking para consultar mas rapido
-            return _context.TiposAyudas.AsNoTracking().FirstOrDefault(t => t.nombre == nombre);
+            return _context.tiposAyudas.AsNoTracking().FirstOrDefault(t => t.nombre == nombre);
         }
 
 
@@ -43,14 +43,14 @@ namespace DAO
         public List<clsTiposAyudas> ConsultarTodos()
         {
             //Uso de AsNoTracking para consultar mas rapido
-            return _context.TiposAyudas.AsNoTracking().ToList();
+            return _context.tiposAyudas.AsNoTracking().ToList();
         }
 
 
         // Modifica un tipo de ayuda existente en la BD
         public void Modificar(clsTiposAyudas tiposAyuda)
         {
-            _context.TiposAyudas.Update(tiposAyuda); // Marca el objeto como modificado
+            _context.tiposAyudas.Update(tiposAyuda); // Marca el objeto como modificado
             _context.SaveChanges(); // Guarda los cambios en la BD
         }
 
@@ -59,11 +59,11 @@ namespace DAO
         public void Eliminar(int id)
         {
             //Uso del FirstOrDefault para que devuelva solo el primer elemento que encuentre que cumpla con la condición
-            var tip = _context.TiposAyudas.FirstOrDefault(t => t.id_tipoAyuda == id);
+            var tip = _context.tiposAyudas.FirstOrDefault(t => t.id_tipoAyuda == id);
 
             if (tip != null) // Si existe, se elimina
             {
-                _context.TiposAyudas.Remove(tip);
+                _context.tiposAyudas.Remove(tip);
                 _context.SaveChanges();
             }
         }

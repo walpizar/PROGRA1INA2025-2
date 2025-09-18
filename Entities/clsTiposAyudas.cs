@@ -24,32 +24,46 @@ namespace Entities
         public string descripcion { get; set; }//Descripción del tipo de ayuda
 
         //Fk a reponsable
-        //[Required]
-        public int id_responsable { get; set; }//Id reponsable
+        [Required]
+        public string id_responsable { get; set; }//Id reponsable
 
         //[Required]
         public clsUsuario responsable { get; set; }//Responsable
 
         //Campos de audioria
-        //[Required]
+        [Required]
         public DateTime fecha_crea { get; set; }//Fecha de creación
 
-        //[Required]
-        public int id_usuarioCrea { get; set; }
+        [Required]
+        public string id_usuarioCrea { get; set; }
 
         [ForeignKey("id_usuarioCrea")]
         public clsUsuario usuario_crea { get; set; }
 
-        //[Required]
-        public int id_usuarioUltimaModificacion { get; set; }
+        [Required]
+        public string id_usuarioUltimaModificacion { get; set; }
 
         [ForeignKey("id_usuarioUltimaModificacion")]
         public clsUsuario usuario_ultimaModificacion { get; set; }
 
-        //[Required]
+        [Required]
         public DateTime fecha_ultimaModificacion { get; set; }//Fecha ultima modificación
 
-        //[Required]
+        [Required]
         public bool estado { get; set; } //Estado del tipo de ayuda
+
+        //Constructor para crear un nuevo tipo de ayuda
+        public clsTiposAyudas(int id_tipoAyuda, string nombre, string descripcion, string id_responsable, DateTime fecha_crea, string id_usuarioCrea, string id_usuarioUltimaModificacion, DateTime fecha_ultimaModificacion, bool estado)
+        {
+            this.id_tipoAyuda = id_tipoAyuda;
+            this.nombre = nombre;
+            this.descripcion = descripcion;
+            this.id_responsable = id_responsable;
+            this.fecha_crea = fecha_crea;
+            this.id_usuarioCrea = id_usuarioCrea;
+            this.id_usuarioUltimaModificacion = id_usuarioUltimaModificacion;
+            this.fecha_ultimaModificacion = fecha_ultimaModificacion;
+            this.estado = true;
+        }
     }
 }

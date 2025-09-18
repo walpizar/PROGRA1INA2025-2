@@ -1,15 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-
 namespace Entities
 {
-    
     [Table("tbDonantes")]
     public class clsDonante
     {
@@ -17,25 +12,24 @@ namespace Entities
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int IdDonante { get; set; }
 
-        public int PersonaId { get; set; }
+        public string PersonaId { get; set; }
         public int PersonaTipoId { get; set; }
-
         [Required]
         public bool Estado { get; set; }
-
+        
         [Required]
         public DateTime FechaRegistro { get; set; }
-
-        // Navegación
+        // Relación: Un Donante es una Persona
+        [ForeignKey("PersonaId,PersonaTipoId")]
         public clsPersona Persona { get; set; }
 
+        // Relación: Un Donante puede tener muchas Donaciones
         public ICollection<clsDonacion> Donaciones { get; set; }
 
-        // Constructor vacío
         public clsDonante() { }
 
         // Constructor con parámetros
-        public clsDonante(int personaId, int personaTipoId, bool estado, DateTime fechaRegistro)
+        public clsDonante(string personaId, int personaTipoId, bool estado, DateTime fechaRegistro)
         {
             PersonaId = personaId;
             PersonaTipoId = personaTipoId;

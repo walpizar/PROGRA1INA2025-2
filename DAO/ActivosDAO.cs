@@ -41,18 +41,28 @@ namespace DAO
 
         public clsActivos consultarPorID(int id)
         {
-            return _context.Activos.SingleOrDefault(p => p.IdActivo == id);
+            return _context.Activos.SingleOrDefault(p => p.idActivo == id);
         }
 
         public clsActivos consultarPorNombre(string nombre)
         {
             return _context.Activos
-                .SingleOrDefault(p => p.NombreActivo.Trim().ToUpper() == nombre.Trim().ToUpper());
+                .SingleOrDefault(p => p.nombreActivo.Trim().ToUpper() == nombre.Trim().ToUpper());
         }
 
         public List<clsActivos> consultarTodos()
         {
             return _context.Activos.ToList();
+        }
+
+        public void eliminar(string id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public clsActivos consultarPorID(string id)
+        {
+            throw new NotImplementedException();
         }
     }
 }
