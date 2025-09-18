@@ -8,8 +8,8 @@ namespace DAO.Interfaces
         void Add(clsCategoriaActivos categoria);
         void Update(clsCategoriaActivos categoria);
         void Delete(int id);
-        clsCategoriaActivos ConsultarPorID(int id, bool incluirActivos = false);
-        List<clsCategoriaActivos> ConsultarTodos(bool incluirActivos = false);
+        clsCategoriaActivos ConsultarPorID(int id);
+        List<clsCategoriaActivos> ConsultarTodos();
         clsCategoriaActivos ConsultarPorNombre(string nombre);
     }
 }

@@ -1,5 +1,6 @@
-﻿using DAO;
-using Entities;
+﻿using Entities;
+using DAO;
+using DAO.Interfaces;
 using Services;
 using System;
 using System.Collections.Generic;
@@ -15,17 +16,14 @@ namespace UI
         {
             InitializeComponent();
 
-            // 🔹 Crear contexto y DAO
             var context = new dbContextINA();
             var dao = new CategoriaActivosDAO(context);
             _service = new CategoriaActivosService(dao);
 
-            // 🔹 Configuración del ListView
             listView1.FullRowSelect = true;
             listView1.GridLines = true;
             listView1.View = View.Details;
 
-            // 🔹 Agregar columnas
             listView1.Columns.Add("ID", 50);
             listView1.Columns.Add("Nombre", 150);
             listView1.Columns.Add("Descripción", 200);
@@ -40,22 +38,19 @@ namespace UI
         private void CargarCategorias()
         {
             listView1.Items.Clear();
-
             List<clsCategoriaActivos> categorias = _service.consultarTodos();
 
             foreach (var cat in categorias)
             {
-                var item = new ListViewItem(cat.Id.ToString());              // Columna ID
-                item.SubItems.Add(cat.nombre);                               // Columna Nombre
-                item.SubItems.Add(cat.descripcion ?? "");                    // Columna Descripción
-                item.SubItems.Add(cat.estado ? "Activo" : "Inactivo");       // Columna Estado
-
+                var item = new ListViewItem(cat.Id.ToString());
+                item.SubItems.Add(cat.nombre);
+                item.SubItems.Add(cat.descripcion ?? "");
+                item.SubItems.Add(cat.estado ? "Activo" : "Inactivo");
                 listView1.Items.Add(item);
             }
         }
 
-        // 🔹 CREAR
-        private void button1_Click(object sender, EventArgs e)
+        private void button1_Click(object sender, EventArgs e) // Crear
         {
             try
             {
@@ -67,86 +62,61 @@ namespace UI
                 };
 
                 _service.crear(nuevaCategoria);
-
-                MessageBox.Show("Categoría guardada correctamente", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
+                MessageBox.Show("Categoría guardada correctamente.");
                 CargarCategorias();
                 LimpiarControles();
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Error al guardar: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show($"Error: {ex.Message}");
             }
         }
 
-        // 🔹 ELIMINAR
-        private void button2_Click(object sender, EventArgs e)
+        private void button2_Click(object sender, EventArgs e) // Eliminar
         {
-            if (listView1.SelectedItems.Count == 0)
-            {
-                MessageBox.Show("Seleccione una categoría para eliminar.");
-                return;
-            }
+            if (listView1.SelectedItems.Count == 0) return;
 
-            var item = listView1.SelectedItems[0];
-            int id = int.Parse(item.SubItems[0].Text);
-
-            if (MessageBox.Show("¿Está seguro de eliminar esta categoría?",
-                "Confirmar", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+            int id = int.Parse(listView1.SelectedItems[0].SubItems[0].Text);
+            if (MessageBox.Show("¿Eliminar categoría?", "Confirmar", MessageBoxButtons.YesNo) == DialogResult.Yes)
             {
                 _service.eliminar(id);
-                MessageBox.Show("Categoría eliminada correctamente.");
+                MessageBox.Show("Categoría eliminada.");
                 CargarCategorias();
             }
         }
 
-        // 🔹 MODIFICAR (cargar datos en controles)
-        private void button3_Click(object sender, EventArgs e)
+        private void button3_Click(object sender, EventArgs e) // Modificar (cargar)
         {
-            if (listView1.SelectedItems.Count == 0)
+            if (listView1.SelectedItems.Count == 0) return;
+
+            int id = int.Parse(listView1.SelectedItems[0].SubItems[0].Text);
+            var cat = _service.consultarPorID(id);
+            if (cat != null)
             {
-                MessageBox.Show("Seleccione una categoría para modificar.");
-                return;
-            }
-
-            var item = listView1.SelectedItems[0];
-            int id = int.Parse(item.SubItems[0].Text);
-
-            var categoria = _service.consultarPorID(id); // 👈 corregido
-
-            if (categoria != null)
-            {
-                label3.Text = categoria.Id.ToString();     // mostrar ID
-                textBox1.Text = categoria.nombre;
-                richTextBox1.Text = categoria.descripcion;
-                checkBox1.Checked = categoria.estado;
+                label3.Text = cat.Id.ToString();
+                textBox1.Text = cat.nombre;
+                richTextBox1.Text = cat.descripcion;
+                checkBox1.Checked = cat.estado;
             }
         }
 
-        // 🔹 ACTUALIZAR
-        private void button4_Click(object sender, EventArgs e)
+        private void button4_Click(object sender, EventArgs e) // Actualizar
         {
-            if (string.IsNullOrEmpty(label3.Text) || label3.Text == "0")
-            {
-                MessageBox.Show("Seleccione primero una categoría con 'Modificar'.");
-                return;
-            }
+            if (string.IsNullOrEmpty(label3.Text) || label3.Text == "0") return;
 
             int id = int.Parse(label3.Text);
-
-            var categoria = new clsCategoriaActivos
+            var categoria = _service.consultarPorID(id);
+            if (categoria != null)
             {
-                Id = id,
-                nombre = textBox1.Text.Trim(),
-                descripcion = richTextBox1.Text.Trim(),
-                estado = checkBox1.Checked
-            };
+                categoria.nombre = textBox1.Text.Trim();
+                categoria.descripcion = richTextBox1.Text.Trim();
+                categoria.estado = checkBox1.Checked;
 
-            _service.modificar(categoria); // 👈 corregido (era actualizar)
-            MessageBox.Show("Categoría actualizada correctamente.");
-            CargarCategorias();
-
-            LimpiarControles();
+                _service.modificar(categoria);
+                MessageBox.Show("Categoría actualizada.");
+                CargarCategorias();
+                LimpiarControles();
+            }
         }
 
         private void LimpiarControles()

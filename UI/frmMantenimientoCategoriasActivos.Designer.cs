@@ -32,6 +32,7 @@
             gbxLogin = new GroupBox();
             label6 = new Label();
             textBox1 = new TextBox();
+            button4 = new Button();
             richTextBox1 = new RichTextBox();
             label5 = new Label();
             label4 = new Label();
@@ -46,7 +47,6 @@
             columnnombre = new ColumnHeader();
             columndescripcion = new ColumnHeader();
             columnestado = new ColumnHeader();
-            button4 = new Button();
             button3 = new Button();
             button2 = new Button();
             gbxLogin.SuspendLayout();
@@ -67,6 +67,7 @@
             // 
             gbxLogin.Controls.Add(label6);
             gbxLogin.Controls.Add(textBox1);
+            gbxLogin.Controls.Add(button4);
             gbxLogin.Controls.Add(richTextBox1);
             gbxLogin.Controls.Add(label5);
             gbxLogin.Controls.Add(label4);
@@ -96,6 +97,16 @@
             textBox1.Name = "textBox1";
             textBox1.Size = new Size(193, 23);
             textBox1.TabIndex = 2;
+            // 
+            // button4
+            // 
+            button4.Location = new Point(124, 352);
+            button4.Name = "button4";
+            button4.Size = new Size(75, 23);
+            button4.TabIndex = 8;
+            button4.Text = "actualizar";
+            button4.UseVisualStyleBackColor = true;
+            button4.Click += button4_Click;
             // 
             // richTextBox1
             // 
@@ -165,7 +176,6 @@
             // 
             groupBox1.Controls.Add(label7);
             groupBox1.Controls.Add(listView1);
-            groupBox1.Controls.Add(button4);
             groupBox1.Controls.Add(button3);
             groupBox1.Controls.Add(button2);
             groupBox1.Location = new Point(237, 215);
@@ -189,7 +199,7 @@
             listView1.Columns.AddRange(new ColumnHeader[] { columnid, columnnombre, columndescripcion, columnestado });
             listView1.Location = new Point(6, 44);
             listView1.Name = "listView1";
-            listView1.Size = new Size(458, 156);
+            listView1.Size = new Size(444, 156);
             listView1.TabIndex = 9;
             listView1.UseCompatibleStateImageBehavior = false;
             listView1.View = View.Details;
@@ -201,6 +211,7 @@
             // columnnombre
             // 
             columnnombre.Text = "nombre";
+            columnnombre.Width = 80;
             // 
             // columndescripcion
             // 
@@ -210,16 +221,6 @@
             // columnestado
             // 
             columnestado.Text = "estado";
-            // 
-            // button4
-            // 
-            button4.Location = new Point(470, 101);
-            button4.Name = "button4";
-            button4.Size = new Size(75, 23);
-            button4.TabIndex = 8;
-            button4.Text = "actualizar";
-            button4.UseVisualStyleBackColor = true;
-            button4.Click += button4_Click;
             // 
             // button3
             // 

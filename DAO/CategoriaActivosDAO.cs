@@ -37,25 +37,19 @@ namespace DAO
             }
         }
 
-        public clsCategoriaActivos ConsultarPorID(int id, bool incluirActivos = false)
+        public clsCategoriaActivos ConsultarPorID(int id)
         {
-            if (incluirActivos)
-                return _context.CategoriasActivos.Include(c => c.Activos).FirstOrDefault(c => c.Id == id);
-
             return _context.CategoriasActivos.FirstOrDefault(c => c.Id == id);
         }
 
-        public List<clsCategoriaActivos> ConsultarTodos(bool incluirActivos = false)
+        public List<clsCategoriaActivos> ConsultarTodos()
         {
-            if (incluirActivos)
-                return _context.CategoriasActivos.Include(c => c.Activos).OrderBy(c => c.nombre).ToList();
-
             return _context.CategoriasActivos.OrderBy(c => c.nombre).ToList();
         }
 
         public clsCategoriaActivos ConsultarPorNombre(string nombre)
         {
-            return _context.CategoriasActivos.FirstOrDefault(c => c.nombre.Equals(nombre));
+            return _context.CategoriasActivos.FirstOrDefault(c => c.nombre == nombre);
         }
     }
 }
