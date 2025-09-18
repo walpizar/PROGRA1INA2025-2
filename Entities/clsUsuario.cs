@@ -15,8 +15,6 @@ namespace Entities
 
         public int personaTipoId {  get; set; }
 
-       
-
         public string nombre_usuario { get; set; }
 
         [Required]

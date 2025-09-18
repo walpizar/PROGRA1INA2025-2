@@ -1,15 +1,19 @@
 ﻿using Common.Interfaces;
 using Entities;
+using Microsoft.EntityFrameworkCore;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace DAO
 {
     public class UsuarioDAO : IGenerica<clsUsuario>
     {
-        private dbContextINA _context;
+        private readonly dbContextINA _context;
 
-        public UsuarioDAO() { 
+        public UsuarioDAO()
+        {
             _context = new dbContextINA();
-
         }
 
         public void crear(clsUsuario usuario)
@@ -22,48 +26,50 @@ namespace DAO
         {
             _context.usuario.Update(usuario);
             _context.SaveChanges();
-
         }
 
-        public void eliminar(string id)
+        // Métodos con clave compuesta
+        public void eliminar(string personaId, int personaTipoId)
         {
-            // Se busca el usuario primero para evitar un error de referencia nula
-            var usua = _context.usuario.SingleOrDefault(u => u.personaId == id);
+            var usua = _context.usuario
+                .SingleOrDefault(u => u.personaId == personaId && u.personaTipoId == personaTipoId);
+
             if (usua != null)
             {
                 _context.usuario.Remove(usua);
                 _context.SaveChanges();
-
             }
-
         }
+
+        public clsUsuario consultarPorID(string personaId, int personaTipoId)
+        {
+            return _context.usuario.Find(personaId, personaTipoId);
+        }
+
+        // Métodos de la interfaz (no aplican, pero obligatorios para compilar)
+        public void eliminar(string id)
+        {
+            throw new NotImplementedException("Usa eliminar(personaId, personaTipoId).");
+        }
+
         public clsUsuario consultarPorID(string id)
         {
-            return _context.usuario.Find(id);
-        }
-
-        public clsUsuario consultarPorID(int id)
-        {
-            throw new NotImplementedException();
+            throw new NotImplementedException("Usa consultarPorID(personaId, personaTipoId).");
         }
 
         public clsUsuario consultarPorNombre(string nombre)
         {
-            return _context.usuario.Where(u => u.nombre_usuario.Trim().ToUpper()
-                                              == nombre.Trim().ToUpper()).SingleOrDefault();
+            return _context.usuario
+                .FirstOrDefault(u => u.nombre_usuario.Trim().ToUpper() == nombre.Trim().ToUpper());
         }
 
         public List<clsUsuario> consultarTodos()
         {
-            return _context.usuario.ToList();
-
+            using var context = new dbContextINA();
+            { 
+                return context.usuario.Include(u => u.persona).ToList();
+            }
+            //return _context.usuario.ToList();
         }
-
-        public void eliminar(int id)
-        {
-            throw new NotImplementedException();
-        }
-
-        
     }
 }

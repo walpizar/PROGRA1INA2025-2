@@ -84,9 +84,9 @@
             Datos.Controls.Add(txtNombre);
             Datos.Controls.Add(label2);
             Datos.Location = new Point(52, 149);
-            Datos.Margin = new Padding(4, 4, 4, 4);
+            Datos.Margin = new Padding(4);
             Datos.Name = "Datos";
-            Datos.Padding = new Padding(4, 4, 4, 4);
+            Datos.Padding = new Padding(4);
             Datos.Size = new Size(966, 531);
             Datos.TabIndex = 1;
             Datos.TabStop = false;
@@ -96,7 +96,7 @@
             // 
             comboRol.FormattingEnabled = true;
             comboRol.Location = new Point(139, 471);
-            comboRol.Margin = new Padding(4, 4, 4, 4);
+            comboRol.Margin = new Padding(4);
             comboRol.Name = "comboRol";
             comboRol.Size = new Size(319, 33);
             comboRol.TabIndex = 17;
@@ -104,7 +104,7 @@
             // txtFecha
             // 
             txtFecha.Location = new Point(198, 302);
-            txtFecha.Margin = new Padding(4, 4, 4, 4);
+            txtFecha.Margin = new Padding(4);
             txtFecha.Name = "txtFecha";
             txtFecha.Size = new Size(260, 31);
             txtFecha.TabIndex = 16;
@@ -122,7 +122,7 @@
             // txtContra
             // 
             txtContra.Location = new Point(139, 415);
-            txtContra.Margin = new Padding(4, 4, 4, 4);
+            txtContra.Margin = new Padding(4);
             txtContra.Name = "txtContra";
             txtContra.Size = new Size(319, 31);
             txtContra.TabIndex = 13;
@@ -140,7 +140,7 @@
             // txtUsuario
             // 
             txtUsuario.Location = new Point(139, 361);
-            txtUsuario.Margin = new Padding(4, 4, 4, 4);
+            txtUsuario.Margin = new Padding(4);
             txtUsuario.Name = "txtUsuario";
             txtUsuario.Size = new Size(319, 31);
             txtUsuario.TabIndex = 11;
@@ -168,7 +168,7 @@
             // txtTelefono
             // 
             txtTelefono.Location = new Point(139, 249);
-            txtTelefono.Margin = new Padding(4, 4, 4, 4);
+            txtTelefono.Margin = new Padding(4);
             txtTelefono.Name = "txtTelefono";
             txtTelefono.Size = new Size(319, 31);
             txtTelefono.TabIndex = 7;
@@ -186,7 +186,7 @@
             // txtDireccion
             // 
             txtDireccion.Location = new Point(139, 192);
-            txtDireccion.Margin = new Padding(4, 4, 4, 4);
+            txtDireccion.Margin = new Padding(4);
             txtDireccion.Name = "txtDireccion";
             txtDireccion.Size = new Size(319, 31);
             txtDireccion.TabIndex = 5;
@@ -204,7 +204,7 @@
             // txtEmail
             // 
             txtEmail.Location = new Point(139, 136);
-            txtEmail.Margin = new Padding(4, 4, 4, 4);
+            txtEmail.Margin = new Padding(4);
             txtEmail.Name = "txtEmail";
             txtEmail.Size = new Size(319, 31);
             txtEmail.TabIndex = 3;
@@ -222,7 +222,7 @@
             // txtNombre
             // 
             txtNombre.Location = new Point(139, 75);
-            txtNombre.Margin = new Padding(4, 4, 4, 4);
+            txtNombre.Margin = new Padding(4);
             txtNombre.Name = "txtNombre";
             txtNombre.Size = new Size(319, 31);
             txtNombre.TabIndex = 1;
@@ -240,7 +240,7 @@
             // btnEliminar
             // 
             btnEliminar.Location = new Point(595, 712);
-            btnEliminar.Margin = new Padding(4, 4, 4, 4);
+            btnEliminar.Margin = new Padding(4);
             btnEliminar.Name = "btnEliminar";
             btnEliminar.Size = new Size(156, 50);
             btnEliminar.TabIndex = 2;
@@ -250,20 +250,19 @@
             // btnAnadir
             // 
             btnAnadir.Location = new Point(776, 712);
-            btnAnadir.Margin = new Padding(4, 4, 4, 4);
+            btnAnadir.Margin = new Padding(4);
             btnAnadir.Name = "btnAnadir";
             btnAnadir.Size = new Size(118, 50);
             btnAnadir.TabIndex = 3;
             btnAnadir.Text = "Añadir";
             btnAnadir.UseVisualStyleBackColor = true;
-            btnAnadir.Click += new System.EventHandler(this.btnAnadir_Click_1);
-
+            btnAnadir.Click += btnAnadir_Click_1;
             // 
             // btnCancelar
             // 
             btnCancelar.BackColor = Color.Snow;
             btnCancelar.Location = new Point(914, 712);
-            btnCancelar.Margin = new Padding(4, 4, 4, 4);
+            btnCancelar.Margin = new Padding(4);
             btnCancelar.Name = "btnCancelar";
             btnCancelar.Size = new Size(118, 50);
             btnCancelar.TabIndex = 4;
@@ -285,7 +284,7 @@
             Controls.Add(btnEliminar);
             Controls.Add(Datos);
             Controls.Add(label1);
-            Margin = new Padding(4, 4, 4, 4);
+            Margin = new Padding(4);
             Name = "FrmAnadirAdmin";
             Text = "Añadir Admin";
             Load += FrmAnadirAdmin_Load;

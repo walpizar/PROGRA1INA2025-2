@@ -10,16 +10,6 @@ namespace Entities
     {
         [Key]
 
-        [DatabaseGenerated(DatabaseGeneratedOption.None)]
-        public int IdDonante { get; set; }
-
-
-        public string PersonaId { get; set; }
-        public int PersonaTipoId { get; set; }
-
-
-
-
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int idDonante { get; set; }
         

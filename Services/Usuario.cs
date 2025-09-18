@@ -54,7 +54,7 @@ namespace Services
 
         public List<clsUsuario> consultarTodos()
         {
-            throw new NotImplementedException();
+            return _usuarioDAO.consultarTodos();
         }
         
     }

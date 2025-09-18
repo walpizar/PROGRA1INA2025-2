@@ -11,9 +11,9 @@ namespace Common.Enums
 
         public enum TipoUsuario
         {
-            Administrador,
-            Usuario,
-            Invitado
+            Administrador =1,
+            Usuario = 2,
+            Invitado = 3
         }
         public enum EstadoPedido
         {
