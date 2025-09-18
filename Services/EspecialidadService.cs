@@ -73,7 +73,7 @@ namespace Services
         {
             throw new NotImplementedException();
         }
-
+      
         public clsEspecialidadMedica consultarPorID(string id)
         {
             throw new NotImplementedException();

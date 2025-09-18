@@ -77,16 +77,19 @@ namespace UI
             if (lstvListaEspecialidad.SelectedItems.Count > 0)
             {
                 int id = int.Parse(lstvListaEspecialidad.SelectedItems[0].SubItems[0].Text);
-                clsEspecialidadMedica cliente = lista.Where(c => c.idEspecialidadMedica == id).SingleOrDefault();
+                clsEspecialidadMedica especialidad = lista.Where(c => c.idEspecialidadMedica == id).SingleOrDefault();
 
-                if (cliente != null)
+                if (especialidad != null)
                 {
                     frmEspecialidad frm = new frmEspecialidad
                     {
-                        especialidadSelected = cliente
+                        especialidadSelected = especialidad
                     };
-                    frm.ShowDialog();
-                    cargarListaEspecialidades();
+
+                    if (frm.ShowDialog() == DialogResult.OK)
+                    {
+                        cargarListaEspecialidades();
+                    }
                 }
             }
         }

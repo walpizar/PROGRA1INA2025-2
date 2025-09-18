@@ -32,6 +32,10 @@ namespace UI
                 txtNombre.Text = especialidadSelected.nombreEspecialidad;
                 txtDescripcion.Text = especialidadSelected.descripcion;
 
+                // INHABILITAR EDICIÓN DEL CAMPO ID
+                txtId.Enabled = false;
+                txtId.ReadOnly = true;
+
                 btnEliminar.Visible = true; // Mostrar botón de eliminar
             }
             else
@@ -56,21 +60,29 @@ namespace UI
             {
                 if (validarDatos())
                 {
-                    clsEspecialidadMedica especialidad = new clsEspecialidadMedica
-                    {
-                        idEspecialidadMedica = Convert.ToInt32(txtId.Text),
-                        nombreEspecialidad = txtNombre.Text,
-                        descripcion = txtDescripcion.Text,
-                        estado = true // Siempre activo al crear
-                    };
-
-
                     if (especialidadSelected == null) // Crear
-                        _especialidadService.crear(especialidad);
+                    {
+                        // CREAR NUEVA ESPECIALIDAD
+                        clsEspecialidadMedica nuevaEspecialidad = new clsEspecialidadMedica
+                        {
+                            idEspecialidadMedica = Convert.ToInt32(txtId.Text),
+                            nombreEspecialidad = txtNombre.Text,
+                            descripcion = txtDescripcion.Text,
+                            estado = true
+                        };
+                        _especialidadService.crear(nuevaEspecialidad);
+                    }
                     else // Modificar
-                        _especialidadService.modificar(especialidad);
+                    {
+                        // MODIFICAR EL OBJETO EXISTENTE
+                        especialidadSelected.nombreEspecialidad = txtNombre.Text;
+                        especialidadSelected.descripcion = txtDescripcion.Text;
 
-                    MessageBox.Show("Especialidad guardada correctamente");
+                        _especialidadService.modificar(especialidadSelected);
+                    }
+
+                    MessageBox.Show("Especialidad actualizada correctamente");
+                    this.DialogResult = DialogResult.OK;
                     this.Close();
                 }
                 else
@@ -86,6 +98,7 @@ namespace UI
 
         private void btnCancelar_Click(object sender, EventArgs e)
         {
+            this.DialogResult = DialogResult.Cancel;
             this.Close();
         }
 
