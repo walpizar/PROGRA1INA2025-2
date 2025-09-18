@@ -36,8 +36,6 @@
             richTextBox1 = new RichTextBox();
             label5 = new Label();
             label4 = new Label();
-            label3 = new Label();
-            label2 = new Label();
             button1 = new Button();
             checkBox1 = new CheckBox();
             groupBox1 = new GroupBox();
@@ -71,8 +69,6 @@
             gbxLogin.Controls.Add(richTextBox1);
             gbxLogin.Controls.Add(label5);
             gbxLogin.Controls.Add(label4);
-            gbxLogin.Controls.Add(label3);
-            gbxLogin.Controls.Add(label2);
             gbxLogin.Controls.Add(button1);
             gbxLogin.Controls.Add(checkBox1);
             gbxLogin.Location = new Point(12, 57);
@@ -134,24 +130,6 @@
             label4.TabIndex = 4;
             label4.Text = "nombre :";
             // 
-            // label3
-            // 
-            label3.AutoSize = true;
-            label3.Location = new Point(36, 79);
-            label3.Name = "label3";
-            label3.Size = new Size(49, 15);
-            label3.TabIndex = 3;
-            label3.Text = "numero";
-            // 
-            // label2
-            // 
-            label2.AutoSize = true;
-            label2.Location = new Point(6, 79);
-            label2.Name = "label2";
-            label2.Size = new Size(24, 15);
-            label2.TabIndex = 2;
-            label2.Text = "ID :";
-            // 
             // button1
             // 
             button1.Location = new Point(10, 352);
@@ -165,7 +143,7 @@
             // checkBox1
             // 
             checkBox1.AutoSize = true;
-            checkBox1.Location = new Point(103, 79);
+            checkBox1.Location = new Point(6, 77);
             checkBox1.Name = "checkBox1";
             checkBox1.Size = new Size(96, 19);
             checkBox1.TabIndex = 0;
@@ -268,8 +246,6 @@
         private CheckBox checkBox1;
         private Label label5;
         private Label label4;
-        private Label label3;
-        private Label label2;
         private Button button1;
         private Label label6;
         private TextBox textBox1;
