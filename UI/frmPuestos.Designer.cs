@@ -29,7 +29,6 @@
         private void InitializeComponent()
         {
             gbxDatosPuesto = new GroupBox();
-            btnNuevoDepartamento = new Button();
             cboDepartamento = new ComboBox();
             lblElegirDept = new Label();
             txtDescripcion = new TextBox();
@@ -48,7 +47,6 @@
             // 
             // gbxDatosPuesto
             // 
-            gbxDatosPuesto.Controls.Add(btnNuevoDepartamento);
             gbxDatosPuesto.Controls.Add(cboDepartamento);
             gbxDatosPuesto.Controls.Add(lblElegirDept);
             gbxDatosPuesto.Controls.Add(txtDescripcion);
@@ -57,22 +55,12 @@
             gbxDatosPuesto.Controls.Add(lblNombre);
             gbxDatosPuesto.Controls.Add(txtCodigo);
             gbxDatosPuesto.Controls.Add(lblCodigo);
-            gbxDatosPuesto.Location = new Point(71, 102);
+            gbxDatosPuesto.Location = new Point(53, 79);
             gbxDatosPuesto.Name = "gbxDatosPuesto";
-            gbxDatosPuesto.Size = new Size(441, 216);
+            gbxDatosPuesto.Size = new Size(426, 203);
             gbxDatosPuesto.TabIndex = 10;
             gbxDatosPuesto.TabStop = false;
             gbxDatosPuesto.Text = "Datos del Puesto";
-            // 
-            // btnNuevoDepartamento
-            // 
-            btnNuevoDepartamento.Location = new Point(346, 145);
-            btnNuevoDepartamento.Name = "btnNuevoDepartamento";
-            btnNuevoDepartamento.Size = new Size(62, 23);
-            btnNuevoDepartamento.TabIndex = 14;
-            btnNuevoDepartamento.Text = "Agregar";
-            btnNuevoDepartamento.UseVisualStyleBackColor = true;
-            btnNuevoDepartamento.Click += btnNuevoDepartamento_Click;
             // 
             // cboDepartamento
             // 
@@ -143,7 +131,7 @@
             // 
             // btnActivar
             // 
-            btnActivar.Location = new Point(107, 376);
+            btnActivar.Location = new Point(182, 312);
             btnActivar.Name = "btnActivar";
             btnActivar.Size = new Size(113, 36);
             btnActivar.TabIndex = 24;
@@ -153,7 +141,7 @@
             // 
             // btnInactivar
             // 
-            btnInactivar.Location = new Point(227, 376);
+            btnInactivar.Location = new Point(420, 37);
             btnInactivar.Name = "btnInactivar";
             btnInactivar.Size = new Size(113, 36);
             btnInactivar.TabIndex = 23;
@@ -163,7 +151,7 @@
             // 
             // btnCancelar
             // 
-            btnCancelar.Location = new Point(465, 376);
+            btnCancelar.Location = new Point(420, 312);
             btnCancelar.Name = "btnCancelar";
             btnCancelar.Size = new Size(113, 36);
             btnCancelar.TabIndex = 22;
@@ -173,7 +161,7 @@
             // 
             // btnGuardar
             // 
-            btnGuardar.Location = new Point(346, 376);
+            btnGuardar.Location = new Point(301, 312);
             btnGuardar.Name = "btnGuardar";
             btnGuardar.Size = new Size(113, 36);
             btnGuardar.TabIndex = 21;
@@ -185,17 +173,18 @@
             // 
             lblTitulo.AutoSize = true;
             lblTitulo.Font = new Font("Segoe UI", 15.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            lblTitulo.Location = new Point(211, 35);
+            lblTitulo.Location = new Point(195, 22);
             lblTitulo.Name = "lblTitulo";
             lblTitulo.Size = new Size(137, 30);
             lblTitulo.TabIndex = 25;
             lblTitulo.Text = "Crear Puesto";
+            lblTitulo.Click += lblTitulo_Click;
             // 
             // frmPuestos
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(586, 424);
+            ClientSize = new Size(542, 360);
             Controls.Add(lblTitulo);
             Controls.Add(btnActivar);
             Controls.Add(btnInactivar);
@@ -227,6 +216,5 @@
         private Button btnCancelar;
         private Button btnGuardar;
         private Label lblTitulo;
-        private Button btnNuevoDepartamento;
     }
 }

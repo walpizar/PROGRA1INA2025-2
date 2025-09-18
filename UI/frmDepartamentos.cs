@@ -58,19 +58,13 @@ namespace UI
 
                 // Mostrar el código funcional y permitir editarlo
                 txtCodigo.Text = _dep.codigoDepartamento;
-                txtCodigo.Enabled = true;
+                txtCodigo.Enabled = false;
                 txtCodigo.BackColor = SystemColors.Window;
 
                 txtNombre.Text = _dep.Nombre;
                 txtDescripcion.Text = _dep.descripcionDepartamento;
 
                 btnEliminar.Visible = true;
-            }
-
-            // Agregar ejemplo en el campo código
-            if (txtCodigo.Text == "")
-            {
-                txtCodigo.PlaceholderText = "Ej: ADM-001, RRHH-001, IT-001";
             }
         }
 
@@ -104,7 +98,7 @@ namespace UI
                     _dep.Nombre = txtNombre.Text.Trim();
                     _dep.descripcionDepartamento = txtDescripcion.Text.Trim();
                     _dep.fecha_ult_mod = DateTime.UtcNow;
-                    _dep.usuario_ult_mod = "IAN";
+                    _dep.usuario_ult_mod = "Admin";
                     _svc.modificar(_dep);
                 }
                 MessageBox.Show("Guardado correctamente.");

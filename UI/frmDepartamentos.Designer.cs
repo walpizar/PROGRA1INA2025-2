@@ -50,7 +50,7 @@
             gbxDatosDept.Controls.Add(lblNombre);
             gbxDatosDept.Controls.Add(txtCodigo);
             gbxDatosDept.Controls.Add(lblId);
-            gbxDatosDept.Location = new Point(69, 116);
+            gbxDatosDept.Location = new Point(44, 72);
             gbxDatosDept.Name = "gbxDatosDept";
             gbxDatosDept.Size = new Size(441, 216);
             gbxDatosDept.TabIndex = 15;
@@ -107,7 +107,7 @@
             // 
             // btnEliminar
             // 
-            btnEliminar.Location = new Point(224, 376);
+            btnEliminar.Location = new Point(145, 319);
             btnEliminar.Name = "btnEliminar";
             btnEliminar.Size = new Size(113, 36);
             btnEliminar.TabIndex = 21;
@@ -117,7 +117,7 @@
             // 
             // btnCancelar
             // 
-            btnCancelar.Location = new Point(462, 376);
+            btnCancelar.Location = new Point(383, 319);
             btnCancelar.Name = "btnCancelar";
             btnCancelar.Size = new Size(113, 36);
             btnCancelar.TabIndex = 20;
@@ -127,7 +127,7 @@
             // 
             // btnGuardar
             // 
-            btnGuardar.Location = new Point(343, 376);
+            btnGuardar.Location = new Point(264, 319);
             btnGuardar.Name = "btnGuardar";
             btnGuardar.Size = new Size(113, 36);
             btnGuardar.TabIndex = 19;
@@ -139,7 +139,7 @@
             // 
             lblTitulo.AutoSize = true;
             lblTitulo.Font = new Font("Segoe UI", 15.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            lblTitulo.Location = new Point(188, 42);
+            lblTitulo.Location = new Point(145, 26);
             lblTitulo.Name = "lblTitulo";
             lblTitulo.Size = new Size(212, 30);
             lblTitulo.TabIndex = 22;
@@ -149,7 +149,7 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(586, 424);
+            ClientSize = new Size(542, 371);
             Controls.Add(lblTitulo);
             Controls.Add(btnEliminar);
             Controls.Add(btnCancelar);

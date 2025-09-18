@@ -69,7 +69,7 @@ namespace UI
 
                 // Mostrar código funcional y permitir editarlo
                 txtCodigo.Text = _puesto.codigo;
-                txtCodigo.Enabled = true;
+                txtCodigo.Enabled = false;
 
                 txtNombre.Text = _puesto.Nombre;
                 txtDescripcion.Text = _puesto.descripcion ?? "";
@@ -192,24 +192,9 @@ namespace UI
 
         }
 
-        private void btnNuevoDepartamento_Click(object sender, EventArgs e)
+        private void lblTitulo_Click(object sender, EventArgs e)
         {
-            using (var frm = new frmDepartamentosLista())
-            {
-                if (frm.ShowDialog(this) == DialogResult.OK)
-                {
-                    var deps = _depSvc.consultarTodos();
-                    cboDepartamento.DataSource = null;
-                    cboDepartamento.DataSource = deps;
-                    cboDepartamento.DisplayMember = "Nombre";
-                    cboDepartamento.ValueMember = "idDepartamento";
 
-                    // Seleccionar el recién creado
-                    var ultimo = deps.OrderByDescending(d => d.idDepartamento).FirstOrDefault();
-                    if (ultimo != null)
-                        cboDepartamento.SelectedValue = ultimo.idDepartamento;
-                }
-            }
         }
     }
 }
