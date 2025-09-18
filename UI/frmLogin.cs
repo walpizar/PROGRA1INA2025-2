@@ -104,6 +104,7 @@ namespace UI
                     {
                         return;//si es vacio, salgo del método
                     }
+
                     //valido que el correo exista en la base de datos, llamo a mi capa de servicios para validar el correo
                     if (_loginService.ValidarCorreoExistente(correoRegistrado))
                     {
