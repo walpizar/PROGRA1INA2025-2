@@ -259,7 +259,7 @@ namespace UI
                     MessageBox.Show("Devolución modificada correctamente.");
                 }
 
-                this.Close();
+                //this.Close();
             }
             catch (EntityExistDBException ex)
             {

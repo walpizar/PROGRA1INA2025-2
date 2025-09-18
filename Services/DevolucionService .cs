@@ -36,8 +36,8 @@ namespace Services
             _devolucionDao.crear(devolucion);
 
             // Si deseas actualizar el activo tras la devolución, descomenta y ajusta:
-            // activo.Estado = "Disponible";
-            // _activosService.modificar(activo);
+            activo.estado = "Disponible";
+           _activosService.modificar(activo);
         }
 
         public void modificar(clsDevolucion devolucion)
