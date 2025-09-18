@@ -60,7 +60,7 @@ namespace UI
                 }
                 else
                 {
-                    MessageBox.Show("Usuario o contraseña incorrectos. Verifique e intentelo de nuevo", "Error de autenticación",
+                    MessageBox.Show("Usuario o Contraseña incorrectos. Verifique e intentelo de nuevo", "Error de autenticación",
                         MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
