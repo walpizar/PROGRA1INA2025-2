@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace DAO
 {
-    internal class donacionDAO : IGenerica<clsDonacion>
+    public class donacionDAO : IGenerica<clsDonacion>
     {
         //inicio  el contexto
         dbContextINA context ;
@@ -17,14 +17,9 @@ namespace DAO
             context = new dbContextINA(); 
         }
 
-        public clsDonacion consultarPorID(int id)
-        {
-           return context.donacion.SingleOrDefault(d => d.idDonacion == id);
-        }
-
         public clsDonacion consultarPorID(string id)
         {
-            throw new NotImplementedException();
+            return context.donacion.FirstOrDefault(d => d.idDonacion.ToString() == id);
         }
 
         public clsDonacion consultarPorNombre(string nombre)
@@ -42,12 +37,6 @@ namespace DAO
             context.donacion.Add(entidad);
             context.SaveChanges();
 
-        }
-
-        public void eliminar(int id)
-        {
-            context.donacion.Remove(consultarPorID(id));
-            context.SaveChanges();
         }
 
         public void eliminar(string id)

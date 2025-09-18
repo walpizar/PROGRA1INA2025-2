@@ -9,16 +9,18 @@ using Entities;
 
 namespace DAO
 {
-    internal class donacionActivoDAO : IGenerica<clsDonacionActivo>
+    public class donacionActivoDAO : IGenerica<clsDonacionActivo>
     {
-        public clsDonacionActivo consultarPorID(int id)
-        {
-            throw new NotImplementedException();
-        }
+        //inicio  el contexto
+        dbContextINA dbContextINA;
 
+        public donacionActivoDAO()
+        {
+            dbContextINA = new dbContextINA();
+        }
         public clsDonacionActivo consultarPorID(string id)
         {
-            throw new NotImplementedException();
+            return dbContextINA.donacionesActivos.FirstOrDefault(d => d.idDonacionActivo.ToString() == id);
         }
 
         public clsDonacionActivo consultarPorNombre(string nombre)
@@ -28,27 +30,25 @@ namespace DAO
 
         public List<clsDonacionActivo> consultarTodos()
         {
-            throw new NotImplementedException();
+            return dbContextINA.donacionesActivos.ToList();
         }
 
         public void crear(clsDonacionActivo entidad)
         {
-            throw new NotImplementedException();
-        }
-
-        public void eliminar(int id)
-        {
-            throw new NotImplementedException();
+            dbContextINA.donacionesActivos.Add(entidad);
+            dbContextINA.SaveChanges();
         }
 
         public void eliminar(string id)
         {
-            throw new NotImplementedException();
+            dbContextINA.donacionesActivos.Remove(consultarPorID(id));
+            dbContextINA.SaveChanges();
         }
 
         public void modificar(clsDonacionActivo entidad)
         {
-            throw new NotImplementedException();
+            dbContextINA.donacionesActivos.Update(entidad);
+            dbContextINA.SaveChanges();
         }
     }
 }
