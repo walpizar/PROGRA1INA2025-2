@@ -1,4 +1,4 @@
-﻿using Common.Interfaces;
+﻿using Common.Interfaces; 
 using Entities;
 using System;
 using System.Collections.Generic;
@@ -6,13 +6,15 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using DAO;
+using Microsoft.IdentityModel.Tokens;
+using Common.Exceptions;
 
 namespace Services
 {
     public class donanteService : IGenerica<clsDonante>
     {
         //inicio DAO
-        DAO.donanteDAO donanteDAO;
+        donanteDAO donanteDAO;
 
         public donanteService()
         {
@@ -36,23 +38,63 @@ namespace Services
 
         public void crear(clsDonante entidad)
         {
-            //valido datos
-            if (string.IsNullOrEmpty(entidad.personaId.ToString()))
+            //validar si el donante ya existe
+            var donanteExistente = donanteDAO.consultarPorID(entidad.personaId.ToString());
+            if (donanteExistente != null)
             {
-                throw new ArgumentException("El ID de la persona no puede estar vacío ");
+                throw new EntityExistDBException("EL DONANTE YA EXISTE EN LA BASE DE DATOS, " +
+                    " PARA MODIFICAR DATOS USE EL MODULO APROPIADO");
             }
+            
+            //si pasa la validacion, se crea el donante
+            donanteDAO.crear(entidad);
+
+
+            //ASIGNO DATOS DE AUDITORIA: REGISTRO
+            entidad.fechaRegistro = DateTime.Now;
+            entidad.usuarioRegistro = "SYSTEM"; //esto se debe cambiar por el usuario que este logueado
+            entidad.estado = true;
+
+            //ASIGNO DATOS DE AUDITORIA: MODIFICACION
+            entidad.fechaModificacion = entidad.fechaRegistro; //ES LA PRIMERA VEZ QUE SE CREA
+            entidad.usuarioModificacion = entidad.usuarioRegistro;//ES LA PRIMERA VEZ QUE SE CREA
 
 
         }
 
         public void eliminar(string id)
         {
-            throw new NotImplementedException();
+            //VALIDAR SI EL DONANTE EXISTE
+            var donanteExistente = donanteDAO.consultarPorID(id);
+            if (donanteExistente == null) {
+                
+                throw new EntityNotFoundDBException("EL DONANTE NO EXISTE EN LA BASE DE DATOS, " +
+                    " NO SE PUEDE ELIMINAR");
+                //no pongo datos de auditoria porque no se pueden setear aca los datos nuevos
+            }
+
+            //SI PASA LA VALIDACION, SE ELIMINA EL DONANTE
+            donanteDAO.eliminar(id);
+
         }
 
         public void modificar(clsDonante entidad)
         {
-            throw new NotImplementedException();
+            //VALIDAR SI EL DONANTE EXISTE
+            var donanteExistente = donanteDAO.consultarPorID(entidad.personaId.ToString());
+            if (donanteExistente == null)
+            {
+                throw new EntityNotFoundDBException("EL DONANTE NO EXISTE EN LA BASE DE DATOS, " +
+                    " PARA CREARLO USE EL MODULO APROPIADO");
+            }
+
+            //ASIGNO DATOS DE AUDITORIA: MODIFICACION
+            entidad.fechaModificacion = DateTime.Now;
+            entidad.usuarioModificacion = "SYSTEM"; //esto se debe cambiar por el usuario que este logueado
+            entidad.razonModifica = "MODIFICACION DE DATOS";//estos tengo que traerlo desde frm cuando quiera modificar un donante
+
+            //SI PASA LA VALIDACION, SE MODIFICA EL DONANTE
+            donanteDAO.modificar(entidad);
         }
     }
 }

@@ -64,8 +64,28 @@ namespace DAO
         public void eliminar(string id)
         {
             //elimino el donante resusltado de consultar por ID
-            dbContextINA.donante.Remove(consultarPorID(id));
-            dbContextINA.SaveChanges();
+           // dbContextINA.donante.Remove(consultarPorID(id));
+            //dbContextINA.SaveChanges();
+
+            //USO BORRADO LOGICO
+            var donanteAEliminar = consultarPorID(id);
+            if (donanteAEliminar != null)
+            {
+                donanteAEliminar.estado = false; //marco el estado como inactivo
+                donanteAEliminar.fechaModificacion = DateTime.Now;
+                donanteAEliminar.usuarioModificacion = "SYSTEM"; //esto se debe cambiar por el usuario que este logueado
+                donanteAEliminar.razonInactivo = "ELIMINACION LOGICA";//estos tengo que traerlo desde frm cuando quiera borrar un donante
+
+                /*puedo dejarlo por ahora pero la idea es que el formulario
+                 pida el motivo si se le da eliminar
+                puedo usar el evento click para seleccionar el ente a eliminar y 
+                mandarselo a los botones de eliminar y editar
+                o puedo usar dobleclick para editar y si le doy en el boton eliminar que se abra 
+                un formulario pidiendo la razon*/
+
+                dbContextINA.donante.Update(donanteAEliminar);
+                dbContextINA.SaveChanges();
+            }
         }
 
         //metodo de modificar
@@ -76,7 +96,7 @@ namespace DAO
             {
                 dbContextINA.persona.Update(entidad.persona);
             }
-
+           
             // Modificar el donante
             dbContextINA.donante.Update(entidad);
             dbContextINA.SaveChanges();

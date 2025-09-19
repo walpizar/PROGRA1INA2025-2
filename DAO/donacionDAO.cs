@@ -41,7 +41,21 @@ namespace DAO
 
         public void eliminar(string id)
         {
-            throw new NotImplementedException();
+            //borrado logico
+            var donacionBorrar = consultarPorID(id);
+            if (donacionBorrar != null)
+             {
+                donacionBorrar.estado = false; //marcar como inactivo
+
+                //ASIGNO DATOS DE AUDITORIA: MODIFICACION
+                donacionBorrar.usuarioModificacion = "SYSTEM"; //esto se debe cambiar por el usuario que este logueado
+                donacionBorrar.fechaModificacion = DateTime.Now;
+                donacionBorrar.razonInactivo = "ELIMINACION LOGICA";//estos tengo que traerlo desde frm cuando quiera borrar una donacion
+
+                context.donacion.Update(donacionBorrar);
+                context.SaveChanges();
+            }
+
         }
 
         public void modificar(clsDonacion entidad)

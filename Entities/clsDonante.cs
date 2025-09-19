@@ -8,33 +8,44 @@ namespace Entities
     [Table("tbDonantes")]
     public class clsDonante
     {
-        //llave primaria compuesta        
+        // Llave primaria compuesta
+        [Key, Column(Order = 0)]
+        [Required, StringLength(20)]
         public string personaId { get; set; }
+
+        [Key, Column(Order = 1)]
+        [Required]
         public int personaTipoId { get; set; }
 
-       //auditoria
+        // Auditoría
         [Required]
         public bool estado { get; set; }
+
         [Required]
         public DateTime fechaRegistro { get; set; }
-        [Required]
+
         public DateTime? fechaModificacion { get; set; }
+
+        [StringLength(50)]
         public string usuarioModificacion { get; set; }
+
+        [Required]
+        [StringLength(50)]
         public string usuarioRegistro { get; set; }
 
+        [StringLength(200)]
+        public string? razonInactivo { get; set; }
 
-        //relacion 1 a 1 con persona 
+        [StringLength(50)]
+        public string? razonModifica { get; set; }
+
+        // Relación 1 a 1 con persona
         public clsPersona persona { get; set; }
 
-        //relacion 1 a muchos con donacion
+        // Relación 1 a muchos con donacion
         public ICollection<clsDonacion> donaciones { get; set; }
 
         //constructor vacio
         public clsDonante() { }
-
-        
-       
-
-       
     }
 }

@@ -41,8 +41,24 @@ namespace DAO
 
         public void eliminar(string id)
         {
-            dbContextINA.donacionesActivos.Remove(consultarPorID(id));
-            dbContextINA.SaveChanges();
+            //dbContextINA.donacionesActivos.Remove(consultarPorID(id));
+            //dbContextINA.SaveChanges();
+
+            //borrado logico
+            var donacionBorrar = consultarPorID(id);
+            if (donacionBorrar != null)
+            {
+                donacionBorrar.estado = false; //marcar como inactivo
+
+                //ASIGNO DATOS DE AUDITORIA: MODIFICACION
+                donacionBorrar.usuarioModificacion = "SYSTEM"; //esto se debe cambiar por el usuario que este logueado
+                donacionBorrar.fechaModificacion = DateTime.Now;
+                donacionBorrar.razonInactivo = "ELIMINACION LOGICA";//estos tengo que traerlo desde frm cuando quiera borrar una donacion
+
+                //actualizo la donacion
+                dbContextINA.donacionesActivos.Update(donacionBorrar);
+                dbContextINA.SaveChanges();
+            }
         }
 
         public void modificar(clsDonacionActivo entidad)

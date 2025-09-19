@@ -29,15 +29,15 @@ namespace Common.Enums
             TransferenciaBancaria,
             ContraEntrega
         }
-       
+
 
         public enum FamiliaProducto
         {
-            Electronica=1,
-            Ropa=2,
-            Hogar=3,
-            Deportes=4,
-            Juguetes=7
+            Electronica = 1,
+            Ropa = 2,
+            Hogar = 3,
+            Deportes = 4,
+            Juguetes = 7
         }
         public enum Frecuencia
         {
@@ -61,5 +61,12 @@ namespace Common.Enums
             // Puedes agregar más tipos si el sistema lo requiere
         }
 
+        public enum tipoMoneda
+        {
+            USD,
+            CRC,
+            EUR
+
+        }
     }
 }

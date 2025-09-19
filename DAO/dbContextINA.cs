@@ -98,6 +98,13 @@ namespace DAO
                 .WithOne()
                 .HasForeignKey<clsDonante>(d => new { d.personaId, d.personaTipoId })
                 .HasPrincipalKey<clsPersona>(p => new { p.id, p.tipoId });
+            //llave foranea comppuesta entre donacion y donante
+                 modelBuilder.Entity<clsDonacion>()
+                .HasOne(d => d.donante)
+                .WithMany(don => don.donaciones)
+                .HasForeignKey(d => new { d.donanteId, d.donanteTipoId })
+                .HasPrincipalKey(don => new { don.personaId, don.personaTipoId })
+                .OnDelete(DeleteBehavior.Restrict); // Evita el borrado en cascada
 
 
             // Clave primaria compuesta para Enfermero
