@@ -52,6 +52,21 @@ using System.Threading.Tasks;
             return _rolDao.consultarTodos();
         }
 
+        public clsRol consultarID(int id)
+        {
+            return _rolDao.consultarPorID(id);
+        }
+
+        public void editarRol(clsRol roool)
+        {
+            _rolDao.modificar(roool);
+        }
+
+        public void eliminando (int id)
+        {
+            _rolDao.eliminar(id);
+        }
+
         public List<clsModulo> consultarModulos()
         {
             return _moduloDao.consultarTodos();
@@ -59,19 +74,19 @@ using System.Threading.Tasks;
 
         public void crearRol(clsRol roool)
         {
-            if (string.IsNullOrWhiteSpace(roool.nombre_rol)) 
+            if (string.IsNullOrWhiteSpace(roool.nombreRol)) 
             {
                 throw new NullException();
             }
-            if (string.IsNullOrWhiteSpace(roool.descripcion_rol))
+            if (string.IsNullOrWhiteSpace(roool.descripcionRol))
             {
                 throw new NullException();
             }
-            if (_rolDao.consultarPorID(roool.id_rol) != null)
+            if (_rolDao.consultarPorID(roool.idRol) != null)
             {
                 throw new EntityExistDBException();
             }
-            if (_rolDao.consultarPorNombre(roool.nombre_rol) != null)
+            if (_rolDao.consultarPorNombre(roool.nombreRol) != null)
             {
                 throw new NameProductExistDBException();
             }

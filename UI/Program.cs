@@ -13,7 +13,7 @@ namespace UI
                 ApplicationConfiguration.Initialize();
 
                 // Pasamos los DAO al servicio
-                SeguridadService seguridadService = new SeguridadService();
+
 
 
             
@@ -26,11 +26,8 @@ namespace UI
         ApplicationConfiguration.Initialize();
         //Application.Run(new frmProductoLista());
 
-        
-        Application.Run(new frmActivos());
-
                 // Inyectamos el servicio en el formulario
-                Application.Run(new frmMantenimientoRoles(seguridadService));
+                Application.Run(new frmMantenimientoRoles());
             }
         }
     }

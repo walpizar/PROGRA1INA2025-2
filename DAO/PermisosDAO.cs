@@ -65,7 +65,7 @@ namespace DAO
         public clsPermiso consultarPorIDs(int idModulo, int idRol)//CONSULTAR LLAVE COMPUESTA/////////////
         {
             return _context.permisos
-                           .SingleOrDefault(p => p.id_modulo == idModulo && p.id_rol == idRol);
+                           .SingleOrDefault(p => p.idModulo == idModulo && p.idRol == idRol);
         }
 
 

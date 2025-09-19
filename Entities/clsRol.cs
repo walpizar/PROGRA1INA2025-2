@@ -7,6 +7,7 @@ using System.ComponentModel;
 
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+//CAMBIARLO LAS VARIABLES A CAMEL CASE
 
 namespace Entities
 {
@@ -15,19 +16,19 @@ namespace Entities
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]//INCREMENTO AUTOMATICO
-        public int id_rol { get; set; }
+        public int idRol { get; set; }
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]//INCREMENTO AUTOMATICO
 
         [StringLength(20, ErrorMessage = "El nombre no puede tener mas de 20 caracteres")]
-        public string nombre_rol { get; set; }
+        public string nombreRol { get; set; }
 
 
         [StringLength(200, ErrorMessage = "La descripcion no puede tener mas de 200 caracteres")]
-        public string descripcion_rol { get; set; }
+        public string descripcionRol { get; set; }
 
         [Required]
         [DefaultValue(true)]
-        public bool estado_rol { get; set; }
+        public bool estadoRol { get; set; }
         public ICollection<clsPermiso> permisos { get; set; }
 
     }

@@ -40,7 +40,7 @@ namespace DAO
 
         public clsModulo consultarPorID(int id)// CONSULTAR ID
         {
-            return _context.modulos.Where(p => p.id_modulo == id).SingleOrDefault();//id_rol
+            return _context.modulos.Where(p => p.idModulo == id).SingleOrDefault();//id_rol
 
             return null;
         }
@@ -49,7 +49,7 @@ namespace DAO
         public clsModulo consultarPorNombre(string nombre)
         {
             return _context.modulos
-                           .FirstOrDefault(r => r.nombre_modulo == nombre);//nombre_rol
+                           .FirstOrDefault(r => r.nombreModulo == nombre);//nombre_rol
         }
 
         public List<clsModulo> consultarTodos()

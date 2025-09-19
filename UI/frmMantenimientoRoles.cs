@@ -22,11 +22,11 @@ namespace UI
     public partial class frmMantenimientoRoles : Form
     {
         private readonly SeguridadService _Service;//ACCESO A SERVICE
-
-        public frmMantenimientoRoles(SeguridadService Service)
+        List<clsRol> lista;
+        public frmMantenimientoRoles()
         {
             InitializeComponent();//INICIALIZACION DEL ACCESO A SERVICE
-            _Service = Service;
+            _Service = new SeguridadService();
         }
 
         private void label2_Click(object sender, EventArgs e)
@@ -38,7 +38,8 @@ namespace UI
         {
             cargarRolesBox();
             cargarModulosBox();
-            cargarListaRoles();
+            this.lista = _Service.consultarRoles(); ;
+            cargarListaRoles(lista);
         }
 
         public void cargarRolesBox()//FUNCIONA
@@ -47,8 +48,8 @@ namespace UI
             {
                 var listaRoles = _Service.consultarRoles();
                 comboBox1.DataSource = listaRoles;
-                comboBox1.DisplayMember = "nombre_rol";
-                comboBox1.ValueMember = "id_rol";
+                comboBox1.DisplayMember = "nombreRol";
+                comboBox1.ValueMember = "idRol";
             }
             catch (Exception ex)
             {
@@ -62,8 +63,8 @@ namespace UI
             {
                 var listaModulos = _Service.consultarModulos();
                 comboBox2.DataSource = listaModulos;
-                comboBox2.DisplayMember = "nombre_modulo";
-                comboBox2.ValueMember = "id_modulo";
+                comboBox2.DisplayMember = "nombreModulo";
+                comboBox2.ValueMember = "idModulo";
             }
             catch (Exception ex)
             {
@@ -71,18 +72,21 @@ namespace UI
             }
         }
 
-        private void cargarListaRoles()
+        private void cargarListaRoles(List<clsRol> lista)
         {
-            var lista = _Service.consultarRoles();
-            listView1.Items.Clear();//???
+            listView1.Items.Clear();
 
             foreach (clsRol roles in lista)
             {
-                ListViewItem item = new ListViewItem(roles.id_rol.ToString());
-                item.SubItems.Add(roles.nombre_rol);
-                item.SubItems.Add(roles.descripcion_rol);
+                ListViewItem item = new ListViewItem(roles.nombreRol);
+                item.SubItems.Add(roles.descripcionRol);
                 listView1.Items.Add(item);
+
+                item.Tag = roles.idRol;
+                listView1.Refresh();
             }
+            this.Refresh();
+            listView1.Refresh();
         }
 
         private void buttonCrearRol_Click(object sender, EventArgs e)
@@ -91,8 +95,8 @@ namespace UI
             {//FALTA EXEPCION DE NULL
                 clsRol roool = new clsRol();
 
-                roool.nombre_rol = textBoxNombreRol.Text;
-                roool.descripcion_rol = richTextBoxDescripcionRol.Text;
+                roool.nombreRol = textBoxNombreRol.Text;
+                roool.descripcionRol = richTextBoxDescripcionRol.Text;
 
                 //llamo a mi capa de servicios para crear y guardar el nuevo rol
                 _Service.crearRol(roool);
@@ -102,9 +106,9 @@ namespace UI
                 textBoxNombreRol.Clear();
                 richTextBoxDescripcionRol.Clear();
 
-                cargarListaRoles();//ACTUALIZAR LISTA DE ROLES
+                cargarListaRoles(lista);//ACTUALIZAR LISTA DE ROLES
             }
-            catch(NullException ex)
+            catch (NullException ex)
             {
                 MessageBox.Show(ex.Message);
             }
@@ -166,8 +170,8 @@ namespace UI
                     {
                         var permi = new clsPermiso();
                         {
-                            permi.id_rol = Convert.ToInt32(comboBox1.SelectedValue ?? 0);
-                            permi.id_modulo = Convert.ToInt32(comboBox2.SelectedValue ?? 0);
+                            permi.idRol = Convert.ToInt32(comboBox1.SelectedValue ?? 0);
+                            permi.idModulo = Convert.ToInt32(comboBox2.SelectedValue ?? 0);
                             permi.consultar = chkConsultar.Checked;
                             permi.crear = chkCrear.Checked;
                             permi.editar = chkEditar.Checked;
@@ -328,6 +332,59 @@ namespace UI
         }
 
         private void checkEliminar(object sender, EventArgs e)
+        {
+
+        }
+
+        private void listView1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label7_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void dobleClickEliminarEditar(object sender, MouseEventArgs e)
+        {
+            try
+            {
+                //validar si hay un elemento seleccionado
+                if (listView1.SelectedItems.Count > 0)
+                {
+                    // Recupero el id que está en Tag
+                    int id = (int)listView1.SelectedItems[0].Tag;
+
+                    // Consulto en el servicio
+                    var rool = _Service.consultarID(id);
+
+                    if (rool != null)
+                    {
+                        //creo una instancia del formulario de producto
+                        frmEliminarEditar frm = new frmEliminarEditar();
+                        //le asigno a la propiedad el producto seleccionado
+                        frm.rolSelected = rool;
+
+                        frm.FormClosed += (s, args) =>
+                        {
+                            this.Show(); // Vuelvo a mostrar el padre siempre que se cierre el hijo
+                        };
+
+                        this.Hide();
+
+                        frm.ShowDialog();
+                    }
+                }   
+            }
+            catch (Exception)
+            {
+
+                MessageBox.Show("Error al seleccionar el producto de la lista");
+            }
+        }
+
+        private void tabPage2_Click(object sender, EventArgs e)
         {
 
         }

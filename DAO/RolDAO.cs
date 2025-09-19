@@ -23,38 +23,38 @@ namespace DAO
 
         public void crear(clsRol roool)//CREAR
         {
-            _context.roles.Add(roool);
+            _context.rol.Add(roool);
             _context.SaveChanges();
         }
 
         public void modificar(clsRol roool)//MODIFICAR
         {
-            _context.roles.Update(roool);
+            _context.rol.Update(roool);
             _context.SaveChanges();
         }
 
         public void eliminar(int id)//ELIMINAR
         {
             var prod = consultarPorID(id);
-            _context.roles.Remove(prod);
+            _context.rol.Remove(prod);
             _context.SaveChanges();
         }
 
         public clsRol consultarPorID(int id)// CONSULTAR ID
         {
-            return _context.roles.Where(p => p.id_rol == id).SingleOrDefault();//id_rol
+            return _context.rol.Where(p => p.idRol == id).SingleOrDefault();//id_rol
         }
 
 
         public clsRol consultarPorNombre(string nombre)
         {
-            return _context.roles
-                           .FirstOrDefault(r => r.nombre_rol == nombre);//nombre 
+            return _context.rol
+                           .FirstOrDefault(r => r.nombreRol == nombre);//nombre 
         }
 
         public List<clsRol> consultarTodos()
         {
-            return _context.roles.ToList();
+            return _context.rol.ToList();
         }
 
     }

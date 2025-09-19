@@ -41,19 +41,17 @@
             chkEliminar = new CheckBox();
             chkEditar = new CheckBox();
             chkCrear = new CheckBox();
-            button3 = new Button();
             guardarPermiso = new Button();
             chkConsultar = new CheckBox();
             comboBox1 = new ComboBox();
             label3 = new Label();
             tabPage2 = new TabPage();
+            label7 = new Label();
             listView1 = new ListView();
-            ID = new ColumnHeader();
             Nombre = new ColumnHeader();
             Descripcion = new ColumnHeader();
             label2 = new Label();
             tabPage3 = new TabPage();
-            button2 = new Button();
             buttonCrearRol = new Button();
             richTextBoxDescripcionRol = new RichTextBox();
             textBoxNombreRol = new TextBox();
@@ -75,7 +73,6 @@
             label1.Size = new Size(228, 25);
             label1.TabIndex = 0;
             label1.Text = "Mantenimiento de Roles";
-            label1.Click += label1_Click;
             // 
             // tabControl1
             // 
@@ -86,7 +83,7 @@
             tabControl1.Location = new Point(27, 79);
             tabControl1.Name = "tabControl1";
             tabControl1.SelectedIndex = 0;
-            tabControl1.Size = new Size(688, 339);
+            tabControl1.Size = new Size(688, 354);
             tabControl1.TabIndex = 1;
             // 
             // tabPage1
@@ -102,10 +99,9 @@
             tabPage1.Location = new Point(4, 30);
             tabPage1.Name = "tabPage1";
             tabPage1.Padding = new Padding(3);
-            tabPage1.Size = new Size(680, 305);
+            tabPage1.Size = new Size(680, 320);
             tabPage1.TabIndex = 0;
             tabPage1.Text = "Permisos";
-            tabPage1.Click += tabPage1_Click;
             // 
             // button5
             // 
@@ -134,17 +130,15 @@
             label6.Size = new Size(166, 21);
             label6.TabIndex = 9;
             label6.Text = "Seleccione un Modulo:";
-            label6.Click += label6_Click;
             // 
             // groupBox1
             // 
             groupBox1.Controls.Add(chkEliminar);
             groupBox1.Controls.Add(chkEditar);
             groupBox1.Controls.Add(chkCrear);
-            groupBox1.Controls.Add(button3);
             groupBox1.Controls.Add(guardarPermiso);
             groupBox1.Controls.Add(chkConsultar);
-            groupBox1.Location = new Point(19, 144);
+            groupBox1.Location = new Point(20, 154);
             groupBox1.Name = "groupBox1";
             groupBox1.Size = new Size(631, 139);
             groupBox1.TabIndex = 6;
@@ -160,7 +154,6 @@
             chkEliminar.TabIndex = 20;
             chkEliminar.Text = "Eliminar";
             chkEliminar.UseVisualStyleBackColor = true;
-            chkEliminar.CheckedChanged += checkEliminar;
             // 
             // chkEditar
             // 
@@ -172,7 +165,6 @@
             chkEditar.TabIndex = 16;
             chkEditar.Text = "Modificar";
             chkEditar.UseVisualStyleBackColor = true;
-            chkEditar.CheckedChanged += checkModificar;
             // 
             // chkCrear
             // 
@@ -183,21 +175,10 @@
             chkCrear.TabIndex = 12;
             chkCrear.Text = "Crear";
             chkCrear.UseVisualStyleBackColor = true;
-            chkCrear.CheckedChanged += checkCrear;
-            // 
-            // button3
-            // 
-            button3.Location = new Point(322, 85);
-            button3.Name = "button3";
-            button3.Size = new Size(101, 40);
-            button3.TabIndex = 7;
-            button3.Text = "Cancelar";
-            button3.UseVisualStyleBackColor = true;
-            button3.Click += button3_Click;
             // 
             // guardarPermiso
             // 
-            guardarPermiso.Location = new Point(197, 85);
+            guardarPermiso.Location = new Point(266, 74);
             guardarPermiso.Name = "guardarPermiso";
             guardarPermiso.Size = new Size(101, 40);
             guardarPermiso.TabIndex = 8;
@@ -214,7 +195,6 @@
             chkConsultar.TabIndex = 0;
             chkConsultar.Text = "Consultar";
             chkConsultar.UseVisualStyleBackColor = true;
-            chkConsultar.CheckedChanged += checkConsultar;
             // 
             // comboBox1
             // 
@@ -233,46 +213,52 @@
             label3.Size = new Size(135, 21);
             label3.TabIndex = 0;
             label3.Text = "Seleccione un Rol:";
-            label3.Click += label3_Click;
             // 
             // tabPage2
             // 
             tabPage2.BackColor = Color.PowderBlue;
+            tabPage2.Controls.Add(label7);
             tabPage2.Controls.Add(listView1);
             tabPage2.Controls.Add(label2);
             tabPage2.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             tabPage2.Location = new Point(4, 30);
             tabPage2.Name = "tabPage2";
             tabPage2.Padding = new Padding(3);
-            tabPage2.Size = new Size(680, 305);
+            tabPage2.Size = new Size(680, 320);
             tabPage2.TabIndex = 1;
             tabPage2.Text = "Lista de Roles";
             // 
+            // label7
+            // 
+            label7.AutoSize = true;
+            label7.ForeColor = SystemColors.ControlDarkDark;
+            label7.Location = new Point(181, 294);
+            label7.Name = "label7";
+            label7.Size = new Size(294, 21);
+            label7.TabIndex = 2;
+            label7.Text = "*Para editar haga doble click sobre un rol";
+            // 
             // listView1
             // 
-            listView1.Columns.AddRange(new ColumnHeader[] { ID, Nombre, Descripcion });
+            listView1.Columns.AddRange(new ColumnHeader[] { Nombre, Descripcion });
             listView1.Items.AddRange(new ListViewItem[] { listViewItem1, listViewItem2, listViewItem3 });
             listView1.Location = new Point(27, 17);
             listView1.Name = "listView1";
-            listView1.Size = new Size(620, 274);
+            listView1.Size = new Size(630, 274);
             listView1.TabIndex = 1;
             listView1.UseCompatibleStateImageBehavior = false;
             listView1.View = View.Details;
-            // 
-            // ID
-            // 
-            ID.Text = "ID Rol";
-            ID.Width = 70;
+            listView1.MouseDoubleClick += dobleClickEliminarEditar;
             // 
             // Nombre
             // 
             Nombre.Text = "Nombre Rol";
-            Nombre.Width = 190;
+            Nombre.Width = 160;
             // 
             // Descripcion
             // 
             Descripcion.Text = "Descripcion de Rol";
-            Descripcion.Width = 260;
+            Descripcion.Width = 430;
             // 
             // label2
             // 
@@ -281,12 +267,10 @@
             label2.Name = "label2";
             label2.Size = new Size(0, 21);
             label2.TabIndex = 0;
-            label2.Click += label2_Click_1;
             // 
             // tabPage3
             // 
             tabPage3.BackColor = Color.LightBlue;
-            tabPage3.Controls.Add(button2);
             tabPage3.Controls.Add(buttonCrearRol);
             tabPage3.Controls.Add(richTextBoxDescripcionRol);
             tabPage3.Controls.Add(textBoxNombreRol);
@@ -295,24 +279,13 @@
             tabPage3.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             tabPage3.Location = new Point(4, 30);
             tabPage3.Name = "tabPage3";
-            tabPage3.Size = new Size(680, 305);
+            tabPage3.Size = new Size(680, 320);
             tabPage3.TabIndex = 2;
             tabPage3.Text = "Crear un nuevo rol";
-            tabPage3.Click += tabPage3_Click;
-            // 
-            // button2
-            // 
-            button2.Location = new Point(324, 229);
-            button2.Name = "button2";
-            button2.Size = new Size(125, 59);
-            button2.TabIndex = 7;
-            button2.Text = "Cancelar";
-            button2.UseVisualStyleBackColor = true;
-            button2.Click += button2_Click;
             // 
             // buttonCrearRol
             // 
-            buttonCrearRol.Location = new Point(176, 229);
+            buttonCrearRol.Location = new Point(240, 226);
             buttonCrearRol.Name = "buttonCrearRol";
             buttonCrearRol.Size = new Size(130, 59);
             buttonCrearRol.TabIndex = 6;
@@ -343,7 +316,6 @@
             label5.Size = new Size(94, 21);
             label5.TabIndex = 1;
             label5.Text = "Descripcion:";
-            label5.Click += label5_Click;
             // 
             // label4
             // 
@@ -354,13 +326,12 @@
             label4.Size = new Size(162, 21);
             label4.TabIndex = 0;
             label4.Text = "Nombre de nuevo rol:";
-            label4.Click += label4_Click;
             // 
             // frmMantenimientoRoles
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(739, 433);
+            ClientSize = new Size(739, 451);
             Controls.Add(tabControl1);
             Controls.Add(label1);
             FormBorderStyle = FormBorderStyle.Fixed3D;
@@ -390,17 +361,14 @@
         private Label label2;
         private Label label3;
         private ListView listView1;
-        private ColumnHeader ID;
         private ColumnHeader Nombre;
         private ColumnHeader Descripcion;
         private Label label4;
         private Label label5;
         private TextBox textBoxNombreRol;
         private RichTextBox richTextBoxDescripcionRol;
-        private Button button2;
         private Button buttonCrearRol;
         private ComboBox comboBox1;
-        private Button button3;
         private Button guardarPermiso;
         private GroupBox groupBox1;
         private CheckBox chkEliminar;
@@ -410,5 +378,6 @@
         private ComboBox comboBox2;
         private Label label6;
         private Button button5;
+        private Label label7;
     }
 }

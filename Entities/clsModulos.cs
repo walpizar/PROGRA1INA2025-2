@@ -9,24 +9,23 @@ using System.Threading.Tasks;
 
 namespace Entities
 {
-    [Table("tb_Modulo")]
+    [Table("tbModulo")]
 
     public class clsModulo
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]//INCREMENTO AUTOMATICO
-        public int id_modulo { get; set; }
+        public int idModulo { get; set; }
 
         [Required]
         [StringLength(100)]
-        public string nombre_modulo { get; set; }
+        public string nombreModulo { get; set; }
 
         [StringLength(200)] 
-        public string? descripcion_modulo { get; set; }
+        public string? descripcionModulo { get; set; }
 
 
 
-        // Navegación: un módulo puede tener muchos permisos
-        public ICollection<clsPermisos> permisos { get; set; }//LIGADO A PERMISOS
+
     }
 }

@@ -1,5 +1,6 @@
 ﻿using Entities;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Options;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,16 +18,24 @@ namespace DAO
         //public DbSet<clsCategoria> Categoria { get; set; }
 
         ///ENTIDADES ASOCIACION / PROPIEDADES DE NAVEGACION
-        public DbSet<clsRol> roles{ get; set; }
-        public DbSet<clsModulo> modulos { get; set; }
-        public DbSet<clsPermiso> permisos { get; set; }
-
-        public DbSet<clsActivos> Activos { get; set; }
-        public DbSet<clsCategoriaActivos> CategoriaActivos { get; set; }
-        public DbSet<clsDepartamentos> Departamentos { get; set; }
-        public DbSet<clsDevolucion> Devoluciones { get; set; }
-        public DbSet<clsEspecialidadMedica> EspecialidadesMedicas { get; set; }
-        public DbSet<clsPuestos> Puestos { get; set; }
+        public DbSet<clsPersona> persona { get; set; }
+        public DbSet<clsDonante> donante { get; set; }
+        public DbSet<clsDonacion> donacion { get; set; }
+        public DbSet<clsDonacionDinero> donacionDinero { get; set; }
+        public DbSet<clsActivos> activos { get; set; }
+        public DbSet<clsDonacionesActivos> donacionesActivos { get; set; }
+        public DbSet<clsCategoriaActivos> categoriaActivos { get; set; }
+        public DbSet<clsDepartamentos> departamentos { get; set; }
+        public DbSet<clsDevolucion> devolucion { get; set; }
+        public DbSet<clsEnfermero> enfermero { get; set; }
+        public DbSet<clsEspecialidadMedica> especialidadMedica { get; set; }
+        public DbSet<clsMedico> medico { get; set; }
+        public DbSet<clsPermiso> permisos { get; set; }//////
+        public DbSet<clsPuestos> puestos { get; set; }
+        public DbSet<clsRol> rol { get; set; }////
+        public DbSet<clsRolPermiso> rolPermiso { get; set; }
+        public DbSet<clsUsuario> usuario { get; set; }
+        public DbSet<clsModulo> modulos { get; set; }////
 
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)//PONER MI DIRECCION
@@ -38,15 +47,16 @@ namespace DAO
                     @"Server=localhost;Database=dbINAproyect;Trusted_Connection=True;TrustServerCertificate=True;MultipleActiveResultSets=True;");
             }
         }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
 
             base.OnModelCreating(modelBuilder);//
 
-            modelBuilder.Entity<clsPermiso>().HasKey(p => new { p.id_rol, p.id_modulo });
+            modelBuilder.Entity<clsPermiso>().HasKey(p => new { p.idRol, p.idModulo });
 
-            modelBuilder.Entity<clsPermiso>().Property(p => p.id_rol).IsRequired();
-            modelBuilder.Entity<clsPermiso>().Property(p => p.id_modulo).IsRequired();
+            modelBuilder.Entity<clsPermiso>().Property(p => p.idRol).IsRequired();
+            modelBuilder.Entity<clsPermiso>().Property(p => p.idModulo).IsRequired();
 
 
 
@@ -107,11 +117,10 @@ namespace DAO
             // Clave primaria compuesta para RolPermiso
             modelBuilder.Entity<clsRolPermiso>()
                 .HasKey(rp => new { rp.idRol, rp.idPermiso });
-=======
+
             // LLAVE COMPUESTA DEFINIDA
             modelBuilder.Entity<clsPermiso>()
-                .HasKey(p => new { p.id_rol, p.id_modulo });
->>>>>>> Stashed changes
+                .HasKey(p => new { p.idRol, p.idModulo });
         }
     }
 }

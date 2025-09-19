@@ -7,22 +7,21 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
-//DONDE ESTOY USANDO LAS PROPIEDADES DE NAVEGACION???????   SI NO LAS USO NO LAS NECESITO
 
 
 namespace Entities
 {
-        [Table("tb_Permisos")]//TABLA INTERMEDIA
+        [Table("tbPermisos")]//TABLA INTERMEDIA
         public class clsPermiso
         {
             //LLAVE PRIMARIA COMPUESTA POR DOS FK
-            public int id_modulo { get; set; } //RELACION CON MODULO
-            [ForeignKey("id_modulo")]
+
+            public int idModulo { get; set; } //RELACION CON MODULO
+            [ForeignKey("idModulo")]
             public clsModulo modulo { get; set; }//PROPIEDAD DE NAVEGACION PARA CONSULTAS
 
-            public int id_rol { get; set; } // RELACION CON ROL
-
-            [ForeignKey("id_rol")]
+            public int idRol { get; set; } // RELACION CON ROL
+            [ForeignKey("idRol")]
             public clsRol rol { get; set; }//PROPIEDAD DE NAVEGACION PARA CONSULTAS
 
 
