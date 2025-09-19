@@ -101,6 +101,7 @@
             lstvLista.TabIndex = 0;
             lstvLista.UseCompatibleStateImageBehavior = false;
             lstvLista.View = View.Details;
+            lstvLista.SelectedIndexChanged += lstvLista_SelectedIndexChanged;
             // 
             // colId
             // 
@@ -117,7 +118,7 @@
             colPrecio.Text = "Precio";
             colPrecio.Width = 150;
             // 
-            // frmProductoLista
+            // ProductoLista
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
@@ -125,7 +126,7 @@
             Controls.Add(btnNuevo);
             Controls.Add(gbxLista);
             Controls.Add(lblTitulo);
-            Name = "frmProductoLista";
+            Name = "ProductoLista";
             Text = "Mantenimiento: Productos";
             gbxLista.ResumeLayout(false);
             gbxLista.PerformLayout();

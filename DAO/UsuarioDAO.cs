@@ -9,7 +9,6 @@ namespace DAO
 
         public UsuarioDAO() { 
             _context = new dbContextINA();
-
         }
 
         public void crear(clsUsuario usuario)

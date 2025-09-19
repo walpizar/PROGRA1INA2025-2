@@ -1,4 +1,5 @@
-﻿using Entities;
+﻿using Common.Enums;
+using Entities;
 using Services;
 using System;
 using System.Collections.Generic;
@@ -18,10 +19,12 @@ namespace UI
         public clsTiposAyudas selectTiposAyudas { get; set; }
 
         private readonly TipoAyudasService _tipoAyudasService;
+        private readonly UsuarioService _usuarioService;
         public frmTipoAyuda()
         {
             InitializeComponent();
             _tipoAyudasService = new TipoAyudasService();
+            _usuarioService = new UsuarioService();
         }
 
 
@@ -81,6 +84,7 @@ namespace UI
             cboResponsable.Name = "cboResponsable";
             cboResponsable.Size = new Size(212, 23);
             cboResponsable.TabIndex = 5;
+            cboResponsable.SelectedIndexChanged += cboResponsable_SelectedIndexChanged_1;
             // 
             // txtDescripcion
             // 
@@ -191,16 +195,29 @@ namespace UI
 
         private void frmTipoAyuda_Load(object sender, EventArgs e)
         {
-
+            cargarCombos();
         }
 
         private void btnGuardar_Click(object sender, EventArgs e)
         {
             try
             {
+                //validar datos de entrada
                 if (true)
                 {
+                    //creo la instancia de tipo de ayuda nuevo
                     clsTiposAyudas tiposAyudas = selectTiposAyudas == null ? new clsTiposAyudas() : selectTiposAyudas;
+
+
+                    if (selectTiposAyudas == null)
+                    {
+                        tiposAyudas = new clsTiposAyudas();
+                    }
+                    else
+                    {
+                        tiposAyudas = selectTiposAyudas;
+
+                    }
 
                     tiposAyudas.nombre = txtNombre.Text;
                     tiposAyudas.descripcion = txtDescripcion.Text;
@@ -208,20 +225,14 @@ namespace UI
 
                     if (selectTiposAyudas == null)
                     {
-
                         _tipoAyudasService.crear(tiposAyudas);
-                        MessageBox.Show("Tipo de ayuda creado correctamente");
-
-
                     }
-                    //else
-                    //{
-                    //es una modificacion
-                    //_tipoAyudasService.(tiposAyudas);
-                    //MessageBox.Show("Tipo de ayuda modificado correctamente");
-                    //this.Close();
-                    //}
+                    else
+                    {
+                        _tipoAyudasService.modificar(tiposAyudas);
+                    }
 
+                    //Limpiar el formulario
                     limpiarForm();
                     this.Close();
                 }
@@ -229,15 +240,39 @@ namespace UI
             }
             catch (Exception)
             {
-
+                MessageBox.Show("Error al guardar el tipo de ayuda");
                 throw;
             }
 
+        }
+        private void cargarCombos()
+        {
+            List<clsUsuario> listaCat = _usuarioService.consultarTodos();
+            cboResponsable.DataSource = listaCat;
+            cboResponsable.DisplayMember = "Nombre";
+            cboResponsable.ValueMember = "Id";
         }
 
         private void btnEliminar_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        private void cboResponsable_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+
+        }
+
+        private void cboResponsable_SelectedIndexChanged_1(object sender, EventArgs e)
+        {
+            if (cboResponsable.SelectedItem != null)
+            {
+                clsUsuario usuarioSeleccionado = (clsUsuario)cboResponsable.SelectedItem;
+
+      
+            }
+
         }
     }
 }

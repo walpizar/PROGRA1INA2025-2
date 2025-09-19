@@ -54,7 +54,14 @@ namespace Services
 
         public List<clsUsuario> consultarTodos()
         {
-            throw new NotImplementedException();
+            try
+            {
+                return _usuarioDAO.consultarTodos();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error al consultar todos los usuarios", ex);
+            }
         }
         
     }

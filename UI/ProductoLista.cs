@@ -15,6 +15,10 @@ namespace UI
 {
     public partial class ProductoLista : Form
     {
+        private void lstvLista_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
         //    List<clsProducto> lista;
 
         //    private readonly ProductoService _productoService;

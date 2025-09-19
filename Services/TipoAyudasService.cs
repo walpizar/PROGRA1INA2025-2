@@ -11,11 +11,12 @@ namespace Services
 {
     public class TipoAyudasService
     {
-        private readonly TipoAyudaDAO _tipDao= new TipoAyudaDAO();
+        private readonly TipoAyudaDAO _tipDao;
 
         public TipoAyudasService() 
         {
-            
+            _tipDao = new TipoAyudaDAO();
+
         }
 
         public void crear(clsTiposAyudas tiposAyudas)
@@ -40,7 +41,13 @@ namespace Services
             }
         }
 
+        public void modificar(clsTiposAyudas tiposAyudas)
+        {
+            
+        }
         
+
+
 
 
     }

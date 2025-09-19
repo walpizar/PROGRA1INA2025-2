@@ -16,7 +16,7 @@ using System.Windows.Forms;
 using static Common.Enums.Enums;
 
 /*namespace UI
-{
+/*{
     public partial class frmProducto : Form
     {
 
@@ -45,14 +45,14 @@ using static Common.Enums.Enums;
                     //creo la instancia del producto nuevo, 
                     clsProducto producto = productoSelected == null ? new clsProducto() : productoSelected;
 
-                    /* if (productoSelected == null)
+                    if (productoSelected == null)
                      {
                          producto = new clsProducto();
                      }
                      else
                      {
                          producto = productoSelected;
-                     }*/
+                     }
                     //seteo los valores del producto
 
                     //clsMedico medico = new clsMedico();
@@ -117,7 +117,7 @@ using static Common.Enums.Enums;
 
         }
 
-        /*private void limpiarForm()
+        /private void limpiarForm()
         {
             txtId.ResetText();
             txtNombre.ResetText();
