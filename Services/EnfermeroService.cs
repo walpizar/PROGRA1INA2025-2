@@ -13,10 +13,10 @@ namespace Services
     {
         private readonly EnfermeroDAO _enfermeroDAO;
         private string _usuarioActual;
-        public EnfermeroService(string _usuarioActual = null)
+        public EnfermeroService(string usuarioActual = null)
         {
             _enfermeroDAO = new EnfermeroDAO();
-            _usuarioActual = _usuarioActual ?? Environment.UserName;
+            _usuarioActual = usuarioActual ?? Environment.UserName;
         }
 
         //Reglas de negocio para crear, eliminar, modificar, consultar enfermeros
@@ -95,7 +95,7 @@ namespace Services
 
         public void modificar(clsEnfermero enfermero)
         {
-            var enfermeroExistente = _enfermeroDAO.consultarPorID(enfermero.id, enfermero.idPersona);
+            var enfermeroExistente = _enfermeroDAO.consultarPorID(enfermero.id, enfermero.tipoId);
             try
             {
                 // El area no puede ser vacia o nula
@@ -139,6 +139,7 @@ namespace Services
                     throw new ArgumentException("Error de servicio: La dirección no puede estar vacía.");
                 }
 
+                //Actulizar datos de auditoria
                 enfermero.usuario_crea = enfermeroExistente.usuario_crea;
                 enfermero.fecha_crea = enfermeroExistente.fecha_crea;
                 enfermero.usuario_ult_mod = _usuarioActual;
@@ -155,14 +156,18 @@ namespace Services
 
         public void eliminar(string id, int tipoId)
         {
+            // Verificar que el enfermero existe
             try
             {
-                // Validar que el enfermero existe antes de eliminar
-                var enfermeroExiste = consultarPorID(id, tipoId);
-                if (enfermeroExiste == null)
-                    throw new Exception("Error de servicio: El enfermero no existe");
-
-                _enfermeroDAO.eliminar(id, tipoId);
+                var enfermeroExistente = _enfermeroDAO.consultarPorID(id, tipoId);
+                if (enfermeroExistente == null)
+                {
+                    throw new Exception("Error de servicio: El enfermero no existe.");
+                }
+                enfermeroExistente.estado = false;
+                enfermeroExistente.usuario_ult_mod = _usuarioActual;
+                enfermeroExistente.fecha_ult_mod = DateTime.Now;
+                _enfermeroDAO.modificar(enfermeroExistente);
             }
             catch (Exception ex)
             {
@@ -201,7 +206,13 @@ namespace Services
         {
             try
             {
-                return _enfermeroDAO.consultarTodos();
+                var resultado = _enfermeroDAO.consultarTodos();
+
+                return resultado.Where(e =>
+                    e.estado == true &&
+                    e.persona != null &&
+                    e.persona.estado == true
+                ).ToList();
             }
             catch (Exception ex)
             {

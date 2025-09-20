@@ -27,7 +27,7 @@ namespace UI
             try
             {
                 this.lista = _enfermeroService.consultarTodos();
-                cargarLista(lista);
+                cargarLista(this.lista);
             }
             catch (Exception)
             {
@@ -40,10 +40,17 @@ namespace UI
         {
             lstvLista.Items.Clear();
 
-            foreach (clsEnfermero enfermero in lista)
+            //Solo se muestran los enfermeros activos y con persona activa (persona = true y enfermero = true)
+            var enfemerosActivos = lista.Where(e =>
+                e.estado == true &&
+                e.persona != null &&
+                e.persona.estado == true
+                ).ToList();
+
+            foreach (clsEnfermero enfermero in enfemerosActivos)
             {
                 ListViewItem item = new ListViewItem(enfermero.id.ToString());
-                item.SubItems.Add(enfermero.persona.id);
+                item.SubItems.Add(enfermero.persona.tipoId.ToString());
                 item.SubItems.Add(enfermero.persona.nombre);
                 item.SubItems.Add(enfermero.persona.apellido1);
                 item.SubItems.Add(enfermero.persona.apellido2);
@@ -58,6 +65,8 @@ namespace UI
             {
                 frmEnfermeros frmEnfermeros = new frmEnfermeros();
                 frmEnfermeros.ShowDialog();
+                this.lista = _enfermeroService.consultarTodos();
+                cargarLista(this.lista);
             }
             catch (Exception)
             {
@@ -70,6 +79,7 @@ namespace UI
             string filtro = txtBusqueda.Text.ToLower();
             var listaFiltrada = lista.Where(e =>
                 e.id.ToLower().Contains(filtro) ||
+                e.tipoId.ToString().ToLower().Contains(filtro) ||
                 e.persona.id.ToLower().Contains(filtro) ||
                 e.persona.nombre.ToLower().Contains(filtro) ||
                 e.persona.apellido1.ToLower().Contains(filtro) ||
@@ -85,8 +95,11 @@ namespace UI
             {
                 // Obtengo el id del médico seleccionado
                 string id = lstvLista.SelectedItems[0].SubItems[0].Text;
+                // Obtengo el tipoId del medico seleccionado
+                int tipoId = Convert.ToInt32(lstvLista.SelectedItems[0].SubItems[1].Text);
+
                 // Busco el médico en la lista
-                clsEnfermero enfermero = lista.Find(m => m.id == id);
+                clsEnfermero enfermero = lista.Find(e => e.id == id && e.tipoId == tipoId);
 
                 if (enfermero != null)
                 {
@@ -95,7 +108,7 @@ namespace UI
                     frmEnfermeros.ShowDialog();
                     //actualizar la lista
                     this.lista = _enfermeroService.consultarTodos();
-                    cargarLista(lista);
+                    cargarLista(this.lista);
                 }
             }
         }

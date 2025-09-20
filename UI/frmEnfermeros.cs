@@ -57,7 +57,6 @@ namespace UI
             txtDireccion.Text = "";
             txtTelefono.Text = "";
             txtArea.Text = "";
-            txtEstado.Text = "";
         }
 
         private void cargarForm()
@@ -72,7 +71,6 @@ namespace UI
             txtDireccion.Text = enfermeroSelected.persona.direccion;
             txtTelefono.Text = enfermeroSelected.persona.telefono;
             txtArea.Text = enfermeroSelected.area;
-            txtEstado.Text = enfermeroSelected.persona.estado.ToString();
         }
 
         private void btnGuardar_Click(object sender, EventArgs e)
@@ -96,7 +94,7 @@ namespace UI
                     enfermero.persona.email = txtEmail.Text;
                     enfermero.persona.direccion = txtDireccion.Text;
                     enfermero.persona.telefono = txtTelefono.Text;
-                    enfermero.estado = Convert.ToBoolean(txtEstado.Text);
+                    enfermero.estado = true; // Asumimos que el enfermero está activo al crearlo o modificarlo
 
                     if (enfermeroSelected == null)
                     {
@@ -113,6 +111,7 @@ namespace UI
                     }
                     this.Close();
                 }
+
             }
             catch (Exception ex)
             {
@@ -167,11 +166,6 @@ namespace UI
             if (string.IsNullOrEmpty(txtTelefono.Text))
             {
                 MessageBox.Show("El campo Teléfono es obligatorio.");
-                return false;
-            }
-            if (string.IsNullOrEmpty(txtEstado.Text) || !bool.TryParse(txtEstado.Text, out bool estado))
-            {
-                MessageBox.Show("El campo Estado es obligatorio y debe ser 'true' o 'false'.");
                 return false;
             }
             return true;

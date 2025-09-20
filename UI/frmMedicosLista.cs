@@ -27,7 +27,7 @@ namespace UI
             try
             {
                 this.lista = _medicoService.consultarTodos();
-                cargarLista(lista);
+                cargarLista(this.lista);
             }
             catch (Exception)
             {
@@ -37,19 +37,33 @@ namespace UI
 
         }
 
-        private void cargarLista(List<clsMedico> lista)
+        public void cargarLista(List<clsMedico> lista)
         {
             lstvLista.Items.Clear();
 
-            foreach (clsMedico medico in lista)
+            //Solo se muestran los medicos activos y con persona activa (persona = true y medico = true)
+            var medicosActivos = lista.Where(m =>
+                m.estado == true &&
+                m.persona != null &&
+                m.persona.estado == true
+                ).ToList();
+
+            foreach (clsMedico medico in medicosActivos)
             {
-                ListViewItem item = new ListViewItem(medico.id.ToString());
-                item.SubItems.Add(medico.persona.id);
-                item.SubItems.Add(medico.persona.nombre);
-                item.SubItems.Add(medico.persona.apellido1);
-                item.SubItems.Add(medico.persona.apellido2);
-                item.SubItems.Add(medico.especialidad);
-                lstvLista.Items.Add(item);
+                try
+                {
+                    ListViewItem item = new ListViewItem(medico.id.ToString());
+                    item.SubItems.Add(medico.tipoId.ToString());
+                    item.SubItems.Add(medico.persona.nombre);
+                    item.SubItems.Add(medico.persona.apellido1);
+                    item.SubItems.Add(medico.persona.apellido2);
+                    item.SubItems.Add(medico.especialidad);
+                    lstvLista.Items.Add(item);
+                }
+                catch (Exception Ex)
+                {
+                    MessageBox.Show("Error en metodo cargarlista");
+                }
             }
         }
 
@@ -59,6 +73,9 @@ namespace UI
             {
                 frmMedico frmMedico = new frmMedico();
                 frmMedico.ShowDialog();
+                
+                this.lista = _medicoService.consultarTodos();
+                cargarLista(this.lista);
             }
             catch (Exception)
             {
@@ -77,17 +94,19 @@ namespace UI
             {
                 // Obtengo el id del médico seleccionado
                 string id = lstvLista.SelectedItems[0].SubItems[0].Text;
-                // Busco el médico en la lista
-                clsMedico medico = lista.Find(m => m.id == id);
+                // Obtengo el tipoId del medico seleccionado
+                int tipoId = Convert.ToInt32(lstvLista.SelectedItems[0].SubItems[1].Text);
+
+                // Busco el médico en la lista segun su id y tipoId
+                clsMedico medico = lista.FirstOrDefault(m => m.id == id && m.tipoId == tipoId);
 
                 if (medico != null)
                 {
                     frmMedico frmMedico = new frmMedico();
-                    frmMedico.medicoSelected = medico;
+                    frmMedico.medicoSelected = medico;                   
                     frmMedico.ShowDialog();
-                    //actualizar la lista
                     this.lista = _medicoService.consultarTodos();
-                    cargarLista(lista);
+                    cargarLista(this.lista);
                 }
             }
         }
@@ -95,8 +114,9 @@ namespace UI
         private void txtBusqueda_TextChanged(object sender, EventArgs e)
         {
             string filtro = txtBusqueda.Text.ToLower();
-            var listaFiltrada = lista.Where(m =>
-                m.id.ToLower().Contains(filtro) ||
+            var listaFiltrada = lista.Where
+               (m => m.id.ToLower().Contains(filtro) ||
+                m.tipoId.ToString().ToLower().Contains(filtro) ||
                 m.persona.id.ToLower().Contains(filtro) ||
                 m.persona.nombre.ToLower().Contains(filtro) ||
                 m.persona.apellido1.ToLower().Contains(filtro) ||
@@ -104,6 +124,11 @@ namespace UI
                 m.especialidad.ToLower().Contains(filtro)
             ).ToList();
             cargarLista(listaFiltrada);
+        }
+
+        private void gbxListaMedicos_Enter(object sender, EventArgs e)
+        {
+
         }
     }
 }

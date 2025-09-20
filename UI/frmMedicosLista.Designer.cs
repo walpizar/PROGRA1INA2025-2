@@ -39,6 +39,7 @@
             txtBusqueda = new TextBox();
             lblBusqueda = new Label();
             btnNuevo = new Button();
+            TipoId = new ColumnHeader();
             gbxListaMedicos.SuspendLayout();
             SuspendLayout();
             // 
@@ -59,20 +60,21 @@
             gbxListaMedicos.Controls.Add(lblBusqueda);
             gbxListaMedicos.Location = new Point(12, 48);
             gbxListaMedicos.Name = "gbxListaMedicos";
-            gbxListaMedicos.Size = new Size(496, 377);
+            gbxListaMedicos.Size = new Size(594, 377);
             gbxListaMedicos.TabIndex = 1;
             gbxListaMedicos.TabStop = false;
             gbxListaMedicos.Text = "Lista Medicos";
+            gbxListaMedicos.Enter += gbxListaMedicos_Enter;
             // 
             // lstvLista
             // 
-            lstvLista.Columns.AddRange(new ColumnHeader[] { Id, Nombre, PrimerApellido, SegundoApellido, Especialidad });
+            lstvLista.Columns.AddRange(new ColumnHeader[] { Id, TipoId, Nombre, PrimerApellido, SegundoApellido, Especialidad });
             lstvLista.FullRowSelect = true;
             lstvLista.GridLines = true;
             lstvLista.Location = new Point(6, 76);
             lstvLista.MultiSelect = false;
             lstvLista.Name = "lstvLista";
-            lstvLista.Size = new Size(476, 295);
+            lstvLista.Size = new Size(574, 295);
             lstvLista.TabIndex = 5;
             lstvLista.UseCompatibleStateImageBehavior = false;
             lstvLista.View = View.Details;
@@ -124,7 +126,7 @@
             // 
             // btnNuevo
             // 
-            btnNuevo.Location = new Point(408, 12);
+            btnNuevo.Location = new Point(506, 9);
             btnNuevo.Name = "btnNuevo";
             btnNuevo.Size = new Size(100, 30);
             btnNuevo.TabIndex = 2;
@@ -132,11 +134,16 @@
             btnNuevo.UseVisualStyleBackColor = true;
             btnNuevo.Click += btnNuevo_Click;
             // 
+            // TipoId
+            // 
+            TipoId.Text = "Tipo Id";
+            TipoId.Width = 100;
+            // 
             // frmMedicosLista
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(519, 432);
+            ClientSize = new Size(617, 432);
             Controls.Add(btnNuevo);
             Controls.Add(gbxListaMedicos);
             Controls.Add(lblTitulo);
@@ -162,5 +169,6 @@
         private ColumnHeader PrimerApellido;
         private ColumnHeader SegundoApellido;
         private ColumnHeader Especialidad;
+        private ColumnHeader TipoId;
     }
 }

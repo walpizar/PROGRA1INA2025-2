@@ -33,7 +33,7 @@ namespace DAO
                     email = enfermero.persona.email,
                     direccion = enfermero.persona.direccion,
                     telefono = enfermero.persona.telefono,
-                    estado = enfermero.persona.estado
+                    estado = true, // Asumimos que una nueva persona está activa
                 };
 
                 _context.persona.Add(varpersona);
@@ -43,11 +43,18 @@ namespace DAO
                 var varenfermero = new clsEnfermero
                 {
                     id = enfermero.id,
-                    tipoId = enfermero.tipoId,
+                    tipoId = varpersona.tipoId,
                     area = enfermero.area,
+                    estado = true, // Asumimos que un nuevo enfermero está activo
+
+                    //Datos de auditoria
+                    usuario_crea = enfermero.usuario_crea ?? ObtenerUsuarioActual(),
+                    fecha_crea = DateTime.Now,
+                    usuario_ult_mod = enfermero.usuario_ult_mod ?? ObtenerUsuarioActual(),
+                    fecha_ult_mod = DateTime.Now
                 };
 
-                _context.enfermero.Add(enfermero);
+                _context.enfermero.Add(varenfermero);
                 _context.SaveChanges();
             }
             catch (Exception ex)
@@ -57,23 +64,31 @@ namespace DAO
 
         }
 
+        private string ObtenerUsuarioActual()
+        {
+            return Environment.UserName;
+        }
+
         public void eliminar(string id, int tipoId)
         {
             try
             {
-                // Primero se elimina el enfermero
-                var enfermero = _context.enfermero.Find(id, tipoId);
+                var enfermero = _context.medico
+                .Include(e => e.persona)
+                .FirstOrDefault(e => e.id == id && e.tipoId == tipoId);
+
                 if (enfermero != null)
                 {
-                    _context.enfermero.Remove(enfermero);
-                    _context.SaveChanges();
-                }
+                    //BORRADO LÓGICO
+                    enfermero.estado = false;
+                    enfermero.fecha_ult_mod = DateTime.Now;
+                    enfermero.usuario_ult_mod = ObtenerUsuarioActual();
 
-                //Despues se elimina la persona
-                var persona = _context.persona.Find(id, tipoId);
-                if (persona != null)
-                {
-                    _context.persona.Remove(persona);
+                    if (enfermero.persona != null)
+                    {
+                        enfermero.persona.estado = false;
+                    }
+
                     _context.SaveChanges();
                 }
             }
@@ -87,8 +102,10 @@ namespace DAO
         {
             try
             {
+                // Convertir idPersona a string
+                string idPersonaString = entidad.idPersona.ToString();
                 // Buscar la persona existente
-                var persona = _context.persona.Find(entidad.idPersona);
+                var persona = _context.persona.Find(idPersonaString,entidad.tipoId);
                 if (persona != null)
                 {
                     // Actualizar datos de persona
@@ -96,19 +113,27 @@ namespace DAO
                     persona.apellido1 = entidad.persona.apellido1;
                     persona.apellido2 = entidad.persona.apellido2;
                     persona.fechaNac = entidad.persona.fechaNac;
+                    persona.email = entidad.persona.email;
                     persona.telefono = entidad.persona.telefono;
+                    persona.direccion = entidad.persona.direccion;
 
-                    _context.Entry(persona).State = EntityState.Modified;
+                    _context.persona.Update(persona);
                 }
 
                 // Buscar el enfermero existente
-                var enfermero = _context.enfermero.Find(entidad.idPersona);
+                var enfermero = _context.enfermero.Find(idPersonaString, entidad.tipoId);
                 if (enfermero != null)
                 {
                     // Actualizar datos del enfermero
                     enfermero.area = entidad.area;
 
-                    _context.Entry(enfermero).State = EntityState.Modified;
+                    //Actualizar datos de auditoria
+                    enfermero.usuario_crea = entidad.usuario_crea;
+                    enfermero.fecha_crea = entidad.fecha_crea;
+                    enfermero.usuario_ult_mod = entidad.usuario_ult_mod;
+                    enfermero.fecha_ult_mod = DateTime.Now;
+
+                    _context.enfermero.Update(enfermero);
                 }
 
                 _context.SaveChanges();
@@ -121,17 +146,28 @@ namespace DAO
 
         public clsEnfermero consultarPorID(string id, int tipoId)
         {
-            return _context.enfermero.Include(m => m.persona).FirstOrDefault(m => m.id == id && m.tipoId == tipoId);
+            return _context.enfermero
+            .Include(e => e.persona)
+            .Where(e => e.id == id && e.tipoId == tipoId)
+            .Where(e => e.estado == true && e.persona.estado == true)
+            .FirstOrDefault();
         }
 
         public clsEnfermero consultarPorNombre(string nombre)
         {
-            return _context.enfermero.Include(m => m.persona).FirstOrDefault(m => m.persona.nombre.Contains(nombre));
+            return _context.enfermero
+                .Include(e => e.persona)
+                .FirstOrDefault(e => e.persona.nombre
+                .Contains(nombre));
         }
 
         public List<clsEnfermero> consultarTodos()
         {
-            return _context.enfermero.Include(m => m.persona).ToList();
+            return _context.enfermero
+                .Include(e => e.persona)
+                .Where(e => e.estado == true)
+                .Where(e => e.persona.estado == true)
+                .ToList();
         }
     }
 }

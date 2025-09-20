@@ -8,7 +8,7 @@ namespace Entities
     [Table("tbDonantes")]
     public class clsDonante
     {
-               
+
         public string personaId { get; set; }
         public int personaTipoId { get; set; }
 

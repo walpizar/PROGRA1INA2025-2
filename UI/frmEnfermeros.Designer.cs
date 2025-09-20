@@ -34,7 +34,6 @@
             lblTipoId = new Label();
             txtArea = new TextBox();
             lblArea = new Label();
-            txtEstado = new TextBox();
             txtTelefono = new TextBox();
             txtDireccion = new TextBox();
             txtEmail = new TextBox();
@@ -43,7 +42,6 @@
             txtPrimerApellido = new TextBox();
             txtNombre = new TextBox();
             txtId = new TextBox();
-            lblEstado = new Label();
             lblTelefono = new Label();
             lblDireccion = new Label();
             lblEmail = new Label();
@@ -74,7 +72,6 @@
             gbxDatosMedico.Controls.Add(lblTipoId);
             gbxDatosMedico.Controls.Add(txtArea);
             gbxDatosMedico.Controls.Add(lblArea);
-            gbxDatosMedico.Controls.Add(txtEstado);
             gbxDatosMedico.Controls.Add(txtTelefono);
             gbxDatosMedico.Controls.Add(txtDireccion);
             gbxDatosMedico.Controls.Add(txtEmail);
@@ -83,7 +80,6 @@
             gbxDatosMedico.Controls.Add(txtPrimerApellido);
             gbxDatosMedico.Controls.Add(txtNombre);
             gbxDatosMedico.Controls.Add(txtId);
-            gbxDatosMedico.Controls.Add(lblEstado);
             gbxDatosMedico.Controls.Add(lblTelefono);
             gbxDatosMedico.Controls.Add(lblDireccion);
             gbxDatosMedico.Controls.Add(lblEmail);
@@ -94,7 +90,7 @@
             gbxDatosMedico.Controls.Add(lblId);
             gbxDatosMedico.Location = new Point(12, 42);
             gbxDatosMedico.Name = "gbxDatosMedico";
-            gbxDatosMedico.Size = new Size(390, 355);
+            gbxDatosMedico.Size = new Size(390, 324);
             gbxDatosMedico.TabIndex = 3;
             gbxDatosMedico.TabStop = false;
             gbxDatosMedico.Text = "Datos de Enfermero";
@@ -132,13 +128,6 @@
             lblArea.Size = new Size(38, 17);
             lblArea.TabIndex = 21;
             lblArea.Text = "Area:";
-            // 
-            // txtEstado
-            // 
-            txtEstado.Location = new Point(141, 318);
-            txtEstado.Name = "txtEstado";
-            txtEstado.Size = new Size(232, 23);
-            txtEstado.TabIndex = 20;
             // 
             // txtTelefono
             // 
@@ -195,16 +184,6 @@
             txtId.Name = "txtId";
             txtId.Size = new Size(232, 23);
             txtId.TabIndex = 12;
-            // 
-            // lblEstado
-            // 
-            lblEstado.AutoSize = true;
-            lblEstado.Font = new Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            lblEstado.Location = new Point(84, 324);
-            lblEstado.Name = "lblEstado";
-            lblEstado.Size = new Size(51, 17);
-            lblEstado.TabIndex = 11;
-            lblEstado.Text = "Estado:";
             // 
             // lblTelefono
             // 
@@ -288,7 +267,7 @@
             // 
             // btnGuardar
             // 
-            btnGuardar.Location = new Point(302, 403);
+            btnGuardar.Location = new Point(302, 372);
             btnGuardar.Name = "btnGuardar";
             btnGuardar.Size = new Size(100, 30);
             btnGuardar.TabIndex = 4;
@@ -298,7 +277,7 @@
             // 
             // btnCancelar
             // 
-            btnCancelar.Location = new Point(196, 403);
+            btnCancelar.Location = new Point(196, 372);
             btnCancelar.Name = "btnCancelar";
             btnCancelar.Size = new Size(100, 30);
             btnCancelar.TabIndex = 5;
@@ -308,7 +287,7 @@
             // 
             // btnEliminar
             // 
-            btnEliminar.Location = new Point(90, 403);
+            btnEliminar.Location = new Point(90, 372);
             btnEliminar.Name = "btnEliminar";
             btnEliminar.Size = new Size(100, 30);
             btnEliminar.TabIndex = 6;
@@ -320,7 +299,7 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(415, 440);
+            ClientSize = new Size(415, 409);
             Controls.Add(btnEliminar);
             Controls.Add(btnCancelar);
             Controls.Add(btnGuardar);
@@ -341,7 +320,6 @@
         private GroupBox gbxDatosMedico;
         private TextBox txtArea;
         private Label lblArea;
-        private TextBox txtEstado;
         private TextBox txtTelefono;
         private TextBox txtDireccion;
         private TextBox txtEmail;
@@ -350,7 +328,6 @@
         private TextBox txtPrimerApellido;
         private TextBox txtNombre;
         private TextBox txtId;
-        private Label lblEstado;
         private Label lblTelefono;
         private Label lblDireccion;
         private Label lblEmail;

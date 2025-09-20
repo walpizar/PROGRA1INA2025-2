@@ -45,7 +45,7 @@ namespace Entities
         public bool estado { get; set; }
 
         // relación 1 a 1 con donante en camelCase
-        public clsDonante donante { get; set; }
+        public clsDonante? donante { get; set; }
 
         // constructor vacío
         public clsPersona() { }
@@ -70,7 +70,5 @@ namespace Entities
         {
             return $"ID: {id}, Nombre: {nombre}, Apellido1: {apellido1}, Apellido2: {apellido2}, FechaNac: {fechaNac.ToShortDateString()}, Email: {email}, Direccion: {direccion}, Telefono: {telefono}, Estado: {estado}";
         }
-        //relacion 1 a 1 con donante
-        public clsDonante Donante { get; set; }
     }
 }

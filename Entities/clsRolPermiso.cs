@@ -11,6 +11,8 @@ namespace Entities
     public class clsRolPermiso
     {
         //llave primaria compuesta
+        [Key, Column(Order = 0)]
+        public int Id { get; set; }
         public int idRol { get; set; }
         public int idPermiso { get; set; }
 

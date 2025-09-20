@@ -33,7 +33,7 @@ namespace DAO
                     email = medico.persona.email,
                     direccion = medico.persona.direccion,
                     telefono = medico.persona.telefono,
-                    estado = medico.persona.estado
+                    estado = true, // Asumimos que una nueva persona está activa
                 };
 
                 _context.persona.Add(varpersona);
@@ -42,12 +42,19 @@ namespace DAO
                 // Luego creamos el médico relacionado con llave compuesta de persona
                 var varmedico = new clsMedico
                 {
-                    id = medico.id,
-                    tipoId = medico.tipoId,
+                    id = varpersona.id,
+                    tipoId = varpersona.tipoId,
                     especialidad = medico.especialidad,
+                    estado = true, // Asumimos que un nuevo médico está activo
+
+                    //Datos de auditoria
+                    usuario_crea = medico.usuario_crea ?? ObtenerUsuarioActual(),
+                    fecha_crea = DateTime.Now,
+                    usuario_ult_mod = medico.usuario_ult_mod ?? ObtenerUsuarioActual(),
+                    fecha_ult_mod = DateTime.Now
                 };
 
-                _context.medico.Add(medico);
+                _context.medico.Add(varmedico);
                 _context.SaveChanges();
             }
             catch (Exception ex)
@@ -58,23 +65,41 @@ namespace DAO
 
         }
 
+        private string ObtenerUsuarioActual()
+        {
+            return Environment.UserName;
+        }
+
         public void eliminar(string id, int tipoId)
         {
+            //var donanteAEliminar = consultarPorID(id);
+            //if (donanteAEliminar != null)
+            //{
+            //    donanteAEliminar.estado = false; //marco el estado como inactivo
+            //    donanteAEliminar.fechaModificacion = DateTime.Now;
+            //    donanteAEliminar.usuarioModificacion = "SYSTEM"; //esto se debe cambiar por el usuario que este logueado
+            //    dbContextINA.donante.Update(donanteAEliminar);
+            //    dbContextINA.SaveChanges();
+            //}
+
             try
             {
-                // Primero se elimina el médico
-                var medico = _context.medico.Find(id,tipoId);
+                var medico = _context.medico
+                .Include(m => m.persona)
+                .FirstOrDefault(m => m.id == id && m.tipoId == tipoId);
+
                 if (medico != null)
                 {
-                    _context.medico.Remove(medico);
-                    _context.SaveChanges();
-                }
+                    //BORRADO LÓGICO
+                    medico.estado = false;
+                    medico.fecha_ult_mod = DateTime.Now;
+                    medico.usuario_ult_mod = ObtenerUsuarioActual();
 
-                //Despues se elimina la persona
-                var persona = _context.persona.Find(id, tipoId);
-                if (persona != null)
-                {
-                    _context.persona.Remove(persona);
+                    if (medico.persona != null)
+                    {
+                        medico.persona.estado = false;
+                    }
+
                     _context.SaveChanges();
                 }
             }
@@ -88,8 +113,10 @@ namespace DAO
         {
             try
             {
+                // Convertir idPersona a string
+                string idPersonaString = entidad.idPersona.ToString();
                 // Buscar la persona existente
-                var persona = _context.persona.Find(entidad.idPersona);
+                var persona = _context.persona.Find(idPersonaString,entidad.tipoId);
                 if (persona != null)
                 {
                     // Actualizar datos de persona
@@ -97,19 +124,28 @@ namespace DAO
                     persona.apellido1 = entidad.persona.apellido1;
                     persona.apellido2 = entidad.persona.apellido2;
                     persona.fechaNac = entidad.persona.fechaNac;
+                    persona.email = entidad.persona.email;
                     persona.telefono = entidad.persona.telefono;
+                    persona.direccion = entidad.persona.direccion;
 
-                    _context.Entry(persona).State = EntityState.Modified;
+                    _context.persona.Update(persona);
                 }
 
                 // Buscar el médico existente
-                var medico = _context.medico.Find(entidad.idPersona);
+                var medico = _context.medico.Find(idPersonaString,entidad.tipoId);
                 if (medico != null)
                 {
                     // Actualizar datos de médico
                     medico.especialidad = entidad.especialidad;
 
-                    _context.Entry(medico).State = EntityState.Modified;
+                    //Actualizar datos de auditoria
+                    medico.usuario_crea = entidad.usuario_crea;
+                    medico.fecha_crea = entidad.fecha_crea;
+                    medico.usuario_ult_mod = entidad.usuario_ult_mod;
+                    medico.fecha_ult_mod = DateTime.Now;
+
+                   _context.medico.Update(medico);
+
                 }
 
                 _context.SaveChanges();
@@ -122,17 +158,28 @@ namespace DAO
 
         public clsMedico consultarPorID(string id, int tipoId)
         {
-            return _context.medico.Include(m => m.persona).FirstOrDefault(m => m.id == id && m.tipoId == tipoId);
+            return _context.medico
+            .Include(m => m.persona)
+            .Where(m => m.id == id && m.tipoId == tipoId)
+            .Where(m => m.estado == true && m.persona.estado == true)
+            .FirstOrDefault();
         }
 
         public clsMedico consultarPorNombre(string nombre)
         {
-            return _context.medico.Include(m => m.persona).FirstOrDefault(m => m.persona.nombre.Contains(nombre));
+            return _context.medico
+                .Include(m => m.persona)
+                .FirstOrDefault(m => m.persona.nombre
+                .Contains(nombre));
         }
 
         public List<clsMedico> consultarTodos()
         {
-            return _context.medico.Include(m => m.persona).ToList();
+            return _context.medico
+            .Include(m => m.persona)
+            .Where(m => m.estado == true)
+            .Where(m => m.persona.estado == true)
+            .ToList();
         }
     }
 }

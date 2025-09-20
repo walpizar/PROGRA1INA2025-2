@@ -39,6 +39,7 @@
             Area = new ColumnHeader();
             txtBusqueda = new TextBox();
             lblBusqueda = new Label();
+            TipoId = new ColumnHeader();
             gbxListaEnfermeros.SuspendLayout();
             SuspendLayout();
             // 
@@ -54,7 +55,7 @@
             // 
             // btnNuevo
             // 
-            btnNuevo.Location = new Point(408, 9);
+            btnNuevo.Location = new Point(500, 9);
             btnNuevo.Name = "btnNuevo";
             btnNuevo.Size = new Size(100, 30);
             btnNuevo.TabIndex = 3;
@@ -69,20 +70,20 @@
             gbxListaEnfermeros.Controls.Add(lblBusqueda);
             gbxListaEnfermeros.Location = new Point(12, 45);
             gbxListaEnfermeros.Name = "gbxListaEnfermeros";
-            gbxListaEnfermeros.Size = new Size(496, 377);
+            gbxListaEnfermeros.Size = new Size(591, 377);
             gbxListaEnfermeros.TabIndex = 4;
             gbxListaEnfermeros.TabStop = false;
             gbxListaEnfermeros.Text = "Lista Enfermeros";
             // 
             // lstvLista
             // 
-            lstvLista.Columns.AddRange(new ColumnHeader[] { Id, Nombre, PrimerApellido, SegundoApellido, Area });
+            lstvLista.Columns.AddRange(new ColumnHeader[] { Id, TipoId, Nombre, PrimerApellido, SegundoApellido, Area });
             lstvLista.FullRowSelect = true;
             lstvLista.GridLines = true;
             lstvLista.Location = new Point(6, 76);
             lstvLista.MultiSelect = false;
             lstvLista.Name = "lstvLista";
-            lstvLista.Size = new Size(476, 295);
+            lstvLista.Size = new Size(576, 295);
             lstvLista.TabIndex = 5;
             lstvLista.UseCompatibleStateImageBehavior = false;
             lstvLista.View = View.Details;
@@ -131,11 +132,16 @@
             lblBusqueda.TabIndex = 3;
             lblBusqueda.Text = "Busqueda:";
             // 
+            // TipoId
+            // 
+            TipoId.Text = "TipoId";
+            TipoId.Width = 100;
+            // 
             // frmEnfermeroLista
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(520, 432);
+            ClientSize = new Size(612, 432);
             Controls.Add(gbxListaEnfermeros);
             Controls.Add(btnNuevo);
             Controls.Add(lblTitulo);
@@ -161,5 +167,6 @@
         private ColumnHeader Area;
         private TextBox txtBusqueda;
         private Label lblBusqueda;
+        private ColumnHeader TipoId;
     }
 }

@@ -12,7 +12,7 @@ namespace Entities
         public int idDonacion { get; set; }
 
         [ForeignKey("donante")]
-        public int idDonante { get; set; }
+        public string idDonante { get; set; }
 
         public DateTime fechaDonacion { get; set; }
         public int tipoDonacion { get; set; }
@@ -24,7 +24,7 @@ namespace Entities
 
         public clsDonacion() { }
 
-        public clsDonacion(int idDonante, DateTime fechaDonacion, int tipoDonacion, string observaciones)
+        public clsDonacion(string idDonante, DateTime fechaDonacion, int tipoDonacion, string observaciones)
         {
             this.idDonante = idDonante;
             this.fechaDonacion = fechaDonacion;

@@ -57,15 +57,15 @@ namespace DAO
                 .IsRequired()
                 .ValueGeneratedNever();
 
-            modelBuilder.Entity<clsUsuario>()
-                //Define la clave primaria compuesta para clsUsuario
-                .HasKey(u => new { u.personaId, u.personaTipoId });
+            //modelBuilder.Entity<clsUsuario>()
+            //    //Define la clave primaria compuesta para clsUsuario
+            //    .HasKey(u => new { u.personaId, u.personaTipoId });
 
-            modelBuilder.Entity<clsUsuario>()
-                .HasOne(u => u.persona)//Establece la relación de 1 a 1(un usuario tiene una persona)
-                .WithOne()
-                .HasForeignKey<clsUsuario>(u => new { u.personaId, u.personaTipoId })
-                .HasPrincipalKey<clsPersona>(p => new { p.id, p.tipoId });
+            //modelBuilder.Entity<clsUsuario>()
+            //    .HasOne(u => u.persona)//Establece la relación de 1 a 1(un usuario tiene una persona)
+            //    .WithOne()
+            //    .HasForeignKey<clsUsuario>(u => new { u.personaId, u.personaTipoId })
+            //    .HasPrincipalKey<clsPersona>(p => new { p.id, p.tipoId });
   
 
             //clsMedico configuracion de llave primaria compuesta   
@@ -83,7 +83,7 @@ namespace DAO
                 .HasOne(m => m.persona)
                 .WithOne()
                 .HasForeignKey<clsMedico>(m => new { m.id, m.tipoId })
-                .OnDelete(DeleteBehavior.Restrict); // Evita el borrado en cascada
+                .OnDelete(DeleteBehavior.Restrict);// Evita el borrado en cascada
 
             //clsEnfermero configuracion de llave primaria compuesta
             modelBuilder.Entity<clsEnfermero>().HasKey(e => new { e.id, e.tipoId });
@@ -102,19 +102,39 @@ namespace DAO
                 .HasForeignKey<clsEnfermero>(e => new { e.id, e.tipoId })
                 .OnDelete(DeleteBehavior.Restrict); // Evita el borrado en cascada
 
+            //clsDonante configuracion de llave primaria compuesta
+            modelBuilder.Entity<clsDonante>()
+                .HasKey(d => new { d.personaId, d.personaTipoId });
+            modelBuilder.Entity<clsDonante>().Property(d => d.personaId)
+                .IsRequired()
+                .HasMaxLength(20)
+                .ValueGeneratedNever();
+            modelBuilder.Entity<clsDonante>().Property(d => d.personaTipoId)
+                .IsRequired()
+                .ValueGeneratedNever();
+
             // Relación 1 a 1 entre Donante y Persona
             modelBuilder.Entity<clsDonante>()
                 .HasOne(d => d.persona)
                 .WithOne(p => p.donante)
-                .HasForeignKey<clsDonante>(d => new { d.personaId, d.personaTipoId });
+                .HasForeignKey<clsDonante>(d => new { d.personaId, d.personaTipoId })
+                .OnDelete(DeleteBehavior.Restrict);
 
             // Clave primaria compuesta para Enfermero
             modelBuilder.Entity<clsEnfermero>()
                 .HasKey(e => new { e.id, e.tipoId });
 
-            // Clave primaria compuesta para RolPermiso
-            modelBuilder.Entity<clsRolPermiso>()
-                .HasKey(rp => new { rp.idRol, rp.idPermiso });
+            //// Clave primaria compuesta para RolPermiso
+            //modelBuilder.Entity<clsRolPermiso>()
+            //    .HasKey(rp => new { rp.idRol, rp.idPermiso });
+
+            modelBuilder.Entity<clsDonacion>()
+            .HasOne(d => d.donante)
+            .WithMany(d => d.donaciones)
+            .HasForeignKey(d => new { d.idDonante, d.idDonacion})
+            .OnDelete(DeleteBehavior.Restrict);
+
+            base.OnModelCreating(modelBuilder);
         }
     }
 }

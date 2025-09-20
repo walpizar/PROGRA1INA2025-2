@@ -13,10 +13,10 @@ namespace Services
     {
         private readonly MedicoDAO _medicoDAO;
         private string _usuarioActual;
-        public MedicoService(string _usuarioActual = null)
+        public MedicoService(string usuarioActual = null)
         {
             _medicoDAO = new MedicoDAO();
-            _usuarioActual = _usuarioActual ?? Environment.UserName;
+            _usuarioActual = usuarioActual ?? Environment.UserName;
         }
 
         //Reglas de negocio para crear, eliminar, modificar, consultar medicos
@@ -95,7 +95,7 @@ namespace Services
 
         public void modificar(clsMedico medico)
         {
-            var medicoExistente = _medicoDAO.consultarPorID(medico.id, medico.idPersona);
+            var medicoExistente = _medicoDAO.consultarPorID(medico.id, medico.tipoId);
             try
             {
                 // La especialidad no puede ser vacia o nula
@@ -139,6 +139,7 @@ namespace Services
                     throw new ArgumentException("Error de servicio: La dirección no puede estar vacía.");
                 }
 
+                //Actualizar datos auditoria
                 medico.usuario_crea = medicoExistente.usuario_crea;
                 medico.fecha_crea = medicoExistente.fecha_crea;
                 medico.usuario_ult_mod = _usuarioActual;
@@ -155,19 +156,37 @@ namespace Services
 
         public void eliminar(string id, int tipoId)
         {
+            //Se debe hacer una eliminacion logica, es decir, cambiar el estado a false
             try
             {
-                // Validar que el médico existe antes de eliminar
-                var medicoExiste = consultarPorID(id,tipoId);
-                if (medicoExiste == null)
-                    throw new Exception("Error de servicio: El médico no existe");
-
-                _medicoDAO.eliminar(id,tipoId);
+                var medicoExistente = _medicoDAO.consultarPorID(id, tipoId);
+                if (medicoExistente == null)
+                {
+                    throw new Exception("Error de servicio: El médico no existe.");
+                }
+                medicoExistente.estado = false;
+                medicoExistente.usuario_ult_mod = _usuarioActual;
+                medicoExistente.fecha_ult_mod = DateTime.Now;
+                _medicoDAO.modificar(medicoExistente);
             }
             catch (Exception ex)
             {
                 throw new Exception($"Error en servicio al eliminar médico: {ex.Message}", ex);
             }
+
+            //try
+            //{
+            //    // Validar que el médico existe antes de eliminar
+            //    var medicoExiste = consultarPorID(id,tipoId);
+            //    if (medicoExiste == null)
+            //        throw new Exception("Error de servicio: El médico no existe");
+
+            //    _medicoDAO.eliminar(id,tipoId);
+            //}
+            //catch (Exception ex)
+            //{
+            //    throw new Exception($"Error en servicio al eliminar médico: {ex.Message}", ex);
+            //}
         }
 
         public clsMedico consultarPorID(string id, int tipoId)
@@ -201,7 +220,13 @@ namespace Services
         {
             try
             {
-                return _medicoDAO.consultarTodos();
+                var resultado = _medicoDAO.consultarTodos();
+
+                return resultado.Where(m =>
+                    m.estado == true &&
+                    m.persona != null &&
+                    m.persona.estado == true
+                ).ToList();
             }
             catch (Exception ex)
             {

@@ -8,7 +8,7 @@ namespace Entities
     public class clsUsuario
     {
         [Key]
-        public string personaId {  get; set; }
+        public string personaId_ {  get; set; }
 
         [Required(ErrorMessage = "El nombre de usuario es obligatorio.")]
         [StringLength(50, ErrorMessage = "El nombre de usuario no puede tener más de 50 caracteres.")]

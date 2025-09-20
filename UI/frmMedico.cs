@@ -4,6 +4,7 @@ using Common.Utils;
 using Entities;
 using Services;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -63,7 +64,6 @@ namespace UI
             txtDireccion.Text = "";
             txtTelefono.Text = "";
             txtEspecialidad.Text = "";
-            txtEstado.Text = "";
         }
 
         private void cargarForm()
@@ -78,7 +78,6 @@ namespace UI
             txtDireccion.Text = medicoSelected.persona.direccion;
             txtTelefono.Text = medicoSelected.persona.telefono;
             txtEspecialidad.Text = medicoSelected.especialidad;
-            txtEstado.Text = medicoSelected.persona.estado.ToString();
         }
 
         private void btnGuardar_Click(object sender, EventArgs e)
@@ -102,7 +101,7 @@ namespace UI
                     medico.persona.email = txtEmail.Text;
                     medico.persona.direccion = txtDireccion.Text;
                     medico.persona.telefono = txtTelefono.Text;
-                    medico.estado = Convert.ToBoolean(txtEstado.Text);
+                    medico.estado = true; // Asumimos que el médico está activo al crearlo o modificarlo
 
                     if (medicoSelected == null)
                     {
@@ -114,6 +113,7 @@ namespace UI
                     {
                         medico.idPersona = medicoSelected.idPersona; // Mantener el idPersona existente
                         _medicoService.modificar(medico);
+
                         //Mensaje de exito
                         MessageBox.Show("Medico modificado con exito");
                     }
@@ -178,11 +178,6 @@ namespace UI
             if (string.IsNullOrEmpty(txtTelefono.Text))
             {
                 MessageBox.Show("El campo Teléfono es obligatorio.");
-                return false;
-            }
-            if (string.IsNullOrEmpty(txtEstado.Text) || !bool.TryParse(txtEstado.Text, out bool estado))
-            {
-                MessageBox.Show("El campo Estado es obligatorio y debe ser 'true' o 'false'.");
                 return false;
             }
             return true;
