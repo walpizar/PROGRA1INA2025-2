@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DAO.Migrations
 {
     [DbContext(typeof(dbContextINA))]
-    [Migration("20250916202815_InitialCreate")]
-    partial class InitialCreate
+    [Migration("20250919192246_Initial")]
+    partial class Initial
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -458,21 +458,14 @@ namespace DAO.Migrations
                     b.Property<bool>("estado")
                         .HasColumnType("bit");
 
-                    b.Property<string>("estadoCivil")
-                        .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
+                    b.Property<int>("estadoCivil")
+                        .HasColumnType("int");
 
                     b.Property<DateTime>("fecha_crea")
                         .HasColumnType("datetime2");
 
                     b.Property<DateTime>("fecha_ult_mod")
                         .HasColumnType("datetime2");
-
-                    b.Property<string>("referencia")
-                        .IsRequired()
-                        .HasMaxLength(500)
-                        .HasColumnType("nvarchar(500)");
 
                     b.Property<string>("usuario_crea")
                         .IsRequired()

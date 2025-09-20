@@ -1,4 +1,5 @@
-﻿using Common.Exceptions;
+﻿using Common.Enums;
+using Common.Exceptions;
 using Common.Interfaces;
 using Entities;
 using Services;
@@ -18,6 +19,9 @@ namespace UI
     {
         //creo propiedad glogabal para pacienteSelected para saber si estoy en modo edicion o modo creacion
         public clsPaciente pacienteSelected { get; set; }
+
+        //creo propiedad para saber si debo mostrar el boton reactivar
+        public bool mostrarBotonReactivar { get; set; } = false;
 
         //declaro para instancia el PacienteService para ir de la capa UI a la capa Services
         private readonly PacienteService _pacienteService;
@@ -41,6 +45,10 @@ namespace UI
 
             try
             {
+                //llamo al metodo para cargar los combos
+                cargarCombos();
+
+                //valido si pacienteSelected es null o no
                 if (pacienteSelected != null) //accion de modificar
                 {
                     //esta label pongale modificar paciente
@@ -50,14 +58,35 @@ namespace UI
                     this.Text = "Modificar Paciente";
 
                     this.txtIdPaciente.Enabled = false; //no se puede modificar el id
-                    this.txtTipoId.Enabled = false; //no se puede modificar el tipo de id
+                    this.cboTipoId.Enabled = false; //no se puede modificar el tipo de id
 
                     //al boton guardar pongale modificar
                     btnGuardarPaciente.Text = "Modificar";
 
                     btnEliminarPaciente.Visible = true; //muestro el boton de eliminar
 
-                    //llamo al metodo para cargar los datos del paciente en el formulario
+                    //valido si el paciente esta inactivo, para mostrar el boton reactivar
+                    if (mostrarBotonReactivar)
+                    {
+                        //cambio el nombre de lblTituloPaciente
+                        this.lblTituloPaciente.Text = "Reactivar Paciente";
+                        this.Text = "Reactivar Paciente";
+
+                        btnReactivar.Visible = true;
+                        btnGuardarPaciente.Visible = false;
+                        btnEliminarPaciente.Visible = false;
+
+                        //llamo al metodo para desabilitar los campos del formulario y solo se pueda reactivar no modificar
+                        desabilitarCampos();
+                    }
+                    else//paciente esta activo
+                    {
+                        btnReactivar.Visible = false;
+                        btnGuardarPaciente.Visible = true;
+                        btnEliminarPaciente.Visible = true;
+                    }
+
+                    //llamo al metodo para cargar los datos del paciente en el formulario si esta en modo edicion o reactivacion
                     cargarForm();
 
                 }
@@ -70,19 +99,48 @@ namespace UI
                     this.Text = "Crear Paciente";
 
                     this.txtIdPaciente.Enabled = true; //se puede ingresar el id
+                    this.cboTipoId.Enabled = true; //se puede ingresar el tipo de id
 
                     //al boton guardar pongale guardar
                     btnGuardarPaciente.Text = "Guardar";
 
                     btnEliminarPaciente.Visible = false; //oculto el boton de eliminar
+                    btnReactivar.Visible = false; //oculto el boton de reactivar
+                    btnGuardarPaciente.Visible = true; //muestro el boton de guardar
 
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error al cargar el formulario, contacte con soporte o con su administrador" +
+                MessageBox.Show("Error al cargar el formulario de crear paciente. Contacte con soporte o con su administrador." +
                     "\n" + "Error: " + "\n" + ex.Message);
             }
+        }
+
+        //metodo para desabilitar los campos del formulario si esta en modo reactivar
+        private void desabilitarCampos()
+        {
+            //desabilito todos los campos del formulario
+            txtNombre.Enabled = false;
+            txtApellido1.Enabled = false;
+            txtApellido2.Enabled = false;
+            dtpFechaNacimiento.Enabled = false;
+            txtEmail.Enabled = false;
+            txtDireccion.Enabled = false;
+            txtTelefono.Enabled = false;
+            cboEstadoCivil.Enabled = false;
+
+        }
+
+        //metodo para cargar los combos
+        private void cargarCombos()
+        {
+            //datasource es para cargar los datos en el combo, enum.getvalues es para obtener los valores del enum
+            //typeof es para obtener el tipo del enum
+            cboTipoId.DataSource = Enum.GetValues(typeof(Enums.TipoIdentificacion));
+
+            //obtengo los valores del enum EstadoCivil y los cargo en el combo
+            cboEstadoCivil.DataSource = Enum.GetValues(typeof(Enums.EstadoCivil));
         }
 
 
@@ -90,23 +148,25 @@ namespace UI
         private void cargarForm()
         {
             //cargo los datos del paciente en el formulario
-            txtIdPaciente.Text = pacienteSelected.persona.id;
-            txtTipoId.Text = pacienteSelected.persona.tipoId.ToString();
-            txtNombre.Text = pacienteSelected.persona.nombre;
-            txtApellido1.Text = pacienteSelected.persona.apellido1;
-            txtApellido2.Text = pacienteSelected.persona.apellido2;
+            txtIdPaciente.Text = pacienteSelected.persona.id.Trim();
+
+            //para seleccionar el valor del combo, hago un casteo del int a el enum TipoIdentificacion
+            //el selectedItem es para seleccionar el valor del combo, el (enums.TipoIdentificacion) es para castear el int a el enum
+            cboTipoId.SelectedItem = (Enums.TipoIdentificacion)pacienteSelected.tipoId;
+
+            txtNombre.Text = pacienteSelected.persona.nombre.Trim();
+            txtApellido1.Text = pacienteSelected.persona.apellido1.Trim();
+            txtApellido2.Text = pacienteSelected.persona.apellido2.Trim();
             dtpFechaNacimiento.Value = pacienteSelected.persona.fechaNac;
-            txtEmail.Text = pacienteSelected.persona.email;
+            txtEmail.Text = pacienteSelected.persona.email.Trim();
             txtDireccion.Text = pacienteSelected.persona.direccion;
-            txtTelefono.Text = pacienteSelected.persona.telefono;
-            txtEstadoCivil.Text = pacienteSelected.estadoCivil;
-            txtReferencia.Text = pacienteSelected.referencia;
-            txtEstado.Text = pacienteSelected.persona.estado ? "Activo" : "Inactivo"; //si el estado es true, ponga activo, si es false, ponga inactivo
+            txtTelefono.Text = pacienteSelected.persona.telefono.Trim();
 
-
+            //lo seleccionado es igual al valor del enum EstadoCivil
+            cboEstadoCivil.SelectedItem = (Enums.EstadoCivil)pacienteSelected.estadoCivil;
         }
 
-     
+
         //evento click del boton guardar
         private void btnGuardarPaciente_Click(object sender, EventArgs e)
         {
@@ -123,17 +183,18 @@ namespace UI
                     clsPersona persona = new clsPersona();
 
                     //seteo los valores de la persona con los datos del formulario
-                    persona.id = txtIdPaciente.Text;
-                    persona.tipoId = int.Parse(txtTipoId.Text);
-                    persona.nombre = txtNombre.Text;
-                    persona.apellido1 = txtApellido1.Text;
-                    persona.apellido2 = txtApellido2.Text;
+                    persona.id = txtIdPaciente.Text.Trim();
+
+                    //el int cast es para convertir el enum a int 
+                    persona.tipoId = (int)(Enums.TipoIdentificacion)cboTipoId.SelectedItem;//el tipo de id es el seleccionado en el combo
+                    persona.nombre = txtNombre.Text.Trim();
+                    persona.apellido1 = txtApellido1.Text.Trim();
+                    persona.apellido2 = txtApellido2.Text.Trim();
                     persona.fechaNac = dtpFechaNacimiento.Value;
-                    persona.email = txtEmail.Text;
+                    persona.email = txtEmail.Text.Trim();
                     persona.direccion = txtDireccion.Text;
-                    persona.telefono = txtTelefono.Text;
-                    //si el estado es "1" (ignora espacios en blanco) entonces es true, si no, es false
-                    persona.estado = txtEstado.Text.Trim() == "1" ? true : false;
+                    persona.telefono = txtTelefono.Text.Trim();
+
 
                     //creo instancia de paciente para setear los valores del paciente
                     clsPaciente pacie = new clsPaciente();
@@ -141,9 +202,7 @@ namespace UI
                     //seteo los valores del paciente con los datos del formulario
                     pacie.id = persona.id;//el id del paciente es el mismo que el de la persona
                     pacie.tipoId = persona.tipoId;//el tipo de id del paciente es el mismo que el de la persona
-                    pacie.referencia = txtReferencia.Text;
-                    pacie.estadoCivil = txtEstadoCivil.Text;
-                    pacie.estado = persona.estado; //el estado del paciente es el mismo que el de la persona
+                    pacie.estadoCivil = (int)(Enums.EstadoCivil)cboEstadoCivil.SelectedItem; //el estado civil del paciente es el seleccionado en el combo
 
                     pacie.persona = persona; //asigno la persona al paciente (relacion de navegacioon)
 
@@ -171,9 +230,9 @@ namespace UI
                     //cierro el formulario
                     this.Close();
 
-                //cierre del if ValidarDatos
+                    //cierre del if ValidarDatos
                 }
-            //cierre del try
+                //cierre del try
             }
 
             //exepciones personalizadas
@@ -189,13 +248,21 @@ namespace UI
             {
                 MessageBox.Show(ex.Message);
             }
+            catch (EmailExistDBExeption ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            catch (PhoneExistDBExeption ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
             catch (NotImplementedException ex)
             {
                 MessageBox.Show(ex.Message);
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error al guardar el paciente, contacte con soporte o con su administrador" +
+                MessageBox.Show("Error al guardar el paciente. Contacte con soporte o con su administrador." +
                     "\n" + "Error: " + "\n" + ex.Message);
             }
 
@@ -206,21 +273,20 @@ namespace UI
         private bool ValidarDatos()
         {
             //valido que el id no este vacio y sea un numero
-            if (string.IsNullOrEmpty(txtIdPaciente.Text) || !int.TryParse(txtIdPaciente.Text, out int id))
+            if (string.IsNullOrEmpty(txtIdPaciente.Text))
             {
                 MessageBox.Show("El ID (Cedula) es obligatorio.");
                 txtIdPaciente.Focus();
                 return false;
             }
 
-            //valido que el tipo de id no este vacio y sea 1 0 2
-            if (string.IsNullOrEmpty(txtTipoId.Text) || (txtTipoId.Text.Trim() != "1" && txtTipoId.Text.Trim() != "2"))
+            //valido que el tipo de id tenga una seleccion
+            if (cboTipoId.SelectedItem == null)
             {
-                MessageBox.Show("El tipo de ID es obligatorio. Debe colocar 1 para cédula física o 2 para cédula jurídica.");
-                txtTipoId.Focus();
+                MessageBox.Show("El tipo de ID (Tipo Cedula) es obligatorio.");
+                cboTipoId.Focus();
                 return false;
             }
-
 
             //valido que el nombre no este vacio
             if (string.IsNullOrEmpty(txtNombre.Text))
@@ -246,35 +312,6 @@ namespace UI
                 return false;
             }
 
-            //valido que el telefono no este vacio y tenga formato de costa Rica
-            if (string.IsNullOrEmpty(txtTelefono.Text) || txtTelefono.Text.Length != 8 || !txtTelefono.Text.StartsWith("6")
-                //el startswith es para validar que el telefono empiece con 6,7,8 o 9
-                && !txtTelefono.Text.StartsWith("7") && !txtTelefono.Text.StartsWith("8") && !txtTelefono.Text.StartsWith("9")
-                //el out int telefono es para convertir el string a int y validar que sean solo numeros
-                || !int.TryParse(txtTelefono.Text, out int telefono))
-            {
-                MessageBox.Show("El teléfono es obligatorio y debe tener un formato válido de Costa Rica (8 dígitos, comenzando con 6, 7, 8 o 9).");
-                txtTelefono.Focus();
-                return false;
-            }
-
-
-            //valido que el email no este vacio y tenga formato de email
-            if (string.IsNullOrEmpty(txtEmail.Text) || !txtEmail.Text.Contains("@") || !txtEmail.Text.Contains("."))
-            {
-                MessageBox.Show("El email es obligatorio y debe tener un formato válido (Debe contener @ y .).");
-                txtEmail.Focus();
-                return false;
-            }
-
-            //valido que la direccion no este vacia
-            if (string.IsNullOrEmpty(txtDireccion.Text))
-            {
-                MessageBox.Show("La dirección es obligatoria.");
-                txtDireccion.Focus();
-                return false;
-            }
-
             //valido que la fecha de nacimiento no sea mayor a la fecha actual
             if (dtpFechaNacimiento.Value > DateTime.Now)
             {
@@ -292,32 +329,40 @@ namespace UI
                 return false;
             }
 
-            //valido que el estado no este vacio y solo pueda ser 1 o 2 (1=activo, 2=inactivo)
-            if (string.IsNullOrEmpty(txtEstado.Text) || (txtEstado.Text.Trim() != "1"
-                && txtEstado.Text.Trim() != "2"))
+            //valido que el email no este vacio y tenga formato de email
+            if (string.IsNullOrEmpty(txtEmail.Text) || !txtEmail.Text.Contains("@") || !txtEmail.Text.Contains("."))
             {
-                MessageBox.Show("El estado es obligatorio. Debe colocar 1 para activo o 2 para inactivo.");
-                txtEstado.Focus();
+                MessageBox.Show("El email es obligatorio y debe tener un formato válido (Debe contener @ y .).");
+                txtEmail.Focus();
                 return false;
             }
 
-            //valido que la referencia no este vacia
-            if (string.IsNullOrEmpty(txtReferencia.Text))
+            //valido que la direccion no este vacia
+            if (string.IsNullOrEmpty(txtDireccion.Text))
             {
-                MessageBox.Show("La referencia es obligatoria.");
-                txtReferencia.Focus();
+                MessageBox.Show("La dirección es obligatoria.");
+                txtDireccion.Focus();
                 return false;
             }
 
-            //valido que el estado civil no este vacio y sea soltero, casado, viudo o n/a
-            if (string.IsNullOrEmpty(txtEstadoCivil.Text) || (txtEstadoCivil.Text.Trim().ToLower() != "soltero" 
-                && txtEstadoCivil.Text.Trim().ToLower() != "soltera" && txtEstadoCivil.Text.Trim().ToLower() != "casado" 
-                && txtEstadoCivil.Text.Trim().ToLower() != "casada" && txtEstadoCivil.Text.Trim().ToLower() != "viudo"
-                && txtEstadoCivil.Text.Trim().ToLower() != "viuda" && txtEstadoCivil.Text.Trim().ToLower() != "divorciado" 
-                && txtEstadoCivil.Text.Trim().ToLower() != "divorciada" && txtEstadoCivil.Text.Trim().ToLower() != "n/a"))
+
+            //valido que el telefono no este vacio y tenga formato de costa Rica
+            if (string.IsNullOrEmpty(txtTelefono.Text) || txtTelefono.Text.Length != 8 || !txtTelefono.Text.StartsWith("6")
+                //el startswith es para validar que el telefono empiece con 6,7,8 o 9
+                && !txtTelefono.Text.StartsWith("7") && !txtTelefono.Text.StartsWith("8") && !txtTelefono.Text.StartsWith("9")
+                //el out int telefono es para convertir el string a int y validar que sean solo numeros
+                || !int.TryParse(txtTelefono.Text, out int telefono))
             {
-                MessageBox.Show("El estado civil es obligatorio y solo puede colocar soltero(@), casado(@), viudo(@), divorciado(@) o n/a.");
-                txtEstadoCivil.Focus();
+                MessageBox.Show("El teléfono es obligatorio y debe tener un formato válido de Costa Rica (8 dígitos, comenzando con 6, 7, 8 o 9).");
+                txtTelefono.Focus();
+                return false;
+            }
+
+            //VAlido que el estado civil tenga una seleccion
+            if (cboEstadoCivil.SelectedItem == null)
+            {
+                MessageBox.Show("El estado civil es obligatorio.");
+                cboEstadoCivil.Focus();
                 return false;
             }
 
@@ -341,28 +386,74 @@ namespace UI
             {
 
                 //esto es para q muestre un mensaje de confirmacion antes de eliminar
-                DialogResult resp = MessageBox.Show("¿Está seguro que desea eliminar el paciente?", "Confirmación",
+                DialogResult resp = MessageBox.Show("¿Está seguro que desea inactivar el paciente?", "Confirmación",
                      MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-                
+
                 //si el usuario dice que si, entonces elimino
                 if (resp == DialogResult.Yes)
                 {
                     //llamo a mi capa de servicios para eliminar el paciente
                     _pacienteService.eliminar(pacienteSelected.id);
-                    MessageBox.Show("Paciente eliminado correctamente");
+                    MessageBox.Show("Paciente inactivado correctamente y enviado a la lista de pacientes inactivos.");
                     this.Close(); //cierro el formulario
-                } 
+                }
 
 
+            }
+            catch (EntityNotExistDBException ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            catch (NotImplementedException ex)
+            {
+                MessageBox.Show(ex.Message);
             }
             catch (Exception ex)
             {
 
-                MessageBox.Show("Error al eliminar el paciente. Contacte con soporte o con su administrador." + 
+                MessageBox.Show("Error al inactivar el paciente. Contacte con soporte o con su administrador." +
                     "\n" + "Error: " + "\n" + ex.Message);
             }
         }
 
-       
+        //evento click del boton reactivar
+        private void btnReactivar_Click(object sender, EventArgs e)
+        {
+            try 
+                {
+                //esto es para q muestre un mensaje de confirmacion antes de reactivar
+                DialogResult resp = MessageBox.Show("¿Está seguro que desea reactivar el paciente?\n" +
+                    "\nEl paciente desaparecera de la lista de inactivos y volvera aparecer en la lista de pacientes activos.", "Confirmación",
+                     MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                //si el usuario dice que si, entonces reactivo
+                if (resp == DialogResult.Yes)
+                {
+                    //llamo a mi capa de servicios para reactivar el paciente
+                    _pacienteService.reactivar(pacienteSelected.id);
+                    MessageBox.Show("Paciente reactivado correctamente.\n\n" +
+                        "NOTA: Verifique la lista de pacientes activos, si necesita modificar algun dato del paciente activado.");
+                    this.Close(); //cierro el formulario
+                }
+            }
+            //exepciones personalizadas
+            catch (EntityNotExistDBException ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            catch (EntityActiveDBExeption ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            catch (NotImplementedException ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al reactivar el paciente. Contacte con soporte o con su administrador." +
+                    "\n" + "Error: " + "\n" + ex.Message);
+            }
+
+        }
     }
 }

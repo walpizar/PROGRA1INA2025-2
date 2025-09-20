@@ -30,6 +30,9 @@
         {
             btnNuevo = new Button();
             gbxListaPacientes = new GroupBox();
+            rdBtnInactivos = new RadioButton();
+            rdBtnActivos = new RadioButton();
+            lblEstadoPacientes = new Label();
             lblBusqueda = new Label();
             txtBusqueda = new TextBox();
             lstvListaPaciente = new ListView();
@@ -56,15 +59,51 @@
             // 
             // gbxListaPacientes
             // 
+            gbxListaPacientes.Controls.Add(rdBtnInactivos);
+            gbxListaPacientes.Controls.Add(rdBtnActivos);
+            gbxListaPacientes.Controls.Add(lblEstadoPacientes);
             gbxListaPacientes.Controls.Add(lblBusqueda);
             gbxListaPacientes.Controls.Add(txtBusqueda);
             gbxListaPacientes.Controls.Add(lstvListaPaciente);
             gbxListaPacientes.Location = new Point(14, 76);
             gbxListaPacientes.Name = "gbxListaPacientes";
-            gbxListaPacientes.Size = new Size(865, 387);
+            gbxListaPacientes.Size = new Size(865, 498);
             gbxListaPacientes.TabIndex = 5;
             gbxListaPacientes.TabStop = false;
-            gbxListaPacientes.Text = "Lista Pacientes";
+            gbxListaPacientes.Text = "Pacientes";
+            // 
+            // rdBtnInactivos
+            // 
+            rdBtnInactivos.AutoSize = true;
+            rdBtnInactivos.Location = new Point(721, 50);
+            rdBtnInactivos.Name = "rdBtnInactivos";
+            rdBtnInactivos.Size = new Size(72, 19);
+            rdBtnInactivos.TabIndex = 4;
+            rdBtnInactivos.TabStop = true;
+            rdBtnInactivos.Text = "Inactivos";
+            rdBtnInactivos.UseVisualStyleBackColor = true;
+            rdBtnInactivos.CheckedChanged += rdBtnInactivos_CheckedChanged;
+            // 
+            // rdBtnActivos
+            // 
+            rdBtnActivos.AutoSize = true;
+            rdBtnActivos.Location = new Point(640, 50);
+            rdBtnActivos.Name = "rdBtnActivos";
+            rdBtnActivos.Size = new Size(64, 19);
+            rdBtnActivos.TabIndex = 8;
+            rdBtnActivos.TabStop = true;
+            rdBtnActivos.Text = "Activos";
+            rdBtnActivos.UseVisualStyleBackColor = true;
+            rdBtnActivos.CheckedChanged += rdBtnActivos_CheckedChanged;
+            // 
+            // lblEstadoPacientes
+            // 
+            lblEstadoPacientes.AutoSize = true;
+            lblEstadoPacientes.Location = new Point(669, 27);
+            lblEstadoPacientes.Name = "lblEstadoPacientes";
+            lblEstadoPacientes.Size = new Size(100, 15);
+            lblEstadoPacientes.TabIndex = 7;
+            lblEstadoPacientes.Text = "Lista de Pacientes";
             // 
             // lblBusqueda
             // 
@@ -91,7 +130,7 @@
             lstvListaPaciente.Location = new Point(15, 88);
             lstvListaPaciente.MultiSelect = false;
             lstvListaPaciente.Name = "lstvListaPaciente";
-            lstvListaPaciente.Size = new Size(838, 293);
+            lstvListaPaciente.Size = new Size(838, 394);
             lstvListaPaciente.TabIndex = 3;
             lstvListaPaciente.UseCompatibleStateImageBehavior = false;
             lstvListaPaciente.View = View.Details;
@@ -126,7 +165,7 @@
             // 
             lblTitulo.AutoSize = true;
             lblTitulo.Font = new Font("Segoe UI", 15.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            lblTitulo.Location = new Point(285, 30);
+            lblTitulo.Location = new Point(311, 30);
             lblTitulo.Name = "lblTitulo";
             lblTitulo.Size = new Size(262, 30);
             lblTitulo.TabIndex = 3;
@@ -136,7 +175,7 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(895, 479);
+            ClientSize = new Size(895, 586);
             Controls.Add(btnNuevo);
             Controls.Add(gbxListaPacientes);
             Controls.Add(lblTitulo);
@@ -162,5 +201,8 @@
         private Label lblTitulo;
         private ColumnHeader colApellido2;
         private ColumnHeader colTelefono;
+        private Label lblEstadoPacientes;
+        private RadioButton rdBtnInactivos;
+        private RadioButton rdBtnActivos;
     }
 }

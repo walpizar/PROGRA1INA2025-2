@@ -45,8 +45,40 @@ namespace DAO
             return _context.paciente
                 .AsNoTracking()//esto es para que no haga seguimiento de los cambios en los objetos, mejora el rendimiento en consultas de solo lectura
                 .Include(p => p.persona)//esto es para traer los datos de la tabla persona que esta relacionada con paciente
+                .Where(p => p.estado == true) //solo los activos
                 .ToList();
 
+        }
+
+        //consultar por correo
+        public clsPaciente consultarPorCorreo(string email)
+        {
+            //retorno una esxpresion lambda que busca en la tabla paciente el email que le paso por parametro
+            return _context.paciente
+                .AsNoTracking()//esto es para que no haga seguimiento de los cambios en los objetos, mejora el rendimiento en consultas de solo lectura
+                .Include(p => p.persona)//esto es para traer los datos de la tabla persona que esta relacionada con paciente
+                .Where(p => p.persona.email == email).SingleOrDefault();
+        }
+
+        //consultar por telefono
+        public clsPaciente consultarPorTelefono(string telefono)
+        {
+            //retorno una esxpresion lambda que busca en la tabla paciente el telefono que le paso por parametro
+            return _context.paciente
+                .AsNoTracking()//esto es para que no haga seguimiento de los cambios en los objetos, mejora el rendimiento en consultas de solo lectura
+                .Include(p => p.persona)//esto es para traer los datos de la tabla persona que esta relacionada con paciente
+                .Where(p => p.persona.telefono == telefono).SingleOrDefault();
+        }
+
+        public List<clsPaciente> consultarTodosInactivos()
+        {
+            //retorno todos los pacientes inactivos de la tabla paciente
+            //el include es para traer los datos de la tabla persona que esta relacionada con paciente
+            return _context.paciente
+                .AsNoTracking()//esto es para que no haga seguimiento de los cambios en los objetos, mejora el rendimiento en consultas de solo lectura
+                .Include(p => p.persona)//esto es para traer los datos de la tabla persona que esta relacionada con paciente
+                .Where(p => p.estado == false) //solo los inactivos
+                .ToList();
         }
 
 
@@ -99,15 +131,6 @@ namespace DAO
                         haycambios = true;
                     }
 
-                    //valido si el estado guardado en persona es diferente al de crear paciente que entre al if
-                    if (personaExistente.estado != paciente.persona.estado)
-                    {
-                        //aqui le digo dele prioridad al estado de crear paciente
-                        personaExistente.estado = paciente.persona.estado;
-                        //cambio a true
-                        haycambios = true;
-                    }
-
                     //si hubo cambios que entre y actualice en los campos de tbPersona
                     if (haycambios)
                     {
@@ -130,15 +153,19 @@ namespace DAO
         }
 
 
-        //eliminar un paciente
+        //eliminar un paciente para cumplir con interfaz
         public void eliminar(string id)
         {
+            //devuelvo una excepcion de metodo no implementado
+            throw new NotImplementedException();
+            /*
             //primero busco el paciente por id y lo guardo en la variable pacient
             var pacient = consultarPorID(id);
             //luego lo elimino
             _context.paciente.Remove(pacient);
             //y guardo los cambios
             _context.SaveChanges();
+            */
         }
 
 
@@ -157,6 +184,26 @@ namespace DAO
             _context.SaveChanges();
         }
 
+        //metodo para reactivar un paciente
+        public void reactivarPaciente(string id)
+        {
+            //primero busco el paciente por id y lo guardo en la variable pacient
+            var pacienteExist = consultarPorID(id);
+
+            if (pacienteExist != null)
+            {
+                pacienteExist.fecha_ult_mod = DateTime.Now;
+                pacienteExist.usuario_ult_mod = "Jumira"; //X mientras luego lo cambio por el usuario logueado
+
+                //luego cambio su estado a true
+                pacienteExist.estado = true;
+                //actualizo el paciente
+                _context.paciente.Update(pacienteExist);
+                //y guardo los cambios
+                _context.SaveChanges();
+            }
+           
+        }
 
         //METODO NO IMPLEMENTADO pero para cumplir con la interfaz
         public clsPaciente consultarPorNombre(string nombre)

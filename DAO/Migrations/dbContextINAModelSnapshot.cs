@@ -455,21 +455,14 @@ namespace DAO.Migrations
                     b.Property<bool>("estado")
                         .HasColumnType("bit");
 
-                    b.Property<string>("estadoCivil")
-                        .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
+                    b.Property<int>("estadoCivil")
+                        .HasColumnType("int");
 
                     b.Property<DateTime>("fecha_crea")
                         .HasColumnType("datetime2");
 
                     b.Property<DateTime>("fecha_ult_mod")
                         .HasColumnType("datetime2");
-
-                    b.Property<string>("referencia")
-                        .IsRequired()
-                        .HasMaxLength(500)
-                        .HasColumnType("nvarchar(500)");
 
                     b.Property<string>("usuario_crea")
                         .IsRequired()

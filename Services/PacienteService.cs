@@ -31,13 +31,34 @@ namespace Services
         }
 
 
-        //consultar todos los pacientes
+        //consultar todos los pacientes activos
         public List<clsPaciente> consultarTodos()
         {
-            //llamo al metodo consultarTodos del dao para que me devuelva todos los pacientes
+            //llamo al metodo consultarTodos del dao para que me devuelva todos los pacientes activos
             return _pacientDao.consultarTodos();
         }
 
+        //consultar por correo
+        public clsPaciente consultarPorCorreo(string email)
+        {
+            //llamo al metodo consultarPorCorreo del dao para que me devuelva el paciente por correo
+            return _pacientDao.consultarPorCorreo(email);
+        }
+
+        //consultar por telefono
+        public clsPaciente consultarPorTelefono(string telefono)
+        {
+            //llamo al metodo consultarPorTelefono del dao para que me devuelva el paciente por telefono
+            return _pacientDao.consultarPorTelefono(telefono);
+        }
+
+
+        //consultar todos los pacientes inactivos
+        public List<clsPaciente> consultarTodosInactivos()
+        {
+            //llamo al metodo consultarTodosInactivos del dao para que me devuelva todos los pacientes inactivos
+            return _pacientDao.consultarTodosInactivos();
+        }
 
         //crear un paciente
         public void crear(clsPaciente paciente)
@@ -51,6 +72,8 @@ namespace Services
             paciente.usuario_crea = "Jumira"; //X mientras luego lo cambio por el usuario logueado
             paciente.usuario_ult_mod = "Jumira"; //X mientras luego lo cambio por el usuario logueado
 
+            paciente.estado = true; //por defecto el paciente se crea activo
+            paciente.persona.estado = true; //por defecto la persona se crea activa
 
             //valido que no exista un paciente con el mismo id (cedula)
             if (_pacientDao.consultarPorID(paciente.id) != null)
@@ -58,14 +81,18 @@ namespace Services
                 throw new EntityExistDBException();
             }
 
-
-            //valido que el telefono no se repita si ya existe
-            var pacientesExistentes = _pacientDao.consultarTodos();
-            //el Any es para validar si algun elemento de la lista cumple la condicion
-            if (pacientesExistentes.Any(p => p.persona.telefono == paciente.persona.telefono))
+            //valido que no tenga el mismo correo que otro paciente(email unico)
+            if (_pacientDao.consultarPorCorreo(paciente.persona.email) != null)
             {
-                throw new EntityExistDBException("El teléfono ya está registrado para otro paciente, NO puede ser el mismo.");
+                throw new EmailExistDBExeption();
             }
+
+            //valido que el telefono no se repita si ya existe otro paciente con ese telefono
+            if ( _pacientDao.consultarPorTelefono(paciente.persona.telefono) != null)
+            {
+                throw new PhoneExistDBExeption();
+            }
+
 
 
             //validar fechas de auditoria que no sean futuras
@@ -83,15 +110,25 @@ namespace Services
         //eliminar un paciente
         public void eliminar(string id)
         {
+            //obtengo el paciente existente
+            var pacienteExistente = _pacientDao.consultarPorID(id);
+
             //validar que el paciente exista
-            if (_pacientDao.consultarPorID(id) == null)
+            if (pacienteExistente == null)
             {
                 //si no existe lanzo una excepcion personalizada
                 throw new EntityNotExistDBException();
             }
 
+            pacienteExistente.estado = false; //cambio el estado a false para eliminarlo logicamente
+            pacienteExistente.fecha_ult_mod = DateTime.Now; //actualizo la fecha de ultima modificacion
+            pacienteExistente.usuario_ult_mod = "Jumira"; //X mientras luego lo cambio por el usuario logueado
+
+            //llamo al metodo modificar del dao para que me modifique el paciente en vez de eliminarlo fisicamente(borrado logico)
+            _pacientDao.modificar(pacienteExistente);
+
             //llamo al metodo eliminar del dao para que me elimine el paciente
-            _pacientDao.eliminar(id);
+            //_pacientDao.eliminar(id);
 
         }
 
@@ -112,12 +149,21 @@ namespace Services
             // Asignar usuario de última modificación automáticamente
             paciente.usuario_ult_mod = "Jumira"; //X mientras luego lo cambio por el usuario logueado
 
-            //valido que el telefono no se repita si ya existe
-            var pacientesExistentes = _pacientDao.consultarTodos();
-            //el Any es para validar si algun elemento de la lista cumple la condicion
-            if (pacientesExistentes.Any(p => p.persona.telefono == paciente.persona.telefono))
+            paciente.estado = true; //por defecto el paciente se modificado se mantiene activo
+            paciente.persona.estado = true;
+
+            //valido que el correo no se repita si ya existe otro paciente con ese correo y no es el mismo paciente
+            var pacienteConMismoCorreo = _pacientDao.consultarPorCorreo(paciente.persona.email);
+            if (pacienteConMismoCorreo != null && pacienteConMismoCorreo.id != paciente.id)
             {
-                throw new EntityExistDBException("El teléfono ya está registrado para otro paciente, NO puede ser el mismo.");
+                throw new EmailExistDBExeption();
+            }
+
+            //valido que el telefono no se repita si ya existe otro paciente con ese telefono y no es el mismo paciente
+            var pacienteConMismoTelefono = _pacientDao.consultarPorTelefono(paciente.persona.telefono);
+            if (pacienteConMismoTelefono != null && pacienteConMismoTelefono.id != paciente.id)
+            {
+                throw new PhoneExistDBExeption();
             }
 
             //validar fechas de auditoria que no sean futuras
@@ -129,6 +175,29 @@ namespace Services
 
             //llamo al metodo modificar del dao para que me modifique el paciente
             _pacientDao.modificar(paciente);
+        }
+
+        //metodo reactivar del service dnd llamo al de dao
+        public void reactivar(string id)
+        {
+            //obtengo el paciente existente
+            var pacienteExistente = _pacientDao.consultarPorID(id);
+
+            //valido que el paciente exista
+            if (pacienteExistente == null)
+            {
+                //si no existe lanzo una excepcion personalizada
+                throw new EntityNotExistDBException();
+            }
+            //valido que el paciente no este activo
+            if (pacienteExistente.estado == true)
+            {
+                //si el paciente ya esta activo lanzo una excepcion personalizada
+                throw new EntityActiveDBExeption();
+            }
+
+            //llamo al metodo reactivar del dao para que me reactive el paciente
+            _pacientDao.reactivarPaciente(id);
         }
 
 

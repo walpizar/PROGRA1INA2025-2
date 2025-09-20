@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace DAO.Migrations
 {
     /// <inheritdoc />
-    public partial class InitialCreate : Migration
+    public partial class Initial : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -253,8 +253,7 @@ namespace DAO.Migrations
                 {
                     id = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: false),
                     tipoId = table.Column<int>(type: "int", nullable: false),
-                    estadoCivil = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
-                    referencia = table.Column<string>(type: "nvarchar(500)", maxLength: 500, nullable: false),
+                    estadoCivil = table.Column<int>(type: "int", nullable: false),
                     estado = table.Column<bool>(type: "bit", nullable: false),
                     fecha_crea = table.Column<DateTime>(type: "datetime2", nullable: false),
                     usuario_crea = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),

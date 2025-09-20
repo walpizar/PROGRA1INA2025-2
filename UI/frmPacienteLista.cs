@@ -20,6 +20,8 @@ namespace UI
         //defino la instancia de pacientes para ir de la capa ui a service
         private readonly PacienteService _pacienteService;
 
+        //variable para saber si estoy mostrando inactivos o activos
+        private bool mostrarInactivos = false;
 
         public frmPacienteLista()
         {
@@ -37,19 +39,59 @@ namespace UI
         {
             try
             {
-                //llamo al metodo consultar todos para que me devuelva la lista de pacientes
-                this.lista = _pacienteService.consultarTodos();
-                //llamo al metodo cargar lista para que me cargue la lista
-                cargarLista(lista);
+                //llamo al metodo para saber que lista cargar si activos o inactivos
+                cargarListaSegunCkeckBox();
 
             }
 
             catch (Exception ex)
             {
-                MessageBox.Show("Error al cargar la lista de pacientes. Contacte con soporte o su administrador" +
+                MessageBox.Show("Error al cargar la lista de pacientes. Contacte con soporte o su administrador." +
                     "\n" + "Error: " + "\n" + ex.Message);
             }
 
+        }
+
+        //metodo para cargar la lista segun el radiobutton seleccionado
+        private void cargarListaSegunCkeckBox()
+        {
+            //valido si el radiobutton activos esta seleccionado
+            if (rdBtnActivos.Checked)
+            {
+                //llamo al metodo consultar todos del servicio para que me devuelva todos los pacientes activos
+                var result = _pacienteService.consultarTodos();
+               
+                this.lista = result ?? new List<clsPaciente>();//si es null le asigno una lista vacia, el ?? lo que hace es validar si es null
+                btnNuevo.Visible = true; //muestro el boton nuevo
+                lblTitulo.Text = "Mantenimiento Pacientes";
+                mostrarInactivos = false;
+            }
+            //valido si el radiobutton inactivos esta seleccionado
+            else if (rdBtnInactivos.Checked)
+            {
+                //llamo al metodo consultar todos los inactivos para que me devuelva todos los pacientes inactivos
+                var result = _pacienteService.consultarTodosInactivos();
+                
+                this.lista = result ?? new List<clsPaciente>();//si es null le asigno una lista vacia, el ?? lo que hace es validar si es null
+                btnNuevo.Visible = false; //oculto el boton nuevo
+                lblTitulo.Text = "Pacientes Inactivos";
+                mostrarInactivos = true;
+            }
+            else
+            {
+                //si ningun radioBoton esta seleccionado, selecciono el de activos por defecto
+                rdBtnActivos.Checked = true;
+
+                var result = _pacienteService.consultarTodos();
+                
+                this.lista = result ?? new List<clsPaciente>();//si es null le asigno una lista vacia, el ?? lo que hace es validar si es null
+                btnNuevo.Visible = true; //muestro el boton nuevo
+                lblTitulo.Text = "Mantenimiento Pacientes";
+                mostrarInactivos = false;
+            }
+
+            //y llamo al metodo cargar lista para que me cargue la lista de pacientes
+            cargarLista(lista);
         }
 
 
@@ -63,14 +105,14 @@ namespace UI
                 //Aqui lo muestro 
                 frmPaciente.ShowDialog();
 
-                //actualizo la lista de pacientes
+                //actualizo la lista de pacientes llamando al metodo consultar todos del servicio para que me devuelva todos los pacientes activos
                 this.lista = _pacienteService.consultarTodos();
                 //y llamo al metodo cargar lista para que me cargue la lista
                 cargarLista(lista);
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error al abrir el formulario de paciente, Contacte con soporte o su administrador" +
+                MessageBox.Show("Error al abrir el formulario de crear paciente. Contacte con soporte o su administrador." +
                     "\n" + "Error: " + "\n" + ex.Message);
             }
 
@@ -101,7 +143,7 @@ namespace UI
         }
 
         //evento doble click en el listbox
-        private void lstvListaPaciente_MouseDoubleClick(object sender, MouseEventArgs e) 
+        private void lstvListaPaciente_MouseDoubleClick(object sender, MouseEventArgs e)
         {
             try
             {
@@ -123,13 +165,14 @@ namespace UI
                         //le paso el paciente seleccionado al formulario de crear paciente
                         frmPaciente.pacienteSelected = paciente;
 
+                        //le paso a la variable mostrarBotonReactivar de frmPaciente el valor de mostrarInactivos para que sepa si esta mostrando inactivos o activos  
+                        frmPaciente.mostrarBotonReactivar = mostrarInactivos;
+
                         //abro el formulario
                         frmPaciente.ShowDialog();
 
-                        //actualiar la lista
-                        this.lista = _pacienteService.consultarTodos();
-                        //y llamo al metodo cargar lista para que me cargue la lista
-                        cargarLista(lista);
+                        //actualizo la lista de pacientes llamando al metodo cargarListaSegunCkeckBox para que me cargue la lista segun el radiobutton seleccionado
+                        cargarListaSegunCkeckBox();
 
                         //cierre del segundo if
                     }
@@ -138,7 +181,7 @@ namespace UI
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error al abrir el formulario de paciente. Contacte con soporte o su administrador" +
+                MessageBox.Show("Error al abrir el formulario del paciente. Contacte con soporte o su administrador" +
                     "\n" + "Error: " + "\n" + ex.Message);
             }
 
@@ -149,7 +192,7 @@ namespace UI
         private void txtBusqueda_TextChanged(object sender, EventArgs e)
         {
             try
-            { 
+            {
                 //filtro la lista de pacientes por nombre o id
                 var listaFiltrada = this.lista.Where(p => p.persona.nombre.ToLower().Contains(txtBusqueda.Text.ToLower()) ||
                 p.id.ToString().Contains(txtBusqueda.Text)).ToList();
@@ -159,11 +202,68 @@ namespace UI
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error al filtrar la lista de pacientes. Contacte con soporte o con su administrador" +
+                MessageBox.Show("Error al filtrar la lista de pacientes. Contacte con soporte o con su administrador." +
                     "\n" + "Error: " + "\n" + ex.Message);
 
             }
         }
 
+        //evento check del radiobutton activos
+        private void rdBtnActivos_CheckedChanged(object sender, EventArgs e)
+        {
+            //valido si el radiobutton activos esta seleccionado
+            if (rdBtnActivos.Checked)
+            {
+                try
+                {
+                    //llamo al metodo consultar todos del servicio para que me devuelva todos los pacientes activos
+                    this.lista = _pacienteService.consultarTodos();
+
+                    txtBusqueda.Clear();//limpio el textbox de busqueda x si habia algo escrito
+
+                    btnNuevo.Visible = true; //muestro el boton nuevo
+                    lblTitulo.Text = "Mantenimiento Pacientes";
+                    //cambio la variable mostrarInactivos a false
+                    mostrarInactivos = false;
+                    //y llamo al metodo cargar lista para que me cargue la lista
+                    cargarLista(lista);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Error al cargar la lista de pacientes activos. Contacte con soporte o su administrador." +
+                        "\n" + "Error: " + "\n" + ex.Message);
+                }
+            }
+
+        }
+
+        //evento check del radiobutton inactivos
+        private void rdBtnInactivos_CheckedChanged(object sender, EventArgs e)
+        {
+            //valido si el radiobutton inactivos esta seleccionado
+            if (rdBtnInactivos.Checked)
+            {
+                try
+                {
+                    //llamo al metodo consultar todos del servicio para que me devuelva todos los pacientes inactivos
+                    this.lista = _pacienteService.consultarTodosInactivos();
+
+                    txtBusqueda.Clear();//limpio el textbox de busqueda x si habia algo escrito
+
+                    btnNuevo.Visible = false; //oculto el boton nuevo
+                    lblTitulo.Text = "Pacientes Inactivos";
+                    //cambio la variable mostrarInactivos a true
+                    mostrarInactivos = true;
+                    //y llamo al metodo cargar lista para que me cargue la lista
+                    cargarLista(lista);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Error al cargar la lista de pacientes inactivos. Contacte con soporte o su administrador." +
+                        "\n" + "Error: " + "\n" + ex.Message);
+                }
+
+            }
+        }
     }
 }

@@ -33,14 +33,10 @@
             btnGuardarPaciente = new Button();
             lblTituloPaciente = new Label();
             gbxDatosPaciente = new GroupBox();
-            txtTipoId = new TextBox();
+            cboEstadoCivil = new ComboBox();
+            cboTipoId = new ComboBox();
             lblTipoId = new Label();
             dtpFechaNacimiento = new DateTimePicker();
-            txtEstado = new TextBox();
-            lblEstado = new Label();
-            txtReferencia = new TextBox();
-            lblReferencia = new Label();
-            txtEstadoCivil = new TextBox();
             lblEstadoCivil = new Label();
             txtTelefono = new TextBox();
             lblTelefono = new Label();
@@ -57,12 +53,13 @@
             lblNombre = new Label();
             txtIdPaciente = new TextBox();
             lblIdPaciente = new Label();
+            btnReactivar = new Button();
             gbxDatosPaciente.SuspendLayout();
             SuspendLayout();
             // 
             // btnEliminarPaciente
             // 
-            btnEliminarPaciente.Location = new Point(129, 490);
+            btnEliminarPaciente.Location = new Point(382, 439);
             btnEliminarPaciente.Name = "btnEliminarPaciente";
             btnEliminarPaciente.Size = new Size(113, 36);
             btnEliminarPaciente.TabIndex = 15;
@@ -72,7 +69,7 @@
             // 
             // btnCancelarPaciente
             // 
-            btnCancelarPaciente.Location = new Point(367, 490);
+            btnCancelarPaciente.Location = new Point(146, 439);
             btnCancelarPaciente.Name = "btnCancelarPaciente";
             btnCancelarPaciente.Size = new Size(113, 36);
             btnCancelarPaciente.TabIndex = 14;
@@ -82,7 +79,7 @@
             // 
             // btnGuardarPaciente
             // 
-            btnGuardarPaciente.Location = new Point(248, 490);
+            btnGuardarPaciente.Location = new Point(263, 439);
             btnGuardarPaciente.Name = "btnGuardarPaciente";
             btnGuardarPaciente.Size = new Size(113, 36);
             btnGuardarPaciente.TabIndex = 13;
@@ -94,7 +91,7 @@
             // 
             lblTituloPaciente.AutoSize = true;
             lblTituloPaciente.Font = new Font("Segoe UI", 15.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            lblTituloPaciente.Location = new Point(174, 22);
+            lblTituloPaciente.Location = new Point(193, 21);
             lblTituloPaciente.Name = "lblTituloPaciente";
             lblTituloPaciente.Size = new Size(152, 30);
             lblTituloPaciente.TabIndex = 9;
@@ -102,14 +99,10 @@
             // 
             // gbxDatosPaciente
             // 
-            gbxDatosPaciente.Controls.Add(txtTipoId);
+            gbxDatosPaciente.Controls.Add(cboEstadoCivil);
+            gbxDatosPaciente.Controls.Add(cboTipoId);
             gbxDatosPaciente.Controls.Add(lblTipoId);
             gbxDatosPaciente.Controls.Add(dtpFechaNacimiento);
-            gbxDatosPaciente.Controls.Add(txtEstado);
-            gbxDatosPaciente.Controls.Add(lblEstado);
-            gbxDatosPaciente.Controls.Add(txtReferencia);
-            gbxDatosPaciente.Controls.Add(lblReferencia);
-            gbxDatosPaciente.Controls.Add(txtEstadoCivil);
             gbxDatosPaciente.Controls.Add(lblEstadoCivil);
             gbxDatosPaciente.Controls.Add(txtTelefono);
             gbxDatosPaciente.Controls.Add(lblTelefono);
@@ -128,18 +121,28 @@
             gbxDatosPaciente.Controls.Add(lblIdPaciente);
             gbxDatosPaciente.Location = new Point(25, 65);
             gbxDatosPaciente.Name = "gbxDatosPaciente";
-            gbxDatosPaciente.Size = new Size(455, 408);
+            gbxDatosPaciente.Size = new Size(470, 354);
             gbxDatosPaciente.TabIndex = 8;
             gbxDatosPaciente.TabStop = false;
             gbxDatosPaciente.Text = "Datos de paciente";
             // 
-            // txtTipoId
+            // cboEstadoCivil
             // 
-            txtTipoId.Location = new Point(168, 64);
-            txtTipoId.MaxLength = 50;
-            txtTipoId.Name = "txtTipoId";
-            txtTipoId.Size = new Size(218, 23);
-            txtTipoId.TabIndex = 2;
+            cboEstadoCivil.DropDownStyle = ComboBoxStyle.DropDownList;
+            cboEstadoCivil.FormattingEnabled = true;
+            cboEstadoCivil.Location = new Point(168, 303);
+            cboEstadoCivil.Name = "cboEstadoCivil";
+            cboEstadoCivil.Size = new Size(218, 23);
+            cboEstadoCivil.TabIndex = 24;
+            // 
+            // cboTipoId
+            // 
+            cboTipoId.DropDownStyle = ComboBoxStyle.DropDownList;
+            cboTipoId.FormattingEnabled = true;
+            cboTipoId.Location = new Point(168, 69);
+            cboTipoId.Name = "cboTipoId";
+            cboTipoId.Size = new Size(218, 23);
+            cboTipoId.TabIndex = 2;
             // 
             // lblTipoId
             // 
@@ -156,45 +159,6 @@
             dtpFechaNacimiento.Name = "dtpFechaNacimiento";
             dtpFechaNacimiento.Size = new Size(218, 23);
             dtpFechaNacimiento.TabIndex = 6;
-            // 
-            // txtEstado
-            // 
-            txtEstado.Location = new Point(168, 358);
-            txtEstado.Name = "txtEstado";
-            txtEstado.Size = new Size(218, 23);
-            txtEstado.TabIndex = 12;
-            // 
-            // lblEstado
-            // 
-            lblEstado.AutoSize = true;
-            lblEstado.Location = new Point(108, 361);
-            lblEstado.Name = "lblEstado";
-            lblEstado.Size = new Size(45, 15);
-            lblEstado.TabIndex = 20;
-            lblEstado.Text = "Estado:";
-            // 
-            // txtReferencia
-            // 
-            txtReferencia.Location = new Point(168, 329);
-            txtReferencia.Name = "txtReferencia";
-            txtReferencia.Size = new Size(218, 23);
-            txtReferencia.TabIndex = 11;
-            // 
-            // lblReferencia
-            // 
-            lblReferencia.AutoSize = true;
-            lblReferencia.Location = new Point(88, 332);
-            lblReferencia.Name = "lblReferencia";
-            lblReferencia.Size = new Size(65, 15);
-            lblReferencia.TabIndex = 18;
-            lblReferencia.Text = "Referencia:";
-            // 
-            // txtEstadoCivil
-            // 
-            txtEstadoCivil.Location = new Point(168, 300);
-            txtEstadoCivil.Name = "txtEstadoCivil";
-            txtEstadoCivil.Size = new Size(218, 23);
-            txtEstadoCivil.TabIndex = 10;
             // 
             // lblEstadoCivil
             // 
@@ -313,7 +277,7 @@
             // 
             // txtIdPaciente
             // 
-            txtIdPaciente.Location = new Point(168, 35);
+            txtIdPaciente.Location = new Point(168, 40);
             txtIdPaciente.Name = "txtIdPaciente";
             txtIdPaciente.Size = new Size(218, 23);
             txtIdPaciente.TabIndex = 1;
@@ -327,11 +291,22 @@
             lblIdPaciente.TabIndex = 0;
             lblIdPaciente.Text = "ID:";
             // 
+            // btnReactivar
+            // 
+            btnReactivar.Location = new Point(27, 439);
+            btnReactivar.Name = "btnReactivar";
+            btnReactivar.Size = new Size(113, 36);
+            btnReactivar.TabIndex = 16;
+            btnReactivar.Text = "Reactivar";
+            btnReactivar.UseVisualStyleBackColor = true;
+            btnReactivar.Click += btnReactivar_Click;
+            // 
             // frmPaciente
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(506, 548);
+            ClientSize = new Size(519, 496);
+            Controls.Add(btnReactivar);
             Controls.Add(btnEliminarPaciente);
             Controls.Add(btnCancelarPaciente);
             Controls.Add(btnGuardarPaciente);
@@ -366,16 +341,13 @@
         private TextBox txtEmail;
         private Label lblEmail;
         private Label lblFechaNacimiento;
-        private TextBox txtEstadoCivil;
         private Label lblEstadoCivil;
         private TextBox txtTelefono;
         private Label lblTelefono;
-        private TextBox txtEstado;
-        private Label lblEstado;
-        private TextBox txtReferencia;
-        private Label lblReferencia;
         private DateTimePicker dtpFechaNacimiento;
-        private TextBox txtTipoId;
         private Label lblTipoId;
+        private ComboBox cboEstadoCivil;
+        private ComboBox cboTipoId;
+        private Button btnReactivar;
     }
 }

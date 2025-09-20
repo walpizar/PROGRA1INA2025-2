@@ -17,12 +17,7 @@ namespace Entities
         public int tipoId { get; set; }//llave primaria compuesta
 
         [Required]//obligatorio
-        [StringLength(100, ErrorMessage = "El nombre no puede tener mas de 100 caracteres")]//longitud maxima
-        public string estadoCivil { get; set; }
-
-        [Required]//obligatorio
-        [StringLength(500, ErrorMessage = "El genero no puede tener mas de 500 caracteres")]//longitud maxima
-        public string referencia { get; set; }
+        public int estadoCivil { get; set; }
 
         //propiedad de navegacion
         public clsPersona persona { get; set; }
