@@ -19,6 +19,11 @@ namespace UI
         private readonly SeguridadService _Service;
         public clsRol rolSelected { get; set; }
 
+        public frmMantenimientoRoles Padre { get; set; }
+
+        List<clsRol> lista;
+
+
         public frmEliminarEditar()
         {
             InitializeComponent();
@@ -39,13 +44,21 @@ namespace UI
         {
             if (rolSelected != null)
             {
+                // Asigno los valores actuales a los controles
                 textBox1.Text = rolSelected.nombreRol;
                 richTextBox1.Text = rolSelected.descripcionRol;
+            }
+            else
+            {
+                // Si no hay rol seleccionado, limpio los campos
+                textBox1.Clear();
+                richTextBox1.Clear();
             }
         }
 
         private void frmEliminarEditar_Load(object sender, EventArgs e)
         {
+            this.lista = _Service.consultarRoles(); // traigo los roles actualizados
             cargarSelecionado();
         }
 
@@ -62,10 +75,9 @@ namespace UI
 
             MessageBox.Show("ROL ELIMINANDO CORRECTAMENTE");
 
-            this.Close();
+            Padre?.cargarListaRoles(_Service.consultarRoles()); // recargo lista
 
-            frmMantenimientoRoles frmMant = new frmMantenimientoRoles();
-            frmMant.Show();
+            this.Close();
         }
 
         private void button2_Click(object sender, EventArgs e)//ACTUALIZAR//EDITAR
@@ -84,12 +96,15 @@ namespace UI
 
             MessageBox.Show("ROL ACTUALIZADO CORRECTAMENTE");
 
-            frmMantenimientoRoles frmMant = new frmMantenimientoRoles();
+            Padre?.cargarListaRoles(_Service.consultarRoles()); // recargo lista
 
-            this.Hide(); // o this.Close() si de verdad quieres cerrarlo
-            frmMant.ShowDialog();
-            this.Show();
+            this.Close();
+        }
 
+
+        private void frmEliminarEditar_FormClosed(object? sender, FormClosedEventArgs e)
+        {
+            Padre?.cargarListaRoles(_Service.consultarRoles()); // recargo lista
             this.Close();
         }
     }

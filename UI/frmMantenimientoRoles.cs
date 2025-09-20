@@ -13,7 +13,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-//EDITAR ROLES 
 //MOSTRAR MODULOS EXISTENTES
 //MOSTRAR LOS PERMISOS AQUE TIENE CADA ROL
 
@@ -22,7 +21,10 @@ namespace UI
     public partial class frmMantenimientoRoles : Form
     {
         private readonly SeguridadService _Service;//ACCESO A SERVICE
+
+
         List<clsRol> lista;
+
         public frmMantenimientoRoles()
         {
             InitializeComponent();//INICIALIZACION DEL ACCESO A SERVICE
@@ -38,8 +40,16 @@ namespace UI
         {
             cargarRolesBox();
             cargarModulosBox();
-            this.lista = _Service.consultarRoles(); ;
-            cargarListaRoles(lista);
+            refrescarRoles();
+            this.lista = _Service.consultarRoles(); // traigo los roles actualizados
+            cargarListaRoles(this.lista);
+        }
+
+        public void refrescarRoles()
+        {
+            // Trae siempre desde la fuente (DB) y actualiza la UI
+            this.lista = _Service.consultarRoles();
+            cargarListaRoles(this.lista);
         }
 
         public void cargarRolesBox()//FUNCIONA
@@ -72,7 +82,7 @@ namespace UI
             }
         }
 
-        private void cargarListaRoles(List<clsRol> lista)
+        public void cargarListaRoles(List<clsRol> lista)
         {
             listView1.Items.Clear();
 
@@ -194,6 +204,7 @@ namespace UI
 
         private void buscarPermiso_Click(object sender, EventArgs e)
         {
+
             // 1 VERIFICAR QUE EXISTE ID EN DB
             int idRol = Convert.ToInt32(comboBox1.SelectedValue);
             int idModulo = Convert.ToInt32(comboBox2.SelectedValue);
@@ -221,133 +232,9 @@ namespace UI
             }
         }
 
-        private void listBox2_SelectedIndexChanged(object sender, EventArgs e)
+        public void dobleClickEliminarEditar(object sender, MouseEventArgs e)///NO TOMA LO NUEVO
         {
 
-        }
-
-        private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void groupBox1_Enter(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label3_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label1_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void listBox1_SelectedIndexChanged_1(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label2_Click_1(object sender, EventArgs e)
-        {
-
-        }
-
-        private void tabPage3_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label4_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label5_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void button2_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void tabPage1_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void button3_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void checkBox1_CheckedChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void checkBox10_CheckedChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void checkBox14_CheckedChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void checkBox16_CheckedChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label6_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void button4_Click_2(object sender, EventArgs e)
-        {
-
-        }
-
-        private void checkCrear(object sender, EventArgs e)
-        {
-
-        }
-
-        private void checkConsultar(object sender, EventArgs e)
-        {
-
-        }
-
-        private void checkModificar(object sender, EventArgs e)
-        {
-
-        }
-
-        private void checkEliminar(object sender, EventArgs e)
-        {
-
-        }
-
-        private void listView1_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label7_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void dobleClickEliminarEditar(object sender, MouseEventArgs e)
-        {
             try
             {
                 //validar si hay un elemento seleccionado
@@ -361,19 +248,12 @@ namespace UI
 
                     if (rool != null)
                     {
-                        //creo una instancia del formulario de producto
                         frmEliminarEditar frm = new frmEliminarEditar();
-                        //le asigno a la propiedad el producto seleccionado
                         frm.rolSelected = rool;
-
-                        frm.FormClosed += (s, args) =>
-                        {
-                            this.Show(); // Vuelvo a mostrar el padre siempre que se cierre el hijo
-                        };
-
-                        this.Hide();
+                        frm.Padre = this; // 🔑 Paso la referencia del padre
 
                         frm.ShowDialog();
+
                     }
                 }   
             }
