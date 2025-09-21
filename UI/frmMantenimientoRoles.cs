@@ -22,7 +22,6 @@ namespace UI
     {
         private readonly SeguridadService _Service;//ACCESO A SERVICE
 
-
         List<clsRol> lista;
 
         public frmMantenimientoRoles()
@@ -40,15 +39,7 @@ namespace UI
         {
             cargarRolesBox();
             cargarModulosBox();
-            refrescarRoles();
             this.lista = _Service.consultarRoles(); // traigo los roles actualizados
-            cargarListaRoles(this.lista);
-        }
-
-        public void refrescarRoles()
-        {
-            // Trae siempre desde la fuente (DB) y actualiza la UI
-            this.lista = _Service.consultarRoles();
             cargarListaRoles(this.lista);
         }
 
@@ -84,6 +75,7 @@ namespace UI
 
         public void cargarListaRoles(List<clsRol> lista)
         {
+
             listView1.Items.Clear();
 
             foreach (clsRol roles in lista)
@@ -91,12 +83,8 @@ namespace UI
                 ListViewItem item = new ListViewItem(roles.nombreRol);
                 item.SubItems.Add(roles.descripcionRol);
                 listView1.Items.Add(item);
-
                 item.Tag = roles.idRol;
-                listView1.Refresh();
             }
-            this.Refresh();
-            listView1.Refresh();
         }
 
         private void buttonCrearRol_Click(object sender, EventArgs e)
@@ -116,7 +104,7 @@ namespace UI
                 textBoxNombreRol.Clear();
                 richTextBoxDescripcionRol.Clear();
 
-                cargarListaRoles(lista);//ACTUALIZAR LISTA DE ROLES
+                cargarListaRoles(_Service.consultarRoles());//ACTUALIZAR LISTA DE ROLES
             }
             catch (NullException ex)
             {
@@ -234,10 +222,8 @@ namespace UI
 
         public void dobleClickEliminarEditar(object sender, MouseEventArgs e)///NO TOMA LO NUEVO
         {
-
             try
-            {
-                //validar si hay un elemento seleccionado
+            {   //validar si hay un elemento seleccionado
                 if (listView1.SelectedItems.Count > 0)
                 {
                     // Recupero el id que está en Tag
@@ -250,16 +236,13 @@ namespace UI
                     {
                         frmEliminarEditar frm = new frmEliminarEditar();
                         frm.rolSelected = rool;
-                        frm.Padre = this; // 🔑 Paso la referencia del padre
-
+                        frm.formPadre = this; //REFERENCIA FRM PADRE
                         frm.ShowDialog();
-
                     }
                 }   
             }
             catch (Exception)
             {
-
                 MessageBox.Show("Error al seleccionar el producto de la lista");
             }
         }

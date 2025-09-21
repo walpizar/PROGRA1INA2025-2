@@ -19,10 +19,7 @@ namespace UI
         private readonly SeguridadService _Service;
         public clsRol rolSelected { get; set; }
 
-        public frmMantenimientoRoles Padre { get; set; }
-
-        List<clsRol> lista;
-
+        public frmMantenimientoRoles formPadre { get; set; }
 
         public frmEliminarEditar()
         {
@@ -40,26 +37,21 @@ namespace UI
 
         }
 
-        public void cargarSelecionado()
-        {
-            if (rolSelected != null)
-            {
-                // Asigno los valores actuales a los controles
-                textBox1.Text = rolSelected.nombreRol;
-                richTextBox1.Text = rolSelected.descripcionRol;
-            }
-            else
-            {
-                // Si no hay rol seleccionado, limpio los campos
-                textBox1.Clear();
-                richTextBox1.Clear();
-            }
-        }
-
         private void frmEliminarEditar_Load(object sender, EventArgs e)
         {
-            this.lista = _Service.consultarRoles(); // traigo los roles actualizados
             cargarSelecionado();
+        }
+
+        public void cargarSelecionado()
+        {
+            var existente = _Service.consultarID(rolSelected.idRol);
+
+            if (existente != null)
+            {
+                // Asigno los valores actuales a los controles
+                textBox1.Text = existente.nombreRol;
+                richTextBox1.Text = existente.descripcionRol;
+            }
         }
 
         private void richTextBox1_TextChanged(object sender, EventArgs e)
@@ -70,12 +62,12 @@ namespace UI
         private void button1_Click(object sender, EventArgs e)//ELIMINAR
         {
 
-             int idRol = rolSelected.idRol;
+            int idRol = rolSelected.idRol;
             _Service.eliminando(idRol);
 
             MessageBox.Show("ROL ELIMINANDO CORRECTAMENTE");
 
-            Padre?.cargarListaRoles(_Service.consultarRoles()); // recargo lista
+            formPadre.cargarListaRoles(_Service.consultarRoles()); // recargo lista
 
             this.Close();
         }
@@ -96,7 +88,7 @@ namespace UI
 
             MessageBox.Show("ROL ACTUALIZADO CORRECTAMENTE");
 
-            Padre?.cargarListaRoles(_Service.consultarRoles()); // recargo lista
+            formPadre.cargarListaRoles(_Service.consultarRoles()); // recargo lista
 
             this.Close();
         }
@@ -104,8 +96,10 @@ namespace UI
 
         private void frmEliminarEditar_FormClosed(object? sender, FormClosedEventArgs e)
         {
-            Padre?.cargarListaRoles(_Service.consultarRoles()); // recargo lista
+            formPadre.cargarListaRoles(_Service.consultarRoles()); // recargo lista
             this.Close();
         }
+
+
     }
 }
