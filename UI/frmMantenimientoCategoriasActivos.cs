@@ -58,7 +58,7 @@ namespace UI
                 {
                     nombre = textBox1.Text.Trim(),
                     descripcion = richTextBox1.Text.Trim(),
-                    estado = checkBox1.Checked
+
                 };
 
                 _service.crear(nuevaCategoria);
@@ -93,29 +93,35 @@ namespace UI
             var cat = _service.consultarPorID(id);
             if (cat != null)
             {
-                label3.Text = cat.Id.ToString();
-                textBox1.Text = cat.nombre;
-                richTextBox1.Text = cat.descripcion;
-                checkBox1.Checked = cat.estado;
+                // Llenar los controles de la pestaña Modificar (tabPage3)
+                label10.Text = cat.Id.ToString();   // ID
+                textBox2.Text = cat.nombre;         // Nombre
+                richTextBox2.Text = cat.descripcion; // Descripción
+
+                // Cambiar de pestaña
+                tabControl1.SelectedTab = tabPage3;
             }
         }
 
+
         private void button4_Click(object sender, EventArgs e) // Actualizar
         {
-            if (string.IsNullOrEmpty(label3.Text) || label3.Text == "0") return;
+            if (string.IsNullOrEmpty(label10.Text)) return;
 
-            int id = int.Parse(label3.Text);
+            int id = int.Parse(label10.Text);
             var categoria = _service.consultarPorID(id);
             if (categoria != null)
             {
-                categoria.nombre = textBox1.Text.Trim();
-                categoria.descripcion = richTextBox1.Text.Trim();
-                categoria.estado = checkBox1.Checked;
+                categoria.nombre = textBox2.Text.Trim();
+                categoria.descripcion = richTextBox2.Text.Trim();
 
                 _service.modificar(categoria);
                 MessageBox.Show("Categoría actualizada.");
+
                 CargarCategorias();
-                LimpiarControles();
+
+                // Regresar a la pestaña de lista
+                tabControl1.SelectedTab = tabPage2;
             }
         }
 
@@ -124,7 +130,12 @@ namespace UI
             label3.Text = "";
             textBox1.Clear();
             richTextBox1.Clear();
-            checkBox1.Checked = false;
+
+        }
+
+        private void groupBox1_Enter(object sender, EventArgs e)
+        {
+
         }
     }
 }
