@@ -26,7 +26,7 @@ namespace UI
         //Application.Run(new frmProductoLista());
 
         
-        Application.Run(new frmPuestosLista());
+        Application.Run(new frmEspecialidad());
 
         }
     }
