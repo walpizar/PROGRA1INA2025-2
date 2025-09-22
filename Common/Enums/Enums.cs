@@ -39,13 +39,13 @@ namespace Common.Enums
             Deportes = 4,
             Juguetes = 7
         }
-        public enum Frecuencia
+        public enum frecuencia
         {
             Mensual = 1,
             Anual = 2
         }
 
-        public enum TipoTransaccion
+        public enum Tipotransaccion
         {
             Efectivo = 1,
             Transferencia = 2,
@@ -54,7 +54,7 @@ namespace Common.Enums
             // Agrega otros tipos según las necesidades del sistema
         }
 
-        public enum TipoDonacion
+        public enum tipoDonacion
         {
             Dinero = 1,
             Articulo = 2
@@ -67,6 +67,13 @@ namespace Common.Enums
             CRC,
             EUR
 
+        }
+
+        //tipo de donante: 1-afiliado, 2-ocasional
+        public enum tipoDonante
+        {
+            Afiliado = 1,
+            Ocasional = 2
         }
     }
 }

@@ -63,8 +63,11 @@ namespace Entities
         // Relación con Devoluciones (uno a muchos)
         public List<clsDevolucion> devoluciones { get; set; }
 
-        // Relación: Un Activo puede estar en muchas DonacionActivos
-        public ICollection<clsDonacionActivo> donacionActivos { get; set; }
+        // Relación muchos a 1 con Donacion
+        public int idDonacion { get; set; }
+
+        [ForeignKey("idDonacion")]
+        public clsDonacion donacion { get; set; }
 
         public clsActivos(int idActivo, string nombreActivo, string descripcion,
                           int cantidadDisponible, string estado, DateTime fechaAdquisicion,

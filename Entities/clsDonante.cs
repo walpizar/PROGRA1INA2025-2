@@ -17,6 +17,9 @@ namespace Entities
         [Required]
         public int personaTipoId { get; set; }
 
+        //tipo de donante: 1-afiliado, 2-ocasional
+        public int tipoDonante { get; set; }//lleva enums
+
         // Auditoría
         [Required]
         public bool estado { get; set; }

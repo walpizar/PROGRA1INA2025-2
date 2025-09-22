@@ -15,9 +15,9 @@ namespace DAO
         public DbSet<clsPersona> persona { get; set; }
         public DbSet<clsDonante> donante { get; set; }
         public DbSet<clsDonacion> donacion { get; set; }
-        public DbSet<clsDonacionDinero> donacionesDinero { get; set; }
+        public DbSet<clsTipoDonacion> TiposDonacion { get; set; }
         public DbSet<clsActivos> activos { get; set; }
-        public DbSet<clsDonacionActivo> donacionesActivos { get; set; }
+        
        // public DbSet<clsCategoria> categoria { get; set; }
         public DbSet<clsCategoriaActivos> categoriaActivos { get; set; }
         public DbSet<clsDepartamentos> departamentos { get; set; }
@@ -92,6 +92,7 @@ namespace DAO
                 .IsRequired()
                 .HasMaxLength(20)
                 .ValueGeneratedNever();
+
             // Relación 1 a 1 entre Donante y Persona
             modelBuilder.Entity<clsDonante>()
                 .HasOne(d => d.persona)
@@ -114,6 +115,16 @@ namespace DAO
             // Clave primaria compuesta para RolPermiso
             modelBuilder.Entity<clsRolPermiso>()
                 .HasKey(rp => new { rp.idRol, rp.idPermiso });
+
+            modelBuilder.Entity<clsDonacion>()
+                .HasOne(d => d.tipoDonacion)
+                .WithMany(td => td.donaciones)
+                .HasForeignKey(d => d.idtipoDonacion);
+
+            modelBuilder.Entity<clsActivos>()
+                .HasOne(a => a.donacion)
+                .WithMany(d => d.activos)
+                .HasForeignKey(a => a.idDonacion);
         }
 
     }

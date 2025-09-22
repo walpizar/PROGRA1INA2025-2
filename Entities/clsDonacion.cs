@@ -18,12 +18,12 @@ namespace Entities
         [Required]
         public int donanteTipoId { get; set; }
 
+        [ForeignKey("tipoDonacion")]
+        public int idtipoDonacion { get; set; }
+
         [Required]
         [DataType(DataType.Date)]
         public DateTime fechaDonacion { get; set; }
-
-        [Required]
-        public int tipoDonacion { get; set; }
 
         [StringLength(200)]
         public string observaciones { get; set; }
@@ -51,11 +51,11 @@ namespace Entities
         // Relación muchos a 1 con donante
         public clsDonante donante { get; set; }
 
-        // Relación 1 a 1 con donacionDinero
-        public clsDonacionDinero donacionDinero { get; set; }
+        // Relación 1 a muchos con Activo (directa)
+        public ICollection<clsActivos> activos { get; set; }
 
-        // Relación 1 a muchos con donacionActivo
-        public ICollection<clsDonacionActivo> donacionesActivos { get; set; }
+        //relacion muchos a 1 con tipo donacion
+        public clsTipoDonacion tipoDonacion { get; set; }
 
         public clsDonacion() { }
     }
