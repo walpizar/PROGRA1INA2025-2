@@ -70,6 +70,31 @@ namespace UI
             cargarTiposAyuda();
         }
 
-        
+        private void txtBusqueda_TextChanged(object sender, EventArgs e)
+        {
+            buscarTiposAyudas(txtBusqueda.Text);
+        }
+
+        private void buscarTiposAyudas(string filtro)
+        {
+            lvtCatalogoTipoAyuda.Items.Clear();
+
+            var lista = _tipoAyudasService.ConsultarTodos();
+
+            // Filtrar por nombre (ignora mayúsculas/minúsculas)
+            var filtrados = lista
+                .Where(t => string.IsNullOrEmpty(filtro) ||
+                            t.nombre.Contains(filtro, StringComparison.OrdinalIgnoreCase))
+                .ToList();
+
+            foreach (var t in filtrados)
+            {
+                ListViewItem item = new ListViewItem(t.id_tipoAyuda.ToString());
+                item.SubItems.Add(t.nombre ?? "");
+                item.SubItems.Add(t.id_responsable ?? "");
+
+                lvtCatalogoTipoAyuda.Items.Add(item);
+            }
+        }
     }
 }

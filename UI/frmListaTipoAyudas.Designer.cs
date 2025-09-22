@@ -88,6 +88,7 @@
             txtBusqueda.Name = "txtBusqueda";
             txtBusqueda.Size = new Size(558, 23);
             txtBusqueda.TabIndex = 2;
+            txtBusqueda.TextChanged += txtBusqueda_TextChanged;
             // 
             // groupBox1
             // 
