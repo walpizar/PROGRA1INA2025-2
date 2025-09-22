@@ -32,6 +32,8 @@ namespace DAO
         public DbSet<clsRolPermiso> rolPermiso { get; set; }
         public DbSet<clsUsuario> usuario { get; set; }
         public DbSet<clsModulo> modulos { get; set; }
+        public DbSet<clsPersonalAdministrativo> personalAdministrativo { get; set; }
+
 
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -104,6 +106,20 @@ namespace DAO
             // Clave primaria compuesta para RolPermiso
             modelBuilder.Entity<clsRolPermiso>()
                 .HasKey(rp => new { rp.idRol, rp.idPermiso });
+
+
+            modelBuilder.Entity<clsPersonalAdministrativo>()
+             .HasOne(pa => pa.persona)
+             .WithOne()
+             .HasForeignKey<clsPersonalAdministrativo>(pa => new { pa.personaId, pa.personaTipoId })
+             .HasPrincipalKey<clsPersona>(p => new { p.id, p.tipoId })
+             .OnDelete(DeleteBehavior.Restrict);
+
+            modelBuilder.Entity<clsPersonalAdministrativo>()
+                .HasOne(pa => pa.Puesto)
+                .WithMany() // un puesto puede estar en varios administrativos
+                .HasForeignKey(pa => pa.puestoId)
+                .OnDelete(DeleteBehavior.Restrict);
         }
 
     }

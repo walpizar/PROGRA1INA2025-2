@@ -15,6 +15,14 @@ namespace Common.Enums
             Usuario = 2,
             Invitado = 3
         }
+
+        public enum TipoIdentificacion
+        {
+            CedulaFisica = 1,
+            CedulaJuridica = 2,
+            Dimex = 3,
+           
+        }
         public enum EstadoPedido
         {
             Pendiente,

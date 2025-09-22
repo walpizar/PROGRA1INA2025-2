@@ -13,12 +13,12 @@ using System.Windows.Forms;
 
 namespace UI
 {
-    public partial class FrmMantenimientoAdmin : Form
+    public partial class FrmPersonalAdministrativo : Form
     {
 
         List<clsUsuario> listaAdmins;
         private readonly UsuarioService _UsuarioService;
-        public FrmMantenimientoAdmin()
+        public FrmPersonalAdministrativo()
         {
             InitializeComponent();
             _UsuarioService = new UsuarioService();
@@ -84,7 +84,7 @@ namespace UI
 
         private void button1_Click(object sender, EventArgs e)
         {
-            FrmAnadirAdmin frmAnadirAdmin = new FrmAnadirAdmin();
+            FrmAnadirPersonalAdministrativo frmAnadirAdmin = new FrmAnadirPersonalAdministrativo();
             frmAnadirAdmin.ShowDialog();
         }
     }

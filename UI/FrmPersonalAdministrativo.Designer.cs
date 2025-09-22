@@ -1,6 +1,6 @@
 ﻿namespace UI
 {
-    partial class FrmMantenimientoAdmin
+    partial class FrmPersonalAdministrativo
     {
         /// <summary>
         /// Required designer variable.

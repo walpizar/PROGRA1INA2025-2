@@ -7,16 +7,16 @@ using static Common.Enums.Enums;
 
 namespace UI
 {
-    public partial class FrmAnadirAdmin : Form
+    public partial class FrmAnadirPersonalAdministrativo : Form
     {
         private UsuarioServicioExtend usuarioService;
-        
 
-        public FrmAnadirAdmin()
+
+        public FrmAnadirPersonalAdministrativo()
         {
             InitializeComponent();
             usuarioService = new UsuarioServicioExtend();
-            
+
 
         }
 
@@ -32,10 +32,10 @@ namespace UI
             // Fecha máxima para no permitir fechas futuras
             txtFecha.MaxDate = DateTime.Today;
 
-            
+
         }
 
-        
+
 
         private void btnAnadir_Click_1(object sender, EventArgs e)
         {
@@ -109,6 +109,16 @@ namespace UI
         private void btnCancelar_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        private void label10_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void textBox2_TextChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }
