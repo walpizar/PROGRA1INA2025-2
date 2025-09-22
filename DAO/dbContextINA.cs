@@ -8,7 +8,7 @@ namespace DAO
         // Entidades mapeadas
         public DbSet<clsPersona> persona { get; set; }
         public DbSet<clsActivos> activos { get; set; }
-        public DbSet<clsCategoriaActivos> CategoriasActivos { get; set; }
+        public DbSet<clsCategoriaActivos> categoriasActivos { get; set; }
         public DbSet<clsDepartamentos> departamentos { get; set; }
         public DbSet<clsDevolucion> devolucion { get; set; }
         public DbSet<clsEnfermero> enfermero { get; set; }
@@ -26,7 +26,7 @@ namespace DAO
             if (!optionsBuilder.IsConfigured)
             {
                 optionsBuilder.UseSqlServer(
-                    @"Server=localhost\sqlexpress01;Database=dbINA;Trusted_Connection=True;MultipleActiveResultSets=True;TrustServerCertificate=True;");
+                    @"Server=localhost\sqlexpress;Database=dbINA;Trusted_Connection=True;MultipleActiveResultSets=True;TrustServerCertificate=True;");
             }
         }
 

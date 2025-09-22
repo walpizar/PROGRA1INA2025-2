@@ -17,39 +17,39 @@ namespace DAO
 
         public void Add(clsCategoriaActivos categoria)
         {
-            _context.CategoriasActivos.Add(categoria);
+            _context.categoriasActivos.Add(categoria);
             _context.SaveChanges();
         }
 
         public void Update(clsCategoriaActivos categoria)
         {
-            _context.CategoriasActivos.Update(categoria);
+            _context.categoriasActivos.Update(categoria);
             _context.SaveChanges();
         }
 
         public void Delete(int id)
         {
-            var cat = _context.CategoriasActivos.Find(id);
+            var cat = _context.categoriasActivos.Find(id);
             if (cat != null)
             {
-                _context.CategoriasActivos.Remove(cat);
+                _context.categoriasActivos.Remove(cat);
                 _context.SaveChanges();
             }
         }
 
         public clsCategoriaActivos ConsultarPorID(int id)
         {
-            return _context.CategoriasActivos.FirstOrDefault(c => c.Id == id);
+            return _context.categoriasActivos.FirstOrDefault(c => c.Id == id);
         }
 
         public List<clsCategoriaActivos> ConsultarTodos()
         {
-            return _context.CategoriasActivos.OrderBy(c => c.nombre).ToList();
+            return _context.categoriasActivos.OrderBy(c => c.nombre).ToList();
         }
 
         public clsCategoriaActivos ConsultarPorNombre(string nombre)
         {
-            return _context.CategoriasActivos.FirstOrDefault(c => c.nombre == nombre);
+            return _context.categoriasActivos.FirstOrDefault(c => c.nombre == nombre);
         }
     }
 }
