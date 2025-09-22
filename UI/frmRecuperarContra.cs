@@ -71,8 +71,8 @@ namespace UI
             catch (Exception ex)
             {
                 //manejo de excepciones
-                MessageBox.Show("Error al intentar cambiar la contraseña. Contacte con su administrador" +
-                    "\n" + "Error" + "\n" + ex.Message, "Error de sistema",
+                MessageBox.Show("Error al intentar cambiar la contraseña. Contacte con su administrador." +
+                    "\n" + "Error:" + "\n" + ex.Message, "Error de sistema",
                     MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
 

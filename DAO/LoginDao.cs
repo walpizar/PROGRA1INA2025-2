@@ -38,7 +38,7 @@ namespace DAO
             catch (Exception ex)
             {
                 //manejo de excepciones
-                throw new Exception("Error al obtener el correo del usuario: " + ex.Message);
+                throw new Exception("Error al obtener el correo del usuario.\n Error:\n" + ex.Message);
             }
         }
 
@@ -68,10 +68,10 @@ namespace DAO
                 //guardo los cambios en la base de datos
                 _context.SaveChanges();
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 //manejo de excepciones
-                throw new Exception("Error al actualizar la contraseña");
+                throw new Exception("Error al actualizar la contraseña.\n Error:\n" + ex.Message);
             }
         }
 

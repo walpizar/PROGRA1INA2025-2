@@ -126,11 +126,11 @@ namespace Services
                 mensaje.To.Add(correoEncontrado);
                 mensaje.Subject = "Código de recuperación de contraseña - Sistema Paliativos";
                 mensaje.Body = $"Estimado usuario,\n\n" +
-                              $"Su código de recuperación de contraseña es:\n\n {codigo}\n\n" +
+                              $"Su código de recuperación de contraseña es:\n\n\n {codigo}\n\n\n" +
                               $"Este código expira en 10 minutos por seguridad.\n\n" +
                               $"Si no solicitó este código, ignore este mensaje.\n\n" +
-                              $"No resporder a este correo, es unicamente para envio de codigos de recuperacion de contraseña. \n\n " +
-                              $"Saludos.\n" +
+                              $"No resporder a este correo, es unicamente para envio de codigos de recuperacion de contraseña. \n\n" +
+                              $"Saludos.\n\n" +
                               $"Sistema de Cuidados Paliativos Garabito.";
 
                 //envia el correo
@@ -139,7 +139,7 @@ namespace Services
             catch (Exception ex)
             {
                 //muestra mensaje de error en caso de fallo
-                throw new Exception("Error al enviar el correo:. Contacte con su administrador"
+                throw new Exception("Error al enviar el correo. Contacte con su administrador"
                     + "\n" + "Error:" + "\n" + ex.Message);
 
             }
