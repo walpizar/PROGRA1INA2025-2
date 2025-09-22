@@ -62,31 +62,58 @@ namespace UI
 
         private void lvtCatalogoTipoAyuda_SelectedIndexChanged(object sender, EventArgs e)
         {
+            if (lvtCatalogoTipoAyuda.SelectedItems.Count > 0)
+            {
+                // Obtener ID seleccionado
+                int idSeleccionado = int.Parse(lvtCatalogoTipoAyuda.SelectedItems[0].Text);
+
+                // Consultar el registro desde el servicio
+                var tipoAyuda = _tipoAyudasService.ConsultarPorID(idSeleccionado);
+
+                if (tipoAyuda != null)
+                {
+                    // Abrir el formulario en modo edición
+                    frmTipoAyuda frm = new frmTipoAyuda();
+                    frm.selectTiposAyudas = tipoAyuda; // Pasamos la entidad existente
+                    frm.ShowDialog();
+
+                    // Refrescar lista después de cerrar
+                    cargarTiposAyuda();
+                }
+            }
 
         }
 
+        //Cargar datos al iniciar el formulario
         private void frmListaTipoAyudas_Load(object sender, EventArgs e)
         {
+            //llamar al metodo para cargar los tipos de ayuda
             cargarTiposAyuda();
         }
 
+        // Filtrar la lista mientras se escribe en el cuadro de búsqueda
         private void txtBusqueda_TextChanged(object sender, EventArgs e)
         {
+            //llamar al metodo para buscar los tipos de ayuda
             buscarTiposAyudas(txtBusqueda.Text);
         }
 
+        // Método para buscar y filtrar tipos de ayuda
         private void buscarTiposAyudas(string filtro)
         {
+            // Limpiar la lista antes de aplicar el filtro
             lvtCatalogoTipoAyuda.Items.Clear();
 
+            // Obtener todos los tipos de ayuda
             var lista = _tipoAyudasService.ConsultarTodos();
 
-            // Filtrar por nombre (ignora mayúsculas/minúsculas)
+            // Filtrar por nombre
             var filtrados = lista
                 .Where(t => string.IsNullOrEmpty(filtro) ||
                             t.nombre.Contains(filtro, StringComparison.OrdinalIgnoreCase))
                 .ToList();
 
+            // Agregar los elementos filtrados a la lista
             foreach (var t in filtrados)
             {
                 ListViewItem item = new ListViewItem(t.id_tipoAyuda.ToString());

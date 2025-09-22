@@ -54,6 +54,7 @@
             // 
             // lvtCatalogoTipoAyuda
             // 
+            lvtCatalogoTipoAyuda.Activation = ItemActivation.TwoClick;
             lvtCatalogoTipoAyuda.BackColor = SystemColors.ScrollBar;
             lvtCatalogoTipoAyuda.Columns.AddRange(new ColumnHeader[] { columnHeader1, columnHeader2, columnHeader3 });
             lvtCatalogoTipoAyuda.FullRowSelect = true;

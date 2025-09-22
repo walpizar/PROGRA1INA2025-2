@@ -46,7 +46,9 @@ namespace UI
             lblDescripcion = new Label();
             lblNombre = new Label();
             btnGuardar = new Button();
+            btnCancelar = new Button();
             btnEliminar = new Button();
+            btnModificar = new Button();
             grbTiposAyudas.SuspendLayout();
             SuspendLayout();
             // 
@@ -134,32 +136,60 @@ namespace UI
             btnGuardar.FlatStyle = FlatStyle.Popup;
             btnGuardar.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
             btnGuardar.ForeColor = Color.DarkGreen;
-            btnGuardar.Location = new Point(309, 259);
+            btnGuardar.Location = new Point(339, 259);
             btnGuardar.Name = "btnGuardar";
-            btnGuardar.Size = new Size(116, 36);
+            btnGuardar.Size = new Size(86, 36);
             btnGuardar.TabIndex = 2;
             btnGuardar.Text = "Guardar";
             btnGuardar.UseVisualStyleBackColor = true;
             btnGuardar.Click += btnGuardar_Click;
+            // 
+            // btnCancelar
+            // 
+            btnCancelar.FlatStyle = FlatStyle.Popup;
+            btnCancelar.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            btnCancelar.ForeColor = Color.DimGray;
+            btnCancelar.Location = new Point(237, 259);
+            btnCancelar.Name = "btnCancelar";
+            btnCancelar.Size = new Size(86, 36);
+            btnCancelar.TabIndex = 3;
+            btnCancelar.Text = "Cancelar";
+            btnCancelar.UseVisualStyleBackColor = true;
+            btnCancelar.Click += btnCancelar_Click_1;
             // 
             // btnEliminar
             // 
             btnEliminar.FlatStyle = FlatStyle.Popup;
             btnEliminar.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
             btnEliminar.ForeColor = Color.FromArgb(192, 0, 0);
-            btnEliminar.Location = new Point(177, 259);
+            btnEliminar.Location = new Point(134, 259);
             btnEliminar.Name = "btnEliminar";
-            btnEliminar.Size = new Size(116, 36);
-            btnEliminar.TabIndex = 3;
-            btnEliminar.Text = "Cancelar";
+            btnEliminar.Size = new Size(86, 36);
+            btnEliminar.TabIndex = 4;
+            btnEliminar.Text = "Eliminar";
             btnEliminar.UseVisualStyleBackColor = true;
             btnEliminar.Click += btnEliminar_Click;
+            // 
+            // btnModificar
+            // 
+            btnModificar.FlatStyle = FlatStyle.Popup;
+            btnModificar.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            btnModificar.ForeColor = Color.FromArgb(255, 128, 0);
+            btnModificar.Location = new Point(30, 259);
+            btnModificar.Name = "btnModificar";
+            btnModificar.Size = new Size(86, 36);
+            btnModificar.TabIndex = 5;
+            btnModificar.Text = "Modificar";
+            btnModificar.UseVisualStyleBackColor = true;
+            btnModificar.Click += btnModificar_Click_1;
             // 
             // frmTipoAyuda
             // 
             BackColor = SystemColors.ControlLightLight;
             ClientSize = new Size(451, 307);
+            Controls.Add(btnModificar);
             Controls.Add(btnEliminar);
+            Controls.Add(btnCancelar);
             Controls.Add(btnGuardar);
             Controls.Add(grbTiposAyudas);
             Controls.Add(lblTiposAyudas);
@@ -183,16 +213,49 @@ namespace UI
         private Label lblNombre;
         private Label lblResponsable;
 
-       
+
         private ComboBox cboResponsable;
         private TextBox txtDescripcion;
         private TextBox txtNombre;
         private Button btnGuardar;
-        private Button btnEliminar;
+        private Button btnCancelar;
 
         private void frmTipoAyuda_Load(object sender, EventArgs e)
         {
             cargarCombos();
+
+            if (selectTiposAyudas == null)
+            {
+                // Caso: nuevo registro
+                btnGuardar.Visible = true;
+                btnEliminar.Visible = false;
+                btnModificar.Visible = false;
+                this.Text = "Nuevo Tipo de Ayuda";
+            }
+            else
+            {
+                // Caso: edición
+                btnEliminar.Visible = true;
+                btnCancelar.Visible = true;
+                btnModificar.Visible = true;
+                btnGuardar.Visible = false;
+                txtNombre.Text = selectTiposAyudas.nombre;
+                txtDescripcion.Text = selectTiposAyudas.descripcion;
+
+                // Buscar y seleccionar responsable en el combo
+                foreach (clsUsuario u in cboResponsable.Items)
+                {
+                    if (u.id == selectTiposAyudas.id_responsable &&
+                        u.personaTipoId == selectTiposAyudas.personaTipoId_responsable)
+                    {
+                        cboResponsable.SelectedItem = u;
+                        break;
+                    }
+                }
+
+
+                this.Text = "Editar Tipo de Ayuda";
+            }
         }
 
         private void btnGuardar_Click(object sender, EventArgs e)
@@ -246,7 +309,7 @@ namespace UI
             cboResponsable.ValueMember = "id";
         }
 
-        private void btnEliminar_Click(object sender, EventArgs e)
+        private void btnCancelar_Click(object sender, EventArgs e)
         {
             this.Close();
         }
@@ -272,6 +335,68 @@ namespace UI
         {
 
         }
+        private Button btnEliminar;
 
+        private void btnCancelar_Click_1(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        private void btnEliminar_Click(object sender, EventArgs e)
+        {
+            if (selectTiposAyudas != null)
+            {
+                var confirm = MessageBox.Show("¿Está seguro de eliminar este tipo de ayuda?",
+                                              "Confirmar eliminación",
+                                              MessageBoxButtons.YesNo);
+
+                if (confirm == DialogResult.Yes)
+                {
+                    _tipoAyudasService.Eliminar(selectTiposAyudas.id_tipoAyuda);
+                    MessageBox.Show("Tipo de ayuda eliminado correctamente.");
+                    this.DialogResult = DialogResult.OK;
+                    this.Close();
+                }
+                else
+                {
+                    MessageBox.Show("El tipo de ayuda " + selectTiposAyudas.nombre + " no se elimino");
+                }
+            }
+                
+
+        }
+        private Button btnModificar;
+
+
+        private void btnModificar_Click_1(object sender, EventArgs e)
+        {
+            try
+            {
+                if (selectTiposAyudas != null)
+                {
+                    var usuarioSeleccionado = (clsUsuario)cboResponsable.SelectedItem;
+
+                    selectTiposAyudas.nombre = txtNombre.Text;
+                    selectTiposAyudas.descripcion = txtDescripcion.Text;
+                    selectTiposAyudas.id_responsable = usuarioSeleccionado.id;
+                    selectTiposAyudas.personaTipoId_responsable = usuarioSeleccionado.personaTipoId;
+
+                    selectTiposAyudas.id_usuarioUltimaModificacion = usuarioSeleccionado.id;
+                    selectTiposAyudas.personaTipoId_usuarioUltimaModificacion = usuarioSeleccionado.personaTipoId;
+                    selectTiposAyudas.fecha_ultimaModificacion = DateTime.Now;
+
+                    _tipoAyudasService.modificar(selectTiposAyudas);
+
+                    MessageBox.Show("Tipo de ayuda actualizado correctamente.");
+                    this.DialogResult = DialogResult.OK;
+                    this.Close();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al modificar: " + ex.Message);
+            }
+
+        }
     }
 }

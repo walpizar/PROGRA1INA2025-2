@@ -8,5 +8,9 @@ namespace Common.Exceptions
 {
     internal class NotFoundException
     {
+        public NotFoundException(string v)
+        {
+            throw new Exception(v);
+        }
     }
 }

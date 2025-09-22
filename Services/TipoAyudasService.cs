@@ -57,11 +57,54 @@ namespace Services
 
         public void modificar(clsTiposAyudas tiposAyudas)
         {
-            
+            try
+            {
+                if (tiposAyudas == null)
+                    throw new ArgumentNullException(nameof(tiposAyudas), "El objeto tipo de ayuda no puede ser nulo.");
+                if (tiposAyudas.id_tipoAyuda <= 0)
+                    throw new ArgumentException("El ID del tipo de ayuda no es válido.");
+                var existente = _tipDao.ConsultarPorID(tiposAyudas.id_tipoAyuda);
+                if (string.IsNullOrWhiteSpace(tiposAyudas.nombre))
+                    throw new ArgumentException("El nombre del tipo de ayuda no puede estar vacío");
+                if (string.IsNullOrWhiteSpace(tiposAyudas.id_responsable))
+                    throw new ArgumentException("Debe asignarse un responsable válido");
+                if (string.IsNullOrWhiteSpace(tiposAyudas.id_usuarioUltimaModificacion))
+                    throw new ArgumentException("Debe asignarse el usuario de última modificación");
+                tiposAyudas.fecha_ultimaModificacion = DateTime.Now;
+                _tipDao.Modificar(tiposAyudas);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error al modificar el tipo de ayuda", ex);
+            }
+
+        }
+
+        public void Eliminar(int id)
+        {
+            try
+            {
+                if (id <= 0)
+                    throw new ArgumentException("El ID del tipo de ayuda no es válido.");
+                var existente = _tipDao.ConsultarPorID(id);
+                //if (existente == null)
+                    //throw new NotFoundException($"No se encontró un tipo de ayuda con ID {id}.");
+                _tipDao.Eliminar(id);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error al eliminar el tipo de ayuda", ex);
+            }
+
         }
         public List<clsTiposAyudas> ConsultarTodos()
         {
             return _tipDao.ConsultarTodos();
+        }
+
+        public clsTiposAyudas ConsultarPorID(int id)
+        {
+            return _tipDao.ConsultarPorID(id);
         }
 
 
