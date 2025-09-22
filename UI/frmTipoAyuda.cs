@@ -75,6 +75,7 @@ namespace UI
             grbTiposAyudas.TabIndex = 1;
             grbTiposAyudas.TabStop = false;
             grbTiposAyudas.Text = "Datos tipos de ayudas";
+            grbTiposAyudas.Enter += grbTiposAyudas_Enter;
             // 
             // cboResponsable
             // 
@@ -109,7 +110,6 @@ namespace UI
             lblResponsable.Size = new Size(76, 15);
             lblResponsable.TabIndex = 2;
             lblResponsable.Text = "Responsable:";
-            lblResponsable.Click += label1_Click;
             // 
             // lblDescripcion
             // 
@@ -183,10 +183,7 @@ namespace UI
         private Label lblNombre;
         private Label lblResponsable;
 
-        private void label1_Click(object sender, EventArgs e)
-        {
-
-        }
+       
         private ComboBox cboResponsable;
         private TextBox txtDescripcion;
         private TextBox txtNombre;
@@ -205,38 +202,34 @@ namespace UI
                 //validar datos de entrada
                 if (true)
                 {
-                    //creo la instancia de tipo de ayuda nuevo
-                    clsTiposAyudas tiposAyudas = selectTiposAyudas == null ? new clsTiposAyudas() : selectTiposAyudas;
-
-
-                    if (selectTiposAyudas == null)
-                    {
-                        tiposAyudas = new clsTiposAyudas();
-                    }
-                    else
-                    {
-                        tiposAyudas = selectTiposAyudas;
-
-                    }
+                    // Creo la instancia de tipo de ayuda nuevo
+                    clsTiposAyudas tiposAyudas = selectTiposAyudas ?? new clsTiposAyudas();
 
                     tiposAyudas.nombre = txtNombre.Text;
                     tiposAyudas.descripcion = txtDescripcion.Text;
-                    tiposAyudas.responsable = (clsUsuario)cboResponsable.SelectedItem;
+
+                    // 👇 Corregido: tomar el usuario seleccionado
+                    var usuarioSeleccionado = (clsUsuario)cboResponsable.SelectedItem;
+
+                    tiposAyudas.id_responsable = usuarioSeleccionado.id;
+                    tiposAyudas.personaTipoId_responsable = usuarioSeleccionado.personaTipoId;
+
+                    // Auditoría (asumimos que el usuario logueado es el que crea)
+                    tiposAyudas.id_usuarioCrea = usuarioSeleccionado.id;
+                    tiposAyudas.personaTipoId_usuarioCrea = usuarioSeleccionado.personaTipoId;
+                    tiposAyudas.id_usuarioUltimaModificacion = usuarioSeleccionado.id;
+                    tiposAyudas.personaTipoId_usuarioUltimaModificacion = usuarioSeleccionado.personaTipoId;
 
                     if (selectTiposAyudas == null)
-                    {
-                        _tipoAyudasService.crear(tiposAyudas);
-                    }
+                        _tipoAyudasService.Crear(tiposAyudas);
                     else
-                    {
                         _tipoAyudasService.modificar(tiposAyudas);
-                    }
 
-                    //Limpiar el formulario
+                    // Limpiar y cerrar
                     limpiarForm();
+                    this.DialogResult = DialogResult.OK;
                     this.Close();
                 }
-
             }
             catch (Exception)
             {
@@ -249,8 +242,8 @@ namespace UI
         {
             List<clsUsuario> listaCat = _usuarioService.consultarTodos();
             cboResponsable.DataSource = listaCat;
-            cboResponsable.DisplayMember = "Nombre";
-            cboResponsable.ValueMember = "Id";
+            cboResponsable.DisplayMember = "id";
+            cboResponsable.ValueMember = "id";
         }
 
         private void btnEliminar_Click(object sender, EventArgs e)
@@ -270,9 +263,15 @@ namespace UI
             {
                 clsUsuario usuarioSeleccionado = (clsUsuario)cboResponsable.SelectedItem;
 
-      
+
             }
 
         }
+
+        private void grbTiposAyudas_Enter(object sender, EventArgs e)
+        {
+
+        }
+
     }
 }

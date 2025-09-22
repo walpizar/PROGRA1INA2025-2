@@ -65,21 +65,22 @@
             lvtCatalogoTipoAyuda.TabIndex = 1;
             lvtCatalogoTipoAyuda.UseCompatibleStateImageBehavior = false;
             lvtCatalogoTipoAyuda.View = View.Details;
+            lvtCatalogoTipoAyuda.SelectedIndexChanged += lvtCatalogoTipoAyuda_SelectedIndexChanged;
             // 
             // columnHeader1
             // 
             columnHeader1.Text = "ID";
-            columnHeader1.Width = 100;
+            columnHeader1.Width = 200;
             // 
             // columnHeader2
             // 
             columnHeader2.Text = "Nombre";
-            columnHeader2.Width = 200;
+            columnHeader2.Width = 250;
             // 
             // columnHeader3
             // 
             columnHeader3.Text = "Responsable";
-            columnHeader3.Width = 300;
+            columnHeader3.Width = 110;
             // 
             // txtBusqueda
             // 

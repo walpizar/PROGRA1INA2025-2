@@ -73,7 +73,6 @@ namespace DAO
         {
             base.OnModelCreating(modelBuilder);
 
-            // Configuración para tbPersonas
             modelBuilder.Entity<clsPersona>().HasKey(p => new { p.id, p.tipoId });
 
             modelBuilder.Entity<clsPersona>().Property(p => p.id)
@@ -85,13 +84,18 @@ namespace DAO
                 .IsRequired()
                 .ValueGeneratedNever();
 
-            //clsMedico configuracion de llave primaria compuesta   
+            // ===============================
+            // Configuración para clsMedico
+            // ===============================
             modelBuilder.Entity<clsMedico>().HasKey(m => new { m.id, m.tipoId });
+
             modelBuilder.Entity<clsMedico>().Property(m => m.id)
                 .IsRequired()
                 .HasMaxLength(20)
                 .ValueGeneratedNever();
-            modelBuilder.Entity<clsMedico>().Property(m => m.tipoId).IsRequired()
+
+            modelBuilder.Entity<clsMedico>().Property(m => m.tipoId)
+                .IsRequired()
                 .ValueGeneratedNever();
 
             modelBuilder.Entity<clsMedico>()
@@ -101,27 +105,18 @@ namespace DAO
                 .OnDelete(DeleteBehavior.Restrict);
 
             // ===============================
-            // Relaciones de clsTiposAyudas
-            // Evitar "multiple cascade paths"
+            // Configuración para clsDonante
             // ===============================
-            modelBuilder.Entity<clsTiposAyudas>(entity =>
-            {
-                // Relación con responsable
-                entity.HasOne(ta => ta.responsable)
-                      .WithMany()
-                      .HasForeignKey(ta => ta.id_responsable)
-                      .OnDelete(DeleteBehavior.Restrict);
+            modelBuilder.Entity<clsDonante>()
+                .HasOne(d => d.Persona)
+                .WithOne(p => p.Donante)
+                .HasForeignKey<clsDonante>(d => new { d.PersonaId, d.PersonaTipoId })
+                .HasPrincipalKey<clsPersona>(p => new { p.id, p.tipoId })
+                .OnDelete(DeleteBehavior.Restrict);
 
-                //relacion 1 a 1 entre donante y persona
-                modelBuilder.Entity<clsDonante>()
-                    .HasOne(d => d.Persona)
-                    .WithOne(p => p.Donante)
-                    .HasForeignKey<clsDonante>(d => new { d.PersonaId, d.PersonaTipoId })
-                    .HasPrincipalKey<clsPersona>(p => new { p.id, p.tipoId })
-                    .OnDelete(DeleteBehavior.Restrict);
-            });
-
-            // clsEnfermero configuración de llave primaria compuesta
+            // ===============================
+            // Configuración para clsEnfermero
+            // ===============================
             modelBuilder.Entity<clsEnfermero>().HasKey(e => new { e.id, e.tipoId });
 
             modelBuilder.Entity<clsEnfermero>().Property(e => e.id)
@@ -133,38 +128,58 @@ namespace DAO
                 .IsRequired()
                 .ValueGeneratedNever();
 
-            // Relación 1 a 1 entre enfermero y persona
             modelBuilder.Entity<clsEnfermero>()
                 .HasOne(e => e.persona)
-                .WithOne() // o .WithOne(p => p.Enfermero) si tienes la navegación en clsPersona
+                .WithOne()
                 .HasForeignKey<clsEnfermero>(e => new { e.id, e.tipoId })
                 .HasPrincipalKey<clsPersona>(p => new { p.id, p.tipoId })
                 .OnDelete(DeleteBehavior.Restrict);
 
+            // ===============================
+            // Configuración para clsRolPermiso
+            // ===============================
             modelBuilder.Entity<clsRolPermiso>()
                 .HasKey(rp => new { rp.idRol, rp.idPermiso });
 
             modelBuilder.Entity<clsRolPermiso>()
-                 .HasOne(rp => rp.Rol)
-                 .WithMany(r => r.RolPermisos)
-                 .HasForeignKey(rp => rp.idRol);
+                .HasOne(rp => rp.Rol)
+                .WithMany(r => r.RolPermisos)
+                .HasForeignKey(rp => rp.idRol);
 
-             modelBuilder.Entity<clsRolPermiso>()
-                  .HasOne(rp => rp.Permiso)
-                  .WithMany(p => p.RolPermisos)
-                  .HasForeignKey(rp => rp.idPermiso);
+            modelBuilder.Entity<clsRolPermiso>()
+                .HasOne(rp => rp.Permiso)
+                .WithMany(p => p.RolPermisos)
+                .HasForeignKey(rp => rp.idPermiso);
+
+            // ===============================
+            // Configuración para clsUsuario
+            // ===============================
+            modelBuilder.Entity<clsUsuario>()
+                .HasKey(u => new { u.id, u.personaTipoId }); // PK compuesta
 
             modelBuilder.Entity<clsUsuario>()
-                .HasKey(u => u.id); // mantener id como PK de Usuario
+                .Property(u => u.id)
+                .IsRequired()
+                .HasMaxLength(20)
+                .ValueGeneratedNever();
+
+            modelBuilder.Entity<clsUsuario>()
+                .Property(u => u.personaTipoId)
+                .IsRequired()
+                .ValueGeneratedNever();
 
             modelBuilder.Entity<clsUsuario>()
                 .HasOne(u => u.Persona)
-                .WithMany() // Persona no tiene ICollection
-                .HasForeignKey(u => new { id = u.id, tipoId = u.personaTipoId }) // mapear id->id y personaTipoId->tipoId
-                .HasPrincipalKey(p => new { p.id, p.tipoId });
+                .WithMany()
+                .HasForeignKey(u => new { u.id, u.personaTipoId })
+                .HasPrincipalKey(p => new { p.id, p.tipoId })
+                .OnDelete(DeleteBehavior.Restrict);
 
-
-
+            // ===============================
+            // Configuración para clsTiposAyudas
+            // ===============================
+            modelBuilder.Entity<clsTiposAyudas>()
+                .HasKey(t => t.id_tipoAyuda);
 
         }
     }

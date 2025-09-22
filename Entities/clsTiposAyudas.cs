@@ -1,69 +1,86 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Entities
 {
-    //Nombre de la tabla
     [Table("tb_tipoAyuda")]
     public class clsTiposAyudas
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int id_tipoAyuda { get; set; }//Llave primaria autoincremental
+        public int id_tipoAyuda { get; set; }
 
         [Required]
-        [StringLength(100, ErrorMessage = "El nombre no puede tener mas de 100 caracteres")]
-        public string nombre { get; set; }//Nombre del tipo de ayuda
+        [StringLength(100)]
+        public string nombre { get; set; }
 
-        [StringLength(300, ErrorMessage = "La descripción no puede tener mas de 300 caracteres")]
-        public string descripcion { get; set; }//Descripción del tipo de ayuda
+        [StringLength(300)]
+        public string descripcion { get; set; }
 
-        //Fk a reponsable
+        // ===== Responsable =====
         [Required]
-        public string id_responsable { get; set; }//Id reponsable
-
-        //[Required]
-        public clsUsuario responsable { get; set; }//Responsable
-
-        //Campos de audioria
-        [Required]
-        public DateTime fecha_crea { get; set; }//Fecha de creación
+        [StringLength(20)]
+        public string id_responsable { get; set; }
 
         [Required]
+        public int personaTipoId_responsable { get; set; }
+
+        // ===== Auditoría =====
+        [Required]
+        [StringLength(20)]
         public string id_usuarioCrea { get; set; }
 
-        [ForeignKey("id_usuarioCrea")]
-        public clsUsuario usuario_crea { get; set; }
+        [Required]
+        public int personaTipoId_usuarioCrea { get; set; }
 
         [Required]
+        [StringLength(20)]
         public string id_usuarioUltimaModificacion { get; set; }
 
-        [ForeignKey("id_usuarioUltimaModificacion")]
-        public clsUsuario usuario_ultimaModificacion { get; set; }
+        [Required]
+        public int personaTipoId_usuarioUltimaModificacion { get; set; }
 
         [Required]
-        public DateTime fecha_ultimaModificacion { get; set; }//Fecha ultima modificación
+        public DateTime fecha_crea { get; set; }
 
         [Required]
-        public bool estado { get; set; } //Estado del tipo de ayuda
+        public DateTime fecha_ultimaModificacion { get; set; }
 
-        //Constructor para crear un nuevo tipo de ayuda
-        //public clsTiposAyudas(int id_tipoAyuda, string nombre, string descripcion, string id_responsable, DateTime fecha_crea, string id_usuarioCrea, string id_usuarioUltimaModificacion, DateTime fecha_ultimaModificacion, bool estado)
-        //{
-        //    this.id_tipoAyuda = id_tipoAyuda;
-        //    this.nombre = nombre;
-        //    this.descripcion = descripcion;
-        //    this.id_responsable = id_responsable;
-        //    this.fecha_crea = fecha_crea;
-        //    this.id_usuarioCrea = id_usuarioCrea;
-        //    this.id_usuarioUltimaModificacion = id_usuarioUltimaModificacion;
-        //    this.fecha_ultimaModificacion = fecha_ultimaModificacion;
-        //    this.estado = true;
-        //}
+        [Required]
+        public bool estado { get; set; }
+
+        // Constructor vacío para EF
+        public clsTiposAyudas()
+        {
+            fecha_crea = DateTime.Now;
+            fecha_ultimaModificacion = DateTime.Now;
+            estado = true;
+        }
+
+        // Constructor con datos clave
+        public clsTiposAyudas(
+            string nombre,
+            string descripcion,
+            string idResponsable, int tipoResponsable,
+            string idUsuarioCrea, int tipoUsuarioCrea
+        )
+        {
+            this.nombre = nombre;
+            this.descripcion = descripcion;
+            this.id_responsable = idResponsable;
+            this.personaTipoId_responsable = tipoResponsable;
+
+            this.id_usuarioCrea = idUsuarioCrea;
+            this.personaTipoId_usuarioCrea = tipoUsuarioCrea;
+
+            this.id_usuarioUltimaModificacion = idUsuarioCrea;
+            this.personaTipoId_usuarioUltimaModificacion = tipoUsuarioCrea;
+
+            this.fecha_crea = DateTime.Now;
+            this.fecha_ultimaModificacion = DateTime.Now;
+            this.estado = true;
+        }
     }
 }
+

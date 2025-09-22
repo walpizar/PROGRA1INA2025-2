@@ -62,7 +62,6 @@ namespace Services
             {
                 throw new Exception("Error al consultar todos los usuarios", ex);
             }
-        }
-        
+        } 
     }
 }
