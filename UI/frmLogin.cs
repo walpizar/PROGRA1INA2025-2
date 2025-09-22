@@ -50,7 +50,7 @@ namespace UI
                     MessageBox.Show("Login exitoso", "Bienvenido",
                         MessageBoxButtons.OK, MessageBoxIcon.Information);
 
-                    // Aquí abrir el formulario principal
+                    //aquí abrp el formulario principal
                     frmPrincipal principal = new frmPrincipal();
                     principal.Show();
 
@@ -67,8 +67,8 @@ namespace UI
             catch (Exception ex)
             {
                 //manejo de excepciones
-                MessageBox.Show("Error al intentar iniciar sesión. Contacte con su administrador" +
-                    "\n" + "Error" + "\n" + ex.Message, "Error de sistema",
+                MessageBox.Show("Error al intentar iniciar sesión. Contacte con su administrador.\n"
+                    + "Error:\n" + ex.Message, "Error de sistema",
                     MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
@@ -155,7 +155,7 @@ namespace UI
                             //si el codigo es valido, abro el formulario para cambiar la contraseña
                             //llamo al constructor que recibe el correo del usuario para pasarselo al formulario de recuperar contraseña
                             frmRecuperarContra frmRecuperar = new frmRecuperarContra(correoRegistrado);
-                            frmRecuperar.ShowDialog(); //muestro el formulario como dialogo modal
+                            frmRecuperar.ShowDialog(); //muestro el formulario 
 
                             //cuando se cierre el formulario de recuperar contraseña, musestro el formulario de login
                             this.Show();
@@ -175,8 +175,8 @@ namespace UI
             catch (Exception ex)
             {
                 //manejo de excepciones
-                MessageBox.Show("Error al intentar enviar el código de recuperación. Contacte con su administrador."
-                    + "\n" +"Error" + "\n" + ex.Message,
+                MessageBox.Show("Error al intentar enviar el código de recuperación. Contacte con su administrador.\n"
+                    + "Error:\n" + ex.Message,
                     "Error de Sistema", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }

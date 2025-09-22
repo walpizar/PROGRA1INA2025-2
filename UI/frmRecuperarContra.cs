@@ -50,7 +50,7 @@ namespace UI
         {
             try
             {
-                //llamo al metodo validar datos de entrada dentro de un if
+                //llamo al metodo validar datos de entrada 
                 if (ValidarDatosEntrada(txtNuevaContra.Text, txtConfirmarContra.Text))
                 {
 

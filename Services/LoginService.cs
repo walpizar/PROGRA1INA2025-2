@@ -32,7 +32,7 @@ namespace Services
         public bool ValidarLogin(string usuario, string contra)
         {
 
-            //llamo al metodo de DAO para validar el login
+            //llamo al metodo de DAO para consultar por usuario
             clsUsuario user = _loginDao.consultarPorNombre(usuario);
             //valido si el usuario existe y la contraseña coincide
             if (user != null && user.contrasena == contra)

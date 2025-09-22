@@ -78,7 +78,7 @@ namespace DAO
         public clsUsuario consultarPorID(string id)
         {
             //obetengo el id de la persona que es el mismo id de usuario
-            return _context.usuario.FirstOrDefault(u => u.personaId == id);//falta la propiedad usuarios en el dbContex
+            return _context.usuario.FirstOrDefault(u => u.personaId == id);
         }
 
 
