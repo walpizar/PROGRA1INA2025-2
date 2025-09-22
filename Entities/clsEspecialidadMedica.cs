@@ -8,6 +8,7 @@ namespace Entities
     public class clsEspecialidadMedica
     {
         [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int idEspecialidadMedica { get; set; }
 
         [Required]
