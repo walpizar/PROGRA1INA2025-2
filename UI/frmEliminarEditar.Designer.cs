@@ -48,7 +48,6 @@
             label1.Size = new Size(71, 21);
             label1.TabIndex = 0;
             label1.Text = "Nombre:";
-            label1.Click += label1_Click;
             // 
             // label2
             // 
@@ -69,7 +68,6 @@
             label3.Size = new Size(94, 21);
             label3.TabIndex = 2;
             label3.Text = "Descripcion:";
-            label3.Click += label3_Click;
             // 
             // textBox1
             // 

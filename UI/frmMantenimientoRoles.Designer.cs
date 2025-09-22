@@ -31,6 +31,12 @@
             ListViewItem listViewItem1 = new ListViewItem("");
             ListViewItem listViewItem2 = new ListViewItem("");
             ListViewItem listViewItem3 = new ListViewItem("");
+            ListViewItem listViewItem4 = new ListViewItem("");
+            ListViewItem listViewItem5 = new ListViewItem("");
+            ListViewItem listViewItem6 = new ListViewItem("");
+            ListViewItem listViewItem7 = new ListViewItem("");
+            ListViewItem listViewItem8 = new ListViewItem("");
+            ListViewItem listViewItem9 = new ListViewItem("");
             label1 = new Label();
             tabControl1 = new TabControl();
             tabPage1 = new TabPage();
@@ -57,11 +63,25 @@
             textBoxNombreRol = new TextBox();
             label5 = new Label();
             label4 = new Label();
+            tabPage4 = new TabPage();
+            listView2 = new ListView();
+            columnHeader1 = new ColumnHeader();
+            columnModulo = new ColumnHeader();
+            tabPage5 = new TabPage();
+            listView3 = new ListView();
+            columnHeader2 = new ColumnHeader();
+            columnHeader3 = new ColumnHeader();
+            columnHeader4 = new ColumnHeader();
+            columnHeader5 = new ColumnHeader();
+            columnHeader6 = new ColumnHeader();
+            columnHeader7 = new ColumnHeader();
             tabControl1.SuspendLayout();
             tabPage1.SuspendLayout();
             groupBox1.SuspendLayout();
             tabPage2.SuspendLayout();
             tabPage3.SuspendLayout();
+            tabPage4.SuspendLayout();
+            tabPage5.SuspendLayout();
             SuspendLayout();
             // 
             // label1
@@ -79,11 +99,13 @@
             tabControl1.Controls.Add(tabPage1);
             tabControl1.Controls.Add(tabPage2);
             tabControl1.Controls.Add(tabPage3);
+            tabControl1.Controls.Add(tabPage4);
+            tabControl1.Controls.Add(tabPage5);
             tabControl1.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            tabControl1.Location = new Point(27, 79);
+            tabControl1.Location = new Point(27, 67);
             tabControl1.Name = "tabControl1";
             tabControl1.SelectedIndex = 0;
-            tabControl1.Size = new Size(688, 354);
+            tabControl1.Size = new Size(700, 354);
             tabControl1.TabIndex = 1;
             // 
             // tabPage1
@@ -101,7 +123,7 @@
             tabPage1.Padding = new Padding(3);
             tabPage1.Size = new Size(680, 320);
             tabPage1.TabIndex = 0;
-            tabPage1.Text = "Permisos";
+            tabPage1.Text = "Editar Permisos";
             // 
             // button5
             // 
@@ -224,7 +246,7 @@
             tabPage2.Location = new Point(4, 30);
             tabPage2.Name = "tabPage2";
             tabPage2.Padding = new Padding(3);
-            tabPage2.Size = new Size(680, 320);
+            tabPage2.Size = new Size(692, 320);
             tabPage2.TabIndex = 1;
             tabPage2.Text = "Lista de Roles";
             // 
@@ -241,6 +263,7 @@
             // listView1
             // 
             listView1.Columns.AddRange(new ColumnHeader[] { Nombre, Descripcion });
+            listView1.Font = new Font("Arial", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             listView1.Items.AddRange(new ListViewItem[] { listViewItem1, listViewItem2, listViewItem3 });
             listView1.Location = new Point(27, 17);
             listView1.Name = "listView1";
@@ -270,7 +293,7 @@
             // 
             // tabPage3
             // 
-            tabPage3.BackColor = Color.LightBlue;
+            tabPage3.BackColor = Color.PowderBlue;
             tabPage3.Controls.Add(buttonCrearRol);
             tabPage3.Controls.Add(richTextBoxDescripcionRol);
             tabPage3.Controls.Add(textBoxNombreRol);
@@ -327,11 +350,95 @@
             label4.TabIndex = 0;
             label4.Text = "Nombre de nuevo rol:";
             // 
+            // tabPage4
+            // 
+            tabPage4.BackColor = Color.PowderBlue;
+            tabPage4.Controls.Add(listView2);
+            tabPage4.Location = new Point(4, 30);
+            tabPage4.Name = "tabPage4";
+            tabPage4.Size = new Size(692, 320);
+            tabPage4.TabIndex = 3;
+            tabPage4.Text = "Lista de Modulos";
+            // 
+            // listView2
+            // 
+            listView2.Columns.AddRange(new ColumnHeader[] { columnHeader1, columnModulo });
+            listView2.Font = new Font("Arial", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            listView2.Items.AddRange(new ListViewItem[] { listViewItem4, listViewItem5, listViewItem6 });
+            listView2.Location = new Point(32, 13);
+            listView2.Name = "listView2";
+            listView2.Size = new Size(636, 290);
+            listView2.TabIndex = 2;
+            listView2.UseCompatibleStateImageBehavior = false;
+            listView2.View = View.Details;
+            // 
+            // columnHeader1
+            // 
+            columnHeader1.Text = "Nombre Modulo";
+            columnHeader1.Width = 200;
+            // 
+            // columnModulo
+            // 
+            columnModulo.Text = "Descripcion de Modulo";
+            columnModulo.Width = 430;
+            // 
+            // tabPage5
+            // 
+            tabPage5.BackColor = Color.PowderBlue;
+            tabPage5.Controls.Add(listView3);
+            tabPage5.Location = new Point(4, 30);
+            tabPage5.Name = "tabPage5";
+            tabPage5.Size = new Size(692, 320);
+            tabPage5.TabIndex = 4;
+            tabPage5.Text = "Lista de Permisos";
+            // 
+            // listView3
+            // 
+            listView3.Columns.AddRange(new ColumnHeader[] { columnHeader2, columnHeader3, columnHeader4, columnHeader5, columnHeader6, columnHeader7 });
+            listView3.Font = new Font("Arial", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            listView3.Items.AddRange(new ListViewItem[] { listViewItem7, listViewItem8, listViewItem9 });
+            listView3.Location = new Point(32, 13);
+            listView3.Name = "listView3";
+            listView3.Size = new Size(623, 293);
+            listView3.TabIndex = 3;
+            listView3.UseCompatibleStateImageBehavior = false;
+            listView3.View = View.Details;
+            // 
+            // columnHeader2
+            // 
+            columnHeader2.Text = "El rol tiene permiso";
+            columnHeader2.Width = 150;
+            // 
+            // columnHeader3
+            // 
+            columnHeader3.Text = "sobre el modulo";
+            columnHeader3.Width = 150;
+            // 
+            // columnHeader4
+            // 
+            columnHeader4.Text = "Consultar";
+            columnHeader4.Width = 80;
+            // 
+            // columnHeader5
+            // 
+            columnHeader5.Text = "Crear";
+            columnHeader5.Width = 80;
+            // 
+            // columnHeader6
+            // 
+            columnHeader6.Text = "Editar";
+            columnHeader6.Width = 80;
+            // 
+            // columnHeader7
+            // 
+            columnHeader7.Text = "Eliminar";
+            columnHeader7.Width = 80;
+            // 
             // frmMantenimientoRoles
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(739, 451);
+            ClientSize = new Size(744, 451);
             Controls.Add(tabControl1);
             Controls.Add(label1);
             FormBorderStyle = FormBorderStyle.Fixed3D;
@@ -347,6 +454,8 @@
             tabPage2.PerformLayout();
             tabPage3.ResumeLayout(false);
             tabPage3.PerformLayout();
+            tabPage4.ResumeLayout(false);
+            tabPage5.ResumeLayout(false);
             ResumeLayout(false);
             PerformLayout();
         }
@@ -379,5 +488,17 @@
         private Label label6;
         private Button button5;
         private Label label7;
+        private TabPage tabPage4;
+        private ListView listView2;
+        private ColumnHeader columnModulo;
+        private ColumnHeader columnHeader1;
+        private TabPage tabPage5;
+        private ListView listView3;
+        private ColumnHeader columnHeader2;
+        private ColumnHeader columnHeader3;
+        private ColumnHeader columnHeader4;
+        private ColumnHeader columnHeader5;
+        private ColumnHeader columnHeader6;
+        private ColumnHeader columnHeader7;
     }
 }

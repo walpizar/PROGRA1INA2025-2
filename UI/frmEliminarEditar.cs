@@ -16,25 +16,15 @@ namespace UI
     public partial class frmEliminarEditar : Form
     {
 
-        private readonly SeguridadService _Service;
-        public clsRol rolSelected { get; set; }
+        private readonly SeguridadService _Service;//ACCESO A SERVICE
+        public clsRol rolSelected { get; set; }//REFERENCIA DE ROL DESDE EL FRM PADRE
 
-        public frmMantenimientoRoles formPadre { get; set; }
+        public frmMantenimientoRoles formPadre { get; set; }//REFERNCIA DEL FRM PADRE
 
         public frmEliminarEditar()
         {
             InitializeComponent();
-            _Service = new SeguridadService();
-        }
-
-        private void label1_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label3_Click(object sender, EventArgs e)
-        {
-
+            _Service = new SeguridadService();//INICIALIZO EL ACCESO
         }
 
         private void frmEliminarEditar_Load(object sender, EventArgs e)
@@ -42,64 +32,49 @@ namespace UI
             cargarSelecionado();
         }
 
-        public void cargarSelecionado()
+        public void cargarSelecionado()//MUESTRO
         {
             var existente = _Service.consultarID(rolSelected.idRol);
 
-            if (existente != null)
+            if (existente != null)//SI EXISTE EL EPRMISO SELECIONADO TRAIGO SU NOMBRE Y DESCRIPCION DESDE LA DB 
             {
-                // Asigno los valores actuales a los controles
                 textBox1.Text = existente.nombreRol;
                 richTextBox1.Text = existente.descripcionRol;
             }
         }
 
-        private void richTextBox1_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
         private void button1_Click(object sender, EventArgs e)//ELIMINAR
         {
-
-            int idRol = rolSelected.idRol;
-            _Service.eliminando(idRol);
+            _Service.eliminando(rolSelected.idRol);
 
             MessageBox.Show("ROL ELIMINANDO CORRECTAMENTE");
 
             formPadre.cargarListaRoles(_Service.consultarRoles()); // recargo lista
 
-            this.Close();
+            this.Close();//CIERRO FRM
         }
 
         private void button2_Click(object sender, EventArgs e)//ACTUALIZAR//EDITAR
         {
-
             var existente = _Service.consultarID(rolSelected.idRol);
 
-            if (existente != null)
+            if (existente != null)//SI EXISTE SE LE DA DATOS
             {
                 existente.nombreRol = textBox1.Text;
                 existente.descripcionRol = richTextBox1.Text;
-                // Si usas base de datos: _context.SaveChanges();
+                _Service.editarRol(existente);//EDITAR
             }
-
-            _Service.editarRol(existente);
-
             MessageBox.Show("ROL ACTUALIZADO CORRECTAMENTE");
 
-            formPadre.cargarListaRoles(_Service.consultarRoles()); // recargo lista
+            formPadre.cargarListaRoles(_Service.consultarRoles()); //REGARGO METODO DEL FRM PADRE DESDE EL FRM HIJO
 
             this.Close();
         }
-
 
         private void frmEliminarEditar_FormClosed(object? sender, FormClosedEventArgs e)
         {
-            formPadre.cargarListaRoles(_Service.consultarRoles()); // recargo lista
+            formPadre.cargarListaRoles(_Service.consultarRoles());  //REGARGO METODO DEL FRM PADRE DESDE EL FRM HIJO
             this.Close();
         }
-
-
     }
 }

@@ -52,6 +52,11 @@ using System.Threading.Tasks;
             return _rolDao.consultarTodos();
         }
 
+        public List<clsPermiso> consultarPermisos()
+        {
+            return _permisoDao.consultarPermisosDos();
+        }
+
         public clsRol consultarID(int id)
         {
             return _rolDao.consultarPorID(id);
@@ -102,6 +107,7 @@ using System.Threading.Tasks;
         {
             return _permisoDao.consultarPorIDs(idModulo, idRol);
         }
+
 
 
         public void modificarPermiso(clsPermiso permi)

@@ -13,8 +13,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-//MOSTRAR MODULOS EXISTENTES
-//MOSTRAR LOS PERMISOS AQUE TIENE CADA ROL
 
 namespace UI
 {
@@ -23,6 +21,8 @@ namespace UI
         private readonly SeguridadService _Service;//ACCESO A SERVICE
 
         List<clsRol> lista;
+        List<clsModulo> listaModulos;
+        List<clsPermiso> listaPermisos;
 
         public frmMantenimientoRoles()
         {
@@ -39,11 +39,18 @@ namespace UI
         {
             cargarRolesBox();
             cargarModulosBox();
-            this.lista = _Service.consultarRoles(); // traigo los roles actualizados
+
+            this.lista = _Service.consultarRoles(); //TRAIGO LOS ROLES ACTUALIZADS DEL DB
             cargarListaRoles(this.lista);
+
+            this.listaModulos = _Service.consultarModulos();    
+            cargarListaModulos(this.listaModulos);
+
+            this.listaPermisos = _Service.consultarPermisos();
+            cargarListaPermisos(this.listaPermisos);
         }
 
-        public void cargarRolesBox()//FUNCIONA
+        public void cargarRolesBox()//COMBO BOXROLES
         {
             try
             {
@@ -58,7 +65,7 @@ namespace UI
             }
         }
 
-        private void cargarModulosBox()//FUNCIONA
+        private void cargarModulosBox()//COMBO BOX MODULO
         {
             try
             {
@@ -73,12 +80,12 @@ namespace UI
             }
         }
 
-        public void cargarListaRoles(List<clsRol> lista)
+        public void cargarListaRoles(List<clsRol> lista)//MOSTRAR LISTA DE ROLES
         {
 
-            listView1.Items.Clear();
+            listView1.Items.Clear();//EVITAR CELDAS VACIAS Y DATOS REPEDITOS
 
-            foreach (clsRol roles in lista)
+            foreach (clsRol roles in lista)//CICLO QUE MUESTRA CADA ROL DE LA DB
             {
                 ListViewItem item = new ListViewItem(roles.nombreRol);
                 item.SubItems.Add(roles.descripcionRol);
@@ -87,17 +94,48 @@ namespace UI
             }
         }
 
-        private void buttonCrearRol_Click(object sender, EventArgs e)
+        public void cargarListaModulos(List<clsModulo> listaModulos)//MOSTRAR LISTA DE ROLES
+        {
+
+            listView2.Items.Clear();//EVITAR CELDAS VACIAS Y DATOS REPEDITOS
+
+            foreach (clsModulo modul in listaModulos)//CICLO QUE MUESTRA CADA ROL DE LA DB
+            {
+                ListViewItem item = new ListViewItem(modul.nombreModulo);
+                item.SubItems.Add(modul.descripcionModulo);
+                listView2.Items.Add(item);
+                item.Tag = modul.idModulo;
+            }
+        }
+
+        public void cargarListaPermisos(List<clsPermiso> listaPermisos)//MOSTRAR LISTA DE PERMISOS
+        {
+
+            listView3.Items.Clear();//EVITAR CELDAS VACIAS Y DATOS REPEDITOS
+
+            foreach (clsPermiso pe in listaPermisos)//CICLO QUE MUESTRA CADA ROL DE LA DB
+            {
+                ListViewItem item = new ListViewItem(pe.rol.nombreRol);
+                item.SubItems.Add(pe.modulo.nombreModulo);
+                item.SubItems.Add(pe.consultar ? "    ✔" : "     ✘");
+                item.SubItems.Add(pe.crear ? "    ✔" : "     ✘");
+                item.SubItems.Add(pe.editar ? "    ✔" : "     ✘");
+                item.SubItems.Add(pe.eliminar ? "    ✔" : "     ✘");
+
+                listView3.Items.Add(item);
+            }
+        }
+
+        private void buttonCrearRol_Click(object sender, EventArgs e)//CREAR ROL
         {
             try
-            {//FALTA EXEPCION DE NULL
-                clsRol roool = new clsRol();
+            {
+                clsRol roool = new clsRol();//CREO UN ESPACIO PARA NUEVO ROL
 
-                roool.nombreRol = textBoxNombreRol.Text;
+                roool.nombreRol = textBoxNombreRol.Text;//LE DOY UN NOMBRE Y DESCRIPCION
                 roool.descripcionRol = richTextBoxDescripcionRol.Text;
 
-                //llamo a mi capa de servicios para crear y guardar el nuevo rol
-                _Service.crearRol(roool);
+                _Service.crearRol(roool);//LE MANDO ROOL A SERVICE PARA CEARLO
                 MessageBox.Show("ROL CREADO CORRECTAMENTE");
 
                 //LIMPIAR CAMPOS
@@ -106,25 +144,25 @@ namespace UI
 
                 cargarListaRoles(_Service.consultarRoles());//ACTUALIZAR LISTA DE ROLES
             }
-            catch (NullException ex)
+            catch (NullException ex)//EXCEPCION DE ESPACIO EN NULL
             {
                 MessageBox.Show(ex.Message);
             }
-            catch (EntityExistDBException ex)//EXEPCION DE ID REPETIDO 
+            catch (EntityExistDBException ex)//EXCEPCION DE ID REPETIDO 
             {
                 MessageBox.Show(ex.Message);
             }
-            catch (NameProductExistDBException ex)//EXEPCION DE NOMBRE REPETIDO
+            catch (NameProductExistDBException ex)//EXCEPCION DE NOMBRE REPETIDO
             {
                 MessageBox.Show(ex.Message);
             }
-            catch (Exception ex)//EXEPCION DESCONOCIDA
+            catch (Exception ex)//EXCEPCION DESCONOCIDA
             {
                 MessageBox.Show("Error desconocido. Contante con el administrador.");
             }
         }
 
-        private void buttonCrearPermiso_Click(object sender, EventArgs e)//FUNCIONA
+        private void buttonCrearPermiso_Click(object sender, EventArgs e)//CREAR PERMISO
         {
             try
             {//CONSULTAR SI EXISTE EN PERMISOS
@@ -133,7 +171,7 @@ namespace UI
                 string nombreRol = comboBox1.DisplayMember;
                 string nombreModulo = comboBox2.DisplayMember;
 
-                var permiso = _Service.consultarPermi(idRol, idModulo);
+                var permiso = _Service.consultarPermi(idModulo, idRol);
 
                 if (permiso != null)//SI EXISTE
                 {
@@ -141,25 +179,25 @@ namespace UI
                     if (result == DialogResult.Yes)
                     {
                         if (!chkConsultar.Checked && !chkEditar.Checked && !chkEliminar.Checked && !chkCrear.Checked)
-                        {
-                            //SI EXISTE Y SE GUARDA VACIO SE ELIMINA DEL DB
+                        {//SI EXISTE Y SE GUARDA VACIO SE ELIMINA DEL DB
                             MessageBox.Show($"PERMISO MODIFICADO, EL ROL {comboBox1.Text} YA NO TIENE PERMISO SOBRE EL MODULO {comboBox2.Text}");
                             _Service.eliminarPermiso(permiso);
+                            cargarListaPermisos(_Service.consultarPermisos());
                         }
                         else
-                        {
-                            //SI EXISTE SE MODIFICA  
+                        {//SI EXISTE SE MODIFICA  
                             permiso.consultar = chkConsultar.Checked;
                             permiso.crear = chkCrear.Checked;
                             permiso.editar = chkEditar.Checked;
                             permiso.eliminar = chkEliminar.Checked;
                             _Service.modificarPermiso(permiso);
+                            cargarListaPermisos(_Service.consultarPermisos());
                             MessageBox.Show("PERMISO MODIFICADO");
                         }
                     }
                 }
-                else//SI NO EXISTE SE CREA
-                {
+                else
+                {//SI NO EXISTE SE CREA
                     if (!chkConsultar.Checked && !chkEditar.Checked && !chkEliminar.Checked && !chkCrear.Checked)
                     {
                         MessageBox.Show("MARQUE ALGUN CHECK");
@@ -176,31 +214,24 @@ namespace UI
                             permi.eliminar = chkEliminar.Checked;
                         }
                         _Service.crearPer(permi);//SE CREA Y SE GUARDA
+                        cargarListaPermisos(_Service.consultarPermisos());
                         MessageBox.Show($" PERMISO DEL ROL {comboBox1.Text} SOBRE EL MODULO {comboBox2.Text} CREADO CORRECTAMENTAMENTE");
                     }
                 }
             }
-            catch (EntityExistDBException ex)
+            catch (Exception ex)//EXCEPCION DESCONOCIDA
             {
-                MessageBox.Show(ex.Message);
-            }
-            catch (NameProductExistDBException ex)
-            {
-                MessageBox.Show(ex.Message);
+                MessageBox.Show("Error desconocido. Contante con el administrador.");
             }
         }
 
-        private void buscarPermiso_Click(object sender, EventArgs e)
+        private void buscarPermiso_Click(object sender, EventArgs e)//BUSCAR Y MOSTRAR PERMISO
         {
-
-            // 1 VERIFICAR QUE EXISTE ID EN DB
             int idRol = Convert.ToInt32(comboBox1.SelectedValue);
             int idModulo = Convert.ToInt32(comboBox2.SelectedValue);
+            var permiso = _Service.consultarPermi(idModulo, idRol); ;//SE LO MANDO A SERVICE PARA VERIFICAR SI EXISTE
 
-            // Llamar al DAO
-            var permiso = _Service.consultarPermi(idRol, idModulo);
-
-            if (permiso != null)// 2 SII EXISTE MOSTRAR PERMISOS
+            if (permiso != null)//SII EXISTE MOSTRAR PERMISOS
             {
                 MessageBox.Show($"EL ROL {comboBox1.Text} TIENE PERMISOS SOBRE EL MODULO {comboBox2.Text}");
 
@@ -209,7 +240,7 @@ namespace UI
                 chkEditar.Checked = permiso.editar;
                 chkEliminar.Checked = permiso.eliminar;
             }
-            else // SI NO EXISTE INDICAR QUE NO TIENE PERMISOS SOBRE EL MODULO{
+            else // SI NO EXISTE INDICAR Y MOSTRAR QUE NO TIENE PERMISOS SOBRE EL MODULO{
             {
                 MessageBox.Show($"EL ROL {comboBox1.Text} NO TIENE PERMISOS SOBRE EL MODULO {comboBox2.Text} SELECIONADO");
 
@@ -234,22 +265,17 @@ namespace UI
 
                     if (rool != null)
                     {
-                        frmEliminarEditar frm = new frmEliminarEditar();
-                        frm.rolSelected = rool;
-                        frm.formPadre = this; //REFERENCIA FRM PADRE
-                        frm.ShowDialog();
+                        frmEliminarEditar frm = new frmEliminarEditar();//SE INSTACIA UN FRM
+                        frm.rolSelected = rool;//SE LE MANDA EL ROOL
+                        frm.formPadre = this; //SE LE MANDA UNA REFERENCIA DEL FRM PADRE
+                        frm.ShowDialog();//SE MUESTRA L FRM
                     }
-                }   
+                }
             }
             catch (Exception)
             {
                 MessageBox.Show("Error al seleccionar el producto de la lista");
             }
-        }
-
-        private void tabPage2_Click(object sender, EventArgs e)
-        {
-
         }
     }
 }

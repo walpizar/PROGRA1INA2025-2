@@ -20,7 +20,7 @@ namespace DAO
         }
 
 
-        public void crearPermiso(clsPermiso permi)//AQUI ESTA EL PROBLEMA
+        public void crearPermiso(clsPermiso permi)//
         {
             _context.permisos.Add(permi);
             _context.SaveChanges();
@@ -80,6 +80,13 @@ namespace DAO
       
         }
 
+        public List<clsPermiso> consultarPermisosDos()
+        {
+            return _context.permisos
+                           .Include(p => p.rol)
+                           .Include(p => p.modulo)
+                           .ToList();
+        }
 
         public void consultarPermisos(int idModulo, int idRol)//MASO MENOS//AUN NO SE USA
         {
