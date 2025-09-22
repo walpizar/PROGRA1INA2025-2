@@ -21,11 +21,6 @@ namespace Services
             return _actiDAO.consultarPorID(id);
         }
 
-        public clsActivos consultarPorID(string id)
-        {
-            throw new NotImplementedException();
-        }
-
         public clsActivos consultarPorNombre(string nombre)
         {
             throw new NotImplementedException();
@@ -38,24 +33,18 @@ namespace Services
 
         public void crear(clsActivos activos)
         {
-            if (_actiDAO.consultarPorID(activos.idActivo) != null)
-            {
-                throw new Exception("El activo ya existe");
-            }
+            _actiDAO.crear(activos);
+        }
+
+        // Borrado lógico: se debe pasar la observación de desecho si aplica
+        public void eliminar(int id, string observacionDesecho = null)
+        {
+            _actiDAO.eliminar(id, observacionDesecho);
         }
 
         public void eliminar(int id)
         {
-            if (_actiDAO.consultarPorID(id) == null)
-            {
-                throw new Exception("El activo no existe");
-            }
-            _actiDAO.eliminar(id);
-        }
-
-        public void eliminar(string id)
-        {
-            throw new NotImplementedException();
+            eliminar(id, null);
         }
 
         public void modificar(clsActivos activos)

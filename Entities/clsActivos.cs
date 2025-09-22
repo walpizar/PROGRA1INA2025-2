@@ -9,7 +9,7 @@ namespace Entities
     public class clsActivos
     {
         [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.None)] // No autonumérico
+        [DatabaseGenerated(DatabaseGeneratedOption.None)] // Ya no es autonumérico
         public int idActivo { get; set; }
 
         [Required]
@@ -19,20 +19,16 @@ namespace Entities
         [StringLength(200, ErrorMessage = "La descripción no puede tener más de 200 caracteres")]
         public string descripcion { get; set; }
 
+        // Estado lógico: true = activo, false = dado de baja
         [Required]
-        [Range(0, 1000, ErrorMessage = "La cantidad debe estar entre 0 y 1000")]
-        [Column("CantidadDisponible", TypeName = "int")]
-        public int cantidadDisponible { get; set; }
+        public bool estado { get; set; }
 
+        // Estado de uso: 0 = disponible, 1 = prestado, 2 = desechado, 3 = en uso, etc.
         [Required]
-        [StringLength(20, ErrorMessage = "El estado no puede tener más de 20 caracteres")]
-        public string estado { get; set; } // Ejemplo: Nuevo, En uso, Reparación, Baja
+        public int estadoUso { get; set; }
 
         [Column(TypeName = "date")]
         public DateTime fechaAdquisicion { get; set; }
-
-        [Range(0, 1000000, ErrorMessage = "El costo debe estar entre 0 y 1,000,000")]
-        public decimal costoUnitario { get; set; }
 
         [StringLength(100, ErrorMessage = "El proveedor no puede tener más de 100 caracteres")]
         public string proveedor { get; set; }
@@ -66,24 +62,12 @@ namespace Entities
         // Relación: Un Activo puede estar en muchas DonacionActivos
         public ICollection<clsDonacionesActivos> donacionActivos { get; set; }
 
-        public clsActivos(int idActivo, string nombreActivo, string descripcion,
-                          int cantidadDisponible, string estado, DateTime fechaAdquisicion,
-                          string proveedor, string ubicacion, int idCategoria,
-                          string usuarioCreacion)
-        {
-            this.idActivo = idActivo;
-            this.nombreActivo = nombreActivo;
-            this.descripcion = descripcion;
-            this.cantidadDisponible = cantidadDisponible;
-            this.estado = estado;
-            this.fechaAdquisicion = fechaAdquisicion;
-            this.proveedor = proveedor;
-            this.ubicacion = ubicacion;
-            this.idCategoria = idCategoria;
-            this.fechaCreacion = DateTime.Now;
-            this.usuarioCreacion = usuarioCreacion;
-            this.devoluciones = new List<clsDevolucion>();
-        }
+        // Nuevos campos para desecho
+        [Column(TypeName = "date")]
+        public DateTime? fechaDesecho { get; set; }
+
+        [StringLength(200, ErrorMessage = "La observación de desecho no puede tener más de 200 caracteres")]
+        public string observacionDesecho { get; set; }
 
         public clsActivos()
         {

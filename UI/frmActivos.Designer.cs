@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             gbxClientes = new GroupBox();
-            txtCantidad = new NumericUpDown();
+            btnLista = new Button();
             cbxCategorias = new ComboBox();
             label6 = new Label();
             txtUbicacion = new TextBox();
@@ -41,23 +41,25 @@
             btnCancelar = new Button();
             txtfecha = new TextBox();
             label4 = new Label();
-            txtEstado = new TextBox();
-            label3 = new Label();
-            label2 = new Label();
             txtDescripcion = new TextBox();
             lblApellido1 = new Label();
             txtNombre = new TextBox();
             lblNombre = new Label();
             txtIdActivo = new TextBox();
             lblId = new Label();
+            lblEstadoUso = new Label();
+            cbxEstadoUso = new ComboBox();
+            lblFechaDesecho = new Label();
+            dtpFechaDesecho = new DateTimePicker();
+            lblObservacionDesecho = new Label();
+            txtObservacionDesecho = new TextBox();
             lblTitulo = new Label();
             gbxClientes.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)txtCantidad).BeginInit();
             SuspendLayout();
             // 
             // gbxClientes
             // 
-            gbxClientes.Controls.Add(txtCantidad);
+            gbxClientes.Controls.Add(btnLista);
             gbxClientes.Controls.Add(cbxCategorias);
             gbxClientes.Controls.Add(label6);
             gbxClientes.Controls.Add(txtUbicacion);
@@ -69,43 +71,49 @@
             gbxClientes.Controls.Add(btnCancelar);
             gbxClientes.Controls.Add(txtfecha);
             gbxClientes.Controls.Add(label4);
-            gbxClientes.Controls.Add(txtEstado);
-            gbxClientes.Controls.Add(label3);
-            gbxClientes.Controls.Add(label2);
             gbxClientes.Controls.Add(txtDescripcion);
             gbxClientes.Controls.Add(lblApellido1);
             gbxClientes.Controls.Add(txtNombre);
             gbxClientes.Controls.Add(lblNombre);
             gbxClientes.Controls.Add(txtIdActivo);
             gbxClientes.Controls.Add(lblId);
+            gbxClientes.Controls.Add(lblEstadoUso);
+            gbxClientes.Controls.Add(cbxEstadoUso);
+            gbxClientes.Controls.Add(lblFechaDesecho);
+            gbxClientes.Controls.Add(dtpFechaDesecho);
+            gbxClientes.Controls.Add(lblObservacionDesecho);
+            gbxClientes.Controls.Add(txtObservacionDesecho);
             gbxClientes.Font = new Font("Segoe UI Variable Display Semib", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
             gbxClientes.Location = new Point(28, 55);
             gbxClientes.Name = "gbxClientes";
-            gbxClientes.Size = new Size(539, 414);
+            gbxClientes.Size = new Size(600, 482);
             gbxClientes.TabIndex = 5;
             gbxClientes.TabStop = false;
             gbxClientes.Text = "Datos Activos:";
             // 
-            // txtCantidad
+            // btnLista
             // 
-            txtCantidad.Location = new Point(121, 163);
-            txtCantidad.Name = "txtCantidad";
-            txtCantidad.Size = new Size(256, 29);
-            txtCantidad.TabIndex = 31;
+            btnLista.Location = new Point(400, 280);
+            btnLista.Name = "btnLista";
+            btnLista.Size = new Size(150, 40);
+            btnLista.TabIndex = 38;
+            btnLista.Text = "Listar Activos";
+            btnLista.UseVisualStyleBackColor = true;
+            btnLista.Click += btnLista_Click;
             // 
             // cbxCategorias
             // 
             cbxCategorias.FormattingEnabled = true;
-            cbxCategorias.Location = new Point(121, 372);
+            cbxCategorias.Location = new Point(150, 317);
             cbxCategorias.Name = "cbxCategorias";
-            cbxCategorias.Size = new Size(256, 29);
+            cbxCategorias.Size = new Size(180, 29);
             cbxCategorias.TabIndex = 30;
             // 
             // label6
             // 
             label6.AutoSize = true;
             label6.Font = new Font("Segoe UI", 9.75F);
-            label6.Location = new Point(36, 378);
+            label6.Location = new Point(40, 320);
             label6.Name = "label6";
             label6.Size = new Size(74, 17);
             label6.TabIndex = 29;
@@ -114,16 +122,16 @@
             // txtUbicacion
             // 
             txtUbicacion.Font = new Font("Segoe UI", 9.75F);
-            txtUbicacion.Location = new Point(121, 323);
+            txtUbicacion.Location = new Point(150, 277);
             txtUbicacion.Name = "txtUbicacion";
-            txtUbicacion.Size = new Size(256, 25);
+            txtUbicacion.Size = new Size(180, 25);
             txtUbicacion.TabIndex = 28;
             // 
             // label5
             // 
             label5.AutoSize = true;
             label5.Font = new Font("Segoe UI", 9.75F);
-            label5.Location = new Point(42, 326);
+            label5.Location = new Point(51, 277);
             label5.Name = "label5";
             label5.Size = new Size(68, 17);
             label5.TabIndex = 27;
@@ -132,16 +140,16 @@
             // txtProveedor
             // 
             txtProveedor.Font = new Font("Segoe UI", 9.75F);
-            txtProveedor.Location = new Point(121, 279);
+            txtProveedor.Location = new Point(150, 230);
             txtProveedor.Name = "txtProveedor";
-            txtProveedor.Size = new Size(256, 25);
+            txtProveedor.Size = new Size(180, 25);
             txtProveedor.TabIndex = 26;
             // 
             // label1
             // 
             label1.AutoSize = true;
             label1.Font = new Font("Segoe UI", 9.75F);
-            label1.Location = new Point(42, 282);
+            label1.Location = new Point(42, 233);
             label1.Name = "label1";
             label1.Size = new Size(72, 17);
             label1.TabIndex = 25;
@@ -149,30 +157,30 @@
             // 
             // btnEliminar
             // 
-            btnEliminar.Location = new Point(410, 207);
+            btnEliminar.Location = new Point(400, 160);
             btnEliminar.Name = "btnEliminar";
-            btnEliminar.Size = new Size(99, 39);
-            btnEliminar.TabIndex = 24;
+            btnEliminar.Size = new Size(150, 40);
+            btnEliminar.TabIndex = 36;
             btnEliminar.Text = "Eliminar";
             btnEliminar.UseVisualStyleBackColor = true;
             btnEliminar.Click += btnEliminar_Click;
             // 
             // btnGuardar
             // 
-            btnGuardar.Location = new Point(410, 146);
+            btnGuardar.Location = new Point(400, 100);
             btnGuardar.Name = "btnGuardar";
-            btnGuardar.Size = new Size(99, 39);
-            btnGuardar.TabIndex = 23;
+            btnGuardar.Size = new Size(150, 40);
+            btnGuardar.TabIndex = 35;
             btnGuardar.Text = "Guardar";
             btnGuardar.UseVisualStyleBackColor = true;
             btnGuardar.Click += btnGuardar_Click;
             // 
             // btnCancelar
             // 
-            btnCancelar.Location = new Point(410, 64);
+            btnCancelar.Location = new Point(400, 220);
             btnCancelar.Name = "btnCancelar";
-            btnCancelar.Size = new Size(99, 39);
-            btnCancelar.TabIndex = 22;
+            btnCancelar.Size = new Size(150, 40);
+            btnCancelar.TabIndex = 37;
             btnCancelar.Text = "Cancelar";
             btnCancelar.UseVisualStyleBackColor = true;
             btnCancelar.Click += btnCancelar_Click;
@@ -180,62 +188,34 @@
             // txtfecha
             // 
             txtfecha.Font = new Font("Segoe UI", 9.75F);
-            txtfecha.Location = new Point(121, 237);
+            txtfecha.Location = new Point(150, 187);
             txtfecha.Name = "txtfecha";
-            txtfecha.Size = new Size(256, 25);
+            txtfecha.Size = new Size(180, 25);
             txtfecha.TabIndex = 21;
             // 
             // label4
             // 
             label4.AutoSize = true;
             label4.Font = new Font("Segoe UI", 9.75F);
-            label4.Location = new Point(7, 240);
+            label4.Location = new Point(6, 190);
             label4.Name = "label4";
             label4.Size = new Size(114, 17);
             label4.TabIndex = 20;
             label4.Text = "Fecha adquisicion:";
             // 
-            // txtEstado
-            // 
-            txtEstado.Font = new Font("Segoe UI", 9.75F);
-            txtEstado.Location = new Point(119, 201);
-            txtEstado.Name = "txtEstado";
-            txtEstado.Size = new Size(258, 25);
-            txtEstado.TabIndex = 19;
-            // 
-            // label3
-            // 
-            label3.AutoSize = true;
-            label3.Font = new Font("Segoe UI", 9.75F);
-            label3.Location = new Point(60, 201);
-            label3.Name = "label3";
-            label3.Size = new Size(51, 17);
-            label3.TabIndex = 18;
-            label3.Text = "Estado:";
-            // 
-            // label2
-            // 
-            label2.AutoSize = true;
-            label2.Font = new Font("Segoe UI", 9.75F);
-            label2.Location = new Point(42, 163);
-            label2.Name = "label2";
-            label2.Size = new Size(63, 17);
-            label2.TabIndex = 16;
-            label2.Text = "Cantidad:";
-            // 
             // txtDescripcion
             // 
             txtDescripcion.Font = new Font("Segoe UI", 9.75F);
-            txtDescripcion.Location = new Point(119, 127);
+            txtDescripcion.Location = new Point(150, 107);
             txtDescripcion.Name = "txtDescripcion";
-            txtDescripcion.Size = new Size(258, 25);
+            txtDescripcion.Size = new Size(180, 25);
             txtDescripcion.TabIndex = 13;
             // 
             // lblApellido1
             // 
             lblApellido1.AutoSize = true;
             lblApellido1.Font = new Font("Segoe UI", 9.75F);
-            lblApellido1.Location = new Point(42, 130);
+            lblApellido1.Location = new Point(40, 110);
             lblApellido1.Name = "lblApellido1";
             lblApellido1.Size = new Size(79, 17);
             lblApellido1.TabIndex = 12;
@@ -244,16 +224,16 @@
             // txtNombre
             // 
             txtNombre.Font = new Font("Segoe UI", 9.75F);
-            txtNombre.Location = new Point(119, 86);
+            txtNombre.Location = new Point(150, 72);
             txtNombre.Name = "txtNombre";
-            txtNombre.Size = new Size(258, 25);
+            txtNombre.Size = new Size(180, 25);
             txtNombre.TabIndex = 11;
             // 
             // lblNombre
             // 
             lblNombre.AutoSize = true;
             lblNombre.Font = new Font("Segoe UI", 9.75F);
-            lblNombre.Location = new Point(52, 89);
+            lblNombre.Location = new Point(40, 75);
             lblNombre.Name = "lblNombre";
             lblNombre.Size = new Size(60, 17);
             lblNombre.TabIndex = 10;
@@ -262,20 +242,77 @@
             // txtIdActivo
             // 
             txtIdActivo.Font = new Font("Segoe UI", 9.75F);
-            txtIdActivo.Location = new Point(119, 52);
+            txtIdActivo.Location = new Point(150, 37);
             txtIdActivo.Name = "txtIdActivo";
-            txtIdActivo.Size = new Size(258, 25);
+            txtIdActivo.Size = new Size(180, 25);
             txtIdActivo.TabIndex = 9;
             // 
             // lblId
             // 
             lblId.AutoSize = true;
             lblId.Font = new Font("Segoe UI", 9.75F);
-            lblId.Location = new Point(76, 55);
+            lblId.Location = new Point(40, 40);
             lblId.Name = "lblId";
             lblId.Size = new Size(23, 17);
             lblId.TabIndex = 8;
             lblId.Text = "ID:";
+            // 
+            // lblEstadoUso
+            // 
+            lblEstadoUso.Font = new Font("Segoe UI", 9.75F);
+            lblEstadoUso.Location = new Point(23, 144);
+            lblEstadoUso.Name = "lblEstadoUso";
+            lblEstadoUso.Size = new Size(110, 17);
+            lblEstadoUso.TabIndex = 15;
+            lblEstadoUso.Text = "Estado de Uso:";
+            // 
+            // cbxEstadoUso
+            // 
+            cbxEstadoUso.DropDownStyle = ComboBoxStyle.DropDownList;
+            cbxEstadoUso.Items.AddRange(new object[] { "Disponible", "Prestado", "Desechado", "En uso" });
+            cbxEstadoUso.Location = new Point(150, 138);
+            cbxEstadoUso.Name = "cbxEstadoUso";
+            cbxEstadoUso.Size = new Size(180, 29);
+            cbxEstadoUso.TabIndex = 16;
+            cbxEstadoUso.SelectedIndexChanged += cbxEstadoUso_SelectedIndexChanged;
+            // 
+            // lblFechaDesecho
+            // 
+            lblFechaDesecho.Font = new Font("Segoe UI", 9.75F);
+            lblFechaDesecho.Location = new Point(40, 355);
+            lblFechaDesecho.Name = "lblFechaDesecho";
+            lblFechaDesecho.Size = new Size(110, 17);
+            lblFechaDesecho.TabIndex = 31;
+            lblFechaDesecho.Text = "Fecha Desecho:";
+            lblFechaDesecho.Visible = false;
+            // 
+            // dtpFechaDesecho
+            // 
+            dtpFechaDesecho.Format = DateTimePickerFormat.Short;
+            dtpFechaDesecho.Location = new Point(150, 352);
+            dtpFechaDesecho.Name = "dtpFechaDesecho";
+            dtpFechaDesecho.Size = new Size(180, 29);
+            dtpFechaDesecho.TabIndex = 32;
+            dtpFechaDesecho.Visible = false;
+            // 
+            // lblObservacionDesecho
+            // 
+            lblObservacionDesecho.Font = new Font("Segoe UI", 9.75F);
+            lblObservacionDesecho.Location = new Point(40, 390);
+            lblObservacionDesecho.Name = "lblObservacionDesecho";
+            lblObservacionDesecho.Size = new Size(130, 17);
+            lblObservacionDesecho.TabIndex = 33;
+            lblObservacionDesecho.Text = "Observación Desecho:";
+            lblObservacionDesecho.Visible = false;
+            // 
+            // txtObservacionDesecho
+            // 
+            txtObservacionDesecho.Location = new Point(150, 390);
+            txtObservacionDesecho.Multiline = true;
+            txtObservacionDesecho.Name = "txtObservacionDesecho";
+            txtObservacionDesecho.Size = new Size(180, 66);
+            txtObservacionDesecho.TabIndex = 34;
+            txtObservacionDesecho.Visible = false;
             // 
             // lblTitulo
             // 
@@ -292,7 +329,7 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(634, 495);
+            ClientSize = new Size(670, 540);
             Controls.Add(gbxClientes);
             Controls.Add(lblTitulo);
             Name = "frmActivos";
@@ -300,7 +337,6 @@
             Load += frmActivos_Load;
             gbxClientes.ResumeLayout(false);
             gbxClientes.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)txtCantidad).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -313,9 +349,12 @@
         private Button btnCancelar;
         private TextBox txtfecha;
         private Label label4;
-        private TextBox txtEstado;
-        private Label label3;
-        private Label label2;
+        private ComboBox cbxEstadoUso;
+        private Label lblEstadoUso;
+        private DateTimePicker dtpFechaDesecho;
+        private Label lblFechaDesecho;
+        private TextBox txtObservacionDesecho;
+        private Label lblObservacionDesecho;
         private TextBox txtDescripcion;
         private Label lblApellido1;
         private TextBox txtNombre;
@@ -329,6 +368,6 @@
         private Label label6;
         private TextBox txtUbicacion;
         private Label label5;
-        private NumericUpDown txtCantidad;
+        private Button btnLista;
     }
 }

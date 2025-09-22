@@ -191,13 +191,11 @@ namespace UI
 
         private void cargarActivos()
         {
-            // Mostrar solo activos con estado "Prestado" o "En uso"
+            // Mostrar solo activos con estadoUso 1 (Prestado) o 3 (En uso)
             List<clsActivos> activos = _activosService.consultarTodos();
             var filtrados = activos
-                .Where(a => a != null && !string.IsNullOrWhiteSpace(a.estado))
-                .Where(a =>
-                    a.estado.Equals("Prestado", StringComparison.OrdinalIgnoreCase) ||
-                    a.estado.Equals("En uso", StringComparison.OrdinalIgnoreCase))
+                .Where(a => a != null)
+                .Where(a => a.estadoUso == 1 || a.estadoUso == 3)
                 .OrderBy(a => a.nombreActivo)
                 .ToList();
 

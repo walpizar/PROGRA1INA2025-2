@@ -16,18 +16,18 @@ namespace UI
     {
         public clsActivos activosSelected { get; set; }
         private readonly ActivosServices _activoService;
-        //private readonly CategoriaActivosServices _categoriaActivosService;
+        // private readonly CategoriaActivosServices _categoriaActivosService;
 
         public frmActivos()
         {
             InitializeComponent();
             _activoService = new ActivosServices();
-           // _categoriaActivosService = new CategoriaActivosServices();
+            // _categoriaActivosService = new CategoriaActivosServices();
         }
 
         private void frmActivos_Load(object sender, EventArgs e)
         {
-            //cargarCombos();
+            llenarCategoriasPrueba(); // Llenar categorías de prueba
             if (activosSelected != null) // acción de modificar
             {
                 this.lblTitulo.Text = "Modificar Activos";
@@ -48,17 +48,29 @@ namespace UI
             }
         }
 
+        private void llenarCategoriasPrueba()
+        {
+            // No cargar categorías de prueba, dejar vacío para que se carguen desde la base de datos
+            cbxCategorias.DataSource = null;
+            cbxCategorias.Items.Clear();
+        }
+
         private void limpiarForm()
         {
-            txtIdActivo.ResetText();
+            txtIdActivo.ResetText(); // Ahora el usuario debe ingresar el ID
             txtNombre.ResetText();
             txtDescripcion.ResetText();
-            txtCantidad.Value = 0;
-            txtEstado.ResetText();
+            cbxEstadoUso.SelectedIndex = 0;
             txtfecha.ResetText();
             txtProveedor.ResetText();
             txtUbicacion.ResetText();
             cbxCategorias.SelectedIndex = -1;
+            dtpFechaDesecho.Value = DateTime.Now;
+            dtpFechaDesecho.Visible = false;
+            lblFechaDesecho.Visible = false;
+            txtObservacionDesecho.ResetText();
+            txtObservacionDesecho.Visible = false;
+            lblObservacionDesecho.Visible = false;
         }
 
         private void cargarForm()
@@ -68,60 +80,133 @@ namespace UI
                 txtIdActivo.Text = activosSelected.idActivo.ToString();
                 txtNombre.Text = activosSelected.nombreActivo;
                 txtDescripcion.Text = activosSelected.descripcion;
-                txtCantidad.Value = activosSelected.cantidadDisponible;
-                txtEstado.Text = activosSelected.estado;
+                cbxEstadoUso.SelectedIndex = activosSelected.estadoUso;
                 txtfecha.Text = activosSelected.fechaAdquisicion.ToString("yyyy-MM-dd");
                 txtProveedor.Text = activosSelected.proveedor;
                 txtUbicacion.Text = activosSelected.ubicacion;
                 cbxCategorias.SelectedValue = activosSelected.idCategoria;
+                if (activosSelected.estadoUso == 2) // Desechado
+                {
+                    dtpFechaDesecho.Visible = true;
+                    lblFechaDesecho.Visible = true;
+                    txtObservacionDesecho.Visible = true;
+                    lblObservacionDesecho.Visible = true;
+                    if (activosSelected.fechaDesecho.HasValue)
+                        dtpFechaDesecho.Value = activosSelected.fechaDesecho.Value;
+                    txtObservacionDesecho.Text = activosSelected.observacionDesecho;
+                }
+                else
+                {
+                    dtpFechaDesecho.Visible = false;
+                    lblFechaDesecho.Visible = false;
+                    txtObservacionDesecho.Visible = false;
+                    lblObservacionDesecho.Visible = false;
+                }
             }
         }
 
-       /* private void cargarCombos()
-        {
-            // Cargar el combo de categorías desde la base de datos
-            //List<clsCategoriaActivos> listaCat = _categoriaActivosService.consultarTodos();
-            cbxCategorias.DataSource = listaCat;
-            cbxCategorias.DisplayMember = "Nombre"; // Ajusta según la propiedad que muestre el nombre
-            cbxCategorias.ValueMember = "Id"; // Ajusta según la propiedad de ID
-        }*/
-       
+        //private void cargarCombos()
+        // {
+        // Cargar el combo de categorías desde la base de datos
+        /* var listaCat = _categoriaActivosService.consultarTodos();
+         cbxCategorias.DataSource = listaCat;
+         cbxCategorias.DisplayMember = "nombreCategoriaActivo"; // Propiedad que muestra el nombre
+         cbxCategorias.ValueMember = "idCategoriaActivo";        // Propiedad de ID
+         cbxCategorias.SelectedIndex = -1; // Opcional: para que no seleccione nada al inicio*/
+
+        // --- Código anterior de ejemplo (comentado) ---
+        /*
+        //List<clsCategoriaActivos> listaCat = _categoriaActivosService.consultarTodos();
+        cbxCategorias.DataSource = listaCat;
+        cbxCategorias.DisplayMember = "Nombre"; // Ajusta según la propiedad que muestre el nombre
+        cbxCategorias.ValueMember = "Id"; // Ajusta según la propiedad de ID
+        */
+        //}
+
         private void btnGuardar_Click(object sender, EventArgs e)
         {
             try
             {
                 if (validarDatos())
                 {
-                    clsActivos activo = activosSelected ?? new clsActivos();
-
-                    activo.idActivo = Convert.ToInt32(txtIdActivo.Text);
-                    activo.nombreActivo = txtNombre.Text;
-                    activo.descripcion = txtDescripcion.Text;
-                    activo.cantidadDisponible = (int)txtCantidad.Value;
-                    activo.estado = txtEstado.Text;
-                    activo.fechaAdquisicion = DateTime.Parse(txtfecha.Text);
-                    activo.proveedor = txtProveedor.Text;
-                    activo.ubicacion = txtUbicacion.Text;
-                    activo.idCategoria = (int)cbxCategorias.SelectedValue;
-
-                    if (activosSelected == null)
+                    if (activosSelected == null) // CREAR
                     {
+                        clsActivos activo = new clsActivos();
+                        activo.idActivo = int.Parse(txtIdActivo.Text); // El usuario debe ingresar el ID
+                        activo.nombreActivo = txtNombre.Text;
+                        activo.descripcion = txtDescripcion.Text;
+                        activo.estado = true;
+                        activo.estadoUso = cbxEstadoUso.SelectedIndex;
+                        activo.fechaAdquisicion = DateTime.Parse(txtfecha.Text);
+                        activo.proveedor = txtProveedor.Text;
+                        activo.ubicacion = txtUbicacion.Text;
+                        activo.idCategoria = (int)cbxCategorias.SelectedValue;
+                        activo.usuarioCreacion = "sistema";
+                        activo.fechaCreacion = DateTime.Now;
+                        activo.usuarioModificacion = "";
+                        activo.fechaModificacion = null;
+                        if (activo.estadoUso == 2)
+                        {
+                            activo.fechaDesecho = dtpFechaDesecho.Value;
+                            activo.observacionDesecho = txtObservacionDesecho.Text;
+                        }
+                        else
+                        {
+                            activo.fechaDesecho = null;
+                            activo.observacionDesecho = null;
+                        }
                         _activoService.crear(activo);
                         MessageBox.Show("Activo creado correctamente");
                     }
-                    else
+                    else // MODIFICAR
                     {
+                        var activo = _activoService.consultarPorID(activosSelected.idActivo);
+                        if (activo == null)
+                        {
+                            MessageBox.Show("No se encontró el activo a modificar.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            return;
+                        }
+                        activo.nombreActivo = txtNombre.Text;
+                        activo.descripcion = txtDescripcion.Text;
+                        activo.estadoUso = cbxEstadoUso.SelectedIndex;
+                        activo.fechaAdquisicion = DateTime.Parse(txtfecha.Text);
+                        activo.proveedor = txtProveedor.Text;
+                        activo.ubicacion = txtUbicacion.Text;
+                        activo.idCategoria = (int)cbxCategorias.SelectedValue;
+                        activo.usuarioModificacion = "sistema";
+                        activo.fechaModificacion = DateTime.Now;
+                        if (activo.estadoUso == 2)
+                        {
+                            activo.fechaDesecho = dtpFechaDesecho.Value;
+                            activo.observacionDesecho = txtObservacionDesecho.Text;
+                        }
+                        else
+                        {
+                            activo.fechaDesecho = null;
+                            activo.observacionDesecho = null;
+                        }
                         _activoService.modificar(activo);
                         MessageBox.Show("Activo modificado correctamente");
                     }
-
                     limpiarForm();
                     this.Close();
                 }
             }
+            catch (FormatException ex)
+            {
+                MessageBox.Show($"Error de formato: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            catch (InvalidCastException ex)
+            {
+                MessageBox.Show($"Error de conversión de datos: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            catch (NullReferenceException ex)
+            {
+                MessageBox.Show($"Referencia nula: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
             catch (Exception ex)
             {
-                MessageBox.Show("Error desconocido. Contacte con el administrador.");
+                MessageBox.Show($"Error desconocido: {ex.Message}\n\nInner: {ex.InnerException?.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -139,12 +224,7 @@ namespace UI
                 txtNombre.Focus();
                 return false;
             }
-            if (txtCantidad.Value < 0)
-            {
-                MessageBox.Show("La cantidad debe ser mayor o igual a 0");
-                txtCantidad.Focus();
-                return false;
-            }
+
             if (string.IsNullOrEmpty(txtfecha.Text) || !DateTime.TryParse(txtfecha.Text, out _))
             {
                 MessageBox.Show("La fecha de adquisición es obligatoria y debe ser válida");
@@ -180,6 +260,31 @@ namespace UI
         private void btnCancelar_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        // Mostrar/ocultar controles de desecho según estadoUso
+        private void cbxEstadoUso_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (cbxEstadoUso.SelectedIndex == 2) // Desechado
+            {
+                dtpFechaDesecho.Visible = true;
+                lblFechaDesecho.Visible = true;
+                txtObservacionDesecho.Visible = true;
+                lblObservacionDesecho.Visible = true;
+            }
+            else
+            {
+                dtpFechaDesecho.Visible = false;
+                lblFechaDesecho.Visible = false;
+                txtObservacionDesecho.Visible = false;
+                lblObservacionDesecho.Visible = false;
+            }
+        }
+
+        private void btnLista_Click(object sender, EventArgs e)
+        {
+            var frmLista = new frmListaActivos();
+            frmLista.ShowDialog();
         }
     }
 }

@@ -25,30 +25,30 @@ namespace DAO.Migrations
             modelBuilder.Entity("Entities.clsActivos", b =>
                 {
                     b.Property<int>("idActivo")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    b.Property<int>("cantidadDisponible")
-                        .HasColumnType("int")
-                        .HasColumnName("CantidadDisponible");
-
-                    b.Property<decimal>("costoUnitario")
-                        .HasColumnType("decimal(18,2)");
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("idActivo"));
 
                     b.Property<string>("descripcion")
                         .IsRequired()
                         .HasMaxLength(200)
                         .HasColumnType("nvarchar(200)");
 
-                    b.Property<string>("estado")
-                        .IsRequired()
-                        .HasMaxLength(20)
-                        .HasColumnType("nvarchar(20)");
+                    b.Property<bool>("estado")
+                        .HasColumnType("bit");
+
+                    b.Property<int>("estadoUso")
+                        .HasColumnType("int");
 
                     b.Property<DateTime>("fechaAdquisicion")
                         .HasColumnType("date");
 
                     b.Property<DateTime>("fechaCreacion")
                         .HasColumnType("datetime");
+
+                    b.Property<DateTime?>("fechaDesecho")
+                        .HasColumnType("date");
 
                     b.Property<DateTime?>("fechaModificacion")
                         .HasColumnType("datetime");
@@ -60,6 +60,11 @@ namespace DAO.Migrations
                         .IsRequired()
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
+
+                    b.Property<string>("observacionDesecho")
+                        .IsRequired()
+                        .HasMaxLength(200)
+                        .HasColumnType("nvarchar(200)");
 
                     b.Property<string>("proveedor")
                         .IsRequired()
@@ -299,12 +304,11 @@ namespace DAO.Migrations
                     b.Property<DateTime>("fechaRegistro")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("personaId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(20)");
-
-                    b.Property<int>("personaTipoId")
+                    b.Property<int>("idDonante")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("idDonante"));
 
                     b.HasKey("personaId", "personaTipoId");
 
