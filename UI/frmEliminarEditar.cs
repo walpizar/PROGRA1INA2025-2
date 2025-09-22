@@ -49,7 +49,8 @@ namespace UI
 
             MessageBox.Show("ROL ELIMINANDO CORRECTAMENTE");
 
-            formPadre.cargarListaRoles(_Service.consultarRoles()); // recargo lista
+            formPadre.cargarListaRoles(_Service.consultarRoles());
+            formPadre.cargarListaPermisos(_Service.consultarPermisos());
 
             this.Close();//CIERRO FRM
         }
