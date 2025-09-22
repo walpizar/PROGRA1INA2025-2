@@ -39,6 +39,9 @@ namespace Entities
 
         [StringLength(100, ErrorMessage = "La ubicación no puede tener más de 100 caracteres")]
         public string ubicacion { get; set; }
+        
+        [ForeignKey("idDonacion")]
+        public int idDonacion { get; set; }
 
         // Campos de auditoría
         [Column(TypeName = "datetime")]
@@ -64,9 +67,6 @@ namespace Entities
         public List<clsDevolucion> devoluciones { get; set; }
 
         // Relación muchos a 1 con Donacion
-        public int idDonacion { get; set; }
-
-        [ForeignKey("idDonacion")]
         public clsDonacion donacion { get; set; }
 
         public clsActivos(int idActivo, string nombreActivo, string descripcion,

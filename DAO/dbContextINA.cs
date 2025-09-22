@@ -17,22 +17,18 @@ namespace DAO
         public DbSet<clsDonacion> donacion { get; set; }
         public DbSet<clsTipoDonacion> TiposDonacion { get; set; }
         public DbSet<clsActivos> activos { get; set; }
-        
-       // public DbSet<clsCategoria> categoria { get; set; }
-        public DbSet<clsCategoriaActivos> categoriaActivos { get; set; }
+        public DbSet<clsCategoriaActivos> categoriasActivos { get; set; }
         public DbSet<clsDepartamentos> departamentos { get; set; }
         public DbSet<clsDevolucion> devolucion { get; set; }
         public DbSet<clsEnfermero> enfermero { get; set; }
         public DbSet<clsEspecialidadMedica> especialidadMedica { get; set; }
         public DbSet<clsMedico> medico { get; set; }
         public DbSet<clsPermisos> permisos { get; set; }
-       // public DbSet<clsProducto> producto { get; set; }
         public DbSet<clsPuestos> puestos { get; set; }
         public DbSet<clsRol> rol { get; set; }
         public DbSet<clsRolPermiso> rolPermiso { get; set; }
         public DbSet<clsUsuario> usuario { get; set; }
         public DbSet<clsModulo> modulos { get; set; }
-
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -54,16 +50,17 @@ namespace DAO
 
             modelBuilder.Entity<clsPersona>().Property(p => p.id)
                 .IsRequired().HasMaxLength(20).ValueGeneratedNever();
+
             modelBuilder.Entity<clsPersona>().Property(p => p.tipoId)
                 .IsRequired()
                 .ValueGeneratedNever();
 
+            // Usuario 1 a 1 con Persona
             modelBuilder.Entity<clsUsuario>()
-                //Define la clave primaria compuesta para clsUsuario
                 .HasKey(u => new { u.personaId, u.personaTipoId });
 
             modelBuilder.Entity<clsUsuario>()
-                .HasOne(u => u.persona)//Establece la relación de 1 a 1(un usuario tiene una persona)
+                .HasOne(u => u.persona)
                 .WithOne()
                 .HasForeignKey<clsUsuario>(u => new { u.personaId, u.personaTipoId })
                 .HasPrincipalKey<clsPersona>(p => new { p.id, p.tipoId });
@@ -126,6 +123,5 @@ namespace DAO
                 .WithMany(d => d.activos)
                 .HasForeignKey(a => a.idDonacion);
         }
-
     }
 }

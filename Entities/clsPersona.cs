@@ -43,6 +43,7 @@ namespace Entities
 
         public bool estado { get; set; }
 
+
         // constructor vacío
         public clsPersona() { }
 
