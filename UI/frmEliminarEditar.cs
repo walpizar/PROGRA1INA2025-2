@@ -51,6 +51,7 @@ namespace UI
 
             formPadre.cargarListaRoles(_Service.consultarRoles());
             formPadre.cargarListaPermisos(_Service.consultarPermisos());
+            formPadre.cargarRolesBox();
 
             this.Close();//CIERRO FRM
         }
