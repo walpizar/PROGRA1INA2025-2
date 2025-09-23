@@ -154,7 +154,7 @@ namespace UI
             Controls.Add(btnCancelar);
             Controls.Add(btnEliminar);
             Name = "frmDevolucion";
-            StartPosition = FormStartPosition.CenterParent;
+            StartPosition = FormStartPosition.CenterScreen;
             Text = "Devolución de Activo";
             Load += frmDevolucion_Load;
             ResumeLayout(false);

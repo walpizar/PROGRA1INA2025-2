@@ -149,7 +149,7 @@
             lblTipoId.AutoSize = true;
             lblTipoId.Location = new Point(98, 72);
             lblTipoId.Name = "lblTipoId";
-            lblTipoId.Size = new Size(64, 15);
+            lblTipoId.Size = new Size(63, 15);
             lblTipoId.TabIndex = 22;
             lblTipoId.Text = "Tipo de ID:";
             // 
@@ -181,7 +181,7 @@
             lblTelefono.AutoSize = true;
             lblTelefono.Location = new Point(100, 274);
             lblTelefono.Name = "lblTelefono";
-            lblTelefono.Size = new Size(56, 15);
+            lblTelefono.Size = new Size(55, 15);
             lblTelefono.TabIndex = 14;
             lblTelefono.Text = "Telefono:";
             // 
@@ -313,6 +313,7 @@
             Controls.Add(lblTituloPaciente);
             Controls.Add(gbxDatosPaciente);
             Name = "frmPaciente";
+            StartPosition = FormStartPosition.CenterScreen;
             Text = "Mantenimiento: Crear Paciente";
             Load += frmPaciente_Load;
             gbxDatosPaciente.ResumeLayout(false);

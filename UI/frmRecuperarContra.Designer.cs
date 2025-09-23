@@ -29,13 +29,13 @@
         private void InitializeComponent()
         {
             gbxRecuperarContra = new GroupBox();
-            lblRecuperarContra = new Label();
             btnCancelarRecuperarContra = new Button();
             btnAceptarRecuperarContra = new Button();
             txtConfirmarContra = new TextBox();
             txtNuevaContra = new TextBox();
             lblConfirmarContra = new Label();
             lblNuevaContra = new Label();
+            lblRecuperarContra = new Label();
             gbxRecuperarContra.SuspendLayout();
             SuspendLayout();
             // 
@@ -52,17 +52,6 @@
             gbxRecuperarContra.Size = new Size(469, 186);
             gbxRecuperarContra.TabIndex = 0;
             gbxRecuperarContra.TabStop = false;
-            // 
-            // lblRecuperarContra
-            // 
-            lblRecuperarContra.AutoSize = true;
-            lblRecuperarContra.Font = new Font("Segoe UI", 15.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            lblRecuperarContra.Location = new Point(103, 18);
-            lblRecuperarContra.Name = "lblRecuperarContra";
-            lblRecuperarContra.Size = new Size(288, 30);
-            lblRecuperarContra.TabIndex = 1;
-            lblRecuperarContra.Text = "Recuperacion de contraseña";
-            lblRecuperarContra.Click += label1_Click;
             // 
             // btnCancelarRecuperarContra
             // 
@@ -86,10 +75,6 @@
             btnAceptarRecuperarContra.TabIndex = 10;
             btnAceptarRecuperarContra.Text = "Aceptar";
             btnAceptarRecuperarContra.UseVisualStyleBackColor = false;
-
-          
-          
-
             // 
             // txtConfirmarContra
             // 
@@ -97,7 +82,6 @@
             txtConfirmarContra.Name = "txtConfirmarContra";
             txtConfirmarContra.Size = new Size(259, 23);
             txtConfirmarContra.TabIndex = 9;
-
             // 
             // txtNuevaContra
             // 
@@ -105,7 +89,6 @@
             txtNuevaContra.Name = "txtNuevaContra";
             txtNuevaContra.Size = new Size(259, 23);
             txtNuevaContra.TabIndex = 8;
-
             // 
             // lblConfirmarContra
             // 
@@ -116,7 +99,7 @@
             lblConfirmarContra.Size = new Size(182, 22);
             lblConfirmarContra.TabIndex = 7;
             lblConfirmarContra.Text = "Confirmar contraseña:";
-
+            // 
             // lblNuevaContra
             // 
             lblNuevaContra.AutoSize = true;
@@ -126,7 +109,17 @@
             lblNuevaContra.Size = new Size(151, 22);
             lblNuevaContra.TabIndex = 6;
             lblNuevaContra.Text = "Nueva contraseña:";
-           
+            // 
+            // lblRecuperarContra
+            // 
+            lblRecuperarContra.AutoSize = true;
+            lblRecuperarContra.Font = new Font("Segoe UI", 15.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblRecuperarContra.Location = new Point(103, 18);
+            lblRecuperarContra.Name = "lblRecuperarContra";
+            lblRecuperarContra.Size = new Size(288, 30);
+            lblRecuperarContra.TabIndex = 1;
+            lblRecuperarContra.Text = "Recuperacion de contraseña";
+            lblRecuperarContra.Click += label1_Click;
             // 
             // frmRecuperarContra
             // 
@@ -138,6 +131,7 @@
             Controls.Add(gbxRecuperarContra);
             FormBorderStyle = FormBorderStyle.None;
             Name = "frmRecuperarContra";
+            StartPosition = FormStartPosition.CenterScreen;
             Text = "frmRecuperarContra";
             gbxRecuperarContra.ResumeLayout(false);
             gbxRecuperarContra.PerformLayout();

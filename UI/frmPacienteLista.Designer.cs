@@ -180,6 +180,7 @@
             Controls.Add(gbxListaPacientes);
             Controls.Add(lblTitulo);
             Name = "frmPacienteLista";
+            StartPosition = FormStartPosition.CenterScreen;
             Text = "Mantenimiento: Pacientes";
             Load += frmPacienteLista_Load;
             gbxListaPacientes.ResumeLayout(false);

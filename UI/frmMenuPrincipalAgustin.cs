@@ -67,6 +67,21 @@ namespace UI
             AbrirFormulario(new frmRecuperarContra());
         }
 
+        private void btnPacientesLista_Click(object sender, EventArgs e)
+        {
+            AbrirFormulario(new frmPacienteLista());
+        }
+
+        private void btnMedicosLista_Click(object sender, EventArgs e)
+        {
+            //No implementado
+        }
+
+        private void btnEnfermerosLista_Click(object sender, EventArgs e)
+        {
+            //No implementado
+        }
+
         private void AbrirFormulario(Form formulario)
         {
             // Limpiar panel de contenido

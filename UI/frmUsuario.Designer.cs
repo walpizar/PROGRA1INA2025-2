@@ -201,6 +201,7 @@
             buttonCancelar.TabIndex = 15;
             buttonCancelar.Text = "Cancelar";
             buttonCancelar.UseVisualStyleBackColor = true;
+            buttonCancelar.Click += buttonCancelar_Click;
             // 
             // buttonGuardar
             // 
@@ -338,6 +339,7 @@
             Controls.Add(lblUsuario);
             Controls.Add(label1);
             Name = "frmUsuario";
+            StartPosition = FormStartPosition.CenterScreen;
             Text = "Mantenimiento: Usuario";
             gbxUsuario.ResumeLayout(false);
             gbxUsuario.PerformLayout();

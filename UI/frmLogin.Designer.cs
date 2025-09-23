@@ -29,11 +29,6 @@
         private void InitializeComponent()
         {
             gbxLogin = new GroupBox();
-
-            
-
-       
-
             btnCancelar = new Button();
             btnAceptar = new Button();
             txtPassword = new TextBox();
@@ -57,10 +52,6 @@
             gbxLogin.TabIndex = 0;
             gbxLogin.TabStop = false;
             // 
-            // linklblOlvidoContra
-            // 
-           
-            // 
             // btnCancelar
             // 
             btnCancelar.BackColor = Color.AliceBlue;
@@ -71,6 +62,7 @@
             btnCancelar.TabIndex = 5;
             btnCancelar.Text = "Cancelar";
             btnCancelar.UseVisualStyleBackColor = false;
+            btnCancelar.Click += btnCancelar_Click_1;
             // 
             // btnAceptar
             // 
@@ -127,6 +119,7 @@
             Controls.Add(gbxLogin);
             FormBorderStyle = FormBorderStyle.None;
             Name = "frmLogin";
+            StartPosition = FormStartPosition.CenterScreen;
             Text = "frmLogin";
             gbxLogin.ResumeLayout(false);
             gbxLogin.PerformLayout();

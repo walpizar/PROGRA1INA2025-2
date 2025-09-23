@@ -78,7 +78,7 @@
             gbxClientes.Controls.Add(lblNombre);
             gbxClientes.Controls.Add(txtIdActivo);
             gbxClientes.Controls.Add(lblId);
-            gbxClientes.Font = new Font("Segoe UI Variable Display Semib", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            gbxClientes.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
             gbxClientes.Location = new Point(28, 55);
             gbxClientes.Name = "gbxClientes";
             gbxClientes.Size = new Size(539, 414);
@@ -90,7 +90,7 @@
             // 
             txtCantidad.Location = new Point(121, 163);
             txtCantidad.Name = "txtCantidad";
-            txtCantidad.Size = new Size(256, 29);
+            txtCantidad.Size = new Size(256, 26);
             txtCantidad.TabIndex = 31;
             // 
             // cbxCategorias
@@ -98,7 +98,7 @@
             cbxCategorias.FormattingEnabled = true;
             cbxCategorias.Location = new Point(121, 372);
             cbxCategorias.Name = "cbxCategorias";
-            cbxCategorias.Size = new Size(256, 29);
+            cbxCategorias.Size = new Size(256, 28);
             cbxCategorias.TabIndex = 30;
             // 
             // label6
@@ -296,6 +296,7 @@
             Controls.Add(gbxClientes);
             Controls.Add(lblTitulo);
             Name = "frmActivos";
+            StartPosition = FormStartPosition.CenterScreen;
             Text = "Mantenimiento: Activos";
             Load += frmActivos_Load;
             gbxClientes.ResumeLayout(false);

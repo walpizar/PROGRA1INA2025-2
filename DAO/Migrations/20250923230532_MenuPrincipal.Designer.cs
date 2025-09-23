@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DAO.Migrations
 {
     [DbContext(typeof(dbContextINA))]
-    [Migration("20250923175452_frmMenu")]
-    partial class frmMenu
+    [Migration("20250923230532_MenuPrincipal")]
+    partial class MenuPrincipal
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -319,6 +319,42 @@ namespace DAO.Migrations
                     b.ToTable("tb_Modulo");
                 });
 
+            modelBuilder.Entity("Entities.clsPaciente", b =>
+                {
+                    b.Property<string>("id")
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
+
+                    b.Property<int>("tipoId")
+                        .HasColumnType("int");
+
+                    b.Property<bool>("estado")
+                        .HasColumnType("bit");
+
+                    b.Property<int>("estadoCivil")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("fecha_crea")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("fecha_ult_mod")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("usuario_crea")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<string>("usuario_ult_mod")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.HasKey("id", "tipoId");
+
+                    b.ToTable("tbPaciente");
+                });
+
             modelBuilder.Entity("Entities.clsPermisos", b =>
                 {
                     b.Property<int>("idPermiso")
@@ -581,6 +617,17 @@ namespace DAO.Migrations
                     b.Navigation("persona");
                 });
 
+            modelBuilder.Entity("Entities.clsPaciente", b =>
+                {
+                    b.HasOne("Entities.clsPersona", "persona")
+                        .WithOne("paciente")
+                        .HasForeignKey("Entities.clsPaciente", "id", "tipoId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("persona");
+                });
+
             modelBuilder.Entity("Entities.clsPermisos", b =>
                 {
                     b.HasOne("Entities.clsModulo", null)
@@ -652,6 +699,12 @@ namespace DAO.Migrations
             modelBuilder.Entity("Entities.clsPermisos", b =>
                 {
                     b.Navigation("RolPermisos");
+                });
+
+            modelBuilder.Entity("Entities.clsPersona", b =>
+                {
+                    b.Navigation("paciente")
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("Entities.clsRol", b =>

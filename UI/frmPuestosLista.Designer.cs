@@ -134,6 +134,7 @@
             Controls.Add(btnNuevo);
             Controls.Add(gbxListaPuesto);
             Name = "frmPuestosLista";
+            StartPosition = FormStartPosition.CenterScreen;
             Text = "Mantenimiento: Puestos";
             Load += frmPuestosLista_Load;
             gbxListaPuesto.ResumeLayout(false);

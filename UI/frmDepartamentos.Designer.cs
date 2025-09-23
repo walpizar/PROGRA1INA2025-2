@@ -156,6 +156,7 @@
             Controls.Add(btnGuardar);
             Controls.Add(gbxDatosDept);
             Name = "frmDepartamentos";
+            StartPosition = FormStartPosition.CenterScreen;
             Text = "frmDepartamentos";
             Load += frmDepartamentos_Load;
             gbxDatosDept.ResumeLayout(false);

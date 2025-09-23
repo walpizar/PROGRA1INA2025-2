@@ -128,6 +128,7 @@
             Controls.Add(btnNuevo);
             Controls.Add(gbxListaDept);
             Name = "frmDepartamentosLista";
+            StartPosition = FormStartPosition.CenterScreen;
             Text = "Mantenimiento: Departamentos";
             Load += frmDepartamentosLista_Load;
             gbxListaDept.ResumeLayout(false);

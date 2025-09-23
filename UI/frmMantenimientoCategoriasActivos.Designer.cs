@@ -335,6 +335,7 @@
             Controls.Add(tabControl1);
             Controls.Add(label1);
             Name = "frmMantenimientoCategoriasActivos";
+            StartPosition = FormStartPosition.CenterScreen;
             Text = "frmMantenimientoCategoriasActivos";
             Load += frmMantenimientoCategoriasActivos_Load;
             tabControl1.ResumeLayout(false);

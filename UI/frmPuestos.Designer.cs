@@ -192,6 +192,7 @@
             Controls.Add(btnGuardar);
             Controls.Add(gbxDatosPuesto);
             Name = "frmPuestos";
+            StartPosition = FormStartPosition.CenterScreen;
             Text = "frmPuestos";
             Load += frmPuestos_Load;
             gbxDatosPuesto.ResumeLayout(false);
