@@ -16,18 +16,19 @@ namespace UI
     {
         public clsActivos activosSelected { get; set; }
         private readonly ActivosServices _activoService;
-        //private readonly CategoriaActivosServices _categoriaActivosService;
+        private readonly CategoriaActivosService _categoriaActivosService;
 
         public frmActivos()
         {
             InitializeComponent();
             _activoService = new ActivosServices();
-           // _categoriaActivosService = new CategoriaActivosServices();
+            _categoriaActivosService = new CategoriaActivosService(new DAO.CategoriaActivosDAO(new DAO.dbContextINA()));
         }
 
         private void frmActivos_Load(object sender, EventArgs e)
         {
-           // cargarCombos();
+            cargarCombos();
+            cbxEstadoUso.SelectedIndexChanged += cbxEstadoUso_SelectedIndexChanged;
             if (activosSelected != null) // acción de modificar
             {
                 this.lblTitulo.Text = "Modificar Activos";
@@ -48,6 +49,24 @@ namespace UI
             }
         }
 
+        private void cbxEstadoUso_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (cbxEstadoUso.SelectedIndex == 2) // Desechado
+            {
+                dtpFechaDesecho.Visible = true;
+                lblFechaDesecho.Visible = true;
+                txtObservacionDesecho.Visible = true;
+                lblObservacionDesecho.Visible = true;
+            }
+            else
+            {
+                dtpFechaDesecho.Visible = false;
+                lblFechaDesecho.Visible = false;
+                txtObservacionDesecho.Visible = false;
+                lblObservacionDesecho.Visible = false;
+            }
+        }
+
         private void limpiarForm()
         {
             txtIdActivo.ResetText();
@@ -59,6 +78,13 @@ namespace UI
             txtProveedor.ResetText();
             txtUbicacion.ResetText();
             cbxCategorias.SelectedIndex = -1;
+            cbxEstadoUso.SelectedIndex = 0;
+            dtpFechaDesecho.Value = DateTime.Now;
+            dtpFechaDesecho.Visible = false;
+            lblFechaDesecho.Visible = false;
+            txtObservacionDesecho.ResetText();
+            txtObservacionDesecho.Visible = false;
+            lblObservacionDesecho.Visible = false;
         }
 
         private void cargarForm()
@@ -74,17 +100,41 @@ namespace UI
                 txtProveedor.Text = activosSelected.proveedor;
                 txtUbicacion.Text = activosSelected.ubicacion;
                 cbxCategorias.SelectedValue = activosSelected.idCategoria;
+                cbxEstadoUso.SelectedIndex = activosSelected.estadoUso;
+                if (activosSelected.estadoUso == 2)
+                {
+                    dtpFechaDesecho.Visible = true;
+                    lblFechaDesecho.Visible = true;
+                    txtObservacionDesecho.Visible = true;
+                    lblObservacionDesecho.Visible = true;
+                    if (activosSelected.fechaDesecho.HasValue)
+                        dtpFechaDesecho.Value = activosSelected.fechaDesecho.Value;
+                    txtObservacionDesecho.Text = activosSelected.observacionDesecho;
+                }
+                else
+                {
+                    dtpFechaDesecho.Visible = false;
+                    lblFechaDesecho.Visible = false;
+                    txtObservacionDesecho.Visible = false;
+                    lblObservacionDesecho.Visible = false;
+                }
             }
         }
 
-       /* private void cargarCombos()
+        private void cargarCombos()
         {
             // Cargar el combo de categorías desde la base de datos
-            //List<clsCategoriaActivos> listaCat = _categoriaActivosService.consultarTodos();
+            var listaCat = _categoriaActivosService.consultarTodos();
             cbxCategorias.DataSource = listaCat;
-            cbxCategorias.DisplayMember = "Nombre"; // Ajusta según la propiedad que muestre el nombre
-            cbxCategorias.ValueMember = "Id"; // Ajusta según la propiedad de ID
-        }*/
+            cbxCategorias.DisplayMember = "nombre"; // Propiedad que muestra el nombre
+            cbxCategorias.ValueMember = "Id"; // Propiedad de ID
+            cbxCategorias.SelectedIndex = -1;
+
+            // Estado de uso: 0 = Disponible, 1 = Prestado, 2 = Desechado, 3 = En uso
+            cbxEstadoUso.Items.Clear();
+            cbxEstadoUso.Items.AddRange(new object[] { "Disponible", "Prestado", "Desechado", "En uso" });
+            cbxEstadoUso.SelectedIndex = 0;
+        }
        
         private void btnGuardar_Click(object sender, EventArgs e)
         {
@@ -103,9 +153,20 @@ namespace UI
                     activo.proveedor = txtProveedor.Text;
                     activo.ubicacion = txtUbicacion.Text;
                     activo.idCategoria = (int)cbxCategorias.SelectedValue;
-
+                    activo.estadoUso = cbxEstadoUso.SelectedIndex;
+                    if (cbxEstadoUso.SelectedIndex == 2)
+                    {
+                        activo.fechaDesecho = dtpFechaDesecho.Value;
+                        activo.observacionDesecho = txtObservacionDesecho.Text;
+                    }
+                    else
+                    {
+                        activo.fechaDesecho = null;
+                        activo.observacionDesecho = null;
+                    }
                     if (activosSelected == null)
                     {
+                        activo.estadoLogico = true; // Nuevo activo siempre activo
                         _activoService.crear(activo);
                         MessageBox.Show("Activo creado correctamente");
                     }
@@ -165,7 +226,7 @@ namespace UI
 
                     if (resp == DialogResult.Yes)
                     {
-                        _activoService.eliminar(activosSelected.idActivo);
+                        _activoService.eliminarLogico(activosSelected.idActivo); // Borrado lógico
                         MessageBox.Show("Activo eliminado correctamente");
                         this.Close();
                     }
