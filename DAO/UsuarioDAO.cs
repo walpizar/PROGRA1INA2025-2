@@ -1,14 +1,16 @@
 ﻿using Common.Interfaces;
 using Entities;
+using Microsoft.EntityFrameworkCore;
 
 namespace DAO
 {
     public class UsuarioDAO : IGenerica<clsUsuario>
     {
-        private dbContextINA _context;
+        private readonly dbContextINA _context;
+        
 
-        public UsuarioDAO() { 
-            _context = new dbContextINA();
+        public UsuarioDAO(dbContextINA context) { 
+            _context = context;
 
         }
 
@@ -20,36 +22,44 @@ namespace DAO
 
         public void modificar(clsUsuario usuario)
         {
-            _context.usuario.Update(usuario);
-            _context.SaveChanges();
+            var existing = _context.usuario
+        .SingleOrDefault(u => u.personaId == usuario.personaId);
 
-        }
-
-        public void eliminar(string id)
-        {
-            // Se busca el usuario primero para evitar un error de referencia nula
-            var usua = _context.usuario.SingleOrDefault(u => u.personaId == id);
-            if (usua != null)
+            if (existing != null)
             {
-                _context.usuario.Remove(usua);
+                _context.Entry(existing).CurrentValues.SetValues(usuario);
                 _context.SaveChanges();
-
             }
 
         }
-        public clsUsuario consultarPorID(string id)
+
+        public void eliminar(string nombreUsuario)
         {
-            return _context.usuario.Find(id);
+            var usua = _context.usuario.SingleOrDefault(u => u.nombre_Usuario == nombreUsuario);
+            if (usua != null)
+            {
+                // Borrado lógico
+                usua.estado = false;
+                _context.usuario.Update(usua);
+                _context.SaveChanges();
+            }
+
         }
 
-        public clsUsuario consultarPorID(int id)
+        public clsUsuario consultarPorID(string id)
         {
-            throw new NotImplementedException();
+            // Asume que 'id' se refiere a 'personaId'.
+            return _context.usuario.SingleOrDefault(u => u.personaId == id);
+        }
+        public clsUsuario consultarPorID(string personaId, int personaTipoId)
+        {
+            return _context.usuario
+                 .SingleOrDefault(u => u.personaId == personaId && u.personaTipoId == personaTipoId);
         }
 
         public clsUsuario consultarPorNombre(string nombre)
         {
-            return _context.usuario.Where(u => u.nombre_usuario.Trim().ToUpper()
+            return _context.usuario.Where(u => u.nombre_Usuario.Trim().ToUpper()
                                               == nombre.Trim().ToUpper()).SingleOrDefault();
         }
 
@@ -59,11 +69,7 @@ namespace DAO
 
         }
 
-        public void eliminar(int id)
-        {
-            throw new NotImplementedException();
-        }
 
-        
+       
     }
 }
