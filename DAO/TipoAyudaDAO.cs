@@ -7,7 +7,7 @@ using System.Linq;
 namespace DAO
 {
     // Clase de acceso a datos para la entidad clsTiposAyudas
-    public class TipoAyudaDAO
+    public class TipoAyudaDAO: IGenerica<clsTiposAyudas>
     {
         private readonly dbContextINA _context;
 
@@ -17,7 +17,7 @@ namespace DAO
         }
 
         // Crear un nuevo tipo de ayuda
-        public void Crear(clsTiposAyudas tiposAyuda)
+        public void crear(clsTiposAyudas tiposAyuda)
         {
             // Añadimos el nuevo tipo de ayuda al contexto y guardamos los cambios
             _context.tiposAyudas.Add(tiposAyuda);
@@ -25,7 +25,7 @@ namespace DAO
         }
 
         // Consultar por ID
-        public clsTiposAyudas ConsultarPorID(int id)
+        public clsTiposAyudas consultarPorID(int id)
         {
             //Retornamos el tipo de ayuda que coincida con el ID proporcionado
             return _context.tiposAyudas
@@ -34,7 +34,7 @@ namespace DAO
         }
 
         // Consultar por nombre
-        public clsTiposAyudas ConsultarPorNombre(string nombre)
+        public clsTiposAyudas consultarPorNombre(string nombre)
         {
             //Retornamos el nombre del tipo de ayuda que coincida con el nombre proporcionado
             return _context.tiposAyudas
@@ -43,7 +43,7 @@ namespace DAO
         }
 
         // Consultar todos
-        public List<clsTiposAyudas> ConsultarTodos()
+        public List<clsTiposAyudas> consultarTodos()
         {
             // Retornamos todos los tipos de ayudas en una lista
             return _context.tiposAyudas
@@ -52,7 +52,7 @@ namespace DAO
         }
 
         // Modificar un tipo de ayuda existente
-        public void Modificar(clsTiposAyudas tiposAyuda)
+        public void modificar(clsTiposAyudas tiposAyuda)
         {
             // Buscar el tipo de ayuda primero para evitar un error de referencia nula
             var existente = _context.tiposAyudas
@@ -68,7 +68,7 @@ namespace DAO
         }
 
         // Eliminar por ID
-        public void Eliminar(int id)
+        public void eliminar(int id)
         {
             // Buscar el tipo de ayuda primero para evitar un error de referencia nula
             var existente = _context.tiposAyudas
@@ -81,6 +81,7 @@ namespace DAO
                 _context.SaveChanges();
             }
         }
+
     }
 }
 

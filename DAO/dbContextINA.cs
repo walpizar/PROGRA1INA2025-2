@@ -21,6 +21,8 @@ namespace DAO
         public DbSet<clsUsuario> usuario { get; set; }
         public DbSet<clsModulo> modulos { get; set; }
 
+        public DbSet<clsTiposAyudas> tiposAyudas { get; set; }
+
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -104,11 +106,8 @@ namespace DAO
                 .WithMany(p => p.RolPermisos)
                 .HasForeignKey(rp => rp.idPermiso);
 
-            // ===============================
-            // Configuración para clsUsuario
-            // ===============================
             modelBuilder.Entity<clsUsuario>()
-                .HasKey(u => new { u.id, u.personaTipoId }); // PK compuesta
+                .HasKey(u => new { u.id, u.personaTipoId }); 
 
             modelBuilder.Entity<clsUsuario>()
                 .Property(u => u.id)
@@ -121,6 +120,7 @@ namespace DAO
                 .IsRequired()
                 .ValueGeneratedNever();
 
+            // Configuración de la relación entre Usuario y Persona
             modelBuilder.Entity<clsUsuario>()
                 .HasOne(u => u.Persona)
                 .WithMany()
@@ -128,12 +128,9 @@ namespace DAO
                 .HasPrincipalKey(p => new { p.id, p.tipoId })
                 .OnDelete(DeleteBehavior.Restrict);
 
-            // ===============================
-            // Configuración para clsTiposAyudas
-            // ===============================
+
             modelBuilder.Entity<clsTiposAyudas>()
                 .HasKey(t => t.id_tipoAyuda);
-
         }
     }
 }

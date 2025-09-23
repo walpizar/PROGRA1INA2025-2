@@ -10,5 +10,6 @@ namespace Common.Interfaces
         T consultarPorID(int id);
         T consultarPorNombre(string nombre);
         List<T> consultarTodos();
+
     }
 }
