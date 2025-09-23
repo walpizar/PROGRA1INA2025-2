@@ -86,6 +86,32 @@ namespace DAO
                 .HasForeignKey<clsMedico>(m => new { m.id, m.tipoId })
                 .OnDelete(DeleteBehavior.Restrict); // Evita el borrado en cascada
 
+
+            /*------------------------------------------------------------*/
+            //clsPaciente configuracion de llave primaria compuesta
+            modelBuilder.Entity<clsPaciente>().HasKey(p => new { p.id, p.tipoId });
+
+            //configuro las propiedades de la llave primaria compuesta para id
+            modelBuilder.Entity<clsPaciente>().Property(p => p.id)
+                .IsRequired()//obligatorio
+                .HasMaxLength(20)//longitud maxima
+                .ValueGeneratedNever();//no se genera automaticamente
+
+            //configuro las propiedades de la llave primaria compuesta para tipoId
+            modelBuilder.Entity<clsPaciente>().Property(p => p.tipoId)
+                .IsRequired()
+                .ValueGeneratedNever();
+
+            //relacion 1 a 1 entre paciente y persona
+            modelBuilder.Entity<clsPaciente>()
+                .HasOne(p => p.persona)//navegacion desde paciente a persona
+                .WithOne(per => per.paciente)//relacion 1 a 1 con persona
+                .HasForeignKey<clsPaciente>(p => new { p.id, p.tipoId })//FK en paciente
+                .HasPrincipalKey<clsPersona>(per => new { per.id, per.tipoId })//PK en persona que es la misma que la FK en paciente
+                .OnDelete(DeleteBehavior.Restrict); // Evita el borrado en cascada
+            /*------------------------------------------------------------*/
+                
+
             //clsDonante configuracion de llave primaria compuesta
             modelBuilder.Entity<clsDonante>().HasKey(m => new { m.personaId, m.personaTipoId });
             modelBuilder.Entity<clsDonante>().Property(m => m.personaId)
