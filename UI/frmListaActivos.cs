@@ -101,5 +101,22 @@ namespace UI
                 MessageBox.Show("Error al seleccionar el Activo de la lista");
             }
         }
+
+        private void btnCrear_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                frmActivos frmActivos = new frmActivos();
+                frmActivos.ShowDialog();
+
+                // Actualizar la lista después de agregar/editar
+                this.lista = _activoService.consultarTodos();
+                cargarLista(lista);
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Error al crear o actualizar el activo");
+            }
+        }
     }
 }
