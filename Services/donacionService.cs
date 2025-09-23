@@ -10,11 +10,11 @@ using System.Threading.Tasks;
 
 namespace Services
 {
-    public class donacionService : IGenerica<clsDonacion>
+    public class DonacionService : IGenerica<clsDonacion>
     {
         //llamado al DAO
         donacionDAO donacionDAO;
-        public donacionService()
+        public DonacionService()
         {
             //instancio el DAO
             donacionDAO = new donacionDAO();
