@@ -8,31 +8,27 @@ using System.Threading.Tasks;
 
 namespace DAO
 {
- 
     public class dbContextINA : DbContext
     {
         // Entidades mapeadas
-        public DbSet<clsPersona> persona { get; set; }
-        public DbSet<clsDonante> donante { get; set; }
-        public DbSet<clsDonacion> donacion { get; set; }
-        public DbSet<clsDonacionDinero> donacionDinero { get; set; }
-        public DbSet<clsActivos> activos { get; set; }
-        public DbSet<clsDonacionesActivos> donacionesActivos { get; set; }
-       // public DbSet<clsCategoria> categoria { get; set; }
-        public DbSet<clsCategoriaActivos> categoriaActivos { get; set; }
-        public DbSet<clsDepartamentos> departamentos { get; set; }
-        public DbSet<clsDevolucion> devolucion { get; set; }
-        public DbSet<clsEnfermero> enfermero { get; set; }
-        public DbSet<clsEspecialidadMedica> especialidadMedica { get; set; }
-        public DbSet<clsMedico> medico { get; set; }
-        public DbSet<clsPermisos> permisos { get; set; }
-       // public DbSet<clsProducto> producto { get; set; }
-        public DbSet<clsPuestos> puestos { get; set; }
-        public DbSet<clsRol> rol { get; set; }
-        public DbSet<clsRolPermiso> rolPermiso { get; set; }
-        public DbSet<clsUsuario> usuario { get; set; }
-        public DbSet<clsModulo> modulos { get; set; }
-
+        public DbSet<clsPersona> Personas { get; set; }
+        public DbSet<clsDonante> Donantes { get; set; }
+        public DbSet<clsDonacion> Donaciones { get; set; }
+        public DbSet<clsDonacionDinero> DonacionesDinero { get; set; }
+        public DbSet<clsActivos> Activos { get; set; }
+        public DbSet<clsDonacionesActivos> DonacionesActivos { get; set; }
+        public DbSet<clsCategoriaActivos> CategoriasActivos { get; set; }
+        public DbSet<clsDepartamentos> Departamentos { get; set; }
+        public DbSet<clsDevolucion> Devoluciones { get; set; }
+        public DbSet<clsEnfermero> Enfermeros { get; set; }
+        public DbSet<clsEspecialidadMedica> EspecialidadesMedicas { get; set; }
+        public DbSet<clsMedico> Medicos { get; set; }
+        public DbSet<clsPermisos> Permisos { get; set; }
+        public DbSet<clsPuestos> Puestos { get; set; }
+        public DbSet<clsRol> Roles { get; set; }
+        public DbSet<clsRolPermiso> RolesPermisos { get; set; }
+        public DbSet<clsUsuario> Usuarios { get; set; }
+        public DbSet<clsModulo> Modulos { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -51,25 +47,22 @@ namespace DAO
             // Clave primaria compuesta para Persona
             modelBuilder.Entity<clsPersona>()
                 .HasKey(p => new { p.id, p.tipoId });
-
             modelBuilder.Entity<clsPersona>().Property(p => p.id)
                 .IsRequired().HasMaxLength(20).ValueGeneratedNever();
             modelBuilder.Entity<clsPersona>().Property(p => p.tipoId)
                 .IsRequired()
                 .ValueGeneratedNever();
 
+            // Clave primaria compuesta para Usuario
             modelBuilder.Entity<clsUsuario>()
-                //Define la clave primaria compuesta para clsUsuario
                 .HasKey(u => new { u.personaId, u.personaTipoId });
-
             modelBuilder.Entity<clsUsuario>()
-                .HasOne(u => u.persona)//Establece la relación de 1 a 1(un usuario tiene una persona)
+                .HasOne(u => u.persona)
                 .WithOne()
                 .HasForeignKey<clsUsuario>(u => new { u.personaId, u.personaTipoId })
                 .HasPrincipalKey<clsPersona>(p => new { p.id, p.tipoId });
-  
 
-            //clsMedico configuracion de llave primaria compuesta   
+            // Clave primaria compuesta para Medico
             modelBuilder.Entity<clsMedico>().HasKey(m => new { m.id, m.tipoId });
             modelBuilder.Entity<clsMedico>().Property(m => m.id)
                 .IsRequired()
@@ -77,25 +70,20 @@ namespace DAO
                 .ValueGeneratedNever();
             modelBuilder.Entity<clsMedico>().Property(m => m.tipoId).IsRequired()
                 .ValueGeneratedNever();
-
-            //relacion 1 a 1 entre medico y persona
-
             modelBuilder.Entity<clsMedico>()
                 .HasOne(m => m.persona)
                 .WithOne()
                 .HasForeignKey<clsMedico>(m => new { m.id, m.tipoId })
-                .OnDelete(DeleteBehavior.Restrict); // Evita el borrado en cascada
+                .OnDelete(DeleteBehavior.Restrict);
 
-
+            // Clave primaria compuesta para Donante y relación 1 a 1 con Persona
             modelBuilder.Entity<clsDonante>()
-                .HasKey(m => new { m.personaId, m.personaTipoId });
-            // Relación 1 a 1 entre Donante y Persona
+                .HasKey(d => new { d.personaId, d.personaTipoId });
             modelBuilder.Entity<clsDonante>()
                 .HasOne(d => d.persona)
                 .WithOne(p => p.donante)
                 .HasForeignKey<clsDonante>(d => new { d.personaId, d.personaTipoId })
                 .HasPrincipalKey<clsPersona>(p => new { p.id, p.tipoId });
-
 
             // Clave primaria compuesta para Enfermero
             modelBuilder.Entity<clsEnfermero>()
@@ -105,6 +93,5 @@ namespace DAO
             modelBuilder.Entity<clsRolPermiso>()
                 .HasKey(rp => new { rp.idRol, rp.idPermiso });
         }
-
     }
 }

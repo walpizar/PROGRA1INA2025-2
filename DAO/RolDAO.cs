@@ -12,35 +12,34 @@ namespace DAO
     {
         private readonly dbContextINA _context;
 
-        // Constructor privado → nadie lo puede usar fuera
-        private RolDAO(dbContextINA context)
+        public RolDAO(dbContextINA context)
         {
             _context = context;
         }
 
-        public async Task<List<clsRol>> GetAllAsync() => await _context.rol.ToListAsync();
+        public async Task<List<clsRol>> GetAllAsync() => await _context.Roles.ToListAsync();
 
         public async Task<clsRol> GetByIdAsync(int id) =>
-            await _context.rol.FindAsync(id);
+            await _context.Roles.FindAsync(id);
 
         public async Task AddAsync(clsRol rol)
         {
-            _context.rol.Add(rol);
+            _context.Roles.Add(rol);
             await _context.SaveChangesAsync();
         }
 
         public async Task UpdateAsync(clsRol rol)
         {
-            _context.rol.Update(rol);
+            _context.Roles.Update(rol);
             await _context.SaveChangesAsync();
         }
 
         public async Task DeleteAsync(int id)
         {
-            var rol = await _context.rol.FindAsync(id);
+            var rol = await _context.Roles.FindAsync(id);
             if (rol != null)
             {
-                _context.rol.Remove(rol);
+                _context.Roles.Remove(rol);
                 await _context.SaveChangesAsync();
             }
         }

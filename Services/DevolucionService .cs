@@ -25,9 +25,11 @@ namespace Services
                 throw new Exception("El activo no existe.");
 
             // Regla de negocio: el estado del activo debe indicar que está prestado/en uso
-            var estado = (activo.estado ?? string.Empty).Trim();
-            if (!string.Equals(estado, "Prestado", StringComparison.OrdinalIgnoreCase) &&
-                !string.Equals(estado, "En uso", StringComparison.OrdinalIgnoreCase))
+            // Eliminar el uso de ?? string.Empty y .Trim() sobre bool
+            // var estado = (activo.estado ?? string.Empty).Trim();
+            // Si necesitas filtrar por estado lógico, usa:
+            bool estado = activo.estado;
+            if (estado != true)
             {
                 throw new Exception("El activo no está prestado. No es posible registrar la devolución.");
             }

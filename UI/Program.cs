@@ -11,11 +11,6 @@ namespace UI
         [STAThread]
         static void Main()
         {
-           
-
-
-
-            
             //ProductoService _productoServ = new ProductoService();
            
 

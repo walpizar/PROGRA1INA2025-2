@@ -11,8 +11,8 @@ namespace Common.Interfaces
     {
         void crear(T entidad);
         void modificar(T entidad);
-        void eliminar(string id);
-        T consultarPorID(string id);
+        void eliminar(int id);
+        T consultarPorID(int id);
         T consultarPorNombre(string nombre);
         List<T> consultarTodos();
 

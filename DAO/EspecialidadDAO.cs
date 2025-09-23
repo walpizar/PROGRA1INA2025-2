@@ -17,40 +17,40 @@ namespace DAO
 
         public void crear(clsEspecialidadMedica especialidad)
         {
-            _context.especialidadMedica.Add(especialidad);
+            _context.EspecialidadesMedicas.Add(especialidad);
             _context.SaveChanges();
         }
 
         public void modificar(clsEspecialidadMedica especialidad)
         {
-            _context.especialidadMedica.Update(especialidad);
+            _context.EspecialidadesMedicas.Update(especialidad);
             _context.SaveChanges();
         }
 
         public void eliminar(int id)
         {
             var esp = consultarPorID(id);
-            _context.especialidadMedica.Remove(esp);
+            _context.EspecialidadesMedicas.Remove(esp);
             _context.SaveChanges();
         }
 
         public clsEspecialidadMedica consultarPorID(int id)
         {
-            return _context.especialidadMedica
+            return _context.EspecialidadesMedicas
                            .Where(e => e.idEspecialidadMedica == id)
                            .SingleOrDefault();
         }
 
         public clsEspecialidadMedica consultarPorNombre(string nombre)
         {
-            return _context.especialidadMedica
+            return _context.EspecialidadesMedicas
                            .Where(e => e.nombreEspecialidad.Trim().ToUpper() == nombre.Trim().ToUpper())
                            .SingleOrDefault();
         }
 
         public List<clsEspecialidadMedica> consultarTodos()
         {
-            return _context.especialidadMedica.ToList();
+            return _context.EspecialidadesMedicas.ToList();
         }
 
         public void eliminar(string id)

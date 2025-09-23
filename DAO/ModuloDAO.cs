@@ -12,36 +12,36 @@ namespace DAO
     {
         private readonly dbContextINA _context;
 
-        private ModuloDAO(dbContextINA context)
+        public ModuloDAO(dbContextINA context)
         {
             _context = context;
         }
 
         public async Task<List<clsModulo>> GetAllAsync() =>
-            await _context.modulos.Include(m => m.permisos).ToListAsync();
+            await _context.Modulos.Include(m => m.permisos).ToListAsync();
 
         public async Task<clsModulo> GetByIdAsync(int id) =>
-            await _context.modulos.Include(m => m.permisos)
+            await _context.Modulos.Include(m => m.permisos)
                                   .FirstOrDefaultAsync(m => m.id_modulo == id);
 
         public async Task AddAsync(clsModulo modulo)
         {
-            _context.modulos.Add(modulo);
+            _context.Modulos.Add(modulo);
             await _context.SaveChangesAsync();
         }
 
         public async Task UpdateAsync(clsModulo modulo)
         {
-            _context.modulos.Update(modulo);
+            _context.Modulos.Update(modulo);
             await _context.SaveChangesAsync();
         }
 
         public async Task DeleteAsync(int id)
         {
-            var modulo = await _context.modulos.FindAsync(id);
+            var modulo = await _context.Modulos.FindAsync(id);
             if (modulo != null)
             {
-                _context.modulos.Remove(modulo);
+                _context.Modulos.Remove(modulo);
                 await _context.SaveChangesAsync();
             }
         }

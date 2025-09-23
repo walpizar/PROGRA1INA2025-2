@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace DAO.Migrations
 {
     /// <inheritdoc />
-    public partial class incial : Migration
+    public partial class MigracionActualizada : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -149,20 +149,22 @@ namespace DAO.Migrations
                 name: "tbActivos",
                 columns: table => new
                 {
-                    idActivo = table.Column<int>(type: "int", nullable: false),
+                    idActivo = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
                     nombreActivo = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
                     descripcion = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: false),
-                    CantidadDisponible = table.Column<int>(type: "int", nullable: false),
-                    estado = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: false),
+                    estado = table.Column<bool>(type: "bit", nullable: false),
+                    estadoUso = table.Column<int>(type: "int", nullable: false),
                     fechaAdquisicion = table.Column<DateTime>(type: "date", nullable: false),
-                    costoUnitario = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     proveedor = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
                     ubicacion = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
                     fechaCreacion = table.Column<DateTime>(type: "datetime", nullable: false),
                     usuarioCreacion = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
                     fechaModificacion = table.Column<DateTime>(type: "datetime", nullable: true),
                     usuarioModificacion = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
-                    idCategoria = table.Column<int>(type: "int", nullable: false)
+                    idCategoria = table.Column<int>(type: "int", nullable: false),
+                    fechaDesecho = table.Column<DateTime>(type: "date", nullable: true),
+                    observacionDesecho = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: false)
                 },
                 constraints: table =>
                 {
@@ -181,6 +183,8 @@ namespace DAO.Migrations
                 {
                     personaId = table.Column<string>(type: "nvarchar(20)", nullable: false),
                     personaTipoId = table.Column<int>(type: "int", nullable: false),
+                    idDonante = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
                     estado = table.Column<bool>(type: "bit", nullable: false),
                     fechaRegistro = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },

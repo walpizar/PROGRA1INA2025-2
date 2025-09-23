@@ -56,6 +56,16 @@ namespace Services
         {
             throw new NotImplementedException();
         }
-        
+
+        // Implementación requerida por la interfaz, pero no utilizada
+        public void eliminar(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public clsUsuario consultarPorID(int id)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

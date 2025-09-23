@@ -19,44 +19,58 @@ namespace DAO
 
         public void crear(clsActivos activo)
         {
-            _context.activos.Add(activo);
+            _context.Activos.Add(activo);
             _context.SaveChanges();
         }
 
         public void modificar(clsActivos activo)
         {
-            _context.activos.Update(activo);
+            var local = _context.Activos.Local.FirstOrDefault(a => a.idActivo == activo.idActivo);
+            if (local != null)
+            {
+                _context.Entry(local).State = Microsoft.EntityFrameworkCore.EntityState.Detached;
+            }
+            _context.Entry(activo).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
             _context.SaveChanges();
         }
 
-        public void eliminar(int id)
+        // Borrado lógico: solo cambia el estado a false, y si corresponde, marca fecha y observación de desecho
+        public void eliminar(int id, string observacionDesecho = null)
         {
             var activo = consultarPorID(id);
             if (activo != null)
             {
-                _context.activos.Remove(activo);
+                activo.estado = false; // Borrado lógico
+                activo.estadoUso = 2; // 2 = desechado
+                activo.fechaDesecho = DateTime.Now;
+                if (!string.IsNullOrWhiteSpace(observacionDesecho))
+                    activo.observacionDesecho = observacionDesecho;
+                _context.Activos.Update(activo);
                 _context.SaveChanges();
             }
         }
 
         public clsActivos consultarPorID(int id)
         {
-            return _context.activos.SingleOrDefault(p => p.idActivo == id);
+            return _context.Activos.SingleOrDefault(p => p.idActivo == id);
         }
 
         public clsActivos consultarPorNombre(string nombre)
         {
-            return _context.activos
+            return _context.Activos
                 .SingleOrDefault(p => p.nombreActivo.Trim().ToUpper() == nombre.Trim().ToUpper());
         }
 
+        // Solo retorna activos no eliminados lógicamente
         public List<clsActivos> consultarTodos()
         {
-            return _context.activos.ToList();
+            return _context.Activos.ToList(); // Mostrar todos, incluso los dados de baja
         }
 
-        public void eliminar(string id)
+        // Implementación requerida por la interfaz, pero no utilizada
+        public void eliminar(int id)
         {
+            // Puedes lanzar una excepción o dejarlo vacío si no se usa
             throw new NotImplementedException();
         }
 
