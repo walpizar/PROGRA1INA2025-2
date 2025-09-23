@@ -26,6 +26,11 @@ namespace Services
             return donanteDAO.consultarPorID(id);
         }
 
+        public clsDonante consultarPorID(int id)
+        {
+            throw new NotImplementedException();
+        }
+
         public clsDonante consultarPorNombre(string nombre)
         {
             throw new NotImplementedException();
@@ -76,6 +81,11 @@ namespace Services
             //SI PASA LA VALIDACION, SE ELIMINA EL DONANTE
             donanteDAO.eliminar(id);
 
+        }
+
+        public void eliminar(int id)
+        {
+            throw new NotImplementedException();
         }
 
         public void modificar(clsDonante entidad)

@@ -22,6 +22,11 @@ namespace DAO
             return context.donacion.FirstOrDefault(d => d.idDonacion.ToString() == id);
         }
 
+        public clsDonacion consultarPorID(int id)
+        {
+            throw new NotImplementedException();
+        }
+
         public clsDonacion consultarPorNombre(string nombre)
         {
             throw new NotImplementedException();
@@ -56,6 +61,11 @@ namespace DAO
                 context.SaveChanges();
             }
 
+        }
+
+        public void eliminar(int id)
+        {
+            throw new NotImplementedException();
         }
 
         public void modificar(clsDonacion entidad)

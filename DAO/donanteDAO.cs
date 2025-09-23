@@ -28,6 +28,11 @@ namespace DAO
                 .FirstOrDefault(d => d.personaId.ToString() == id);
         }
 
+        public clsDonante consultarPorID(int id)
+        {
+            throw new NotImplementedException();
+        }
+
         //no se implementa consultar por nombre
         public clsDonante consultarPorNombre(string nombre)
         {
@@ -86,6 +91,11 @@ namespace DAO
                 dbContextINA.donante.Update(donanteAEliminar);
                 dbContextINA.SaveChanges();
             }
+        }
+
+        public void eliminar(int id)
+        {
+            throw new NotImplementedException();
         }
 
         //metodo de modificar

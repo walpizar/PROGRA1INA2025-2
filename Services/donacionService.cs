@@ -26,6 +26,11 @@ namespace Services
             return donacionDAO.consultarPorID(id);
         }
 
+        public clsDonacion consultarPorID(int id)
+        {
+            throw new NotImplementedException();
+        }
+
         //consultar por nombre no se implementa
         public clsDonacion consultarPorNombre(string nombre)
         {
@@ -73,6 +78,11 @@ namespace Services
             
             //si pasa la validacion, se elimina la donacion
             donacionDAO.eliminar(id);
+        }
+
+        public void eliminar(int id)
+        {
+            throw new NotImplementedException();
         }
 
         public void modificar(clsDonacion entidad)

@@ -21,6 +21,11 @@ namespace Services
             return tipoDonacionDAO.consultarPorID(id);
         }
 
+        public clsTipoDonacion consultarPorID(int id)
+        {
+            throw new NotImplementedException();
+        }
+
         public clsTipoDonacion consultarPorNombre(string nombre)
         {
             //no se implementa porque no es necesario 
@@ -58,6 +63,11 @@ namespace Services
             }
 
             tipoDonacionDAO.eliminar(id);
+        }
+
+        public void eliminar(int id)
+        {
+            throw new NotImplementedException();
         }
 
         public void modificar(clsTipoDonacion entidad)

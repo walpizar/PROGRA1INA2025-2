@@ -61,5 +61,15 @@ namespace DAO
         {
             return context.TiposDonacion.ToList();
         }
+
+        public void eliminar(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public clsTipoDonacion consultarPorID(int id)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
