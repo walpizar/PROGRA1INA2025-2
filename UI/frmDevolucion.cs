@@ -56,7 +56,7 @@ namespace UI
             lblTitulo.Name = "lblTitulo";
             lblTitulo.Size = new Size(170, 21);
             lblTitulo.TabIndex = 0;
-            lblTitulo.Text = "Registrar Devolución";
+            lblTitulo.Text = "Registrar Devoluciï¿½n";
             // 
             // lblActivo
             // 
@@ -83,7 +83,7 @@ namespace UI
             lblFecha.Name = "lblFecha";
             lblFecha.Size = new Size(103, 15);
             lblFecha.TabIndex = 3;
-            lblFecha.Text = "Fecha devolución:";
+            lblFecha.Text = "Fecha devoluciï¿½n:";
             // 
             // dtpFecha
             // 
@@ -155,7 +155,7 @@ namespace UI
             Controls.Add(btnEliminar);
             Name = "frmDevolucion";
             StartPosition = FormStartPosition.CenterParent;
-            Text = "Devolución de Activo";
+            Text = "Devoluciï¿½n de Activo";
             Load += frmDevolucion_Load;
             ResumeLayout(false);
             PerformLayout();
@@ -167,8 +167,8 @@ namespace UI
 
             if (devolucionSelected != null)
             {
-                this.lblTitulo.Text = "Modificar Devolución";
-                this.Text = "Modificar Devolución";
+                this.lblTitulo.Text = "Modificar Devoluciï¿½n";
+                this.Text = "Modificar Devoluciï¿½n";
                 this.btnEliminar.Visible = true;
 
                 dtpFecha.Value = devolucionSelected.fechaDevolucion == default
@@ -181,8 +181,8 @@ namespace UI
             }
             else
             {
-                this.lblTitulo.Text = "Registrar Devolución";
-                this.Text = "Registrar Devolución";
+                this.lblTitulo.Text = "Registrar Devoluciï¿½n";
+                this.Text = "Registrar Devoluciï¿½n";
                 this.btnEliminar.Visible = false;
 
                 dtpFecha.Value = DateTime.Today;
@@ -221,12 +221,12 @@ namespace UI
                 if (devolucionSelected == null)
                 {
                     _devolucionService.crear(devolucion);
-                    MessageBox.Show("Devolución registrada correctamente.");
+                    MessageBox.Show("Devoluciï¿½n registrada correctamente.");
                 }
                 else
                 {
                     _devolucionService.modificar(devolucion);
-                    MessageBox.Show("Devolución modificada correctamente.");
+                    MessageBox.Show("Devoluciï¿½n modificada correctamente.");
                 }
 
                 this.Close();
@@ -237,7 +237,7 @@ namespace UI
             }
             catch (Exception)
             {
-                MessageBox.Show("Error al procesar la devolución. Contacte al administrador.");
+                MessageBox.Show("Error al procesar la devoluciï¿½n. Contacte al administrador.");
             }
         }
 
@@ -271,23 +271,23 @@ namespace UI
             {
                 if (devolucionSelected == null)
                 {
-                    MessageBox.Show("No hay una devolución seleccionada.");
+                    MessageBox.Show("No hay una devoluciï¿½n seleccionada.");
                     return;
                 }
 
-                var resp = MessageBox.Show("¿Está seguro que desea eliminar la devolución?", "Confirmación",
+                var resp = MessageBox.Show("ï¿½Estï¿½ seguro que desea eliminar la devoluciï¿½n?", "Confirmaciï¿½n",
                     MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 
                 if (resp == DialogResult.Yes)
                 {
                     _devolucionService.eliminar(devolucionSelected.idDevolucion);
-                    MessageBox.Show("Devolución eliminada correctamente.");
+                    MessageBox.Show("Devoluciï¿½n eliminada correctamente.");
                     this.Close();
                 }
             }
             catch
             {
-                MessageBox.Show("Error al eliminar la devolución.");
+                MessageBox.Show("Error al eliminar la devoluciï¿½n.");
             }
         }
 

@@ -11,18 +11,31 @@ namespace Services
 {
     public class UsuarioService : IGenerica<clsUsuario>
     {
-      
-        UsuarioDAO _usuarioDAO= new UsuarioDAO();
-        public UsuarioService() { }
 
+        // Declara la dependencia de UsuarioDAO.
+        private readonly UsuarioDAO _usuarioDAO;
+        private object _context;
 
+        // El constructor ahora recibe UsuarioDAO por inyección de dependencias.
+        public UsuarioService(UsuarioDAO usuarioDAO)
+        {
+            _usuarioDAO = usuarioDAO;
+
+        }
         public void crear(clsUsuario usuario)
         {
-            // regla de negocio valida queno exista un Usuario con el mismo id
+            // regla de negocio valida que no exista un Usuario con el mismo id
+            if (_usuarioDAO.consultarPorNombre(usuario.nombre_Usuario) != null)
+            {
+                throw new Exception("El usuario ya existe");
+            }
+            // Validar por ID de persona
             if (_usuarioDAO.consultarPorID(usuario.personaId) != null)
             {
-                throw new Exception("El cliente ya existe");
+                throw new Exception("Ya existe un usuario asociado a esta persona.");
             }
+            usuario.estado = true; // siempre en true al crear
+            // Si el usuario no existe, se procede a crearlo.
             _usuarioDAO.crear(usuario);
         }
 
@@ -52,10 +65,13 @@ namespace Services
             return _usuarioDAO.consultarPorNombre(nombre);
         }
 
+
+
         public List<clsUsuario> consultarTodos()
         {
-            throw new NotImplementedException();
+            return _usuarioDAO.consultarTodos();
         }
-        
+
+
     }
 }
