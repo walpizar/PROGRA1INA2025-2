@@ -18,7 +18,7 @@ namespace Entities
         [StringLength(300)]
         public string descripcion { get; set; }
 
-        // ===== Responsable =====
+        //Responsable
         [Required]
         [StringLength(20)]
         public string id_responsable { get; set; }
@@ -26,7 +26,7 @@ namespace Entities
         [Required]
         public int personaTipoId_responsable { get; set; }
 
-        // ===== Auditoría =====
+        //Auditoría
         [Required]
         [StringLength(20)]
         public string id_usuarioCrea { get; set; }
@@ -50,13 +50,6 @@ namespace Entities
         [Required]
         public bool estado { get; set; }
 
-        // Constructor vacío para EF
-        public clsTiposAyudas()
-        {
-            fecha_crea = DateTime.Now;
-            fecha_ultimaModificacion = DateTime.Now;
-            estado = true;
-        }
 
         // Constructor con datos clave
         public clsTiposAyudas(

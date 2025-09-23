@@ -47,7 +47,7 @@ namespace Services
                 if (!tiposAyudas.estado) // Si no lo setearon, lo dejamos activo
                     tiposAyudas.estado = true;
 
-                _tipDao.Crear(tiposAyudas);
+                _tipDao.crear(tiposAyudas);
             }
             catch (Exception ex)
             {
@@ -63,7 +63,7 @@ namespace Services
                     throw new ArgumentNullException(nameof(tiposAyudas), "El objeto tipo de ayuda no puede ser nulo.");
                 if (tiposAyudas.id_tipoAyuda <= 0)
                     throw new ArgumentException("El ID del tipo de ayuda no es válido.");
-                var existente = _tipDao.ConsultarPorID(tiposAyudas.id_tipoAyuda);
+                var existente = _tipDao.consultarPorID(tiposAyudas.id_tipoAyuda);
                 if (string.IsNullOrWhiteSpace(tiposAyudas.nombre))
                     throw new ArgumentException("El nombre del tipo de ayuda no puede estar vacío");
                 if (string.IsNullOrWhiteSpace(tiposAyudas.id_responsable))
@@ -71,7 +71,7 @@ namespace Services
                 if (string.IsNullOrWhiteSpace(tiposAyudas.id_usuarioUltimaModificacion))
                     throw new ArgumentException("Debe asignarse el usuario de última modificación");
                 tiposAyudas.fecha_ultimaModificacion = DateTime.Now;
-                _tipDao.Modificar(tiposAyudas);
+                _tipDao.modificar(tiposAyudas);
             }
             catch (Exception ex)
             {
@@ -86,10 +86,10 @@ namespace Services
             {
                 if (id <= 0)
                     throw new ArgumentException("El ID del tipo de ayuda no es válido.");
-                var existente = _tipDao.ConsultarPorID(id);
+                var existente = _tipDao.consultarPorID(id);
                 //if (existente == null)
                     //throw new NotFoundException($"No se encontró un tipo de ayuda con ID {id}.");
-                _tipDao.Eliminar(id);
+                _tipDao.eliminar(id);
             }
             catch (Exception ex)
             {
@@ -99,12 +99,12 @@ namespace Services
         }
         public List<clsTiposAyudas> ConsultarTodos()
         {
-            return _tipDao.ConsultarTodos();
+            return _tipDao.consultarTodos();
         }
 
         public clsTiposAyudas ConsultarPorID(int id)
         {
-            return _tipDao.ConsultarPorID(id);
+            return _tipDao.consultarPorID(id);
         }
 
 
