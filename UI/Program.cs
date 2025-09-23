@@ -28,6 +28,13 @@ namespace UI
         
         Application.Run(new frmDonanteLista());
 
+        //solo ejemplo
+        //Application.Run(new frmPacienteLista());
+
+        
+        //Application.Run(new frmActivos());
+
+
         }
     }
 }

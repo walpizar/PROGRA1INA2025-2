@@ -30,8 +30,8 @@ namespace DAO
         public DbSet<clsRolPermiso> rolPermiso { get; set; }
         public DbSet<clsUsuario> usuario { get; set; }
         public DbSet<clsModulo> modulos { get; set; }
+        public DbSet<clsPaciente> paciente { get; set; }
         public DbSet<clsCategoriaActivos> categoriaActivos { get; set; }
-
 
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -48,13 +48,12 @@ namespace DAO
         {
             base.OnModelCreating(modelBuilder);
 
-            // Clave primaria compuesta para Persona
-            modelBuilder.Entity<clsPersona>()
-                .HasKey(p => new { p.id, p.tipoId });
+
 
             // Clave primaria compuesta para Persona
             modelBuilder.Entity<clsPersona>()
                 .HasKey(p => new { p.id, p.tipoId });
+           
             modelBuilder.Entity<clsPersona>().Property(p => p.id)
                 .IsRequired().HasMaxLength(20).ValueGeneratedNever();
 
@@ -71,14 +70,15 @@ namespace DAO
 
             //clsMedico configuracion de llave primaria compuesta   
             modelBuilder.Entity<clsMedico>().HasKey(m => new { m.id, m.tipoId });
-
-            modelBuilder.Entity<clsMedico>().Property(m => new { m.id, m.tipoId })
-                 .IsRequired()
-                .HasMaxLength(20)
+            modelBuilder.Entity<clsMedico>().Property(m => m.id)
+                .IsRequired()
+                .HasMaxLength(20)        // use esto solo si 'id' es string
                 .ValueGeneratedNever();
 
+            modelBuilder.Entity<clsMedico>().Property(m => m.tipoId)
+                .IsRequired()
+                .ValueGeneratedNever();  // no ponga HasMaxLength si 'tipoId' es int
 
-            //relacion 1 a 1 entre medico y persona
 
             modelBuilder.Entity<clsMedico>()
                 .HasOne(m => m.persona)
@@ -110,7 +110,7 @@ namespace DAO
                 .HasPrincipalKey<clsPersona>(per => new { per.id, per.tipoId })//PK en persona que es la misma que la FK en paciente
                 .OnDelete(DeleteBehavior.Restrict); // Evita el borrado en cascada
             /*------------------------------------------------------------*/
-                
+
 
             //clsDonante configuracion de llave primaria compuesta
             modelBuilder.Entity<clsDonante>().HasKey(m => new { m.personaId, m.personaTipoId });

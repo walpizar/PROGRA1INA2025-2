@@ -44,6 +44,9 @@ namespace Entities
         public bool estado { get; set; }
 
 
+        //relacion de 1 a 1 con paciente 
+        public clsPaciente paciente { get; set; }
+
         // constructor vacío
         public clsPersona() { }
 

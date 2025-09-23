@@ -31,21 +31,14 @@ namespace Common.Enums
         }
 
 
-        public enum FamiliaProducto
-        {
-            Electronica = 1,
-            Ropa = 2,
-            Hogar = 3,
-            Deportes = 4,
-            Juguetes = 7
-        }
+        
         public enum frecuencia
         {
             Mensual = 1,
             Anual = 2
         }
 
-        public enum Tipotransaccion
+        public enum tipoTransaccion
         {
             Efectivo = 1,
             Transferencia = 2,
