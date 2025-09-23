@@ -21,20 +21,23 @@ namespace UI
             InitializeComponent();
             _tipoAyudasService = new TipoAyudasService();
 
-
         }
 
+        // Abrir el formulario para crear un nuevo tipo de ayuda
         private void btnNuevo_Click(object sender, EventArgs e)
         {
+            //Crear una instancia del formulario de tipo de ayuda
             frmTipoAyuda frmTipoAyuda = new frmTipoAyuda();
+            // Mostrar el formulario como un diálogo modal
             if (frmTipoAyuda.ShowDialog() == DialogResult.OK)
             {
+                // Refrescar la lista después de cerrar el formulario
                 cargarTiposAyuda();
             }
 
         }
 
-
+        // Método para cargar y mostrar los tipos de ayuda en el ListView
         private void cargarTiposAyuda()
         {
             lvtCatalogoTipoAyuda.Items.Clear(); // limpiar filas

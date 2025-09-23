@@ -27,7 +27,7 @@ namespace UI
             _usuarioService = new UsuarioService();
         }
 
-
+        //Metodo para limpiar el formulario
         private void limpiarForm()
         {
             txtNombre.ResetText();
@@ -77,7 +77,6 @@ namespace UI
             grbTiposAyudas.TabIndex = 1;
             grbTiposAyudas.TabStop = false;
             grbTiposAyudas.Text = "Datos tipos de ayudas";
-            grbTiposAyudas.Enter += grbTiposAyudas_Enter;
             // 
             // cboResponsable
             // 
@@ -226,7 +225,7 @@ namespace UI
 
             if (selectTiposAyudas == null)
             {
-                // Caso: nuevo registro
+                // Caso nuevo registro
                 btnGuardar.Visible = true;
                 btnEliminar.Visible = false;
                 btnModificar.Visible = false;
@@ -234,7 +233,7 @@ namespace UI
             }
             else
             {
-                // Caso: edición
+                // Caso edición
                 btnEliminar.Visible = true;
                 btnCancelar.Visible = true;
                 btnModificar.Visible = true;
@@ -271,13 +270,13 @@ namespace UI
                     tiposAyudas.nombre = txtNombre.Text;
                     tiposAyudas.descripcion = txtDescripcion.Text;
 
-                    // 👇 Corregido: tomar el usuario seleccionado
+                    //tomar el usuario seleccionado
                     var usuarioSeleccionado = (clsUsuario)cboResponsable.SelectedItem;
 
                     tiposAyudas.id_responsable = usuarioSeleccionado.id;
                     tiposAyudas.personaTipoId_responsable = usuarioSeleccionado.personaTipoId;
 
-                    // Auditoría (asumimos que el usuario logueado es el que crea)
+                    // Auditoría 
                     tiposAyudas.id_usuarioCrea = usuarioSeleccionado.id;
                     tiposAyudas.personaTipoId_usuarioCrea = usuarioSeleccionado.personaTipoId;
                     tiposAyudas.id_usuarioUltimaModificacion = usuarioSeleccionado.id;
@@ -301,55 +300,54 @@ namespace UI
             }
 
         }
+
+        //cargar los combos
         private void cargarCombos()
         {
+            //Creamos la lista y cargamos el combo de los responsables
             List<clsUsuario> listaCat = _usuarioService.consultarTodos();
             cboResponsable.DataSource = listaCat;
             cboResponsable.DisplayMember = "id";
             cboResponsable.ValueMember = "id";
         }
 
+        //Metodo para el evento click del boton cancelar
         private void btnCancelar_Click(object sender, EventArgs e)
         {
+            //Cerrar el formulario sin guardar cambios
             this.Close();
         }
 
-        private void cboResponsable_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-
-        }
-
+        
         private void cboResponsable_SelectedIndexChanged_1(object sender, EventArgs e)
         {
             if (cboResponsable.SelectedItem != null)
             {
                 clsUsuario usuarioSeleccionado = (clsUsuario)cboResponsable.SelectedItem;
-
-
             }
-
         }
 
-        private void grbTiposAyudas_Enter(object sender, EventArgs e)
-        {
-
-        }
         private Button btnEliminar;
 
+        //Metodo para el evento click del boton cancelar
         private void btnCancelar_Click_1(object sender, EventArgs e)
         {
+            //Cerrar el formulario sin guardar cambios
             this.Close();
         }
 
+        //Metodo para el evento click del boton eliminar
         private void btnEliminar_Click(object sender, EventArgs e)
         {
+            //Validar datos que item seleccionado no sea null
             if (selectTiposAyudas != null)
             {
+                //Mensaje de confirmacion
                 var confirm = MessageBox.Show("¿Está seguro de eliminar este tipo de ayuda?",
                                               "Confirmar eliminación",
                                               MessageBoxButtons.YesNo);
 
+                //Si el usuario confirma la eliminacion
                 if (confirm == DialogResult.Yes)
                 {
                     _tipoAyudasService.Eliminar(selectTiposAyudas.id_tipoAyuda);
@@ -359,6 +357,7 @@ namespace UI
                 }
                 else
                 {
+                    //Mensaje de cancelacion
                     MessageBox.Show("El tipo de ayuda " + selectTiposAyudas.nombre + " no se elimino");
                 }
             }
@@ -367,15 +366,19 @@ namespace UI
         }
         private Button btnModificar;
 
-
+        //Metodo para el evento click del boton modificar
         private void btnModificar_Click_1(object sender, EventArgs e)
         {
+           
             try
             {
+                //Validar datos que item seleccionado no sea null
                 if (selectTiposAyudas != null)
                 {
+                    //tomar el usuario seleccionado
                     var usuarioSeleccionado = (clsUsuario)cboResponsable.SelectedItem;
 
+                    //Actualizar los datos del tipo de ayuda
                     selectTiposAyudas.nombre = txtNombre.Text;
                     selectTiposAyudas.descripcion = txtDescripcion.Text;
                     selectTiposAyudas.id_responsable = usuarioSeleccionado.id;
@@ -385,8 +388,10 @@ namespace UI
                     selectTiposAyudas.personaTipoId_usuarioUltimaModificacion = usuarioSeleccionado.personaTipoId;
                     selectTiposAyudas.fecha_ultimaModificacion = DateTime.Now;
 
+                    //Llamar al servicio para modificar el tipo de ayuda
                     _tipoAyudasService.modificar(selectTiposAyudas);
 
+                    //Mostrar mensaje de éxito y cerrar el formulario
                     MessageBox.Show("Tipo de ayuda actualizado correctamente.");
                     this.DialogResult = DialogResult.OK;
                     this.Close();
@@ -394,6 +399,7 @@ namespace UI
             }
             catch (Exception ex)
             {
+                //messaje de error
                 MessageBox.Show("Error al modificar: " + ex.Message);
             }
 

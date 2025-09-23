@@ -25,8 +25,6 @@ namespace UI
         ApplicationConfiguration.Initialize();
         Application.Run(new frmListaTipoAyudas());
 
-        //solo ejemplo
-        //Application.Run(new frmLogin());
 
         }
     }

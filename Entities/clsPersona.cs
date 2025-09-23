@@ -40,7 +40,10 @@ namespace Entities
 
         public bool estado { get; set; }
 
-        //constructor vacio
+        // relación 1 a 1 con donante en camelCase
+        public clsDonante donante { get; set; }
+
+        // constructor vacío
         public clsPersona() { }
 
         //constructor con parametros
