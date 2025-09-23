@@ -121,7 +121,7 @@
             tabPage1.Location = new Point(4, 30);
             tabPage1.Name = "tabPage1";
             tabPage1.Padding = new Padding(3);
-            tabPage1.Size = new Size(680, 320);
+            tabPage1.Size = new Size(692, 320);
             tabPage1.TabIndex = 0;
             tabPage1.Text = "Editar Permisos";
             // 
@@ -264,6 +264,7 @@
             // 
             listView1.Columns.AddRange(new ColumnHeader[] { Nombre, Descripcion });
             listView1.Font = new Font("Arial", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            listView1.GridLines = true;
             listView1.Items.AddRange(new ListViewItem[] { listViewItem1, listViewItem2, listViewItem3 });
             listView1.Location = new Point(27, 17);
             listView1.Name = "listView1";
@@ -302,7 +303,7 @@
             tabPage3.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             tabPage3.Location = new Point(4, 30);
             tabPage3.Name = "tabPage3";
-            tabPage3.Size = new Size(680, 320);
+            tabPage3.Size = new Size(692, 320);
             tabPage3.TabIndex = 2;
             tabPage3.Text = "Crear un nuevo rol";
             // 
@@ -364,6 +365,7 @@
             // 
             listView2.Columns.AddRange(new ColumnHeader[] { columnHeader1, columnModulo });
             listView2.Font = new Font("Arial", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            listView2.GridLines = true;
             listView2.Items.AddRange(new ListViewItem[] { listViewItem4, listViewItem5, listViewItem6 });
             listView2.Location = new Point(32, 13);
             listView2.Name = "listView2";
@@ -396,6 +398,7 @@
             // 
             listView3.Columns.AddRange(new ColumnHeader[] { columnHeader2, columnHeader3, columnHeader4, columnHeader5, columnHeader6, columnHeader7 });
             listView3.Font = new Font("Arial", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            listView3.GridLines = true;
             listView3.Items.AddRange(new ListViewItem[] { listViewItem7, listViewItem8, listViewItem9 });
             listView3.Location = new Point(32, 13);
             listView3.Name = "listView3";

@@ -37,6 +37,8 @@ namespace DAO
         public DbSet<clsUsuario> usuario { get; set; }
         public DbSet<clsModulo> modulos { get; set; }////
 
+        public DbSet<clsVisitasDomiciliares> visitasDomiciliares { get; set; }
+
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)//PONER MI DIRECCION
         {

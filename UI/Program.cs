@@ -1,4 +1,5 @@
 using DAO;
+using Entities;
 using Services;
 
 namespace UI
@@ -27,7 +28,7 @@ namespace UI
         //Application.Run(new frmProductoLista());
 
                 // Inyectamos el servicio en el formulario
-                Application.Run(new frmMantenimientoRoles());
+                Application.Run(new frmVisitasDomiciliarias());
             }
         }
     }

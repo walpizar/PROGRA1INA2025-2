@@ -44,6 +44,5 @@ namespace UI
             this.Hide();
 
         }
-
     }
 }
