@@ -25,8 +25,8 @@ namespace UI
         ApplicationConfiguration.Initialize();
         Application.Run(new frmEnfermeroLista());
 
-        //solo ejemplo
-        //Application.Run(new frmLogin());
+        
+        Application.Run(new frmEspecialidad());
 
         }
     }

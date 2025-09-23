@@ -181,5 +181,20 @@ namespace DAO
             .Where(m => m.persona.estado == true)
             .ToList();
         }
+
+        public void eliminar(string id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public clsMedico consultarPorID(string id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public clsMedico consultarPorID(int id)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

@@ -219,5 +219,20 @@ namespace Services
                 throw new Exception($"Error en servicio al consultar todos los enfermeros: {ex.Message}", ex);
             }
         }
+
+        public void eliminar(string id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public clsEnfermero consultarPorID(string id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public clsEnfermero consultarPorID(int id)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

@@ -15,7 +15,6 @@ namespace Entities
         public string id { get; set; }
         public int tipoId { get; set; }
 
-
         [Required(ErrorMessage = "El nombre es obligatorio.")]
         [StringLength(50, ErrorMessage = "El nombre no puede superar los 50 caracteres.")]
         public string nombre { get; set; }
@@ -50,25 +49,7 @@ namespace Entities
         // constructor vacío
         public clsPersona() { }
 
-        //constructor con parametros
-        public clsPersona(string id, int tipoId, string nombre, string apellido1, string apellido2, DateTime fechaNac, string email, string direccion, string telefono, bool estado)
-        {
-            this.id = id;
-            this.tipoId = tipoId; 
-            this.nombre = nombre;
-            this.apellido1 = apellido1;
-            this.apellido2 = apellido2;
-            this.fechaNac = fechaNac;
-            this.email = email;
-            this.direccion = direccion;
-            this.telefono = telefono;
-            this.estado = estado;
-        }
-
-        //metodo toString
-        public override string ToString()
-        {
-            return $"ID: {id}, Nombre: {nombre}, Apellido1: {apellido1}, Apellido2: {apellido2}, FechaNac: {fechaNac.ToShortDateString()}, Email: {email}, Direccion: {direccion}, Telefono: {telefono}, Estado: {estado}";
-        }
+   
+        
     }
 }

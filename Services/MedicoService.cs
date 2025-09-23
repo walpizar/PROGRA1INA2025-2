@@ -233,5 +233,20 @@ namespace Services
                 throw new Exception($"Error en servicio al consultar todos los médicos: {ex.Message}", ex);
             }
         }
+
+        public void eliminar(string id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public clsMedico consultarPorID(string id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public clsMedico consultarPorID(int id)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
