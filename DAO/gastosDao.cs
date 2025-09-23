@@ -109,65 +109,6 @@ namespace DAO
             throw new NotImplementedException();
         }
 
-        // Métodos adicionales específicos para gastos
-        public List<clsGastos> consultarPorFecha(DateTime fechaInicio, DateTime fechaFin)
-        {
-            try
-            {
-                return _context.Gastos
-                    .Where(g => g.fechaCompra >= fechaInicio && g.fechaCompra <= fechaFin)
-                    .OrderByDescending(g => g.fechaCompra)
-                    .ToList();
-            }
-            catch (Exception)
-            {
-                throw;
-            }
-        }
-
-        public List<clsGastos> consultarPorPersona(string realizadoPor)
-        {
-            try
-            {
-                return _context.Gastos
-                    .Where(g => g.responsable.Contains(realizadoPor))
-                    .OrderByDescending(g => g.fechaCompra)
-                    .ToList();
-            }
-            catch (Exception)
-            {
-                throw;
-            }
-        }
-
-        public decimal obtenerTotalGastos()
-        {
-            try
-            {
-                return _context.Gastos.Sum(g => g.montoGasto);
-            }
-            catch (Exception)
-            {
-                return 0;
-            }
-        }
-
-        public decimal obtenerTotalGastosPorMes(int año, int mes)
-        {
-            try
-            {
-                return _context.Gastos
-                    .Where(g => g.fechaCompra.Year == año && g.fechaCompra.Month == mes)
-                    .Sum(g => g.montoGasto);
-            }
-            catch (Exception)
-            {
-                {
-                    return 0;
-                }
-            }
-        }
-
         public clsGastos consultarPorNombre(string nombre)
         {
             throw new NotImplementedException();
