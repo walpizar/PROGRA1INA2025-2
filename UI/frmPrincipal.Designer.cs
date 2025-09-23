@@ -43,7 +43,7 @@
             mnuPrincipal.Items.AddRange(new ToolStripItem[] { archivoToolStripMenuItem, mantenimientosToolStripMenuItem, procesosToolStripMenuItem, consultasToolStripMenuItem, reportesToolStripMenuItem });
             mnuPrincipal.Location = new Point(0, 0);
             mnuPrincipal.Name = "mnuPrincipal";
-            mnuPrincipal.Size = new Size(1285, 24);
+            mnuPrincipal.Size = new Size(975, 24);
             mnuPrincipal.TabIndex = 2;
             mnuPrincipal.Text = "menuStrip1";
             // 
@@ -83,7 +83,7 @@
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = SystemColors.AppWorkspace;
-            ClientSize = new Size(1285, 678);
+            ClientSize = new Size(975, 678);
             Controls.Add(mnuPrincipal);
             Enabled = false;
             FormBorderStyle = FormBorderStyle.Fixed3D;
