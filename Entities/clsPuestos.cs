@@ -1,5 +1,4 @@
 ﻿using System;
-// <<<<<<< HEAD
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -15,7 +14,7 @@ namespace Entities
     public class clsPuestos
     {
         [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)] // Explicitly set as IDENTITY
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int idPuesto { get; set; }
 
         [Required]

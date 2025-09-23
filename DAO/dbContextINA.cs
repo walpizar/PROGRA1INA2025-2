@@ -6,7 +6,6 @@ namespace DAO
     public class dbContextINA : DbContext
     {
         // Entidades mapeadas
-        // Entidades mapeadas
         public DbSet<clsPersona> persona { get; set; }
         public DbSet<clsActivos> activos { get; set; }
         public DbSet<clsCategoriaActivos> categoriasActivos { get; set; }
@@ -25,14 +24,12 @@ namespace DAO
         //public DbSet<clsDonacion> donacion { get; set; }
         public DbSet<clsCategoriaActivos> categoriaActivos { get; set; }
 
-
-
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             if (!optionsBuilder.IsConfigured)
             {
                 optionsBuilder.UseSqlServer(
-                    @"Server=localhost\sqlexpress;Database=dbPaleativoGarabito;Trusted_Connection=True;MultipleActiveResultSets=True;TrustServerCertificate=True;");
+                    @"Server=.;Database=dbPaleativoGarabito;Trusted_Connection=True;MultipleActiveResultSets=True;TrustServerCertificate=True;");
             }
         }
 
@@ -40,13 +37,12 @@ namespace DAO
         {
             base.OnModelCreating(modelBuilder);
 
-            // Clave primaria compuesta para Persona
-            modelBuilder.Entity<clsPersona>()
-                .HasKey(p => new { p.id, p.tipoId });
+            //-------------------------------------------------------
 
             // Clave primaria compuesta para Persona
             modelBuilder.Entity<clsPersona>()
                 .HasKey(p => new { p.id, p.tipoId });
+
             modelBuilder.Entity<clsPersona>().Property(p => p.id)
                 .IsRequired().HasMaxLength(20).ValueGeneratedNever();
 
@@ -63,11 +59,17 @@ namespace DAO
             // Medico
             modelBuilder.Entity<clsMedico>().HasKey(m => new { m.id, m.tipoId });
 
-            modelBuilder.Entity<clsMedico>().Property(m => new { m.id, m.tipoId })
-                 .IsRequired()
+            modelBuilder.Entity<clsMedico>()
+                .Property(m => m.id)
+                .IsRequired()
                 .HasMaxLength(20)
                 .ValueGeneratedNever();
 
+            modelBuilder.Entity<clsMedico>()
+                .Property(m => m.tipoId)
+                .IsRequired()
+                .HasMaxLength(20)
+                .ValueGeneratedNever();
 
             modelBuilder.Entity<clsMedico>()
                 .HasOne(m => m.persona)
@@ -80,7 +82,6 @@ namespace DAO
                 .HasKey(e => new { e.id, e.tipoId });
 
             // RolPermiso
-
 
             //// Relación 1 a 1 entre Donante y Persona
             //modelBuilder.Entity<clsDonante>()
