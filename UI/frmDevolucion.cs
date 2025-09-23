@@ -5,6 +5,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
+using System.Drawing;
+using static Common.Enums.Enums;
 
 namespace UI
 {
@@ -167,24 +169,22 @@ namespace UI
 
             if (devolucionSelected != null)
             {
-                this.lblTitulo.Text = "Modificar Devolución";
-                this.Text = "Modificar Devolución";
-                this.btnEliminar.Visible = true;
+                lblTitulo.Text = "Modificar Devolución";
+                Text = "Modificar Devolución";
+                btnEliminar.Visible = true;
 
                 dtpFecha.Value = devolucionSelected.fechaDevolucion == default
                     ? DateTime.Today
                     : devolucionSelected.fechaDevolucion;
 
                 txtObservaciones.Text = devolucionSelected.observaciones ?? string.Empty;
-
                 cboActivo.SelectedValue = devolucionSelected.idActivoFK;
             }
             else
             {
-                this.lblTitulo.Text = "Registrar Devolución";
-                this.Text = "Registrar Devolución";
-                this.btnEliminar.Visible = false;
-
+                lblTitulo.Text = "Registrar Devolución";
+                Text = "Registrar Devolución";
+                btnEliminar.Visible = false;
                 dtpFecha.Value = DateTime.Today;
             }
         }
@@ -193,30 +193,23 @@ namespace UI
         {
             try
             {
-                // Obtener desde BD vía servicio (DAO -> dbContext)
                 var activos = _activosService.consultarTodos() ?? new List<clsActivos>();
 
                 var filtrados = activos
-                    .Where(a => a != null && !string.IsNullOrWhiteSpace(a.estado))
-                    .Where(a =>
-                        a.estado.Equals("Prestado", StringComparison.OrdinalIgnoreCase) ||
-                        a.estado.Equals("En uso", StringComparison.OrdinalIgnoreCase))
+                    .Where(a => a != null && a.estado) // Activo lógico
+                    .Where(a => ((EstadoUsoActivo)a.estadoUso) is EstadoUsoActivo.Prestado or EstadoUsoActivo.EnUso)
                     .OrderBy(a => a.nombreActivo)
                     .ToList();
 
-                // Si se está editando y el activo seleccionado no cumple el filtro,
-                // lo agregamos para permitir visualizar/editar la devolución.
+                // Permite ver el activo original al editar aunque ya no cumpla el filtro.
                 if (devolucionSelected != null &&
                     filtrados.All(a => a.idActivo != devolucionSelected.idActivoFK))
                 {
                     var seleccionado = _activosService.consultarPorID(devolucionSelected.idActivoFK);
                     if (seleccionado != null)
-                    {
                         filtrados.Insert(0, seleccionado);
-                    }
                 }
 
-                // Reasignar DataSource de forma segura
                 cboActivo.DataSource = null;
                 cboActivo.DisplayMember = nameof(clsActivos.nombreActivo);
                 cboActivo.ValueMember = nameof(clsActivos.idActivo);
@@ -225,7 +218,7 @@ namespace UI
                 if (filtrados.Count == 0)
                 {
                     cboActivo.SelectedIndex = -1;
-                    MessageBox.Show("No hay activos en estado 'Prestado' o 'En uso' disponibles para devolución.");
+                    MessageBox.Show("No hay activos prestados o en uso disponibles para devolución.");
                 }
             }
             catch (Exception)
@@ -242,7 +235,10 @@ namespace UI
             {
                 if (!validarDatos()) return;
 
-                clsDevolucion devolucion = devolucionSelected ?? new clsDevolucion();
+                var devolucion = devolucionSelected ?? new clsDevolucion
+                {
+                    fechaDevolucion = dtpFecha.Value.Date
+                };
 
                 devolucion.idActivoFK = (int)cboActivo.SelectedValue;
                 devolucion.fechaDevolucion = dtpFecha.Value.Date;
@@ -259,7 +255,8 @@ namespace UI
                     MessageBox.Show("Devolución modificada correctamente.");
                 }
 
-                //this.Close();
+                // Estándar: cerrar tras guardar y que la lista refresque
+                Close();
             }
             catch (EntityExistDBException ex)
             {
@@ -292,7 +289,7 @@ namespace UI
 
         private void btnCancelar_Click(object sender, EventArgs e)
         {
-            this.Close();
+            Close();
         }
 
         private void btnEliminar_Click(object sender, EventArgs e)
@@ -312,7 +309,7 @@ namespace UI
                 {
                     _devolucionService.eliminar(devolucionSelected.idDevolucion);
                     MessageBox.Show("Devolución eliminada correctamente.");
-                    this.Close();
+                    Close();
                 }
             }
             catch
@@ -323,7 +320,6 @@ namespace UI
 
         private void cboActivo_SelectedIndexChanged(object sender, EventArgs e)
         {
-
         }
     }
 }

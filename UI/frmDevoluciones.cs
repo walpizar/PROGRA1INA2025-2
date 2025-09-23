@@ -65,25 +65,29 @@ namespace UI
             {
                 DataPropertyName = "Id",
                 HeaderText = "ID",
-                Width = 60
+                Width = 60,
+                Name = "Id"
             });
             dgvDevoluciones.Columns.Add(new DataGridViewTextBoxColumn
             {
                 DataPropertyName = "Fecha",
                 HeaderText = "Fecha devolución",
-                Width = 140
+                Width = 140,
+                Name = "Fecha"
             });
             dgvDevoluciones.Columns.Add(new DataGridViewTextBoxColumn
             {
                 DataPropertyName = "Activo",
                 HeaderText = "Activo",
-                Width = 240
+                Width = 240,
+                Name = "Activo"
             });
             dgvDevoluciones.Columns.Add(new DataGridViewTextBoxColumn
             {
                 DataPropertyName = "Observaciones",
                 HeaderText = "Observaciones",
-                AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill
+                AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill,
+                Name = "Observaciones"
             });
 
             // btnCrear
@@ -195,13 +199,11 @@ namespace UI
 
         private void btnCrear_Click(object sender, EventArgs e)
         {
-            // Abrir el formulario de crear/modificar
             using var frm = new frmDevolucion
             {
                 devolucionSelected = null
             };
             frm.ShowDialog(this);
-            // Al cerrar, refrescar el listado
             CargarDevoluciones();
         }
 

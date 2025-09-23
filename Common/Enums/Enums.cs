@@ -61,5 +61,13 @@ namespace Common.Enums
             // Puedes agregar más tipos si el sistema lo requiere
         }
 
+        public enum EstadoUsoActivo
+        {
+            Disponible = 0,
+            Prestado = 1,
+            Desechado = 2,
+            EnUso = 3
+        }
+
     }
 }

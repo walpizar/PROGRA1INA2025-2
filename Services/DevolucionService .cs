@@ -2,6 +2,8 @@
 using Common.Interfaces;
 using DAO;
 using Entities;
+using static Common.Enums.Enums;
+
 
 namespace Services
 {
@@ -16,30 +18,30 @@ namespace Services
         public void crear(clsDevolucion devolucion)
         {
             if (devolucion == null) throw new ArgumentNullException(nameof(devolucion));
-            if (devolucion.idActivoFK <= 0) throw new ArgumentException("El activo asociado es obligatorio.", 
-                nameof(devolucion.idActivoFK));
+            if (devolucion.idActivoFK <= 0)
+                throw new ArgumentException("El activo asociado es obligatorio.", nameof(devolucion.idActivoFK));
 
             // Validar que el activo exista
             var activo = _activosService.consultarPorID(devolucion.idActivoFK);
             if (activo == null)
                 throw new Exception("El activo no existe.");
 
-            // Regla de negocio: el estado del activo debe indicar que está prestado/en uso
-            // Eliminar el uso de ?? string.Empty y .Trim() sobre bool
-            // var estado = (activo.estado ?? string.Empty).Trim();
-            // Si necesitas filtrar por estado lógico, usa:
-            bool estado = activo.estado;
-            if (estado != true)
-            {
-                throw new Exception("El activo no está prestado. No es posible registrar la devolución.");
-            }
+            // 1) Debe estar activo lógicamente
+            if (!activo.estado)
+                throw new Exception("El activo está eliminado. No es posible registrar la devolución.");
+
+            // 2) Debe estar prestado o en uso (según catálogo de estadoUso)
+            var estadoUso = (EstadoUsoActivo)activo.estadoUso;
+            var esPrestadoOEnUso = estadoUso is EstadoUsoActivo.Prestado or EstadoUsoActivo.EnUso;
+            if (!esPrestadoOEnUso)
+                throw new Exception("El activo no está prestado ni en uso. No es posible registrar la devolución.");
 
             // Registrar la devolución
             _devolucionDao.crear(devolucion);
 
-            // Si deseas actualizar el activo tras la devolución, descomenta y ajusta:
-            activo.estado = "Disponible";
-           _activosService.modificar(activo);
+            // Poner el activo como Disponible
+            activo.estadoUso = (int)EstadoUsoActivo.Disponible;
+            _activosService.modificar(activo);
         }
 
         public void modificar(clsDevolucion devolucion)
