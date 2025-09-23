@@ -19,7 +19,7 @@ namespace UI
         public frmEspecialidad()
         {
             InitializeComponent();
-            _especialidadService = new EspecialidadService();   
+            _especialidadService = new EspecialidadService();
         }
 
         private void frmEspecialidades_Load(object sender, EventArgs e)
@@ -122,6 +122,11 @@ namespace UI
                     MessageBox.Show("Error al eliminar: " + ex.Message);
                 }
             }
+        }
+
+        private void gbxDatosEspecialidad_Enter(object sender, EventArgs e)
+        {
+
         }
     }
 }

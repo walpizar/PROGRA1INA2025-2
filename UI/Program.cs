@@ -26,8 +26,10 @@ namespace UI
         //Application.Run(new frmProductoLista());
 
         //HENRRY LEIBA -- PRUEBA PARA ESPECIALIDADES
-        Application.Run(new frmEspecialidadLista());
+        //Application.Run(new frmEspecialidadLista());
 
+        //HENRRY LEIBA -- PRUEBA PARA SOLICITUD DE APOYO
+        Application.Run(new frmSolicitudApoyo());
         
 
         //Application.Run(new frmMantenimientoCategoriasActivos());
