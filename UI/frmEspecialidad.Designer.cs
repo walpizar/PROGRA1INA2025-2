@@ -60,6 +60,7 @@ namespace UI
             gbxDatosEspecialidad.TabStop = false;
             gbxDatosEspecialidad.Text = "Datos de Especialidad Médica";
             gbxDatosEspecialidad.Enter += gbxDatosEspecialidad_Enter;
+
             // 
             // txtDescripcion
             // 

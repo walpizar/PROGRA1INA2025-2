@@ -25,6 +25,7 @@ namespace UI
         ApplicationConfiguration.Initialize();
         //Application.Run(new frmProductoLista());
 
+
         //HENRRY LEIBA -- PRUEBA PARA ESPECIALIDADES
         //Application.Run(new frmEspecialidadLista());
 
@@ -33,6 +34,14 @@ namespace UI
         
 
         //Application.Run(new frmMantenimientoCategoriasActivos());
+
+
+        //solo ejemplo
+        //Application.Run(new frmPacienteLista());
+
+        
+        //Application.Run(new frmActivos());
+
 
 
         }
