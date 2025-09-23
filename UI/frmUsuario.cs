@@ -195,6 +195,8 @@ namespace UI
 
         }
 
+
+
         private void btnEliminar_Click(object sender, EventArgs e)
         {
             if (string.IsNullOrWhiteSpace(txtUsuario.Text))

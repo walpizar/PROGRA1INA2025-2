@@ -16,9 +16,10 @@ namespace UI
   
         // see https://aka.ms/applicationconfiguration.
         ApplicationConfiguration.Initialize();
-            Application.Run(new frmActivos());
-        Application.Run(new frmUsuario());
-       
+        //Application.Run(new frmProductoLista());
+
+        
+        Application.Run(new frmEspecialidad());
 
         }
     }
