@@ -1,17 +1,17 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <root>
-  <!-- 
-    Microsoft ResX Schema 
-    
+  <!--
+    Microsoft ResX Schema
+
     Version 2.0
-    
-    The primary goals of this format is to allow a simple XML format 
-    that is mostly human readable. The generation and parsing of the 
-    various data types are done through the TypeConverter classes 
+
+    The primary goals of this format is to allow a simple XML format
+    that is mostly human readable. The generation and parsing of the
+    various data types are done through the TypeConverter classes
     associated with the data types.
-    
+
     Example:
-    
+
     ... ado.net/XML headers & schema ...
     <resheader name="resmimetype">text/microsoft-resx</resheader>
     <resheader name="version">2.0</resheader>
@@ -26,36 +26,36 @@
         <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
         <comment>This is a comment</comment>
     </data>
-                
-    There are any number of "resheader" rows that contain simple 
+
+    There are any number of "resheader" rows that contain simple
     name/value pairs.
-    
-    Each data row contains a name, and value. The row also contains a 
-    type or mimetype. Type corresponds to a .NET class that support 
-    text/value conversion through the TypeConverter architecture. 
-    Classes that don't support this are serialized and stored with the 
+
+    Each data row contains a name, and value. The row also contains a
+    type or mimetype. Type corresponds to a .NET class that support
+    text/value conversion through the TypeConverter architecture.
+    Classes that don't support this are serialized and stored with the
     mimetype set.
-    
-    The mimetype is used for serialized objects, and tells the 
-    ResXResourceReader how to depersist the object. This is currently not 
+
+    The mimetype is used for serialized objects, and tells the
+    ResXResourceReader how to depersist the object. This is currently not
     extensible. For a given mimetype the value must be set accordingly:
-    
-    Note - application/x-microsoft.net.object.binary.base64 is the format 
-    that the ResXResourceWriter will generate, however the reader can 
+
+    Note - application/x-microsoft.net.object.binary.base64 is the format
+    that the ResXResourceWriter will generate, however the reader can
     read any of the formats listed below.
-    
+
     mimetype: application/x-microsoft.net.object.binary.base64
-    value   : The object must be serialized with 
+    value   : The object must be serialized with
             : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
             : and then encoded with base64 encoding.
-    
+
     mimetype: application/x-microsoft.net.object.soap.base64
-    value   : The object must be serialized with 
+    value   : The object must be serialized with
             : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
             : and then encoded with base64 encoding.
 
     mimetype: application/x-microsoft.net.object.bytearray.base64
-    value   : The object must be serialized into a byte array 
+    value   : The object must be serialized into a byte array
             : using a System.ComponentModel.TypeConverter
             : and then encoded with base64 encoding.
     -->
@@ -117,4 +117,47 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="btnLupaPaciente.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAABcAAAAXCAYAAADgKtSgAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
+        YQUAAAFKSURBVEhLtZQxTgNBDEVTpExHi2RLwwUo0qYMDUqZM1DSpKXkDjRcgBtwMyrQizyS8z27SqSl
+        +Nrdb/uP53tmV0+vz6v/QiGWRCGWRCEymvmmmT82830z3zXze82ZQyFCdN3MD838PfDWzF/i/XTtIoUI
+        4S6EKE++2QUxdgH3oLWKQkjHx2Z+N8jZRnyjsUnx6K53fNRkyWU3e+UztIDh9a5Lx4Pck/IZWoCf5+Fp
+        ooKhRu5aYx1awHE7D08TFQwUceUztIBusGSym5TLLmd3WIg4x7ODisF/4LvGMgqRut9qLAkT/2nmn3OD
+        L0QI4Ge/PJwKFoTjDtAxwr+Br6kbW4i0AB3iKzZxKvovgMXouIuD79GNLaIj6ICxIjrWBS4sKkLXIqxC
+        sItj1S7nlKJbEHNgAYR5XnhfCm5FWDT815fkJVGIJVGIJfEHdrj6d/4EM6YAAAAASUVORK5CYII=
+</value>
+  </data>
+  <data name="btnAgregarActivo.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAABcAAAAXCAYAAADgKtSgAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
+        YQUAAAEVSURBVEhLtZSxTQNBFESfRAEuwBkhNThwhmTRgAtwTgsE7oaUlALogYQGaAH909zpmFn5VmIJ
+        Rjq/+X/Wt/d3eXx+4r8UYKQCjFQAF3C3lvu3FGAxYA+8AK+mK3Dv9S0FUPAOeAO+gXdTsQ/gwftcARR+
+        UMjFtwU4Ap89CwRQ+EnhB/fk1+KbCwToCVfNvEBt1c79P4Wr7qy6o3uT70BNveHztzm5N/kO1NQbXlNV
+        H33v3uQ7UFNX+JYCTLAzXHVn54vvYNV0M1wzXye2pqV5LQToCZdfwV+qq+d4g2hUc/OErvwawfkqKNXz
+        JXIcqLl1t9TvZeRsW/oPkZpbt+Kvw6I3iH+8Gb4KiG3pVYCRCjBSAUbqB6ty0ongCwckAAAAAElFTkSu
+        QmCC
+</value>
+  </data>
+  <data name="btnLupaActivo.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAABcAAAAXCAYAAADgKtSgAAAABGdBTUEAALGPC/xhBQAAAUpJREFUSEu1
+        lDFOA0EMRVOkTEeLZEvDBSjSpgwNSpkzUNKkpeQONFyAG3AzKtCLPJLzPbtKpKX42t1v+4/ne2ZXT6/P
+        q/9CIZZEIZZEITKa+aaZPzbzfTPfNfN7zZlDIUJ03cwPzfw98NbMX+L9dO0ihQjhLoQoT77ZBTF2Afeg
+        tYpCSMfHZn43yNlGfKOxSfHornd81GTJZTd75TO0gOH1rkvHg9yT8hlagJ/n4WmigqFG7lpjHVrAcTsP
+        TxMVDBRx5TO0gG6wZLKblMsuZ3dYiDjHs4OKwX/gu8YyCpG632osCRP/aeafc4MvRAjgZ788nAoWhOMO
+        0DHCv4GvqRtbiLQAHeIrNnEq+i+Axei4i4Pv0Y0toiPogLEiOtYFLiwqQtcirEKwi2PVLueUolsQc2AB
+        hHleeF8KbkVYNPzXl+QlUYglUYgl8Qd2uPp3/gQzpgAAAABJRU5ErkJggg==
+</value>
+  </data>
+  <metadata name="colIdActivo.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <metadata name="ColDescripcioon.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <metadata name="ColEstado.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
 </root>
