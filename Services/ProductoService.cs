@@ -76,7 +76,8 @@ using Entities;
 
         public List<clsProducto> consultarTodos()
         {
-           return _prodDao.consultarTodos();
+            var productos = _prodDao.consultarTodos();
+            return productos ?? new List<clsProducto>();
         }
 
         public clsProducto consultarPorNombre(string nombre)

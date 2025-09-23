@@ -212,6 +212,14 @@ namespace DAO
             throw new NotImplementedException();
         }
 
+        public void eliminar(int id)
+        {
+            throw new NotImplementedException();
+        }
 
+        public clsPaciente consultarPorID(int id)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

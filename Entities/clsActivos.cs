@@ -64,7 +64,7 @@ namespace Entities
         public List<clsDevolucion> devoluciones { get; set; }
 
         // Relación: Un Activo puede estar en muchas DonacionActivos
-        public ICollection<clsDonacionesActivos> donacionActivos { get; set; }
+
 
         public clsActivos(int idActivo, string nombreActivo, string descripcion,
                           int cantidadDisponible, string estado, DateTime fechaAdquisicion,
