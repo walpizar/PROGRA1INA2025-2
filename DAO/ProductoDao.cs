@@ -105,7 +105,14 @@ using Common.Interfaces;
             }
         }
 
+        public void eliminar(string id)
+        {
+            throw new NotImplementedException();
+        }
 
-
+        public clsProducto consultarPorID(string id)
+        {
+            throw new NotImplementedException();
+        }
     }
 }*/

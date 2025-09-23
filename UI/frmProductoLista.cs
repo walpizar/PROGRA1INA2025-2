@@ -96,7 +96,7 @@ using System.Windows.Forms;
 
                     //consulto el producto por id a la lista    
 
-                    clsProducto producto = lista.Where(p => p.id == id).SingleOrDefault();
+                    clsProducto producto = lista.Where(p => p.id.Equals(id)).SingleOrDefault();
 
                     if (producto != null)
                     {
