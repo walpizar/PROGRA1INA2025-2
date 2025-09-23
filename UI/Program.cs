@@ -25,13 +25,8 @@ namespace UI
         ApplicationConfiguration.Initialize();
         //Application.Run(new frmProductoLista());
 
-        //HENRRY LEIBA -- PRUEBA PARA ESPECIALIDADES
-        //Application.Run(new frmEspecialidadLista());
-
         
-
-        Application.Run(new frmMantenimientoCategoriasActivos());
-
+        Application.Run(new frmEspecialidad());
 
         }
     }
