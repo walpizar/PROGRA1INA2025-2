@@ -9,18 +9,20 @@ namespace UI
     {
         private readonly SolicitudApoyoService _solicitudService;
 
+        // Constructor
         public frmSolicitudApoyo()
         {
             InitializeComponent();
             _solicitudService = new SolicitudApoyoService();
         }
 
+        // Evento Load del formulario
         private void frmSolicitudApoyo_Load(object sender, EventArgs e)
         {
-            // Al crear, todos los campos son editables
-            txtIdSolicitud.Enabled = true;
-            btnAdjuntarReferencia.Enabled = false;
-            btnAdjuntarEstudio.Enabled = false;
+            // Al crear una solicitud nueva, todos los campos son editables
+            txtIdSolicitud.Enabled = true;  // El ID lo define el usuario
+            btnAdjuntarReferencia.Enabled = false; // Se habilita cuando haya paciente válido
+            btnAdjuntarEstudio.Enabled = false;   // Se habilita cuando haya paciente válido
         }
 
         // Validación de campos obligatorios
@@ -33,6 +35,7 @@ namespace UI
             return true;
         }
 
+        // Botón Guardar
         private void btnGuardar_Click(object sender, EventArgs e)
         {
             try
@@ -43,17 +46,20 @@ namespace UI
                     return;
                 }
 
+                // Crear nueva solicitud con los datos ingresados
                 clsSolicitudApoyo nuevaSolicitud = new clsSolicitudApoyo
                 {
                     idSolicitud = Convert.ToInt32(txtIdSolicitud.Text),
                     idPaciente = Convert.ToInt32(txtIDPaciente.Text),
                     justificacion = txtJustificacion.Text,
                     equiposNecesarios = txtEquipos.Text,
-                    referenciaCCSS = null,
-                    estudioSocioeconomico = null
+                    referenciaCCSS = null,        // Se puede adjuntar después
+                    estudioSocioeconomico = null  // Se puede adjuntar después
                 };
 
+                // Llamada al servicio para guardar la solicitud
                 _solicitudService.crear(nuevaSolicitud);
+
                 MessageBox.Show("Solicitud creada correctamente");
                 this.DialogResult = DialogResult.OK;
                 this.Close();
@@ -64,14 +70,16 @@ namespace UI
             }
         }
 
+        // Botón Cancelar
         private void btnCancelar_Click(object sender, EventArgs e)
         {
             this.DialogResult = DialogResult.Cancel;
             this.Close();
         }
+
+        // Evento click del título (no hace nada por ahora)
         private void lblTitulo_Click(object sender, EventArgs e)
         {
-
         }
     }
 }
