@@ -46,12 +46,10 @@
             btnActivos = new Button();
             lblSeccion1 = new Label();
             panelHeader = new Panel();
-            picLogo = new PictureBox();
             lblTitulo = new Label();
             panelContenido = new Panel();
             panelSidebar.SuspendLayout();
             panelHeader.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)picLogo).BeginInit();
             SuspendLayout();
             // 
             // panelSidebar
@@ -77,7 +75,7 @@
             panelSidebar.Dock = DockStyle.Left;
             panelSidebar.Location = new Point(0, 0);
             panelSidebar.Name = "panelSidebar";
-            panelSidebar.Size = new Size(250, 494);
+            panelSidebar.Size = new Size(195, 681);
             panelSidebar.TabIndex = 0;
             // 
             // btnRecuperarContra
@@ -90,7 +88,7 @@
             btnRecuperarContra.Location = new Point(0, 640);
             btnRecuperarContra.Name = "btnRecuperarContra";
             btnRecuperarContra.Padding = new Padding(30, 0, 0, 0);
-            btnRecuperarContra.Size = new Size(233, 45);
+            btnRecuperarContra.Size = new Size(178, 45);
             btnRecuperarContra.TabIndex = 12;
             btnRecuperarContra.Text = "Recuperar Contraseñas";
             btnRecuperarContra.TextAlign = ContentAlignment.MiddleLeft;
@@ -107,7 +105,7 @@
             btnUsuarios.Location = new Point(0, 595);
             btnUsuarios.Name = "btnUsuarios";
             btnUsuarios.Padding = new Padding(30, 0, 0, 0);
-            btnUsuarios.Size = new Size(233, 45);
+            btnUsuarios.Size = new Size(178, 45);
             btnUsuarios.TabIndex = 10;
             btnUsuarios.Text = "Usuarios";
             btnUsuarios.TextAlign = ContentAlignment.MiddleLeft;
@@ -124,7 +122,7 @@
             btnLogin.Location = new Point(0, 550);
             btnLogin.Name = "btnLogin";
             btnLogin.Padding = new Padding(30, 0, 0, 0);
-            btnLogin.Size = new Size(233, 45);
+            btnLogin.Size = new Size(178, 45);
             btnLogin.TabIndex = 11;
             btnLogin.Text = "Inicio de Sesion";
             btnLogin.TextAlign = ContentAlignment.MiddleLeft;
@@ -154,7 +152,7 @@
             btnDepartamentos.Location = new Point(0, 480);
             btnDepartamentos.Name = "btnDepartamentos";
             btnDepartamentos.Padding = new Padding(30, 0, 0, 0);
-            btnDepartamentos.Size = new Size(233, 45);
+            btnDepartamentos.Size = new Size(178, 45);
             btnDepartamentos.TabIndex = 3;
             btnDepartamentos.Text = "Departamentos";
             btnDepartamentos.TextAlign = ContentAlignment.MiddleLeft;
@@ -171,7 +169,7 @@
             btnDevoluciones.Location = new Point(0, 435);
             btnDevoluciones.Name = "btnDevoluciones";
             btnDevoluciones.Padding = new Padding(30, 0, 0, 0);
-            btnDevoluciones.Size = new Size(233, 45);
+            btnDevoluciones.Size = new Size(178, 45);
             btnDevoluciones.TabIndex = 7;
             btnDevoluciones.Text = "Devoluciones";
             btnDevoluciones.TextAlign = ContentAlignment.MiddleLeft;
@@ -201,7 +199,7 @@
             btnPuestos.Location = new Point(0, 365);
             btnPuestos.Name = "btnPuestos";
             btnPuestos.Padding = new Padding(30, 0, 0, 0);
-            btnPuestos.Size = new Size(233, 45);
+            btnPuestos.Size = new Size(178, 45);
             btnPuestos.TabIndex = 5;
             btnPuestos.Text = "Puestos";
             btnPuestos.TextAlign = ContentAlignment.MiddleLeft;
@@ -218,7 +216,7 @@
             btnEspecialidades.Location = new Point(0, 320);
             btnEspecialidades.Name = "btnEspecialidades";
             btnEspecialidades.Padding = new Padding(30, 0, 0, 0);
-            btnEspecialidades.Size = new Size(233, 45);
+            btnEspecialidades.Size = new Size(178, 45);
             btnEspecialidades.TabIndex = 4;
             btnEspecialidades.Text = "Especialidades";
             btnEspecialidades.TextAlign = ContentAlignment.MiddleLeft;
@@ -235,7 +233,7 @@
             btnPacientesLista.Location = new Point(0, 275);
             btnPacientesLista.Name = "btnPacientesLista";
             btnPacientesLista.Padding = new Padding(30, 0, 0, 0);
-            btnPacientesLista.Size = new Size(233, 45);
+            btnPacientesLista.Size = new Size(178, 45);
             btnPacientesLista.TabIndex = 15;
             btnPacientesLista.Text = "Lista de Pacientes";
             btnPacientesLista.TextAlign = ContentAlignment.MiddleLeft;
@@ -252,7 +250,7 @@
             btnEnfermerosLista.Location = new Point(0, 230);
             btnEnfermerosLista.Name = "btnEnfermerosLista";
             btnEnfermerosLista.Padding = new Padding(30, 0, 0, 0);
-            btnEnfermerosLista.Size = new Size(233, 45);
+            btnEnfermerosLista.Size = new Size(178, 45);
             btnEnfermerosLista.TabIndex = 17;
             btnEnfermerosLista.Text = "Lista de Enfermeros";
             btnEnfermerosLista.TextAlign = ContentAlignment.MiddleLeft;
@@ -269,7 +267,7 @@
             btnMedicosLista.Location = new Point(0, 185);
             btnMedicosLista.Name = "btnMedicosLista";
             btnMedicosLista.Padding = new Padding(30, 0, 0, 0);
-            btnMedicosLista.Size = new Size(233, 45);
+            btnMedicosLista.Size = new Size(178, 45);
             btnMedicosLista.TabIndex = 16;
             btnMedicosLista.Text = "Lista de Medicos";
             btnMedicosLista.TextAlign = ContentAlignment.MiddleLeft;
@@ -286,7 +284,7 @@
             btnCategorias.Location = new Point(0, 140);
             btnCategorias.Name = "btnCategorias";
             btnCategorias.Padding = new Padding(30, 0, 0, 0);
-            btnCategorias.Size = new Size(233, 45);
+            btnCategorias.Size = new Size(178, 45);
             btnCategorias.TabIndex = 13;
             btnCategorias.Text = "Categorias";
             btnCategorias.TextAlign = ContentAlignment.MiddleLeft;
@@ -303,7 +301,7 @@
             btnActivos.Location = new Point(0, 95);
             btnActivos.Name = "btnActivos";
             btnActivos.Padding = new Padding(30, 0, 0, 0);
-            btnActivos.Size = new Size(233, 45);
+            btnActivos.Size = new Size(178, 45);
             btnActivos.TabIndex = 14;
             btnActivos.Text = "Activos";
             btnActivos.TextAlign = ContentAlignment.MiddleLeft;
@@ -326,24 +324,12 @@
             // panelHeader
             // 
             panelHeader.BackColor = Color.CadetBlue;
-            panelHeader.Controls.Add(picLogo);
             panelHeader.Controls.Add(lblTitulo);
             panelHeader.Dock = DockStyle.Top;
             panelHeader.Location = new Point(0, 0);
             panelHeader.Name = "panelHeader";
-            panelHeader.Size = new Size(233, 70);
+            panelHeader.Size = new Size(178, 70);
             panelHeader.TabIndex = 0;
-            // 
-            // picLogo
-            // 
-            picLogo.Dock = DockStyle.Right;
-            picLogo.Image = (Image)resources.GetObject("picLogo.Image");
-            picLogo.Location = new Point(133, 0);
-            picLogo.Name = "picLogo";
-            picLogo.Size = new Size(100, 70);
-            picLogo.SizeMode = PictureBoxSizeMode.Zoom;
-            picLogo.TabIndex = 1;
-            picLogo.TabStop = false;
             // 
             // lblTitulo
             // 
@@ -360,11 +346,13 @@
             // panelContenido
             // 
             panelContenido.BackColor = Color.AliceBlue;
+            panelContenido.BackgroundImage = (Image)resources.GetObject("panelContenido.BackgroundImage");
+            panelContenido.BackgroundImageLayout = ImageLayout.Center;
             panelContenido.Dock = DockStyle.Fill;
-            panelContenido.Location = new Point(250, 0);
+            panelContenido.Location = new Point(195, 0);
             panelContenido.Name = "panelContenido";
             panelContenido.Padding = new Padding(20);
-            panelContenido.Size = new Size(578, 494);
+            panelContenido.Size = new Size(1069, 681);
             panelContenido.TabIndex = 1;
             // 
             // frmMenuPrincipalAgustin
@@ -372,7 +360,7 @@
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.AliceBlue;
-            ClientSize = new Size(828, 494);
+            ClientSize = new Size(1264, 681);
             Controls.Add(panelContenido);
             Controls.Add(panelSidebar);
             Name = "frmMenuPrincipalAgustin";
@@ -384,7 +372,6 @@
             panelSidebar.PerformLayout();
             panelHeader.ResumeLayout(false);
             panelHeader.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)picLogo).EndInit();
             ResumeLayout(false);
         }
 
@@ -409,6 +396,5 @@
         private Button btnPacientesLista;
         private Button btnEnfermerosLista;
         private Button btnMedicosLista;
-        private PictureBox picLogo;
     }
 }
