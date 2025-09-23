@@ -21,15 +21,6 @@ namespace UI
 
 
 
-            int i = 0;
-
-            bool reslt = i > 5 && i < 10 || i == 20;
-
-
-
-
-
-
         }
 
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
@@ -54,19 +45,19 @@ namespace UI
             //clsProducto prod1 = new clsProducto();
             //clsProducto prod2 = new clsProducto();
             //clsProducto prod3 = new clsProducto();
-            clsProducto prodX = new clsProducto();
+            //clsProducto prodX = new clsProducto();
 
 
 
 
-            for (int j = 0; j < 10; j++)
+            /*for (int j = 0; j < 10; j++)
             {
                 //clsProducto prodX = new clsProducto();
             
                 prodX.nombre="";             
       
 
-            }
+            }*/
 
 
 

@@ -15,7 +15,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using static Common.Enums.Enums;
 
-namespace UI
+/*namespace UI
 {
     public partial class frmProducto : Form
     {
@@ -54,7 +54,19 @@ namespace UI
                          producto = productoSelected;
                      }*/
                     //seteo los valores del producto
-                    producto.id = Convert.ToInt32(txtId.Text);
+
+                    //clsMedico medico = new clsMedico();
+                    //medico.Especialidad = 343243;
+
+                    //clsPersona persona = new clsPersona();
+                    //persona.nombre = "Juan";
+                    //persona.apellido1 = "Perez"; 
+
+                    //medico.Persona = persona;
+
+
+
+                    /*producto.id = Convert.ToInt32(txtId.Text);
                     // producto.id = int.Parse(txtId.Text);
                     producto.nombre = txtNombre.Text;
                     producto.precio = Convert.ToInt32(txtPrecio.Text);
@@ -106,7 +118,7 @@ namespace UI
 
         }
 
-        private void limpiarForm()
+        /*private void limpiarForm()
         {
             txtId.ResetText();
             txtNombre.ResetText();
@@ -242,4 +254,4 @@ namespace UI
 
         }
     }
-}
+}*/

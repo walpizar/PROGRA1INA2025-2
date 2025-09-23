@@ -13,19 +13,19 @@ namespace Entities
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int IdDevolucion { get; set; }
+        public int idDevolucion { get; set; }
 
         [Required(ErrorMessage = "La fecha de devolución es obligatoria")]
         [Column(TypeName = "date")]
-        public DateTime FechaDevolucion { get; set; }
+        public DateTime fechaDevolucion { get; set; }
 
         [StringLength(200, ErrorMessage = "Las observaciones no pueden tener más de 200 caracteres")]
-        public string Observaciones { get; set; } = string.Empty;
+        public string observaciones { get; set; } = string.Empty;
 
         [Required(ErrorMessage = "El activo asociado es obligatorio")]
-        [ForeignKey(nameof(Activo))]
-        public int IdActivoFK { get; set; }
+        [ForeignKey(nameof(activo))]
+        public int idActivoFK { get; set; }
 
-        public clsActivos? Activo { get; set; }
+        public clsActivos? activo { get; set; }
     }
 }

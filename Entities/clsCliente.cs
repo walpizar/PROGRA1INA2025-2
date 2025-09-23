@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Entities
+/*namespace Entities
 {
     [Table("tbClientes")]
     public class clsCliente
@@ -47,4 +47,4 @@ namespace Entities
 
         public clsCliente() { }
     }
-}
+}*/
