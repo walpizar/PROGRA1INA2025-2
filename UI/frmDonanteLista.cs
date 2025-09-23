@@ -21,10 +21,14 @@ namespace UI
         {
 
         }
-
-        private void label1_Click(object sender, EventArgs e)
+        private void btnNuevoDonante_Click(object sender, EventArgs e)
         {
+            //abro el formulario de donante en modo de creacion
+            frmDonante formularioDonante = new frmDonante();
+            formularioDonante.ShowDialog();
 
+            //cuando se cierre el formulario de donante, actualizo la lista de donantes
+            //actualizarListaDonantes();
         }
     }
 }

@@ -16,5 +16,16 @@ namespace UI
         {
             InitializeComponent();
         }
+
+        private void textBox1_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnCancelar_Click(object sender, EventArgs e)
+        {
+            //CIERRO EL FORMULARIO
+            this.Close();
+        }
     }
 }

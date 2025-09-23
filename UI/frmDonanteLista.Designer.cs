@@ -29,32 +29,130 @@
         private void InitializeComponent()
         {
             lblMantDonante = new Label();
+            gbxDonanteLista = new GroupBox();
+            txtbxBuscarDonante = new TextBox();
+            lstvwDonanteLista = new ListView();
+            donanteID = new ColumnHeader();
+            donanteNombre = new ColumnHeader();
+            donanteAp1 = new ColumnHeader();
+            donanteAp2 = new ColumnHeader();
+            lblBuscarDonante = new Label();
+            btnNuevoDonante = new Button();
+            gbxDonanteLista.SuspendLayout();
             SuspendLayout();
             // 
             // lblMantDonante
             // 
             lblMantDonante.AutoSize = true;
-            lblMantDonante.Location = new Point(187, 18);
+            lblMantDonante.Font = new Font("Segoe UI", 10.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblMantDonante.Location = new Point(197, 37);
             lblMantDonante.Name = "lblMantDonante";
-            lblMantDonante.Size = new Size(202, 20);
+            lblMantDonante.Size = new Size(262, 25);
             lblMantDonante.TabIndex = 1;
             lblMantDonante.Text = "MANTENIMIENTO DONANTE";
-            lblMantDonante.Click += label1_Click;
+            // 
+            // gbxDonanteLista
+            // 
+            gbxDonanteLista.Controls.Add(txtbxBuscarDonante);
+            gbxDonanteLista.Controls.Add(lstvwDonanteLista);
+            gbxDonanteLista.Controls.Add(lblBuscarDonante);
+            gbxDonanteLista.Font = new Font("Segoe UI", 10.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            gbxDonanteLista.Location = new Point(12, 84);
+            gbxDonanteLista.Name = "gbxDonanteLista";
+            gbxDonanteLista.Size = new Size(650, 347);
+            gbxDonanteLista.TabIndex = 2;
+            gbxDonanteLista.TabStop = false;
+            gbxDonanteLista.Text = "LISTA DONANTES";
+            // 
+            // txtbxBuscarDonante
+            // 
+            txtbxBuscarDonante.Font = new Font("Segoe UI Semibold", 10.2F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point, 0);
+            txtbxBuscarDonante.Location = new Point(81, 31);
+            txtbxBuscarDonante.Name = "txtbxBuscarDonante";
+            txtbxBuscarDonante.Size = new Size(563, 30);
+            txtbxBuscarDonante.TabIndex = 2;
+            // 
+            // lstvwDonanteLista
+            // 
+            lstvwDonanteLista.Columns.AddRange(new ColumnHeader[] { donanteID, donanteNombre, donanteAp1, donanteAp2 });
+            lstvwDonanteLista.FullRowSelect = true;
+            lstvwDonanteLista.GridLines = true;
+            lstvwDonanteLista.Location = new Point(6, 69);
+            lstvwDonanteLista.MultiSelect = false;
+            lstvwDonanteLista.Name = "lstvwDonanteLista";
+            lstvwDonanteLista.Size = new Size(638, 272);
+            lstvwDonanteLista.TabIndex = 0;
+            lstvwDonanteLista.UseCompatibleStateImageBehavior = false;
+            lstvwDonanteLista.View = View.Details;
+            // 
+            // donanteID
+            // 
+            donanteID.Text = "ID";
+            donanteID.Width = 100;
+            // 
+            // donanteNombre
+            // 
+            donanteNombre.Text = "NOMBRE";
+            donanteNombre.Width = 175;
+            // 
+            // donanteAp1
+            // 
+            donanteAp1.Text = "APELLIDO1";
+            donanteAp1.Width = 175;
+            // 
+            // donanteAp2
+            // 
+            donanteAp2.Text = " APELLIDO2";
+            donanteAp2.Width = 175;
+            // 
+            // lblBuscarDonante
+            // 
+            lblBuscarDonante.AutoSize = true;
+            lblBuscarDonante.Font = new Font("Segoe UI", 9F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point, 0);
+            lblBuscarDonante.Location = new Point(6, 36);
+            lblBuscarDonante.Name = "lblBuscarDonante";
+            lblBuscarDonante.Size = new Size(69, 20);
+            lblBuscarDonante.TabIndex = 0;
+            lblBuscarDonante.Text = "BUSCAR";
+            // 
+            // btnNuevoDonante
+            // 
+            btnNuevoDonante.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btnNuevoDonante.Location = new Point(497, 49);
+            btnNuevoDonante.Name = "btnNuevoDonante";
+            btnNuevoDonante.Size = new Size(151, 29);
+            btnNuevoDonante.TabIndex = 3;
+            btnNuevoDonante.Text = "NUEVO";
+            btnNuevoDonante.UseVisualStyleBackColor = true;
+            btnNuevoDonante.Click += btnNuevoDonante_Click;
             // 
             // frmDonanteLista
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(660, 499);
+            ClientSize = new Size(674, 445);
+            Controls.Add(btnNuevoDonante);
+            Controls.Add(gbxDonanteLista);
             Controls.Add(lblMantDonante);
             Name = "frmDonanteLista";
-            Text = "frmDonanteLista";
+            Text = "LISTA DONANTES";
             Load += frmDonanteLista_Load;
+            gbxDonanteLista.ResumeLayout(false);
+            gbxDonanteLista.PerformLayout();
             ResumeLayout(false);
             PerformLayout();
         }
 
         #endregion
         private Label lblMantDonante;
+        private GroupBox gbxDonanteLista;
+        private Button btnNuevoDonante;
+        private Label lblBuscarDonante;
+        private TextBox txtbxBuscarDonante;
+        private ListView lstvwDonanteLista;
+        private ColumnHeader donanteID;
+        private ColumnHeader donanteNombre;
+        private ColumnHeader donanteAp1;
+        private ColumnHeader donanteAp2;
     }
 }
