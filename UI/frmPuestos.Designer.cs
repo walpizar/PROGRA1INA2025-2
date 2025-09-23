@@ -86,6 +86,7 @@
             txtDescripcion.Name = "txtDescripcion";
             txtDescripcion.Size = new Size(238, 23);
             txtDescripcion.TabIndex = 5;
+            txtDescripcion.TextChanged += txtDescripcion_TextChanged;
             // 
             // lblDescripcion
             // 

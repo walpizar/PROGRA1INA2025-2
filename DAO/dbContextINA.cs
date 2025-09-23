@@ -21,6 +21,7 @@ namespace DAO
         public DbSet<clsRolPermiso> rolPermiso { get; set; }
         public DbSet<clsUsuario> usuario { get; set; }
         public DbSet<clsModulo> modulos { get; set; }
+        public DbSet<clsGastos> Gastos { get; set; }
         //public DbSet<clsDonante> donante { get; set; }
         //public DbSet<clsDonacion> donacion { get; set; }
         public DbSet<clsCategoriaActivos> categoriaActivos { get; set; }
@@ -39,6 +40,10 @@ namespace DAO
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
+
+            modelBuilder.Entity<clsGastos>()
+                 .Property(g => g.montoGasto)
+                 .HasPrecision(18, 2);
 
             // Clave primaria compuesta para Persona
             modelBuilder.Entity<clsPersona>()
