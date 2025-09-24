@@ -45,9 +45,10 @@
             // 
             label1.AutoSize = true;
             label1.Font = new Font("Segoe UI", 16.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label1.Location = new Point(256, 23);
+            label1.Location = new Point(366, 38);
+            label1.Margin = new Padding(4, 0, 4, 0);
             label1.Name = "label1";
-            label1.Size = new Size(178, 30);
+            label1.Size = new Size(269, 45);
             label1.TabIndex = 0;
             label1.Text = "Mantenimiento ";
             // 
@@ -60,11 +61,11 @@
             // gblista
             // 
             gblista.Controls.Add(listAdministradores);
-            gblista.Location = new Point(43, 78);
-            gblista.Margin = new Padding(3, 2, 3, 2);
+            gblista.Location = new Point(61, 130);
+            gblista.Margin = new Padding(4, 3, 4, 3);
             gblista.Name = "gblista";
-            gblista.Padding = new Padding(3, 2, 3, 2);
-            gblista.Size = new Size(572, 371);
+            gblista.Padding = new Padding(4, 3, 4, 3);
+            gblista.Size = new Size(817, 618);
             gblista.TabIndex = 3;
             gblista.TabStop = false;
             gblista.Text = "Lista Admin";
@@ -74,28 +75,31 @@
             listAdministradores.Columns.AddRange(new ColumnHeader[] { colNombre, ColApellido, ColCorreo, ColPuesto });
             listAdministradores.FullRowSelect = true;
             listAdministradores.GridLines = true;
-            listAdministradores.Location = new Point(26, 49);
-            listAdministradores.Margin = new Padding(3, 2, 3, 2);
+            listAdministradores.Location = new Point(37, 82);
+            listAdministradores.Margin = new Padding(4, 3, 4, 3);
+            listAdministradores.MultiSelect = false;
             listAdministradores.Name = "listAdministradores";
-            listAdministradores.Size = new Size(521, 305);
+            listAdministradores.Size = new Size(743, 506);
             listAdministradores.TabIndex = 0;
             listAdministradores.UseCompatibleStateImageBehavior = false;
             listAdministradores.View = View.Details;
+            listAdministradores.SelectedIndexChanged += listAdministradores_SelectedIndexChanged;
+            listAdministradores.MouseDoubleClick += listAdministradores_MouseDoubleClick;
             // 
             // colNombre
             // 
             colNombre.Text = "Nombre";
-            colNombre.Width = 90;
+            colNombre.Width = 150;
             // 
             // ColApellido
             // 
             ColApellido.Text = "Apellidos";
-            ColApellido.Width = 130;
+            ColApellido.Width = 150;
             // 
             // ColCorreo
             // 
             ColCorreo.Text = "Correo Electrónico";
-            ColCorreo.Width = 140;
+            ColCorreo.Width = 200;
             // 
             // ColPuesto
             // 
@@ -104,10 +108,10 @@
             // 
             // btnAnadir
             // 
-            btnAnadir.Location = new Point(499, 23);
-            btnAnadir.Margin = new Padding(3, 2, 3, 2);
+            btnAnadir.Location = new Point(713, 38);
+            btnAnadir.Margin = new Padding(4, 3, 4, 3);
             btnAnadir.Name = "btnAnadir";
-            btnAnadir.Size = new Size(116, 33);
+            btnAnadir.Size = new Size(166, 55);
             btnAnadir.TabIndex = 4;
             btnAnadir.Text = "Añadir";
             btnAnadir.UseVisualStyleBackColor = true;
@@ -115,13 +119,13 @@
             // 
             // FrmPersonalAdministrativo
             // 
-            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(645, 458);
+            ClientSize = new Size(921, 763);
             Controls.Add(btnAnadir);
             Controls.Add(gblista);
             Controls.Add(label1);
-            Margin = new Padding(3, 2, 3, 2);
+            Margin = new Padding(4, 3, 4, 3);
             Name = "FrmPersonalAdministrativo";
             Text = "Mantenimiento de Administradores";
             Load += FrmMantenimientoAdmin_Load;

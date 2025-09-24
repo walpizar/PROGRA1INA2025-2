@@ -114,5 +114,37 @@ namespace DAO
             }
         }
 
+        public void modificarPersonaYPersonal(clsPersonalAdministrativo admin)
+        {
+            using (var db = new dbContextINA())
+            {
+                var existente = db.personalAdministrativo
+                                  .Include(a => a.persona)
+                                  .FirstOrDefault(a => a.personaId == admin.personaId
+                                                    && a.personaTipoId == admin.personaTipoId);
+
+                if (existente != null)
+                {
+                    // Actualizar persona
+                    existente.persona.nombre = admin.persona.nombre;
+                    existente.persona.apellido1 = admin.persona.apellido1;
+                    existente.persona.apellido2 = admin.persona.apellido2;
+                    existente.persona.direccion = admin.persona.direccion;
+                    existente.persona.telefono = admin.persona.telefono;
+                    existente.persona.email = admin.persona.email;
+                    existente.persona.fechaNac = admin.persona.fechaNac;
+                    existente.persona.estado = true; // Asegurar que la persona esté activa
+
+                    // Actualizar admin
+                    existente.puestoId = admin.puestoId;
+                    existente.descripcion = admin.descripcion;
+                    existente.modificadoPor = admin.modificadoPor;
+                    existente.fechaModificacion = admin.fechaModificacion;
+
+                    db.SaveChanges();
+                }
+            }
+        }
+
     }
 }

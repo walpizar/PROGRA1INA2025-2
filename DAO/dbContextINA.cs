@@ -108,6 +108,8 @@ namespace DAO
                 .HasKey(rp => new { rp.idRol, rp.idPermiso });
 
 
+            // Configuración de clsPersonalAdministrativo 
+            //Relacion 1 a 1 con persona
             modelBuilder.Entity<clsPersonalAdministrativo>()
              .HasOne(pa => pa.persona)
              .WithOne()
@@ -115,6 +117,7 @@ namespace DAO
              .HasPrincipalKey<clsPersona>(p => new { p.id, p.tipoId })
              .OnDelete(DeleteBehavior.Restrict);
 
+            // Relación muchos a uno con Puestos
             modelBuilder.Entity<clsPersonalAdministrativo>()
                 .HasOne(pa => pa.Puesto)
                 .WithMany() // un puesto puede estar en varios administrativos

@@ -53,7 +53,7 @@ namespace UI
             btnEliminar = new Button();
             btnAnadir = new Button();
             btnCancelar = new Button();
-            label13 = new Label();
+            lblTitulo = new Label();
             gbDatosPersonales.SuspendLayout();
             SuspendLayout();
             // 
@@ -93,7 +93,7 @@ namespace UI
             // 
             dateFecha.Location = new Point(190, 272);
             dateFecha.Name = "dateFecha";
-            dateFecha.Size = new Size(265, 23);
+            dateFecha.Size = new Size(265, 31);
             dateFecha.TabIndex = 25;
             // 
             // txtDescripcion
@@ -109,7 +109,7 @@ namespace UI
             combPuesto.FormattingEnabled = true;
             combPuesto.Location = new Point(190, 301);
             combPuesto.Name = "combPuesto";
-            combPuesto.Size = new Size(265, 23);
+            combPuesto.Size = new Size(265, 33);
             combPuesto.TabIndex = 23;
             // 
             // label12
@@ -117,7 +117,7 @@ namespace UI
             label12.AutoSize = true;
             label12.Location = new Point(24, 333);
             label12.Name = "label12";
-            label12.Size = new Size(72, 15);
+            label12.Size = new Size(108, 25);
             label12.TabIndex = 22;
             label12.Text = "Descripción:";
             // 
@@ -126,7 +126,7 @@ namespace UI
             label10.AutoSize = true;
             label10.Location = new Point(24, 304);
             label10.Name = "label10";
-            label10.Size = new Size(46, 15);
+            label10.Size = new Size(70, 25);
             label10.TabIndex = 20;
             label10.Text = "Puesto:";
             // 
@@ -135,7 +135,7 @@ namespace UI
             label11.AutoSize = true;
             label11.Location = new Point(24, 275);
             label11.Name = "label11";
-            label11.Size = new Size(106, 15);
+            label11.Size = new Size(156, 25);
             label11.TabIndex = 18;
             label11.Text = "Fecha Nacimiento:";
             // 
@@ -144,14 +144,14 @@ namespace UI
             label8.AutoSize = true;
             label8.Location = new Point(23, 347);
             label8.Name = "label8";
-            label8.Size = new Size(0, 15);
+            label8.Size = new Size(0, 25);
             label8.TabIndex = 16;
             // 
             // txtEmail
             // 
             txtEmail.Location = new Point(190, 243);
             txtEmail.Name = "txtEmail";
-            txtEmail.Size = new Size(265, 23);
+            txtEmail.Size = new Size(265, 31);
             txtEmail.TabIndex = 15;
             // 
             // label9
@@ -159,7 +159,7 @@ namespace UI
             label9.AutoSize = true;
             label9.Location = new Point(24, 246);
             label9.Name = "label9";
-            label9.Size = new Size(39, 15);
+            label9.Size = new Size(58, 25);
             label9.TabIndex = 14;
             label9.Text = "Email:";
             // 
@@ -167,7 +167,7 @@ namespace UI
             // 
             txtTelefono.Location = new Point(190, 214);
             txtTelefono.Name = "txtTelefono";
-            txtTelefono.Size = new Size(265, 23);
+            txtTelefono.Size = new Size(265, 31);
             txtTelefono.TabIndex = 13;
             // 
             // label7
@@ -175,7 +175,7 @@ namespace UI
             label7.AutoSize = true;
             label7.Location = new Point(24, 217);
             label7.Name = "label7";
-            label7.Size = new Size(55, 15);
+            label7.Size = new Size(83, 25);
             label7.TabIndex = 12;
             label7.Text = "Teléfono:";
             // 
@@ -183,7 +183,7 @@ namespace UI
             // 
             txtDireccion.Location = new Point(190, 185);
             txtDireccion.Name = "txtDireccion";
-            txtDireccion.Size = new Size(265, 23);
+            txtDireccion.Size = new Size(265, 31);
             txtDireccion.TabIndex = 11;
             // 
             // label6
@@ -191,7 +191,7 @@ namespace UI
             label6.AutoSize = true;
             label6.Location = new Point(24, 188);
             label6.Name = "label6";
-            label6.Size = new Size(64, 15);
+            label6.Size = new Size(95, 25);
             label6.TabIndex = 10;
             label6.Text = "Dirrección:";
             // 
@@ -199,7 +199,7 @@ namespace UI
             // 
             txt2Apellido.Location = new Point(190, 156);
             txt2Apellido.Name = "txt2Apellido";
-            txt2Apellido.Size = new Size(265, 23);
+            txt2Apellido.Size = new Size(265, 31);
             txt2Apellido.TabIndex = 9;
             // 
             // label5
@@ -207,7 +207,7 @@ namespace UI
             label5.AutoSize = true;
             label5.Location = new Point(24, 159);
             label5.Name = "label5";
-            label5.Size = new Size(104, 15);
+            label5.Size = new Size(159, 25);
             label5.TabIndex = 8;
             label5.Text = "Segundo Apellido:";
             // 
@@ -215,7 +215,7 @@ namespace UI
             // 
             txt1Apellido.Location = new Point(190, 127);
             txt1Apellido.Name = "txt1Apellido";
-            txt1Apellido.Size = new Size(265, 23);
+            txt1Apellido.Size = new Size(265, 31);
             txt1Apellido.TabIndex = 7;
             // 
             // label4
@@ -223,7 +223,7 @@ namespace UI
             label4.AutoSize = true;
             label4.Location = new Point(23, 130);
             label4.Name = "label4";
-            label4.Size = new Size(92, 15);
+            label4.Size = new Size(138, 25);
             label4.TabIndex = 6;
             label4.Text = "Primer Apellido:";
             // 
@@ -231,7 +231,7 @@ namespace UI
             // 
             txtNombre.Location = new Point(190, 98);
             txtNombre.Name = "txtNombre";
-            txtNombre.Size = new Size(265, 23);
+            txtNombre.Size = new Size(265, 31);
             txtNombre.TabIndex = 5;
             // 
             // label3
@@ -239,7 +239,7 @@ namespace UI
             label3.AutoSize = true;
             label3.Location = new Point(24, 101);
             label3.Name = "label3";
-            label3.Size = new Size(54, 15);
+            label3.Size = new Size(82, 25);
             label3.TabIndex = 4;
             label3.Text = "Nombre:";
             // 
@@ -248,7 +248,7 @@ namespace UI
             label2.AutoSize = true;
             label2.Location = new Point(23, 72);
             label2.Name = "label2";
-            label2.Size = new Size(82, 15);
+            label2.Size = new Size(121, 25);
             label2.TabIndex = 3;
             label2.Text = "Identificación:";
             // 
@@ -256,7 +256,7 @@ namespace UI
             // 
             txtIdentificacion.Location = new Point(190, 69);
             txtIdentificacion.Name = "txtIdentificacion";
-            txtIdentificacion.Size = new Size(265, 23);
+            txtIdentificacion.Size = new Size(265, 31);
             txtIdentificacion.TabIndex = 2;
             // 
             // combTipoIdent
@@ -264,7 +264,7 @@ namespace UI
             combTipoIdent.FormattingEnabled = true;
             combTipoIdent.Location = new Point(190, 40);
             combTipoIdent.Name = "combTipoIdent";
-            combTipoIdent.Size = new Size(265, 23);
+            combTipoIdent.Size = new Size(265, 33);
             combTipoIdent.TabIndex = 1;
             // 
             // label1
@@ -272,7 +272,7 @@ namespace UI
             label1.AutoSize = true;
             label1.Location = new Point(24, 43);
             label1.Name = "label1";
-            label1.Size = new Size(108, 15);
+            label1.Size = new Size(161, 25);
             label1.TabIndex = 0;
             label1.Text = "Tipo Identificación:";
             // 
@@ -284,6 +284,7 @@ namespace UI
             btnEliminar.TabIndex = 1;
             btnEliminar.Text = "Eliminar";
             btnEliminar.UseVisualStyleBackColor = true;
+            btnEliminar.Click += btnEliminar_Click;
             // 
             // btnAnadir
             // 
@@ -304,22 +305,22 @@ namespace UI
             btnCancelar.Text = "Cancelar";
             btnCancelar.UseVisualStyleBackColor = true;
             // 
-            // label13
+            // lblTitulo
             // 
-            label13.AutoSize = true;
-            label13.BackColor = Color.Transparent;
-            label13.Font = new Font("Arial", 15.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label13.Location = new Point(100, 53);
-            label13.Name = "label13";
-            label13.Size = new Size(400, 24);
-            label13.TabIndex = 4;
-            label13.Text = "Mantenimento Personal Administrativo";
-            label13.TextAlign = ContentAlignment.MiddleCenter;
+            lblTitulo.AutoSize = true;
+            lblTitulo.BackColor = Color.Transparent;
+            lblTitulo.Font = new Font("Arial", 15.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblTitulo.Location = new Point(100, 53);
+            lblTitulo.Name = "lblTitulo";
+            lblTitulo.Size = new Size(612, 37);
+            lblTitulo.TabIndex = 4;
+            lblTitulo.Text = "Mantenimento Personal Administrativo";
+            lblTitulo.TextAlign = ContentAlignment.MiddleCenter;
             // 
             // FrmAnadirPersonalAdministrativo
             // 
             ClientSize = new Size(595, 611);
-            Controls.Add(label13);
+            Controls.Add(lblTitulo);
             Controls.Add(btnCancelar);
             Controls.Add(btnAnadir);
             Controls.Add(btnEliminar);
@@ -365,7 +366,7 @@ namespace UI
         private Button btnEliminar;
         private Button btnAnadir;
         private Button btnCancelar;
-        private Label label13;
+        private Label lblTitulo;
         private DateTimePicker dateFecha;
     }
 }

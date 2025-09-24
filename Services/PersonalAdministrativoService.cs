@@ -78,6 +78,11 @@ namespace Services
             throw new NotImplementedException();
         }
 
+        public void modificarPersonaYPersonal(clsPersonalAdministrativo admin)
+        {
+            _AdminDao.modificarPersonaYPersonal(admin);
+        }
+
        
 
 
