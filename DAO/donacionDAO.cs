@@ -1,5 +1,6 @@
 ﻿using Common.Interfaces;
 using Entities;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,7 +20,13 @@ namespace DAO
 
         public clsDonacion consultarPorID(string id)
         {
-            return context.donacion.FirstOrDefault(d => d.idDonacion.ToString() == id);
+            //DEVUELVO LA DONACION QUE COINCIDA CON EL ID E INCLUYO EL DONANTE Y TIPO DE DONACION
+            return context.donacion
+                .Include(d => d.donante)
+                .Include(d => d.tipoDonacion)
+                .Include(d => d.activos) //incluyo los activos relacionados
+                .Where(d => d.idDonacion.ToString() == id)
+                .FirstOrDefault();
         }
 
         public clsDonacion consultarPorID(int id)

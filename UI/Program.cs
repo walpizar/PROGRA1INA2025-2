@@ -20,19 +20,26 @@ namespace UI
            
 
 
-        // To customize application configuration such as set high DPI settings or default font,
-        // see https://aka.ms/applicationconfiguration.
-        ApplicationConfiguration.Initialize();
-        //Application.Run(new frmProductoLista());
+            // To customize application configuration such as set high DPI settings or default font,
+            // see https://aka.ms/applicationconfiguration.
+            ApplicationConfiguration.Initialize();
 
-        
-        Application.Run(new frmDonanteLista());
 
-        //solo ejemplo
-        //Application.Run(new frmPacienteLista());
+            //abrir formulario donante lista
+            //Application.Run(new frmDonanteLista());
 
-        
-        //Application.Run(new frmActivos());
+            //abrir formulario donacion lista
+            Application.Run(new frmDonacionLista());
+
+
+
+
+
+            //solo ejemplo
+            //Application.Run(new frmPacienteLista());
+
+
+            //Application.Run(new frmActivos());
 
 
         }

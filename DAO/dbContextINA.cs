@@ -145,7 +145,7 @@ namespace DAO
             modelBuilder.Entity<clsDonacion>()
                 .HasOne(d => d.tipoDonacion)
                 .WithMany(td => td.donaciones)
-                .HasForeignKey(d => d.idtipoDonacion);
+                .HasForeignKey(d => d.idTipoDonacion);
 
             modelBuilder.Entity<clsActivos>()
                 .HasOne(a => a.donacion)

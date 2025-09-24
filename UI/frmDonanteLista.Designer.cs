@@ -135,7 +135,7 @@
             Controls.Add(gbxDonanteLista);
             Controls.Add(lblMantDonante);
             Name = "frmDonanteLista";
-            Text = "LISTA DONANTES";
+            Text = "LISTA DONANTE";
             Load += frmDonanteLista_Load;
             gbxDonanteLista.ResumeLayout(false);
             gbxDonanteLista.PerformLayout();

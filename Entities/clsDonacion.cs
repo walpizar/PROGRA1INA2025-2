@@ -19,7 +19,7 @@ namespace Entities
         public int donanteTipoId { get; set; }
 
         [ForeignKey("tipoDonacion")]
-        public int idtipoDonacion { get; set; }
+        public int idTipoDonacion { get; set; }
 
         [Required]
         [DataType(DataType.Date)]
@@ -27,6 +27,13 @@ namespace Entities
 
         [StringLength(200)]
         public string observaciones { get; set; }
+
+        //CAMPOS OPCIONALES SEGUN TIPO DE DONACION
+        public decimal? monto { get; set; } //opcional
+        public int? tipoTransaccion { get; set; } //opcional, lleva enums
+        public int? frecuencia { get; set; } //opcional, lleva enums
+        public int? tipoMoneda { get; set; } //opcional, lleva enums
+        public DateTime? fechaProximaDonacion { get; set; } //opcional
 
         // Auditoría
         [Required, StringLength(50)]
