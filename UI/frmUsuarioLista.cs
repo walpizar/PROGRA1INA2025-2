@@ -13,32 +13,24 @@ using System.Windows.Forms;
 
 namespace UI
 {
-    public partial class frmListaUsuarios : Form
+    public partial class frmUsuarioLista : Form
     {
-        List<clsUsuario> _listaUsuarios;
+        List<clsUsuario> lista;
         private readonly UsuarioService _usuarioService;
 
         // Modifica el constructor para que reciba el servicio
-        public frmListaUsuarios(UsuarioService usuarioService)
+        public frmUsuarioLista()
         {
             InitializeComponent();
-
-            var context = new dbContextINA();
-            var usuarioDAO = new UsuarioDAO(context);
-            _usuarioService = new UsuarioService(usuarioDAO);
-            _usuarioService = usuarioService;
-
-          
+            _usuarioService = new UsuarioService();
         }
 
-        private void btnNuevo_Click(object sender, EventArgs e)
-        {
-            frmUsuario frmUsuario = new frmUsuario();
-            frmUsuario.ShowDialog();
 
-            //actualizar la _listaUsuarios
-            this._listaUsuarios = _usuarioService.consultarTodos();
-            cargarLista(_listaUsuarios);
+        private void frmUsuarioLista_Load(object sender, EventArgs e)
+        {
+            this.lista = _usuarioService.consultarTodos();
+            cargarLista(lista);
+
         }
 
         private void cargarLista(List<clsUsuario> lista)
@@ -46,13 +38,25 @@ namespace UI
             lstvLista.Items.Clear();
             foreach (clsUsuario usuario in lista)
             {
-                ListViewItem item = new ListViewItem(usuario.idRol.ToString());
+                ListViewItem item = new ListViewItem(usuario.id.ToString());
                 item.SubItems.Add(usuario.nombre_Usuario);
                 item.SubItems.Add(usuario.contrasena);
                 item.SubItems.Add(usuario.idRol.ToString());
                 lstvLista.Items.Add(item);
 
             }
+
+        }
+
+        private void btnNuevo_Click(object sender, EventArgs e)
+        {
+            frmUsuario frmUsuario = new frmUsuario();
+            frmUsuario.ShowDialog();
+
+            //actualizar la lista
+            this.lista = _usuarioService.consultarTodos();
+            cargarLista(lista);
+
         }
 
         private void lstvLista_SelectedIndexChanged(object sender, EventArgs e)
@@ -65,8 +69,8 @@ namespace UI
                     //extraigo el id del usuario seleccionado de la listview
                     int idRol = int.Parse(lstvLista.SelectedItems[0].SubItems[0].Text);
 
-                    //consulto el cliente por idRol a la _listaUsuarios
-                    clsUsuario usuario = _listaUsuarios.Where(u => u.idRol == idRol).SingleOrDefault();
+                    //consulto el cliente por idRol a la lista
+                    clsUsuario usuario = lista.Where(u => u.idRol == idRol).SingleOrDefault();
                     if (usuario != null)
                     {
                         //Creo una instancia del formulario de cliente
@@ -75,28 +79,29 @@ namespace UI
                         frmUsuario.usuarioSelected = usuario;
                         frmUsuario.ShowDialog();
 
-                        //actualizar la _listaUsuarios
-                        this._listaUsuarios = _usuarioService.consultarTodos();
-                        cargarLista(_listaUsuarios);
+                        //actualizar la lista
+                        this.lista = _usuarioService.consultarTodos();
+                        cargarLista(lista);
                     }
 
                 }
             }
             catch (Exception)
             {
-                MessageBox.Show("Error al seleccionar el usuario de la _listaUsuarios");
+                MessageBox.Show("Error al seleccionar el usuario de la lista");
             }
         }
 
         private void textBusqueda_TextChanged(object sender, EventArgs e)
         {
             //Filtrar por nombre y por el idRol
-            var listaFiltrada = this._listaUsuarios.Where(u=>u.nombre_Usuario.ToUpper()
-            .Contains(txtBusqueda.Text.ToUpper())||u.contrasena.Contains(txtBusqueda.Text.ToUpper())||
+            var listaFiltrada = this.lista.Where(u => u.nombre_Usuario.ToUpper()
+            .Contains(txtBusqueda.Text.ToUpper()) || u.contrasena.Contains(txtBusqueda.Text.ToUpper()) ||
             u.idRol.ToString().Contains(txtBusqueda.Text.ToUpper())).ToList();
 
-            // Volver a cargar el ListView con la _listaUsuarios filtrada
+            // Volver a cargar el ListView con la lista filtrada
             cargarLista(listaFiltrada);
         }
+
     }
 }

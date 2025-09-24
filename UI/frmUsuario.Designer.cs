@@ -29,7 +29,7 @@
             cboRol = new ComboBox();
             lblRol = new Label();
             lblConfirmar = new Label();
-            txtConfirmar = new TextBox();
+            txtConfirmarContraseña = new TextBox();
             txtPassword = new TextBox();
             lblPassword = new Label();
             txtUsuario = new TextBox();
@@ -58,7 +58,6 @@
             lblUsuario.TabIndex = 5;
             lblUsuario.Text = "Crear Usuario";
             lblUsuario.TextAlign = ContentAlignment.TopCenter;
-            lblUsuario.Click += lblUsuario_Click;
             // 
             // gbxUsuario
             // 
@@ -66,7 +65,7 @@
             gbxUsuario.Controls.Add(cboRol);
             gbxUsuario.Controls.Add(lblRol);
             gbxUsuario.Controls.Add(lblConfirmar);
-            gbxUsuario.Controls.Add(txtConfirmar);
+            gbxUsuario.Controls.Add(txtConfirmarContraseña);
             gbxUsuario.Controls.Add(txtPassword);
             gbxUsuario.Controls.Add(lblPassword);
             gbxUsuario.Controls.Add(txtUsuario);
@@ -114,19 +113,17 @@
             lblConfirmar.TabIndex = 9;
             lblConfirmar.Text = "Confirmar:";
             // 
-            // txtConfirmar
+            // txtConfirmarContraseña
             // 
-            txtConfirmar.Location = new Point(82, 166);
-            txtConfirmar.Name = "txtConfirmar";
-            txtConfirmar.PasswordChar = '*';
-            txtConfirmar.Size = new Size(299, 23);
-            txtConfirmar.TabIndex = 8;
+            txtConfirmarContraseña.Location = new Point(82, 166);
+            txtConfirmarContraseña.Name = "txtConfirmarContraseña";
+            txtConfirmarContraseña.Size = new Size(299, 23);
+            txtConfirmarContraseña.TabIndex = 8;
             // 
             // txtPassword
             // 
             txtPassword.Location = new Point(82, 119);
             txtPassword.Name = "txtPassword";
-            txtPassword.PasswordChar = '*';
             txtPassword.Size = new Size(299, 23);
             txtPassword.TabIndex = 6;
             // 
@@ -166,7 +163,7 @@
             // 
             // btnEliminar
             // 
-            btnEliminar.Location = new Point(310, 299);
+            btnEliminar.Location = new Point(85, 299);
             btnEliminar.Name = "btnEliminar";
             btnEliminar.Size = new Size(88, 29);
             btnEliminar.TabIndex = 17;
@@ -176,16 +173,17 @@
             // 
             // button2
             // 
-            button2.Location = new Point(195, 299);
+            button2.Location = new Point(285, 302);
             button2.Name = "button2";
             button2.Size = new Size(99, 29);
             button2.TabIndex = 16;
             button2.Text = "Cancelar";
             button2.UseVisualStyleBackColor = true;
+            button2.Click += btnCancelar_Click;
             // 
             // btnGuardar
             // 
-            btnGuardar.Location = new Point(85, 296);
+            btnGuardar.Location = new Point(188, 299);
             btnGuardar.Name = "btnGuardar";
             btnGuardar.Size = new Size(85, 32);
             btnGuardar.TabIndex = 15;
@@ -268,7 +266,7 @@
             Controls.Add(btnGuardar);
             Name = "frmUsuario";
             Text = "Mantenimiento de Usuarios";
-            Load += frmUsuarioLista_Load;
+            Load += frmUsuario_Load;
             gbxUsuario.ResumeLayout(false);
             gbxUsuario.PerformLayout();
             ResumeLayout(false);
@@ -304,7 +302,7 @@
         private ComboBox cboPersona;
         private TextBox txtPassword;
         private Label lblPassword;
-        private TextBox txtConfirmar;
+        private TextBox txtConfirmarContraseña;
         private Label lblConfirmar;
         private ComboBox cboRol;
         private Label lblRol;

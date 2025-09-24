@@ -16,27 +16,16 @@ namespace UI
 {
     public partial class frmUsuario : Form
     {
-        private readonly UsuarioService _usuarioService;
+
         public clsUsuario usuarioSelected { get; set; }
-        
+        private readonly UsuarioService _usuarioService;
+
 
 
         public frmUsuario()
         {
             InitializeComponent();
-            // Creamos dependencias aquí mismo (no tocamos Program.cs)
-            var context = new dbContextINA();
-            var usuarioDAO = new UsuarioDAO(context);
-            _usuarioService = new UsuarioService(usuarioDAO);
-
-        }
-
-        private void frmUsuarioLista_Load(object sender, EventArgs e)
-        {
-            //llenar el Combox de personas y roles cuando se carga el formulario
-            CargarComboPersona();
-            CargarComboRol();
-
+            _usuarioService = new UsuarioService();
 
         }
 
@@ -44,16 +33,38 @@ namespace UI
         {
             try
             {
+                //validar datos de entrada
                 if (validarDatos())
                 {
-                    // Lógica para crear o modificar.
+                    //Creo la instancia del usuario nuevo
                     clsUsuario usuario = usuarioSelected == null ? new clsUsuario() : usuarioSelected;
 
-                    // Asigna valores a las propiedades del usuario.
-                    usuario.personaId = cboPersona.SelectedValue.ToString();
-                    usuario.nombre_Usuario = txtUsuario.Text.Trim();
-                    usuario.contrasena = txtPassword.Text;
-                    usuario.idRol = (int)cboRol.SelectedValue;
+                    // Lógica temporal para obtener persona y su tipo directamente
+                    string idPersona = cboPersona.SelectedValue?.ToString();
+
+                    if (string.IsNullOrEmpty(idPersona))
+                    {
+                        MessageBox.Show("Debe seleccionar una persona válida.");
+                        return;
+                    }
+
+                    // Aquí se salta la capa de servicio y se accede directamente al contexto
+                    using (var context = new dbContextINA())
+                    {
+                        var personaSeleccionada = context.persona.FirstOrDefault(p => p.id == idPersona);
+
+                        if (personaSeleccionada == null)
+                        {
+                            MessageBox.Show("No se pudo encontrar la persona seleccionada.");
+                            return;
+                        }
+
+                        usuario.id = personaSeleccionada.id;
+                        usuario.tipoId = personaSeleccionada.tipoId;
+                        usuario.nombre_Usuario = txtUsuario.Text.Trim();
+                        usuario.contrasena = txtPassword.Text;
+                        usuario.idRol = (int)cboRol.SelectedValue;
+                    }
 
                     if (usuarioSelected == null)
                     {
@@ -66,31 +77,28 @@ namespace UI
                         MessageBox.Show("Usuario modificado correctamente");
                     }
 
-                    //limpio los campos
                     limpiarForm();
                     this.Close();
                 }
             }
             catch (Exception ex)
             {
-                //MessageBox.Show("Ocurrió un error al guardar el usuario: " + ex.Message);
-                string inner = ex.InnerException != null ? ex.InnerException.Message : "";
-                string inner2 = ex.InnerException?.InnerException != null ? ex.InnerException.InnerException.Message : "";
-
+                string inner = ex.InnerException?.Message ?? "";
+                string inner2 = ex.InnerException?.InnerException?.Message ?? "";
                 MessageBox.Show(
                     "Ocurrió un error al guardar el usuario:\n" + ex.Message +
                     (string.IsNullOrEmpty(inner) ? "" : "\n\nInnerException: " + inner) +
                     (string.IsNullOrEmpty(inner2) ? "" : "\n\nInnerException2: " + inner2)
                 );
+
             }
         }
-
         private void limpiarForm()
         {
             cboPersona.ResetText();
             txtUsuario.ResetText();
             txtPassword.ResetText();
-            txtConfirmar.ResetText();
+            txtConfirmarContraseña.ResetText();
             cboRol.SelectedIndex = -1;
         }
 
@@ -113,9 +121,29 @@ namespace UI
                 MessageBox.Show("Debe seleccionar un rol");
                 return false;
             }
+            if (string.IsNullOrWhiteSpace(txtPassword.Text))
+            {
+                MessageBox.Show("La contraseña no puede estar vacía.");
+                return false;
+
+            }
+            if (txtPassword.Text != txtConfirmarContraseña.Text)
+            {
+                MessageBox.Show("Las contraseñas no coinciden. Por favor, verifíquelas.");
+                return false;
+
+            }
 
             return true;
         }
+        private void frmUsuario_Load(object sender, EventArgs e)
+        {
+            //llenar el Combox de personas y roles cuando se carga el formulario
+            CargarComboPersona();
+            CargarComboRol();
+
+        }
+
 
         private void CargarComboPersona()
         {
@@ -130,8 +158,8 @@ namespace UI
                     .ToList();*/
             var personas = new[]
             {
-                new { id = "1", NombreCompleto = "Luis Alvarez Rojas" },
-                new { id = "2", NombreCompleto = "Karla Rojas Sanchez" }
+                new { id = "1", NombreCompleto = "Luis Alvarez Rojas", tipoId = 1 },
+                new { id = "2", NombreCompleto = "Karla Rojas Sanchez", tipoId = 2 }
             }.ToList();
 
             cboPersona.DataSource = personas;
@@ -199,22 +227,36 @@ namespace UI
 
         private void btnEliminar_Click(object sender, EventArgs e)
         {
-            if (string.IsNullOrWhiteSpace(txtUsuario.Text))
+            try
             {
-                MessageBox.Show("Seleccione un usuario");
-                return;
+
+                DialogResult resp = MessageBox.Show("¿Está seguro que desea eliminar el usuario?", "Confirmación",
+                     MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+                if (resp == DialogResult.Yes)
+                {
+                    _usuarioService.eliminar(usuarioSelected.id);
+                    MessageBox.Show("Usuario eliminado correctamente");
+                    this.Close(); //cierro el formulario
+                }
+
+
+            }
+            catch (Exception)
+            {
+
+                MessageBox.Show("Error al eliminar el usuario.");
             }
 
-            // Elimina por nombre de usuario
-            _usuarioService.eliminar(txtUsuario.Text.Trim());
-            MessageBox.Show("Usuario eliminado (lógicamente)");
-
         }
 
-        private void lblUsuario_Click(object sender, EventArgs e)
+        private void btnCancelar_Click(object sender, EventArgs e)
         {
-
+            this.Close();
         }
     }
+
 }
+
+
 

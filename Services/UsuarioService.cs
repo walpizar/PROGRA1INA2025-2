@@ -13,13 +13,12 @@ namespace Services
     {
 
         // Declara la dependencia de UsuarioDAO.
-        private readonly UsuarioDAO _usuarioDAO;
+        private readonly UsuarioDAO _usuarioDAO= new UsuarioDAO();
         private object _context;
 
-        // El constructor ahora recibe UsuarioDAO por inyección de dependencias.
-        public UsuarioService(UsuarioDAO usuarioDAO)
+       
+        public UsuarioService()
         {
-            _usuarioDAO = usuarioDAO;
 
         }
         public void crear(clsUsuario usuario)
@@ -30,10 +29,11 @@ namespace Services
                 throw new Exception("El usuario ya existe");
             }
             // Validar por ID de persona
-            if (_usuarioDAO.consultarPorID(usuario.personaId) != null)
+            if (_usuarioDAO.consultarPorID(usuario.id) != null)
             {
                 throw new Exception("Ya existe un usuario asociado a esta persona.");
             }
+
             usuario.estado = true; // siempre en true al crear
             // Si el usuario no existe, se procede a crearlo.
             _usuarioDAO.crear(usuario);

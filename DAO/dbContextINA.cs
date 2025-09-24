@@ -59,14 +59,15 @@ namespace DAO
 
             modelBuilder.Entity<clsUsuario>()
                 //Define la clave primaria compuesta para clsUsuario
-                .HasKey(u => new { u.personaId, u.personaTipoId });
+                .HasKey(u => new { u.id, u.tipoId});
 
             modelBuilder.Entity<clsUsuario>()
                 .HasOne(u => u.persona)//Establece la relación de 1 a 1(un usuario tiene una persona)
                 .WithOne()
-                .HasForeignKey<clsUsuario>(u => new { u.personaId, u.personaTipoId })
+                .HasForeignKey<clsUsuario>(u => new { u.id,u.tipoId })
                 .HasPrincipalKey<clsPersona>(p => new { p.id, p.tipoId });
-  
+
+            
 
             //clsMedico configuracion de llave primaria compuesta   
             modelBuilder.Entity<clsMedico>().HasKey(m => new { m.id, m.tipoId });

@@ -5,7 +5,6 @@ namespace UI
 {
     internal static class Program
     {
-        private static UsuarioService usuarioService;
 
         /// <summary>
         ///  The main entry point for the application.
@@ -16,7 +15,7 @@ namespace UI
   
         // see https://aka.ms/applicationconfiguration.
         ApplicationConfiguration.Initialize();
-        Application.Run(new frmUsuario());
+        Application.Run(new frmUsuarioLista());
        
 
         }

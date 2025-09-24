@@ -15,7 +15,7 @@ using System.Windows.Forms;
 {
     public partial class frmProductoLista : Form
     {
-        List<clsProducto> _listaUsuarios;
+        List<clsProducto> lista;
 
         private readonly ProductoService _productoService;
         public frmProductoLista()
@@ -28,13 +28,13 @@ using System.Windows.Forms;
         {
             try
             {
-                this._listaUsuarios = _productoService.consultarTodos();
-                cargarLista(_listaUsuarios);
+                this.lista = _productoService.consultarTodos();
+                cargarLista(lista);
             }
             catch (Exception)
             {
 
-                MessageBox.Show("Error al cargar la _listaUsuarios de productos");
+                MessageBox.Show("Error al cargar la lista de productos");
             }
 
         }
@@ -47,9 +47,9 @@ using System.Windows.Forms;
                 frmProducto.ShowDialog();
 
 
-                //actualiar la _listaUsuarios
-                this._listaUsuarios = _productoService.consultarTodos();
-                cargarLista(_listaUsuarios);
+                //actualiar la lista
+                this.lista = _productoService.consultarTodos();
+                cargarLista(lista);
 
 
                
@@ -64,14 +64,14 @@ using System.Windows.Forms;
 
         }
 
-        private void cargarLista(List<clsProducto> _listaUsuarios)
+        private void cargarLista(List<clsProducto> lista)
         {
 
            
 
             lstvLista.Items.Clear();
 
-            foreach (clsProducto producto in _listaUsuarios)
+            foreach (clsProducto producto in lista)
             {
                 ListViewItem item = new ListViewItem(producto.id.ToString());
                 item.SubItems.Add(producto.nombre);
@@ -96,9 +96,9 @@ using System.Windows.Forms;
                     //extraigo el id del producto seleccionado de la listview
                     int id = int.Parse(lstvLista.SelectedItems[0].SubItems[0].Text);
 
-                    //consulto el producto por id a la _listaUsuarios    
+                    //consulto el producto por id a la lista    
 
-                    clsProducto producto = _listaUsuarios.Where(p => p.id == id).SingleOrDefault();
+                    clsProducto producto = lista.Where(p => p.id == id).SingleOrDefault();
 
                     if (producto != null)
                     {
@@ -109,9 +109,9 @@ using System.Windows.Forms;
                         //abro el formulario
                         frmProducto.ShowDialog();
 
-                        //actualiar la _listaUsuarios
-                        this._listaUsuarios = _productoService.consultarTodos();
-                        cargarLista(_listaUsuarios);
+                        //actualiar la lista
+                        this.lista = _productoService.consultarTodos();
+                        cargarLista(lista);
                     }
 
 
@@ -121,14 +121,14 @@ using System.Windows.Forms;
             catch (Exception)
             {
 
-                MessageBox.Show("Error al seleccionar el producto de la _listaUsuarios");
+                MessageBox.Show("Error al seleccionar el producto de la lista");
             }
         }
 
         private void txtBusqueda_TextChanged(object sender, EventArgs e)
         {
             //FILTRAR POR NOMBRE Y POR EL ID
-            var listaFiltrada = this._listaUsuarios.Where(p => p.id.ToString().ToUpper()
+            var listaFiltrada = this.lista.Where(p => p.id.ToString().ToUpper()
             .Contains(txtBusqueda.Text.ToUpper()) || 
             p.nombre.ToUpper().Contains(txtBusqueda.Text.ToUpper())).ToList();
 

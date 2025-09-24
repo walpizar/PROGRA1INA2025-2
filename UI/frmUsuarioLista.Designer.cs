@@ -1,6 +1,6 @@
 ﻿namespace UI
 {
-    partial class frmListaUsuarios
+    partial class frmUsuarioLista
     {
         /// <summary>
         /// Required designer variable.
@@ -125,7 +125,7 @@
             label1.TabIndex = 3;
             label1.Text = "Mantenimientos Usuarios";
             // 
-            // frmListaUsuarios
+            // frmUsuarioLista
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
@@ -135,9 +135,10 @@
             Controls.Add(btnNuevo);
             Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
             ForeColor = SystemColors.ButtonShadow;
-            Name = "frmListaUsuarios";
+            Name = "frmUsuarioLista";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Mantenimiento de Usuarios";
+            Load += frmUsuarioLista_Load;
             txtBusqueda.ResumeLayout(false);
             txtBusqueda.PerformLayout();
             ResumeLayout(false);
