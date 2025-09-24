@@ -36,7 +36,7 @@ namespace UI
             {
                 pnlMenuPrincipal.Width = 250;
                 ptbLogo.Size = new Size(250, 158);
-                ptbLogo.Location = new Point(0, 26);
+                ptbLogo.Location = new Point(0, 12);
             }
 
         }
@@ -82,6 +82,31 @@ namespace UI
         {
             ReleaseCapture();
             SendMessage(this.Handle, 0x112, 0xf012, 0);
+
+        }
+
+        private void bntActivos_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void panel2_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void ptbLogo_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void panel4_Paint(object sender, PaintEventArgs e)
+        {
 
         }
     }
