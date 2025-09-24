@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DAO.Migrations
 {
     [DbContext(typeof(dbContextINA))]
-    [Migration("20250923172406_incial")]
-    partial class incial
+    [Migration("20250924151200_Initial")]
+    partial class Initial
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -89,6 +89,55 @@ namespace DAO.Migrations
                     b.HasIndex("idCategoria");
 
                     b.ToTable("tbActivos");
+                });
+
+            modelBuilder.Entity("Entities.clsAsignacionActivosPaciente", b =>
+                {
+                    b.Property<int>("idAsigActivo")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("idAsigActivo"));
+
+                    b.Property<bool>("estado")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime>("fechaAsignacion")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("fecha_crea")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("fecha_ult_mod")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("idActivo")
+                        .HasColumnType("int");
+
+                    b.Property<string>("idPaciente")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(20)");
+
+                    b.Property<int>("tipoIdPaciente")
+                        .HasColumnType("int");
+
+                    b.Property<string>("usuario_crea")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<string>("usuario_ult_mod")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.HasKey("idAsigActivo");
+
+                    b.HasIndex("idActivo");
+
+                    b.HasIndex("idPaciente", "tipoIdPaciente");
+
+                    b.ToTable("tbAsigActivoPaciente");
                 });
 
             modelBuilder.Entity("Entities.clsCategoriaActivos", b =>
@@ -584,6 +633,25 @@ namespace DAO.Migrations
                     b.Navigation("categoria");
                 });
 
+            modelBuilder.Entity("Entities.clsAsignacionActivosPaciente", b =>
+                {
+                    b.HasOne("Entities.clsActivos", "activo")
+                        .WithMany("asignacionesActivos")
+                        .HasForeignKey("idActivo")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("Entities.clsPaciente", "paciente")
+                        .WithMany("asignacionesActivos")
+                        .HasForeignKey("idPaciente", "tipoIdPaciente")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("activo");
+
+                    b.Navigation("paciente");
+                });
+
             modelBuilder.Entity("Entities.clsDevolucion", b =>
                 {
                     b.HasOne("Entities.clsActivos", "activo")
@@ -678,6 +746,8 @@ namespace DAO.Migrations
 
             modelBuilder.Entity("Entities.clsActivos", b =>
                 {
+                    b.Navigation("asignacionesActivos");
+
                     b.Navigation("devoluciones");
                 });
 
@@ -694,6 +764,11 @@ namespace DAO.Migrations
             modelBuilder.Entity("Entities.clsModulo", b =>
                 {
                     b.Navigation("permisos");
+                });
+
+            modelBuilder.Entity("Entities.clsPaciente", b =>
+                {
+                    b.Navigation("asignacionesActivos");
                 });
 
             modelBuilder.Entity("Entities.clsPermisos", b =>

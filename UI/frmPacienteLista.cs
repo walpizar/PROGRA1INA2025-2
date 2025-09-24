@@ -23,6 +23,10 @@ namespace UI
         //variable para saber si estoy mostrando inactivos o activos
         private bool mostrarInactivos = false;
 
+        //agrego propiedades para saber si estoy en modo seleccion (No modificacion ni Creacion ni Reactivacion)
+        public bool modoSeleccion { get; set; } = false;
+        public clsPaciente pacienteSeleccionado { get; set; } = null;//variable para guardar el paciente seleccionado SOLO DEL MODO SELECCION
+
         public frmPacienteLista()
         {
             InitializeComponent();
@@ -39,7 +43,22 @@ namespace UI
         {
             try
             {
-                //llamo al metodo para saber que lista cargar si activos o inactivos
+                //valido si estoy en modo seleccion
+                if (modoSeleccion == true)
+                {
+                    //cambio el titulo del form y del label y oculto el boton nuevo
+                    this.Text = "Seleccionar Paciente"; //cambio el titulo del form
+                    lblTitulo.Text = "Seleccionar Paciente"; //cambio el titulo del label
+                    btnNuevo.Visible = false; //oculto el boton nuevo
+
+                    //le digo solo activos radiobutton activos checked
+                    rdBtnActivos.Checked = true;
+                    rdBtnInactivos.Visible = false; //oculto el radiobutton inactivos
+                    rdBtnActivos.Visible = false; //oculto el radiobutton activos
+                    lblEstadoPacientes.Visible = false; //oculto el label estado pacientes
+                }
+
+                //si no esta en modo seleccion, llamo al metodo para saber que lista cargar si activos o inactivos
                 cargarListaSegunCkeckBox();
 
             }
@@ -62,9 +81,12 @@ namespace UI
                 var result = _pacienteService.consultarTodos();
                
                 this.lista = result ?? new List<clsPaciente>();//si es null le asigno una lista vacia, el ?? lo que hace es validar si es null
-                btnNuevo.Visible = true; //muestro el boton nuevo
-                lblTitulo.Text = "Mantenimiento Pacientes";
-                mostrarInactivos = false;
+                btnNuevo.Visible = !modoSeleccion; //si modoSeleccion es false muestro el boton nuevo, si es true lo oculto
+
+                //el ? operador ternario, si modoSeleccion es true muestro "Seleccionar Paciente", si es false "Mantenimiento Pacientes"
+                lblTitulo.Text = modoSeleccion ? "Seleccionar Paciente" : "Mantenimiento Pacientes";
+
+                mostrarInactivos = false;//cambio la variable mostrarInactivos a false
             }
             //valido si el radiobutton inactivos esta seleccionado
             else if (rdBtnInactivos.Checked)
@@ -85,8 +107,12 @@ namespace UI
                 var result = _pacienteService.consultarTodos();
                 
                 this.lista = result ?? new List<clsPaciente>();//si es null le asigno una lista vacia, el ?? lo que hace es validar si es null
-                btnNuevo.Visible = true; //muestro el boton nuevo
-                lblTitulo.Text = "Mantenimiento Pacientes";
+             
+                btnNuevo.Visible = !modoSeleccion;//si modoSeleccion es false muestro el boton nuevo, si es true lo oculto 
+                
+                //el ? operador ternario, si modoSeleccion es true muestro "Seleccionar Paciente", si es false "Mantenimiento Pacientes"
+                lblTitulo.Text = modoSeleccion ? "Seleccionar Paciente" : "Mantenimiento Pacientes";
+
                 mostrarInactivos = false;
             }
 
@@ -159,10 +185,21 @@ namespace UI
                     //valido que el paciente no sea nulo
                     if (paciente != null)
                     {
+                        //valido si estoy en modo seleccion
+                        if (modoSeleccion == true)
+                        {
+                            //si estoy en modo seleccion, asigno el paciente seleccionado a la variable pacienteSeleccionado
+                            pacienteSeleccionado = paciente;
+                            //y cierro el formulario con DialogResult OK para que el formulario padre (frmAsignacionActivos) sepa que se selecciono un paciente
+                            this.DialogResult = DialogResult.OK;
+                            this.Close();
+                            return; //salgo del metodo para que no siga ejecutando el resto del codigo, aqui se corta xq ya se selecciono un paciente
+                        }
+
                         //creo una instancia del formulario de paciente
                         frmPaciente frmPaciente = new frmPaciente();
 
-                        //le paso el paciente seleccionado al formulario de crear paciente
+                        //le paso el paciente seleccionado al formulario de crear paciente para que me lo muestre y pueda modificarlo
                         frmPaciente.pacienteSelected = paciente;
 
                         //le paso a la variable mostrarBotonReactivar de frmPaciente el valor de mostrarInactivos para que sepa si esta mostrando inactivos o activos  
@@ -221,8 +258,11 @@ namespace UI
 
                     txtBusqueda.Clear();//limpio el textbox de busqueda x si habia algo escrito
 
-                    btnNuevo.Visible = true; //muestro el boton nuevo
-                    lblTitulo.Text = "Mantenimiento Pacientes";
+                    btnNuevo.Visible = !modoSeleccion; //si modoSeleccion es false muestro el boton nuevo, si es true lo oculto 
+
+                    //el ? operador ternario, si modoSeleccion es true muestro "Seleccionar Paciente", si es false "Mantenimiento Pacientes"
+                    lblTitulo.Text = modoSeleccion ? "Seleccionar Paciente" : "Mantenimiento Pacientes";
+
                     //cambio la variable mostrarInactivos a false
                     mostrarInactivos = false;
                     //y llamo al metodo cargar lista para que me cargue la lista

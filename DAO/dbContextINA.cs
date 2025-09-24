@@ -25,6 +25,7 @@ namespace DAO
         //public DbSet<clsDonante> donante { get; set; }
         //public DbSet<clsDonacion> donacion { get; set; }
         public DbSet<clsCategoriaActivos> categoriaActivos { get; set; }
+        public DbSet<clsAsignacionActivosPaciente> asignacionActivosPaciente { get; set; }
 
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -32,8 +33,8 @@ namespace DAO
             if (!optionsBuilder.IsConfigured)
             {
                 optionsBuilder.UseSqlServer(
-                    @"Server=localhost\sqlexpress;Database=dbPaleativoGarabito;Trusted_Connection=True;MultipleActiveResultSets=True;TrustServerCertificate=True;");
-            }
+                    @"Server=.;Database=dbPaleativoGarabito;Trusted_Connection=True;MultipleActiveResultSets=True;TrustServerCertificate=True;");
+            }       //localhost\sqlexpress
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -45,7 +46,7 @@ namespace DAO
             // Clave primaria compuesta para Persona
             modelBuilder.Entity<clsPersona>()
                 .HasKey(p => new { p.id, p.tipoId });
-           
+
             modelBuilder.Entity<clsPersona>().Property(p => p.id)
                 .IsRequired().HasMaxLength(20).ValueGeneratedNever();
 
@@ -78,7 +79,7 @@ namespace DAO
                 .OnDelete(DeleteBehavior.Restrict); // Evita el borrado en cascada
 
 
-            /*------------------------------------------------------------*/
+            /*----------------------PACIENTE--------------------------------------*/
             //clsPaciente configuracion de llave primaria compuesta
             modelBuilder.Entity<clsPaciente>().HasKey(p => new { p.id, p.tipoId });
 
@@ -102,6 +103,34 @@ namespace DAO
                 .OnDelete(DeleteBehavior.Restrict); // Evita el borrado en cascada
             /*------------------------------------------------------------*/
 
+            /*----------------------AsigActivosPaciente---------------------*/
+            modelBuilder.Entity<clsAsignacionActivosPaciente>()
+                .HasKey(a => new { a.idAsigActivo });//llave primaria
+
+            //configuro las propiedades de la llave primaria de asignacion
+            modelBuilder.Entity<clsAsignacionActivosPaciente>().Property(a => a.idAsigActivo)
+                .IsRequired()//obligatorio
+                .ValueGeneratedOnAdd();//se genera automaticamente al agregar un nuevo registro
+
+            //relacion muchos a 1 entre asignacion y paciente
+            modelBuilder.Entity<clsAsignacionActivosPaciente>()
+                .HasOne(a => a.paciente)//navegacion desde asignacion a paciente
+                .WithMany(p => p.asignacionesActivos)//relacion muchos a 1 con paciente
+                .HasForeignKey(a => new { a.idPaciente, a.tipoIdPaciente })//FK en asignacion
+                .HasPrincipalKey(p => new { p.id, p.tipoId })//PK en paciente que es la misma que la FK en asignacion
+                .OnDelete(DeleteBehavior.Restrict); // Evita el borrado en cascada
+
+            //relacion muchos a 1 entre asignacion y activo
+            modelBuilder.Entity<clsAsignacionActivosPaciente>()
+                .HasOne(a => a.activo)//navegacion desde asignacion a activo
+                .WithMany(ac => ac.asignacionesActivos)//relacion muchos a 1 con activo
+                .HasForeignKey(a => a.idActivo)//FK en asignacion
+                .HasPrincipalKey(ac => ac.idActivo)//PK en activo que es la misma que la FK en asignacion
+                .OnDelete(DeleteBehavior.Restrict); // Evita el borrado en cascada
+
+
+
+            /*--------------------------------------------------------------*/
 
             // RolPermiso
 

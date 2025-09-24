@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace DAO.Migrations
 {
     /// <inheritdoc />
-    public partial class incial : Migration
+    public partial class Initial : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -332,10 +332,53 @@ namespace DAO.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "tbAsigActivoPaciente",
+                columns: table => new
+                {
+                    idAsigActivo = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    idPaciente = table.Column<string>(type: "nvarchar(20)", nullable: false),
+                    tipoIdPaciente = table.Column<int>(type: "int", nullable: false),
+                    idActivo = table.Column<int>(type: "int", nullable: false),
+                    fechaAsignacion = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    estado = table.Column<bool>(type: "bit", nullable: false),
+                    fecha_crea = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    usuario_crea = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
+                    fecha_ult_mod = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    usuario_ult_mod = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_tbAsigActivoPaciente", x => x.idAsigActivo);
+                    table.ForeignKey(
+                        name: "FK_tbAsigActivoPaciente_tbActivos_idActivo",
+                        column: x => x.idActivo,
+                        principalTable: "tbActivos",
+                        principalColumn: "idActivo",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_tbAsigActivoPaciente_tbPaciente_idPaciente_tipoIdPaciente",
+                        columns: x => new { x.idPaciente, x.tipoIdPaciente },
+                        principalTable: "tbPaciente",
+                        principalColumns: new[] { "id", "tipoId" },
+                        onDelete: ReferentialAction.Restrict);
+                });
+
             migrationBuilder.CreateIndex(
                 name: "IX_tbActivos_idCategoria",
                 table: "tbActivos",
                 column: "idCategoria");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_tbAsigActivoPaciente_idActivo",
+                table: "tbAsigActivoPaciente",
+                column: "idActivo");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_tbAsigActivoPaciente_idPaciente_tipoIdPaciente",
+                table: "tbAsigActivoPaciente",
+                columns: new[] { "idPaciente", "tipoIdPaciente" });
 
             migrationBuilder.CreateIndex(
                 name: "IX_tbDevolucion_idActivoFK",
@@ -367,6 +410,9 @@ namespace DAO.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
+                name: "tbAsigActivoPaciente");
+
+            migrationBuilder.DropTable(
                 name: "tbDevolucion");
 
             migrationBuilder.DropTable(
@@ -379,9 +425,6 @@ namespace DAO.Migrations
                 name: "tbMedico");
 
             migrationBuilder.DropTable(
-                name: "tbPaciente");
-
-            migrationBuilder.DropTable(
                 name: "tbPuestos");
 
             migrationBuilder.DropTable(
@@ -389,6 +432,9 @@ namespace DAO.Migrations
 
             migrationBuilder.DropTable(
                 name: "tbUsuarios");
+
+            migrationBuilder.DropTable(
+                name: "tbPaciente");
 
             migrationBuilder.DropTable(
                 name: "tbActivos");

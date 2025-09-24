@@ -9,21 +9,31 @@ using System.Threading.Tasks;
 namespace Entities
 {
     //defino el nombre de la tabla que va a representar esta clase en sql
-    [Table("tbPaciente")]
-    public class clsPaciente
+    [Table("tbAsigActivoPaciente")]
+    public class clsAsignacionActivosPaciente
     {
-        //llave primaria compuesta que es la misma que en clsPersona (id/tipoId)
-        public string id { get; set; }//llave primaria compuesta 
-        public int tipoId { get; set; }//llave primaria compuesta
 
-        [Required]//obligatorio
-        public int estadoCivil { get; set; }
+        [Key]
+        public int idAsigActivo { get; set; }//llave primaria
 
-        //propiedad de navegacion 
-        public clsPersona persona { get; set; }
+        [Required]
+        public string idPaciente { get; set; }//campo de llave foranea
+        [Required]
+        public int tipoIdPaciente { get; set; }//campo de llave foranea
 
-        //Relacion uno a muchos con clsAsignacionActivosPaciente
-        public ICollection<clsAsignacionActivosPaciente> asignacionesActivos { get; set; }
+        [Required]
+        public int idActivo { get; set; }//llave foranea
+        
+        [Required]
+        [DataType(DataType.Date)]//tipo de dato fecha
+        public DateTime fechaAsignacion { get; set; }
+
+
+        //propiedad de navegacion de la llave foranea de paciente
+        public clsPaciente paciente { get; set; }
+        //propiedad de navegacion de la llave foranea de activo
+        public clsActivos activo { get; set; }
+       
 
         //Atributos de auditoria
         [Required]//obligatorio

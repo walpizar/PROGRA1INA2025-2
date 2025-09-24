@@ -65,6 +65,9 @@ namespace Entities
 
         // Relación: Un Activo puede estar en muchas DonacionActivos
 
+        //relacion de uno a muchos con clsAsignacionActivosPaciente, es mas eficiente para evitar duplicados
+        public ICollection<clsAsignacionActivosPaciente> asignacionesActivos { get; set; }
+
 
         public clsActivos(int idActivo, string nombreActivo, string descripcion,
                           int cantidadDisponible, string estado, DateTime fechaAdquisicion,
@@ -83,11 +86,13 @@ namespace Entities
             this.fechaCreacion = DateTime.Now;
             this.usuarioCreacion = usuarioCreacion;
             this.devoluciones = new List<clsDevolucion>();
+            this.asignacionesActivos = new HashSet<clsAsignacionActivosPaciente>();//HashSet para evitar duplicados
         }
 
         public clsActivos()
         {
             this.devoluciones = new List<clsDevolucion>();
+            this.asignacionesActivos = new HashSet<clsAsignacionActivosPaciente>();
             this.fechaCreacion = DateTime.Now;
         }
     }
