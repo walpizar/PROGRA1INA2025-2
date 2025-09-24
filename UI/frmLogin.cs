@@ -55,7 +55,7 @@ namespace UI
                     principal.Show();
 
                     //oculto el formulario de login si el logine es exitoso
-                    this.Hide(); 
+                    this.Hide();
 
                 }
                 else
@@ -116,7 +116,7 @@ namespace UI
                         MessageBox.Show("El correo electrónico no está registrado. Por favor, inténtelo de nuevo.",
                             "Correo No Registrado", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
-                //cierre del while
+                    //cierre del while
                 }
 
                 //llamo a mi capa de servicios para enviar el codigo de recuperacion, dentr del if valido si se envio correctamente
@@ -167,9 +167,9 @@ namespace UI
                             MessageBox.Show("El código ingresado es incorrecto. Por favor, inténtelo de nuevo.",
                                 "Código Incorrecto", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         }
-                    //cierre del while
+                        //cierre del while
                     }
-                //cierre del if enviarCodigoRecuperacion
+                    //cierre del if enviarCodigoRecuperacion
                 }
             }
             catch (Exception ex)
@@ -180,7 +180,6 @@ namespace UI
                     "Error de Sistema", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-
 
     }
 }
