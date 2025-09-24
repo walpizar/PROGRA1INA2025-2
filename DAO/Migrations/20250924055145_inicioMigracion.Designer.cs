@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DAO.Migrations
 {
     [DbContext(typeof(dbContextINA))]
-    [Migration("20250923172406_incial")]
-    partial class incial
+    [Migration("20250924055145_inicioMigracion")]
+    partial class inicioMigracion
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -571,6 +571,38 @@ namespace DAO.Migrations
                     b.HasKey("personaId", "personaTipoId");
 
                     b.ToTable("tbUsuarios");
+                });
+
+            modelBuilder.Entity("Entities.clsVisitasDomiciliares", b =>
+                {
+                    b.Property<int>("idVisita")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("idVisita"));
+
+                    b.Property<string>("detalles")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("direccion")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("fecha")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("nombrePaciente")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("nombreVisitante")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("idVisita");
+
+                    b.ToTable("tbVisitasDomiciliares");
                 });
 
             modelBuilder.Entity("Entities.clsActivos", b =>

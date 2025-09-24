@@ -22,9 +22,12 @@ namespace DAO
         public DbSet<clsUsuario> usuario { get; set; }
         public DbSet<clsModulo> modulos { get; set; }
         public DbSet<clsPaciente> paciente { get; set; }
+
         //public DbSet<clsDonante> donante { get; set; }
         //public DbSet<clsDonacion> donacion { get; set; }
         public DbSet<clsCategoriaActivos> categoriaActivos { get; set; }
+
+        public DbSet<clsVisitasDomiciliares> visitasDomiciliares { get; set; }
 
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -32,7 +35,7 @@ namespace DAO
             if (!optionsBuilder.IsConfigured)
             {
                 optionsBuilder.UseSqlServer(
-                    @"Server=localhost\sqlexpress;Database=dbPaleativoGarabito;Trusted_Connection=True;MultipleActiveResultSets=True;TrustServerCertificate=True;");
+                    @"Server=localhost;Database=dbPaleativoGarabito;Trusted_Connection=True;MultipleActiveResultSets=True;TrustServerCertificate=True;");
             }
         }
 

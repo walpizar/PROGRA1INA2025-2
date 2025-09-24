@@ -30,7 +30,7 @@ namespace UI
         Application.Run(new frmPacienteLista());
 
         
-        //Application.Run(new frmActivos());
+        Application.Run(new frmVisitasDomiciliarias());
 
 
         }

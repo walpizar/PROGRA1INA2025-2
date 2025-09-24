@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace DAO.Migrations
 {
     /// <inheritdoc />
-    public partial class incial : Migration
+    public partial class inicioMigracion : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -107,6 +107,23 @@ namespace DAO.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_tbRoles", x => x.idRol);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "tbVisitasDomiciliares",
+                columns: table => new
+                {
+                    idVisita = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    fecha = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    nombreVisitante = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    nombrePaciente = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    direccion = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    detalles = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_tbVisitasDomiciliares", x => x.idVisita);
                 });
 
             migrationBuilder.CreateTable(
@@ -389,6 +406,9 @@ namespace DAO.Migrations
 
             migrationBuilder.DropTable(
                 name: "tbUsuarios");
+
+            migrationBuilder.DropTable(
+                name: "tbVisitasDomiciliares");
 
             migrationBuilder.DropTable(
                 name: "tbActivos");
