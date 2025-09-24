@@ -1,4 +1,4 @@
-﻿namespace UI
+﻿/*namespace UI
 {
     partial class frmProductoLista
     {
@@ -150,4 +150,4 @@
         private ColumnHeader colNombre;
         private ColumnHeader colPrecio;
     }
-}
+}*/

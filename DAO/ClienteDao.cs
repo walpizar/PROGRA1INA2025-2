@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DAO
+/*namespace DAO
 {
     public class ClienteDao: IGenerica<clsCliente>
     {
@@ -40,15 +40,13 @@ namespace DAO
 
         public void eliminar(int id)
         {
-            clsCliente clienteEliminar = listaCliente.Where(p => p.id
-                                                == id).SingleOrDefault();
+            clsCliente clienteEliminar = listaCliente.Where(p => p.id == id).SingleOrDefault();
             listaCliente.Remove(clienteEliminar);
 
         }
         public clsCliente consultarPorID(int id)
         {
-            return listaCliente.Where(p => p.id
-                                                 == id).SingleOrDefault();
+            return listaCliente.Where(p => p.id == id).SingleOrDefault();
         }
 
         public List<clsCliente> consultarTodos()
@@ -60,5 +58,15 @@ namespace DAO
         {
             throw new NotImplementedException();
         }
+
+        public void eliminar(string id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public clsCliente consultarPorID(string id)
+        {
+            throw new NotImplementedException();
+        }
     }
-}
+}*/

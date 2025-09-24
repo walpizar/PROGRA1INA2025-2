@@ -9,7 +9,7 @@ using System.Reflection.Metadata;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Services
+/*namespace Services
 {
     public class CategoriaService : IGenerica<clsCategoria>
     {
@@ -24,6 +24,11 @@ namespace Services
             throw new NotImplementedException();
 
 
+        }
+
+        public clsCategoria consultarPorID(string id)
+        {
+            throw new NotImplementedException();
         }
 
         public clsCategoria consultarPorNombre(string nombre)
@@ -55,9 +60,14 @@ namespace Services
             throw new NotImplementedException();
         }
 
+        public void eliminar(string id)
+        {
+            throw new NotImplementedException();
+        }
+
         public void modificar(clsCategoria entidad)
         {
             throw new NotImplementedException();
         }
     }
-}
+}*/

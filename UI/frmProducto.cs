@@ -15,7 +15,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using static Common.Enums.Enums;
 
-namespace UI
+/*namespace UI
 {
     public partial class frmProducto : Form
     {
@@ -31,7 +31,7 @@ namespace UI
             InitializeComponent();
 
             _productoService = new ProductoService();
-            _CategoriaService  = new CategoriaService();
+            _CategoriaService = new CategoriaService();
         }
 
         private void btnGuardar_Click(object sender, EventArgs e)
@@ -66,7 +66,7 @@ namespace UI
 
 
 
-                    producto.id = Convert.ToInt32(txtId.Text);
+                    /*producto.id = Convert.ToInt32(txtId.Text);
                     // producto.id = int.Parse(txtId.Text);
                     producto.nombre = txtNombre.Text;
                     producto.precio = Convert.ToInt32(txtPrecio.Text);
@@ -118,7 +118,7 @@ namespace UI
 
         }
 
-        private void limpiarForm()
+        /*private void limpiarForm()
         {
             txtId.ResetText();
             txtNombre.ResetText();
@@ -184,7 +184,7 @@ namespace UI
                 limpiarForm();
             }
 
-          
+
 
 
 
@@ -219,7 +219,7 @@ namespace UI
             txtCantidad.Value = productoSelected.cantidad;
             //obtiene el valor que el usuario selecciono en el combo
             cboFamilia.SelectedItem = (FamiliaProducto)productoSelected.familia;
-            cboCategoria.SelectedValue = (int)productoSelected.CategoriaId;
+            cboCategoria.SelectedValue = productoSelected.CategoriaId;
         }
 
         private void btnCancelar_Click(object sender, EventArgs e)
@@ -232,10 +232,10 @@ namespace UI
             try
             {
 
-               DialogResult resp = MessageBox.Show("¿Está seguro que desea eliminar el producto?", "Confirmación", 
-                    MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                DialogResult resp = MessageBox.Show("¿Está seguro que desea eliminar el producto?", "Confirmación",
+                     MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 
-                if(resp == DialogResult.Yes)
+                if (resp == DialogResult.Yes)
                 {
                     _productoService.eliminar(productoSelected.id);
                     MessageBox.Show("Producto eliminado correctamente");
@@ -253,5 +253,7 @@ namespace UI
 
 
         }
+
+  
     }
-}
+}*/

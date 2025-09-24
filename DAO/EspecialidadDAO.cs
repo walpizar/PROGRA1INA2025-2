@@ -1,56 +1,72 @@
-﻿using Common.Interfaces;
-using Entities;
-using Microsoft.EntityFrameworkCore;
+﻿using Entities;
 using System.Collections.Generic;
 using System.Linq;
 
 namespace DAO
 {
-    public class EspecialidadDao : IGenerica<clsEspecialidadMedica>
+    public class EspecialidadDao
     {
-        private dbContextINA _context;
+        // CRUD
+        private dbContextINA _context; //CONTEXTO DE BASE DE DATOS
 
         public EspecialidadDao()
         {
-            _context = new dbContextINA();
+            _context = new dbContextINA(); //INICIALIZAR EL CONTEXTO
         }
 
         public void crear(clsEspecialidadMedica especialidad)
         {
-            _context.EspecialidadMedica.Add(especialidad);
+            _context.especialidadMedica.Add(especialidad);
             _context.SaveChanges();
         }
 
         public void modificar(clsEspecialidadMedica especialidad)
         {
-            _context.EspecialidadMedica.Update(especialidad);
+            _context.especialidadMedica.Update(especialidad);
             _context.SaveChanges();
         }
 
         public void eliminar(int id)
         {
-            var esp = consultarPorID(id);
-            _context.EspecialidadMedica.Remove(esp);
-            _context.SaveChanges();
+            var especialidad = consultarPorID(id);
+            if (especialidad != null)
+            {
+                _context.especialidadMedica.Remove(especialidad);
+                _context.SaveChanges();
+            }
         }
 
         public clsEspecialidadMedica consultarPorID(int id)
         {
-            return _context.EspecialidadMedica
-                           .Where(e => e.id == id)
+            return _context.especialidadMedica
+                           .Where(e => e.idEspecialidadMedica == id)
                            .SingleOrDefault();
         }
 
         public clsEspecialidadMedica consultarPorNombre(string nombre)
         {
-            return _context.EspecialidadMedica
-                           .Where(e => e.nombre.Trim().ToUpper() == nombre.Trim().ToUpper())
+            return _context.especialidadMedica
+                           .Where(e => e.nombreEspecialidad.Trim().ToUpper() == nombre.Trim().ToUpper())
                            .SingleOrDefault();
         }
 
         public List<clsEspecialidadMedica> consultarTodos()
         {
-            return _context.EspecialidadMedica.ToList();
+            return _context.especialidadMedica.ToList();
         }
+
+        public void eliminar(string id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public clsEspecialidadMedica consultarPorID(string id)
+        {
+            throw new NotImplementedException();
+        }
+
+        
+
+      
     }
 }

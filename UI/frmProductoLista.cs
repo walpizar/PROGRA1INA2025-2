@@ -11,7 +11,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace UI
+/*namespace UI
 {
     public partial class frmProductoLista : Form
     {
@@ -66,8 +66,7 @@ namespace UI
 
         private void cargarLista(List<clsProducto> lista)
         {
-
-           
+            if (lista == null) lista = new List<clsProducto>();
 
             lstvLista.Items.Clear();
 
@@ -78,7 +77,6 @@ namespace UI
                 item.SubItems.Add(producto.precio.ToString());
                 lstvLista.Items.Add(item);
             }
-
         }
 
         private void lstvLista_SelectedIndexChanged(object sender, EventArgs e)
@@ -98,7 +96,7 @@ namespace UI
 
                     //consulto el producto por id a la lista    
 
-                    clsProducto producto = lista.Where(p => p.id == id).SingleOrDefault();
+                    clsProducto producto = lista.Where(p => p.id.Equals(id)).SingleOrDefault();
 
                     if (producto != null)
                     {
@@ -139,4 +137,4 @@ namespace UI
 
         }
     }
-}
+}*/

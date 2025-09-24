@@ -8,7 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DAO
+/*namespace DAO
 {
     public class CategoriaDAO : IGenerica<clsCategoria>
     {
@@ -20,7 +20,7 @@ namespace DAO
         }
 
 
-        public clsCategoria consultarPorID(int id)
+        public clsCategoria consultarPorID(string id)
         {
             //_context.facturas.Where(f => f.tipopago == (int)Enums.MetodoPago.PayPal).ToList();
             throw new NotImplementedException();
@@ -57,7 +57,7 @@ namespace DAO
             throw new NotImplementedException();
         }
 
-        public void eliminar(int id)
+        public void eliminar(string id)
         {
             throw new NotImplementedException();
         }
@@ -67,4 +67,4 @@ namespace DAO
             throw new NotImplementedException();
         }
     }
-}
+}*/

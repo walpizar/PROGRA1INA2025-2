@@ -1,30 +1,30 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.Collections.Generic;
+using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Collections.Generic;
+
 namespace Entities
 {
-    [Table("tbCategoriasActivos")]
+    [Table("tbCategoriaActivos")]
     public class clsCategoriaActivos
     {
         [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)] // Autonumérico
-        public int IdCategoria { get; set; }
+        public int Id { get; set; }
 
-        [Required]
-        [StringLength(50, ErrorMessage = "El nombre de la categoría no puede tener más de 50 caracteres")]
-        public string Nombre { get; set; }
+        [StringLength(50, ErrorMessage = "El nombre no puede tener más de 50 caracteres")]
+        public string nombre { get; set; }
 
-        [Required]
         [StringLength(200, ErrorMessage = "La descripción no puede tener más de 200 caracteres")]
-        public string Descripcion { get; set; }
+        public string descripcion { get; set; }
 
         [Required]
-        public bool Estado { get; set; } // true = activa, false = inactiva
+        [DefaultValue(true)]
+        public bool estado { get; set; }
 
-        public clsCategoriaActivos() { }
+        // Relación uno-a-muchos: una categoría tiene muchos activos
+        public ICollection<clsActivos> Activos { get; set; } = new List<clsActivos>();
+
+        // Para mostrar en combos
+        public string Display => $"{Id} - {nombre}";
     }
 }

@@ -3,12 +3,12 @@ using Common.Interfaces;
 using DAO;
 using Entities;
 
-namespace Services
+/*namespace Services
 {
     //reglas de negocio
     public class ProductoService: IGenerica<clsProducto>
     {
-        //capa de servicio viaja o accede a capa de datos    
+        //capa de servicio viaja a capa de datos    
         private readonly ProductoDao _prodDao= new ProductoDao();
 
         public ProductoService() {      
@@ -76,12 +76,23 @@ namespace Services
 
         public List<clsProducto> consultarTodos()
         {
-           return _prodDao.consultarTodos();
+            var productos = _prodDao.consultarTodos();
+            return productos ?? new List<clsProducto>();
         }
 
         public clsProducto consultarPorNombre(string nombre)
         {
             throw new NotImplementedException();
         }
+
+        public void eliminar(string id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public clsProducto consultarPorID(string id)
+        {
+            throw new NotImplementedException();
+        }
     }
-}
+}*/

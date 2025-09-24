@@ -29,6 +29,11 @@
         private void InitializeComponent()
         {
             gbxLogin = new GroupBox();
+
+            
+
+       
+
             btnCancelar = new Button();
             btnAceptar = new Button();
             txtPassword = new TextBox();
@@ -51,6 +56,10 @@
             gbxLogin.Size = new Size(448, 170);
             gbxLogin.TabIndex = 0;
             gbxLogin.TabStop = false;
+            // 
+            // linklblOlvidoContra
+            // 
+           
             // 
             // btnCancelar
             // 

@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Common.Interfaces;
 
-namespace DAO
+/*namespace DAO
 {
     public class ProductoDao: IGenerica<clsProducto>
     {
@@ -92,10 +92,27 @@ namespace DAO
 
         public List<clsProducto> consultarTodos()
         {
-          return null;
-            //return _context.Producto.ToList();
+            try
+            {
+                using (var context = new dbContextINA())
+                {
+                    return context.Productos.ToList(); // si no hay, devuelve []
+                }
+            }
+            catch
+            {
+                return new List<clsProducto>();
+            }
         }
 
-       
+        public void eliminar(string id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public clsProducto consultarPorID(string id)
+        {
+            throw new NotImplementedException();
+        }
     }
-}
+}*/
