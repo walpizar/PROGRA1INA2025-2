@@ -53,11 +53,17 @@ namespace Services
 
         public void eliminar(int id)
         {
-            var gasto = _dao.consultarPorID(id);
-            if (gasto == null)
-                throw new Exception("El gasto no existe.");
+            var GastoEliminar = consultarPorID(id);
+            if (GastoEliminar != null)
+            {
+                GastoEliminar.Estado = false;
+                GastoEliminar.usuario_ult_mod = "Admin";
+                GastoEliminar.fecha_ult_mod = DateTime.Now;
 
-            _dao.eliminar(id);
+                using var ctxUpdate = new dbContextINA();
+                ctxUpdate.Gastos.Update(GastoEliminar);
+                ctxUpdate.SaveChanges();
+            }
         }
 
         public void eliminar(string id)

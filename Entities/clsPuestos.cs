@@ -15,7 +15,7 @@ namespace Entities
     public class clsPuestos
     {
         [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)] // Explicitly set as IDENTITY
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int idPuesto { get; set; }
 
         [Required]
@@ -48,7 +48,7 @@ namespace Entities
 
         [Required]
         [Column(TypeName = "DATETIME2")]
-        public DateTime fecha_crea { get; set; } = DateTime.UtcNow;
+        public DateTime fecha_crea { get; set; } = DateTime.Now;
 
         [Required]
         [StringLength(50)]

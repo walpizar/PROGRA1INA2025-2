@@ -62,6 +62,7 @@
             lstvListaGastos.TabIndex = 0;
             lstvListaGastos.UseCompatibleStateImageBehavior = false;
             lstvListaGastos.View = View.Details;
+            lstvListaGastos.SelectedIndexChanged += lstvListaGastos_SelectedIndexChanged;
             lstvListaGastos.MouseDoubleClick += lstvListaGastos_MouseDoubleClick;
             // 
             // colCompra

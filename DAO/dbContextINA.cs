@@ -33,7 +33,7 @@ namespace DAO
             if (!optionsBuilder.IsConfigured)
             {
                 optionsBuilder.UseSqlServer(
-                    @"Server=localhost\sqlexpress;Database=dbPaleativoGarabito;Trusted_Connection=True;MultipleActiveResultSets=True;TrustServerCertificate=True;");
+                    @"Server=.;Database=dbPaleativoGarabito;Trusted_Connection=True;MultipleActiveResultSets=True;TrustServerCertificate=True;");
             }
         }
 
@@ -48,6 +48,7 @@ namespace DAO
             // Clave primaria compuesta para Persona
             modelBuilder.Entity<clsPersona>()
                 .HasKey(p => new { p.id, p.tipoId });
+
 
             // Clave primaria compuesta para Persona
             modelBuilder.Entity<clsPersona>()
@@ -66,13 +67,20 @@ namespace DAO
                 .HasPrincipalKey<clsPersona>(p => new { p.id, p.tipoId });
 
             // Medico
-            modelBuilder.Entity<clsMedico>().HasKey(m => new { m.id, m.tipoId });
+            modelBuilder.Entity<clsMedico>()
+       .HasKey(m => new { m.id, m.tipoId });
 
-            modelBuilder.Entity<clsMedico>().Property(m => new { m.id, m.tipoId })
-                 .IsRequired()
+            modelBuilder.Entity<clsMedico>()
+                .Property(m => m.id)
+                .IsRequired()
                 .HasMaxLength(20)
                 .ValueGeneratedNever();
 
+            modelBuilder.Entity<clsMedico>()
+                .Property(m => m.tipoId)
+                .IsRequired()
+                .HasMaxLength(20)
+                .ValueGeneratedNever();
 
             modelBuilder.Entity<clsMedico>()
                 .HasOne(m => m.persona)

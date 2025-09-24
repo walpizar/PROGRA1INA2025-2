@@ -67,7 +67,6 @@ namespace UI
                 btnInactivar.Visible = _puesto.Estado;
                 btnActivar.Visible = !_puesto.Estado;
 
-                // Mostrar código funcional y permitir editarlo
                 txtCodigo.Text = _puesto.codigo;
                 txtCodigo.Enabled = false;
 

@@ -63,6 +63,9 @@ namespace Entities
         [Column(TypeName = "NVARCHAR(50)")]
         public string? usuario_ult_mod { get; set; }
 
+        [Required]
+        public bool Estado { get; set; } = true;
+
         // Constructores
         public clsGastos() { }
 

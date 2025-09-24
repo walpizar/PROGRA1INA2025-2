@@ -143,5 +143,10 @@ namespace UI
                     "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+
+        private void lstvListaDept_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }

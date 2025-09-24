@@ -81,6 +81,7 @@
             lstvListaDept.TabIndex = 1;
             lstvListaDept.UseCompatibleStateImageBehavior = false;
             lstvListaDept.View = View.Details;
+            lstvListaDept.SelectedIndexChanged += lstvListaDept_SelectedIndexChanged;
             lstvListaDept.MouseDoubleClick += lstvListaDept_MouseDoubleClick_1;
             // 
             // ColId

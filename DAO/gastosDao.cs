@@ -38,16 +38,13 @@ namespace DAO
 
         public List<clsGastos> consultarTodos()
         {
-            try
+            using (var context = new dbContextINA())
             {
-                return _context.Gastos
+                return context.Gastos
+                    .Where(g => g.Estado) // Solo los activos, si usas borrado lógico
                     .OrderByDescending(g => g.fechaCompra)
                     .ThenByDescending(g => g.fechaCrea)
                     .ToList();
-            }
-            catch (Exception)
-            {
-                throw;
             }
         }
 
@@ -89,19 +86,13 @@ namespace DAO
 
         public void eliminar(int id)
         {
-            try
-            {
-                var gasto = _context.Gastos.Find(id);
-                if (gasto != null)
-                {
-                    _context.Gastos.Remove(gasto);
-                    _context.SaveChanges();
-                }
-            }
-            catch (Exception)
-            {
-                throw;
-            }
+            var gasto = _context.Gastos.SingleOrDefault(g => g.idGasto == id);
+            if (gasto == null)
+                throw new Exception("El gasto no existe");
+
+            gasto.Estado = false;
+            _context.Gastos.Update(gasto);
+            _context.SaveChanges();
         }
 
         public void eliminar(string id)
