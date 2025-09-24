@@ -9,16 +9,22 @@ using Microsoft.EntityFrameworkCore;
 
 namespace DAO
 {
+    // Este DAO lo uso para manejar directamente la base de datos de personal administrativo.
+    // Me encargo de crear, modificar, eliminar (lógico), y consultar los administrativos.
+    // Siempre trato de capturar errores y lanzarlos de manera clara.
     public class PersonalAdministrativoDAO: IGenerica<clsPersonalAdministrativo>
     {
+        // Uso mi contexto para interactuar con la DB
         private dbContextINA _context = new dbContextINA();
+
 
         public PersonalAdministrativoDAO()
         {
             _context = new dbContextINA();
 
-        }  
-        
+        }
+
+        // Aquí agrego un administrativo a la base de datos
         public void crear(clsPersonalAdministrativo administrativo)
         {
             try
@@ -33,6 +39,7 @@ namespace DAO
 
         }
 
+        // Modifico un administrativo existente
         public void modificar(clsPersonalAdministrativo administrativo)
         {
             try
@@ -54,6 +61,7 @@ namespace DAO
             }
         }
 
+        // Elimino un administrativo de forma lógica
         public void eliminar(string personaId)
         {
             try
@@ -61,8 +69,16 @@ namespace DAO
               var admin = consultarPorID(personaId);
               if (admin == null)
                     throw new Exception("El personal administrativo no existe.");
-                _context.personalAdministrativo.Remove(admin);
-                _context.SaveChanges();
+                if (admin != null)
+                {
+                    admin.estado = false; // solo desactiva
+                    admin.fechaModificacion = DateTime.Now;
+                    admin.modificadoPor = "admin"; // o el usuario actual
+                    _context.Update(admin);
+                    _context.SaveChanges();
+
+                }
+              
             }
             catch (Exception ex)
             {
@@ -70,6 +86,7 @@ namespace DAO
             }
         }
 
+        // Traigo un administrativo por su ID
         public clsPersonalAdministrativo consultarPorID(string personaId)
         {
             try
@@ -87,6 +104,7 @@ namespace DAO
             }
         }
 
+        // Traigo todos los administrativos activos
         public List<clsPersonalAdministrativo> consultarTodos()
         {
             try
@@ -94,6 +112,8 @@ namespace DAO
                 return _context.personalAdministrativo
                         .Include(a => a.persona)
                         .Include(a => a.Puesto)
+                        .Where(a => a.estado == true) // solo activos
+                        .AsNoTracking()
                         .ToList();
             }
             catch (Exception ex)
@@ -102,6 +122,7 @@ namespace DAO
             }
         }
 
+        // Traigo un administrativo por nombre
         public clsPersonalAdministrativo consultarPorNombre(string nombre)
         {
             try { 
@@ -114,6 +135,8 @@ namespace DAO
             }
         }
 
+
+        // Actualizo tanto los datos de la persona como del administrativo
         public void modificarPersonaYPersonal(clsPersonalAdministrativo admin)
         {
             using (var db = new dbContextINA())

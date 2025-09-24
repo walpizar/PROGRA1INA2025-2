@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace DAO.Migrations
 {
     /// <inheritdoc />
-    public partial class RelacionPuestoPersonalAdmin : Migration
+    public partial class BorradoLogico_PersonalAdminitrativo : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -341,6 +341,7 @@ namespace DAO.Migrations
                     personaTipoId = table.Column<int>(type: "int", nullable: false),
                     puestoId = table.Column<int>(type: "int", nullable: false),
                     descripcion = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: false),
+                    estado = table.Column<bool>(type: "bit", nullable: false),
                     creadoPor = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
                     fechaCreacion = table.Column<DateTime>(type: "datetime2", nullable: false),
                     modificadoPor = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),

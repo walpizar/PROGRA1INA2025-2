@@ -26,6 +26,8 @@ namespace Entities
         [StringLength(255)]
         public string descripcion { get; set; }
 
+        public bool estado { get; set; } = true;
+
         // Auditoría
         [Required]
         [StringLength(50)]

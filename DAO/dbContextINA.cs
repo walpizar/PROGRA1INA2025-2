@@ -32,6 +32,8 @@ namespace DAO
         public DbSet<clsRolPermiso> rolPermiso { get; set; }
         public DbSet<clsUsuario> usuario { get; set; }
         public DbSet<clsModulo> modulos { get; set; }
+
+        // Defino la tabla que voy a usar
         public DbSet<clsPersonalAdministrativo> personalAdministrativo { get; set; }
 
 
@@ -108,18 +110,18 @@ namespace DAO
                 .HasKey(rp => new { rp.idRol, rp.idPermiso });
 
 
-            // Configuración de clsPersonalAdministrativo 
+            // Configuro las relaciones
             //Relacion 1 a 1 con persona
             modelBuilder.Entity<clsPersonalAdministrativo>()
-             .HasOne(pa => pa.persona)
+             .HasOne(pa => pa.persona)// cada administrativo tiene una persona
              .WithOne()
              .HasForeignKey<clsPersonalAdministrativo>(pa => new { pa.personaId, pa.personaTipoId })
              .HasPrincipalKey<clsPersona>(p => new { p.id, p.tipoId })
-             .OnDelete(DeleteBehavior.Restrict);
+             .OnDelete(DeleteBehavior.Restrict); // no borro la persona si elimino el administrativo
 
             // Relación muchos a uno con Puestos
             modelBuilder.Entity<clsPersonalAdministrativo>()
-                .HasOne(pa => pa.Puesto)
+                .HasOne(pa => pa.Puesto)  // cada administrativo tiene un puesto
                 .WithMany() // un puesto puede estar en varios administrativos
                 .HasForeignKey(pa => pa.puestoId)
                 .OnDelete(DeleteBehavior.Restrict);

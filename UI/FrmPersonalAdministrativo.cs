@@ -13,9 +13,11 @@ using System.Windows.Forms;
 
 namespace UI
 {
+    // Este form lo uso para ver la lista de todos los admins y poder abrir el form de añadir/modificar
+
     public partial class FrmPersonalAdministrativo : Form
     {
-
+        // Este form lo uso para ver la lista de todos los admins y poder abrir el form de añadir/modificar
         List<clsPersonalAdministrativo> lista;
         private readonly PersonalAdministrativoService _personalAdministrativoService;
         public FrmPersonalAdministrativo()
@@ -25,13 +27,15 @@ namespace UI
 
         }
 
+        // Al cargar el form, traigo todos los admins y los muestro
         private void FrmMantenimientoAdmin_Load(object sender, EventArgs e)
         {
             this.lista = _personalAdministrativoService.consultarTodos();
             cargarLista(lista);
         }
 
-        private void cargarLista(List<clsPersonalAdministrativo> lista)
+        // Lleno el ListView con los admins que tengo en la lista
+        public void cargarLista(List<clsPersonalAdministrativo> lista)
         {
             try
             {
@@ -57,20 +61,18 @@ namespace UI
             }
         }
 
+        // Botón para abrir el form de añadir admin
         private void button1_Click(object sender, EventArgs e)
         {
             FrmAnadirPersonalAdministrativo frmAnadirAdmin = new FrmAnadirPersonalAdministrativo();
             frmAnadirAdmin.ShowDialog();
-
+            // Recargo la lista después de cerrar el form
             this.lista = _personalAdministrativoService.consultarTodos();
             cargarLista(lista);
         }
 
-        private void listAdministradores_SelectedIndexChanged(object sender, EventArgs e)
-        {
 
-        }
-
+        // Doble click en un admin abre el form para editar
         private void listAdministradores_MouseDoubleClick(object sender, MouseEventArgs e)
         {
             try
@@ -86,13 +88,13 @@ namespace UI
                         FrmAnadirPersonalAdministrativo frmAnadirPersonalAdministrativo = new FrmAnadirPersonalAdministrativo();
                         frmAnadirPersonalAdministrativo.adminSeleccionado = Admin;
                         frmAnadirPersonalAdministrativo.ShowDialog();
-
+                        // Recargo la lista después de modificar
                         this.lista = _personalAdministrativoService.consultarTodos();
                         cargarLista(lista);
                     }
 
                 }
-                cargarLista(lista);
+                
 
 
             }

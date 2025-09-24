@@ -83,7 +83,7 @@
             listAdministradores.TabIndex = 0;
             listAdministradores.UseCompatibleStateImageBehavior = false;
             listAdministradores.View = View.Details;
-            listAdministradores.SelectedIndexChanged += listAdministradores_SelectedIndexChanged;
+            //listAdministradores.SelectedIndexChanged += listAdministradores_SelectedIndexChanged;
             listAdministradores.MouseDoubleClick += listAdministradores_MouseDoubleClick;
             // 
             // colNombre

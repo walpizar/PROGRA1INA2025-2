@@ -548,6 +548,9 @@ namespace DAO.Migrations
                         .HasMaxLength(255)
                         .HasColumnType("nvarchar(255)");
 
+                    b.Property<bool>("estado")
+                        .HasColumnType("bit");
+
                     b.Property<DateTime>("fechaCreacion")
                         .HasColumnType("datetime2");
 

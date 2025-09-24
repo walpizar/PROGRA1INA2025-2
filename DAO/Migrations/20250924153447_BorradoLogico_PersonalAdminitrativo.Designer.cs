@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DAO.Migrations
 {
     [DbContext(typeof(dbContextINA))]
-    [Migration("20250923164935_RelacionPuestoPersonalAdmin")]
-    partial class RelacionPuestoPersonalAdmin
+    [Migration("20250924153447_BorradoLogico_PersonalAdminitrativo")]
+    partial class BorradoLogico_PersonalAdminitrativo
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -550,6 +550,9 @@ namespace DAO.Migrations
                         .IsRequired()
                         .HasMaxLength(255)
                         .HasColumnType("nvarchar(255)");
+
+                    b.Property<bool>("estado")
+                        .HasColumnType("bit");
 
                     b.Property<DateTime>("fechaCreacion")
                         .HasColumnType("datetime2");

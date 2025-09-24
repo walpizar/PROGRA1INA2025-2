@@ -9,10 +9,15 @@ using static Common.Enums.Enums;
 
 namespace UI
 {
+    // Este formulario lo uso para añadir o modificar un administrador
+    // Manejo la persona y el admin en un mismo form, según si adminSeleccionado es null
     public partial class FrmAnadirPersonalAdministrativo : Form
     {
+
+        // Guardo el admin que estoy editando (si aplica)
         public clsPersonalAdministrativo adminSeleccionado { get; set; }
 
+        // Servicios que uso para cargar puestos y manejar admins
         private PuestoService _puestoService = new PuestoService();
         private PersonalAdministrativoService _personalService = new PersonalAdministrativoService();
 
@@ -23,12 +28,15 @@ namespace UI
 
         }
 
+        // Al cargar el form, lleno combos y campos según si estoy añadiendo o editando
         private void FrmAnadirPersonalAdministrativo_Load(object sender, EventArgs e)
         {
-            // Aquí podrías cargar combobox, por ejemplo combTipoIdent o combPuesto
+            
             combTipoIdent.DataSource = Enum.GetValues(typeof(TipoIdentificacion));
+
             if (adminSeleccionado != null)
             {
+                // Estoy editando: desactivo identificación, cambio títulos y botón
                 this.lblTitulo.Text = "Modificar Administrador";
                 this.gbDatosPersonales.Text = "Modificar Administrador";
                 this.txtIdentificacion.Enabled = false;
@@ -43,6 +51,7 @@ namespace UI
             }
             else
             {
+                // Estoy añadiendo: habilito todo, oculto botón eliminar
                 this.lblTitulo.Text = "Añadir Administrador";
                 this.gbDatosPersonales.Text = "Añadir Administrador";
                 this.txtIdentificacion.Enabled = true;
@@ -56,6 +65,7 @@ namespace UI
 
         private void cargarForm()
         {
+            // Lleno los campos con los datos del admin que edito
             txtIdentificacion.Text = adminSeleccionado.personaId;
             txtNombre.Text = adminSeleccionado.persona.nombre;
             txt1Apellido.Text = adminSeleccionado.persona.apellido1;
@@ -70,6 +80,7 @@ namespace UI
 
         }
 
+        // Cargo los puestos en el combo
         private void cargarPuestos()
         {
             try
@@ -91,31 +102,28 @@ namespace UI
                     MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+        // Cierro el form sin guardar
         private void btnCancelar_Click(object sender, EventArgs e)
         {
             this.Close();
         }
+        // Aquí añado o modifico al admin según el modo
         private void btnAnadir_Click_1(object sender, EventArgs e)
         {
             try
             {
+                validarDatos();
                 // Si adminSeleccionado es null, estamos en modo "Añadir"
                 clsPersonalAdministrativo admin = adminSeleccionado == null ? new clsPersonalAdministrativo() : adminSeleccionado;
 
                 if (adminSeleccionado == null)
                 {
                     // --- Lógica de añadir ---
-                    if (string.IsNullOrWhiteSpace(txtIdentificacion.Text))
-                        throw new Exception("Debe ingresar la identificación.");
-
-                    if (string.IsNullOrWhiteSpace(txtNombre.Text))
-                        throw new Exception("Debe ingresar el nombre.");
-
-                    if (combPuesto.SelectedItem == null)
-                        throw new Exception("Debe seleccionar un puesto.");
 
                     using (var db = new dbContextINA())
                     {
+
+                        // Creo persona y admin dentro de transacción
                         using (var transaction = db.Database.BeginTransaction())
                         {
                             try
@@ -177,7 +185,7 @@ namespace UI
                 }
                 else
                 {
-                    // --- Lógica de modificar ---
+                    // --- Modificar ---
                     var adminEditado = new clsPersonalAdministrativo
                     {
                         personaId = admin.personaId,
@@ -209,7 +217,7 @@ namespace UI
 
                     limpiarForm();
                     this.Close();
-                    cargarForm();
+                    
                 }
             }
             catch (Exception ex)
@@ -219,7 +227,7 @@ namespace UI
             }
         }
 
-
+        // Limpio los campos del form
         private void limpiarForm()
         {
             txt1Apellido.ResetText();
@@ -237,6 +245,7 @@ namespace UI
 
         }
 
+        // Borro lógicamente al admin
         private void btnEliminar_Click(object sender, EventArgs e)
         {
             try
@@ -258,5 +267,48 @@ namespace UI
                     MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+
+        // Método que revisa que todo lo obligatorio esté correcto
+        private void validarDatos()
+        {
+            // Validaciones de persona
+            if (string.IsNullOrWhiteSpace(txtIdentificacion.Text))
+                throw new Exception("Debe ingresar la identificación.");
+
+            if (combTipoIdent.SelectedItem == null)
+                throw new Exception("Debe seleccionar un tipo de identificación.");
+
+            if (string.IsNullOrWhiteSpace(txtNombre.Text))
+                throw new Exception("Debe ingresar el nombre.");
+
+            if (string.IsNullOrWhiteSpace(txt1Apellido.Text))
+                throw new Exception("Debe ingresar el primer apellido.");
+
+            if (string.IsNullOrWhiteSpace(txt2Apellido.Text))
+                throw new Exception("Debe ingresar el segundo apellido.");
+
+            if (string.IsNullOrWhiteSpace(txtEmail.Text))
+                throw new Exception("Debe ingresar el correo electrónico.");
+
+            if (!txtEmail.Text.Contains("@"))
+                throw new Exception("Debe ingresar un correo electrónico válido.");
+
+            if (string.IsNullOrWhiteSpace(txtTelefono.Text))
+                throw new Exception("Debe ingresar un teléfono.");
+
+            if (!txtTelefono.Text.All(char.IsDigit))
+                throw new Exception("El teléfono solo debe contener números.");
+
+            if (dateFecha.Value >= DateTime.Now)
+                throw new Exception("La fecha de nacimiento no puede ser futura.");
+            
+            // Validaciones de admin
+            if (combPuesto.SelectedItem == null)
+                throw new Exception("Debe seleccionar un puesto.");
+
+            if (string.IsNullOrWhiteSpace(txtDescripcion.Text))
+                throw new Exception("Debe ingresar una descripción.");
+        }
+
     }
 }
