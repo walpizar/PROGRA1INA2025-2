@@ -46,7 +46,7 @@ namespace Entities
         [Column(TypeName = "NVARCHAR(500)")]
         public string descripcion { get; set; } = "";
 
-        // Auditoría - fecha de registro del sistema
+        // Auditoría
         [Required]
         [Column(TypeName = "DATETIME2")]
         public DateTime fechaCrea { get; set; } = DateTime.Now;

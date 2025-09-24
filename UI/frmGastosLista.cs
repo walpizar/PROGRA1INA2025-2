@@ -34,7 +34,6 @@ namespace UI
             {
                 _cache = _svc.consultarTodos();
                 RefrescarListView(_cache);
-               // ActualizarTitulo();
             }
             catch (Exception ex)
             {
@@ -69,19 +68,6 @@ namespace UI
                 lstvListaGastos.Items.Add(item);
             }
         }
-
-        //private void ActualizarTitulo()
-        //{
-        //    if (_cache?.Count > 0)
-        //    {
-        //        var total = _cache.Sum(g => g.montoGasto);
-        //        this.Text = $"Lista Gastos ({_cache.Count}) - Total: {total:C2}";
-        //    }
-        //    else
-        //    {
-        //        this.Text = "Lista Gastos";
-        //    }
-        //}
 
         private void btnNuevo_Click(object sender, EventArgs e)
         {
@@ -125,9 +111,5 @@ namespace UI
             }
         }
 
-        private void lstvListaGastos_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
     }
 }

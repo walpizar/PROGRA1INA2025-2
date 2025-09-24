@@ -162,7 +162,7 @@ namespace UI
                     _gasto.descripcion = txtJustificacion.Text.Trim();
                     _gasto.fechaCompra = dtmCompra.Value.Date;
                     _gasto.fecha_ult_mod = DateTime.Now;
-                    _gasto.usuario_ult_mod = "admin"; // Usuario actual
+                    _gasto.usuario_ult_mod = "admin";
 
                     _svc.modificar(_gasto);
                     MessageBox.Show("Gasto actualizado correctamente.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
