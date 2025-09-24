@@ -38,6 +38,8 @@ namespace Entities
         public string modificadoPor { get; set; }
 
         public DateTime? fechaModificacion { get; set; }
+
+
     }
 
 }

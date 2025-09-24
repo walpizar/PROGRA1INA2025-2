@@ -1,7 +1,9 @@
 ﻿using Common.Enums;
+using DAO;
 using Entities;
 using Services;
 using System;
+using System.Linq;
 using System.Windows.Forms;
 using static Common.Enums.Enums;
 
@@ -9,116 +11,132 @@ namespace UI
 {
     public partial class FrmAnadirPersonalAdministrativo : Form
     {
-        private UsuarioServicioExtend usuarioService;
+        
+        private PuestoService _puestoService = new PuestoService();
 
 
         public FrmAnadirPersonalAdministrativo()
         {
             InitializeComponent();
-            usuarioService = new UsuarioServicioExtend();
-
-
+            
         }
 
-        private void FrmAnadirAdmin_Load(object sender, EventArgs e)
+        private void FrmAnadirPersonalAdministrativo_Load(object sender, EventArgs e)
         {
-            // Cargar roles
-            comboRol.DataSource = Enum.GetValues(typeof(Enums.TipoUsuario));
-            comboRol.DropDownStyle = ComboBoxStyle.DropDownList;
+            // Aquí podrías cargar combobox, por ejemplo combTipoIdent o combPuesto
+            combTipoIdent.DataSource = Enum.GetValues(typeof(TipoIdentificacion));
 
-            comboRol.DisplayMember = "Nombre";
-            comboRol.ValueMember = "Id";
-
-            // Fecha máxima para no permitir fechas futuras
-            txtFecha.MaxDate = DateTime.Today;
-
-
+            cargarPuestos();
         }
 
-
-
-        private void btnAnadir_Click_1(object sender, EventArgs e)
+        private void cargarPuestos()
         {
             try
             {
-                // Validaciones simples
-                if (string.IsNullOrWhiteSpace(txtNombre.Text))
-                    throw new Exception("El nombre es obligatorio.");
-                if (string.IsNullOrWhiteSpace(txtUsuario.Text))
-                    throw new Exception("El nombre de usuario es obligatorio.");
-                if (string.IsNullOrWhiteSpace(txtContra.Text))
-                    throw new Exception("La contraseña es obligatoria.");
-                if (string.IsNullOrWhiteSpace(txtEmail.Text))
-                    throw new Exception("El email es obligatorio.");
-                if (comboRol.SelectedItem == null)
-                    throw new Exception("Debe seleccionar un rol.");
-
-                TipoUsuario tipoSeleccionado = (TipoUsuario)comboRol.SelectedItem;
-
-                string nombreCompleto = txtNombre.Text.Trim();
-
-                string[] partes = nombreCompleto.Split(' ');
-
-                string Nombre = partes.Length > 0 ? partes[0] : "-";
-
-                string Apellido1 = partes.Length > 1 ? partes[1] : "-";
-
-                string Apellido2 = partes.Length > 2 ? partes[2] : "-";
-
-
-                // 1️⃣ Crear Persona
-                clsPersona persona = new clsPersona
-                {
-                    id = Guid.NewGuid().ToString("N").Substring(0, 20),
-                    tipoId = (int)tipoSeleccionado,
-                    nombre = Nombre,
-                    apellido1 = Apellido1,
-                    apellido2 = Apellido2,
-                    fechaNac = txtFecha.Value,
-                    email = txtEmail.Text.Trim(),
-                    direccion = txtDireccion.Text.Trim(),
-                    telefono = txtTelefono.Text.Trim(),
-                    estado = true
-                };
-
-                // 2️⃣ Crear Usuario vinculado a Persona
-                clsUsuario usuario = new clsUsuario
-                {
-                    personaId = persona.id,
-                    personaTipoId = (int)tipoSeleccionado,
-                    nombre_usuario = txtUsuario.Text.Trim(),
-                    contrasena = txtContra.Text.Trim(),
-                    email = txtEmail.Text.Trim(),
-                    estado = true,
-                    persona = persona
-                    // rol_id = ((dynamic)comboRol.SelectedItem).Id  // Descomenta si tienes rol_id en Usuario
-                };
-
-                // 3️⃣ Guardar
-                usuarioService.crear(usuario);
-
-                MessageBox.Show(" Administrador añadido correctamente.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                this.Close();
+                var puestos = _puestoService.consultarTodos();
+                combPuesto.DataSource = puestos
+                    .Select(p => new
+                    {
+                        Id = p.idPuesto,
+                        Texto = $"{p.idPuesto} - {p.codigo} - {p.Nombre}"
+                    })
+                    .ToList();
+                combPuesto.DisplayMember = "Texto";
+                combPuesto.ValueMember = "Id";
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Error al cargar los puestos: " + ex.Message, "Error",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-
         private void btnCancelar_Click(object sender, EventArgs e)
         {
             this.Close();
         }
-
-        private void label10_Click(object sender, EventArgs e)
+        private void btnAnadir_Click_1(object sender, EventArgs e)
         {
+            try
+            {
+                // Validación básica de campos
+                if (string.IsNullOrWhiteSpace(txtIdentificacion.Text))
+                    throw new Exception("Debe ingresar la identificación.");
 
-        }
+                if (string.IsNullOrWhiteSpace(txtNombre.Text))
+                    throw new Exception("Debe ingresar el nombre.");
 
-        private void textBox2_TextChanged(object sender, EventArgs e)
-        {
+                if (combPuesto.SelectedItem == null)
+                    throw new Exception("Debe seleccionar un puesto.");
 
+                using (var db = new dbContextINA())
+                {
+                    using (var transaction = db.Database.BeginTransaction())
+                    {
+                        try
+                        {
+                            // 1️⃣ Insertar en persona
+                            var personaExistente = db.persona
+                                .FirstOrDefault(p => p.id == txtIdentificacion.Text
+                                                  && p.tipoId == (int)combTipoIdent.SelectedItem);
+
+                            if (personaExistente != null)
+                                throw new Exception("La persona ya existe.");
+
+                            clsPersona persona = new clsPersona
+                            {
+                                id = txtIdentificacion.Text,
+                                tipoId = (int)combTipoIdent.SelectedItem,
+                                nombre = txtNombre.Text,
+                                apellido1 = txt1Apellido.Text,
+                                apellido2 = txt2Apellido.Text,
+                                direccion = txtDireccion.Text,
+                                telefono = txtTelefono.Text,
+                                email = txtEmail.Text,
+                                fechaNac = DateTime.Parse(dateFecha.Text),
+                                estado = true
+                            };
+
+                            db.persona.Add(persona);
+
+                            // 2️⃣ Insertar en personalAdministrativo
+                            clsPersonalAdministrativo admin = new clsPersonalAdministrativo
+                            {
+                                personaId = persona.id,
+                                personaTipoId = persona.tipoId,
+                                puestoId = (int)combPuesto.SelectedValue,
+                                descripcion = txtDescripcion.Text,
+                                creadoPor = "admin",
+                                fechaCreacion = DateTime.Now,
+                                modificadoPor = "admin",
+
+                            };
+
+                            db.personalAdministrativo.Add(admin);
+
+                            // Guardar cambios
+                            db.SaveChanges();
+                            transaction.Commit();
+
+                            MessageBox.Show("Personal administrativo añadido correctamente.",
+                                "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                            this.Close();
+                        }
+                        catch
+                        {
+                            MessageBox.Show("Error al añadir el personal administrativo. Se revertirán los cambios.", "Error",
+                                MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            transaction.Rollback();
+                            throw;
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error: " + ex.Message, "Error",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
     }
 }

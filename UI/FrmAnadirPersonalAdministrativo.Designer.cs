@@ -1,10 +1,8 @@
-﻿namespace UI
+﻿
+namespace UI
 {
     partial class FrmAnadirPersonalAdministrativo
     {
-        /// <summary>
-        /// Required designer variable.
-        /// </summary>
         private System.ComponentModel.IContainer components = null;
 
         /// <summary>
@@ -28,394 +26,346 @@
         /// </summary>
         private void InitializeComponent()
         {
-            label1 = new Label();
-            txtDescripcion = new GroupBox();
-            comboRol = new ComboBox();
-            txtFecha = new DateTimePicker();
-            label9 = new Label();
-            txtContra = new TextBox();
+            gbDatosPersonales = new GroupBox();
+            dateFecha = new DateTimePicker();
+            txtDescripcion = new RichTextBox();
+            combPuesto = new ComboBox();
+            label12 = new Label();
+            label10 = new Label();
+            label11 = new Label();
             label8 = new Label();
-            txtUsuario = new TextBox();
-            label7 = new Label();
-            label6 = new Label();
-            txtTelefono = new TextBox();
-            label5 = new Label();
-            txtDireccion = new TextBox();
-            label4 = new Label();
             txtEmail = new TextBox();
-            label3 = new Label();
+            label9 = new Label();
+            txtTelefono = new TextBox();
+            label7 = new Label();
+            txtDireccion = new TextBox();
+            label6 = new Label();
+            txt2Apellido = new TextBox();
+            label5 = new Label();
+            txt1Apellido = new TextBox();
+            label4 = new Label();
             txtNombre = new TextBox();
+            label3 = new Label();
             label2 = new Label();
+            txtIdentificacion = new TextBox();
+            combTipoIdent = new ComboBox();
+            label1 = new Label();
             btnEliminar = new Button();
             btnAnadir = new Button();
             btnCancelar = new Button();
-            sqlCommand1 = new Microsoft.Data.SqlClient.SqlCommand();
-            label10 = new Label();
-            label11 = new Label();
-            textBox2 = new TextBox();
-            comboBox1 = new ComboBox();
-            menuStrip1 = new MenuStrip();
-            toolStripMenuItem1 = new ToolStripMenuItem();
-            credencialesToolStripMenuItem = new ToolStripMenuItem();
-            administrativoToolStripMenuItem = new ToolStripMenuItem();
-            toolStripSeparator1 = new ToolStripTextBox();
-            txtDescripcion.SuspendLayout();
-            menuStrip1.SuspendLayout();
+            label13 = new Label();
+            gbDatosPersonales.SuspendLayout();
             SuspendLayout();
             // 
-            // label1
+            // gbDatosPersonales
             // 
-            label1.AutoSize = true;
-            label1.Font = new Font("Segoe UI", 16.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label1.Location = new Point(415, 61);
-            label1.Margin = new Padding(4, 0, 4, 0);
-            label1.Name = "label1";
-            label1.Size = new Size(234, 45);
-            label1.TabIndex = 0;
-            label1.Text = "Añadir Admin";
+            gbDatosPersonales.Controls.Add(dateFecha);
+            gbDatosPersonales.Controls.Add(txtDescripcion);
+            gbDatosPersonales.Controls.Add(combPuesto);
+            gbDatosPersonales.Controls.Add(label12);
+            gbDatosPersonales.Controls.Add(label10);
+            gbDatosPersonales.Controls.Add(label11);
+            gbDatosPersonales.Controls.Add(label8);
+            gbDatosPersonales.Controls.Add(txtEmail);
+            gbDatosPersonales.Controls.Add(label9);
+            gbDatosPersonales.Controls.Add(txtTelefono);
+            gbDatosPersonales.Controls.Add(label7);
+            gbDatosPersonales.Controls.Add(txtDireccion);
+            gbDatosPersonales.Controls.Add(label6);
+            gbDatosPersonales.Controls.Add(txt2Apellido);
+            gbDatosPersonales.Controls.Add(label5);
+            gbDatosPersonales.Controls.Add(txt1Apellido);
+            gbDatosPersonales.Controls.Add(label4);
+            gbDatosPersonales.Controls.Add(txtNombre);
+            gbDatosPersonales.Controls.Add(label3);
+            gbDatosPersonales.Controls.Add(label2);
+            gbDatosPersonales.Controls.Add(txtIdentificacion);
+            gbDatosPersonales.Controls.Add(combTipoIdent);
+            gbDatosPersonales.Controls.Add(label1);
+            gbDatosPersonales.Location = new Point(12, 108);
+            gbDatosPersonales.Name = "gbDatosPersonales";
+            gbDatosPersonales.Size = new Size(547, 427);
+            gbDatosPersonales.TabIndex = 0;
+            gbDatosPersonales.TabStop = false;
+            gbDatosPersonales.Text = "Asignación Personal Adminitrativo";
+            // 
+            // dateFecha
+            // 
+            dateFecha.Location = new Point(190, 272);
+            dateFecha.Name = "dateFecha";
+            dateFecha.Size = new Size(265, 23);
+            dateFecha.TabIndex = 25;
             // 
             // txtDescripcion
             // 
-            txtDescripcion.BackColor = SystemColors.Control;
-            txtDescripcion.Controls.Add(comboBox1);
-            txtDescripcion.Controls.Add(textBox2);
-            txtDescripcion.Controls.Add(label11);
-            txtDescripcion.Controls.Add(label10);
-            txtDescripcion.Controls.Add(comboRol);
-            txtDescripcion.Controls.Add(txtFecha);
-            txtDescripcion.Controls.Add(label9);
-            txtDescripcion.Controls.Add(txtContra);
-            txtDescripcion.Controls.Add(label8);
-            txtDescripcion.Controls.Add(txtUsuario);
-            txtDescripcion.Controls.Add(label7);
-            txtDescripcion.Controls.Add(label6);
-            txtDescripcion.Controls.Add(txtTelefono);
-            txtDescripcion.Controls.Add(label5);
-            txtDescripcion.Controls.Add(txtDireccion);
-            txtDescripcion.Controls.Add(label4);
-            txtDescripcion.Controls.Add(txtEmail);
-            txtDescripcion.Controls.Add(label3);
-            txtDescripcion.Controls.Add(txtNombre);
-            txtDescripcion.Controls.Add(label2);
-            txtDescripcion.Location = new Point(52, 149);
-            txtDescripcion.Margin = new Padding(4);
+            txtDescripcion.Location = new Point(190, 330);
             txtDescripcion.Name = "txtDescripcion";
-            txtDescripcion.Padding = new Padding(4);
-            txtDescripcion.Size = new Size(966, 531);
-            txtDescripcion.TabIndex = 1;
-            txtDescripcion.TabStop = false;
-            txtDescripcion.Text = "Datos";
+            txtDescripcion.Size = new Size(265, 81);
+            txtDescripcion.TabIndex = 24;
+            txtDescripcion.Text = "";
             // 
-            // comboRol
+            // combPuesto
             // 
-            comboRol.FormattingEnabled = true;
-            comboRol.Location = new Point(606, 352);
-            comboRol.Margin = new Padding(4);
-            comboRol.Name = "comboRol";
-            comboRol.Size = new Size(319, 33);
-            comboRol.TabIndex = 17;
+            combPuesto.FormattingEnabled = true;
+            combPuesto.Location = new Point(190, 301);
+            combPuesto.Name = "combPuesto";
+            combPuesto.Size = new Size(265, 23);
+            combPuesto.TabIndex = 23;
             // 
-            // txtFecha
+            // label12
             // 
-            txtFecha.Location = new Point(198, 256);
-            txtFecha.Margin = new Padding(4);
-            txtFecha.Name = "txtFecha";
-            txtFecha.Size = new Size(260, 31);
-            txtFecha.TabIndex = 16;
+            label12.AutoSize = true;
+            label12.Location = new Point(24, 333);
+            label12.Name = "label12";
+            label12.Size = new Size(72, 15);
+            label12.TabIndex = 22;
+            label12.Text = "Descripción:";
             // 
-            // label9
+            // label10
             // 
-            label9.AutoSize = true;
-            label9.Location = new Point(524, 355);
-            label9.Margin = new Padding(4, 0, 4, 0);
-            label9.Name = "label9";
-            label9.Size = new Size(41, 25);
-            label9.TabIndex = 14;
-            label9.Text = "Rol:";
+            label10.AutoSize = true;
+            label10.Location = new Point(24, 304);
+            label10.Name = "label10";
+            label10.Size = new Size(46, 15);
+            label10.TabIndex = 20;
+            label10.Text = "Puesto:";
             // 
-            // txtContra
+            // label11
             // 
-            txtContra.Location = new Point(139, 352);
-            txtContra.Margin = new Padding(4);
-            txtContra.Name = "txtContra";
-            txtContra.Size = new Size(319, 31);
-            txtContra.TabIndex = 13;
+            label11.AutoSize = true;
+            label11.Location = new Point(24, 275);
+            label11.Name = "label11";
+            label11.Size = new Size(106, 15);
+            label11.TabIndex = 18;
+            label11.Text = "Fecha Nacimiento:";
             // 
             // label8
             // 
             label8.AutoSize = true;
-            label8.Location = new Point(26, 355);
-            label8.Margin = new Padding(4, 0, 4, 0);
+            label8.Location = new Point(23, 347);
             label8.Name = "label8";
-            label8.Size = new Size(105, 25);
-            label8.TabIndex = 12;
-            label8.Text = "Contraseña:";
+            label8.Size = new Size(0, 15);
+            label8.TabIndex = 16;
             // 
-            // txtUsuario
+            // txtEmail
             // 
-            txtUsuario.Location = new Point(606, 256);
-            txtUsuario.Margin = new Padding(4);
-            txtUsuario.Name = "txtUsuario";
-            txtUsuario.Size = new Size(319, 31);
-            txtUsuario.TabIndex = 11;
+            txtEmail.Location = new Point(190, 243);
+            txtEmail.Name = "txtEmail";
+            txtEmail.Size = new Size(265, 23);
+            txtEmail.TabIndex = 15;
+            // 
+            // label9
+            // 
+            label9.AutoSize = true;
+            label9.Location = new Point(24, 246);
+            label9.Name = "label9";
+            label9.Size = new Size(39, 15);
+            label9.TabIndex = 14;
+            label9.Text = "Email:";
+            // 
+            // txtTelefono
+            // 
+            txtTelefono.Location = new Point(190, 214);
+            txtTelefono.Name = "txtTelefono";
+            txtTelefono.Size = new Size(265, 23);
+            txtTelefono.TabIndex = 13;
             // 
             // label7
             // 
             label7.AutoSize = true;
-            label7.Location = new Point(514, 259);
-            label7.Margin = new Padding(4, 0, 4, 0);
+            label7.Location = new Point(24, 217);
             label7.Name = "label7";
-            label7.Size = new Size(76, 25);
-            label7.TabIndex = 10;
-            label7.Text = "Usuario:";
+            label7.Size = new Size(55, 15);
+            label7.TabIndex = 12;
+            label7.Text = "Teléfono:";
+            // 
+            // txtDireccion
+            // 
+            txtDireccion.Location = new Point(190, 185);
+            txtDireccion.Name = "txtDireccion";
+            txtDireccion.Size = new Size(265, 23);
+            txtDireccion.TabIndex = 11;
             // 
             // label6
             // 
             label6.AutoSize = true;
-            label6.Location = new Point(26, 256);
-            label6.Margin = new Padding(4, 0, 4, 0);
+            label6.Location = new Point(24, 188);
             label6.Name = "label6";
-            label6.Size = new Size(156, 25);
-            label6.TabIndex = 8;
-            label6.Text = "Fecha Nacimiento:";
+            label6.Size = new Size(64, 15);
+            label6.TabIndex = 10;
+            label6.Text = "Dirrección:";
             // 
-            // txtTelefono
+            // txt2Apellido
             // 
-            txtTelefono.Location = new Point(606, 157);
-            txtTelefono.Margin = new Padding(4);
-            txtTelefono.Name = "txtTelefono";
-            txtTelefono.Size = new Size(319, 31);
-            txtTelefono.TabIndex = 7;
+            txt2Apellido.Location = new Point(190, 156);
+            txt2Apellido.Name = "txt2Apellido";
+            txt2Apellido.Size = new Size(265, 23);
+            txt2Apellido.TabIndex = 9;
             // 
             // label5
             // 
             label5.AutoSize = true;
-            label5.Location = new Point(514, 157);
-            label5.Margin = new Padding(4, 0, 4, 0);
+            label5.Location = new Point(24, 159);
             label5.Name = "label5";
-            label5.Size = new Size(83, 25);
-            label5.TabIndex = 6;
-            label5.Text = "Telefono:";
+            label5.Size = new Size(104, 15);
+            label5.TabIndex = 8;
+            label5.Text = "Segundo Apellido:";
             // 
-            // txtDireccion
+            // txt1Apellido
             // 
-            txtDireccion.Location = new Point(139, 154);
-            txtDireccion.Margin = new Padding(4);
-            txtDireccion.Name = "txtDireccion";
-            txtDireccion.Size = new Size(319, 31);
-            txtDireccion.TabIndex = 5;
+            txt1Apellido.Location = new Point(190, 127);
+            txt1Apellido.Name = "txt1Apellido";
+            txt1Apellido.Size = new Size(265, 23);
+            txt1Apellido.TabIndex = 7;
             // 
             // label4
             // 
             label4.AutoSize = true;
-            label4.Location = new Point(26, 157);
-            label4.Margin = new Padding(4, 0, 4, 0);
+            label4.Location = new Point(23, 130);
             label4.Name = "label4";
-            label4.Size = new Size(87, 25);
-            label4.TabIndex = 4;
-            label4.Text = "Dirreción:";
+            label4.Size = new Size(92, 15);
+            label4.TabIndex = 6;
+            label4.Text = "Primer Apellido:";
             // 
-            // txtEmail
+            // txtNombre
             // 
-            txtEmail.Location = new Point(606, 75);
-            txtEmail.Margin = new Padding(4);
-            txtEmail.Name = "txtEmail";
-            txtEmail.Size = new Size(319, 31);
-            txtEmail.TabIndex = 3;
+            txtNombre.Location = new Point(190, 98);
+            txtNombre.Name = "txtNombre";
+            txtNombre.Size = new Size(265, 23);
+            txtNombre.TabIndex = 5;
             // 
             // label3
             // 
             label3.AutoSize = true;
-            label3.Location = new Point(532, 81);
-            label3.Margin = new Padding(4, 0, 4, 0);
+            label3.Location = new Point(24, 101);
             label3.Name = "label3";
-            label3.Size = new Size(58, 25);
-            label3.TabIndex = 2;
-            label3.Text = "Email:";
-            // 
-            // txtNombre
-            // 
-            txtNombre.Location = new Point(139, 78);
-            txtNombre.Margin = new Padding(4);
-            txtNombre.Name = "txtNombre";
-            txtNombre.Size = new Size(319, 31);
-            txtNombre.TabIndex = 1;
+            label3.Size = new Size(54, 15);
+            label3.TabIndex = 4;
+            label3.Text = "Nombre:";
             // 
             // label2
             // 
             label2.AutoSize = true;
-            label2.Location = new Point(31, 81);
-            label2.Margin = new Padding(4, 0, 4, 0);
+            label2.Location = new Point(23, 72);
             label2.Name = "label2";
-            label2.Size = new Size(82, 25);
-            label2.TabIndex = 0;
-            label2.Text = "Nombre:";
+            label2.Size = new Size(82, 15);
+            label2.TabIndex = 3;
+            label2.Text = "Identificación:";
+            // 
+            // txtIdentificacion
+            // 
+            txtIdentificacion.Location = new Point(190, 69);
+            txtIdentificacion.Name = "txtIdentificacion";
+            txtIdentificacion.Size = new Size(265, 23);
+            txtIdentificacion.TabIndex = 2;
+            // 
+            // combTipoIdent
+            // 
+            combTipoIdent.FormattingEnabled = true;
+            combTipoIdent.Location = new Point(190, 40);
+            combTipoIdent.Name = "combTipoIdent";
+            combTipoIdent.Size = new Size(265, 23);
+            combTipoIdent.TabIndex = 1;
+            // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Location = new Point(24, 43);
+            label1.Name = "label1";
+            label1.Size = new Size(108, 15);
+            label1.TabIndex = 0;
+            label1.Text = "Tipo Identificación:";
             // 
             // btnEliminar
             // 
-            btnEliminar.Location = new Point(595, 712);
-            btnEliminar.Margin = new Padding(4);
+            btnEliminar.Location = new Point(237, 554);
             btnEliminar.Name = "btnEliminar";
-            btnEliminar.Size = new Size(156, 50);
-            btnEliminar.TabIndex = 2;
+            btnEliminar.Size = new Size(112, 34);
+            btnEliminar.TabIndex = 1;
             btnEliminar.Text = "Eliminar";
             btnEliminar.UseVisualStyleBackColor = true;
             // 
             // btnAnadir
             // 
-            btnAnadir.Location = new Point(776, 712);
-            btnAnadir.Margin = new Padding(4);
+            btnAnadir.Location = new Point(355, 554);
             btnAnadir.Name = "btnAnadir";
-            btnAnadir.Size = new Size(118, 50);
-            btnAnadir.TabIndex = 3;
+            btnAnadir.Size = new Size(112, 34);
+            btnAnadir.TabIndex = 2;
             btnAnadir.Text = "Añadir";
             btnAnadir.UseVisualStyleBackColor = true;
             btnAnadir.Click += btnAnadir_Click_1;
             // 
             // btnCancelar
             // 
-            btnCancelar.BackColor = Color.Snow;
-            btnCancelar.Location = new Point(914, 712);
-            btnCancelar.Margin = new Padding(4);
+            btnCancelar.Location = new Point(473, 554);
             btnCancelar.Name = "btnCancelar";
-            btnCancelar.Size = new Size(118, 50);
-            btnCancelar.TabIndex = 4;
+            btnCancelar.Size = new Size(112, 34);
+            btnCancelar.TabIndex = 3;
             btnCancelar.Text = "Cancelar";
-            btnCancelar.UseVisualStyleBackColor = false;
+            btnCancelar.UseVisualStyleBackColor = true;
             // 
-            // sqlCommand1
+            // label13
             // 
-            sqlCommand1.CommandTimeout = 30;
-            sqlCommand1.EnableOptimizedParameterBinding = false;
-            // 
-            // label10
-            // 
-            label10.AutoSize = true;
-            label10.Location = new Point(42, 437);
-            label10.Margin = new Padding(4, 0, 4, 0);
-            label10.Name = "label10";
-            label10.Size = new Size(66, 25);
-            label10.TabIndex = 18;
-            label10.Text = "Puesto";
-            label10.Click += label10_Click;
-            // 
-            // label11
-            // 
-            label11.AutoSize = true;
-            label11.Location = new Point(497, 434);
-            label11.Margin = new Padding(4, 0, 4, 0);
-            label11.Name = "label11";
-            label11.Size = new Size(104, 25);
-            label11.TabIndex = 20;
-            label11.Text = "Descripcion";
-            // 
-            // textBox2
-            // 
-            textBox2.Location = new Point(606, 431);
-            textBox2.Margin = new Padding(4);
-            textBox2.Name = "textBox2";
-            textBox2.Size = new Size(319, 31);
-            textBox2.TabIndex = 21;
-            textBox2.TextChanged += textBox2_TextChanged;
-            // 
-            // comboBox1
-            // 
-            comboBox1.FormattingEnabled = true;
-            comboBox1.Location = new Point(139, 429);
-            comboBox1.Name = "comboBox1";
-            comboBox1.Size = new Size(319, 33);
-            comboBox1.TabIndex = 22;
-            // 
-            // menuStrip1
-            // 
-            menuStrip1.ImageScalingSize = new Size(24, 24);
-            menuStrip1.Items.AddRange(new ToolStripItem[] { toolStripMenuItem1, credencialesToolStripMenuItem, administrativoToolStripMenuItem });
-            menuStrip1.Location = new Point(0, 0);
-            menuStrip1.Name = "menuStrip1";
-            menuStrip1.Size = new Size(1062, 33);
-            menuStrip1.TabIndex = 5;
-            menuStrip1.Text = "menuStrip1";
-            // 
-            // toolStripMenuItem1
-            // 
-            toolStripMenuItem1.DropDownItems.AddRange(new ToolStripItem[] { toolStripSeparator1 });
-            toolStripMenuItem1.Name = "toolStripMenuItem1";
-            toolStripMenuItem1.Size = new Size(163, 29);
-            toolStripMenuItem1.Text = "Datos Personales";
-            // 
-            // credencialesToolStripMenuItem
-            // 
-            credencialesToolStripMenuItem.Name = "credencialesToolStripMenuItem";
-            credencialesToolStripMenuItem.Size = new Size(126, 29);
-            credencialesToolStripMenuItem.Text = "Credenciales";
-            // 
-            // administrativoToolStripMenuItem
-            // 
-            administrativoToolStripMenuItem.Name = "administrativoToolStripMenuItem";
-            administrativoToolStripMenuItem.Size = new Size(144, 29);
-            administrativoToolStripMenuItem.Text = "Administrativo";
-            // 
-            // toolStripSeparator1
-            // 
-            toolStripSeparator1.Name = "toolStripSeparator1";
-            toolStripSeparator1.Size = new Size(267, 31);
+            label13.AutoSize = true;
+            label13.BackColor = Color.Transparent;
+            label13.Font = new Font("Arial", 15.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label13.Location = new Point(100, 53);
+            label13.Name = "label13";
+            label13.Size = new Size(400, 24);
+            label13.TabIndex = 4;
+            label13.Text = "Mantenimento Personal Administrativo";
+            label13.TextAlign = ContentAlignment.MiddleCenter;
             // 
             // FrmAnadirPersonalAdministrativo
             // 
-            AutoScaleDimensions = new SizeF(10F, 25F);
-            AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1062, 772);
+            ClientSize = new Size(595, 611);
+            Controls.Add(label13);
             Controls.Add(btnCancelar);
             Controls.Add(btnAnadir);
             Controls.Add(btnEliminar);
-            Controls.Add(txtDescripcion);
-            Controls.Add(label1);
-            Controls.Add(menuStrip1);
-            MainMenuStrip = menuStrip1;
-            Margin = new Padding(4);
+            Controls.Add(gbDatosPersonales);
             Name = "FrmAnadirPersonalAdministrativo";
-            Text = "Añadir Admin";
-            Load += FrmAnadirAdmin_Load;
-            txtDescripcion.ResumeLayout(false);
-            txtDescripcion.PerformLayout();
-            menuStrip1.ResumeLayout(false);
-            menuStrip1.PerformLayout();
+            Load += FrmAnadirPersonalAdministrativo_Load;
+            gbDatosPersonales.ResumeLayout(false);
+            gbDatosPersonales.PerformLayout();
             ResumeLayout(false);
             PerformLayout();
         }
 
+        private void combTipoId_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            throw new NotImplementedException();
+        }
+
         #endregion
 
+        private GroupBox gbDatosPersonales;
         private Label label1;
-        private GroupBox txtDescripcion;
-        private TextBox txtDireccion;
-        private Label label4;
-        private TextBox txtEmail;
-        private Label label3;
-        private TextBox txtNombre;
-        private Label label2;
-        private Label label7;
-        private Label label6;
-        private TextBox txtTelefono;
-        private Label label5;
-        private Label label9;
-        private TextBox txtContra;
+        private Label label12;
+        private Label label10;
+        private Label label11;
         private Label label8;
-        private TextBox txtUsuario;
+        private TextBox txtEmail;
+        private Label label9;
+        private TextBox txtTelefono;
+        private TextBox txtDireccion;
+        private Label label6;
+        private TextBox txt2Apellido;
+        private Label label5;
+        private TextBox txt1Apellido;
+        private Label label4;
+        private TextBox txtNombre;
+        private Label label3;
+        private Label label2;
+        private TextBox txtIdentificacion;
+        private ComboBox combTipoIdent;
+        private Label label7;
+        private RichTextBox txtDescripcion;
+        private ComboBox combPuesto;
         private Button btnEliminar;
         private Button btnAnadir;
         private Button btnCancelar;
-        private ComboBox comboRol;
-        private DateTimePicker txtFecha;
-        private Microsoft.Data.SqlClient.SqlCommand sqlCommand1;
-        private TextBox textBox2;
-        private Label label11;
-        private Label label10;
-        private ComboBox comboBox1;
-        private MenuStrip menuStrip1;
-        private ToolStripMenuItem toolStripMenuItem1;
-        private ToolStripTextBox toolStripSeparator1;
-        private ToolStripMenuItem credencialesToolStripMenuItem;
-        private ToolStripMenuItem administrativoToolStripMenuItem;
+        private Label label13;
+        private DateTimePicker dateFecha;
     }
 }

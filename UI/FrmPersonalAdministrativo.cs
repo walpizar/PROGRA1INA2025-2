@@ -16,76 +16,52 @@ namespace UI
     public partial class FrmPersonalAdministrativo : Form
     {
 
-        List<clsUsuario> listaAdmins;
-        private readonly UsuarioService _UsuarioService;
+        List<clsPersonalAdministrativo> lista;
+        private readonly PersonalAdministrativoService _personalAdministrativoService;
         public FrmPersonalAdministrativo()
         {
             InitializeComponent();
-            _UsuarioService = new UsuarioService();
-        }
-
-
-        private void CargarAdmins()
-        {
-            try
-            {
-                var admins = _UsuarioService.consultarTodos();
-                cargarList(admins);
-                MessageBox.Show("Lista de administradores cargada correctamente");
-
-
-            }
-            catch (Exception)
-            {
-
-                MessageBox.Show("Error al cargar la lista de administradores");
-            }
-       
+            _personalAdministrativoService = new PersonalAdministrativoService();
 
         }
-
-        private void cargarList(List<clsUsuario> admins)
-        {
-            listView1.Items.Clear(); // limpiamos el ListView del form
-
-            foreach (clsUsuario admin in admins)
-            {
-                ListViewItem item = new ListViewItem(admin.personaId);
-                //item.SubItems.Add(admin.personaTipoId.ToString());
-                //item.SubItems.Add(admin.contrasena);
-                item.SubItems.Add(
-                        admin.persona != null
-                            ? $"{admin.persona.nombre} {admin.persona.apellido1} {admin.persona.apellido2}"
-                            : "Sin datos"
-                    );
-                item.SubItems.Add(admin.nombre_usuario);
-                item.SubItems.Add(admin.email);
-
-                listView1.Items.Add(item); // lo agregamos al ListView real
-            }
-        }
-
 
         private void FrmMantenimientoAdmin_Load(object sender, EventArgs e)
         {
-            CargarAdmins();
-
+            this.lista = _personalAdministrativoService.consultarTodos();
+            cargarLista(lista);
         }
 
-        private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
+        private void cargarLista(List<clsPersonalAdministrativo> lista)
         {
+            try
+            { 
+                
+                listAdministradores.Items.Clear();
 
-        }
+                foreach (clsPersonalAdministrativo administrador in lista)
+                {
+                    ListViewItem item = new ListViewItem(administrador.persona.nombre);
+                    item.SubItems.Add(administrador.persona.apellido1 + " " + administrador.persona.apellido2);
+                    item.SubItems.Add(administrador.persona.email);
+                    item.SubItems.Add(administrador.Puesto.Nombre);
+                    listAdministradores.Items.Add(item);
+                    //MessageBox.Show("Personal administrativo cargado correctamente.", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
-        private void groupBox1_Enter(object sender, EventArgs e)
-        {
-
+                }
+            } 
+            catch 
+            {
+                MessageBox.Show("Error al cargar el personal administrativo.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);    
+            }    
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
             FrmAnadirPersonalAdministrativo frmAnadirAdmin = new FrmAnadirPersonalAdministrativo();
             frmAnadirAdmin.ShowDialog();
+
+            this.lista = _personalAdministrativoService.consultarTodos();
+            cargarLista(lista);
         }
     }
 }

@@ -26,10 +26,8 @@
             lblApellido1 = new Label();
             txtNombre = new TextBox();
             lblNombre = new Label();
-
             gbrDatosPersonales.SuspendLayout();
             SuspendLayout();
-
             // 
             // gbrDatosPersonales
             // 
@@ -51,133 +49,163 @@
             gbrDatosPersonales.Controls.Add(lblApellido1);
             gbrDatosPersonales.Controls.Add(txtNombre);
             gbrDatosPersonales.Controls.Add(lblNombre);
-            gbrDatosPersonales.Location = new Point(14, 14);
+            gbrDatosPersonales.Location = new Point(16, 55);
             gbrDatosPersonales.Name = "gbrDatosPersonales";
-            gbrDatosPersonales.Size = new Size(564, 352);
+            gbrDatosPersonales.Size = new Size(649, 537);
             gbrDatosPersonales.TabIndex = 0;
             gbrDatosPersonales.TabStop = false;
             gbrDatosPersonales.Text = "Datos Personales";
-
-            // 
-            // label7 (Tipo ID)
-            // 
-            label7.AutoSize = true;
-            label7.Location = new Point(20, 35);
-            label7.Name = "label7";
-            label7.Size = new Size(120, 15);
-            label7.Text = "Tipo Identificación:";
             // 
             // combTipoId
             // 
-            combTipoId.Location = new Point(160, 30);
+            combTipoId.Location = new Point(182, 52);
             combTipoId.Name = "combTipoId";
-            combTipoId.Size = new Size(200, 23);
-
+            combTipoId.Size = new Size(236, 33);
+            combTipoId.TabIndex = 0;
+            combTipoId.SelectedIndexChanged += combTipoId_SelectedIndexChanged;
+            // 
+            // label7
+            // 
+            label7.AutoSize = true;
+            label7.Location = new Point(20, 55);
+            label7.Name = "label7";
+            label7.Size = new Size(161, 25);
+            label7.TabIndex = 1;
+            label7.Text = "Tipo Identificación:";
+            // 
+            // txtIdentificacion
+            // 
+            txtIdentificacion.Location = new Point(160, 105);
+            txtIdentificacion.Name = "txtIdentificacion";
+            txtIdentificacion.Size = new Size(258, 31);
+            txtIdentificacion.TabIndex = 2;
             // 
             // lblIdentificacion
             // 
             lblIdentificacion.AutoSize = true;
-            lblIdentificacion.Location = new Point(20, 70);
+            lblIdentificacion.Location = new Point(20, 108);
             lblIdentificacion.Name = "lblIdentificacion";
-            lblIdentificacion.Size = new Size(82, 15);
+            lblIdentificacion.Size = new Size(121, 25);
+            lblIdentificacion.TabIndex = 3;
             lblIdentificacion.Text = "Identificación:";
             // 
-            // txtIdentificacion
+            // dateFecha
             // 
-            txtIdentificacion.Location = new Point(160, 65);
-            txtIdentificacion.Size = new Size(200, 23);
-
+            dateFecha.Location = new Point(182, 454);
+            dateFecha.Name = "dateFecha";
+            dateFecha.Size = new Size(236, 31);
+            dateFecha.TabIndex = 4;
             // 
-            // lblNombre
+            // label1
             // 
-            lblNombre.AutoSize = true;
-            lblNombre.Location = new Point(20, 105);
-            lblNombre.Text = "Nombre:";
+            label1.AutoSize = true;
+            label1.Location = new Point(20, 459);
+            label1.Name = "label1";
+            label1.Size = new Size(156, 25);
+            label1.TabIndex = 5;
+            label1.Text = "Fecha Nacimiento:";
             // 
-            // txtNombre
+            // txtEmail
             // 
-            txtNombre.Location = new Point(160, 100);
-            txtNombre.Size = new Size(200, 23);
-
+            txtEmail.Location = new Point(160, 405);
+            txtEmail.Name = "txtEmail";
+            txtEmail.Size = new Size(258, 31);
+            txtEmail.TabIndex = 6;
+            // 
+            // label6
+            // 
+            label6.AutoSize = true;
+            label6.Location = new Point(20, 408);
+            label6.Name = "label6";
+            label6.Size = new Size(58, 25);
+            label6.TabIndex = 7;
+            label6.Text = "Email:";
+            // 
+            // txtTelefono
+            // 
+            txtTelefono.Location = new Point(160, 355);
+            txtTelefono.Name = "txtTelefono";
+            txtTelefono.Size = new Size(258, 31);
+            txtTelefono.TabIndex = 8;
+            // 
+            // txtDireccion
+            // 
+            txtDireccion.Location = new Point(160, 303);
+            txtDireccion.Name = "txtDireccion";
+            txtDireccion.Size = new Size(258, 31);
+            txtDireccion.TabIndex = 9;
+            // 
+            // label5
+            // 
+            label5.AutoSize = true;
+            label5.Location = new Point(20, 358);
+            label5.Name = "label5";
+            label5.Size = new Size(83, 25);
+            label5.TabIndex = 10;
+            label5.Text = "Teléfono:";
+            // 
+            // label4
+            // 
+            label4.AutoSize = true;
+            label4.Location = new Point(20, 306);
+            label4.Name = "label4";
+            label4.Size = new Size(89, 25);
+            label4.TabIndex = 11;
+            label4.Text = "Dirección:";
+            // 
+            // txtSegundoApellido
+            // 
+            txtSegundoApellido.Location = new Point(182, 257);
+            txtSegundoApellido.Name = "txtSegundoApellido";
+            txtSegundoApellido.Size = new Size(236, 31);
+            txtSegundoApellido.TabIndex = 12;
+            // 
+            // label3
+            // 
+            label3.AutoSize = true;
+            label3.Location = new Point(22, 260);
+            label3.Name = "label3";
+            label3.Size = new Size(159, 25);
+            label3.TabIndex = 13;
+            label3.Text = "Segundo Apellido:";
+            // 
+            // txtApellido1
+            // 
+            txtApellido1.Location = new Point(160, 209);
+            txtApellido1.Name = "txtApellido1";
+            txtApellido1.Size = new Size(258, 31);
+            txtApellido1.TabIndex = 14;
             // 
             // lblApellido1
             // 
             lblApellido1.AutoSize = true;
-            lblApellido1.Location = new Point(20, 140);
+            lblApellido1.Location = new Point(22, 212);
+            lblApellido1.Name = "lblApellido1";
+            lblApellido1.Size = new Size(138, 25);
+            lblApellido1.TabIndex = 15;
             lblApellido1.Text = "Primer Apellido:";
             // 
-            // txtApellido1
+            // txtNombre
             // 
-            txtApellido1.Location = new Point(160, 135);
-            txtApellido1.Size = new Size(200, 23);
-
+            txtNombre.Location = new Point(160, 156);
+            txtNombre.Name = "txtNombre";
+            txtNombre.Size = new Size(258, 31);
+            txtNombre.TabIndex = 16;
             // 
-            // label3 (Segundo Apellido)
+            // lblNombre
             // 
-            label3.AutoSize = true;
-            label3.Location = new Point(20, 175);
-            label3.Text = "Segundo Apellido:";
-            // 
-            // txtSegundoApellido
-            // 
-            txtSegundoApellido.Location = new Point(160, 170);
-            txtSegundoApellido.Size = new Size(200, 23);
-
-            // 
-            // label4 (Dirección)
-            // 
-            label4.AutoSize = true;
-            label4.Location = new Point(20, 210);
-            label4.Text = "Dirección:";
-            // 
-            // txtDireccion
-            // 
-            txtDireccion.Location = new Point(160, 205);
-            txtDireccion.Size = new Size(350, 23);
-
-            // 
-            // label5 (Teléfono)
-            // 
-            label5.AutoSize = true;
-            label5.Location = new Point(20, 245);
-            label5.Text = "Teléfono:";
-            // 
-            // txtTelefono
-            // 
-            txtTelefono.Location = new Point(160, 240);
-            txtTelefono.Size = new Size(200, 23);
-
-            // 
-            // label6 (Email)
-            // 
-            label6.AutoSize = true;
-            label6.Location = new Point(20, 280);
-            label6.Text = "Email:";
-            // 
-            // txtEmail
-            // 
-            txtEmail.Location = new Point(160, 275);
-            txtEmail.Size = new Size(250, 23);
-
-            // 
-            // label1 (Fecha Nacimiento)
-            // 
-            label1.AutoSize = true;
-            label1.Location = new Point(20, 315);
-            label1.Text = "Fecha Nacimiento:";
-            // 
-            // dateFecha
-            // 
-            dateFecha.Location = new Point(160, 310);
-            dateFecha.Size = new Size(200, 23);
-
+            lblNombre.AutoSize = true;
+            lblNombre.Location = new Point(22, 159);
+            lblNombre.Name = "lblNombre";
+            lblNombre.Size = new Size(82, 25);
+            lblNombre.TabIndex = 17;
+            lblNombre.Text = "Nombre:";
             // 
             // DatosPersonalesControl
             // 
             Controls.Add(gbrDatosPersonales);
             Name = "DatosPersonalesControl";
-            Size = new Size(600, 400);
-
+            Size = new Size(682, 666);
             gbrDatosPersonales.ResumeLayout(false);
             gbrDatosPersonales.PerformLayout();
             ResumeLayout(false);

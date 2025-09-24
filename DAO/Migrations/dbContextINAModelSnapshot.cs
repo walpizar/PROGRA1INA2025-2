@@ -122,32 +122,38 @@ namespace DAO.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("idDepartamento"));
 
-                    b.Property<string>("descripcion")
+                    b.Property<string>("Nombre")
                         .IsRequired()
-                        .HasMaxLength(200)
-                        .HasColumnType("nvarchar(200)");
+                        .HasMaxLength(100)
+                        .HasColumnType("NVARCHAR(100)");
+
+                    b.Property<string>("codigoDepartamento")
+                        .IsRequired()
+                        .HasMaxLength(20)
+                        .HasColumnType("NVARCHAR(20)");
+
+                    b.Property<string>("descripcionDepartamento")
+                        .IsRequired()
+                        .HasMaxLength(250)
+                        .HasColumnType("NVARCHAR(250)");
 
                     b.Property<bool>("estado")
                         .HasColumnType("bit");
 
-                    b.Property<DateTime>("fechaCreacion")
-                        .HasColumnType("datetime2");
+                    b.Property<DateTime>("fecha_crea")
+                        .HasColumnType("DATETIME2");
 
-                    b.Property<DateTime?>("fechaModificacion")
-                        .HasColumnType("datetime2");
+                    b.Property<DateTime?>("fecha_ult_mod")
+                        .HasColumnType("DATETIME2");
 
-                    b.Property<string>("nombreDepartamento")
+                    b.Property<string>("usuario_crea")
                         .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
+                        .HasMaxLength(50)
+                        .HasColumnType("NVARCHAR(50)");
 
-                    b.Property<string>("usuarioCreacion")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("usuarioModificacion")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<string>("usuario_ult_mod")
+                        .HasMaxLength(50)
+                        .HasColumnType("NVARCHAR(50)");
 
                     b.HasKey("idDepartamento");
 
@@ -581,20 +587,48 @@ namespace DAO.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("idPuesto"));
 
-                    b.Property<string>("descripcion")
-                        .IsRequired()
-                        .HasMaxLength(200)
-                        .HasColumnType("nvarchar(200)");
-
-                    b.Property<bool>("estado")
+                    b.Property<bool>("Estado")
                         .HasColumnType("bit");
 
-                    b.Property<string>("nombrePuesto")
+                    b.Property<string>("Nombre")
                         .IsRequired()
                         .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
+                        .HasColumnType("NVARCHAR(100)");
+
+                    b.Property<string>("codigo")
+                        .IsRequired()
+                        .HasMaxLength(20)
+                        .HasColumnType("NVARCHAR(20)");
+
+                    b.Property<string>("descripcion")
+                        .HasMaxLength(250)
+                        .HasColumnType("NVARCHAR(250)");
+
+                    b.Property<DateTime>("fecha_crea")
+                        .HasColumnType("DATETIME2");
+
+                    b.Property<DateTime?>("fecha_ult_mod")
+                        .HasColumnType("DATETIME2");
+
+                    b.Property<int>("idDepartamento")
+                        .HasColumnType("int");
+
+                    b.Property<string>("motivoInactivo")
+                        .HasMaxLength(300)
+                        .HasColumnType("NVARCHAR(300)");
+
+                    b.Property<string>("usuario_crea")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("NVARCHAR(50)");
+
+                    b.Property<string>("usuario_ult_mod")
+                        .HasMaxLength(50)
+                        .HasColumnType("NVARCHAR(50)");
 
                     b.HasKey("idPuesto");
+
+                    b.HasIndex("idDepartamento");
 
                     b.ToTable("tbPuestos");
                 });
@@ -804,6 +838,17 @@ namespace DAO.Migrations
                     b.Navigation("persona");
                 });
 
+            modelBuilder.Entity("Entities.clsPuestos", b =>
+                {
+                    b.HasOne("Entities.clsDepartamentos", "Departamento")
+                        .WithMany("Puestos")
+                        .HasForeignKey("idDepartamento")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Departamento");
+                });
+
             modelBuilder.Entity("Entities.clsRolPermiso", b =>
                 {
                     b.HasOne("Entities.clsPermisos", "Permiso")
@@ -839,6 +884,11 @@ namespace DAO.Migrations
                     b.Navigation("devoluciones");
 
                     b.Navigation("donacionActivos");
+                });
+
+            modelBuilder.Entity("Entities.clsDepartamentos", b =>
+                {
+                    b.Navigation("Puestos");
                 });
 
             modelBuilder.Entity("Entities.clsDonacion", b =>

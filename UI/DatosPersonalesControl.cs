@@ -48,5 +48,10 @@ namespace UI
             if (string.IsNullOrWhiteSpace(Email))
                 throw new Exception("El email es obligatorio.");
         }
+
+        private void combTipoId_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }

@@ -32,12 +32,11 @@
             label1 = new Label();
             contextMenuStrip1 = new ContextMenuStrip(components);
             gblista = new GroupBox();
-            listView1 = new ListView();
+            listAdministradores = new ListView();
             colNombre = new ColumnHeader();
             ColApellido = new ColumnHeader();
             ColCorreo = new ColumnHeader();
-            ColRol = new ColumnHeader();
-            ColEstado = new ColumnHeader();
+            ColPuesto = new ColumnHeader();
             btnAnadir = new Button();
             gblista.SuspendLayout();
             SuspendLayout();
@@ -46,9 +45,9 @@
             // 
             label1.AutoSize = true;
             label1.Font = new Font("Segoe UI", 16.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label1.Location = new Point(293, 30);
+            label1.Location = new Point(256, 23);
             label1.Name = "label1";
-            label1.Size = new Size(229, 38);
+            label1.Size = new Size(178, 30);
             label1.TabIndex = 0;
             label1.Text = "Mantenimiento ";
             // 
@@ -60,73 +59,70 @@
             // 
             // gblista
             // 
-            gblista.Controls.Add(listView1);
-            gblista.Location = new Point(50, 104);
+            gblista.Controls.Add(listAdministradores);
+            gblista.Location = new Point(43, 78);
+            gblista.Margin = new Padding(3, 2, 3, 2);
             gblista.Name = "gblista";
-            gblista.Size = new Size(712, 495);
+            gblista.Padding = new Padding(3, 2, 3, 2);
+            gblista.Size = new Size(572, 371);
             gblista.TabIndex = 3;
             gblista.TabStop = false;
             gblista.Text = "Lista Admin";
-            gblista.Enter += groupBox1_Enter;
             // 
-            // listView1
+            // listAdministradores
             // 
-            listView1.Columns.AddRange(new ColumnHeader[] { colNombre, ColApellido, ColCorreo, ColEstado, ColRol });
-            listView1.FullRowSelect = true;
-            listView1.GridLines = true;
-            listView1.Location = new Point(41, 68);
-            listView1.Name = "listView1";
-            listView1.Size = new Size(647, 405);
-            listView1.TabIndex = 0;
-            listView1.UseCompatibleStateImageBehavior = false;
-            listView1.View = View.Details;
+            listAdministradores.Columns.AddRange(new ColumnHeader[] { colNombre, ColApellido, ColCorreo, ColPuesto });
+            listAdministradores.FullRowSelect = true;
+            listAdministradores.GridLines = true;
+            listAdministradores.Location = new Point(26, 49);
+            listAdministradores.Margin = new Padding(3, 2, 3, 2);
+            listAdministradores.Name = "listAdministradores";
+            listAdministradores.Size = new Size(521, 305);
+            listAdministradores.TabIndex = 0;
+            listAdministradores.UseCompatibleStateImageBehavior = false;
+            listAdministradores.View = View.Details;
             // 
             // colNombre
             // 
             colNombre.Text = "Nombre";
-            colNombre.Width = 200;
+            colNombre.Width = 90;
             // 
             // ColApellido
             // 
-            ColApellido.Text = "Apellido";
-            ColApellido.Width = 200;
+            ColApellido.Text = "Apellidos";
+            ColApellido.Width = 130;
             // 
             // ColCorreo
             // 
             ColCorreo.Text = "Correo Electrónico";
             ColCorreo.Width = 140;
             // 
-            // ColRol
+            // ColPuesto
             // 
-            ColRol.DisplayIndex = 3;
-            ColRol.Text = "Rol";
-            ColRol.Width = 50;
-            // 
-            // ColEstado
-            // 
-            ColEstado.DisplayIndex = 4;
-            ColEstado.Text = "Estado";
-            ColEstado.Width = 50;
+            ColPuesto.Text = "Puesto";
+            ColPuesto.Width = 150;
             // 
             // btnAnadir
             // 
-            btnAnadir.Location = new Point(630, 40);
+            btnAnadir.Location = new Point(499, 23);
+            btnAnadir.Margin = new Padding(3, 2, 3, 2);
             btnAnadir.Name = "btnAnadir";
-            btnAnadir.Size = new Size(132, 44);
+            btnAnadir.Size = new Size(116, 33);
             btnAnadir.TabIndex = 4;
             btnAnadir.Text = "Añadir";
             btnAnadir.UseVisualStyleBackColor = true;
             btnAnadir.Click += button1_Click;
             // 
-            // FrmMantenimientoAdmin
+            // FrmPersonalAdministrativo
             // 
-            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(810, 611);
+            ClientSize = new Size(645, 458);
             Controls.Add(btnAnadir);
             Controls.Add(gblista);
             Controls.Add(label1);
-            Name = "FrmMantenimientoAdmin";
+            Margin = new Padding(3, 2, 3, 2);
+            Name = "FrmPersonalAdministrativo";
             Text = "Mantenimiento de Administradores";
             Load += FrmMantenimientoAdmin_Load;
             gblista.ResumeLayout(false);
@@ -139,12 +135,11 @@
         private Label label1;
         private ContextMenuStrip contextMenuStrip1;
         private GroupBox gblista;
-        private ListView listView1;
+        private ListView listAdministradores;
         private ColumnHeader colNombre;
         private ColumnHeader ColApellido;
         private ColumnHeader ColCorreo;
-        private ColumnHeader ColRol;
-        private ColumnHeader ColEstado;
+        private ColumnHeader ColPuesto;
         private Button btnAnadir;
     }
 }

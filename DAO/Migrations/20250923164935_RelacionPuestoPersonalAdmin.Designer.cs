@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DAO.Migrations
 {
     [DbContext(typeof(dbContextINA))]
-    [Migration("20250917172245_probando-CraeteAdmin2")]
-    partial class probandoCraeteAdmin2
+    [Migration("20250923164935_RelacionPuestoPersonalAdmin")]
+    partial class RelacionPuestoPersonalAdmin
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -125,32 +125,38 @@ namespace DAO.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("idDepartamento"));
 
-                    b.Property<string>("descripcion")
+                    b.Property<string>("Nombre")
                         .IsRequired()
-                        .HasMaxLength(200)
-                        .HasColumnType("nvarchar(200)");
+                        .HasMaxLength(100)
+                        .HasColumnType("NVARCHAR(100)");
+
+                    b.Property<string>("codigoDepartamento")
+                        .IsRequired()
+                        .HasMaxLength(20)
+                        .HasColumnType("NVARCHAR(20)");
+
+                    b.Property<string>("descripcionDepartamento")
+                        .IsRequired()
+                        .HasMaxLength(250)
+                        .HasColumnType("NVARCHAR(250)");
 
                     b.Property<bool>("estado")
                         .HasColumnType("bit");
 
-                    b.Property<DateTime>("fechaCreacion")
-                        .HasColumnType("datetime2");
+                    b.Property<DateTime>("fecha_crea")
+                        .HasColumnType("DATETIME2");
 
-                    b.Property<DateTime?>("fechaModificacion")
-                        .HasColumnType("datetime2");
+                    b.Property<DateTime?>("fecha_ult_mod")
+                        .HasColumnType("DATETIME2");
 
-                    b.Property<string>("nombreDepartamento")
+                    b.Property<string>("usuario_crea")
                         .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
+                        .HasMaxLength(50)
+                        .HasColumnType("NVARCHAR(50)");
 
-                    b.Property<string>("usuarioCreacion")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("usuarioModificacion")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<string>("usuario_ult_mod")
+                        .HasMaxLength(50)
+                        .HasColumnType("NVARCHAR(50)");
 
                     b.HasKey("idDepartamento");
 
@@ -527,6 +533,55 @@ namespace DAO.Migrations
                     b.ToTable("tbPersonas");
                 });
 
+            modelBuilder.Entity("Entities.clsPersonalAdministrativo", b =>
+                {
+                    b.Property<int>("id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("id"));
+
+                    b.Property<string>("creadoPor")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<string>("descripcion")
+                        .IsRequired()
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)");
+
+                    b.Property<DateTime>("fechaCreacion")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("fechaModificacion")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("modificadoPor")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<string>("personaId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(20)");
+
+                    b.Property<int>("personaTipoId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("puestoId")
+                        .HasColumnType("int");
+
+                    b.HasKey("id");
+
+                    b.HasIndex("puestoId");
+
+                    b.HasIndex("personaId", "personaTipoId")
+                        .IsUnique();
+
+                    b.ToTable("tbPersonalAdministrativo");
+                });
+
             modelBuilder.Entity("Entities.clsPuestos", b =>
                 {
                     b.Property<int>("idPuesto")
@@ -535,20 +590,48 @@ namespace DAO.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("idPuesto"));
 
-                    b.Property<string>("descripcion")
-                        .IsRequired()
-                        .HasMaxLength(200)
-                        .HasColumnType("nvarchar(200)");
-
-                    b.Property<bool>("estado")
+                    b.Property<bool>("Estado")
                         .HasColumnType("bit");
 
-                    b.Property<string>("nombrePuesto")
+                    b.Property<string>("Nombre")
                         .IsRequired()
                         .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
+                        .HasColumnType("NVARCHAR(100)");
+
+                    b.Property<string>("codigo")
+                        .IsRequired()
+                        .HasMaxLength(20)
+                        .HasColumnType("NVARCHAR(20)");
+
+                    b.Property<string>("descripcion")
+                        .HasMaxLength(250)
+                        .HasColumnType("NVARCHAR(250)");
+
+                    b.Property<DateTime>("fecha_crea")
+                        .HasColumnType("DATETIME2");
+
+                    b.Property<DateTime?>("fecha_ult_mod")
+                        .HasColumnType("DATETIME2");
+
+                    b.Property<int>("idDepartamento")
+                        .HasColumnType("int");
+
+                    b.Property<string>("motivoInactivo")
+                        .HasMaxLength(300)
+                        .HasColumnType("NVARCHAR(300)");
+
+                    b.Property<string>("usuario_crea")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("NVARCHAR(50)");
+
+                    b.Property<string>("usuario_ult_mod")
+                        .HasMaxLength(50)
+                        .HasColumnType("NVARCHAR(50)");
 
                     b.HasKey("idPuesto");
+
+                    b.HasIndex("idDepartamento");
 
                     b.ToTable("tbPuestos");
                 });
@@ -739,6 +822,36 @@ namespace DAO.Migrations
                         .HasForeignKey("clsModuloid_modulo");
                 });
 
+            modelBuilder.Entity("Entities.clsPersonalAdministrativo", b =>
+                {
+                    b.HasOne("Entities.clsPuestos", "Puesto")
+                        .WithMany()
+                        .HasForeignKey("puestoId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("Entities.clsPersona", "persona")
+                        .WithOne()
+                        .HasForeignKey("Entities.clsPersonalAdministrativo", "personaId", "personaTipoId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("Puesto");
+
+                    b.Navigation("persona");
+                });
+
+            modelBuilder.Entity("Entities.clsPuestos", b =>
+                {
+                    b.HasOne("Entities.clsDepartamentos", "Departamento")
+                        .WithMany("Puestos")
+                        .HasForeignKey("idDepartamento")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Departamento");
+                });
+
             modelBuilder.Entity("Entities.clsRolPermiso", b =>
                 {
                     b.HasOne("Entities.clsPermisos", "Permiso")
@@ -774,6 +887,11 @@ namespace DAO.Migrations
                     b.Navigation("devoluciones");
 
                     b.Navigation("donacionActivos");
+                });
+
+            modelBuilder.Entity("Entities.clsDepartamentos", b =>
+                {
+                    b.Navigation("Puestos");
                 });
 
             modelBuilder.Entity("Entities.clsDonacion", b =>

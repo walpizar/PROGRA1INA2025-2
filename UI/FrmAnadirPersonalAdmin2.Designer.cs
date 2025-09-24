@@ -9,7 +9,6 @@ namespace UI
 
         private MenuStrip menuStrip1;
         private ToolStripMenuItem datosPersonalesToolStripMenuItem;
-        private ToolStripMenuItem credencialesToolStripMenuItem;
         private ToolStripMenuItem adminToolStripMenuItem;
         private Panel panelContenedor;
 
@@ -31,7 +30,6 @@ namespace UI
         {
             menuStrip1 = new MenuStrip();
             datosPersonalesToolStripMenuItem = new ToolStripMenuItem();
-            credencialesToolStripMenuItem = new ToolStripMenuItem();
             adminToolStripMenuItem = new ToolStripMenuItem();
             panelContenedor = new Panel();
             panelBotones = new Panel();
@@ -48,42 +46,34 @@ namespace UI
             // menuStrip1
             // 
             menuStrip1.ImageScalingSize = new Size(24, 24);
-            menuStrip1.Items.AddRange(new ToolStripItem[] { datosPersonalesToolStripMenuItem, credencialesToolStripMenuItem, adminToolStripMenuItem });
+            menuStrip1.Items.AddRange(new ToolStripItem[] { datosPersonalesToolStripMenuItem, adminToolStripMenuItem });
             menuStrip1.Location = new Point(0, 0);
             menuStrip1.Name = "menuStrip1";
-            menuStrip1.Padding = new Padding(4, 1, 0, 1);
-            menuStrip1.Size = new Size(654, 24);
+            menuStrip1.Size = new Size(934, 33);
             menuStrip1.TabIndex = 0;
             menuStrip1.Text = "menuStrip1";
+            menuStrip1.ItemClicked += menuStrip1_ItemClicked;
             // 
             // datosPersonalesToolStripMenuItem
             // 
             datosPersonalesToolStripMenuItem.Name = "datosPersonalesToolStripMenuItem";
-            datosPersonalesToolStripMenuItem.Size = new Size(108, 22);
+            datosPersonalesToolStripMenuItem.Size = new Size(163, 29);
             datosPersonalesToolStripMenuItem.Text = "Datos Personales";
             datosPersonalesToolStripMenuItem.Click += btnDatosPersonales_Click;
-            // 
-            // credencialesToolStripMenuItem
-            // 
-            credencialesToolStripMenuItem.Name = "credencialesToolStripMenuItem";
-            credencialesToolStripMenuItem.Size = new Size(86, 22);
-            credencialesToolStripMenuItem.Text = "Credenciales";
-            credencialesToolStripMenuItem.Click += btnCredenciales_Click;
             // 
             // adminToolStripMenuItem
             // 
             adminToolStripMenuItem.Name = "adminToolStripMenuItem";
-            adminToolStripMenuItem.Size = new Size(55, 22);
-            adminToolStripMenuItem.Text = "Admin";
+            adminToolStripMenuItem.Size = new Size(174, 29);
+            adminToolStripMenuItem.Text = "Asignación Puesto";
             adminToolStripMenuItem.Click += btnAdministrativo_Click;
             // 
             // panelContenedor
             // 
             panelContenedor.Dock = DockStyle.Fill;
-            panelContenedor.Location = new Point(0, 24);
-            panelContenedor.Margin = new Padding(2);
+            panelContenedor.Location = new Point(0, 33);
             panelContenedor.Name = "panelContenedor";
-            panelContenedor.Size = new Size(654, 262);
+            panelContenedor.Size = new Size(934, 444);
             panelContenedor.TabIndex = 1;
             // 
             // panelBotones
@@ -94,18 +84,16 @@ namespace UI
             panelBotones.Controls.Add(btnDelete);
             panelBotones.Dock = DockStyle.Bottom;
             panelBotones.ForeColor = Color.Black;
-            panelBotones.Location = new Point(0, 286);
-            panelBotones.Margin = new Padding(2);
+            panelBotones.Location = new Point(0, 477);
             panelBotones.Name = "panelBotones";
-            panelBotones.Size = new Size(654, 38);
+            panelBotones.Size = new Size(934, 63);
             panelBotones.TabIndex = 3;
             // 
             // btnCancel
             // 
-            btnCancel.Location = new Point(568, 4);
-            btnCancel.Margin = new Padding(2);
+            btnCancel.Location = new Point(811, 7);
             btnCancel.Name = "btnCancel";
-            btnCancel.Size = new Size(78, 28);
+            btnCancel.Size = new Size(111, 47);
             btnCancel.TabIndex = 2;
             btnCancel.Text = "Cancelar";
             btnCancel.UseVisualStyleBackColor = true;
@@ -113,10 +101,9 @@ namespace UI
             // 
             // btnCreate
             // 
-            btnCreate.Location = new Point(388, 4);
-            btnCreate.Margin = new Padding(2);
+            btnCreate.Location = new Point(554, 7);
             btnCreate.Name = "btnCreate";
-            btnCreate.Size = new Size(78, 28);
+            btnCreate.Size = new Size(111, 47);
             btnCreate.TabIndex = 1;
             btnCreate.Text = "Añadir";
             btnCreate.UseVisualStyleBackColor = true;
@@ -124,10 +111,9 @@ namespace UI
             // 
             // btnDelete
             // 
-            btnDelete.Location = new Point(479, 4);
-            btnDelete.Margin = new Padding(2);
+            btnDelete.Location = new Point(684, 7);
             btnDelete.Name = "btnDelete";
-            btnDelete.Size = new Size(78, 28);
+            btnDelete.Size = new Size(111, 47);
             btnDelete.TabIndex = 0;
             btnDelete.Text = "Eliminar";
             btnDelete.UseVisualStyleBackColor = true;
@@ -161,13 +147,12 @@ namespace UI
             // 
             // FrmAnadirPersonalAdmin2
             // 
-            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(654, 324);
+            ClientSize = new Size(934, 540);
             Controls.Add(panelContenedor);
             Controls.Add(menuStrip1);
             Controls.Add(panelBotones);
-            Margin = new Padding(2);
             Name = "FrmAnadirPersonalAdmin2";
             Text = "Añadir Personal Administrativo";
             Load += FrmAnadirPersonalAdmin2_Load;

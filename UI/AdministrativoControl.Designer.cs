@@ -42,11 +42,9 @@
             grpAsigancionPuesto.Controls.Add(comboPuesto);
             grpAsigancionPuesto.Controls.Add(label2);
             grpAsigancionPuesto.Controls.Add(label1);
-            grpAsigancionPuesto.Location = new Point(14, 42);
-            grpAsigancionPuesto.Margin = new Padding(2, 2, 2, 2);
+            grpAsigancionPuesto.Location = new Point(20, 70);
             grpAsigancionPuesto.Name = "grpAsigancionPuesto";
-            grpAsigancionPuesto.Padding = new Padding(2, 2, 2, 2);
-            grpAsigancionPuesto.Size = new Size(547, 245);
+            grpAsigancionPuesto.Size = new Size(781, 408);
             grpAsigancionPuesto.TabIndex = 0;
             grpAsigancionPuesto.TabStop = false;
             grpAsigancionPuesto.Text = "Asignación Puesto";
@@ -54,51 +52,46 @@
             // 
             // txtDescripcion
             // 
-            txtDescripcion.Location = new Point(164, 133);
-            txtDescripcion.Margin = new Padding(2, 2, 2, 2);
+            txtDescripcion.Location = new Point(234, 171);
             txtDescripcion.Name = "txtDescripcion";
-            txtDescripcion.Size = new Size(187, 88);
+            txtDescripcion.Size = new Size(265, 144);
             txtDescripcion.TabIndex = 4;
             txtDescripcion.Text = "";
             // 
             // comboPuesto
             // 
             comboPuesto.FormattingEnabled = true;
-            comboPuesto.Location = new Point(158, 67);
-            comboPuesto.Margin = new Padding(2, 2, 2, 2);
+            comboPuesto.Location = new Point(234, 81);
             comboPuesto.Name = "comboPuesto";
-            comboPuesto.Size = new Size(194, 23);
+            comboPuesto.Size = new Size(275, 33);
             comboPuesto.TabIndex = 3;
             // 
             // label2
             // 
             label2.AutoSize = true;
-            label2.Location = new Point(88, 133);
-            label2.Margin = new Padding(2, 0, 2, 0);
+            label2.Location = new Point(126, 171);
             label2.Name = "label2";
-            label2.Size = new Size(69, 15);
+            label2.Size = new Size(104, 25);
             label2.TabIndex = 2;
             label2.Text = "Descripción";
             // 
             // label1
             // 
             label1.AutoSize = true;
-            label1.Location = new Point(88, 68);
-            label1.Margin = new Padding(2, 0, 2, 0);
+            label1.Location = new Point(126, 89);
             label1.Name = "label1";
-            label1.Size = new Size(43, 15);
+            label1.Size = new Size(66, 25);
             label1.TabIndex = 0;
             label1.Text = "Puesto";
             label1.Click += label1_Click;
             // 
             // AdministrativoControl
             // 
-            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
             Controls.Add(grpAsigancionPuesto);
-            Margin = new Padding(2, 2, 2, 2);
             Name = "AdministrativoControl";
-            Size = new Size(580, 304);
+            Size = new Size(829, 507);
             grpAsigancionPuesto.ResumeLayout(false);
             grpAsigancionPuesto.PerformLayout();
             ResumeLayout(false);

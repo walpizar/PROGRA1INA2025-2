@@ -14,15 +14,15 @@ namespace UI
         private CredencialesControl credencialesControl;
         private AdministrativoControl adminControl;
         private UsuarioServicioExtend usuarioService;
-        
+
 
         public FrmAnadirPersonalAdmin2()
         {
             InitializeComponent();
             usuarioService = new UsuarioServicioExtend();
-            
-            
-            
+
+
+
         }
 
         private void FrmAnadirPersonalAdmin2_Load(object sender, EventArgs e)
@@ -34,7 +34,7 @@ namespace UI
 
             // Asignar eventos a los ToolStripMenuItem
             datosPersonalesToolStripMenuItem.Click += (s, ev) => MostrarUserControl(datosControl);
-            credencialesToolStripMenuItem.Click += (s, ev) => MostrarUserControl(credencialesControl);
+            //credencialesToolStripMenuItem.Click += (s, ev) => MostrarUserControl(credencialesControl);
             adminToolStripMenuItem.Click += (s, ev) => MostrarUserControl(adminControl);
 
             // Mostrar por defecto "Datos Personales"
@@ -42,16 +42,16 @@ namespace UI
 
             try
             {
-               
+
 
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 MessageBox.Show("Error al el enumerador de tipo de id: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
 
 
-        
+
         }
 
         private void MostrarUserControl(UserControl control)
@@ -62,7 +62,7 @@ namespace UI
         }
         private void btnCredenciales_Click(object sender, EventArgs e)
         {
-            MostrarUserControl(credencialesControl);
+            
         }
 
         private void btnAdministrativo_Click(object sender, EventArgs e)
@@ -84,21 +84,20 @@ namespace UI
         {
             try
             {
-                // 1️⃣ Validar datos del control
+                // 1️⃣ Validar datos del control de persona
                 datosControl.Validar();
 
                 // 2️⃣ Obtener el enum seleccionado desde el control
                 TipoIdentificacion tipoSeleccionado = datosControl.TipoSeleccionado;
                 int tipoId = (int)tipoSeleccionado;
 
-                // 3️⃣ Crear instancia del contexto y transacción
                 using (var db = new dbContextINA())
                 {
                     using (var transaction = db.Database.BeginTransaction())
                     {
                         try
                         {
-                            // 4️⃣ Construir persona
+                            // 3️⃣ Crear persona
                             clsPersona persona = new clsPersona
                             {
                                 id = datosControl.Identificacion,
@@ -113,7 +112,7 @@ namespace UI
                                 estado = true
                             };
 
-                            // 5️⃣ Verificar que no exista la persona
+                            // Verificar duplicados
                             var existingPersona = db.persona
                                 .FirstOrDefault(p => p.id == persona.id && p.tipoId == persona.tipoId);
 
@@ -122,28 +121,7 @@ namespace UI
 
                             db.persona.Add(persona);
 
-                            // 6️⃣ Construir usuario
-                            clsUsuario usuario = new clsUsuario
-                            {
-                                personaId = persona.id,
-                                personaTipoId = persona.tipoId,
-                                nombre_usuario = credencialesControl.Usuario,
-                                contrasena = credencialesControl.Contrasena,
-                                email = persona.email,
-                                estado = true,
-                                persona = persona
-                            };
-
-                            // 7️⃣ Verificar que no exista el usuario
-                            var existingUsuario = db.usuario
-                                .FirstOrDefault(u => u.personaId == usuario.personaId && u.personaTipoId == usuario.personaTipoId);
-
-                            if (existingUsuario != null)
-                                throw new Exception("El usuario ya existe.");
-
-                            db.usuario.Add(usuario);
-
-                            // 8️⃣ Crear registro administrativo
+                            // 4️⃣ Crear administrativo
                             int puestoId = adminControl.comboPuesto.SelectedValue != null
                                           ? (int)adminControl.comboPuesto.SelectedValue
                                           : throw new Exception("Debe seleccionar un puesto.");
@@ -160,26 +138,33 @@ namespace UI
 
                             db.personalAdministrativo.Add(admin);
 
-                            // 9️⃣ Guardar todo y confirmar transacción
+                            // 5️⃣ Guardar cambios
                             db.SaveChanges();
                             transaction.Commit();
 
-                            MessageBox.Show("Administrador añadido correctamente.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            MessageBox.Show("Personal administrativo añadido correctamente.",
+                                "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
                             this.Close();
                         }
                         catch
                         {
                             transaction.Rollback();
-                            throw; // relanzamos para capturar en el catch externo
+                            throw;
                         }
                     }
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Error: " + ex.Message, "Error",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
+        private void menuStrip1_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
+        {
+
+        }
     }
 }
