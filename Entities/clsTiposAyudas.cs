@@ -50,13 +50,22 @@ namespace Entities
         [Required]
         public bool estado { get; set; }
 
+        // Constructor
+        public clsTiposAyudas()
+        {
+            fecha_crea = DateTime.Now;
+            fecha_ultimaModificacion = DateTime.Now;
+            estado = true;
+        }
 
         // Constructor con datos clave
         public clsTiposAyudas(
             string nombre,
             string descripcion,
-            string idResponsable, int tipoResponsable,
-            string idUsuarioCrea, int tipoUsuarioCrea
+            string idResponsable,
+            int tipoResponsable,
+            string idUsuarioCrea,
+            int tipoUsuarioCrea
         )
         {
             this.nombre = nombre;

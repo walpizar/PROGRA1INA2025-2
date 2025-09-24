@@ -24,6 +24,7 @@ namespace DAO
 
         }
 
+        
         public void eliminar(string id)
         {
             // Se busca el usuario primero para evitar un error de referencia nula
