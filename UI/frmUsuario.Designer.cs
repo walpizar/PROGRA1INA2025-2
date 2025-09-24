@@ -304,7 +304,6 @@
             btnBuscarPersona.BackColor = Color.BurlyWood;
             btnBuscarPersona.BackgroundImageLayout = ImageLayout.Stretch;
             btnBuscarPersona.ForeColor = SystemColors.MenuHighlight;
-            btnBuscarPersona.ImageAlign = ContentAlignment.BottomCenter;
             btnBuscarPersona.Location = new Point(378, 30);
             btnBuscarPersona.Name = "btnBuscarPersona";
             btnBuscarPersona.Size = new Size(43, 35);
@@ -333,7 +332,7 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            BackColor = SystemColors.ControlLightLight;
+            BackColor = SystemColors.GradientActiveCaption;
             ClientSize = new Size(441, 366);
             Controls.Add(gbxUsuario);
             Controls.Add(lblUsuario);

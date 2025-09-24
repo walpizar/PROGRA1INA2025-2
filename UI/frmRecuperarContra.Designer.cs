@@ -125,11 +125,10 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            BackColor = SystemColors.InactiveCaption;
+            BackColor = SystemColors.GradientActiveCaption;
             ClientSize = new Size(493, 269);
             Controls.Add(lblRecuperarContra);
             Controls.Add(gbxRecuperarContra);
-            FormBorderStyle = FormBorderStyle.None;
             Name = "frmRecuperarContra";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "frmRecuperarContra";

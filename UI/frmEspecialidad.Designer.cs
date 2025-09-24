@@ -162,6 +162,7 @@ namespace UI
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
+            BackColor = SystemColors.GradientActiveCaption;
             ClientSize = new Size(450, 340);
             Controls.Add(btnEliminar);
             Controls.Add(btnCancelar);

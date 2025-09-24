@@ -331,6 +331,7 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
+            BackColor = SystemColors.GradientActiveCaption;
             ClientSize = new Size(832, 450);
             Controls.Add(tabControl1);
             Controls.Add(label1);

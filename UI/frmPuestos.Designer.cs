@@ -184,6 +184,7 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
+            BackColor = SystemColors.GradientActiveCaption;
             ClientSize = new Size(542, 360);
             Controls.Add(lblTitulo);
             Controls.Add(btnActivar);

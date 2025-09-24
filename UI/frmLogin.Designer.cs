@@ -114,10 +114,9 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            BackColor = SystemColors.InactiveCaption;
+            BackColor = SystemColors.GradientActiveCaption;
             ClientSize = new Size(473, 199);
             Controls.Add(gbxLogin);
-            FormBorderStyle = FormBorderStyle.None;
             Name = "frmLogin";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "frmLogin";

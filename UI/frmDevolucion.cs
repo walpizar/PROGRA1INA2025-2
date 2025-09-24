@@ -142,6 +142,7 @@ namespace UI
             // 
             // frmDevolucion
             // 
+            BackColor = SystemColors.GradientActiveCaption;
             ClientSize = new Size(544, 321);
             Controls.Add(lblTitulo);
             Controls.Add(lblActivo);
