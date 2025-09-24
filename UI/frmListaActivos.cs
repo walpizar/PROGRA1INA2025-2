@@ -22,7 +22,7 @@ namespace UI
         {
             try
             {
-                // ✅ Verificar conexión primero
+                //Verificar conexión primero
                 if (!VerificarConexion())
                 {
                     MessageBox.Show("No se puede conectar a la base de datos.",
@@ -30,15 +30,18 @@ namespace UI
                     return;
                 }
 
-                // ✅ Cargar lista con manejo detallado de errores
+                // Cargar lista con manejo detallado de errores
                 CargarListaConManejo();
+                //this.lista = _activoService.consultarTodos();
+               // cargarLista(lista);
+
             }
             catch (Exception ex)
             {
                 MostrarErrorDetallado("Error al inicializar el formulario", ex);
                 // Inicializar lista vacía para evitar errores posteriores
-                lista = new List<clsActivos>();
-                cargarLista(lista);
+                //lista = new List<clsActivos>();
+                //cargarLista(lista);
             }
         }
 
@@ -121,10 +124,10 @@ namespace UI
         {
             lstvListaActivos.Items.Clear();
 
-            if (lista == null || lista.Count == 0)
+            /*if (lista == null || lista.Count == 0)
             {
                 return;
-            }
+            }*/
 
             foreach (clsActivos activos in lista)
             {
@@ -133,26 +136,29 @@ namespace UI
                     if (activos.idActivo <= 0) continue;
 
                     ListViewItem item = new ListViewItem(activos.idActivo.ToString());
-                    item.SubItems.Add(activos.nombreActivo ?? "Sin nombre");
+                    item.SubItems.Add(activos.nombreActivo);
                     item.SubItems.Add(activos.descripcion ?? "Sin descripción");
                     item.SubItems.Add(activos.idCategoria.ToString());
-
-                    string nombreCategoria = activos.categoria?.nombre ?? "Sin categoría";
-                    item.SubItems.Add(nombreCategoria);
+                    item.SubItems.Add(activos.categoria?.nombre ?? "Sin categoría");
                     item.SubItems.Add(estadoUsoToString(activos.estadoUso));
                     item.SubItems.Add(activos.estado ? "Activo" : "Inactivo");
 
+                    //string nombreCategoria = activos.categoria?.nombre ?? "Sin categoría";
+                    //item.SubItems.Add(nombreCategoria);
+                    //item.SubItems.Add(estadoUsoToString(activos.estadoUso));
+                    //item.SubItems.Add(activos.estado ? "Activo" : "Inactivo");
+                    /*
                     item.SubItems.Add(activos.fechaAdquisicion.ToString("dd/MM/yyyy"));
                     item.SubItems.Add(activos.proveedor ?? "Sin proveedor");
-                    item.SubItems.Add(activos.ubicacion ?? "Sin ubicación");
+                    item.SubItems.Add(activos.ubicacion ?? "Sin ubicación");*/
 
-                    if (activos.estadoUso == 2)
+                    /*if (activos.estadoUso == 2)
                     {
                         string fechaDesecho = activos.fechaDesecho?.ToString("dd/MM/yyyy") ?? "No registrada";
                         string observacion = activos.observacionDesecho ?? "Sin observación";
                         item.BackColor = System.Drawing.Color.LightGray;
                         item.ToolTipText = $"Desechado - Fecha: {fechaDesecho}, Observación: {observacion}";
-                    }
+                    }*/
 
                     lstvListaActivos.Items.Add(item);
                 }

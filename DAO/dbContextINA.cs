@@ -29,6 +29,7 @@ namespace DAO
             {
                 optionsBuilder.UseSqlServer(
                     @"Server=localhost\sqlexpress;Database=dbPaleativoGarabito;Trusted_Connection=True;MultipleActiveResultSets=True;TrustServerCertificate=True;");
+                //localhost\sqlexpress
             }
         }
         
@@ -85,6 +86,36 @@ namespace DAO
                 .WithMany() // cámbialo a .WithOne() si quieres relación 1:1
                 .HasForeignKey(u => new { u.personaId, u.personaTipoId })
                 .HasPrincipalKey(p => new { p.id, p.tipoId });
+
+            // Configuración de CategoriaActivos
+            modelBuilder.Entity<clsCategoriaActivos>()
+                .HasKey(c => c.Id);
+            modelBuilder.Entity<clsCategoriaActivos>()
+                .Property(c => c.Id)
+                .ValueGeneratedOnAdd();
+            modelBuilder.Entity<clsCategoriaActivos>()
+                .Property(c => c.nombre)
+                .IsRequired()
+                .HasMaxLength(50);
+
+            // Configuración de Activos
+            modelBuilder.Entity<clsActivos>()
+                .HasKey(a => a.idActivo);
+            modelBuilder.Entity<clsActivos>()
+                .Property(a => a.idActivo)
+                .ValueGeneratedOnAdd();
+            modelBuilder.Entity<clsActivos>()
+                .Property(a => a.nombreActivo)
+                .IsRequired()
+                .HasMaxLength(100);
+
+            // *RELACIÓN CORRECTA 1:N entre CategoriaActivos y Activos*
+            modelBuilder.Entity<clsActivos>()
+                .HasOne(a => a.categoria)
+                .WithMany(c => c.Activos)
+                .HasForeignKey(a => a.idCategoria)
+                .OnDelete(DeleteBehavior.Restrict);
         }
+
     }
 }

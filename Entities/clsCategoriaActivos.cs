@@ -9,6 +9,7 @@ namespace Entities
     public class clsCategoriaActivos
     {
         [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)] // Autogeneración del ID
         public int Id { get; set; }
 
         [StringLength(50, ErrorMessage = "El nombre no puede tener más de 50 caracteres")]
@@ -22,7 +23,7 @@ namespace Entities
         public bool estado { get; set; }
 
         // Relación uno-a-muchos: una categoría tiene muchos activos
-        public ICollection<clsActivos> Activos { get; set; } = new List<clsActivos>();
+        public ICollection<clsActivos> Activos { get; set; } 
 
         // Para mostrar en combos
         public string Display => $"{Id} - {nombre}";

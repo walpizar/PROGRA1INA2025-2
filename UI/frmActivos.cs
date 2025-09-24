@@ -186,7 +186,9 @@ namespace UI
 
                         using (var service = new ActivosServices())
                         {
+                            activo.usuarioModificacion = "usuario";
                             service.crear(activo);
+
                         }
                         MessageBox.Show("Activo creado correctamente");
                         this.DialogResult = DialogResult.OK;
@@ -208,7 +210,7 @@ namespace UI
                         activo.proveedor = txtProveedor.Text;
                         activo.ubicacion = txtUbicacion.Text;
                         activo.idCategoria = (int)cbxCategorias.SelectedValue;
-                        activo.usuarioModificacion = "sistema";
+                        activo.usuarioModificacion = "usuario";
                         activo.fechaModificacion = DateTime.Now;
 
                         if (activo.estadoUso == 2) // Desechado
@@ -224,7 +226,9 @@ namespace UI
 
                         using (var service = new ActivosServices())
                         {
+                            activo.usuarioModificacion = "usuario";
                             service.modificar(activo);
+
                         }
                         MessageBox.Show("Activo modificado correctamente");
                         this.DialogResult = DialogResult.OK;

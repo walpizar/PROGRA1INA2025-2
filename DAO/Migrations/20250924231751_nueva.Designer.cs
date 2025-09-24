@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DAO.Migrations
 {
     [DbContext(typeof(dbContextINA))]
-    [Migration("20250924201504_nueva")]
+    [Migration("20250924231751_nueva")]
     partial class nueva
     {
         /// <inheritdoc />
@@ -653,7 +653,7 @@ namespace DAO.Migrations
                     b.HasOne("Entities.clsCategoriaActivos", "categoria")
                         .WithMany("Activos")
                         .HasForeignKey("idCategoria")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.Navigation("categoria");

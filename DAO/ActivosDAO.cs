@@ -80,7 +80,7 @@ namespace DAO
             // el include es para traer los datos de la tabla categoria que esta relacionada con activos
             return _context.Activos
                 .AsNoTracking() // esto es para que no haga seguimiento de los cambios en los objetos, mejora el rendimiento en consultas de solo lectura
-                .Include(a => a.categoria) // esto es para traer los datos de la tabla categoria que esta relacionada con activos
+                .Include(a => a.categoria)
                 .Where(a => a.estado == true) // solo los activos
                 .ToList();
         }
@@ -145,10 +145,13 @@ namespace DAO
 
         public clsActivos consultarPorID(string id)
         {
-            if (int.TryParse(id, out int idNumerico))
+           /* if (int.TryParse(id, out int idNumerico))
                 return consultarPorID(idNumerico);
 
-            return null;
+            return null;*/
+           return _context.Activos
+                .Include(a => a.categoria)
+                .SingleOrDefault(p => p.idActivo.ToString() == id);
         }
 
         public void LimpiarRegistrosProblematicos()

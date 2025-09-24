@@ -30,7 +30,7 @@ namespace UI
 
 
 
-           
+           Application.Run(new frmMantenimientoCategoriasActivos());
             Application.Run(new frmListaActivos());
 
             

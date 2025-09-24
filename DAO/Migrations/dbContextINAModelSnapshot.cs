@@ -650,7 +650,7 @@ namespace DAO.Migrations
                     b.HasOne("Entities.clsCategoriaActivos", "categoria")
                         .WithMany("Activos")
                         .HasForeignKey("idCategoria")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.Navigation("categoria");

@@ -47,6 +47,7 @@ namespace Entities
         public string usuarioModificacion { get; set; }
 
         [Required]
+       
         public int idCategoria { get; set; }
 
         [ForeignKey("idCategoria")]
@@ -59,6 +60,8 @@ namespace Entities
 
         [StringLength(200, ErrorMessage = "La observación de desecho no puede tener más de 200 caracteres")]
         public string observacionDesecho { get; set; }
+        //propiedad de navegacion para la relacion uno a muchos con clsCategoriaActivos
+        
 
         public clsActivos()
         {

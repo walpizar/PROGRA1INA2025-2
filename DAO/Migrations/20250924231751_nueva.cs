@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace DAO.Migrations
 {
     /// <inheritdoc />
-    public partial class InitialCreate : Migration
+    public partial class nueva : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -173,7 +173,7 @@ namespace DAO.Migrations
                         column: x => x.idCategoria,
                         principalTable: "tbCategoriaActivos",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
