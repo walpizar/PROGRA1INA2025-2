@@ -8,31 +8,27 @@ namespace Entities
     public class clsUsuario
     {
         [Key]
-        public string personaId {  get; set; }
+        public int usuarioId { get; set; }   // PK propia de usuario
+
+        // 🔑 FK hacia Persona (compuesta)
+        public string personaId { get; set; }
+        public int personaTipoId { get; set; }
 
         [Required(ErrorMessage = "El nombre de usuario es obligatorio.")]
         [StringLength(50, ErrorMessage = "El nombre de usuario no puede tener más de 50 caracteres.")]
-
-        public int personaTipoId {  get; set; }
-
-       
-
         public string nombre_usuario { get; set; }
 
-        [Required]
-        [StringLength(100, ErrorMessage = "La contraseña no puede tener más de 100 caracteres")]
+        [Required, StringLength(100)]
         public string contrasena { get; set; }
 
-        [Required]
-        [StringLength(100, ErrorMessage = "El correo electrónico no puede tener más de 100 caracteres")]
+        [Required, StringLength(100)]
         public string email { get; set; }
 
         public bool estado { get; set; }
 
+        // Navegación
         public clsPersona persona { get; set; }
 
         public clsUsuario() { }
-
-       
     }
 }

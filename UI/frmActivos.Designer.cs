@@ -88,6 +88,7 @@
             gbxClientes.TabIndex = 5;
             gbxClientes.TabStop = false;
             gbxClientes.Text = "Datos Activos:";
+            
             // 
             // cbxCategorias
             // 
@@ -151,7 +152,7 @@
             btnEliminar.TabIndex = 36;
             btnEliminar.Text = "Eliminar";
             btnEliminar.UseVisualStyleBackColor = true;
-            btnEliminar.Click += btnEliminar_Click;
+            
             // 
             // btnGuardar
             // 
@@ -171,7 +172,7 @@
             btnCancelar.TabIndex = 37;
             btnCancelar.Text = "Cancelar";
             btnCancelar.UseVisualStyleBackColor = true;
-            btnCancelar.Click += btnCancelar_Click;
+          
             // 
             // txtfecha
             // 
@@ -262,7 +263,6 @@
             cbxEstadoUso.Name = "cbxEstadoUso";
             cbxEstadoUso.Size = new Size(180, 29);
             cbxEstadoUso.TabIndex = 16;
-            cbxEstadoUso.SelectedIndexChanged += cbxEstadoUso_SelectedIndexChanged;
             // 
             // lblFechaDesecho
             // 

@@ -57,5 +57,10 @@ namespace DAO
         {
             throw new NotImplementedException();
         }
+
+        public void eliminarActivo(int id, string observacionDesecho = null)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

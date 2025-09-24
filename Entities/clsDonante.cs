@@ -11,14 +11,14 @@ namespace Entities
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int idDonante { get; set; }
-        
+
         public string personaId { get; set; }
         public int personaTipoId { get; set; }
 
-       
+
         [Required]
         public bool estado { get; set; }
-        
+
         [Required]
         public DateTime fechaRegistro { get; set; }
 
@@ -28,9 +28,9 @@ namespace Entities
 
         public clsDonante() { }
 
-        
-       
 
-       
+
+
+
     }
 }

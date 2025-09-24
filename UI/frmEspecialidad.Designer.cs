@@ -30,7 +30,6 @@ namespace UI
         private void InitializeComponent()
         {
             gbxDatosEspecialidad = new GroupBox();
-            chkEstado = new CheckBox();
             txtDescripcion = new TextBox();
             lblDescripcion = new Label();
             txtNombre = new TextBox();
@@ -46,132 +45,143 @@ namespace UI
             // 
             // gbxDatosEspecialidad
             // 
-            gbxDatosEspecialidad.Controls.Add(chkEstado);
             gbxDatosEspecialidad.Controls.Add(txtDescripcion);
             gbxDatosEspecialidad.Controls.Add(lblDescripcion);
             gbxDatosEspecialidad.Controls.Add(txtNombre);
             gbxDatosEspecialidad.Controls.Add(lblNombre);
             gbxDatosEspecialidad.Controls.Add(txtId);
             gbxDatosEspecialidad.Controls.Add(lblId);
-            gbxDatosEspecialidad.Location = new Point(12, 50);
+            gbxDatosEspecialidad.Location = new Point(17, 83);
+            gbxDatosEspecialidad.Margin = new Padding(4, 5, 4, 5);
             gbxDatosEspecialidad.Name = "gbxDatosEspecialidad";
-            gbxDatosEspecialidad.Size = new Size(420, 220);
+            gbxDatosEspecialidad.Padding = new Padding(4, 5, 4, 5);
+            gbxDatosEspecialidad.Size = new Size(600, 367);
             gbxDatosEspecialidad.TabIndex = 0;
             gbxDatosEspecialidad.TabStop = false;
             gbxDatosEspecialidad.Text = "Datos de Especialidad Médica";
             // 
-            // chkEstado
-            // 
-            chkEstado.AutoSize = true;
-            chkEstado.Location = new Point(78, 170);
-            chkEstado.Name = "chkEstado";
-            chkEstado.Size = new Size(62, 19);
-            chkEstado.TabIndex = 6;
-            chkEstado.Text = "Activo";
-            chkEstado.UseVisualStyleBackColor = true;
-            // 
             // txtDescripcion
             // 
-            txtDescripcion.Location = new Point(78, 95);
+            txtDescripcion.Location = new Point(111, 158);
+            txtDescripcion.Margin = new Padding(4, 5, 4, 5);
             txtDescripcion.MaxLength = 250;
             txtDescripcion.Multiline = true;
             txtDescripcion.Name = "txtDescripcion";
-            txtDescripcion.Size = new Size(310, 60);
+            txtDescripcion.Size = new Size(441, 97);
             txtDescripcion.TabIndex = 3;
             // 
             // lblDescripcion
             // 
             lblDescripcion.AutoSize = true;
-            lblDescripcion.Location = new Point(6, 98);
+            lblDescripcion.Location = new Point(9, 163);
+            lblDescripcion.Margin = new Padding(4, 0, 4, 0);
             lblDescripcion.Name = "lblDescripcion";
-            lblDescripcion.Size = new Size(69, 15);
+            lblDescripcion.Size = new Size(108, 25);
             lblDescripcion.TabIndex = 4;
             lblDescripcion.Text = "Descripción:";
             // 
             // txtNombre
             // 
-            txtNombre.Location = new Point(78, 65);
+            txtNombre.Location = new Point(111, 108);
+            txtNombre.Margin = new Padding(4, 5, 4, 5);
             txtNombre.MaxLength = 100;
             txtNombre.Name = "txtNombre";
-            txtNombre.Size = new Size(310, 23);
+            txtNombre.Size = new Size(441, 31);
             txtNombre.TabIndex = 2;
             // 
             // lblNombre
             // 
             lblNombre.AutoSize = true;
-            lblNombre.Location = new Point(18, 68);
+            lblNombre.Location = new Point(26, 113);
+            lblNombre.Margin = new Padding(4, 0, 4, 0);
             lblNombre.Name = "lblNombre";
-            lblNombre.Size = new Size(54, 15);
+            lblNombre.Size = new Size(82, 25);
             lblNombre.TabIndex = 2;
             lblNombre.Text = "Nombre:";
             // 
             // txtId
             // 
-            txtId.Location = new Point(78, 36);
+            txtId.Location = new Point(111, 60);
+            txtId.Margin = new Padding(4, 5, 4, 5);
             txtId.Name = "txtId";
-            txtId.Size = new Size(125, 23);
+            txtId.Size = new Size(177, 31);
             txtId.TabIndex = 1;
             // 
             // lblId
             // 
             lblId.AutoSize = true;
-            lblId.Location = new Point(51, 39);
+            lblId.Location = new Point(73, 65);
+            lblId.Margin = new Padding(4, 0, 4, 0);
             lblId.Name = "lblId";
-            lblId.Size = new Size(21, 15);
+            lblId.Size = new Size(34, 25);
             lblId.TabIndex = 0;
             lblId.Text = "ID:";
             // 
             // lblTitulo
             // 
             lblTitulo.AutoSize = true;
-            lblTitulo.Font = new Font("Segoe UI", 15.75F, FontStyle.Bold, GraphicsUnit.Point);
-            lblTitulo.Location = new Point(100, 10);
+            lblTitulo.Font = new Font("Segoe UI", 15.75F, FontStyle.Bold);
+            lblTitulo.Location = new Point(128, 24);
+            lblTitulo.Margin = new Padding(4, 0, 4, 0);
             lblTitulo.Name = "lblTitulo";
-            lblTitulo.Size = new Size(249, 30);
+            lblTitulo.Size = new Size(411, 45);
             lblTitulo.TabIndex = 1;
             lblTitulo.Text = "Crear Especialidad Médica";
             // 
             // btnGuardar
             // 
-            btnGuardar.Location = new Point(190, 290);
+            btnGuardar.BackColor = Color.FromArgb(0, 192, 0);
+            btnGuardar.Font = new Font("Segoe UI Black", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btnGuardar.ForeColor = SystemColors.ControlLightLight;
+            btnGuardar.Location = new Point(271, 483);
+            btnGuardar.Margin = new Padding(4, 5, 4, 5);
             btnGuardar.Name = "btnGuardar";
-            btnGuardar.Size = new Size(113, 36);
+            btnGuardar.Size = new Size(161, 60);
             btnGuardar.TabIndex = 5;
             btnGuardar.Text = "Guardar";
-            btnGuardar.UseVisualStyleBackColor = true;
+            btnGuardar.UseVisualStyleBackColor = false;
             btnGuardar.Click += btnGuardar_Click;
             // 
             // btnCancelar
             // 
-            btnCancelar.Location = new Point(309, 290);
+            btnCancelar.BackColor = Color.FromArgb(255, 128, 0);
+            btnCancelar.Font = new Font("Segoe UI Black", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btnCancelar.ForeColor = SystemColors.ControlLightLight;
+            btnCancelar.Location = new Point(441, 483);
+            btnCancelar.Margin = new Padding(4, 5, 4, 5);
             btnCancelar.Name = "btnCancelar";
-            btnCancelar.Size = new Size(113, 36);
+            btnCancelar.Size = new Size(161, 60);
             btnCancelar.TabIndex = 6;
             btnCancelar.Text = "Cancelar";
-            btnCancelar.UseVisualStyleBackColor = true;
+            btnCancelar.UseVisualStyleBackColor = false;
             btnCancelar.Click += btnCancelar_Click;
             // 
             // btnEliminar
             // 
-            btnEliminar.Location = new Point(71, 290);
+            btnEliminar.BackColor = Color.Red;
+            btnEliminar.Font = new Font("Segoe UI Black", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btnEliminar.ForeColor = SystemColors.Control;
+            btnEliminar.Location = new Point(101, 483);
+            btnEliminar.Margin = new Padding(4, 5, 4, 5);
             btnEliminar.Name = "btnEliminar";
-            btnEliminar.Size = new Size(113, 36);
+            btnEliminar.Size = new Size(161, 60);
             btnEliminar.TabIndex = 7;
             btnEliminar.Text = "Eliminar";
-            btnEliminar.UseVisualStyleBackColor = true;
+            btnEliminar.UseVisualStyleBackColor = false;
             btnEliminar.Click += btnEliminar_Click;
             // 
-            // frmEspecialidades
+            // frmEspecialidad
             // 
-            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(450, 340);
+            ClientSize = new Size(643, 567);
             Controls.Add(btnEliminar);
             Controls.Add(btnCancelar);
             Controls.Add(btnGuardar);
             Controls.Add(lblTitulo);
             Controls.Add(gbxDatosEspecialidad);
-            Name = "frmEspecialidades";
+            Margin = new Padding(4, 5, 4, 5);
+            Name = "frmEspecialidad";
             Text = "Mantenimiento: Especialidades Médicas";
             Load += frmEspecialidades_Load;
             gbxDatosEspecialidad.ResumeLayout(false);
@@ -194,6 +204,5 @@ namespace UI
         private Label lblNombre;
         private TextBox txtId;
         private Label lblId;
-        private CheckBox chkEstado;
     }
 }
