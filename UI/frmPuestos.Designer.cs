@@ -37,11 +37,10 @@
             lblNombre = new Label();
             txtCodigo = new TextBox();
             lblCodigo = new Label();
-            btnActivar = new Button();
-            btnInactivar = new Button();
             btnCancelar = new Button();
             btnGuardar = new Button();
             lblTitulo = new Label();
+            btnEliminar = new Button();
             gbxDatosPuesto.SuspendLayout();
             SuspendLayout();
             // 
@@ -129,26 +128,6 @@
             lblCodigo.TabIndex = 0;
             lblCodigo.Text = "Codigo:";
             // 
-            // btnActivar
-            // 
-            btnActivar.Location = new Point(182, 312);
-            btnActivar.Name = "btnActivar";
-            btnActivar.Size = new Size(113, 36);
-            btnActivar.TabIndex = 24;
-            btnActivar.Text = "Activar";
-            btnActivar.UseVisualStyleBackColor = true;
-            btnActivar.Click += btnActivar_Click_1;
-            // 
-            // btnInactivar
-            // 
-            btnInactivar.Location = new Point(420, 37);
-            btnInactivar.Name = "btnInactivar";
-            btnInactivar.Size = new Size(113, 36);
-            btnInactivar.TabIndex = 23;
-            btnInactivar.Text = "Inactivar";
-            btnInactivar.UseVisualStyleBackColor = true;
-            btnInactivar.Click += btnInactivar_Click_1;
-            // 
             // btnCancelar
             // 
             btnCancelar.Location = new Point(420, 312);
@@ -180,14 +159,23 @@
             lblTitulo.Text = "Crear Puesto";
             lblTitulo.Click += lblTitulo_Click;
             // 
+            // btnEliminar
+            // 
+            btnEliminar.Location = new Point(182, 312);
+            btnEliminar.Name = "btnEliminar";
+            btnEliminar.Size = new Size(113, 36);
+            btnEliminar.TabIndex = 26;
+            btnEliminar.Text = "Elininar";
+            btnEliminar.UseVisualStyleBackColor = true;
+            btnEliminar.Click += btnEliminar_Click;
+            // 
             // frmPuestos
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(542, 360);
+            Controls.Add(btnEliminar);
             Controls.Add(lblTitulo);
-            Controls.Add(btnActivar);
-            Controls.Add(btnInactivar);
             Controls.Add(btnCancelar);
             Controls.Add(btnGuardar);
             Controls.Add(gbxDatosPuesto);
@@ -211,10 +199,9 @@
         private Label lblNombre;
         private TextBox txtCodigo;
         private Label lblCodigo;
-        private Button btnActivar;
-        private Button btnInactivar;
         private Button btnCancelar;
         private Button btnGuardar;
         private Label lblTitulo;
+        private Button btnEliminar;
     }
 }

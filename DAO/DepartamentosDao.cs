@@ -55,11 +55,17 @@ namespace DAO
 
         public void eliminar(int id)
         {
-            using var ctx = new dbContextINA();
-            var dep = ctx.departamentos.Find(id);
-            if (dep == null) return;
-            ctx.departamentos.Remove(dep);
-            ctx.SaveChanges();
+            var DeptoEliminar = consultarPorID(id);
+            if (DeptoEliminar != null)
+            {
+                DeptoEliminar.estado = false;
+                DeptoEliminar.usuario_ult_mod = "Admin";
+                DeptoEliminar.fecha_ult_mod = DateTime.Now;
+
+                using var ctxUpdate = new dbContextINA();
+                ctxUpdate.departamentos.Update(DeptoEliminar);
+                ctxUpdate.SaveChanges();
+            }
         }
 
         public void eliminar(string id)

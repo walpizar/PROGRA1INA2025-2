@@ -14,6 +14,7 @@ namespace Services
         private readonly DepartamentosDao _dao = new DepartamentosDao();
 
         private readonly PuestosDao _puestosDao = new PuestosDao();
+
         public clsDepartamentos consultarPorID(int id)
         {
             return _dao.consultarPorID(id);
@@ -26,100 +27,60 @@ namespace Services
 
         public List<clsDepartamentos> consultarTodos()
         {
-            return _dao.consultarTodos();
+            return _dao.consultarTodos().Where(d => d.estado).ToList(); // Solo activos
         }
 
         public void crear(clsDepartamentos d)
         {
-            ValidarCampos(d);
 
-            // Validar código personalizado (NO el ID autoincremental)
+            // Validar código funcional (NO el ID autoincremental)
             if (string.IsNullOrWhiteSpace(d.codigoDepartamento))
                 throw new Exception("El código del departamento es obligatorio.");
 
-            // Validación de código funcional único
+            // Validación de código funcional único (solo entre activos)
             var codigoDup = _dao.consultarTodos()
+                .Where(x => x.estado) // Solo validar entre activos
                 .Any(x => x.codigoDepartamento.Trim().ToUpper() == d.codigoDepartamento.Trim().ToUpper());
             if (codigoDup)
-                throw new Exception("Ya existe un departamento con ese código.");
+                throw new Exception("Ya existe un departamento activo con ese código.");
 
             if (string.IsNullOrWhiteSpace(d.Nombre))
                 throw new Exception("El nombre es obligatorio.");
 
-            // Validación de nombre único
+            // Validación de nombre único (solo entre activos)
             var nombreDup = _dao.consultarTodos()
+                .Where(x => x.estado) // Solo validar entre activos
                 .Any(x => x.Nombre.Trim().ToUpper() == d.Nombre.Trim().ToUpper());
             if (nombreDup)
-                throw new Exception("Ya existe un departamento con ese nombre.");
+                throw new Exception("Ya existe un departamento activo con ese nombre.");
 
             if (string.IsNullOrWhiteSpace(d.descripcionDepartamento))
                 throw new Exception("La descripcion del departamento es obligatoria");
 
-            d.fecha_crea = DateTime.Now;
+            d.fecha_crea = DateTime.UtcNow;
             d.usuario_crea = string.IsNullOrWhiteSpace(d.usuario_crea) ? "system" : d.usuario_crea;
 
             _dao.crear(d);
         }
 
-        public void eliminar(int id)
+        public void eliminar(int id, string motivo, string usuario)
         {
+            if (string.IsNullOrWhiteSpace(motivo))
+                throw new Exception("Debe ingresar un motivo de inactivación.");
+
             var dep = _dao.consultarPorID(id);
             if (dep == null) throw new Exception("El departamento no existe.");
 
-            bool tienePuestos = _puestosDao
+            // Verificar si tiene puestos activos asociados
+            bool tienePuestosActivos = _puestosDao
                 .consultarTodos()
-                .Any(p => p.idDepartamento == id);
+                .Any(p => p.idDepartamento == id && p.Estado);
 
-            if (tienePuestos)
-                throw new Exception("No se puede eliminar: el departamento tiene puestos asociados.");
+            if (tienePuestosActivos)
+                throw new Exception("No se puede inactivar: el departamento tiene puestos activos asociados.");
 
-            _dao.eliminar(id);
-        }
-
-        public void modificar(clsDepartamentos d)
-        {
-            ValidarCampos(d);
-
-            if (_dao.consultarPorID(d.idDepartamento) == null)
-                throw new Exception("El departamento no existe.");
-
-            if (string.IsNullOrWhiteSpace(d.codigoDepartamento))
-                throw new Exception("El código del departamento es obligatorio.");
-
-            if (string.IsNullOrWhiteSpace(d.Nombre))
-                throw new Exception("El nombre es obligatorio.");
-
-            if (string.IsNullOrWhiteSpace(d.descripcionDepartamento))
-                throw new Exception("La descripción del departamento es obligatoria.");
-
-            // Validación de código funcional único
-            var codigoDup = _dao.consultarTodos()
-                .Any(x => x.idDepartamento != d.idDepartamento &&
-                          x.codigoDepartamento.Trim().ToUpper() == d.codigoDepartamento.Trim().ToUpper());
-            if (codigoDup)
-                throw new Exception("Ya existe otro departamento con ese código.");
-
-            // Validación de nombre único
-            var nombreDup = _dao.consultarTodos()
-                .Any(x => x.idDepartamento != d.idDepartamento &&
-                          x.Nombre.Trim().ToUpper() == d.Nombre.Trim().ToUpper());
-            if (nombreDup)
-                throw new Exception("Ya existe otro departamento con ese nombre.");
-
-            d.fecha_ult_mod = DateTime.Now;
-            d.usuario_ult_mod = string.IsNullOrWhiteSpace(d.usuario_ult_mod) ? "system" : d.usuario_ult_mod;
-
-            _dao.modificar(d);
-        }
-
-        private static void ValidarCampos(clsDepartamentos d)
-        {
-            if (string.IsNullOrWhiteSpace(d.codigoDepartamento) || d.codigoDepartamento.Length > 20)
-                throw new Exception("Código es obligatorio y ≤ 20 caracteres.");
-            if (string.IsNullOrWhiteSpace(d.Nombre) || d.Nombre.Length > 100)
-                throw new Exception("Nombre es obligatorio y ≤ 100 caracteres.");
-            if (string.IsNullOrWhiteSpace(d.descripcionDepartamento) || d.descripcionDepartamento.Length > 250)
-                throw new Exception("Descripción es obligatoria y ≤ 250 caracteres.");
+            dep.Inactivar(motivo.Trim(), string.IsNullOrWhiteSpace(usuario) ? "system" : usuario);
+            _dao.modificar(dep);
         }
 
         public void eliminar(string id)
@@ -128,6 +89,16 @@ namespace Services
         }
 
         public clsDepartamentos consultarPorID(string id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void modificar(clsDepartamentos entidad)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void eliminar(int id)
         {
             throw new NotImplementedException();
         }

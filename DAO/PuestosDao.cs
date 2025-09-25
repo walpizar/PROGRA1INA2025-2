@@ -30,12 +30,12 @@ namespace DAO
 
         public List<clsPuestos> consultarTodos()
         {
-            using var ctx = new dbContextINA();
-            return ctx.puestos
-                      .AsNoTracking()
-                      .Include(p => p.Departamento)
-                      .Where(p => p.Nombre != null)
-                      .ToList();
+            using (var context = new dbContextINA())
+            {
+                return context.puestos
+                    .Where(p => p.Estado)
+                    .ToList();
+            }
         }
 
         public void crear(clsPuestos p)
@@ -99,4 +99,3 @@ namespace DAO
 }
 
    
-    

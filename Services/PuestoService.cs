@@ -60,16 +60,16 @@ namespace Services
             p.fecha_crea = DateTime.UtcNow;
             p.usuario_crea = string.IsNullOrWhiteSpace(p.usuario_crea) ? "system" : p.usuario_crea;
 
+            // Asegurar que motivoInactivo tenga un valor válido para puestos activos
+            if (p.Estado && string.IsNullOrEmpty(p.motivoInactivo))
+            {
+                p.motivoInactivo = ""; // o NULL si la base permite
+            }
+
             _dao.crear(p);
         }
 
-        public void eliminar(int id)
-        {
-            if (_dao.consultarPorID(id) == null)
-                throw new Exception("El puesto no existe");
-        }
-
-        public void inactivar(int id, string motivo, string usuario)
+        public void eliminar(int id, string motivo, string usuario)
         {
             if (string.IsNullOrWhiteSpace(motivo))
                 throw new Exception("Debe ingresar un motivo de inactivación.");
@@ -87,20 +87,38 @@ namespace Services
             _dao.modificar(p);
         }
 
-        public void reactivar(int id, string usuario)
-        {
-            var p = _dao.consultarPorID(id);
-            if (p == null) throw new Exception("El puesto no existe.");
-            if (p.Estado) throw new Exception("El puesto ya está activo.");
+        //public void inactivar(int id, string motivo, string usuario)
+        //{
+        //    if (string.IsNullOrWhiteSpace(motivo))
+        //        throw new Exception("Debe ingresar un motivo de inactivación.");
 
-            p.Reactivar(string.IsNullOrWhiteSpace(usuario) ? "system" : usuario);
+        //    var p = _dao.consultarPorID(id);
+        //    if (p == null) throw new Exception("El puesto no existe.");
+        //    if (!p.Estado) throw new Exception("El puesto ya está inactivo.");
 
-            p.motivoInactivo = "";
-            p.fecha_ult_mod = DateTime.Now;
-            p.usuario_ult_mod = string.IsNullOrWhiteSpace(usuario) ? "system" : usuario;
+        //    p.Inactivar(motivo.Trim(), string.IsNullOrWhiteSpace(usuario) ? "system" : usuario);
 
-            _dao.modificar(p);
-        }
+        //    // auditoría
+        //    p.fecha_ult_mod = DateTime.Now;
+        //    p.usuario_ult_mod = string.IsNullOrWhiteSpace(usuario) ? "system" : usuario;
+
+        //    _dao.modificar(p);
+        //}
+
+        //public void reactivar(int id, string usuario)
+        //{
+        //    var p = _dao.consultarPorID(id);
+        //    if (p == null) throw new Exception("El puesto no existe.");
+        //    if (p.Estado) throw new Exception("El puesto ya está activo.");
+
+        //    p.Reactivar(string.IsNullOrWhiteSpace(usuario) ? "system" : usuario);
+
+        //    p.motivoInactivo = "";
+        //    p.fecha_ult_mod = DateTime.Now;
+        //    p.usuario_ult_mod = string.IsNullOrWhiteSpace(usuario) ? "system" : usuario;
+
+        //    _dao.modificar(p);
+        //}
 
         public void modificar(clsPuestos p)
         {
@@ -115,14 +133,14 @@ namespace Services
             if (string.IsNullOrWhiteSpace(p.Nombre))
                 throw new Exception("El nombre es obligatorio");
 
-            // Validación de código único
+            // Validación de código único (excluyendo el actual)
             var codigoDup = _dao.consultarTodos()
                     .Any(x => x.idPuesto != p.idPuesto &&
                               x.codigo.Trim().ToUpper() == p.codigo.Trim().ToUpper());
             if (codigoDup)
                 throw new Exception("Ya existe un puesto con ese código.");
 
-            // Validar nombre único en el mismo departamento (solo activos)
+            // Validar nombre único en el mismo departamento (solo activos, excluyendo el actual)
             if (p.Estado)
             {
                 var nombreDup = _dao.consultarTodos()
@@ -134,7 +152,7 @@ namespace Services
                     throw new Exception("Ya existe un puesto ACTIVO con ese nombre en este departamento.");
             }
 
-            p.fecha_ult_mod = DateTime.Now;
+            p.fecha_ult_mod = DateTime.UtcNow;
             p.usuario_ult_mod = string.IsNullOrWhiteSpace(p.usuario_ult_mod) ? "system" : p.usuario_ult_mod;
 
             _dao.modificar(p);
@@ -159,6 +177,11 @@ namespace Services
         }
 
         public clsPuestos consultarPorID(string id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void eliminar(int id)
         {
             throw new NotImplementedException();
         }

@@ -5,17 +5,16 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Entities
-{ 
+{
     [Table("tbDepartamento")]
     public class clsDepartamentos
     {
         [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)] // Explicitly set as IDENTITY
         public int idDepartamento { get; set; }
 
         [Required]
@@ -35,6 +34,11 @@ namespace Entities
 
         [Required]
         public bool estado { get; set; } = true;
+
+        // Campo para borrado lógico
+        [StringLength(300, ErrorMessage = "El motivo de inactivación no puede tener más de 300 caracteres")]
+        [Column(TypeName = "NVARCHAR(300)")]
+        public string? motivoInactivacion { get; set; } = null;
 
         // Auditoría
         [Required]
@@ -72,6 +76,23 @@ namespace Entities
         public override string ToString()
         {
             return $"{codigoDepartamento} - {Nombre}";
+        }
+
+        // Métodos para borrado lógico
+        public void Inactivar(string motivo, string usuario)
+        {
+            this.estado = false;
+            this.motivoInactivacion = motivo;
+            this.usuario_ult_mod = usuario;
+            this.fecha_ult_mod = DateTime.UtcNow;
+        }
+
+        public void Reactivar(string usuario)
+        {
+            this.estado = true;
+            this.motivoInactivacion = null;
+            this.usuario_ult_mod = usuario;
+            this.fecha_ult_mod = DateTime.UtcNow;
         }
     }
 }

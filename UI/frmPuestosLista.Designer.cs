@@ -35,7 +35,6 @@
             ColId = new ColumnHeader();
             ColNombre = new ColumnHeader();
             ColDescripción = new ColumnHeader();
-            colEstado = new ColumnHeader();
             btnNuevo = new Button();
             lblTitulo = new Label();
             gbxListaPuesto.SuspendLayout();
@@ -72,7 +71,7 @@
             // 
             // lstvListaPuestos
             // 
-            lstvListaPuestos.Columns.AddRange(new ColumnHeader[] { ColId, ColNombre, ColDescripción, colEstado });
+            lstvListaPuestos.Columns.AddRange(new ColumnHeader[] { ColId, ColNombre, ColDescripción });
             lstvListaPuestos.FullRowSelect = true;
             lstvListaPuestos.GridLines = true;
             lstvListaPuestos.Location = new Point(26, 84);
@@ -97,12 +96,7 @@
             // ColDescripción
             // 
             ColDescripción.Text = "Descripción";
-            ColDescripción.Width = 300;
-            // 
-            // colEstado
-            // 
-            colEstado.Text = "Estado";
-            colEstado.Width = 87;
+            ColDescripción.Width = 387;
             // 
             // btnNuevo
             // 
@@ -151,7 +145,6 @@
         private ColumnHeader ColId;
         private ColumnHeader ColNombre;
         private ColumnHeader ColDescripción;
-        private ColumnHeader colEstado;
         private Button btnNuevo;
         private Label lblTitulo;
     }

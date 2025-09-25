@@ -9,7 +9,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace UI
 {
@@ -25,20 +24,33 @@ namespace UI
 
         private void frmPuestosLista_Load(object sender, EventArgs e)
         {
+            // Configuración del ListView
             lstvListaPuestos.View = View.Details;
             lstvListaPuestos.FullRowSelect = true;
             lstvListaPuestos.GridLines = true;
-            lstvListaPuestos.HideSelection = false;
+            lstvListaPuestos.HideSelection = false; // Mantiene selección visible
+
+            if (lstvListaPuestos.Columns.Count == 0)
+            {
+                lstvListaPuestos.Columns.Add("Código", 110);
+                lstvListaPuestos.Columns.Add("Nombre", 200);
+                lstvListaPuestos.Columns.Add("Descripción", 220);
+                lstvListaPuestos.Columns.Add("Departamento", 180);
+                // Eliminada columna de Estado
+            }
 
             CargarPuestos();
 
+            // Asegurar que el evento esté conectado
+            lstvListaPuestos.MouseDoubleClick -= lstvListaPuestos_MouseDoubleClick_1;
+            lstvListaPuestos.MouseDoubleClick += lstvListaPuestos_MouseDoubleClick_1;
         }
 
         private void CargarPuestos()
         {
             try
             {
-                _cache = _svc.consultarTodos();
+                _cache = _svc.consultarTodos(); // CORREGIDO: Sin asteriscos
                 RefrescarListView(_cache);
             }
             catch (Exception ex)
@@ -59,8 +71,8 @@ namespace UI
                 item.SubItems.Add(p.descripcion ?? "");
                 item.SubItems.Add(p.Estado ? "ACTIVO" : "INACTIVO");
                 item.SubItems.Add(p.Departamento?.Nombre ?? "Sin departamento");
-                // Guardamos el ID para referencia
-                item.Tag = p.idPuesto;
+
+                item.Tag = p.idPuesto; // Guardamos el ID para referencia
 
                 // Cambiar color para puestos inactivos
                 if (!p.Estado)
@@ -79,12 +91,12 @@ namespace UI
         private void btnNuevo_Click_1(object sender, EventArgs e)
         {
             try
-            {// Crear nuevo puesto
-                using (var frm = new frmPuestos())
+            {
+                using (var frm = new frmPuestos()) // Crear nuevo puesto
                 {
                     if (frm.ShowDialog(this) == DialogResult.OK)
                     {
-                        CargarPuestos();
+                        CargarPuestos(); // Refrescar lista después de crear
                     }
                 }
             }
@@ -132,12 +144,11 @@ namespace UI
 
                 int puestoId = Convert.ToInt32(lstvListaPuestos.SelectedItems[0].Tag);
 
-                // Editar puesto existente
-                using (var frm = new frmPuestos(puestoId))
+                using (var frm = new frmPuestos(puestoId)) // Editar puesto existente
                 {
                     if (frm.ShowDialog(this) == DialogResult.OK)
                     {
-                        CargarPuestos();
+                        CargarPuestos(); // Refrescar lista después de editar
                     }
                 }
             }

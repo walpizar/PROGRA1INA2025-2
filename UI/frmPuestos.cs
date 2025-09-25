@@ -45,8 +45,7 @@ namespace UI
                     lbl.Text = "Crear Puesto";
 
                 btnGuardar.Text = "Crear";
-                btnInactivar.Visible = false;
-                btnActivar.Visible = false;
+                btnEliminar.Visible = false;
 
                 // Campo código habilitado
                 txtCodigo.Text = "";
@@ -64,8 +63,8 @@ namespace UI
                     lbl.Text = "Modificar Puesto";
 
                 btnGuardar.Text = "Guardar cambios";
-                btnInactivar.Visible = _puesto.Estado;
-                btnActivar.Visible = !_puesto.Estado;
+                btnEliminar.Visible = _puesto.Estado;
+
 
                 // Mostrar código funcional y permitir editarlo
                 txtCodigo.Text = _puesto.codigo;
@@ -128,7 +127,19 @@ namespace UI
             this.Close();
         }
 
-        private void btnInactivar_Click_1(object sender, EventArgs e)
+
+
+        private void txtCodigo_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void lblTitulo_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnEliminar_Click(object sender, EventArgs e)
         {
             while (true)
             {
@@ -149,52 +160,18 @@ namespace UI
 
                 try
                 {
-                    _svc.inactivar(_puesto.idPuesto, motivo, "admin");
-                    MessageBox.Show("Puesto inactivado.");
+                    _svc.eliminar(_puesto.idPuesto, motivo, "admin");
+                    MessageBox.Show("Puesto eliminado.");
                     DialogResult = DialogResult.OK; // refresca lista
                     Close();
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show(ex.Message, "No se pudo inactivar",
+                    MessageBox.Show(ex.Message, "No se pudo eliminar",
                         MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 }
                 return;
             }
-        }
-
-        private void btnActivar_Click_1(object sender, EventArgs e)
-        {
-            try
-            {
-                // si ya está activo, no tiene sentido
-                if (_puesto != null && _puesto.Estado)
-                {
-                    MessageBox.Show("El puesto ya está activo.");
-                    return;
-                }
-
-                _svc.reactivar(_puesto.idPuesto, "admin");
-
-                MessageBox.Show("Puesto reactivado.");
-                DialogResult = DialogResult.OK;
-                Close();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message, "No se pudo reactivar",
-                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
-            }
-        }
-
-        private void txtCodigo_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void lblTitulo_Click(object sender, EventArgs e)
-        {
-
         }
     }
 }

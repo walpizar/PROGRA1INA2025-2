@@ -1,4 +1,5 @@
-﻿using Entities;
+﻿using DAO;
+using Entities;
 using Services;
 using System;
 using System.Collections.Generic;
@@ -113,28 +114,36 @@ namespace UI
 
         private void btnEliminar_Click_1(object sender, EventArgs e)
         {
-            if (_dep == null) return;
-
-            var r = MessageBox.Show(
-                $"¿Seguro que desea eliminar el departamento \"{_dep.codigoDepartamento} - {_dep.Nombre}\"?\n" +
-                "Esta acción no se puede deshacer.",
-                "Confirmar eliminación",
-                MessageBoxButtons.YesNo,
-                MessageBoxIcon.Warning);
-
-            if (r != DialogResult.Yes) return;
-
-            try
+            while (true)
             {
-                _svc.eliminar(_dep.idDepartamento);
-                MessageBox.Show("Departamento eliminado.");
-                this.DialogResult = DialogResult.OK;
-                this.Close();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message, "No se pudo eliminar",
-                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                var motivo = Microsoft.VisualBasic.Interaction.InputBox(
+                    "Motivo de inactivación (obligatorio):",
+                    "Inactivar puesto",
+                    "");
+
+                // Si se toca cancelar, motivo será "" o null
+                if (motivo == null) return;
+                motivo = motivo.Trim();
+
+                if (motivo == "")
+                {
+                    // Si el usuario cancela, motivo es "" y debe salir
+                    return;
+                }
+
+                try
+                {
+                    _svc.eliminar(_dep.idDepartamento, motivo, "admin");
+                    MessageBox.Show("Departamento eliminado.");
+                    DialogResult = DialogResult.OK; // refresca lista
+                    Close();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message, "No se pudo eliminar",
+                        MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
+                return;
             }
         }
     }
