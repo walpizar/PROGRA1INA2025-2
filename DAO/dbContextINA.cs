@@ -6,6 +6,7 @@ namespace DAO
     public class dbContextINA : DbContext
     {
         // Entidades mapeadas
+        // Entidades mapeadas
         public DbSet<clsPersona> persona { get; set; }
         public DbSet<clsActivos> activos { get; set; }
         public DbSet<clsCategoriaActivos> categoriasActivos { get; set; }
@@ -25,9 +26,11 @@ namespace DAO
         //public DbSet<clsDonacion> donacion { get; set; }
         public DbSet<clsCategoriaActivos> categoriaActivos { get; set; }
 
+
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             if (!optionsBuilder.IsConfigured)
+            // 🔹 Conexión a SQL Express con autenticación de Windows
             {
                 optionsBuilder.UseSqlServer(
                     @"Server=.\SQLEXPRESS01;Database=dbPaleativoGarabito;Trusted_Connection=True;MultipleActiveResultSets=True;TrustServerCertificate=True;");
@@ -37,6 +40,8 @@ namespace DAO
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
+
+
 
             // Clave primaria compuesta para Persona
             modelBuilder.Entity<clsPersona>()
@@ -50,12 +55,13 @@ namespace DAO
 
             // Usuario 1 a 1 con Persona
             modelBuilder.Entity<clsUsuario>()
-                .HasKey(u => new { u.personaId, u.personaTipoId });
+                //Define la clave primaria compuesta para clsUsuario
+                .HasKey(u => new { u.id, u.tipoId});
 
             modelBuilder.Entity<clsUsuario>()
                 .HasOne(u => u.persona)//Establece la relación de 1 a 1(un usuario tiene una persona)
                 .WithOne()
-                .HasForeignKey<clsUsuario>(u => new { u.personaId, u.personaTipoId })
+                .HasForeignKey<clsUsuario>(u => new { u.id,u.tipoId })
                 .HasPrincipalKey<clsPersona>(p => new { p.id, p.tipoId });
 
             // Medico
