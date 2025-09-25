@@ -173,15 +173,19 @@ namespace UI
                             idCategoria = (int)cbxCategorias.SelectedValue,
                             estadoUso = cbxEstadoUso.SelectedIndex,
                             Estado = true, // Establecer explícitamente a true
-                            fechaCreacion = DateTime.Now, // Asegúrate de que esto se establezca
-                            usuarioCreacion = "sistema",
-                            observacionDesecho = null
+                            fechaCreacion = DateTime.Now,
+                            usuarioCreacion = "sistema"
                         };
 
                         if (cbxEstadoUso.SelectedIndex == 2) // Desechado
                         {
                             activo.fechaDesecho = dtpFechaDesecho.Value;
-                            activo.observacionDesecho = string.IsNullOrWhiteSpace(txtObservacionDesecho.Text) ? null : txtObservacionDesecho.Text;
+                            activo.observacionDesecho = string.IsNullOrWhiteSpace(txtObservacionDesecho.Text) ? "No aplica" : txtObservacionDesecho.Text;
+                        }
+                        else
+                        {
+                            activo.fechaDesecho = DateTime.MinValue;
+                            activo.observacionDesecho = "No aplica";
                         }
 
                         using (var service = new ActivosServices())
@@ -216,12 +220,12 @@ namespace UI
                         if (activo.estadoUso == 2) // Desechado
                         {
                             activo.fechaDesecho = dtpFechaDesecho.Value;
-                            activo.observacionDesecho = string.IsNullOrWhiteSpace(txtObservacionDesecho.Text) ? null : txtObservacionDesecho.Text;
+                            activo.observacionDesecho = string.IsNullOrWhiteSpace(txtObservacionDesecho.Text) ? "No aplica" : txtObservacionDesecho.Text;
                         }
                         else
                         {
-                            activo.fechaDesecho = null;
-                            activo.observacionDesecho = null;
+                            activo.fechaDesecho = DateTime.MinValue;
+                            activo.observacionDesecho = "No aplica";
                         }
 
                         using (var service = new ActivosServices())
@@ -242,6 +246,7 @@ namespace UI
                 MessageBox.Show($"Error al guardar: {ex.Message}\n\nDetalles: {ex.InnerException?.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+
 
         private bool validarDatos()
         {
