@@ -30,6 +30,7 @@ namespace UI
                 pnlMenuPrincipal.Width = 70;
                 ptbLogo.Size = new Size(50, 50);
                 ptbLogo.Location = new Point(12, 19);
+                panelSubmenuActivos.Visible = false;
 
             }
             else
@@ -38,6 +39,7 @@ namespace UI
                 ptbLogo.Size = new Size(250, 158);
                 ptbLogo.Location = new Point(0, 12);
             }
+            pnlContiene.BackColor = Color.White;
 
         }
 
@@ -85,27 +87,77 @@ namespace UI
 
         }
 
+        private void panelSubMenu_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void btnAyuda_Click(object sender, EventArgs e)
+        {
+            panelSubMenu.Visible = true;
+            panelSubmenuActivos.Visible = false;
+
+        }
+
+        private void btnTipoAyuda_Click(object sender, EventArgs e)
+        {
+            panelSubMenu.Visible = false;
+        }
+
+        private void btnFormularioAyuda_Click(object sender, EventArgs e)
+        {
+            panelSubMenu.Visible = false;
+        }
+
         private void bntActivos_Click(object sender, EventArgs e)
         {
+            panelSubMenu.Visible = false;
+            panelSubmenuActivos.Visible = true;
+
+
+
+            if (pnlMenuPrincipal.Width != 250)
+            {
+                panelSubmenuActivos.Visible = false;
+                pnlContiene.BackColor = Color.White;
+
+            }
+            else
+            {
+                pnlContiene.BackColor = Color.Gainsboro;
+
+            }
 
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void button2_Click(object sender, EventArgs e)
+        {
+            panelSubmenuActivos.Visible = false;
+            pnlContiene.BackColor = Color.White;
+        }
+
+        private void btnDevolucion_Click(object sender, EventArgs e)
+        {
+            panelSubmenuActivos.Visible = false;
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            panelSubmenuActivos.Visible = false;
+        }
+
+        private void frmMenuVertical_Load_1(object sender, EventArgs e)
         {
 
         }
 
-        private void panel2_Paint(object sender, PaintEventArgs e)
+        private void horaFecha_Tick(object sender, EventArgs e)
         {
-
+            lblHora.Text = DateTime.Now.ToString("hh:mm:ss");
+            lblFecha.Text = DateTime.Now.ToShortDateString();
         }
 
-        private void ptbLogo_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void panel4_Paint(object sender, PaintEventArgs e)
+        private void fileSystemWatcher1_Changed(object sender, FileSystemEventArgs e)
         {
 
         }

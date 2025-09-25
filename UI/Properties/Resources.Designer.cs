@@ -63,6 +63,26 @@ namespace UI.Properties {
         /// <summary>
         ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap icons8_análisis_sitio_web_50 {
+            get {
+                object obj = ResourceManager.GetObject("icons8-análisis-sitio-web-50", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap icons8_apagar_26 {
+            get {
+                object obj = ResourceManager.GetObject("icons8-apagar-26", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap icons8_eliminar_50 {
             get {
                 object obj = ResourceManager.GetObject("icons8-eliminar-50", resourceCulture);
@@ -76,6 +96,16 @@ namespace UI.Properties {
         internal static System.Drawing.Bitmap icons8_menu_50 {
             get {
                 object obj = ResourceManager.GetObject("icons8-menu-50", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap icons8_panel_de_control_64 {
+            get {
+                object obj = ResourceManager.GetObject("icons8-panel-de-control-64", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
