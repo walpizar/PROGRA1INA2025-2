@@ -73,7 +73,7 @@ namespace UI
 
         private void btnAsiganar_Click(object sender, EventArgs e)
         {
-            try
+            try { 
 
             // Aquí llamo a mi método de validación porque prefiero que todo pase por ahí.
             // Si todo está bien, muestro un mensaje de éxito que me da cierta satisfacción.

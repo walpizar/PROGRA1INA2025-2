@@ -93,7 +93,7 @@
             combMedico.Name = "combMedico";
             combMedico.Size = new Size(359, 33);
             combMedico.TabIndex = 2;
-            combMedico.SelectedIndexChanged += combMedico_SelectedIndexChanged;
+            
             // 
             // label3
             // 
