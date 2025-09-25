@@ -96,7 +96,11 @@ using System.Windows.Forms;
 
                     //consulto el producto por id a la _listaUsuarios    
 
+<<<<<<< HEAD
                     clsProducto producto = _listaUsuarios.Where(p => p.id == id).SingleOrDefault();
+=======
+                    clsProducto producto = lista.Where(p => p.id.Equals(id)).SingleOrDefault();
+>>>>>>> 12b8aef8e1a45169e765f6fe9b12c66e91c9845e
 
                     if (producto != null)
                     {

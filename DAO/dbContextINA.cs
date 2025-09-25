@@ -21,10 +21,10 @@ namespace DAO
         public DbSet<clsRolPermiso> rolPermiso { get; set; }
         public DbSet<clsUsuario> usuario { get; set; }
         public DbSet<clsModulo> modulos { get; set; }
+        public DbSet<clsPaciente> paciente { get; set; }
         //public DbSet<clsDonante> donante { get; set; }
         //public DbSet<clsDonacion> donacion { get; set; }
         public DbSet<clsCategoriaActivos> categoriaActivos { get; set; }
-
 
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -40,13 +40,12 @@ namespace DAO
         {
             base.OnModelCreating(modelBuilder);
 
-            // Clave primaria compuesta para Persona
-            modelBuilder.Entity<clsPersona>()
-                .HasKey(p => new { p.id, p.tipoId });
+
 
             // Clave primaria compuesta para Persona
             modelBuilder.Entity<clsPersona>()
                 .HasKey(p => new { p.id, p.tipoId });
+           
             modelBuilder.Entity<clsPersona>().Property(p => p.id)
                 .IsRequired().HasMaxLength(20).ValueGeneratedNever();
 
@@ -62,22 +61,47 @@ namespace DAO
 
             // Medico
             modelBuilder.Entity<clsMedico>().HasKey(m => new { m.id, m.tipoId });
-
-            modelBuilder.Entity<clsMedico>().Property(m => new { m.id, m.tipoId })
-                 .IsRequired()
-                .HasMaxLength(20)
+            modelBuilder.Entity<clsMedico>().Property(m => m.id)
+                .IsRequired()
+                .HasMaxLength(20)        // use esto solo si 'id' es string
                 .ValueGeneratedNever();
+
+            modelBuilder.Entity<clsMedico>().Property(m => m.tipoId)
+                .IsRequired()
+                .ValueGeneratedNever();  // no ponga HasMaxLength si 'tipoId' es int
 
 
             modelBuilder.Entity<clsMedico>()
                 .HasOne(m => m.persona)
                 .WithOne()
                 .HasForeignKey<clsMedico>(m => new { m.id, m.tipoId })
-                .OnDelete(DeleteBehavior.Restrict);
+                .OnDelete(DeleteBehavior.Restrict); // Evita el borrado en cascada
 
-            // Enfermero
-            modelBuilder.Entity<clsEnfermero>()
-                .HasKey(e => new { e.id, e.tipoId });
+
+            /*------------------------------------------------------------*/
+            //clsPaciente configuracion de llave primaria compuesta
+            modelBuilder.Entity<clsPaciente>().HasKey(p => new { p.id, p.tipoId });
+
+            //configuro las propiedades de la llave primaria compuesta para id
+            modelBuilder.Entity<clsPaciente>().Property(p => p.id)
+                .IsRequired()//obligatorio
+                .HasMaxLength(20)//longitud maxima
+                .ValueGeneratedNever();//no se genera automaticamente
+
+            //configuro las propiedades de la llave primaria compuesta para tipoId
+            modelBuilder.Entity<clsPaciente>().Property(p => p.tipoId)
+                .IsRequired()
+                .ValueGeneratedNever();
+
+            //relacion 1 a 1 entre paciente y persona
+            modelBuilder.Entity<clsPaciente>()
+                .HasOne(p => p.persona)//navegacion desde paciente a persona
+                .WithOne(per => per.paciente)//relacion 1 a 1 con persona
+                .HasForeignKey<clsPaciente>(p => new { p.id, p.tipoId })//FK en paciente
+                .HasPrincipalKey<clsPersona>(per => new { per.id, per.tipoId })//PK en persona que es la misma que la FK en paciente
+                .OnDelete(DeleteBehavior.Restrict); // Evita el borrado en cascada
+            /*------------------------------------------------------------*/
+
 
             // RolPermiso
 
