@@ -304,11 +304,12 @@ namespace UI
         //cargar los combos
         private void cargarCombos()
         {
+
             //Creamos la lista y cargamos el combo de los responsables
             List<clsUsuario> listaCat = _usuarioService.consultarTodos();
             cboResponsable.DataSource = listaCat;
-            cboResponsable.DisplayMember = "id";
-            cboResponsable.ValueMember = "id";
+            cboResponsable.DisplayMember = "personaId";
+            cboResponsable.ValueMember = "personaId";
         }
 
         //Metodo para el evento click del boton cancelar

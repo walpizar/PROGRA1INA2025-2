@@ -19,7 +19,7 @@ namespace DAO
         public DbSet<clsRol> rol { get; set; }
         public DbSet<clsRolPermiso> rolPermiso { get; set; }
         public DbSet<clsUsuario> usuario { get; set; }
-        public DbSet<clsModulo> modulos { get; set; }
+        //public DbSet<clsModulo> modulos { get; set; }
         public DbSet<clsPaciente> paciente { get; set; }
     
         public DbSet<clsCategoriaActivos> categoriaActivos { get; set; }
@@ -32,8 +32,8 @@ namespace DAO
             if (!optionsBuilder.IsConfigured)
             // 🔹 Conexión a SQL Express con autenticación de Windows
             {
-                optionsBuilder.UseSqlServer(
-                    @"Server=localhost\sqlexpress;Database=dbINA;Trusted_Connection=True;MultipleActiveResultSets=True;TrustServerCertificate=True;");
+                optionsBuilder.UseSqlServer(@"Server=localhost;Database=dbINA;Trusted_Connection=True;MultipleActiveResultSets=True;TrustServerCertificate=True;"
+);
             }
         }
 
@@ -116,6 +116,19 @@ namespace DAO
 
             modelBuilder.Entity<clsTiposAyudas>()
                 .HasKey(t => t.id_tipoAyuda);
+
+            modelBuilder.Entity<clsPersona>()
+            .HasKey(p => new { p.id, p.tipoId });
+
+            modelBuilder.Entity<clsPaciente>()
+                .HasOne(p => p.persona)
+                .WithOne(p => p.paciente)
+                .HasForeignKey<clsPaciente>(p => new { p.id, p.tipoId });
+
+            modelBuilder.Entity<clsActivos>()
+            .Property(a => a.costoUnitario)
+            .HasPrecision(18, 2);
+
         }
     }
 }

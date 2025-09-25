@@ -38,7 +38,7 @@ namespace UI
 
         
 
-        Application.Run(new frmTipoAyuda());
+        Application.Run(new frmListaTipoAyudas());
 
 
         }
