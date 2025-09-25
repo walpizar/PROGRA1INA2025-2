@@ -172,7 +172,7 @@ namespace UI
                             ubicacion = txtUbicacion.Text,
                             idCategoria = (int)cbxCategorias.SelectedValue,
                             estadoUso = cbxEstadoUso.SelectedIndex,
-                            estado = true, // Establecer explícitamente a true
+                            Estado = true, // Establecer explícitamente a true
                             fechaCreacion = DateTime.Now, // Asegúrate de que esto se establezca
                             usuarioCreacion = "sistema",
                             observacionDesecho = null
@@ -189,7 +189,6 @@ namespace UI
                             activo.usuarioModificacion = "usuario";
                             activo.fechaModificacion = DateTime.Now;
                             service.crear(activo);
-
                         }
                         MessageBox.Show("Activo creado correctamente");
                         this.DialogResult = DialogResult.OK;
@@ -230,7 +229,6 @@ namespace UI
                             activo.usuarioModificacion = "usuario";
                             activo.fechaModificacion = DateTime.Now;
                             service.modificar(activo);
-
                         }
                         MessageBox.Show("Activo modificado correctamente");
                         this.DialogResult = DialogResult.OK;
@@ -288,20 +286,12 @@ namespace UI
             return true;
         }
 
-
-
-        
-
-
-
         private void gbxClientes_Enter(object sender, EventArgs e)
         {
-
         }
 
         private void gbxClientes_Enter_1(object sender, EventArgs e)
         {
-
         }
 
         private void btnEliminar_Click_1(object sender, EventArgs e)
@@ -315,7 +305,7 @@ namespace UI
                 {
                     try
                     {
-                        _activoService.eliminarLogico(activosSelected.idActivo);
+                        _activoService.DarDeBajaActivo(activosSelected.idActivo);
                         MessageBox.Show("Activo eliminado correctamente");
                         this.DialogResult = DialogResult.OK;
                         this.Close();

@@ -9,7 +9,7 @@ namespace Entities
     public class clsActivos
     {
         [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)] // Cambiado a Identity para autogeneración
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)] // Autogeneración del ID
         public int idActivo { get; set; }
 
         [Required]
@@ -20,11 +20,12 @@ namespace Entities
         public string descripcion { get; set; }
 
         [Required]
-        public bool estado { get; set; }
+        public bool Estado { get; set; } // true = Activo, false = Dado de baja
 
         [Required]
         public int estadoUso { get; set; }
 
+        [Required]
         [Column(TypeName = "date")]
         public DateTime fechaAdquisicion { get; set; }
 
@@ -34,6 +35,7 @@ namespace Entities
         [StringLength(100, ErrorMessage = "La ubicación no puede tener más de 100 caracteres")]
         public string ubicacion { get; set; }
 
+        [Required]
         [Column(TypeName = "datetime")]
         public DateTime fechaCreacion { get; set; }
 
@@ -46,16 +48,17 @@ namespace Entities
         [StringLength(50, ErrorMessage = "El usuario de modificación no puede tener más de 50 caracteres")]
         public string usuarioModificacion { get; set; }
 
+        // 🔹 Relación con categoría
         [Required]
-       
         public int idCategoria { get; set; }
 
         [ForeignKey("idCategoria")]
         public clsCategoriaActivos categoria { get; set; }
 
-        public List<clsDevolucion> devoluciones { get; set; }
+        // 🔹 Relación con devoluciones
+        public List<clsDevolucion> devoluciones { get; set; } = new List<clsDevolucion>();
 
-        // Solo pueden ser nulos si estadoUso == 2
+        // Solo pueden ser nulos si estadoUso == 2 (Desechado)
         [Column(TypeName = "date")]
         public DateTime? fechaDesecho { get; set; }
 
@@ -64,14 +67,16 @@ namespace Entities
 
         public clsActivos()
         {
-            this.devoluciones = new List<clsDevolucion>();
             this.fechaCreacion = DateTime.Now;
             // Inicializar campos de desecho como null
             this.fechaDesecho = null;
             this.observacionDesecho = null;
         }
 
-        // Validación para asegurar que solo sean nulos si estadoUso == 2
+        /// <summary>
+        /// Validación para asegurar que solo se registren datos de desecho
+        /// si el activo está en estado de uso == 2 (Desechado).
+        /// </summary>
         public void ValidarDesecho()
         {
             if (estadoUso != 2)
@@ -79,7 +84,6 @@ namespace Entities
                 fechaDesecho = null;
                 observacionDesecho = null;
             }
-            // Si estadoUso == 2 y los campos están vacíos, se mantienen como null
         }
     }
 }
