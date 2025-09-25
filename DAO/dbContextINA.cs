@@ -41,7 +41,7 @@ namespace DAO
             {
                 // 🔹 Conexión a SQL Express con autenticación de Windows
                 optionsBuilder.UseSqlServer(
-                    @"Server=.;Database=dbPaleativoGarabito;Trusted_Connection=True;MultipleActiveResultSets=True;TrustServerCertificate=True;");
+                    @"Server=.\SQLEXPRESS;Database=dbPaleativoGarabito;Trusted_Connection=True;MultipleActiveResultSets=True;TrustServerCertificate=True;");
             }
         }
 
@@ -124,7 +124,7 @@ namespace DAO
             // Relación 1 a 1 entre Donante y Persona
             modelBuilder.Entity<clsDonante>()
                 .HasOne(d => d.persona)
-                .WithOne()
+                .WithOne(p=>p.donante)
                 .HasForeignKey<clsDonante>(d => new { d.personaId, d.personaTipoId })
                 .HasPrincipalKey<clsPersona>(p => new { p.id, p.tipoId });
             //llave foranea comppuesta entre donacion y donante

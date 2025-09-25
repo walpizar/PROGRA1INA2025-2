@@ -49,6 +49,9 @@ namespace Entities
         //relacion de 1 a 1 con paciente 
         public clsPaciente paciente { get; set; }
 
+        //relacion 1 a 1 con donante
+        public clsDonante donante { get; set; }
+
         // constructor vacío
         public clsPersona() { }
 

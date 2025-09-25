@@ -24,6 +24,7 @@ namespace DAO
         {
             // Incluyo la entidad relacionada 'persona' para cargar sus datos junto con el donante
             return dbContextINA.donante
+                .AsNoTracking()
                 .Include(d => d.persona)
                 .FirstOrDefault(d => d.personaId.ToString() == id);
         }

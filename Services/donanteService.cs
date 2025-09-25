@@ -51,10 +51,6 @@ namespace Services
                     " PARA MODIFICAR DATOS USE EL MODULO APROPIADO");
             }
             
-            //si pasa la validacion, se crea el donante
-            donanteDAO.crear(entidad);
-
-
             //ASIGNO DATOS DE AUDITORIA: REGISTRO
             entidad.fechaRegistro = DateTime.Now;
             entidad.usuarioRegistro = "SYSTEM"; //esto se debe cambiar por el usuario que este logueado
@@ -63,6 +59,9 @@ namespace Services
             //ASIGNO DATOS DE AUDITORIA: MODIFICACION
             entidad.fechaModificacion = entidad.fechaRegistro; //ES LA PRIMERA VEZ QUE SE CREA
             entidad.usuarioModificacion = entidad.usuarioRegistro;//ES LA PRIMERA VEZ QUE SE CREA
+
+            //si pasa la validacion, se crea el donante
+            donanteDAO.crear(entidad);
 
 
         }

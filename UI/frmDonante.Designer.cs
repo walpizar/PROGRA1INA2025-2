@@ -30,6 +30,9 @@
         {
             lblCrearDonante = new Label();
             gbxDatosDonante = new GroupBox();
+            cboxDonanteTipoID = new ComboBox();
+            cboxDonanteTipo = new ComboBox();
+            lblDonanteTipoDon = new Label();
             datepkDonanteFechaNac = new DateTimePicker();
             txtbxDonanteDireccion = new TextBox();
             lblDonateDireccion = new Label();
@@ -38,19 +41,18 @@
             txtbxDonanteEmail = new TextBox();
             lblDonateEmail = new Label();
             lblDonateFechaNac = new Label();
-            textBox1 = new TextBox();
+            txtbxDonanteAp2 = new TextBox();
             lblDonateAp2 = new Label();
-            textBox2 = new TextBox();
+            txtbxDonanteAp1 = new TextBox();
             lblDonateAp1 = new Label();
             txtbxDonanteNombre = new TextBox();
             lblDonateNombre = new Label();
-            txtbxDonanteTipoID = new TextBox();
             lblDonateTipoID = new Label();
             txtbxDonanteID = new TextBox();
             lblDonanteID = new Label();
             btnGuardarDonante = new Button();
             btnCancelar = new Button();
-            btnModificarDonante = new Button();
+            btnEliminarDonante = new Button();
             gbxDatosDonante.SuspendLayout();
             SuspendLayout();
             // 
@@ -66,6 +68,9 @@
             // 
             // gbxDatosDonante
             // 
+            gbxDatosDonante.Controls.Add(cboxDonanteTipoID);
+            gbxDatosDonante.Controls.Add(cboxDonanteTipo);
+            gbxDatosDonante.Controls.Add(lblDonanteTipoDon);
             gbxDatosDonante.Controls.Add(datepkDonanteFechaNac);
             gbxDatosDonante.Controls.Add(txtbxDonanteDireccion);
             gbxDatosDonante.Controls.Add(lblDonateDireccion);
@@ -74,13 +79,12 @@
             gbxDatosDonante.Controls.Add(txtbxDonanteEmail);
             gbxDatosDonante.Controls.Add(lblDonateEmail);
             gbxDatosDonante.Controls.Add(lblDonateFechaNac);
-            gbxDatosDonante.Controls.Add(textBox1);
+            gbxDatosDonante.Controls.Add(txtbxDonanteAp2);
             gbxDatosDonante.Controls.Add(lblDonateAp2);
-            gbxDatosDonante.Controls.Add(textBox2);
+            gbxDatosDonante.Controls.Add(txtbxDonanteAp1);
             gbxDatosDonante.Controls.Add(lblDonateAp1);
             gbxDatosDonante.Controls.Add(txtbxDonanteNombre);
             gbxDatosDonante.Controls.Add(lblDonateNombre);
-            gbxDatosDonante.Controls.Add(txtbxDonanteTipoID);
             gbxDatosDonante.Controls.Add(lblDonateTipoID);
             gbxDatosDonante.Controls.Add(txtbxDonanteID);
             gbxDatosDonante.Controls.Add(lblDonanteID);
@@ -91,6 +95,31 @@
             gbxDatosDonante.TabIndex = 1;
             gbxDatosDonante.TabStop = false;
             gbxDatosDonante.Text = "DATOS DONANTE";
+            // 
+            // cboxDonanteTipoID
+            // 
+            cboxDonanteTipoID.FormattingEnabled = true;
+            cboxDonanteTipoID.Location = new Point(162, 118);
+            cboxDonanteTipoID.Name = "cboxDonanteTipoID";
+            cboxDonanteTipoID.Size = new Size(185, 31);
+            cboxDonanteTipoID.TabIndex = 20;
+            // 
+            // cboxDonanteTipo
+            // 
+            cboxDonanteTipo.FormattingEnabled = true;
+            cboxDonanteTipo.Location = new Point(162, 447);
+            cboxDonanteTipo.Name = "cboxDonanteTipo";
+            cboxDonanteTipo.Size = new Size(185, 31);
+            cboxDonanteTipo.TabIndex = 19;
+            // 
+            // lblDonanteTipoDon
+            // 
+            lblDonanteTipoDon.AutoSize = true;
+            lblDonanteTipoDon.Location = new Point(17, 450);
+            lblDonanteTipoDon.Name = "lblDonanteTipoDon";
+            lblDonanteTipoDon.Size = new Size(139, 23);
+            lblDonanteTipoDon.TabIndex = 18;
+            lblDonanteTipoDon.Text = "TIPO DONANTE";
             // 
             // datepkDonanteFechaNac
             // 
@@ -163,13 +192,13 @@
             lblDonateFechaNac.TabIndex = 10;
             lblDonateFechaNac.Text = "FECHA NACIMIENTO";
             // 
-            // textBox1
+            // txtbxDonanteAp2
             // 
-            textBox1.Font = new Font("Segoe UI", 9F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point, 0);
-            textBox1.Location = new Point(162, 226);
-            textBox1.Name = "textBox1";
-            textBox1.Size = new Size(185, 27);
-            textBox1.TabIndex = 9;
+            txtbxDonanteAp2.Font = new Font("Segoe UI", 9F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point, 0);
+            txtbxDonanteAp2.Location = new Point(162, 226);
+            txtbxDonanteAp2.Name = "txtbxDonanteAp2";
+            txtbxDonanteAp2.Size = new Size(185, 27);
+            txtbxDonanteAp2.TabIndex = 9;
             // 
             // lblDonateAp2
             // 
@@ -180,13 +209,13 @@
             lblDonateAp2.TabIndex = 8;
             lblDonateAp2.Text = "APELLIDO2";
             // 
-            // textBox2
+            // txtbxDonanteAp1
             // 
-            textBox2.Font = new Font("Segoe UI", 9F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point, 0);
-            textBox2.Location = new Point(162, 190);
-            textBox2.Name = "textBox2";
-            textBox2.Size = new Size(185, 27);
-            textBox2.TabIndex = 7;
+            txtbxDonanteAp1.Font = new Font("Segoe UI", 9F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point, 0);
+            txtbxDonanteAp1.Location = new Point(162, 190);
+            txtbxDonanteAp1.Name = "txtbxDonanteAp1";
+            txtbxDonanteAp1.Size = new Size(185, 27);
+            txtbxDonanteAp1.TabIndex = 7;
             // 
             // lblDonateAp1
             // 
@@ -213,15 +242,6 @@
             lblDonateNombre.Size = new Size(83, 23);
             lblDonateNombre.TabIndex = 4;
             lblDonateNombre.Text = "NOMBRE";
-            // 
-            // txtbxDonanteTipoID
-            // 
-            txtbxDonanteTipoID.Font = new Font("Segoe UI", 9F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point, 0);
-            txtbxDonanteTipoID.Location = new Point(162, 118);
-            txtbxDonanteTipoID.Name = "txtbxDonanteTipoID";
-            txtbxDonanteTipoID.Size = new Size(185, 27);
-            txtbxDonanteTipoID.TabIndex = 3;
-            txtbxDonanteTipoID.TextChanged += textBox1_TextChanged;
             // 
             // lblDonateTipoID
             // 
@@ -258,6 +278,7 @@
             btnGuardarDonante.TabIndex = 18;
             btnGuardarDonante.Text = "GUARDAR";
             btnGuardarDonante.UseVisualStyleBackColor = true;
+            btnGuardarDonante.Click += btnGuardarDonante_Click;
             // 
             // btnCancelar
             // 
@@ -270,28 +291,30 @@
             btnCancelar.UseVisualStyleBackColor = true;
             btnCancelar.Click += btnCancelar_Click;
             // 
-            // btnModificarDonante
+            // btnEliminarDonante
             // 
-            btnModificarDonante.Font = new Font("Segoe UI", 10.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            btnModificarDonante.Location = new Point(12, 604);
-            btnModificarDonante.Name = "btnModificarDonante";
-            btnModificarDonante.Size = new Size(121, 50);
-            btnModificarDonante.TabIndex = 20;
-            btnModificarDonante.Text = "MODIFICAR";
-            btnModificarDonante.UseVisualStyleBackColor = true;
+            btnEliminarDonante.Font = new Font("Segoe UI", 10.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btnEliminarDonante.Location = new Point(12, 604);
+            btnEliminarDonante.Name = "btnEliminarDonante";
+            btnEliminarDonante.Size = new Size(121, 50);
+            btnEliminarDonante.TabIndex = 20;
+            btnEliminarDonante.Text = "ELIMINAR";
+            btnEliminarDonante.UseVisualStyleBackColor = true;
+            btnEliminarDonante.Click += btnEliminarDonante_Click;
             // 
             // frmDonante
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(421, 663);
-            Controls.Add(btnModificarDonante);
+            Controls.Add(btnEliminarDonante);
             Controls.Add(btnCancelar);
             Controls.Add(btnGuardarDonante);
             Controls.Add(gbxDatosDonante);
             Controls.Add(lblCrearDonante);
             Name = "frmDonante";
             Text = "MANTENIMIENTO DONANTES";
+            Load += frmDonante_Load;
             gbxDatosDonante.ResumeLayout(false);
             gbxDatosDonante.PerformLayout();
             ResumeLayout(false);
@@ -304,16 +327,15 @@
         private GroupBox gbxDatosDonante;
         private Button btnGuardarDonante;
         private Button btnCancelar;
-        private Button btnModificarDonante;
+        private Button btnEliminarDonante;
         private Label lblDonanteID;
         private TextBox txtbxDonanteID;
-        private TextBox txtbxDonanteTipoID;
         private Label lblDonateTipoID;
         private TextBox txtbxDonanteNombre;
         private Label lblDonateNombre;
-        private TextBox textBox1;
+        private TextBox txtbxDonanteAp2;
         private Label lblDonateAp2;
-        private TextBox textBox2;
+        private TextBox txtbxDonanteAp1;
         private Label lblDonateAp1;
         private TextBox textBox3;
         private Label label1;
@@ -325,5 +347,8 @@
         private Label lblDonateEmail;
         private Label lblDonateFechaNac;
         private DateTimePicker datepkDonanteFechaNac;
+        private ComboBox cboxDonanteTipo;
+        private Label lblDonanteTipoDon;
+        private ComboBox cboxDonanteTipoID;
     }
 }

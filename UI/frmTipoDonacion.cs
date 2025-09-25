@@ -41,7 +41,7 @@ namespace UI
                 this.btnGuardarDonacion.Text = "MODIFICAR";
                 
                 //cargo los datos en el formulario
-                cargarFormModificarDonacion();
+                cargarFormModificarTipoDonacion();
 
 
             }
@@ -82,7 +82,7 @@ namespace UI
             }
         }
 
-        private void cargarFormModificarDonacion()
+        private void cargarFormModificarTipoDonacion()
         {
             txtbxTipoDonacionID.Text = tipoDonacionSelected.idTipoDonacion.ToString();
             txtbxTipoDonacionID.Enabled = false; //no se puede modificar el id

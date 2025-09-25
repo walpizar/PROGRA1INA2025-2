@@ -38,7 +38,11 @@ namespace UI
             //Application.Run(new frmDonacionLista());
 
             //ABRIR FORMULARIO TIPO DONACION LISTA
-            Application.Run(new frmTipoDonacionLista());
+            //Application.Run(new frmTipoDonacionLista());
+
+            //abrir formulario donante lista
+            Application.Run(new frmDonanteLista());
+
 
 
 

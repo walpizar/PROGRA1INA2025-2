@@ -6,14 +6,15 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace Entities
 {
     [Table("tbDonantes")]
+    //[PrimaryKey(nameof(personaId), nameof(personaTipoId))]
     public class clsDonante
     {
         // Llave primaria compuesta
-        [Key, Column(Order = 0)]
+        [Column(Order = 0)]
         [Required, StringLength(20)]
         public string personaId { get; set; }
 
-        [Key, Column(Order = 1)]
+        [Column(Order = 1)]
         [Required]
         public int personaTipoId { get; set; }
 
@@ -30,7 +31,7 @@ namespace Entities
         public DateTime? fechaModificacion { get; set; }
 
         [StringLength(50)]
-        public string usuarioModificacion { get; set; }
+        public string? usuarioModificacion { get; set; }
 
         [Required]
         [StringLength(50)]
