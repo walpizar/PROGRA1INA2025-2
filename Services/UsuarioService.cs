@@ -65,13 +65,19 @@ namespace Services
             return _usuarioDAO.consultarPorNombre(nombre);
         }
 
-
-
         public List<clsUsuario> consultarTodos()
         {
             return _usuarioDAO.consultarTodos();
         }
 
+        public void eliminar(int id)
+        {
+            throw new NotImplementedException();
+        }
 
+        public clsUsuario consultarPorID(int id)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

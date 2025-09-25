@@ -16,11 +16,8 @@ namespace UI
 {
     public partial class frmUsuario : Form
     {
-
         public clsUsuario usuarioSelected { get; set; }
         private readonly UsuarioService _usuarioService;
-
-
 
         public frmUsuario()
         {
@@ -29,70 +26,76 @@ namespace UI
 
         }
 
+        private void frmUsuarioLista_Load(object sender, EventArgs e)
+        {
+            //llenar el Combox de personas y roles cuando se carga el formulario
+            CargarComboPersona();
+            CargarComboRol();
+
+
+        }
+
         private void btnGuardar_Click(object sender, EventArgs e)
         {
             try
             {
-                //validar datos de entrada
                 if (validarDatos())
                 {
-                    //Creo la instancia del usuario nuevo
-                    clsUsuario usuario = usuarioSelected == null ? new clsUsuario() : usuarioSelected;
-
-                    // Lógica temporal para obtener persona y su tipo directamente
-                    string idPersona = cboPersona.SelectedValue?.ToString();
-
-                    if (string.IsNullOrEmpty(idPersona))
-                    {
-                        MessageBox.Show("Debe seleccionar una persona válida.");
-                        return;
-                    }
-
-                    // Aquí se salta la capa de servicio y se accede directamente al contexto
                     using (var context = new dbContextINA())
                     {
+                        // Obtener persona seleccionada
+                        string idPersona = cboPersona.SelectedValue?.ToString();
                         var personaSeleccionada = context.persona.FirstOrDefault(p => p.id == idPersona);
 
                         if (personaSeleccionada == null)
                         {
-                            MessageBox.Show("No se pudo encontrar la persona seleccionada.");
+                            MessageBox.Show("Debe seleccionar una persona válida.",
+                                            "Datos incompletos", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                             return;
                         }
 
-                        usuario.id = personaSeleccionada.id;
-                        usuario.tipoId = personaSeleccionada.tipoId;
-                        usuario.nombre_Usuario = txtUsuario.Text.Trim();
-                        usuario.contrasena = txtPassword.Text;
-                        usuario.idRol = (int)cboRol.SelectedValue;
-                    }
+                        // Verificar si ya existe un usuario asociado a esta persona
+                        var usuarioExistente = context.usuario
+                            .FirstOrDefault(u => u.id == personaSeleccionada.id && u.tipoId == personaSeleccionada.tipoId);
 
-                    if (usuarioSelected == null)
-                    {
-                        _usuarioService.crear(usuario);
-                        MessageBox.Show("Usuario creado correctamente");
-                    }
-                    else
-                    {
-                        _usuarioService.modificar(usuario);
-                        MessageBox.Show("Usuario modificado correctamente");
-                    }
+                        if (usuarioExistente != null)
+                        {
+                            MessageBox.Show("Ya existe un usuario asociado a esta persona.",
+                                            "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                            return;
+                        }
 
-                    limpiarForm();
-                    this.Close();
+                        // Crear nuevo usuario
+                        var nuevoUsuario = new clsUsuario
+                        {
+                            id = personaSeleccionada.id,
+                            tipoId = personaSeleccionada.tipoId,
+                            nombre_Usuario = txtUsuario.Text.Trim(),
+                            contrasena = txtPassword.Text.Trim(),
+                            estado = true,
+                            idRol = (int)cboRol.SelectedValue
+                        };
+
+                        // Guardar en la BD
+                        context.usuario.Add(nuevoUsuario);
+                        context.SaveChanges();
+
+                        MessageBox.Show("El usuario fue creado correctamente.",
+                                        "Operación exitosa", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                        limpiarForm();
+                        this.Close();
+                    }
                 }
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                string inner = ex.InnerException?.Message ?? "";
-                string inner2 = ex.InnerException?.InnerException?.Message ?? "";
-                MessageBox.Show(
-                    "Ocurrió un error al guardar el usuario:\n" + ex.Message +
-                    (string.IsNullOrEmpty(inner) ? "" : "\n\nInnerException: " + inner) +
-                    (string.IsNullOrEmpty(inner2) ? "" : "\n\nInnerException2: " + inner2)
-                );
-
+                MessageBox.Show("Ocurrió un error al guardar el usuario. " +
+                                "Por favor, verifique la información e intente nuevamente.",
+                                "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+
         private void limpiarForm()
         {
             cboPersona.ResetText();
@@ -121,6 +124,7 @@ namespace UI
                 MessageBox.Show("Debe seleccionar un rol");
                 return false;
             }
+
             if (string.IsNullOrWhiteSpace(txtPassword.Text))
             {
                 MessageBox.Show("La contraseña no puede estar vacía.");
@@ -143,8 +147,7 @@ namespace UI
             CargarComboRol();
 
         }
-
-
+        
         private void CargarComboPersona()
         {
             /*using (var context = new dbContextINA())
@@ -160,6 +163,7 @@ namespace UI
             {
                 new { id = "1", NombreCompleto = "Luis Alvarez Rojas", tipoId = 1 },
                 new { id = "2", NombreCompleto = "Karla Rojas Sanchez", tipoId = 2 }
+                
             }.ToList();
 
             cboPersona.DataSource = personas;
@@ -223,7 +227,16 @@ namespace UI
 
         }
 
+        private void lblUsuario_Click(object sender, EventArgs e)
+        {
 
+            //Obtener el item seleccionado y hacer cast a clsRol
+            if (cboRol.SelectedItem is Entities.clsRol rolSeleccionado)
+                // Aquí accedes a la "collection item" seleccionada
+                MessageBox.Show("Rol: " + rolSeleccionado.nombreRol + "\nDescripción: " +
+                    rolSeleccionado.descripcion);
+
+        }
 
         private void btnEliminar_Click(object sender, EventArgs e)
         {
@@ -257,6 +270,4 @@ namespace UI
     }
 
 }
-
-
 

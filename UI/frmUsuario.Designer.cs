@@ -29,10 +29,15 @@
             cboRol = new ComboBox();
             lblRol = new Label();
             lblConfirmar = new Label();
+
             txtConfirmarContraseña = new TextBox();
             txtPassword = new TextBox();
             lblPassword = new Label();
             txtUsuario = new TextBox();
+            txtPassword = new TextBox();
+            lblPassword = new Label();
+            txtUsuario = new TextBox();
+            lblUusario = new Label();
             cboPersona = new ComboBox();
             lblPersona = new Label();
             btnEliminar = new Button();
@@ -58,6 +63,7 @@
             lblUsuario.TabIndex = 5;
             lblUsuario.Text = "Crear Usuario";
             lblUsuario.TextAlign = ContentAlignment.TopCenter;
+
             // 
             // gbxUsuario
             // 
@@ -113,17 +119,20 @@
             lblConfirmar.TabIndex = 9;
             lblConfirmar.Text = "Confirmar:";
             // 
+
             // txtConfirmarContraseña
             // 
             txtConfirmarContraseña.Location = new Point(82, 166);
             txtConfirmarContraseña.Name = "txtConfirmarContraseña";
             txtConfirmarContraseña.Size = new Size(299, 23);
             txtConfirmarContraseña.TabIndex = 8;
+          
             // 
             // txtPassword
             // 
             txtPassword.Location = new Point(82, 119);
             txtPassword.Name = "txtPassword";
+            txtPassword.PasswordChar = '*';
             txtPassword.Size = new Size(299, 23);
             txtPassword.TabIndex = 6;
             // 
@@ -163,17 +172,23 @@
             // 
             // btnEliminar
             // 
+
             btnEliminar.Location = new Point(85, 299);
+            btnEliminar.Location = new Point(310, 299);
             btnEliminar.Name = "btnEliminar";
             btnEliminar.Size = new Size(88, 29);
             btnEliminar.TabIndex = 17;
             btnEliminar.Text = "Eliminar";
             btnEliminar.UseVisualStyleBackColor = true;
-            btnEliminar.Click += btnEliminar_Click;
             // 
             // button2
             // 
             button2.Location = new Point(285, 302);
+            
+            // 
+            // button2
+            // 
+            button2.Location = new Point(195, 299);
             button2.Name = "button2";
             button2.Size = new Size(99, 29);
             button2.TabIndex = 16;
@@ -184,12 +199,17 @@
             // btnGuardar
             // 
             btnGuardar.Location = new Point(188, 299);
+            // 
+            // btnGuardar
+            // 
+            btnGuardar.Location = new Point(85, 296);
             btnGuardar.Name = "btnGuardar";
             btnGuardar.Size = new Size(85, 32);
             btnGuardar.TabIndex = 15;
             btnGuardar.Text = "Guardar";
             btnGuardar.UseVisualStyleBackColor = true;
             btnGuardar.Click += btnGuardar_Click;
+
             // 
             // label1
             // 
@@ -253,6 +273,104 @@
             lblId.Size = new Size(23, 17);
             lblId.TabIndex = 8;
             lblId.Text = "ID:";
+            // 
+            // gbxUsuario
+            // 
+        
+            gbxUsuario.Controls.Add(cboRol);
+            gbxUsuario.Controls.Add(lblRol);
+            gbxUsuario.Controls.Add(lblConfirmar);
+            gbxUsuario.Controls.Add(txtPassword);
+            gbxUsuario.Controls.Add(lblPassword);
+            gbxUsuario.Controls.Add(txtUsuario);
+            gbxUsuario.Controls.Add(lblUusario);
+            gbxUsuario.Controls.Add(cboPersona);
+            gbxUsuario.Controls.Add(lblPersona);
+            gbxUsuario.Location = new Point(12, 40);
+            gbxUsuario.Name = "gbxUsuario";
+            gbxUsuario.Size = new Size(427, 314);
+            gbxUsuario.TabIndex = 6;
+            gbxUsuario.TabStop = false;
+            gbxUsuario.Text = "Datos Usuarios";
+            // 
+            
+            // cboRol
+            // 
+            cboRol.FormattingEnabled = true;
+            cboRol.Location = new Point(73, 195);
+            cboRol.Name = "cboRol";
+            cboRol.Size = new Size(145, 23);
+            cboRol.TabIndex = 11;
+            // 
+            // lblRol
+            // 
+            lblRol.AutoSize = true;
+            lblRol.Location = new Point(37, 195);
+            lblRol.Name = "lblRol";
+            lblRol.Size = new Size(27, 15);
+            lblRol.TabIndex = 10;
+            lblRol.Text = "Rol:";
+            // 
+            // lblConfirmar
+            // 
+            lblConfirmar.AutoSize = true;
+            lblConfirmar.Location = new Point(6, 158);
+            lblConfirmar.Name = "lblConfirmar";
+            lblConfirmar.Size = new Size(64, 15);
+            lblConfirmar.TabIndex = 9;
+            lblConfirmar.Text = "Confirmar:";
+            // 
+            // 
+            // txtPassword
+            // 
+            txtPassword.Location = new Point(73, 114);
+            txtPassword.Name = "txtPassword";
+            txtPassword.PasswordChar = '*';
+            txtPassword.Size = new Size(299, 23);
+            txtPassword.TabIndex = 6;
+            // 
+            // lblPassword
+            // 
+            lblPassword.AutoSize = true;
+            lblPassword.Location = new Point(0, 114);
+            lblPassword.Name = "lblPassword";
+            lblPassword.Size = new Size(70, 15);
+            lblPassword.TabIndex = 5;
+            lblPassword.Text = "Contraseña:";
+            // 
+            // txtUsuario
+            // 
+            txtUsuario.Location = new Point(70, 75);
+            txtUsuario.Name = "txtUsuario";
+            txtUsuario.Size = new Size(299, 23);
+            txtUsuario.TabIndex = 4;
+            // 
+            // lblUusario
+            // 
+            lblUusario.AutoSize = true;
+            lblUusario.Location = new Point(14, 75);
+            lblUusario.Name = "lblUusario";
+            lblUusario.Size = new Size(50, 15);
+            lblUusario.TabIndex = 3;
+            lblUusario.Text = "Usuario:";
+            // 
+            // cboPersona
+            // 
+            cboPersona.FormattingEnabled = true;
+            cboPersona.Location = new Point(37, 42);
+            cboPersona.Name = "cboPersona";
+            cboPersona.Size = new Size(335, 23);
+            cboPersona.TabIndex = 1;
+            // 
+            // lblPersona
+            // 
+            lblPersona.AutoSize = true;
+            lblPersona.Location = new Point(37, 19);
+            lblPersona.Name = "lblPersona";
+            lblPersona.Size = new Size(49, 15);
+            lblPersona.TabIndex = 0;
+            lblPersona.Text = "Persona";
+          
             // 
             // frmUsuario
             // 

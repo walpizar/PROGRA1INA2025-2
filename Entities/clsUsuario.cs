@@ -10,6 +10,7 @@ namespace Entities
         
         // La clave primaria para la entidad, que es el nombre de usuario
         [Key]
+<<<<<<< HEAD
         [Required(ErrorMessage = "El nombre de usuario es obligatorio.")]
         [StringLength(50, ErrorMessage = "El nombre de usuario no puede tener más de 50 caracteres.")]
         public string nombre_Usuario { get; set; }
@@ -20,6 +21,17 @@ namespace Entities
 
         [Column("TipoId")]
         public int tipoId { get; set; }
+=======
+        [Required(ErrorMessage = "El nombre de usuario es obligatorio.")]
+        [StringLength(50, ErrorMessage = "El nombre de usuario no puede tener más de 50 caracteres.")]
+        public string nombre_Usuario { get; set; }
+
+        public string personaId { get; set; }
+
+        [Required(ErrorMessage = "El nombre de usuario es obligatorio.")]
+        [StringLength(50, ErrorMessage = "El nombre de usuario no puede tener más de 50 caracteres.")]
+        public int personaTipoId { get; set; }
+>>>>>>> 402d6eeb49317638690ae90a0ab7fd445c339002
 
         [Required]
         [StringLength(100, ErrorMessage = "La contraseña no puede tener más de 100 caracteres")]
