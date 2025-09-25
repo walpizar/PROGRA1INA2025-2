@@ -2,16 +2,13 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Entities
 {
     [Table("tbPersonas")]
     public class clsPersona
     {
-        // atributos con decoradores en camelCase
+        // Llave primaria compuesta
         public string id { get; set; }
         public int tipoId { get; set; }
 
@@ -43,14 +40,13 @@ namespace Entities
 
         public bool estado { get; set; }
 
-        //relacion de 1 a 1 con paciente 
+        // Relación 1 a 1 con Paciente
         public clsPaciente paciente { get; set; }
 
+        // Relación 1 a 1 con Donante
+        public clsDonante donante { get; set; }
 
-        // constructor vacío
+        // Constructor vacío
         public clsPersona() { }
-
-       
-      
     }
 }
