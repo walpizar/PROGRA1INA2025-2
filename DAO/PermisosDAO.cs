@@ -17,13 +17,14 @@ namespace DAO
             _context = context;
         }
 
-        public async Task<List<clsPermisos>> GetAllAsync() =>
-            await _context.permisos.Include(p => p.RolPermisos) // Incluye la colección de la tabla de unión
+        public async Task<List<clsPermisos>> GetAllAsync()
+        {
+            return await _context.permisos.Include(p => p.RolPermisos) // Incluye la colección de la tabla de unión
                           .ThenInclude(rp => rp.Rol) // Luego, desde ahí, incluye el Rol
                           .Include(p => p.RolPermisos) // Vuelve a incluir la colección de unión
                           .ThenInclude(rp => rp.Permiso) // Y luego el Permiso
                           .ToListAsync();
-
+        }
 
         public async Task AddAsync(clsPermisos permiso)
         {

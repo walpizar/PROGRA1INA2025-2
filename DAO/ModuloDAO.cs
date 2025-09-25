@@ -17,12 +17,16 @@ namespace DAO
             _context = context;
         }
 
-        public async Task<List<clsModulo>> GetAllAsync() =>
-            await _context.modulos.Include(m => m.permisos).ToListAsync();
+        public async Task<List<clsModulo>> GetAllAsync()
+        {
+            return await _context.modulos.Include(m => m.permisos).ToListAsync();
+        }
 
-        public async Task<clsModulo> GetByIdAsync(int id) =>
-            await _context.modulos.Include(m => m.permisos)
+        public async Task<clsModulo> GetByIdAsync(int id)
+        {
+            return await _context.modulos.Include(m => m.permisos)
                                   .FirstOrDefaultAsync(m => m.id_modulo == id);
+        }
 
         public async Task AddAsync(clsModulo modulo)
         {

@@ -36,12 +36,14 @@
             Apellido2 = new ColumnHeader();
             Correo = new ColumnHeader();
             textBox1 = new TextBox();
-            button2 = new Button();
             tabControl1 = new TabControl();
             tabPage1 = new TabPage();
-            tabPage2 = new TabPage();
-            textBox2 = new TextBox();
+            button2 = new Button();
             button1 = new Button();
+            tabPage2 = new TabPage();
+            button3 = new Button();
+            button4 = new Button();
+            textBox2 = new TextBox();
             LvDonantes = new ListView();
             columnHeader1 = new ColumnHeader();
             columnHeader2 = new ColumnHeader();
@@ -57,7 +59,7 @@
             // 
             label1.AutoSize = true;
             label1.Font = new Font("Segoe UI", 20.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label1.Location = new Point(133, 9);
+            label1.Location = new Point(149, 9);
             label1.Name = "label1";
             label1.Size = new Size(492, 37);
             label1.TabIndex = 0;
@@ -66,13 +68,12 @@
             // lvAfiliados
             // 
             lvAfiliados.Columns.AddRange(new ColumnHeader[] { ID, Nombre, Apellido, Apellido2, Correo });
-            lvAfiliados.Location = new Point(12, 65);
+            lvAfiliados.Location = new Point(11, 40);
             lvAfiliados.Name = "lvAfiliados";
             lvAfiliados.Size = new Size(743, 266);
             lvAfiliados.TabIndex = 1;
             lvAfiliados.UseCompatibleStateImageBehavior = false;
             lvAfiliados.View = View.Details;
-         
             // 
             // ID
             // 
@@ -101,19 +102,10 @@
             // 
             // textBox1
             // 
-            textBox1.Location = new Point(12, 19);
+            textBox1.Location = new Point(11, 11);
             textBox1.Name = "textBox1";
-            textBox1.Size = new Size(379, 23);
+            textBox1.Size = new Size(152, 23);
             textBox1.TabIndex = 3;
-            // 
-            // button2
-            // 
-            button2.Location = new Point(397, 19);
-            button2.Name = "button2";
-            button2.Size = new Size(54, 23);
-            button2.TabIndex = 4;
-            button2.Text = "button2";
-            button2.UseVisualStyleBackColor = true;
             // 
             // tabControl1
             // 
@@ -127,8 +119,9 @@
             // 
             // tabPage1
             // 
-            tabPage1.Controls.Add(textBox1);
             tabPage1.Controls.Add(button2);
+            tabPage1.Controls.Add(button1);
+            tabPage1.Controls.Add(textBox1);
             tabPage1.Controls.Add(lvAfiliados);
             tabPage1.Location = new Point(4, 24);
             tabPage1.Name = "tabPage1";
@@ -138,10 +131,30 @@
             tabPage1.Text = "Afiliados";
             tabPage1.UseVisualStyleBackColor = true;
             // 
+            // button2
+            // 
+            button2.Location = new Point(645, 10);
+            button2.Name = "button2";
+            button2.Size = new Size(109, 23);
+            button2.TabIndex = 5;
+            button2.Text = "button2";
+            button2.UseVisualStyleBackColor = true;
+            // 
+            // button1
+            // 
+            button1.Location = new Point(524, 10);
+            button1.Name = "button1";
+            button1.Size = new Size(115, 23);
+            button1.TabIndex = 4;
+            button1.Text = "button1";
+            button1.UseVisualStyleBackColor = true;
+            button1.Click += button4_Click;
+            // 
             // tabPage2
             // 
+            tabPage2.Controls.Add(button3);
+            tabPage2.Controls.Add(button4);
             tabPage2.Controls.Add(textBox2);
-            tabPage2.Controls.Add(button1);
             tabPage2.Controls.Add(LvDonantes);
             tabPage2.Location = new Point(4, 24);
             tabPage2.Name = "tabPage2";
@@ -151,26 +164,36 @@
             tabPage2.Text = "Donantes";
             tabPage2.UseVisualStyleBackColor = true;
             // 
+            // button3
+            // 
+            button3.Location = new Point(645, 10);
+            button3.Name = "button3";
+            button3.Size = new Size(109, 23);
+            button3.TabIndex = 8;
+            button3.Text = "button3";
+            button3.UseVisualStyleBackColor = true;
+            // 
+            // button4
+            // 
+            button4.Location = new Point(524, 10);
+            button4.Name = "button4";
+            button4.Size = new Size(115, 23);
+            button4.TabIndex = 7;
+            button4.Text = "button4";
+            button4.UseVisualStyleBackColor = true;
+            button4.Click += button4_Click;
+            // 
             // textBox2
             // 
-            textBox2.Location = new Point(13, 17);
+            textBox2.Location = new Point(11, 11);
             textBox2.Name = "textBox2";
-            textBox2.Size = new Size(379, 23);
+            textBox2.Size = new Size(148, 23);
             textBox2.TabIndex = 6;
-            // 
-            // button1
-            // 
-            button1.Location = new Point(398, 17);
-            button1.Name = "button1";
-            button1.Size = new Size(54, 23);
-            button1.TabIndex = 7;
-            button1.Text = "button1";
-            button1.UseVisualStyleBackColor = true;
             // 
             // LvDonantes
             // 
             LvDonantes.Columns.AddRange(new ColumnHeader[] { columnHeader1, columnHeader2, columnHeader3, columnHeader4, columnHeader5 });
-            LvDonantes.Location = new Point(13, 67);
+            LvDonantes.Location = new Point(11, 40);
             LvDonantes.Name = "LvDonantes";
             LvDonantes.Size = new Size(743, 266);
             LvDonantes.TabIndex = 5;
@@ -225,7 +248,6 @@
         private Label label1;
         private ListView lvAfiliados;
         private TextBox textBox1;
-        private Button button2;
         private ColumnHeader ID;
         private ColumnHeader Nombre;
         private ColumnHeader Apellido;
@@ -235,12 +257,15 @@
         private TabPage tabPage1;
         private TabPage tabPage2;
         private TextBox textBox2;
-        private Button button1;
         private ListView LvDonantes;
         private ColumnHeader columnHeader1;
         private ColumnHeader columnHeader2;
         private ColumnHeader columnHeader3;
         private ColumnHeader columnHeader4;
         private ColumnHeader columnHeader5;
+        private Button button2;
+        private Button button1;
+        private Button button3;
+        private Button button4;
     }
 }

@@ -18,10 +18,15 @@ namespace DAO
             _context = context;
         }
 
-        public async Task<List<clsRol>> GetAllAsync() => await _context.rol.ToListAsync();
+        public async Task<List<clsRol>> GetAllAsync()
+        {
+            return await _context.rol.ToListAsync();
+        }
 
-        public async Task<clsRol> GetByIdAsync(int id) =>
-            await _context.rol.FindAsync(id);
+        public async Task<clsRol> GetByIdAsync(int id)
+        {
+            return await _context.rol.FindAsync(id);
+        }
 
         public async Task AddAsync(clsRol rol)
         {

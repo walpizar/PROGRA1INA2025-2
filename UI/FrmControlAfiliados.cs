@@ -64,6 +64,7 @@ namespace UI
             }
         }
 
+
         private void CargarDonantes()
         {
             LvDonantes.Items.Clear();
@@ -82,5 +83,36 @@ namespace UI
                 }
             }
         }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            // Obtener el donante/afiliado seleccionado
+            if (lvAfiliados.SelectedItems.Count > 0)
+            {
+                // Por ejemplo, tomar el primer seleccionado
+                var personaId = lvAfiliados.SelectedItems[0].Text;
+
+                // Buscar el objeto completo usando el servicio
+                var personaSeleccionada = _service.ConsultarAfiliados()
+                                                 .FirstOrDefault(a => a.personaId == personaId);
+
+                if (personaSeleccionada != null)
+                {
+                    // Crear la instancia del formulario DetallePagos
+                    var detallePagosForm = new frmDetallePagos(personaSeleccionada, new DonacionService(), _service);
+                    detallePagosForm.ShowDialog(); // o Show() si no quieres que sea modal
+                }
+                else
+                {
+                    MessageBox.Show("No se encontró el afiliado seleccionado.");
+                }
+            }
+            else
+            {
+                MessageBox.Show("Seleccione un afiliado de la lista primero.");
+            }
+        }
+
+
     }
 }

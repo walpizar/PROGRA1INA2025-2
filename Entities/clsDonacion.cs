@@ -1,0 +1,69 @@
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+
+namespace Entities
+{
+    [Table("tbDonaciones")]
+    public class clsDonacion
+    {
+        [Key]
+        public int idDonacion { get; set; }
+
+        // Foreign key compuesta con donante
+        [Required, StringLength(20)]
+        public string donanteId { get; set; }
+
+        [Required]
+        public int donanteTipoId { get; set; }
+
+        [ForeignKey("tipoDonacion")]
+        public int idTipoDonacion { get; set; }
+
+        [Required]
+        [DataType(DataType.Date)]
+        public DateTime fechaDonacion { get; set; }
+
+        [StringLength(200)]
+        public string observaciones { get; set; }
+
+        //CAMPOS OPCIONALES SEGUN TIPO DE DONACION
+        public decimal? monto { get; set; } //opcional
+        public int? tipoTransaccion { get; set; } //opcional, lleva enums
+        public int? frecuencia { get; set; } //opcional, lleva enums
+        public int? tipoMoneda { get; set; } //opcional, lleva enums
+        public DateTime? fechaProximaDonacion { get; set; } //opcional
+
+        // Auditoría
+        [Required, StringLength(50)]
+        public string usuarioCreacion { get; set; }
+
+        [Required]
+        public DateTime fechaCreacion { get; set; }
+
+        [StringLength(50)]
+        public string usuarioModificacion { get; set; }
+
+        public DateTime? fechaModificacion { get; set; }
+        [Required]
+        public bool estado { get; set; }
+
+        [StringLength(200)]
+        public string? razonInactivo { get; set; }
+
+        [StringLength(200)]
+        public string? razonModifica { get; set; }
+
+        // Relación muchos a 1 con donante
+        public clsDonante donante { get; set; }
+
+        // Relación 1 a muchos con Activo (directa)
+        public ICollection<clsActivos> activos { get; set; }
+
+        //relacion muchos a 1 con tipo donacion
+        public clsTipoDonacion tipoDonacion { get; set; }
+
+        public clsDonacion() { }
+    }
+}

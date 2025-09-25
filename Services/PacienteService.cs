@@ -117,7 +117,7 @@ namespace Services
             if (pacienteExistente == null)
             {
                 //si no existe lanzo una excepcion personalizada
-                throw new EntityNotExistDBException();
+                throw new EntityNotFoundDBException();
             }
 
             pacienteExistente.estado = false; //cambio el estado a false para eliminarlo logicamente
@@ -140,7 +140,7 @@ namespace Services
             if (_pacientDao.consultarPorID(paciente.id) == null)
             {
                 //si no existe lanzo una excepcion personalizada
-                throw new EntityNotExistDBException();
+                throw new EntityNotFoundDBException();
             }
 
             // Asignar fecha de última modificación automáticamente
@@ -187,7 +187,7 @@ namespace Services
             if (pacienteExistente == null)
             {
                 //si no existe lanzo una excepcion personalizada
-                throw new EntityNotExistDBException();
+                throw new EntityNotFoundDBException();
             }
             //valido que el paciente no este activo
             if (pacienteExistente.estado == true)

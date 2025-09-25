@@ -240,7 +240,7 @@ namespace UI
             {
                 MessageBox.Show(ex.Message);
             }
-            catch (EntityNotExistDBException ex)
+            catch (EntityNotFoundDBException ex)
             {
                 MessageBox.Show(ex.Message);
             }
@@ -400,7 +400,7 @@ namespace UI
 
 
             }
-            catch (EntityNotExistDBException ex)
+            catch (EntityNotFoundDBException ex)
             {
                 MessageBox.Show(ex.Message);
             }
@@ -436,7 +436,7 @@ namespace UI
                 }
             }
             //exepciones personalizadas
-            catch (EntityNotExistDBException ex)
+            catch (EntityNotFoundDBException ex)
             {
                 MessageBox.Show(ex.Message);
             }

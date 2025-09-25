@@ -23,7 +23,7 @@ namespace DAO
         public DbSet<clsModulo> modulos { get; set; }
         public DbSet<clsPaciente> paciente { get; set; }
         public DbSet<clsDonante> donante { get; set; }
-        //public DbSet<clsDonacion> donacion { get; set; }
+        public DbSet<clsDonacion> donacion { get; set; }
         public DbSet<clsCategoriaActivos> categoriaActivos { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
