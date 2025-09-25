@@ -19,7 +19,14 @@ namespace DAO
         {
             return _context.donante
                            .Include(d => d.persona)
-                           .Where(d => d.tipoDonante == 1)
+                           .ToList(); // <- quitas el filtro de tipoDonante
+        }
+
+        public List<clsDonante> ConsultarDonantes()
+        {
+            return _context.donante
+                           .Include(d => d.persona)
+                           .Where(d => d.tipoDonante == 2) // 2 = Donante
                            .ToList();
         }
 

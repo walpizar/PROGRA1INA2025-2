@@ -13,15 +13,15 @@ namespace UI
         {
             InitializeComponent();
             _service = service;
-            this.Load += FrmControlAfiliados_Load; // asegurar que el evento Load esté conectado
+            this.Load += FrmControlAfiliados_Load;
         }
 
         private void FrmControlAfiliados_Load(object sender, EventArgs e)
         {
+            // Configurar lvAfiliados
             lvAfiliados.View = View.Details;
             lvAfiliados.FullRowSelect = true;
             lvAfiliados.GridLines = true;
-
             lvAfiliados.Columns.Clear();
             lvAfiliados.Columns.Add("ID", 100);
             lvAfiliados.Columns.Add("Nombre", 150);
@@ -29,17 +29,30 @@ namespace UI
             lvAfiliados.Columns.Add("Apellido 2", 150);
             lvAfiliados.Columns.Add("Correo", 200);
 
+            // Configurar LvDonantes
+            LvDonantes.View = View.Details;
+            LvDonantes.FullRowSelect = true;
+            LvDonantes.GridLines = true;
+            LvDonantes.Columns.Clear();
+            LvDonantes.Columns.Add("ID", 100);
+            LvDonantes.Columns.Add("Nombre", 150);
+            LvDonantes.Columns.Add("Apellido 1", 150);
+            LvDonantes.Columns.Add("Apellido 2", 150);
+            LvDonantes.Columns.Add("Correo", 200);
+
+            // Cargar datos
             CargarAfiliados();
+            CargarDonantes();
         }
 
         private void CargarAfiliados()
         {
             lvAfiliados.Items.Clear();
-            var afiliados = _service.ConsultarTodos();
+            var afiliados = _service.ConsultarAfiliados();
 
             foreach (var a in afiliados)
             {
-                if (a.persona != null) // asegurarse de que la relación esté cargada
+                if (a.persona != null)
                 {
                     var item = new ListViewItem(a.personaId);
                     item.SubItems.Add(a.persona.nombre);
@@ -47,6 +60,25 @@ namespace UI
                     item.SubItems.Add(a.persona.apellido2 ?? "");
                     item.SubItems.Add(a.persona.email ?? "");
                     lvAfiliados.Items.Add(item);
+                }
+            }
+        }
+
+        private void CargarDonantes()
+        {
+            LvDonantes.Items.Clear();
+            var donantes = _service.ConsultarDonantes();
+
+            foreach (var d in donantes)
+            {
+                if (d.persona != null)
+                {
+                    var item = new ListViewItem(d.personaId);
+                    item.SubItems.Add(d.persona.nombre);
+                    item.SubItems.Add(d.persona.apellido1);
+                    item.SubItems.Add(d.persona.apellido2 ?? "");
+                    item.SubItems.Add(d.persona.email ?? "");
+                    LvDonantes.Items.Add(item);
                 }
             }
         }
