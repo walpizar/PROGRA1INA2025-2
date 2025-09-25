@@ -82,6 +82,15 @@ namespace DAO
             }
         }
 
+        public void eliminar(string id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public clsTiposAyudas consultarPorID(string id)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
 

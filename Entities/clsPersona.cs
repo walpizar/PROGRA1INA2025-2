@@ -11,8 +11,7 @@ namespace Entities
     [Table("tbPersonas")]
     public class clsPersona
     {
-        //atributos con decoradores
-   
+        // atributos con decoradores en camelCase
         public string id { get; set; }
         public int tipoId { get; set; }
 
@@ -41,7 +40,10 @@ namespace Entities
         public bool estado { get; set; }
 
         // relación 1 a 1 con donante en camelCase
-        public clsDonante donante { get; set; }
+        //public clsDonante donante { get; set; }
+
+        //relacion de 1 a 1 con paciente 
+        public clsPaciente paciente { get; set; }
 
         // constructor vacío
         public clsPersona() { }
@@ -66,7 +68,7 @@ namespace Entities
             return $"ID: {id}, Nombre: {nombre}, Apellido1: {apellido1}, Apellido2: {apellido2}, FechaNac: {fechaNac.ToShortDateString()}, Email: {email}, Direccion: {direccion}, Telefono: {telefono}, Estado: {estado}";
         }
         //relacion 1 a 1 con donante
-        public clsDonante Donante { get; set; }
+        //public clsDonante Donante { get; set; }
     }
 }
   

@@ -244,7 +244,7 @@ namespace UI
                 // Buscar y seleccionar responsable en el combo
                 foreach (clsUsuario u in cboResponsable.Items)
                 {
-                    if (u.id == selectTiposAyudas.id_responsable &&
+                    if (u.personaId == selectTiposAyudas.id_responsable &&
                         u.personaTipoId == selectTiposAyudas.personaTipoId_responsable)
                     {
                         cboResponsable.SelectedItem = u;
@@ -273,13 +273,13 @@ namespace UI
                     //tomar el usuario seleccionado
                     var usuarioSeleccionado = (clsUsuario)cboResponsable.SelectedItem;
 
-                    tiposAyudas.id_responsable = usuarioSeleccionado.id;
+                    tiposAyudas.id_responsable = usuarioSeleccionado.personaId;
                     tiposAyudas.personaTipoId_responsable = usuarioSeleccionado.personaTipoId;
 
                     // Auditoría 
-                    tiposAyudas.id_usuarioCrea = usuarioSeleccionado.id;
+                    tiposAyudas.id_usuarioCrea = usuarioSeleccionado.personaId;
                     tiposAyudas.personaTipoId_usuarioCrea = usuarioSeleccionado.personaTipoId;
-                    tiposAyudas.id_usuarioUltimaModificacion = usuarioSeleccionado.id;
+                    tiposAyudas.id_usuarioUltimaModificacion = usuarioSeleccionado.personaId;
                     tiposAyudas.personaTipoId_usuarioUltimaModificacion = usuarioSeleccionado.personaTipoId;
 
                     if (selectTiposAyudas == null)
@@ -381,10 +381,10 @@ namespace UI
                     //Actualizar los datos del tipo de ayuda
                     selectTiposAyudas.nombre = txtNombre.Text;
                     selectTiposAyudas.descripcion = txtDescripcion.Text;
-                    selectTiposAyudas.id_responsable = usuarioSeleccionado.id;
+                    selectTiposAyudas.id_responsable = usuarioSeleccionado.personaId;
                     selectTiposAyudas.personaTipoId_responsable = usuarioSeleccionado.personaTipoId;
 
-                    selectTiposAyudas.id_usuarioUltimaModificacion = usuarioSeleccionado.id;
+                    selectTiposAyudas.id_usuarioUltimaModificacion = usuarioSeleccionado.personaId;
                     selectTiposAyudas.personaTipoId_usuarioUltimaModificacion = usuarioSeleccionado.personaTipoId;
                     selectTiposAyudas.fecha_ultimaModificacion = DateTime.Now;
 

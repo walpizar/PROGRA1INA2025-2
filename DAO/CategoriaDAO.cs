@@ -20,7 +20,7 @@ using System.Threading.Tasks;
         }
 
 
-        public clsCategoria consultarPorID(int id)
+        public clsCategoria consultarPorID(string id)
         {
             //_context.facturas.Where(f => f.tipopago == (int)Enums.MetodoPago.PayPal).ToList();
             throw new NotImplementedException();
@@ -49,7 +49,7 @@ using System.Threading.Tasks;
             throw new NotImplementedException();
         }
 
-        public void eliminar(int id)
+        public void eliminar(string id)
         {
             throw new NotImplementedException();
         }

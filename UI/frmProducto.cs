@@ -218,7 +218,7 @@ using static Common.Enums.Enums;
             txtCantidad.Value = productoSelected.cantidad;
             //obtiene el valor que el usuario selecciono en el combo
             cboFamilia.SelectedItem = (FamiliaProducto)productoSelected.familia;
-            cboCategoria.SelectedValue = (int)productoSelected.CategoriaId;
+            cboCategoria.SelectedValue = productoSelected.CategoriaId;
         }
 
         private void btnCancelar_Click(object sender, EventArgs e)
@@ -257,5 +257,7 @@ using static Common.Enums.Enums;
         {
 
         }
+
+  
     }
 }*/

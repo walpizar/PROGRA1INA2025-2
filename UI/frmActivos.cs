@@ -27,7 +27,9 @@ namespace UI
 
         private void frmActivos_Load(object sender, EventArgs e)
         {
-           // cargarCombos();
+
+            //cargarCombos();
+
             if (activosSelected != null) // acción de modificar
             {
                 this.lblTitulo.Text = "Modificar Activos";

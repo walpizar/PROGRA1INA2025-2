@@ -181,6 +181,7 @@
             lblTitulo.Size = new Size(161, 30);
             lblTitulo.TabIndex = 1;
             lblTitulo.Text = "Crear Producto";
+
             // 
             // btnGuardar
             // 
