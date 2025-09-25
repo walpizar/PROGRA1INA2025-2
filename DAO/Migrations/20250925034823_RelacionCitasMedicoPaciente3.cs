@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace DAO.Migrations
 {
     /// <inheritdoc />
-    public partial class incial : Migration
+    public partial class RelacionCitasMedicoPaciente3 : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -220,22 +220,24 @@ namespace DAO.Migrations
                     id = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: false),
                     tipoId = table.Column<int>(type: "int", nullable: false),
                     especialidad = table.Column<string>(type: "nvarchar(300)", maxLength: 300, nullable: false),
-                    fechaCrea = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    usuarioCrea = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
-                    fechaUltMod = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    usuarioUltMod = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
+                    fecha_crea = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    usuario_crea = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
+                    fecha_ult_mod = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    usuario_ult_mod = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
                     estado = table.Column<bool>(type: "bit", nullable: false),
-                    idPersona = table.Column<int>(type: "int", nullable: false)
+                    idPersona = table.Column<int>(type: "int", nullable: false),
+                    personaid = table.Column<string>(type: "nvarchar(20)", nullable: true),
+                    personatipoId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_tbMedico", x => new { x.id, x.tipoId });
+                    table.PrimaryKey("PK_tbMedico", x => x.id);
+                    table.UniqueConstraint("AK_tbMedico_id_tipoId", x => new { x.id, x.tipoId });
                     table.ForeignKey(
-                        name: "FK_tbMedico_tbPersonas_id_tipoId",
-                        columns: x => new { x.id, x.tipoId },
+                        name: "FK_tbMedico_tbPersonas_personaid_personatipoId",
+                        columns: x => new { x.personaid, x.personatipoId },
                         principalTable: "tbPersonas",
-                        principalColumns: new[] { "id", "tipoId" },
-                        onDelete: ReferentialAction.Restrict);
+                        principalColumns: new[] { "id", "tipoId" });
                 });
 
             migrationBuilder.CreateTable(
@@ -332,15 +334,66 @@ namespace DAO.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "tbCita",
+                columns: table => new
+                {
+                    citaId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    idPaciente = table.Column<string>(type: "nvarchar(20)", nullable: false),
+                    tipoIdPaciente = table.Column<int>(type: "int", nullable: false),
+                    idMedico = table.Column<string>(type: "nvarchar(20)", nullable: false),
+                    tipoIdMedico = table.Column<int>(type: "int", nullable: false),
+                    fechaCita = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    horaCita = table.Column<TimeSpan>(type: "time", nullable: false),
+                    motivo = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    estado = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: false),
+                    activo = table.Column<bool>(type: "bit", nullable: false),
+                    fechaCrea = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    usuarioCrea = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
+                    fechaUltMod = table.Column<DateTime>(type: "datetime2", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_tbCita", x => x.citaId);
+                    table.ForeignKey(
+                        name: "FK_tbCita_tbMedico_idMedico_tipoIdMedico",
+                        columns: x => new { x.idMedico, x.tipoIdMedico },
+                        principalTable: "tbMedico",
+                        principalColumns: new[] { "id", "tipoId" },
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_tbCita_tbPaciente_idPaciente_tipoIdPaciente",
+                        columns: x => new { x.idPaciente, x.tipoIdPaciente },
+                        principalTable: "tbPaciente",
+                        principalColumns: new[] { "id", "tipoId" },
+                        onDelete: ReferentialAction.Restrict);
+                });
+
             migrationBuilder.CreateIndex(
                 name: "IX_tbActivos_idCategoria",
                 table: "tbActivos",
                 column: "idCategoria");
 
             migrationBuilder.CreateIndex(
+                name: "IX_tbCita_idMedico_tipoIdMedico",
+                table: "tbCita",
+                columns: new[] { "idMedico", "tipoIdMedico" });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_tbCita_idPaciente_tipoIdPaciente",
+                table: "tbCita",
+                columns: new[] { "idPaciente", "tipoIdPaciente" });
+
+            migrationBuilder.CreateIndex(
                 name: "IX_tbDevolucion_idActivoFK",
                 table: "tbDevolucion",
                 column: "idActivoFK");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_tbMedico_personaid_personatipoId",
+                table: "tbMedico",
+                columns: new[] { "personaid", "personatipoId" });
 
             migrationBuilder.CreateIndex(
                 name: "IX_tbPermisos_clsModuloid_modulo",
@@ -367,6 +420,9 @@ namespace DAO.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
+                name: "tbCita");
+
+            migrationBuilder.DropTable(
                 name: "tbDevolucion");
 
             migrationBuilder.DropTable(
@@ -376,12 +432,6 @@ namespace DAO.Migrations
                 name: "tbEspecialidadMedica");
 
             migrationBuilder.DropTable(
-                name: "tbMedico");
-
-            migrationBuilder.DropTable(
-                name: "tbPaciente");
-
-            migrationBuilder.DropTable(
                 name: "tbPuestos");
 
             migrationBuilder.DropTable(
@@ -389,6 +439,12 @@ namespace DAO.Migrations
 
             migrationBuilder.DropTable(
                 name: "tbUsuarios");
+
+            migrationBuilder.DropTable(
+                name: "tbMedico");
+
+            migrationBuilder.DropTable(
+                name: "tbPaciente");
 
             migrationBuilder.DropTable(
                 name: "tbActivos");

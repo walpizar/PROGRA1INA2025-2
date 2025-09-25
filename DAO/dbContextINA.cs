@@ -26,13 +26,15 @@ namespace DAO
         //public DbSet<clsDonacion> donacion { get; set; }
         public DbSet<clsCategoriaActivos> categoriaActivos { get; set; }
 
+        public DbSet<clsCita> cita { get; set; }        
+
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             if (!optionsBuilder.IsConfigured)
             {
                 optionsBuilder.UseSqlServer(
-                    @"Server=localhost\sqlexpress;Database=dbPaleativoGarabito;Trusted_Connection=True;MultipleActiveResultSets=True;TrustServerCertificate=True;");
+                    @"Server=.\SQLEXPRESS;Database=dbPaleativoGarabito;Trusted_Connection=True;MultipleActiveResultSets=True;TrustServerCertificate=True;");
             }
         }
 
@@ -60,22 +62,22 @@ namespace DAO
                 .HasPrincipalKey<clsPersona>(p => new { p.id, p.tipoId });
 
             // Medico
-            modelBuilder.Entity<clsMedico>().HasKey(m => new { m.id, m.tipoId });
+            //  Esto no funciona en EF Core, rompe las migraciones:
+            // modelBuilder.Entity<clsMedico>().Property(m => new { m.id, m.tipoId })
+            //    .IsRequired()
+            //    .HasMaxLength(20)
+            //    .ValueGeneratedNever();
+
+            // Lo correcto es configurar cada propiedad individualmente:
             modelBuilder.Entity<clsMedico>().Property(m => m.id)
                 .IsRequired()
-                .HasMaxLength(20)        // use esto solo si 'id' es string
+                .HasMaxLength(20)
                 .ValueGeneratedNever();
 
             modelBuilder.Entity<clsMedico>().Property(m => m.tipoId)
                 .IsRequired()
-                .ValueGeneratedNever();  // no ponga HasMaxLength si 'tipoId' es int
+                .ValueGeneratedNever();
 
-
-            modelBuilder.Entity<clsMedico>()
-                .HasOne(m => m.persona)
-                .WithOne()
-                .HasForeignKey<clsMedico>(m => new { m.id, m.tipoId })
-                .OnDelete(DeleteBehavior.Restrict); // Evita el borrado en cascada
 
 
             /*------------------------------------------------------------*/
@@ -119,6 +121,29 @@ namespace DAO
             // Clave primaria compuesta para RolPermiso
             modelBuilder.Entity<clsRolPermiso>()
                 .HasKey(rp => new { rp.idRol, rp.idPermiso });
+
+
+            
+
+            // Relación Cita -> Paciente
+            modelBuilder.Entity<clsCita>()
+                .HasOne(c => c.paciente)
+                .WithMany() // un paciente puede tener muchas citas
+                .HasForeignKey(c => new { c.idPaciente, c.tipoIdPaciente })
+                .HasPrincipalKey(p => new { p.id, p.tipoId })
+                .OnDelete(DeleteBehavior.Restrict);
+
+            // Relación Cita -> Medico
+            modelBuilder.Entity<clsCita>()
+                .HasOne(c => c.medico)
+                .WithMany() // un médico puede tener muchas citas
+                .HasForeignKey(c => new { c.idMedico, c.tipoIdMedico })
+                .HasPrincipalKey(m => new { m.id, m.tipoId })
+                .OnDelete(DeleteBehavior.Restrict);
+
         }
+
+
     }
+
 }

@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DAO.Migrations
 {
     [DbContext(typeof(dbContextINA))]
-    [Migration("20250923172406_incial")]
-    partial class incial
+    [Migration("20250925034823_RelacionCitasMedicoPaciente3")]
+    partial class RelacionCitasMedicoPaciente3
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -115,6 +115,66 @@ namespace DAO.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("tbCategoriaActivos");
+                });
+
+            modelBuilder.Entity("Entities.clsCita", b =>
+                {
+                    b.Property<int>("citaId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("citaId"));
+
+                    b.Property<bool>("activo")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("estado")
+                        .IsRequired()
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
+
+                    b.Property<DateTime>("fechaCita")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("fechaCrea")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("fechaUltMod")
+                        .HasColumnType("datetime2");
+
+                    b.Property<TimeSpan>("horaCita")
+                        .HasColumnType("time");
+
+                    b.Property<string>("idMedico")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(20)");
+
+                    b.Property<string>("idPaciente")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(20)");
+
+                    b.Property<string>("motivo")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("tipoIdMedico")
+                        .HasColumnType("int");
+
+                    b.Property<int>("tipoIdPaciente")
+                        .HasColumnType("int");
+
+                    b.Property<string>("usuarioCrea")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.HasKey("citaId");
+
+                    b.HasIndex("idMedico", "tipoIdMedico");
+
+                    b.HasIndex("idPaciente", "tipoIdPaciente");
+
+                    b.ToTable("tbCita");
                 });
 
             modelBuilder.Entity("Entities.clsDepartamentos", b =>
@@ -262,9 +322,6 @@ namespace DAO.Migrations
                         .HasMaxLength(20)
                         .HasColumnType("nvarchar(20)");
 
-                    b.Property<int>("tipoId")
-                        .HasColumnType("int");
-
                     b.Property<string>("especialidad")
                         .IsRequired()
                         .HasMaxLength(300)
@@ -273,26 +330,37 @@ namespace DAO.Migrations
                     b.Property<bool>("estado")
                         .HasColumnType("bit");
 
-                    b.Property<DateTime>("fechaCrea")
+                    b.Property<DateTime>("fecha_crea")
                         .HasColumnType("datetime2");
 
-                    b.Property<DateTime>("fechaUltMod")
+                    b.Property<DateTime>("fecha_ult_mod")
                         .HasColumnType("datetime2");
 
                     b.Property<int>("idPersona")
                         .HasColumnType("int");
 
-                    b.Property<string>("usuarioCrea")
+                    b.Property<string>("personaid")
+                        .HasColumnType("nvarchar(20)");
+
+                    b.Property<int?>("personatipoId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("tipoId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("usuario_crea")
                         .IsRequired()
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
-                    b.Property<string>("usuarioUltMod")
+                    b.Property<string>("usuario_ult_mod")
                         .IsRequired()
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
-                    b.HasKey("id", "tipoId");
+                    b.HasKey("id");
+
+                    b.HasIndex("personaid", "personatipoId");
 
                     b.ToTable("tbMedico");
                 });
@@ -584,6 +652,26 @@ namespace DAO.Migrations
                     b.Navigation("categoria");
                 });
 
+            modelBuilder.Entity("Entities.clsCita", b =>
+                {
+                    b.HasOne("Entities.clsMedico", "medico")
+                        .WithMany()
+                        .HasForeignKey("idMedico", "tipoIdMedico")
+                        .HasPrincipalKey("id", "tipoId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("Entities.clsPaciente", "paciente")
+                        .WithMany()
+                        .HasForeignKey("idPaciente", "tipoIdPaciente")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("medico");
+
+                    b.Navigation("paciente");
+                });
+
             modelBuilder.Entity("Entities.clsDevolucion", b =>
                 {
                     b.HasOne("Entities.clsActivos", "activo")
@@ -609,10 +697,8 @@ namespace DAO.Migrations
             modelBuilder.Entity("Entities.clsMedico", b =>
                 {
                     b.HasOne("Entities.clsPersona", "persona")
-                        .WithOne()
-                        .HasForeignKey("Entities.clsMedico", "id", "tipoId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
+                        .WithMany()
+                        .HasForeignKey("personaid", "personatipoId");
 
                     b.Navigation("persona");
                 });

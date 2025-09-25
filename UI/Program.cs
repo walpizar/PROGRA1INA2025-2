@@ -27,7 +27,7 @@ namespace UI
 
 
         //solo ejemplo
-        Application.Run(new frmPacienteLista());
+        Application.Run(new frmAsignacionCita());
 
         
         //Application.Run(new frmActivos());
