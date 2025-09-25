@@ -29,15 +29,15 @@
         private void InitializeComponent()
         {
             btnNuevo = new Button();
-            txtBusqueda = new GroupBox();
+            gbBusqueda = new GroupBox();
             lstvLista = new ListView();
             colnombreUsuario = new ColumnHeader();
             colcontraseña = new ColumnHeader();
             colidRol = new ColumnHeader();
-            textBusqueda = new TextBox();
+            txtBusqueda = new TextBox();
             label2 = new Label();
             label1 = new Label();
-            txtBusqueda.SuspendLayout();
+            gbBusqueda.SuspendLayout();
             SuspendLayout();
             // 
             // btnNuevo
@@ -52,18 +52,18 @@
             btnNuevo.UseVisualStyleBackColor = true;
             btnNuevo.Click += btnNuevo_Click;
             // 
-            // txtBusqueda
+            // gbBusqueda
             // 
-            txtBusqueda.Controls.Add(lstvLista);
-            txtBusqueda.Controls.Add(textBusqueda);
-            txtBusqueda.Controls.Add(label2);
-            txtBusqueda.Font = new Font("Tahoma", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            txtBusqueda.Location = new Point(1, 46);
-            txtBusqueda.Name = "txtBusqueda";
-            txtBusqueda.Size = new Size(581, 336);
-            txtBusqueda.TabIndex = 2;
-            txtBusqueda.TabStop = false;
-            txtBusqueda.Text = "Lista Usuarios";
+            gbBusqueda.Controls.Add(lstvLista);
+            gbBusqueda.Controls.Add(txtBusqueda);
+            gbBusqueda.Controls.Add(label2);
+            gbBusqueda.Font = new Font("Tahoma", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            gbBusqueda.Location = new Point(1, 46);
+            gbBusqueda.Name = "gbBusqueda";
+            gbBusqueda.Size = new Size(581, 336);
+            gbBusqueda.TabIndex = 2;
+            gbBusqueda.TabStop = false;
+            gbBusqueda.Text = "Lista Usuarios";
             // 
             // lstvLista
             // 
@@ -95,13 +95,13 @@
             colidRol.TextAlign = HorizontalAlignment.Center;
             colidRol.Width = 250;
             // 
-            // textBusqueda
+            // txtBusqueda
             // 
-            textBusqueda.Location = new Point(6, 37);
-            textBusqueda.Name = "textBusqueda";
-            textBusqueda.Size = new Size(569, 22);
-            textBusqueda.TabIndex = 1;
-            textBusqueda.TextChanged += textBusqueda_TextChanged;
+            txtBusqueda.Location = new Point(6, 37);
+            txtBusqueda.Name = "txtBusqueda";
+            txtBusqueda.Size = new Size(569, 22);
+            txtBusqueda.TabIndex = 1;
+            txtBusqueda.TextChanged += txtBusqueda_TextChanged;
             // 
             // label2
             // 
@@ -112,7 +112,7 @@
             label2.Name = "label2";
             label2.Size = new Size(76, 16);
             label2.TabIndex = 0;
-            label2.Text = "Busqueda:";
+            label2.Text = "Búsqueda:";
             // 
             // label1
             // 
@@ -131,7 +131,7 @@
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(594, 394);
             Controls.Add(label1);
-            Controls.Add(txtBusqueda);
+            Controls.Add(gbBusqueda);
             Controls.Add(btnNuevo);
             Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
             ForeColor = SystemColors.ButtonShadow;
@@ -139,19 +139,20 @@
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Mantenimiento de Usuarios";
             Load += frmUsuarioLista_Load;
-            txtBusqueda.ResumeLayout(false);
-            txtBusqueda.PerformLayout();
+            gbBusqueda.ResumeLayout(false);
+            gbBusqueda.PerformLayout();
             ResumeLayout(false);
             PerformLayout();
         }
 
         #endregion
+
         private Button btnNuevo;
-        private GroupBox txtBusqueda;
+        private GroupBox gbBusqueda;
         private Label label1;
         private Label label2;
         private ListView lstvLista;
-        private TextBox textBusqueda;
+        private TextBox txtBusqueda;
         private ColumnHeader colnombreUsuario;
         private ColumnHeader colcontraseña;
         private ColumnHeader colidRol;

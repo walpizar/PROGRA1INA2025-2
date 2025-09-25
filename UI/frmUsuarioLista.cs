@@ -92,16 +92,27 @@ namespace UI
             }
         }
 
-        private void textBusqueda_TextChanged(object sender, EventArgs e)
+        private void txtBusqueda_TextChanged(object sender, EventArgs e)
         {
-            //Filtrar por nombre y por el idRol
-            var listaFiltrada = this.lista.Where(u => u.nombre_Usuario.ToUpper()
-            .Contains(txtBusqueda.Text.ToUpper()) || u.contrasena.Contains(txtBusqueda.Text.ToUpper()) ||
-            u.idRol.ToString().Contains(txtBusqueda.Text.ToUpper())).ToList();
+            string criterio = txtBusqueda.Text.Trim().ToUpper();
 
-            // Volver a cargar el ListView con la lista filtrada
+            List<clsUsuario> listaFiltrada;
+
+            if (string.IsNullOrEmpty(criterio))
+            {
+                listaFiltrada = this.lista;
+            }
+            else
+            {
+                listaFiltrada = this.lista.Where(u =>
+                    (!string.IsNullOrEmpty(u.nombre_Usuario) && u.nombre_Usuario.ToUpper().Contains(criterio)) ||
+                    (!string.IsNullOrEmpty(u.contrasena) && u.contrasena.ToUpper().Contains(criterio)) ||
+                    u.idRol.ToString().Contains(criterio)
+                ).ToList();
+            }
+
             cargarLista(listaFiltrada);
-        }
 
+        }
     }
 }

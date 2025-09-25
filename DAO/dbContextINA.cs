@@ -30,15 +30,12 @@ namespace DAO
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             if (!optionsBuilder.IsConfigured)
-<<<<<<< HEAD
-            
-                // 🔹 Conexión a SQL Express con autenticación de Windows
-=======
+            // 🔹 Conexión a SQL Express con autenticación de Windows
             {
->>>>>>> 402d6eeb49317638690ae90a0ab7fd445c339002
                 optionsBuilder.UseSqlServer(
                     @"Server=.;Database=dbPaleativoGarabito;Trusted_Connection=True;MultipleActiveResultSets=True;TrustServerCertificate=True;");
             }
+        }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -55,23 +52,14 @@ namespace DAO
 
             // Usuario 1 a 1 con Persona
             modelBuilder.Entity<clsUsuario>()
-<<<<<<< HEAD
                 //Define la clave primaria compuesta para clsUsuario
                 .HasKey(u => new { u.id, u.tipoId});
-=======
-                .HasKey(u => new { u.personaId, u.personaTipoId });
->>>>>>> 402d6eeb49317638690ae90a0ab7fd445c339002
 
             modelBuilder.Entity<clsUsuario>()
                 .HasOne(u => u.persona)//Establece la relación de 1 a 1(un usuario tiene una persona)
                 .WithOne()
                 .HasForeignKey<clsUsuario>(u => new { u.id,u.tipoId })
                 .HasPrincipalKey<clsPersona>(p => new { p.id, p.tipoId });
-<<<<<<< HEAD
-
-            
-=======
->>>>>>> 402d6eeb49317638690ae90a0ab7fd445c339002
 
             // Medico
             modelBuilder.Entity<clsMedico>().HasKey(m => new { m.id, m.tipoId });
