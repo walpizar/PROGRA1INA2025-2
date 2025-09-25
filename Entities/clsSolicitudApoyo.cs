@@ -2,30 +2,38 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
+
+
 namespace Entities
 {
     [Table("tbSolicitudApoyo")]
     public class clsSolicitudApoyo
     {
         [Key]
+        [Required]
+        [StringLength(20, ErrorMessage = "El ID de la solicitud no puede exceder 20 caracteres.")]
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
-        public int idSolicitud { get; set; }
+        public string idSolicitud { get; set; }
 
         [Required]
-        public int idPaciente { get; set; }
+        [StringLength(20, ErrorMessage = "El ID del paciente no puede exceder 20 caracteres.")]
+        public string idPaciente { get; set; }
 
-        public string referenciaCCSS { get; set; }           // Ruta archivo eventualmenrte
-        public string estudioSocioeconomico { get; set; }   // Ruta archivo eventualmenrte
+        [Required]
+        public int tipoIdPaciente { get; set; }
 
-        [StringLength(500, ErrorMessage = "La justificación no puede tener más de 500 caracteres")]
+        public string referenciaCCSS { get; set; }
+        public string estudioSocioeconomico { get; set; }
+
+        [Required]
+        [StringLength(500, ErrorMessage = "La justificación no puede superar los 500 caracteres.")]
         public string justificacion { get; set; }
 
-        [StringLength(500, ErrorMessage = "La descripción de equipos necesarios no puede tener más de 500 caracteres")]
+        [Required]
+        [StringLength(500, ErrorMessage = "Los equipos necesarios no pueden superar los 500 caracteres.")]
         public string equiposNecesarios { get; set; }
 
-        [Required]
-        [StringLength(20)]
-        public string estado { get; private set; }  // Pendiente por defecto, solo aprobador puede cambiar
+        public int estado { get; set; }
 
         [Required]
         public DateTime fechaSolicitud { get; set; }
@@ -33,22 +41,8 @@ namespace Entities
         // Constructor por defecto
         public clsSolicitudApoyo()
         {
-            estado = "Pendiente";
+            estado = 1;
             fechaSolicitud = DateTime.Now;
         }
-
-        // Constructor completo
-        public clsSolicitudApoyo(int idPaciente, string referenciaCCSS, string estudioSocioeconomico,
-                                 string justificacion, string equiposNecesarios)
-        {
-            this.idPaciente = idPaciente;
-            this.referenciaCCSS = referenciaCCSS;
-            this.estudioSocioeconomico = estudioSocioeconomico;
-            this.justificacion = justificacion;
-            this.equiposNecesarios = equiposNecesarios;
-            this.estado = "Pendiente";
-            this.fechaSolicitud = DateTime.Now;
-        }
-
     }
 }

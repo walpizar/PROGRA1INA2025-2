@@ -20,15 +20,13 @@ namespace UI
         {
             InitializeComponent();
 
-            _especialidadService = new EspecialidadService();
-
-            _especialidadService = new EspecialidadService();   
+            _especialidadService = new EspecialidadService(); 
 
         }
 
         private void frmEspecialidades_Load(object sender, EventArgs e)
         {
-            if (especialidadSelected != null) // Estamos modificando
+            if (especialidadSelected != null) //SE MOFICICA
             {
                 btnGuardar.Text = "Editar";
                 lblTitulo.Text = "Editar Especialidad Médica";
@@ -39,7 +37,6 @@ namespace UI
                 // INHABILITAR EDICIÓN DEL CAMPO ID
                 txtId.Enabled = false;
                 txtId.ReadOnly = true;
-
                 btnEliminar.Visible = true; // Mostrar botón de eliminar
             }
             else
@@ -99,7 +96,7 @@ namespace UI
                 MessageBox.Show("Ocurrió un error: " + ex.Message);
             }
         }
-
+        // Cerrar el formulario sin guardar
         private void btnCancelar_Click(object sender, EventArgs e)
         {
             this.DialogResult = DialogResult.Cancel;

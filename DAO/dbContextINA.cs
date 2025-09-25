@@ -123,6 +123,15 @@ namespace DAO
             // Clave primaria compuesta para RolPermiso
             modelBuilder.Entity<clsRolPermiso>()
                 .HasKey(rp => new { rp.idRol, rp.idPermiso });
+
+            // Relación 1 a 1 entre SolicitudApoyo y Paciente
+            modelBuilder.Entity<clsSolicitudApoyo>()
+                .HasOne<clsPaciente>()
+                .WithOne()
+                .HasForeignKey<clsSolicitudApoyo>(s => new { s.idPaciente, s.tipoIdPaciente })
+                .OnDelete(DeleteBehavior.Restrict);
+
+
         }
     }
 }

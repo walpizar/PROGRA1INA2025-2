@@ -23,18 +23,13 @@ namespace DAO
         }
 
         // Eliminar una solicitud por ID
-        public void eliminar(int id)
+        public void eliminar(String id)
         {
-            var solicitud = _context.solicitudApoyo.FirstOrDefault(s => s.idSolicitud == id);
-            if (solicitud != null)
-            {
-                _context.solicitudApoyo.Remove(solicitud);
-                _context.SaveChanges();
-            }
+
         }
 
         // Consultar una solicitud por ID
-        public clsSolicitudApoyo consultarPorID(int id)
+        public clsSolicitudApoyo consultarPorID(string id)
         {
             return _context.solicitudApoyo.FirstOrDefault(s => s.idSolicitud == id);
         }
@@ -46,15 +41,12 @@ namespace DAO
         }
 
         // Consultar solicitudes por paciente
-        public List<clsSolicitudApoyo> consultarPorPaciente(int idPaciente)
+        public List<clsSolicitudApoyo> consultarPorPaciente(string idPaciente, int tipoIdPaciente)
         {
-            return _context.solicitudApoyo.Where(s => s.idPaciente == idPaciente).ToList();
+            return _context.solicitudApoyo
+                           .Where(s => s.idPaciente == idPaciente && s.tipoIdPaciente == tipoIdPaciente)
+                           .ToList();
         }
 
-        // Consultar solicitudes por estado (Pendiente, Aprobada, Rechazada)
-        public List<clsSolicitudApoyo> consultarPorEstado(string estado)
-        {
-            return _context.solicitudApoyo.Where(s => s.estado == estado).ToList();
-        }
     }
 }

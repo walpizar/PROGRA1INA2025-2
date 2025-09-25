@@ -30,7 +30,7 @@ namespace UI
         //Application.Run(new frmEspecialidadLista());
 
         //HENRRY LEIBA -- PRUEBA PARA SOLICITUD DE APOYO
-        Application.Run(new frmSolicitudApoyo());
+        Application.Run(new frmSolicitudApoyoLista());
         
 
         //Application.Run(new frmMantenimientoCategoriasActivos());

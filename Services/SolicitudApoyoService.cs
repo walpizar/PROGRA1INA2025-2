@@ -4,14 +4,14 @@ using DAO;
 using Entities;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Services
 {
     public class SolicitudApoyoService : IGenerica<clsSolicitudApoyo>
     {
-        private readonly SolicitudApoyoDao _solicitudDao = new SolicitudApoyoDao(); // DAO de solicitud de apoyo
+        private readonly SolicitudApoyoDao _solicitudDao = new SolicitudApoyoDao();
 
-        // Constructor
         public SolicitudApoyoService() { }
 
         // Crear nueva solicitud
@@ -24,15 +24,18 @@ namespace Services
                 throw new Exception("Debe especificar los equipos que necesita el paciente.");
 
             if (_solicitudDao.consultarPorID(solicitud.idSolicitud) != null)
-                throw new EntityExistDBException(); // Ya existe una solicitud con ese ID
+                throw new EntityExistDBException();
 
-            _solicitudDao.crear(solicitud); // Crear la solicitud
+            var solicitudesPaciente = _solicitudDao.consultarPorPaciente(solicitud.idPaciente, solicitud.tipoIdPaciente);
+            if (solicitudesPaciente != null && solicitudesPaciente.Count > 0)
+                throw new Exception("Este paciente ya tiene una solicitud de apoyo registrada.");
+
+            _solicitudDao.crear(solicitud);
         }
 
         // Modificar solicitud existente
         public void modificar(clsSolicitudApoyo solicitud)
         {
-
             if (string.IsNullOrWhiteSpace(solicitud.justificacion))
                 throw new Exception("La justificación de la ayuda no puede estar vacía.");
 
@@ -43,16 +46,21 @@ namespace Services
         }
 
         // Eliminar solicitud por ID
-        public void eliminar(int id)
+        public void eliminar(string id)
         {
-            if (_solicitudDao.consultarPorID(id) == null)
+            // Obtener la solicitud por ID
+            var solicitud = _solicitudDao.consultarPorID(id);
+            if (solicitud == null)
                 throw new Exception("La solicitud no existe.");
 
-            _solicitudDao.eliminar(id);
-        }
+            // Cambiar el estado a Rechazada (enum valor 3)
+            solicitud.estado = (int)Common.Enums.Enums.EstadoAprobacionSolicitudApoyo.Rechazada;
 
-        // Consultar por ID
-        public clsSolicitudApoyo consultarPorID(int id)
+            // Guardar cambios en la BD
+            _solicitudDao.modificar(solicitud);
+        }
+        // Consultar solicitud por ID
+        public clsSolicitudApoyo consultarPorID(string id)
         {
             return _solicitudDao.consultarPorID(id);
         }
@@ -62,31 +70,17 @@ namespace Services
         {
             return _solicitudDao.consultarTodos();
         }
-
-        // Consultar solicitudes por paciente
-        public List<clsSolicitudApoyo> consultarPorPaciente(int idPaciente)
-        {
-            return _solicitudDao.consultarPorPaciente(idPaciente);
-        }
-
-        // Consultar solicitudes por estado
-        public List<clsSolicitudApoyo> consultarPorEstado(string estado)
-        {
-            return _solicitudDao.consultarPorEstado(estado);
-        }
-
-        // Métodos de la interfaz que no aplican
-        public clsSolicitudApoyo consultarPorNombre(string nombre)
-        {
-            throw new NotImplementedException("No aplica consultar por nombre en Solicitud de Apoyo.");
-        }
-
-        public void eliminar(string id)
+        public void eliminar(int id)
         {
             throw new NotImplementedException();
         }
 
-        public clsSolicitudApoyo consultarPorID(string id)
+        public clsSolicitudApoyo consultarPorID(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public clsSolicitudApoyo consultarPorNombre(string nombre)
         {
             throw new NotImplementedException();
         }
