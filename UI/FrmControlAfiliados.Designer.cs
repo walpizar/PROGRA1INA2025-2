@@ -38,10 +38,8 @@
             textBox1 = new TextBox();
             tabControl1 = new TabControl();
             tabPage1 = new TabPage();
-            button2 = new Button();
             button1 = new Button();
             tabPage2 = new TabPage();
-            button3 = new Button();
             button4 = new Button();
             textBox2 = new TextBox();
             LvDonantes = new ListView();
@@ -50,6 +48,8 @@
             columnHeader3 = new ColumnHeader();
             columnHeader4 = new ColumnHeader();
             columnHeader5 = new ColumnHeader();
+            label2 = new Label();
+            label3 = new Label();
             tabControl1.SuspendLayout();
             tabPage1.SuspendLayout();
             tabPage2.SuspendLayout();
@@ -58,10 +58,10 @@
             // label1
             // 
             label1.AutoSize = true;
-            label1.Font = new Font("Segoe UI", 20.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label1.Location = new Point(149, 9);
+            label1.Font = new Font("Segoe UI", 20.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label1.Location = new Point(142, 9);
             label1.Name = "label1";
-            label1.Size = new Size(492, 37);
+            label1.Size = new Size(535, 37);
             label1.TabIndex = 0;
             label1.Text = "Control Aportes de Afiliados y Donantes";
             // 
@@ -102,10 +102,12 @@
             // 
             // textBox1
             // 
+            textBox1.ForeColor = SystemColors.WindowFrame;
             textBox1.Location = new Point(11, 11);
             textBox1.Name = "textBox1";
             textBox1.Size = new Size(152, 23);
             textBox1.TabIndex = 3;
+            textBox1.Text = "filtre por nombre";
             // 
             // tabControl1
             // 
@@ -119,7 +121,7 @@
             // 
             // tabPage1
             // 
-            tabPage1.Controls.Add(button2);
+            tabPage1.Controls.Add(label2);
             tabPage1.Controls.Add(button1);
             tabPage1.Controls.Add(textBox1);
             tabPage1.Controls.Add(lvAfiliados);
@@ -131,28 +133,18 @@
             tabPage1.Text = "Afiliados";
             tabPage1.UseVisualStyleBackColor = true;
             // 
-            // button2
-            // 
-            button2.Location = new Point(645, 10);
-            button2.Name = "button2";
-            button2.Size = new Size(109, 23);
-            button2.TabIndex = 5;
-            button2.Text = "Agregar pago";
-            button2.UseVisualStyleBackColor = true;
-            // 
             // button1
             // 
-            button1.Location = new Point(524, 10);
+            button1.Location = new Point(639, 11);
             button1.Name = "button1";
             button1.Size = new Size(115, 23);
             button1.TabIndex = 4;
             button1.Text = "Detalles de pago";
             button1.UseVisualStyleBackColor = true;
-     
             // 
             // tabPage2
             // 
-            tabPage2.Controls.Add(button3);
+            tabPage2.Controls.Add(label3);
             tabPage2.Controls.Add(button4);
             tabPage2.Controls.Add(textBox2);
             tabPage2.Controls.Add(LvDonantes);
@@ -164,31 +156,23 @@
             tabPage2.Text = "Donantes";
             tabPage2.UseVisualStyleBackColor = true;
             // 
-            // button3
-            // 
-            button3.Location = new Point(645, 10);
-            button3.Name = "button3";
-            button3.Size = new Size(109, 23);
-            button3.TabIndex = 8;
-            button3.Text = "Agregar pago";
-            button3.UseVisualStyleBackColor = true;
-            // 
             // button4
             // 
-            button4.Location = new Point(524, 10);
+            button4.Location = new Point(639, 10);
             button4.Name = "button4";
             button4.Size = new Size(115, 23);
             button4.TabIndex = 7;
             button4.Text = "Detalles de pago";
             button4.UseVisualStyleBackColor = true;
-      
             // 
             // textBox2
             // 
+            textBox2.ForeColor = SystemColors.WindowFrame;
             textBox2.Location = new Point(11, 11);
             textBox2.Name = "textBox2";
             textBox2.Size = new Size(148, 23);
             textBox2.TabIndex = 6;
+            textBox2.Text = "filtre por nombre";
             // 
             // LvDonantes
             // 
@@ -225,6 +209,28 @@
             columnHeader5.Text = "Correo";
             columnHeader5.Width = 200;
             // 
+            // label2
+            // 
+            label2.AutoSize = true;
+            label2.Font = new Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label2.ForeColor = SystemColors.AppWorkspace;
+            label2.Location = new Point(180, 319);
+            label2.Name = "label2";
+            label2.Size = new Size(410, 17);
+            label2.TabIndex = 6;
+            label2.Text = "Seleccione el usuario y presione los botones de arriba para utilizarlo";
+            // 
+            // label3
+            // 
+            label3.AutoSize = true;
+            label3.Font = new Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label3.ForeColor = SystemColors.ControlDark;
+            label3.Location = new Point(202, 318);
+            label3.Name = "label3";
+            label3.Size = new Size(362, 17);
+            label3.TabIndex = 8;
+            label3.Text = "Seleccione un donante y administra los detalles con el boton";
+            // 
             // FrmControlAfiliados
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -234,7 +240,6 @@
             Controls.Add(label1);
             Name = "FrmControlAfiliados";
             Text = "FrmControlAfiliados";
-    
             tabControl1.ResumeLayout(false);
             tabPage1.ResumeLayout(false);
             tabPage1.PerformLayout();
@@ -264,9 +269,9 @@
         private ColumnHeader columnHeader3;
         private ColumnHeader columnHeader4;
         private ColumnHeader columnHeader5;
-        private Button button2;
         private Button button1;
-        private Button button3;
         private Button button4;
+        private Label label2;
+        private Label label3;
     }
 }

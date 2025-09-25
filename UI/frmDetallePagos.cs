@@ -83,9 +83,12 @@ namespace UI
         {
             listView1.Clear();
             listView1.View = View.Details;
-            listView1.Columns.Add("Fecha de Pago", 120);
+
+            // Columnas unificadas
+            listView1.Columns.Add("Mes / Año", 120);
             listView1.Columns.Add("Monto", 100);
             listView1.Columns.Add("Estado", 100);
+            listView1.Columns.Add("Fecha Pago Real", 120);
 
             var donacionBase = _donacionService.consultarTodos()
                 .FirstOrDefault(d => d.donanteId == _persona.personaId
@@ -96,15 +99,17 @@ namespace UI
 
             decimal cuotaMensual = donacionBase.monto ?? 0;
             decimal totalAnual = cuotaMensual * 12;
-
             montoAnual.Text = totalAnual.ToString("C");
 
-            decimal totalPagado = _donacionService.consultarTodos()
+            // Obtener pagos existentes
+            var pagosExistentes = _donacionService.consultarTodos()
                 .Where(d => d.donanteId == _persona.personaId
                          && d.donanteTipoId == _persona.personaTipoId
                          && d.estado)
-                .Sum(d => d.monto ?? 0);
+                .ToList();
 
+            // Calcular saldo pendiente
+            decimal totalPagado = pagosExistentes.Sum(d => d.monto ?? 0);
             saldoPendiente.Text = (totalAnual - totalPagado).ToString("C");
 
             string frecuencia = cbFrecuencia.SelectedItem.ToString();
@@ -118,28 +123,25 @@ namespace UI
 
             int cantidadPagos = 12 / mesesPorPago;
             decimal montoPorPago = cuotaMensual * mesesPorPago;
-
-            var fechasFuturas = new List<DateTime>();
             var fechaInicio = donacionBase.fechaDonacion;
+
             for (int i = 0; i < cantidadPagos; i++)
             {
-                fechasFuturas.Add(fechaInicio.AddMonths(i * mesesPorPago));
-            }
+                var fechaPago = fechaInicio.AddMonths(i * mesesPorPago);
 
-            decimal acumuladoPagado = totalPagado;
-
-            foreach (var fecha in fechasFuturas)
-            {
-                var item = new ListViewItem(fecha.ToShortDateString());
-                item.SubItems.Add(montoPorPago.ToString("C"));
+                var pagoRealizado = pagosExistentes
+                    .FirstOrDefault(p => p.fechaDonacion.Month == fechaPago.Month &&
+                                         p.fechaDonacion.Year == fechaPago.Year);
 
                 string estado;
-                if (acumuladoPagado >= montoPorPago)
+                string fechaReal = "-";
+
+                if (pagoRealizado != null)
                 {
                     estado = "Pagado";
-                    acumuladoPagado -= montoPorPago;
+                    fechaReal = pagoRealizado.fechaDonacion.ToShortDateString();
                 }
-                else if (fecha <= DateTime.Today)
+                else if (fechaPago <= DateTime.Today)
                 {
                     estado = "Pendiente";
                 }
@@ -148,7 +150,10 @@ namespace UI
                     estado = "Futuro";
                 }
 
+                var item = new ListViewItem($"{fechaPago:MMMM yyyy}");
+                item.SubItems.Add(montoPorPago.ToString("C"));
                 item.SubItems.Add(estado);
+                item.SubItems.Add(fechaReal);
                 listView1.Items.Add(item);
             }
         }
@@ -188,15 +193,14 @@ namespace UI
 
             string frecuencia = cbFrecuencia.SelectedItem.ToString();
             var pagoForm = new frmPagoAfiliado(_persona, _donacionService, frecuencia);
+
+            // Recargar lista automáticamente al cerrar el formulario de pago
+            pagoForm.FormClosed += (s, args) =>
+            {
+                CargarPagosAfiliado();
+            };
+
             pagoForm.ShowDialog();
-
-            // Recargar la lista después de agregar pago
-            CargarPagosAfiliado();
-        }
-
-        private void frmDetallePagos_Load_1(object sender, EventArgs e)
-        {
-
         }
     }
 }

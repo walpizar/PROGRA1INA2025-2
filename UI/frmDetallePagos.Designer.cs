@@ -48,55 +48,60 @@
             // label1
             // 
             label1.AutoSize = true;
-            label1.Location = new Point(12, 61);
+            label1.Font = new Font("Segoe UI Semibold", 11.25F, FontStyle.Bold);
+            label1.Location = new Point(11, 61);
             label1.Name = "label1";
-            label1.Size = new Size(57, 15);
+            label1.Size = new Size(74, 20);
             label1.TabIndex = 0;
             label1.Text = "Nombre :";
             // 
             // label2
             // 
             label2.AutoSize = true;
-            label2.Location = new Point(22, 125);
+            label2.Font = new Font("Segoe UI Semibold", 11.25F, FontStyle.Bold);
+            label2.Location = new Point(23, 105);
             label2.Name = "label2";
-            label2.Size = new Size(47, 15);
+            label2.Size = new Size(62, 20);
             label2.TabIndex = 1;
             label2.Text = "correo :";
             // 
             // label3
             // 
             label3.AutoSize = true;
-            label3.Location = new Point(12, 95);
+            label3.Font = new Font("Segoe UI Semibold", 11.25F, FontStyle.Bold);
+            label3.Location = new Point(11, 84);
             label3.Name = "label3";
-            label3.Size = new Size(57, 15);
+            label3.Size = new Size(74, 20);
             label3.TabIndex = 2;
             label3.Text = "Apellido :";
             // 
             // label4
             // 
             label4.AutoSize = true;
-            label4.Font = new Font("Segoe UI", 21.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label4.Location = new Point(292, 9);
+            label4.Font = new Font("Segoe UI", 21.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label4.Location = new Point(275, 9);
             label4.Name = "label4";
-            label4.Size = new Size(190, 40);
+            label4.Size = new Size(203, 40);
             label4.TabIndex = 3;
             label4.Text = "Detalle Pagos";
             // 
             // apellido2
             // 
             apellido2.AutoSize = true;
-            apellido2.Location = new Point(143, 95);
+            apellido2.Font = new Font("Segoe UI Semibold", 11.25F, FontStyle.Bold);
+            apellido2.Location = new Point(141, 84);
             apellido2.Name = "apellido2";
-            apellido2.Size = new Size(38, 15);
+            apellido2.Size = new Size(50, 20);
             apellido2.TabIndex = 5;
             apellido2.Text = "label5";
             // 
             // apellido
             // 
             apellido.AutoSize = true;
-            apellido.Location = new Point(69, 95);
+            apellido.Font = new Font("Segoe UI Semibold", 11.25F, FontStyle.Bold);
+            apellido.Location = new Point(85, 85);
             apellido.Name = "apellido";
-            apellido.Size = new Size(38, 15);
+            apellido.Size = new Size(50, 20);
             apellido.TabIndex = 4;
             apellido.Text = "label6";
             // 
@@ -111,56 +116,62 @@
             // nombre
             // 
             nombre.AutoSize = true;
-            nombre.Location = new Point(69, 61);
+            nombre.Font = new Font("Segoe UI Semibold", 11.25F, FontStyle.Bold);
+            nombre.Location = new Point(85, 63);
             nombre.Name = "nombre";
-            nombre.Size = new Size(38, 15);
+            nombre.Size = new Size(50, 20);
             nombre.TabIndex = 8;
             nombre.Text = "label7";
             // 
             // correo
             // 
             correo.AutoSize = true;
-            correo.Location = new Point(69, 125);
+            correo.Font = new Font("Segoe UI Semibold", 11.25F, FontStyle.Bold);
+            correo.Location = new Point(85, 105);
             correo.Name = "correo";
-            correo.Size = new Size(38, 15);
+            correo.Size = new Size(50, 20);
             correo.TabIndex = 9;
             correo.Text = "label8";
             // 
             // label9
             // 
             label9.AutoSize = true;
-            label9.Location = new Point(547, 61);
+            label9.Font = new Font("Segoe UI Semibold", 11.25F, FontStyle.Bold);
+            label9.Location = new Point(542, 82);
             label9.Name = "label9";
-            label9.Size = new Size(81, 15);
+            label9.Size = new Size(104, 20);
             label9.TabIndex = 10;
             label9.Text = "monto anual :";
             // 
             // saldoPendiente
             // 
             saldoPendiente.AutoSize = true;
-            saldoPendiente.Location = new Point(634, 95);
+            saldoPendiente.Font = new Font("Segoe UI Semibold", 11.25F, FontStyle.Bold);
+            saldoPendiente.Location = new Point(649, 111);
             saldoPendiente.Name = "saldoPendiente";
-            saldoPendiente.Size = new Size(44, 15);
+            saldoPendiente.Size = new Size(45, 20);
             saldoPendiente.TabIndex = 13;
-            saldoPendiente.Text = "label11";
+            saldoPendiente.Text = "saldo";
             // 
             // label12
             // 
             label12.AutoSize = true;
-            label12.Location = new Point(531, 95);
+            label12.Font = new Font("Segoe UI Semibold", 11.25F, FontStyle.Bold);
+            label12.Location = new Point(520, 111);
             label12.Name = "label12";
-            label12.Size = new Size(97, 15);
+            label12.Size = new Size(126, 20);
             label12.TabIndex = 12;
             label12.Text = "saldo pendiente :";
             // 
             // montoAnual
             // 
             montoAnual.AutoSize = true;
-            montoAnual.Location = new Point(634, 61);
+            montoAnual.Font = new Font("Segoe UI Semibold", 11.25F, FontStyle.Bold);
+            montoAnual.Location = new Point(648, 82);
             montoAnual.Name = "montoAnual";
-            montoAnual.Size = new Size(74, 15);
+            montoAnual.Size = new Size(126, 20);
             montoAnual.TabIndex = 11;
-            montoAnual.Text = "Pago Anual :";
+            montoAnual.Text = "cantidad por ano";
             // 
             // cbFrecuencia
             // 
@@ -201,7 +212,6 @@
             Controls.Add(label2);
             Controls.Add(label1);
             Name = "frmDetallePagos";
-            Load += frmDetallePagos_Load_1;
             ResumeLayout(false);
             PerformLayout();
         }
