@@ -88,7 +88,7 @@
             gbxClientes.TabIndex = 5;
             gbxClientes.TabStop = false;
             gbxClientes.Text = "Datos Activos:";
-            gbxClientes.Enter += gbxClientes_Enter_1;
+            gbxClientes.Enter += gbxClientes_Enter;
             // 
             // cbxCategorias
             // 

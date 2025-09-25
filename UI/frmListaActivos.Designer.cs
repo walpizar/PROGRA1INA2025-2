@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             gbxLista = new GroupBox();
+            btnCrear = new Button();
             label1 = new Label();
             txtBusqueda = new TextBox();
             lstvListaActivos = new ListView();
@@ -39,8 +40,9 @@
             colNomCategoria = new ColumnHeader();
             colEstadoUso = new ColumnHeader();
             colEstado = new ColumnHeader();
+            colfechadesecho = new ColumnHeader();
+            colObservaciones = new ColumnHeader();
             lblTitulo = new Label();
-            btnCrear = new Button();
             gbxLista.SuspendLayout();
             SuspendLayout();
             // 
@@ -52,10 +54,22 @@
             gbxLista.Controls.Add(lstvListaActivos);
             gbxLista.Location = new Point(12, 61);
             gbxLista.Name = "gbxLista";
-            gbxLista.Size = new Size(1020, 387);
+            gbxLista.Size = new Size(1127, 387);
             gbxLista.TabIndex = 5;
             gbxLista.TabStop = false;
             gbxLista.Text = "Lista Activos";
+            // 
+            // btnCrear
+            // 
+            btnCrear.FlatAppearance.BorderColor = Color.Red;
+            btnCrear.FlatAppearance.BorderSize = 3;
+            btnCrear.Location = new Point(790, 27);
+            btnCrear.Name = "btnCrear";
+            btnCrear.Size = new Size(120, 40);
+            btnCrear.TabIndex = 4;
+            btnCrear.Text = "Nuevo";
+            btnCrear.UseVisualStyleBackColor = true;
+            btnCrear.Click += btnCrear_Click_1;
             // 
             // label1
             // 
@@ -72,21 +86,22 @@
             txtBusqueda.Name = "txtBusqueda";
             txtBusqueda.Size = new Size(600, 23);
             txtBusqueda.TabIndex = 3;
-            txtBusqueda.TextChanged += txtBusqueda_TextChanged;
+            txtBusqueda.TextChanged += txtBusqueda_TextChanged_1;
             // 
             // lstvListaActivos
             // 
-            lstvListaActivos.Columns.AddRange(new ColumnHeader[] { colId, colNombre, colDescripcion, colIdCategoria, colNomCategoria, colEstadoUso, colEstado });
+            lstvListaActivos.Columns.AddRange(new ColumnHeader[] { colId, colNombre, colDescripcion, colIdCategoria, colNomCategoria, colEstadoUso, colEstado, colfechadesecho, colObservaciones });
             lstvListaActivos.FullRowSelect = true;
             lstvListaActivos.GridLines = true;
-            lstvListaActivos.Location = new Point(15, 88);
+            lstvListaActivos.Location = new Point(19, 88);
             lstvListaActivos.MultiSelect = false;
             lstvListaActivos.Name = "lstvListaActivos";
-            lstvListaActivos.Size = new Size(973, 293);
+            lstvListaActivos.Size = new Size(1085, 293);
             lstvListaActivos.TabIndex = 0;
             lstvListaActivos.UseCompatibleStateImageBehavior = false;
             lstvListaActivos.View = View.Details;
-            lstvListaActivos.MouseDoubleClick += lstvListaActivos_MouseDoubleClick;
+            
+            lstvListaActivos.MouseDoubleClick += lstvListaActivos_MouseDoubleClick_1;
             // 
             // colId
             // 
@@ -106,7 +121,7 @@
             // colIdCategoria
             // 
             colIdCategoria.Text = "ID Categoria";
-            colIdCategoria.Width = 150;
+            colIdCategoria.Width = 100;
             // 
             // colNomCategoria
             // 
@@ -121,7 +136,17 @@
             // colEstado
             // 
             colEstado.Text = "Estado Activo";
-            colEstado.Width = 200;
+            colEstado.Width = 120;
+            // 
+            // colfechadesecho
+            // 
+            colfechadesecho.Text = "Fecha desecho";
+            colfechadesecho.Width = 90;
+            // 
+            // colObservaciones
+            // 
+            colObservaciones.Text = "Observaciones desecho";
+            colObservaciones.Width = 150;
             // 
             // lblTitulo
             // 
@@ -133,23 +158,11 @@
             lblTitulo.TabIndex = 3;
             lblTitulo.Text = "Mantenimiento Activos\r\n";
             // 
-            // btnCrear
-            // 
-            btnCrear.FlatAppearance.BorderColor = Color.Red;
-            btnCrear.FlatAppearance.BorderSize = 3;
-            btnCrear.Location = new Point(790, 27);
-            btnCrear.Name = "btnCrear";
-            btnCrear.Size = new Size(120, 40);
-            btnCrear.TabIndex = 4;
-            btnCrear.Text = "Nuevo";
-            btnCrear.UseVisualStyleBackColor = true;
-            btnCrear.Click += btnCrear_Click;
-            // 
             // frmListaActivos
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1052, 489);
+            ClientSize = new Size(1152, 489);
             Controls.Add(gbxLista);
             Controls.Add(lblTitulo);
             Name = "frmListaActivos";
@@ -175,5 +188,7 @@
         private ColumnHeader colNomCategoria;
         private ColumnHeader colEstadoUso;
         private ColumnHeader colEstado;
+        private ColumnHeader colfechadesecho;
+        private ColumnHeader colObservaciones;
     }
 }

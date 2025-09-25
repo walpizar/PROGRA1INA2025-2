@@ -49,9 +49,11 @@ namespace UI
             lstvListaActivos.Columns.Add("Nombre", 120);
             lstvListaActivos.Columns.Add("Descripción", 150);
             lstvListaActivos.Columns.Add("ID Categoría", 80);
-            lstvListaActivos.Columns.Add("Categoría", 120);
-            lstvListaActivos.Columns.Add("Estado Uso", 100);
-            lstvListaActivos.Columns.Add("Estado", 80);
+            lstvListaActivos.Columns.Add("Nombre Categoría", 120);
+            lstvListaActivos.Columns.Add("Estado de Uso", 100);
+            lstvListaActivos.Columns.Add("Estado Activo", 80);
+            lstvListaActivos.Columns.Add("Fecha Desecho", 100);
+            lstvListaActivos.Columns.Add("Observaciones Desecho", 150);
         }
 
         private bool VerificarConexion()
@@ -142,6 +144,8 @@ namespace UI
                     string nombreCategoria = activo.categoria != null && activo.categoria.nombre != null ? activo.categoria.nombre : "Sin categoría";
                     string estadoUso = estadoUsoToString(activo.estadoUso);
                     string estado = activo.Estado ? "Activo" : "Dado de baja";
+                    string fechaDesecho = activo.fechaDesecho == null ? "" : activo.fechaDesecho.Value.ToString("yyyy-MM-dd");
+                    string observacionDesecho = activo.observacionDesecho == null ? "" : activo.observacionDesecho;
 
                     var item = new ListViewItem(activo.idActivo.ToString());
                     item.SubItems.Add(nombreActivo);
@@ -150,12 +154,13 @@ namespace UI
                     item.SubItems.Add(nombreCategoria);
                     item.SubItems.Add(estadoUso);
                     item.SubItems.Add(estado);
+                    item.SubItems.Add(fechaDesecho);
+                    item.SubItems.Add(observacionDesecho);
                     item.Tag = activo;
 
-                    // Resaltar activos con Estado = false (Dado de baja) con fondo gris claro
                     if (!activo.Estado)
                     {
-                        item.BackColor = System.Drawing.Color.LightGray; // Mejora visual
+                        item.BackColor = System.Drawing.Color.LightGray;
                     }
 
                     lstvListaActivos.Items.Add(item);
@@ -179,7 +184,7 @@ namespace UI
             };
         }
 
-        private void txtBusqueda_TextChanged(object sender, EventArgs e)
+        private void txtBusqueda_TextChanged_1(object sender, EventArgs e)
         {
             try
             {
@@ -208,7 +213,7 @@ namespace UI
             }
         }
 
-        private void lstvListaActivos_MouseDoubleClick(object sender, MouseEventArgs e)
+        private void lstvListaActivos_MouseDoubleClick_1(object sender, MouseEventArgs e)
         {
             try
             {
@@ -240,7 +245,12 @@ namespace UI
             }
         }
 
-        private void btnCrear_Click(object sender, EventArgs e)
+        private void RefrescarLista()
+        {
+            CargarListaConManejo();
+        }
+
+        private void btnCrear_Click_1(object sender, EventArgs e)
         {
             try
             {
@@ -258,11 +268,6 @@ namespace UI
                 MessageBox.Show($"Error al crear activo: {ex.Message}",
                                 "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-        }
-
-        private void RefrescarLista()
-        {
-            CargarListaConManejo();
         }
     }
 }
