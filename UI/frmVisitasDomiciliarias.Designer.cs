@@ -31,7 +31,6 @@
             label1 = new Label();
             label2 = new Label();
             textBox1 = new TextBox();
-            button1 = new Button();
             button2 = new Button();
             groupBox1 = new GroupBox();
             label3 = new Label();
@@ -57,26 +56,17 @@
             label2.AutoSize = true;
             label2.Location = new Point(70, 28);
             label2.Name = "label2";
-            label2.Size = new Size(93, 15);
+            label2.Size = new Size(151, 15);
             label2.TabIndex = 1;
-            label2.Text = "Buscar Paciente:";
+            label2.Text = "Buscar Paciente o Visitante:";
             // 
             // textBox1
             // 
-            textBox1.Location = new Point(169, 24);
+            textBox1.Location = new Point(227, 25);
             textBox1.Name = "textBox1";
-            textBox1.Size = new Size(142, 23);
+            textBox1.Size = new Size(166, 23);
             textBox1.TabIndex = 2;
             textBox1.TextChanged += textBox1_TextChanged;
-            // 
-            // button1
-            // 
-            button1.Location = new Point(317, 24);
-            button1.Name = "button1";
-            button1.Size = new Size(75, 23);
-            button1.TabIndex = 3;
-            button1.Text = "Buscar";
-            button1.UseVisualStyleBackColor = true;
             // 
             // button2
             // 
@@ -93,11 +83,10 @@
             groupBox1.Controls.Add(label3);
             groupBox1.Controls.Add(listView1);
             groupBox1.Controls.Add(label2);
-            groupBox1.Controls.Add(button1);
             groupBox1.Controls.Add(textBox1);
             groupBox1.Location = new Point(22, 93);
             groupBox1.Name = "groupBox1";
-            groupBox1.Size = new Size(478, 397);
+            groupBox1.Size = new Size(491, 385);
             groupBox1.TabIndex = 6;
             groupBox1.TabStop = false;
             groupBox1.Text = "Lista de Visitas Domiciliarias";
@@ -106,7 +95,7 @@
             // 
             label3.AutoSize = true;
             label3.ForeColor = SystemColors.ControlDarkDark;
-            label3.Location = new Point(86, 370);
+            label3.Location = new Point(97, 353);
             label3.Name = "label3";
             label3.Size = new Size(272, 15);
             label3.TabIndex = 7;
@@ -115,13 +104,15 @@
             // listView1
             // 
             listView1.Columns.AddRange(new ColumnHeader[] { columnHeader1, columnHeader2, columnHeader3 });
+            listView1.FullRowSelect = true;
             listView1.GridLines = true;
-            listView1.Location = new Point(48, 62);
+            listView1.Location = new Point(9, 54);
             listView1.Name = "listView1";
-            listView1.Size = new Size(367, 296);
+            listView1.Size = new Size(469, 296);
             listView1.TabIndex = 6;
             listView1.UseCompatibleStateImageBehavior = false;
             listView1.View = View.Details;
+            listView1.MouseDoubleClick += listView1_MouseDoubleClick;
             // 
             // columnHeader1
             // 
@@ -131,12 +122,12 @@
             // columnHeader2
             // 
             columnHeader2.Text = "Nombre Paciente";
-            columnHeader2.Width = 130;
+            columnHeader2.Width = 180;
             // 
             // columnHeader3
             // 
             columnHeader3.Text = "Nombre Visitante";
-            columnHeader3.Width = 130;
+            columnHeader3.Width = 180;
             // 
             // frmVisitasDomiciliarias
             // 
@@ -160,7 +151,6 @@
         private Label label1;
         private Label label2;
         private TextBox textBox1;
-        private Button button1;
         private Button button2;
         private GroupBox groupBox1;
         private ListView listView1;

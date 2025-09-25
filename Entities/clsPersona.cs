@@ -50,8 +50,5 @@ namespace Entities
 
         // constructor vacío
         public clsPersona() { }
-
-       
-      
     }
 }

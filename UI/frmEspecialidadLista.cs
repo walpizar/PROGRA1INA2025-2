@@ -61,9 +61,6 @@ namespace UI
             }
         }
 
-
-
-
         private void btnNuevaEspecialidad_Click(object sender, EventArgs e)
         {
             frmEspecialidad frm = new frmEspecialidad();
@@ -103,7 +100,5 @@ namespace UI
         private void gbxListaEspecialidad_Enter(object sender, EventArgs e) { }
         private void btnNuevaEspecialidad_TextChanged(object sender, EventArgs e) { }
         private void lstvListaEspecialidad_SelectedIndexChanged(object sender, EventArgs e) { }
-
-
     }
 }

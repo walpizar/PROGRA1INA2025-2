@@ -64,5 +64,45 @@ namespace DAO
             return _context.visitasDomiciliares.ToList();
         }
 
+
+        //MAGIBER PARA ACCEDER A LA TB DE PERSONA
+        public bool existePersonaPorNombre(string nombre)//SERIA MAS FACIL SI HUBIERA UNA RELACION 1 A 1 CON PACIENTE
+        {
+            var nombreNormalizado = nombre.Trim().ToLower();
+
+            return _context.persona.Any(p =>
+                ((p.nombre ?? "").Trim().ToLower() + " " +
+                 (p.apellido1 ?? "").Trim().ToLower() + " " +
+                 (p.apellido2 ?? "").Trim().ToLower()).Trim()
+                 == nombreNormalizado);
+        }
+        public string consultarDireccion(string nombreCompleto)
+        {
+            var nombreNormalizado = nombreCompleto.Trim().ToLower();
+
+            var persona = _context.persona
+                .FirstOrDefault(p =>
+                    ((p.nombre ?? "").Trim().ToLower() + " " +
+                     (p.apellido1 ?? "").Trim().ToLower() + " " +
+                     (p.apellido2 ?? "").Trim().ToLower()).Trim()
+                     == nombreNormalizado);
+
+            return persona?.direccion;
+        }
+        public string consultarTelefono(string nombreCompleto)
+        {
+            var nombreNormalizado = nombreCompleto.Trim().ToLower();
+
+            var persona = _context.persona
+                .FirstOrDefault(p =>
+                    ((p.nombre ?? "").Trim().ToLower() + " " +
+                     (p.apellido1 ?? "").Trim().ToLower() + " " +
+                     (p.apellido2 ?? "").Trim().ToLower()).Trim()
+                     == nombreNormalizado);
+
+            return persona?.telefono;
+        }
+
+
     }
 }

@@ -1,5 +1,6 @@
 ﻿using DAO;
 using Entities;
+using Microsoft.IdentityModel.Tokens;
 using Services;
 using System;
 using System.Collections.Generic;
@@ -17,24 +18,39 @@ namespace UI
     {
         private readonly VisitasService _visitaService;
 
+        public clsVisitasDomiciliares visitaSelected { get; set; }
+
         public frmNuevaVisita()
         {
             InitializeComponent();
             _visitaService = new VisitasService();
         }
 
-        private void groupBox1_Enter(object sender, EventArgs e)
-        {
-        }
-
         private void frmNuevaVisita_Load(object sender, EventArgs e)
         {
-            textBox1.Text = DateTime.Now.ToString("dd/MM/yyyy");
-        }
+            textBox1.Text = DateTime.Now.ToString("dd/MM/yyyy");//FECHA ACTUAL POR DEFECTO
+            textBox1.ReadOnly = true;
 
-        private void textBox3_TextChanged(object sender, EventArgs e)
-        {
+            if (visitaSelected != null) //SI SE SELECIONA ALGUNO DE LA LISTA
+            {
+                label2.Text = "Visita Domiciliaria Hecha";
+                textBox1.Text = visitaSelected.fecha.ToString("dd/MM/yyyy");
+                textBox2.Text = visitaSelected.nombreVisitante;
+                textBox3.Text = visitaSelected.nombrePaciente;
+                textBox4.Text = visitaSelected.direccion;
+                textBox5.Text = visitaSelected.telefono.ToString();/////////////////////////////////////////
+                richTextBox1.Text = visitaSelected.detalles;
 
+                textBox1.ReadOnly = true;//NO PERMITE QUE SE MODIFIQUEN
+                textBox2.ReadOnly = true;
+                textBox3.ReadOnly = true;
+                textBox4.ReadOnly = true;
+                textBox5.ReadOnly = true;
+                richTextBox1.ReadOnly = true;
+
+                button1.Visible = false;
+                button2.Visible = false;// NO MOSTAR BTNS
+            }
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -43,12 +59,19 @@ namespace UI
             {
                 if (validarDatos())
                 {
+                    if (!_visitaService.existenciaPersonaPorNombre(textBox3.Text))  //SE VALIDA SI EXISTE EL NOMBRE EN LA TB PERSONA 
+                    {
+                        MessageBox.Show("El paciente no existe en la base de datos.");
+                        return;
+                    }
+
                     clsVisitasDomiciliares visita = new clsVisitasDomiciliares();
                     visita.fecha = DateTime.Now.Date;
-                    visita.nombreVisitante = textBox2.Text;
-                    visita.nombrePaciente = textBox3.Text;
+                    visita.nombreVisitante = textBox2.Text;//OBTENER EL NOMBRE DE LA PERSONA LOGEADA
+                    visita.nombrePaciente = textBox3.Text;//NOMBRE DE LA PERSONA
                     visita.direccion = textBox4.Text;
-                    visita.detalles = richTextBox1.Text;
+                    visita.telefono = int.Parse(textBox5.Text);
+                    visita.detalles = richTextBox1.Text;//OBTENER DIRECCION DE LA PERSONA PUESTA EN TXT
 
                     _visitaService.crear(visita);
 
@@ -57,6 +80,8 @@ namespace UI
                     textBox2.Clear();
                     textBox3.Clear();
                     textBox3.Clear();
+                    textBox4.Clear();
+                    textBox5.Clear();
                     richTextBox1.Clear();
                     //extraer el nombre del usuario
                     //consultar si existe nombre en tb de personas
@@ -74,13 +99,38 @@ namespace UI
             }
         }
 
-        private bool validarDatos()
+        private bool validarDatos()//VALIDACION DE CAMPOS
         {
             if (string.IsNullOrWhiteSpace(textBox2.Text)) return false;
             if (string.IsNullOrWhiteSpace(textBox3.Text)) return false;
             if (string.IsNullOrWhiteSpace(textBox4.Text)) return false;
+            if (string.IsNullOrWhiteSpace(textBox5.Text)) return false;
             if (string.IsNullOrWhiteSpace(richTextBox1.Text)) return false;
             return true;
         }
+
+        private void button2_Click(object sender, EventArgs e)//OBTENER DIRECCION DEL PACIENTE VISISTADO DE FORMA AUTOMATICA
+        {
+
+            if (_visitaService.existenciaPersonaPorNombre(textBox3.Text))
+            {
+
+                string nombreCompleto = textBox3.Text;
+                string direcc = _visitaService.consultarDireccion(nombreCompleto);
+                textBox4.Text = direcc;
+                string numero = _visitaService.consultarTelefono(nombreCompleto);
+                textBox5.Text = numero;
+            }
+            else
+            {
+                MessageBox.Show("El paciente no existe dentro del sistema");
+            }
+        }
+
+        private void label6_Click(object sender, EventArgs e)
+        {
+
+        }
+
     }
 }

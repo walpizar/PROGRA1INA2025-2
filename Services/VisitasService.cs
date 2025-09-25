@@ -29,5 +29,21 @@ namespace Services
         {
             return _VisitasDao.consultarTodos();
         }
+
+        public bool existenciaPersonaPorNombre(string nombre)
+        {
+            return _VisitasDao.existePersonaPorNombre(nombre);
+        }
+
+        public string consultarDireccion(string nombreCompleto)
+        {
+
+            return _VisitasDao.consultarDireccion(nombreCompleto);
+        }
+
+        public string consultarTelefono(string nombreCompleto)
+        {
+            return _VisitasDao.consultarTelefono(nombreCompleto);
+        }
     }
 }
