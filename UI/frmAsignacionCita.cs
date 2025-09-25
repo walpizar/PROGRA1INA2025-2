@@ -22,6 +22,9 @@ namespace UI
 
         public frmAsignacionCita()
         {
+
+            // Aquí lo primero que hago es instanciar mis servicios y objetos. 
+
             InitializeComponent();
             _citaService = new citaService();
             _clsMedico = new clsMedico();
@@ -31,10 +34,7 @@ namespace UI
 
         }
 
-        private void label1_Click(object sender, EventArgs e)
-        {
-
-        }
+        // Aquí me aseguro de cargar el combo de médicos.
         private void cargarComboMedico()
         {
 
@@ -74,7 +74,10 @@ namespace UI
         private void btnAsiganar_Click(object sender, EventArgs e)
         {
             try
-            {
+
+            // Aquí llamo a mi método de validación porque prefiero que todo pase por ahí.
+            // Si todo está bien, muestro un mensaje de éxito que me da cierta satisfacción.
+
                 validarDatos();
                 MessageBox.Show("Cita creada correctamente.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
@@ -139,17 +142,14 @@ namespace UI
                 motivo = richTextBox1.Text
             };
 
-            // 7. Llamar al Service para crear la cita
+            // 7. Llamo al Service para crear la cita
             _citaService.crear(cita);
 
             MessageBox.Show("Cita creada correctamente.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
 
-        private void combMedico_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            //cargarComboMedico();
-        }
+    
 
         private void frmAsignacionCita_Load(object sender, EventArgs e)
         {

@@ -182,7 +182,7 @@
             Controls.Add(label1);
             Controls.Add(lblTitulo);
             Name = "frmAsignacionCita";
-            Text = "frmAsigancionCita";
+            Text = "Citas";
             Load += frmAsignacionCita_Load;
             ResumeLayout(false);
             PerformLayout();
