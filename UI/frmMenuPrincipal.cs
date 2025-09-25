@@ -96,6 +96,15 @@ namespace UI
         {
             panelSubMenu.Visible = true;
             panelSubmenuActivos.Visible = false;
+            if (pnlMenuPrincipal.Width != 250)
+            {
+                panelSubMenu.Visible = false;
+                pnlContiene.BackColor = Color.White;
+            }
+            else
+            {
+                pnlContiene.BackColor = Color.Gainsboro;
+            }
 
         }
 
