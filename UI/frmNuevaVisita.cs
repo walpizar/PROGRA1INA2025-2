@@ -32,6 +32,8 @@ namespace UI
         {
             textBox1.Text = DateTime.Now.ToString("dd/MM/yyyy");//FECHA ACTUAL POR DEFECTO
             textBox1.ReadOnly = true;
+            textBox4.ReadOnly = true;
+            textBox5.ReadOnly = true;
 
             if (visitaSelected != null) //SI SE SELECIONA ALGUNO DE LA LISTA
             {
@@ -40,7 +42,7 @@ namespace UI
                 textBox2.Text = visitaSelected.nombreVisitante;
                 textBox3.Text = visitaSelected.nombrePaciente;
                 textBox4.Text = visitaSelected.direccion;
-                textBox5.Text = visitaSelected.telefono.ToString();/////////////////////////////////////////
+                textBox5.Text = visitaSelected.telefono.ToString();
                 richTextBox1.Text = visitaSelected.detalles;
 
                 textBox1.ReadOnly = true;//NO PERMITE QUE SE MODIFIQUEN
@@ -88,7 +90,6 @@ namespace UI
                             this.DialogResult = DialogResult.OK;
                             this.Close();
                         }
-
                     }
                     catch(EntityNotExistDBException ex)
                     {
@@ -104,7 +105,6 @@ namespace UI
             catch (Exception ex)
             {
                 MessageBox.Show("Ocurrió un error: " + ex.Message);
-
             } 
         }
 
@@ -124,7 +124,6 @@ namespace UI
             {
                 if (_visitaService.existenciaPersonaPorNombre(textBox3.Text))
                 {
-
                     string nombreCompleto = textBox3.Text;
                     string direcc = _visitaService.consultarDireccion(nombreCompleto);
                     textBox4.Text = direcc;

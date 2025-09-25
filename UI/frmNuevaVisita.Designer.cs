@@ -68,9 +68,9 @@
             // 
             // button1
             // 
-            button1.Location = new Point(203, 415);
+            button1.Location = new Point(411, 15);
             button1.Name = "button1";
-            button1.Size = new Size(88, 38);
+            button1.Size = new Size(95, 43);
             button1.TabIndex = 10;
             button1.Text = "Guardar";
             button1.UseVisualStyleBackColor = true;
@@ -91,9 +91,9 @@
             groupBox1.Controls.Add(label5);
             groupBox1.Controls.Add(label4);
             groupBox1.Controls.Add(label3);
-            groupBox1.Location = new Point(12, 56);
+            groupBox1.Location = new Point(12, 64);
             groupBox1.Name = "groupBox1";
-            groupBox1.Size = new Size(502, 353);
+            groupBox1.Size = new Size(502, 366);
             groupBox1.TabIndex = 11;
             groupBox1.TabStop = false;
             groupBox1.Text = "Datos de Visita";
@@ -116,7 +116,7 @@
             // 
             // button2
             // 
-            button2.Location = new Point(399, 96);
+            button2.Location = new Point(409, 96);
             button2.Name = "button2";
             button2.Size = new Size(85, 55);
             button2.TabIndex = 20;
@@ -142,9 +142,9 @@
             // 
             // richTextBox1
             // 
-            richTextBox1.Location = new Point(6, 222);
+            richTextBox1.Location = new Point(6, 213);
             richTextBox1.Name = "richTextBox1";
-            richTextBox1.Size = new Size(490, 118);
+            richTextBox1.Size = new Size(490, 139);
             richTextBox1.TabIndex = 17;
             richTextBox1.Text = "";
             // 
@@ -209,7 +209,7 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(526, 465);
+            ClientSize = new Size(526, 450);
             Controls.Add(groupBox1);
             Controls.Add(button1);
             Controls.Add(label2);

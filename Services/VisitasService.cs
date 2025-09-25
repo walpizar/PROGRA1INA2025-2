@@ -41,7 +41,6 @@ namespace Services
 
         public string consultarDireccion(string nombreCompleto)
         {
-
             return _VisitasDao.consultarDireccion(nombreCompleto);
         }
 
