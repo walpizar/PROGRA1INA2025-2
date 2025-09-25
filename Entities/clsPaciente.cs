@@ -43,7 +43,5 @@ namespace Entities
         //longitud maxima
         [StringLength(100, ErrorMessage = "El usuario de la ultima modificacion no puede tener mas de 100 caracteres")]
         public string usuario_ult_mod { get; set; }
-
-
     }
 }

@@ -34,11 +34,11 @@
             button1 = new Button();
             button2 = new Button();
             groupBox1 = new GroupBox();
+            label3 = new Label();
             listView1 = new ListView();
             columnHeader1 = new ColumnHeader();
             columnHeader2 = new ColumnHeader();
             columnHeader3 = new ColumnHeader();
-            label3 = new Label();
             groupBox1.SuspendLayout();
             SuspendLayout();
             // 
@@ -67,6 +67,7 @@
             textBox1.Name = "textBox1";
             textBox1.Size = new Size(142, 23);
             textBox1.TabIndex = 2;
+            textBox1.TextChanged += textBox1_TextChanged;
             // 
             // button1
             // 
@@ -101,6 +102,16 @@
             groupBox1.TabStop = false;
             groupBox1.Text = "Lista de Visitas Domiciliarias";
             // 
+            // label3
+            // 
+            label3.AutoSize = true;
+            label3.ForeColor = SystemColors.ControlDarkDark;
+            label3.Location = new Point(86, 370);
+            label3.Name = "label3";
+            label3.Size = new Size(272, 15);
+            label3.TabIndex = 7;
+            label3.Text = "*Para ver los detalles de la visita haga\"doble click\" ";
+            // 
             // listView1
             // 
             listView1.Columns.AddRange(new ColumnHeader[] { columnHeader1, columnHeader2, columnHeader3 });
@@ -127,16 +138,6 @@
             columnHeader3.Text = "Nombre Visitante";
             columnHeader3.Width = 130;
             // 
-            // label3
-            // 
-            label3.AutoSize = true;
-            label3.ForeColor = SystemColors.ControlDarkDark;
-            label3.Location = new Point(86, 370);
-            label3.Name = "label3";
-            label3.Size = new Size(272, 15);
-            label3.TabIndex = 7;
-            label3.Text = "*Para ver los detalles de la visita haga\"doble click\" ";
-            // 
             // frmVisitasDomiciliarias
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -147,6 +148,7 @@
             Controls.Add(label1);
             Name = "frmVisitasDomiciliarias";
             Text = "frmVisitasDomiciliarias";
+            Load += frmVisitasDomiciliarias_Load;
             groupBox1.ResumeLayout(false);
             groupBox1.PerformLayout();
             ResumeLayout(false);

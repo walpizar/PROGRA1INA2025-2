@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DAO.Migrations
 {
     [DbContext(typeof(dbContextINA))]
-    [Migration("20250924055145_inicioMigracion")]
+    [Migration("20250924174958_inicioMigracion")]
     partial class inicioMigracion
     {
         /// <inheritdoc />

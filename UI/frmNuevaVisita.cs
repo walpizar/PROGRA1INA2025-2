@@ -39,21 +39,48 @@ namespace UI
 
         private void button1_Click(object sender, EventArgs e)
         {
-            clsVisitasDomiciliares visita = new clsVisitasDomiciliares();
+            try
+            {
+                if (validarDatos())
+                {
+                    clsVisitasDomiciliares visita = new clsVisitasDomiciliares();
+                    visita.fecha = DateTime.Now.Date;
+                    visita.nombreVisitante = textBox2.Text;
+                    visita.nombrePaciente = textBox3.Text;
+                    visita.direccion = textBox4.Text;
+                    visita.detalles = richTextBox1.Text;
 
-            textBox1.Text = DateTime.Now.ToString("dd/MM/yyyy");
-            visita.fecha = DateTime.Now;
-            visita.nombreVisitante = textBox2.Text;
-            visita.nombrePaciente = textBox3.Text;
-            visita.detalles = richTextBox1.Text;
+                    _visitaService.crear(visita);
 
-            _visitaService.crear(visita);
+                    MessageBox.Show("visita registrada");
 
-            textBox2.Clear();
-            textBox3.Clear();
-            richTextBox1.Clear();
-            //extraer el nombre del usuario
-            //consultar si existe nombre en tb de personas
+                    textBox2.Clear();
+                    textBox3.Clear();
+                    textBox3.Clear();
+                    richTextBox1.Clear();
+                    //extraer el nombre del usuario
+                    //consultar si existe nombre en tb de personas
+                    this.DialogResult = DialogResult.OK;
+                    this.Close();
+                }
+                else
+                {
+                    MessageBox.Show("Faltan datos obligatorios.");
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Ocurrió un error: " + ex.Message);
+            }
+        }
+
+        private bool validarDatos()
+        {
+            if (string.IsNullOrWhiteSpace(textBox2.Text)) return false;
+            if (string.IsNullOrWhiteSpace(textBox3.Text)) return false;
+            if (string.IsNullOrWhiteSpace(textBox4.Text)) return false;
+            if (string.IsNullOrWhiteSpace(richTextBox1.Text)) return false;
+            return true;
         }
     }
 }

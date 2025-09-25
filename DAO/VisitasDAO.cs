@@ -61,7 +61,8 @@ namespace DAO
 
         public List<clsVisitasDomiciliares> consultarTodos()
         {
-            return null;
+            return _context.visitasDomiciliares.ToList();
         }
+
     }
 }

@@ -40,6 +40,8 @@
             label5 = new Label();
             label4 = new Label();
             label3 = new Label();
+            textBox4 = new TextBox();
+            label7 = new Label();
             groupBox1.SuspendLayout();
             SuspendLayout();
             // 
@@ -63,7 +65,7 @@
             // 
             // button1
             // 
-            button1.Location = new Point(152, 382);
+            button1.Location = new Point(152, 406);
             button1.Name = "button1";
             button1.Size = new Size(88, 38);
             button1.TabIndex = 10;
@@ -73,6 +75,8 @@
             // 
             // groupBox1
             // 
+            groupBox1.Controls.Add(textBox4);
+            groupBox1.Controls.Add(label7);
             groupBox1.Controls.Add(richTextBox1);
             groupBox1.Controls.Add(textBox3);
             groupBox1.Controls.Add(textBox2);
@@ -91,7 +95,7 @@
             // 
             // richTextBox1
             // 
-            richTextBox1.Location = new Point(13, 153);
+            richTextBox1.Location = new Point(6, 208);
             richTextBox1.Name = "richTextBox1";
             richTextBox1.Size = new Size(392, 115);
             richTextBox1.TabIndex = 17;
@@ -122,7 +126,7 @@
             // label6
             // 
             label6.AutoSize = true;
-            label6.Location = new Point(13, 135);
+            label6.Location = new Point(6, 190);
             label6.Name = "label6";
             label6.Size = new Size(110, 15);
             label6.TabIndex = 13;
@@ -155,11 +159,27 @@
             label3.TabIndex = 10;
             label3.Text = "Nombre del Visitante:";
             // 
+            // textBox4
+            // 
+            textBox4.Location = new Point(140, 142);
+            textBox4.Name = "textBox4";
+            textBox4.Size = new Size(202, 23);
+            textBox4.TabIndex = 19;            
+            // 
+            // label7
+            // 
+            label7.AutoSize = true;
+            label7.Location = new Point(13, 142);
+            label7.Name = "label7";
+            label7.Size = new Size(127, 15);
+            label7.TabIndex = 18;
+            label7.Text = "Direccion del Paciente:";
+            // 
             // frmNuevaVisita
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(435, 441);
+            ClientSize = new Size(435, 465);
             Controls.Add(groupBox1);
             Controls.Add(button1);
             Controls.Add(label2);
@@ -187,5 +207,7 @@
         private Label label5;
         private Label label4;
         private Label label3;
+        private TextBox textBox4;
+        private Label label7;
     }
 }

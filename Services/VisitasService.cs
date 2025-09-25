@@ -25,5 +25,9 @@ namespace Services
             _VisitasDao.crear(entidad);
         }
 
+        public List<clsVisitasDomiciliares> consultarTodos()
+        {
+            return _VisitasDao.consultarTodos();
+        }
     }
 }
