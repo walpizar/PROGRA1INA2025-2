@@ -29,16 +29,16 @@
         private void InitializeComponent()
         {
             lblCrearTipoDonacion = new Label();
-            btnModificarDonacion = new Button();
+            btnEliminarDonacion = new Button();
             btnCancelar = new Button();
             btnGuardarDonacion = new Button();
             gbxDatosTipoDonacion = new GroupBox();
+            txtbxTipoDonacionID = new TextBox();
+            txtbxTipoDonacionNombre = new TextBox();
             txtbxTipoDonacionDescripcion = new TextBox();
             lblTipoDonacionDesc = new Label();
-            this.lblTipoDonacionNombre = new Label();
-            txtbxTipoDonacionID = new TextBox();
+            lblTipoDonacionNombre = new Label();
             lblTipoDonacionID = new Label();
-            txtbxTipoDonacionNombre = new TextBox();
             gbxDatosTipoDonacion.SuspendLayout();
             SuspendLayout();
             // 
@@ -52,15 +52,16 @@
             lblCrearTipoDonacion.TabIndex = 27;
             lblCrearTipoDonacion.Text = "CREAR TIPO DONACION";
             // 
-            // btnModificarDonacion
+            // btnEliminarDonacion
             // 
-            btnModificarDonacion.Font = new Font("Segoe UI", 10.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            btnModificarDonacion.Location = new Point(32, 317);
-            btnModificarDonacion.Name = "btnModificarDonacion";
-            btnModificarDonacion.Size = new Size(121, 50);
-            btnModificarDonacion.TabIndex = 31;
-            btnModificarDonacion.Text = "MODIFICAR";
-            btnModificarDonacion.UseVisualStyleBackColor = true;
+            btnEliminarDonacion.Font = new Font("Segoe UI", 10.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btnEliminarDonacion.Location = new Point(32, 317);
+            btnEliminarDonacion.Name = "btnEliminarDonacion";
+            btnEliminarDonacion.Size = new Size(121, 50);
+            btnEliminarDonacion.TabIndex = 31;
+            btnEliminarDonacion.Text = "ELIMINAR";
+            btnEliminarDonacion.UseVisualStyleBackColor = true;
+            btnEliminarDonacion.Click += btnEliminarDonacion_Click;
             // 
             // btnCancelar
             // 
@@ -71,6 +72,7 @@
             btnCancelar.TabIndex = 30;
             btnCancelar.Text = "CANCELAR";
             btnCancelar.UseVisualStyleBackColor = true;
+            btnCancelar.Click += btnCancelar_Click;
             // 
             // btnGuardarDonacion
             // 
@@ -81,14 +83,15 @@
             btnGuardarDonacion.TabIndex = 29;
             btnGuardarDonacion.Text = "GUARDAR";
             btnGuardarDonacion.UseVisualStyleBackColor = true;
+            btnGuardarDonacion.Click += btnGuardarDonacion_Click;
             // 
             // gbxDatosTipoDonacion
             // 
+            gbxDatosTipoDonacion.Controls.Add(txtbxTipoDonacionID);
             gbxDatosTipoDonacion.Controls.Add(txtbxTipoDonacionNombre);
             gbxDatosTipoDonacion.Controls.Add(txtbxTipoDonacionDescripcion);
             gbxDatosTipoDonacion.Controls.Add(lblTipoDonacionDesc);
-            gbxDatosTipoDonacion.Controls.Add(this.lblTipoDonacionNombre);
-            gbxDatosTipoDonacion.Controls.Add(txtbxTipoDonacionID);
+            gbxDatosTipoDonacion.Controls.Add(lblTipoDonacionNombre);
             gbxDatosTipoDonacion.Controls.Add(lblTipoDonacionID);
             gbxDatosTipoDonacion.Font = new Font("Segoe UI", 10.2F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point, 0);
             gbxDatosTipoDonacion.Location = new Point(32, 97);
@@ -97,6 +100,22 @@
             gbxDatosTipoDonacion.TabIndex = 28;
             gbxDatosTipoDonacion.TabStop = false;
             gbxDatosTipoDonacion.Text = "DATOS TIPO DONACION";
+            // 
+            // txtbxTipoDonacionID
+            // 
+            txtbxTipoDonacionID.Font = new Font("Segoe UI", 9F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point, 0);
+            txtbxTipoDonacionID.Location = new Point(206, 49);
+            txtbxTipoDonacionID.Name = "txtbxTipoDonacionID";
+            txtbxTipoDonacionID.Size = new Size(185, 27);
+            txtbxTipoDonacionID.TabIndex = 32;
+            // 
+            // txtbxTipoDonacionNombre
+            // 
+            txtbxTipoDonacionNombre.Font = new Font("Segoe UI", 9F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point, 0);
+            txtbxTipoDonacionNombre.Location = new Point(206, 82);
+            txtbxTipoDonacionNombre.Name = "txtbxTipoDonacionNombre";
+            txtbxTipoDonacionNombre.Size = new Size(185, 27);
+            txtbxTipoDonacionNombre.TabIndex = 31;
             // 
             // txtbxTipoDonacionDescripcion
             // 
@@ -118,20 +137,12 @@
             // 
             // lblTipoDonacionNombre
             // 
-            this.lblTipoDonacionNombre.AutoSize = true;
-            this.lblTipoDonacionNombre.Location = new Point(117, 86);
-            this.lblTipoDonacionNombre.Name = "lblTipoDonacionNombre";
-            this.lblTipoDonacionNombre.Size = new Size(83, 23);
-            this.lblTipoDonacionNombre.TabIndex = 6;
-            this.lblTipoDonacionNombre.Text = "NOMBRE";
-            // 
-            // txtbxTipoDonacionID
-            // 
-            txtbxTipoDonacionID.Font = new Font("Segoe UI", 9F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point, 0);
-            txtbxTipoDonacionID.Location = new Point(206, 49);
-            txtbxTipoDonacionID.Name = "txtbxTipoDonacionID";
-            txtbxTipoDonacionID.Size = new Size(185, 27);
-            txtbxTipoDonacionID.TabIndex = 1;
+            lblTipoDonacionNombre.AutoSize = true;
+            lblTipoDonacionNombre.Location = new Point(117, 86);
+            lblTipoDonacionNombre.Name = "lblTipoDonacionNombre";
+            lblTipoDonacionNombre.Size = new Size(83, 23);
+            lblTipoDonacionNombre.TabIndex = 6;
+            lblTipoDonacionNombre.Text = "NOMBRE";
             // 
             // lblTipoDonacionID
             // 
@@ -142,26 +153,19 @@
             lblTipoDonacionID.TabIndex = 0;
             lblTipoDonacionID.Text = "ID TIPO DONACION";
             // 
-            // txtbxTipoDonacionNombre
-            // 
-            txtbxTipoDonacionNombre.Font = new Font("Segoe UI", 9F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point, 0);
-            txtbxTipoDonacionNombre.Location = new Point(206, 82);
-            txtbxTipoDonacionNombre.Name = "txtbxTipoDonacionNombre";
-            txtbxTipoDonacionNombre.Size = new Size(185, 27);
-            txtbxTipoDonacionNombre.TabIndex = 31;
-            // 
             // frmTipoDonacion
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(441, 391);
-            Controls.Add(btnModificarDonacion);
+            Controls.Add(btnEliminarDonacion);
             Controls.Add(btnCancelar);
             Controls.Add(btnGuardarDonacion);
             Controls.Add(gbxDatosTipoDonacion);
             Controls.Add(lblCrearTipoDonacion);
             Name = "frmTipoDonacion";
             Text = "MANTENIMIENTO TIPO DONACION";
+            Load += frmTipoDonacion_Load;
             gbxDatosTipoDonacion.ResumeLayout(false);
             gbxDatosTipoDonacion.PerformLayout();
             ResumeLayout(false);
@@ -171,7 +175,7 @@
         #endregion
 
         private Label lblCrearTipoDonacion;
-        private Button btnModificarDonacion;
+        private Button btnEliminarDonacion;
         private Button btnCancelar;
         private Button btnGuardarDonacion;
         private GroupBox gbxDatosTipoDonacion;
@@ -182,8 +186,8 @@
         private Label lblDonacionIdTipoDonacion;
         private TextBox txtbxDonacionDonanteID;
         private Label lblDonacionDonanteID;
-        private TextBox txtbxTipoDonacionID;
         private Label lblTipoDonacionID;
         private TextBox txtbxTipoDonacionNombre;
+        private TextBox txtbxTipoDonacionID;
     }
 }

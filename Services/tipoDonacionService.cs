@@ -45,7 +45,8 @@ namespace Services
             {
                 throw new EntityExistDBException("EL TIPO DE DONACIÓN YA EXISTE EN LA BASE DE DATOS, PARA MODIFICAR DATOS USE EL MÓDULO APROPIADO");
             }
-
+            
+            entidad.estado = true; //activo por defecto
             entidad.fechaCreacion = DateTime.Now;
             entidad.usuarioCreacion = "SYSTEM"; // Cambiar por usuario logueado
             entidad.fechaModificacion = entidad.fechaCreacion;
@@ -81,6 +82,7 @@ namespace Services
             entidad.fechaModificacion = DateTime.Now;
             entidad.usuarioModificacion = "SYSTEM"; // Cambiar por usuario logueado
             entidad.razonModifica = "MODIFICACIÓN DE DATOS"; // Traer desde el formulario
+            entidad.estado = true; // Reactivar en caso de que estuviera inactivo
 
             tipoDonacionDAO.modificar(entidad);
         }

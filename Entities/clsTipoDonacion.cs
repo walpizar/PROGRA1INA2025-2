@@ -9,6 +9,7 @@ namespace Entities
     public class clsTipoDonacion
     {
         [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int idTipoDonacion { get; set; }
 
         [Required, StringLength(100)]
@@ -19,16 +20,16 @@ namespace Entities
 
         // Requerimientos
         [Required]
-        public bool requiereMonto { get; set; }
+        public bool? requiereMonto { get; set; }
 
         [Required]
-        public bool requiereTipoTransaccion { get; set; }
+        public bool? requiereTipoTransaccion { get; set; }
 
         [Required]
-        public bool requiereFrecuencia { get; set; }
+        public bool? requiereFrecuencia { get; set; }
 
         [Required]
-        public bool requiereTipoMoneda { get; set; }
+        public bool? requiereTipoMoneda { get; set; }
 
         // Auditoría
         [Required]
@@ -43,7 +44,7 @@ namespace Entities
         public DateTime? fechaModificacion { get; set; }
 
         [StringLength(50)]
-        public string usuarioModificacion { get; set; }
+        public string? usuarioModificacion { get; set; }
 
         [StringLength(200)]
         public string? razonInactivo { get; set; }
