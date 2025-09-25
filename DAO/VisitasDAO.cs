@@ -64,7 +64,6 @@ namespace DAO
             return _context.visitasDomiciliares.ToList();
         }
 
-
         //MAGIBER PARA ACCEDER A LA TB DE PERSONA
         public bool existePersonaPorNombre(string nombre)//SERIA MAS FACIL SI HUBIERA UNA RELACION 1 A 1 CON PACIENTE
         {
@@ -102,7 +101,5 @@ namespace DAO
 
             return persona?.telefono;
         }
-
-
     }
 }

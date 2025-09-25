@@ -24,15 +24,8 @@ namespace UI
         // see https://aka.ms/applicationconfiguration.
         ApplicationConfiguration.Initialize();
         //Application.Run(new frmProductoLista());
-
-
-        //solo ejemplo
-        Application.Run(new frmPacienteLista());
-
         
         Application.Run(new frmVisitasDomiciliarias());
-
-
         }
     }
 }

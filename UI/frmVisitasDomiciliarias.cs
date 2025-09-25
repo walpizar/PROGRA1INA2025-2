@@ -98,7 +98,7 @@ namespace UI
             }
             catch (Exception)
             {
-                MessageBox.Show("Error al seleccionar el producto de la lista");
+                MessageBox.Show("Error al seleccionar una visita de la lista");
             }
         }
     }

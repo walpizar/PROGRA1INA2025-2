@@ -177,7 +177,6 @@
             label6.Size = new Size(110, 15);
             label6.TabIndex = 13;
             label6.Text = "Detalles de la Visita:";
-            label6.Click += label6_Click;
             // 
             // label5
             // 

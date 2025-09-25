@@ -32,6 +32,10 @@ namespace Services
 
         public bool existenciaPersonaPorNombre(string nombre)
         {
+            if (!_VisitasDao.existePersonaPorNombre(nombre))
+            {
+                throw new EntityNotExistDBException();
+            }
             return _VisitasDao.existePersonaPorNombre(nombre);
         }
 

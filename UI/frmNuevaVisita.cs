@@ -1,4 +1,5 @@
-﻿using DAO;
+﻿using Common.Exceptions;
+using DAO;
 using Entities;
 using Microsoft.IdentityModel.Tokens;
 using Services;
@@ -8,6 +9,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -53,40 +55,46 @@ namespace UI
             }
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void button1_Click(object sender, EventArgs e)//CREAR VISIITA
         {
             try
             {
                 if (validarDatos())
                 {
-                    if (!_visitaService.existenciaPersonaPorNombre(textBox3.Text))  //SE VALIDA SI EXISTE EL NOMBRE EN LA TB PERSONA 
+                    try
                     {
-                        MessageBox.Show("El paciente no existe en la base de datos.");
-                        return;
+                        if(_visitaService.existenciaPersonaPorNombre(textBox3.Text))
+                        {
+                            clsVisitasDomiciliares visita = new clsVisitasDomiciliares();
+                            visita.fecha = DateTime.Now.Date;
+                            visita.nombreVisitante = textBox2.Text;//OBTENER EL NOMBRE DE LA PERSONA LOGEADA
+                            visita.nombrePaciente = textBox3.Text;//NOMBRE DE LA PERSONA
+                            visita.direccion = textBox4.Text;
+                            visita.telefono = int.Parse(textBox5.Text);
+                            visita.detalles = richTextBox1.Text;//OBTENER DIRECCION DE LA PERSONA PUESTA EN TXT
+
+                            _visitaService.crear(visita);
+
+                            MessageBox.Show("visita registrada");
+
+                            textBox2.Clear();
+                            textBox3.Clear();
+                            textBox3.Clear();
+                            textBox4.Clear();
+                            textBox5.Clear();
+                            richTextBox1.Clear();
+                            //extraer el nombre del usuario
+                            //consultar si existe nombre en tb de personas
+                            this.DialogResult = DialogResult.OK;
+                            this.Close();
+                        }
+
                     }
-
-                    clsVisitasDomiciliares visita = new clsVisitasDomiciliares();
-                    visita.fecha = DateTime.Now.Date;
-                    visita.nombreVisitante = textBox2.Text;//OBTENER EL NOMBRE DE LA PERSONA LOGEADA
-                    visita.nombrePaciente = textBox3.Text;//NOMBRE DE LA PERSONA
-                    visita.direccion = textBox4.Text;
-                    visita.telefono = int.Parse(textBox5.Text);
-                    visita.detalles = richTextBox1.Text;//OBTENER DIRECCION DE LA PERSONA PUESTA EN TXT
-
-                    _visitaService.crear(visita);
-
-                    MessageBox.Show("visita registrada");
-
-                    textBox2.Clear();
-                    textBox3.Clear();
-                    textBox3.Clear();
-                    textBox4.Clear();
-                    textBox5.Clear();
-                    richTextBox1.Clear();
-                    //extraer el nombre del usuario
-                    //consultar si existe nombre en tb de personas
-                    this.DialogResult = DialogResult.OK;
-                    this.Close();
+                    catch(EntityNotExistDBException ex)
+                    {
+                        MessageBox.Show(ex.Message);
+                        MessageBox.Show("El paciente no existe dentro del sistema");
+                    }
                 }
                 else
                 {
@@ -96,7 +104,8 @@ namespace UI
             catch (Exception ex)
             {
                 MessageBox.Show("Ocurrió un error: " + ex.Message);
-            }
+
+            } 
         }
 
         private bool validarDatos()//VALIDACION DE CAMPOS
@@ -111,26 +120,23 @@ namespace UI
 
         private void button2_Click(object sender, EventArgs e)//OBTENER DIRECCION DEL PACIENTE VISISTADO DE FORMA AUTOMATICA
         {
-
-            if (_visitaService.existenciaPersonaPorNombre(textBox3.Text))
+            try
             {
+                if (_visitaService.existenciaPersonaPorNombre(textBox3.Text))
+                {
 
-                string nombreCompleto = textBox3.Text;
-                string direcc = _visitaService.consultarDireccion(nombreCompleto);
-                textBox4.Text = direcc;
-                string numero = _visitaService.consultarTelefono(nombreCompleto);
-                textBox5.Text = numero;
+                    string nombreCompleto = textBox3.Text;
+                    string direcc = _visitaService.consultarDireccion(nombreCompleto);
+                    textBox4.Text = direcc;
+                    string numero = _visitaService.consultarTelefono(nombreCompleto);
+                    textBox5.Text = numero;
+                }
             }
-            else
+            catch (EntityNotExistDBException ex)
             {
+                MessageBox.Show(ex.Message);
                 MessageBox.Show("El paciente no existe dentro del sistema");
             }
         }
-
-        private void label6_Click(object sender, EventArgs e)
-        {
-
-        }
-
     }
 }
