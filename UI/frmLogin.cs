@@ -19,6 +19,11 @@ namespace UI
 
         private void btnAceptar_Click(object sender, EventArgs e)
         {
+            //Abre el formulario principal y cierra el de login
+            frmMenuPrincipalAgustin frmMenuPrincipal = new frmMenuPrincipalAgustin();
+            this.Hide();
+            frmMenuPrincipal.ShowDialog();
+            this.Close();
 
         }
 

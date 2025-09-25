@@ -302,7 +302,7 @@
             btnActivos.Padding = new Padding(30, 0, 0, 0);
             btnActivos.Size = new Size(195, 45);
             btnActivos.TabIndex = 14;
-            btnActivos.Text = "Activos";
+            btnActivos.Text = "Lista de Activos";
             btnActivos.TextAlign = ContentAlignment.MiddleLeft;
             btnActivos.UseVisualStyleBackColor = true;
             btnActivos.Click += btnActivos_Click;
