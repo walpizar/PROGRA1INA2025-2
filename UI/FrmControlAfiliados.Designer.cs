@@ -137,7 +137,7 @@
             button2.Name = "button2";
             button2.Size = new Size(109, 23);
             button2.TabIndex = 5;
-            button2.Text = "button2";
+            button2.Text = "Agregar pago";
             button2.UseVisualStyleBackColor = true;
             // 
             // button1
@@ -146,9 +146,9 @@
             button1.Name = "button1";
             button1.Size = new Size(115, 23);
             button1.TabIndex = 4;
-            button1.Text = "button1";
+            button1.Text = "Detalles de pago";
             button1.UseVisualStyleBackColor = true;
-            button1.Click += button4_Click;
+     
             // 
             // tabPage2
             // 
@@ -170,7 +170,7 @@
             button3.Name = "button3";
             button3.Size = new Size(109, 23);
             button3.TabIndex = 8;
-            button3.Text = "button3";
+            button3.Text = "Agregar pago";
             button3.UseVisualStyleBackColor = true;
             // 
             // button4
@@ -179,9 +179,9 @@
             button4.Name = "button4";
             button4.Size = new Size(115, 23);
             button4.TabIndex = 7;
-            button4.Text = "button4";
+            button4.Text = "Detalles de pago";
             button4.UseVisualStyleBackColor = true;
-            button4.Click += button4_Click;
+      
             // 
             // textBox2
             // 
@@ -234,6 +234,7 @@
             Controls.Add(label1);
             Name = "FrmControlAfiliados";
             Text = "FrmControlAfiliados";
+    
             tabControl1.ResumeLayout(false);
             tabPage1.ResumeLayout(false);
             tabPage1.PerformLayout();

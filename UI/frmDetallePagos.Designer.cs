@@ -35,13 +35,14 @@
             apellido2 = new Label();
             apellido = new Label();
             listView1 = new ListView();
-            listView2 = new ListView();
             nombre = new Label();
             correo = new Label();
             label9 = new Label();
-            montoAnual = new Label();
             saldoPendiente = new Label();
             label12 = new Label();
+            montoAnual = new Label();
+            cbFrecuencia = new ComboBox();
+            agregarPago = new Button();
             SuspendLayout();
             // 
             // label1
@@ -101,19 +102,11 @@
             // 
             // listView1
             // 
-            listView1.Location = new Point(12, 162);
+            listView1.Location = new Point(12, 194);
             listView1.Name = "listView1";
-            listView1.Size = new Size(776, 88);
+            listView1.Size = new Size(776, 187);
             listView1.TabIndex = 6;
             listView1.UseCompatibleStateImageBehavior = false;
-            // 
-            // listView2
-            // 
-            listView2.Location = new Point(12, 273);
-            listView2.Name = "listView2";
-            listView2.Size = new Size(776, 88);
-            listView2.TabIndex = 7;
-            listView2.UseCompatibleStateImageBehavior = false;
             // 
             // nombre
             // 
@@ -123,7 +116,6 @@
             nombre.Size = new Size(38, 15);
             nombre.TabIndex = 8;
             nombre.Text = "label7";
-          
             // 
             // correo
             // 
@@ -137,25 +129,16 @@
             // label9
             // 
             label9.AutoSize = true;
-            label9.Location = new Point(524, 61);
+            label9.Location = new Point(547, 61);
             label9.Name = "label9";
             label9.Size = new Size(81, 15);
             label9.TabIndex = 10;
             label9.Text = "monto anual :";
             // 
-            // montoAnual
-            // 
-            montoAnual.AutoSize = true;
-            montoAnual.Location = new Point(611, 61);
-            montoAnual.Name = "montoAnual";
-            montoAnual.Size = new Size(44, 15);
-            montoAnual.TabIndex = 11;
-            montoAnual.Text = "label10";
-            // 
             // saldoPendiente
             // 
             saldoPendiente.AutoSize = true;
-            saldoPendiente.Location = new Point(611, 95);
+            saldoPendiente.Location = new Point(634, 95);
             saldoPendiente.Name = "saldoPendiente";
             saldoPendiente.Size = new Size(44, 15);
             saldoPendiente.TabIndex = 13;
@@ -164,24 +147,52 @@
             // label12
             // 
             label12.AutoSize = true;
-            label12.Location = new Point(508, 95);
+            label12.Location = new Point(531, 95);
             label12.Name = "label12";
             label12.Size = new Size(97, 15);
             label12.TabIndex = 12;
             label12.Text = "saldo pendiente :";
+            // 
+            // montoAnual
+            // 
+            montoAnual.AutoSize = true;
+            montoAnual.Location = new Point(634, 61);
+            montoAnual.Name = "montoAnual";
+            montoAnual.Size = new Size(74, 15);
+            montoAnual.TabIndex = 11;
+            montoAnual.Text = "Pago Anual :";
+            // 
+            // cbFrecuencia
+            // 
+            cbFrecuencia.FormattingEnabled = true;
+            cbFrecuencia.Location = new Point(12, 165);
+            cbFrecuencia.Name = "cbFrecuencia";
+            cbFrecuencia.Size = new Size(182, 23);
+            cbFrecuencia.TabIndex = 14;
+            // 
+            // agregarPago
+            // 
+            agregarPago.Location = new Point(531, 387);
+            agregarPago.Name = "agregarPago";
+            agregarPago.Size = new Size(257, 39);
+            agregarPago.TabIndex = 0;
+            agregarPago.Text = "agregar un pago";
+            agregarPago.UseVisualStyleBackColor = true;
+            agregarPago.Click += btnAgregarPago_Click;
             // 
             // frmDetallePagos
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
+            Controls.Add(agregarPago);
+            Controls.Add(cbFrecuencia);
             Controls.Add(saldoPendiente);
             Controls.Add(label12);
             Controls.Add(montoAnual);
             Controls.Add(label9);
             Controls.Add(correo);
             Controls.Add(nombre);
-            Controls.Add(listView2);
             Controls.Add(listView1);
             Controls.Add(apellido2);
             Controls.Add(apellido);
@@ -190,7 +201,7 @@
             Controls.Add(label2);
             Controls.Add(label1);
             Name = "frmDetallePagos";
-            Text = "frmHistorialPagos";
+            Load += frmDetallePagos_Load_1;
             ResumeLayout(false);
             PerformLayout();
         }
@@ -204,12 +215,13 @@
         private Label apellido2;
         private Label apellido;
         private ListView listView1;
-        private ListView listView2;
         private Label nombre;
         private Label correo;
         private Label label9;
-        private Label montoAnual;
         private Label saldoPendiente;
         private Label label12;
+        private Label montoAnual;
+        private ComboBox cbFrecuencia;
+        private Button agregarPago;
     }
 }

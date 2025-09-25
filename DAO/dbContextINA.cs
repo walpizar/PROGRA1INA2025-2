@@ -39,6 +39,10 @@ namespace DAO
         {
             base.OnModelCreating(modelBuilder);
 
+            modelBuilder.Entity<clsDonacion>().ToTable("tbDonacion");
+            modelBuilder.Entity<clsTipoDonacion>().ToTable("tbTipoDonacion");
+            modelBuilder.Entity<clsDonante>().ToTable("tbDonante");
+
             // Clave primaria compuesta para Persona
             modelBuilder.Entity<clsPersona>()
                 .HasKey(p => new { p.id, p.tipoId });
@@ -61,12 +65,12 @@ namespace DAO
 
             modelBuilder.Entity<clsMedico>().Property(m => m.id)
                 .IsRequired()
-                .HasMaxLength(20)        // solo si 'id' es string
+                .HasMaxLength(20)
                 .ValueGeneratedNever();
 
             modelBuilder.Entity<clsMedico>().Property(m => m.tipoId)
                 .IsRequired()
-                .ValueGeneratedNever();  // no pongas HasMaxLength si es int
+                .ValueGeneratedNever();
 
             modelBuilder.Entity<clsMedico>()
                 .HasOne(m => m.persona)
@@ -74,8 +78,7 @@ namespace DAO
                 .HasForeignKey<clsMedico>(m => new { m.id, m.tipoId })
                 .OnDelete(DeleteBehavior.Restrict);
 
-            /*------------------------------------------------------------*/
-            // Paciente: llave primaria compuesta
+            // Paciente
             modelBuilder.Entity<clsPaciente>().HasKey(p => new { p.id, p.tipoId });
 
             modelBuilder.Entity<clsPaciente>().Property(p => p.id)
@@ -93,17 +96,24 @@ namespace DAO
                 .HasForeignKey<clsPaciente>(p => new { p.id, p.tipoId })
                 .HasPrincipalKey<clsPersona>(per => new { per.id, per.tipoId })
                 .OnDelete(DeleteBehavior.Restrict);
-            /*------------------------------------------------------------*/
 
-            // Donante: llave primaria compuesta y relación 1 a 1 con Persona
+            // Donante
             modelBuilder.Entity<clsDonante>()
                 .HasKey(d => new { d.personaId, d.personaTipoId });
 
             modelBuilder.Entity<clsDonante>()
                 .HasOne(d => d.persona)
-                .WithOne(p => p.donante)  // asegúrate de que clsPersona tenga la propiedad donante
+                .WithOne(p => p.donante)
                 .HasForeignKey<clsDonante>(d => new { d.personaId, d.personaTipoId })
                 .HasPrincipalKey<clsPersona>(p => new { p.id, p.tipoId })
+                .OnDelete(DeleteBehavior.Restrict);
+
+            // **RELACIÓN CORRECTA PARA CLSDONACION**
+            modelBuilder.Entity<clsDonacion>()
+                .HasOne(d => d.donante)
+                .WithMany() // o WithMany(d => d.donaciones) si quieres la colección
+                .HasForeignKey(d => new { d.donanteId, d.donanteTipoId })
+                .HasPrincipalKey(d => new { d.personaId, d.personaTipoId })
                 .OnDelete(DeleteBehavior.Restrict);
 
             // Enfermero
@@ -114,6 +124,7 @@ namespace DAO
             modelBuilder.Entity<clsRolPermiso>()
                 .HasKey(rp => new { rp.idRol, rp.idPermiso });
         }
+
 
     }
 }

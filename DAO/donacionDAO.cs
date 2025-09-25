@@ -46,11 +46,31 @@ namespace DAO
 
         public void crear(clsDonacion entidad)
         {
-            context.donacion.Add(entidad);
+            // Validaciones básicas
+            if (string.IsNullOrEmpty(entidad.donanteId))
+                throw new ArgumentException("El campo donanteId es obligatorio.");
+
+            if (entidad.donanteTipoId <= 0)
+                throw new ArgumentException("El campo donanteTipoId es obligatorio y debe ser mayor a cero.");
+
+            if (entidad.idTipoDonacion <= 0)
+                throw new ArgumentException("El campo idTipoDonacion es obligatorio y debe ser mayor a cero.");
+
+            if (entidad.fechaDonacion == default)
+                throw new ArgumentException("El campo fechaDonacion es obligatorio.");
+
+            if (string.IsNullOrEmpty(entidad.usuarioCreacion))
+                entidad.usuarioCreacion = "SYSTEM";
+
+            if (entidad.fechaCreacion == default)
+                entidad.fechaCreacion = DateTime.Now;
+
+            if (string.IsNullOrEmpty(entidad.usuarioModificacion))
+
+                // Agregar la entidad al contexto
+                context.donacion.Add(entidad);
             context.SaveChanges();
-
         }
-
         public void eliminar(string id)
         {
             //borrado logico

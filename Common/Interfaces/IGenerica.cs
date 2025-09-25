@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using Entities;
+using System.Collections.Generic;
 
 namespace Common.Interfaces
 {
@@ -12,5 +13,6 @@ namespace Common.Interfaces
         T consultarPorID(string id);
         T consultarPorNombre(string nombre);
         List<T> consultarTodos();
+      
     }
 }

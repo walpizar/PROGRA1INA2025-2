@@ -13,9 +13,12 @@ namespace Entities
 
         // Foreign key compuesta con donante
         [Required, StringLength(20)]
+        [Column("donantepersonaId")]
         public string donanteId { get; set; }
 
+
         [Required]
+        [Column("donanteTipoId")]
         public int donanteTipoId { get; set; }
 
         [ForeignKey("tipoDonacion")]
@@ -28,14 +31,12 @@ namespace Entities
         [StringLength(200)]
         public string observaciones { get; set; }
 
-        //CAMPOS OPCIONALES SEGUN TIPO DE DONACION
-        public decimal? monto { get; set; } //opcional
-        public int? tipoTransaccion { get; set; } //opcional, lleva enums
-        public int? frecuencia { get; set; } //opcional, lleva enums
-        public int? tipoMoneda { get; set; } //opcional, lleva enums
-        public DateTime? fechaProximaDonacion { get; set; } //opcional
+        public decimal? monto { get; set; }
+        public int? tipoTransaccion { get; set; }
+        public int? frecuencia { get; set; }
+        public int? tipoMoneda { get; set; }
+        public DateTime? fechaProximaDonacion { get; set; }
 
-        // Auditoría
         [Required, StringLength(50)]
         public string usuarioCreacion { get; set; }
 
@@ -55,13 +56,9 @@ namespace Entities
         [StringLength(200)]
         public string? razonModifica { get; set; }
 
-        // Relación muchos a 1 con donante
+        // Relaciones
         public clsDonante donante { get; set; }
-
-        // Relación 1 a muchos con Activo (directa)
         public ICollection<clsActivos> activos { get; set; }
-
-        //relacion muchos a 1 con tipo donacion
         public clsTipoDonacion tipoDonacion { get; set; }
 
         public clsDonacion() { }
