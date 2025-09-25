@@ -15,6 +15,7 @@ namespace UI
         public frmListaActivos()
         {
             InitializeComponent();
+            InicializarColumnasListView();
             _activoService = new ActivosServices();
         }
 
@@ -124,41 +125,29 @@ namespace UI
         {
             lstvListaActivos.Items.Clear();
 
-            /*if (lista == null || lista.Count == 0)
-            {
-                return;
-            }*/
-
-            foreach (clsActivos activos in lista)
+            // Mostrar todos los activos, incluyendo los dados de baja
+            var activosList = lista ?? new List<clsActivos>();
+            foreach (clsActivos activos in activosList)
             {
                 try
                 {
-                    if (activos.idActivo <= 0) continue;
+                    if (activos == null || activos.idActivo <= 0) continue;
+
+                    // Manejo seguro de nulos en todas las propiedades
+                    string nombreActivo = activos.nombreActivo ?? "Sin nombre";
+                    string descripcion = activos.descripcion ?? "Sin descripción";
+                    string idCategoria = activos.idCategoria.ToString();
+                    string nombreCategoria = activos.categoria != null && activos.categoria.nombre != null ? activos.categoria.nombre : "Sin categoría";
+                    string estadoUso = estadoUsoToString(activos.estadoUso);
+                    string estado = activos.estado ? "Activo" : "Dado de baja";
 
                     ListViewItem item = new ListViewItem(activos.idActivo.ToString());
-                    item.SubItems.Add(activos.nombreActivo);
-                    item.SubItems.Add(activos.descripcion ?? "Sin descripción");
-                    item.SubItems.Add(activos.idCategoria.ToString());
-                    item.SubItems.Add(activos.categoria?.nombre ?? "Sin categoría");
-                    item.SubItems.Add(estadoUsoToString(activos.estadoUso));
-                    item.SubItems.Add(activos.estado ? "Activo" : "Inactivo");
-
-                    //string nombreCategoria = activos.categoria?.nombre ?? "Sin categoría";
-                    //item.SubItems.Add(nombreCategoria);
-                    //item.SubItems.Add(estadoUsoToString(activos.estadoUso));
-                    //item.SubItems.Add(activos.estado ? "Activo" : "Inactivo");
-                    /*
-                    item.SubItems.Add(activos.fechaAdquisicion.ToString("dd/MM/yyyy"));
-                    item.SubItems.Add(activos.proveedor ?? "Sin proveedor");
-                    item.SubItems.Add(activos.ubicacion ?? "Sin ubicación");*/
-
-                    /*if (activos.estadoUso == 2)
-                    {
-                        string fechaDesecho = activos.fechaDesecho?.ToString("dd/MM/yyyy") ?? "No registrada";
-                        string observacion = activos.observacionDesecho ?? "Sin observación";
-                        item.BackColor = System.Drawing.Color.LightGray;
-                        item.ToolTipText = $"Desechado - Fecha: {fechaDesecho}, Observación: {observacion}";
-                    }*/
+                    item.SubItems.Add(nombreActivo);
+                    item.SubItems.Add(descripcion);
+                    item.SubItems.Add(idCategoria);
+                    item.SubItems.Add(nombreCategoria);
+                    item.SubItems.Add(estadoUso);
+                    item.SubItems.Add(estado);
 
                     lstvListaActivos.Items.Add(item);
                 }
@@ -293,6 +282,21 @@ namespace UI
                                   "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
+        }
+
+        private void InicializarColumnasListView()
+        {
+            lstvListaActivos.View = View.Details;
+            lstvListaActivos.FullRowSelect = true;
+            lstvListaActivos.GridLines = true;
+            lstvListaActivos.Columns.Clear();
+            lstvListaActivos.Columns.Add("ID", 60);
+            lstvListaActivos.Columns.Add("Nombre", 120);
+            lstvListaActivos.Columns.Add("Descripción", 150);
+            lstvListaActivos.Columns.Add("ID Categoría", 80);
+            lstvListaActivos.Columns.Add("Categoría", 120);
+            lstvListaActivos.Columns.Add("Estado Uso", 100);
+            lstvListaActivos.Columns.Add("Estado", 80);
         }
     }
 }

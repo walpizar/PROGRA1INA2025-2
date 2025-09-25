@@ -88,7 +88,7 @@
             gbxClientes.TabIndex = 5;
             gbxClientes.TabStop = false;
             gbxClientes.Text = "Datos Activos:";
-            
+            gbxClientes.Enter += gbxClientes_Enter_1;
             // 
             // cbxCategorias
             // 
@@ -152,7 +152,7 @@
             btnEliminar.TabIndex = 36;
             btnEliminar.Text = "Eliminar";
             btnEliminar.UseVisualStyleBackColor = true;
-            
+            btnEliminar.Click += btnEliminar_Click_1;
             // 
             // btnGuardar
             // 
@@ -172,7 +172,7 @@
             btnCancelar.TabIndex = 37;
             btnCancelar.Text = "Cancelar";
             btnCancelar.UseVisualStyleBackColor = true;
-          
+            btnCancelar.Click += btnCancelar_Click_1;
             // 
             // txtfecha
             // 

@@ -19,9 +19,18 @@ namespace DAO
 
         public List<clsActivos> listar()
         {
-            return _context.Activos
-                .Include(a => a.categoria)
-                .ToList();
+            try
+            {
+                return _context.Activos
+                    .Include(a => a.categoria)
+                    .ToList();
+            }
+            catch (Exception ex)
+            {
+                // Log o mensaje para depuración
+                System.Diagnostics.Debug.WriteLine($"Error en listar Activos: {ex.Message}");
+                throw new Exception($"Error al listar activos: {ex.Message}", ex);
+            }
         }
 
         public void crear(clsActivos activo)
@@ -76,27 +85,32 @@ namespace DAO
 
         public List<clsActivos> consultarTodos()
         {
-            // retorno todos los activos de la tabla tbActivos
-            // el include es para traer los datos de la tabla categoria que esta relacionada con activos
+            // Retorna todos los activos, sin filtrar por estado ni por categoría
             return _context.Activos
-                .AsNoTracking() // esto es para que no haga seguimiento de los cambios en los objetos, mejora el rendimiento en consultas de solo lectura
+                .AsNoTracking()
                 .Include(a => a.categoria)
-                .Where(a => a.estado == true) // solo los activos
                 .ToList();
         }
 
         public List<clsActivos> consultarTodosSinRelaciones()
         {
+            var result = new List<clsActivos>();
+            List<clsActivos> activos;
             try
             {
-                var activos = _context.Activos
-                    .Where(a => a.estado == true &&
-                              !string.IsNullOrEmpty(a.nombreActivo) &&
-                              a.idCategoria > 0)
-                    .ToList();
+                activos = _context.Activos.ToList();
+            }
+            catch (Exception ex)
+            {
+                // Si hay un error al leer la tabla, retorna lista vacía
+                return new List<clsActivos>();
+            }
 
-                foreach (var activo in activos)
+            foreach (var activo in activos)
+            {
+                try
                 {
+                    // Intenta cargar la categoría, si falla la deja en null
                     try
                     {
                         activo.categoria = _context.Set<clsCategoriaActivos>()
@@ -106,14 +120,28 @@ namespace DAO
                     {
                         activo.categoria = null;
                     }
-                }
 
-                return activos;
+                    // Si algún campo obligatorio es nulo o inválido, lo salta
+                    if (string.IsNullOrEmpty(activo.nombreActivo) ||
+                        activo.idCategoria <= 0 ||
+                        activo.estadoUso < 0 ||
+                        activo.fechaAdquisicion == default ||
+                        activo.fechaCreacion == default ||
+                        string.IsNullOrEmpty(activo.usuarioCreacion))
+                    {
+                        continue;
+                    }
+
+                    result.Add(activo);
+                }
+                catch
+                {
+                    // Ignora el registro problemático
+                    continue;
+                }
             }
-            catch (Exception ex)
-            {
-                throw new Exception($"Error al consultar los activos: {ex.Message}");
-            }
+
+            return result;
         }
 
         public void eliminarActivo(int id, string observacionDesecho = null)
@@ -158,10 +186,10 @@ namespace DAO
         {
             try
             {
+                // 1. Activos sin nombre
                 var sinNombre = _context.Activos
                     .Where(a => string.IsNullOrEmpty(a.nombreActivo))
                     .ToList();
-
                 foreach (var activo in sinNombre)
                 {
                     activo.nombreActivo = $"Activo sin nombre - ID: {activo.idActivo}";
@@ -169,17 +197,73 @@ namespace DAO
                     activo.fechaModificacion = DateTime.Now;
                 }
 
-                var categoriaInvalida = _context.Activos
-                    .Where(a => a.idCategoria <= 0 ||
-                              !_context.Set<clsCategoriaActivos>().Any(c => c.Id == a.idCategoria))
+                // 2. Activos con estadoUso inválido
+                var estadoUsoInvalido = _context.Activos
+                    .Where(a => a.estadoUso < 0)
                     .ToList();
-
-                foreach (var activo in categoriaInvalida)
+                foreach (var activo in estadoUsoInvalido)
                 {
-                    activo.estado = false;
-                    activo.observacionDesecho = "Desactivado por categoría inválida";
+                    activo.estadoUso = 0;
                     activo.usuarioModificacion = "sistema_limpieza";
                     activo.fechaModificacion = DateTime.Now;
+                }
+
+                // 3. Activos con idCategoria inválido o inexistente
+                // Buscar una categoría válida por defecto
+                var categoriaDefault = _context.CategoriasActivos.FirstOrDefault(c => c.estado);
+                int idCategoriaDefault = categoriaDefault != null ? categoriaDefault.Id : 1;
+                var categoriaInvalida = _context.Activos
+                    .Where(a => a.idCategoria <= 0 ||
+                        !_context.CategoriasActivos.Any(c => c.Id == a.idCategoria))
+                    .ToList();
+                foreach (var activo in categoriaInvalida)
+                {
+                    activo.idCategoria = idCategoriaDefault;
+                    activo.usuarioModificacion = "sistema_limpieza";
+                    activo.fechaModificacion = DateTime.Now;
+                }
+
+                // 4. Activos con fechaAdquisicion o fechaCreacion por defecto
+                var fechasInvalidas = _context.Activos
+                    .Where(a => a.fechaAdquisicion == default || a.fechaCreacion == default)
+                    .ToList();
+                foreach (var activo in fechasInvalidas)
+                {
+                    if (activo.fechaAdquisicion == default)
+                        activo.fechaAdquisicion = DateTime.Now;
+                    if (activo.fechaCreacion == default)
+                        activo.fechaCreacion = DateTime.Now;
+                    activo.usuarioModificacion = "sistema_limpieza";
+                    activo.fechaModificacion = DateTime.Now;
+                }
+
+                // 5. Activos sin usuarioCreacion
+                var sinUsuarioCreacion = _context.Activos
+                    .Where(a => string.IsNullOrEmpty(a.usuarioCreacion))
+                    .ToList();
+                foreach (var activo in sinUsuarioCreacion)
+                {
+                    activo.usuarioCreacion = "sistema_limpieza";
+                    activo.usuarioModificacion = "sistema_limpieza";
+                    activo.fechaModificacion = DateTime.Now;
+                }
+
+                // 6. Categorías sin nombre
+                var categoriasSinNombre = _context.CategoriasActivos
+                    .Where(c => string.IsNullOrEmpty(c.nombre))
+                    .ToList();
+                foreach (var categoria in categoriasSinNombre)
+                {
+                    categoria.nombre = $"Categoría sin nombre - ID: {categoria.Id}";
+                }
+
+                // 7. Categorías con estado NULL o inválido (no debería ocurrir, pero por seguridad)
+                var categoriasEstadoNull = _context.CategoriasActivos
+                    .Where(c => c.estado != true && c.estado != false)
+                    .ToList();
+                foreach (var categoria in categoriasEstadoNull)
+                {
+                    categoria.estado = true;
                 }
 
                 _context.SaveChanges();

@@ -55,18 +55,31 @@ namespace Entities
 
         public List<clsDevolucion> devoluciones { get; set; }
 
+        // Solo pueden ser nulos si estadoUso == 2
         [Column(TypeName = "date")]
         public DateTime? fechaDesecho { get; set; }
 
         [StringLength(200, ErrorMessage = "La observación de desecho no puede tener más de 200 caracteres")]
         public string observacionDesecho { get; set; }
-        //propiedad de navegacion para la relacion uno a muchos con clsCategoriaActivos
-        
 
         public clsActivos()
         {
             this.devoluciones = new List<clsDevolucion>();
             this.fechaCreacion = DateTime.Now;
+            // Inicializar campos de desecho como null
+            this.fechaDesecho = null;
+            this.observacionDesecho = null;
+        }
+
+        // Validación para asegurar que solo sean nulos si estadoUso == 2
+        public void ValidarDesecho()
+        {
+            if (estadoUso != 2)
+            {
+                fechaDesecho = null;
+                observacionDesecho = null;
+            }
+            // Si estadoUso == 2 y los campos están vacíos, se mantienen como null
         }
     }
 }

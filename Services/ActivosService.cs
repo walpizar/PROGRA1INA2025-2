@@ -31,11 +31,19 @@ namespace Services
         {
             try
             {
-                return _actiDAO.consultarTodos();
+                // Usar el método listar() que incluye la categoría
+                return _actiDAO.listar();
             }
-            catch (System.Exception)
+            catch (System.Exception ex)
             {
-                return _actiDAO.consultarTodosSinRelaciones();
+                try
+                {
+                    return _actiDAO.consultarTodosSinRelaciones();
+                }
+                catch (System.Exception innerEx)
+                {
+                    throw new Exception("No se pudieron consultar los activos. Verifique la integridad de los datos en la base de datos.", innerEx);
+                }
             }
         }
 
@@ -50,13 +58,14 @@ namespace Services
             if (activos.idCategoria <= 0)
                 throw new System.ArgumentException("Debe seleccionar una categoría válida");
 
-            // ❌ No validar el idActivo, la BD lo genera automáticamente
+            // Validar campos de desecho
+            activos.ValidarDesecho();
+
             using (var dao = new ActivosDAO())
             {
                 dao.crear(activos);
             }
         }
-
 
         public void modificar(clsActivos activos)
         {
@@ -67,7 +76,10 @@ namespace Services
             if (existeActivo == null)
                 throw new System.ArgumentException($"No se encontró el activo con ID {activos.idActivo}");
 
-            using (var dao = new ActivosDAO()) // Nuevo contexto, se dispone automáticamente
+            // Validar campos de desecho
+            activos.ValidarDesecho();
+
+            using (var dao = new ActivosDAO())
             {
                 dao.modificar(activos);
             }

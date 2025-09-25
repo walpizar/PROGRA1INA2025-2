@@ -187,6 +187,7 @@ namespace UI
                         using (var service = new ActivosServices())
                         {
                             activo.usuarioModificacion = "usuario";
+                            activo.fechaModificacion = DateTime.Now;
                             service.crear(activo);
 
                         }
@@ -227,6 +228,7 @@ namespace UI
                         using (var service = new ActivosServices())
                         {
                             activo.usuarioModificacion = "usuario";
+                            activo.fechaModificacion = DateTime.Now;
                             service.modificar(activo);
 
                         }
@@ -286,7 +288,23 @@ namespace UI
             return true;
         }
 
-        private void btnEliminar_Click(object sender, EventArgs e)
+
+
+        
+
+
+
+        private void gbxClientes_Enter(object sender, EventArgs e)
+        {
+
+        }
+
+        private void gbxClientes_Enter_1(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnEliminar_Click_1(object sender, EventArgs e)
         {
             if (activosSelected != null)
             {
@@ -310,28 +328,10 @@ namespace UI
             }
         }
 
-        private void btnCancelar_Click(object sender, EventArgs e)
+        private void btnCancelar_Click_1(object sender, EventArgs e)
         {
             this.DialogResult = DialogResult.Cancel;
             this.Close();
-        }
-
-        private void btnLista_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                var frmLista = new frmListaActivos();
-                frmLista.ShowDialog();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"Error al abrir la lista: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }
-
-        private void gbxClientes_Enter(object sender, EventArgs e)
-        {
-
         }
     }
 }
