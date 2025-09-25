@@ -134,16 +134,21 @@ namespace UI
         {
             panelSubmenuActivos.Visible = false;
             pnlContiene.BackColor = Color.White;
+            new frmActivos().ShowDialog();
         }
 
         private void btnDevolucion_Click(object sender, EventArgs e)
         {
             panelSubmenuActivos.Visible = false;
+            pnlContiene.BackColor = Color.White;
+            new frmDevolucion().ShowDialog();
         }
 
         private void button4_Click(object sender, EventArgs e)
         {
             panelSubmenuActivos.Visible = false;
+            pnlContiene.BackColor = Color.White;
+            new frmMantenimientoCategoriasActivos().ShowDialog();
         }
 
         private void frmMenuVertical_Load_1(object sender, EventArgs e)
@@ -161,5 +166,11 @@ namespace UI
         {
 
         }
+
+        private void SalirSistema_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
+        }
+
     }
 }

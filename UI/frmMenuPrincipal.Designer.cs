@@ -129,6 +129,7 @@
             SalirSistema.Size = new Size(250, 51);
             SalirSistema.TabIndex = 8;
             SalirSistema.UseVisualStyleBackColor = true;
+            SalirSistema.Click += SalirSistema_Click;
             // 
             // button6
             // 
@@ -260,7 +261,7 @@
             pnlPanelTop.Dock = DockStyle.Top;
             pnlPanelTop.Location = new Point(250, 0);
             pnlPanelTop.Name = "pnlPanelTop";
-            pnlPanelTop.Size = new Size(1441, 50);
+            pnlPanelTop.Size = new Size(780, 50);
             pnlPanelTop.TabIndex = 1;
             // 
             // pnlContenedor
@@ -274,7 +275,7 @@
             pnlContenedor.Dock = DockStyle.Top;
             pnlContenedor.Location = new Point(0, 0);
             pnlContenedor.Name = "pnlContenedor";
-            pnlContenedor.Size = new Size(1441, 50);
+            pnlContenedor.Size = new Size(780, 50);
             pnlContenedor.TabIndex = 2;
             pnlContenedor.MouseDown += pnlContenedor_MouseDown;
             // 
@@ -283,7 +284,7 @@
             ptbRestaurar.Cursor = Cursors.Hand;
             ptbRestaurar.Dock = DockStyle.Right;
             ptbRestaurar.Image = (Image)resources.GetObject("ptbRestaurar.Image");
-            ptbRestaurar.Location = new Point(1349, 0);
+            ptbRestaurar.Location = new Point(688, 0);
             ptbRestaurar.Name = "ptbRestaurar";
             ptbRestaurar.Size = new Size(23, 50);
             ptbRestaurar.SizeMode = PictureBoxSizeMode.Zoom;
@@ -297,7 +298,7 @@
             ptbMinimizar.Cursor = Cursors.Hand;
             ptbMinimizar.Dock = DockStyle.Right;
             ptbMinimizar.Image = (Image)resources.GetObject("ptbMinimizar.Image");
-            ptbMinimizar.Location = new Point(1372, 0);
+            ptbMinimizar.Location = new Point(711, 0);
             ptbMinimizar.Name = "ptbMinimizar";
             ptbMinimizar.Size = new Size(23, 50);
             ptbMinimizar.SizeMode = PictureBoxSizeMode.Zoom;
@@ -310,7 +311,7 @@
             ptbMaximizar.Cursor = Cursors.Hand;
             ptbMaximizar.Dock = DockStyle.Right;
             ptbMaximizar.Image = (Image)resources.GetObject("ptbMaximizar.Image");
-            ptbMaximizar.Location = new Point(1395, 0);
+            ptbMaximizar.Location = new Point(734, 0);
             ptbMaximizar.Name = "ptbMaximizar";
             ptbMaximizar.Size = new Size(23, 50);
             ptbMaximizar.SizeMode = PictureBoxSizeMode.Zoom;
@@ -323,7 +324,7 @@
             ptbSalir.Cursor = Cursors.Hand;
             ptbSalir.Dock = DockStyle.Right;
             ptbSalir.Image = Properties.Resources.icons8_eliminar_50;
-            ptbSalir.Location = new Point(1418, 0);
+            ptbSalir.Location = new Point(757, 0);
             ptbSalir.Name = "ptbSalir";
             ptbSalir.Size = new Size(23, 50);
             ptbSalir.SizeMode = PictureBoxSizeMode.Zoom;
@@ -518,7 +519,7 @@
             pnlContiene.Dock = DockStyle.Fill;
             pnlContiene.Location = new Point(0, 0);
             pnlContiene.Name = "pnlContiene";
-            pnlContiene.Size = new Size(1691, 753);
+            pnlContiene.Size = new Size(1030, 753);
             pnlContiene.TabIndex = 4;
             // 
             // panel10
@@ -654,9 +655,10 @@
             // 
             panel7.BackColor = Color.DeepPink;
             panel7.Controls.Add(lblDashboard);
-            panel7.Location = new Point(250, 44);
+            panel7.Dock = DockStyle.Top;
+            panel7.Location = new Point(0, 0);
             panel7.Name = "panel7";
-            panel7.Size = new Size(1441, 47);
+            panel7.Size = new Size(1030, 90);
             panel7.TabIndex = 2;
             // 
             // lblDashboard
@@ -664,7 +666,7 @@
             lblDashboard.AutoSize = true;
             lblDashboard.Font = new Font("Segoe UI Semibold", 15.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
             lblDashboard.ForeColor = SystemColors.Control;
-            lblDashboard.Location = new Point(7, 9);
+            lblDashboard.Location = new Point(276, 53);
             lblDashboard.Name = "lblDashboard";
             lblDashboard.Size = new Size(118, 30);
             lblDashboard.TabIndex = 3;
@@ -701,7 +703,7 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1691, 753);
+            ClientSize = new Size(1030, 753);
             Controls.Add(panelSubmenuActivos);
             Controls.Add(panelSubMenu);
             Controls.Add(pnlPanelTop);
