@@ -5,14 +5,20 @@ namespace UI
 {
     internal static class Program
     {
+
+
+        private static UsuarioService usuarioService;
+
+
         /// <summary>
         ///  The main entry point for the application.
         /// </summary>
         [STAThread]
         static void Main()
         {
-           
-
+  
+        // see https://aka.ms/applicationconfiguration.
+        ApplicationConfiguration.Initialize();
 
 
             
@@ -43,6 +49,7 @@ namespace UI
 
 
             //Application.Run(new frmActivos());
+
 
 
         }
