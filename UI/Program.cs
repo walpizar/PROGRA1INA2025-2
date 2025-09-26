@@ -28,7 +28,7 @@ namespace UI
         //Application.Run(new frmProductoLista());
 
                 // Inyectamos el servicio en el formulario
-                Application.Run(new frmVisitasDomiciliarias());
+                Application.Run(new frmMantenimientoRoles());
             }
         }
     }

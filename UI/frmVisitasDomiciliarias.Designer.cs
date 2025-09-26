@@ -51,7 +51,7 @@
             label1.Size = new Size(186, 25);
             label1.TabIndex = 0;
             label1.Text = "Visitas Domiciliarias";
-            label1.Click += label1_Click;
+
             // 
             // label2
             // 
@@ -61,7 +61,7 @@
             label2.Size = new Size(93, 15);
             label2.TabIndex = 1;
             label2.Text = "Buscar Paciente:";
-            label2.Click += label2_Click;
+
             // 
             // textBox1
             // 
@@ -102,7 +102,6 @@
             groupBox1.TabIndex = 6;
             groupBox1.TabStop = false;
             groupBox1.Text = "Lista de Visitas Domiciliarias";
-            groupBox1.Enter += groupBox1_Enter;
             // 
             // listView1
             // 
@@ -150,7 +149,6 @@
             Controls.Add(label1);
             Name = "frmVisitasDomiciliarias";
             Text = "frmVisitasDomiciliarias";
-            Load += frmVisitasDomiciliarias_Load;
             groupBox1.ResumeLayout(false);
             groupBox1.PerformLayout();
             ResumeLayout(false);

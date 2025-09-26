@@ -60,7 +60,6 @@
             label2.Size = new Size(229, 25);
             label2.TabIndex = 1;
             label2.Text = "Nueva visita Domiciliaria";
-            label2.Click += label2_Click;
             // 
             // button1
             // 
@@ -70,7 +69,6 @@
             button1.TabIndex = 10;
             button1.Text = "Guardar";
             button1.UseVisualStyleBackColor = true;
-            button1.Click += button1_Click;
             // 
             // groupBox1
             // 
@@ -118,7 +116,6 @@
             textBox1.Name = "textBox1";
             textBox1.Size = new Size(111, 23);
             textBox1.TabIndex = 14;
-            textBox1.TextChanged += textBox1_TextChanged;
             // 
             // label6
             // 

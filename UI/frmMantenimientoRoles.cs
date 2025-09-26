@@ -143,6 +143,8 @@ namespace UI
                 richTextBoxDescripcionRol.Clear();
 
                 cargarListaRoles(_Service.consultarRoles());//ACTUALIZAR LISTA DE ROLES
+                cargarRolesBox();
+
             }
             catch (NullException ex)//EXCEPCION DE ESPACIO EN NULL
             {
