@@ -31,7 +31,7 @@ using static Common.Enums.Enums;
             InitializeComponent();
 
             _productoService = new ProductoService();
-            _CategoriaService  = new CategoriaService();
+            _CategoriaService = new CategoriaService();
         }
 
         private void btnGuardar_Click(object sender, EventArgs e)
@@ -184,7 +184,7 @@ using static Common.Enums.Enums;
                 limpiarForm();
             }
 
-          
+
 
 
 
@@ -219,7 +219,7 @@ using static Common.Enums.Enums;
             txtCantidad.Value = productoSelected.cantidad;
             //obtiene el valor que el usuario selecciono en el combo
             cboFamilia.SelectedItem = (FamiliaProducto)productoSelected.familia;
-            cboCategoria.SelectedValue = (int)productoSelected.CategoriaId;
+            cboCategoria.SelectedValue = productoSelected.CategoriaId;
         }
 
         private void btnCancelar_Click(object sender, EventArgs e)
@@ -232,10 +232,10 @@ using static Common.Enums.Enums;
             try
             {
 
-               DialogResult resp = MessageBox.Show("¿Está seguro que desea eliminar el producto?", "Confirmación", 
-                    MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                DialogResult resp = MessageBox.Show("¿Está seguro que desea eliminar el producto?", "Confirmación",
+                     MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 
-                if(resp == DialogResult.Yes)
+                if (resp == DialogResult.Yes)
                 {
                     _productoService.eliminar(productoSelected.id);
                     MessageBox.Show("Producto eliminado correctamente");
@@ -250,5 +250,7 @@ using static Common.Enums.Enums;
                 MessageBox.Show("Error al eliminar el producto.");
             }
         }
+
+  
     }
 }*/
