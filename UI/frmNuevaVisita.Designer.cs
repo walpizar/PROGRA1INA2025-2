@@ -40,11 +40,11 @@
             richTextBox1 = new RichTextBox();
             textBox3 = new TextBox();
             textBox2 = new TextBox();
-            textBox1 = new TextBox();
             label6 = new Label();
             label5 = new Label();
             label4 = new Label();
             label3 = new Label();
+            dateTimePicker1 = new DateTimePicker();
             groupBox1.SuspendLayout();
             SuspendLayout();
             // 
@@ -78,6 +78,7 @@
             // 
             // groupBox1
             // 
+            groupBox1.Controls.Add(dateTimePicker1);
             groupBox1.Controls.Add(textBox5);
             groupBox1.Controls.Add(label8);
             groupBox1.Controls.Add(button2);
@@ -86,7 +87,6 @@
             groupBox1.Controls.Add(richTextBox1);
             groupBox1.Controls.Add(textBox3);
             groupBox1.Controls.Add(textBox2);
-            groupBox1.Controls.Add(textBox1);
             groupBox1.Controls.Add(label6);
             groupBox1.Controls.Add(label5);
             groupBox1.Controls.Add(label4);
@@ -162,13 +162,6 @@
             textBox2.Size = new Size(202, 23);
             textBox2.TabIndex = 15;
             // 
-            // textBox1
-            // 
-            textBox1.Location = new Point(59, 22);
-            textBox1.Name = "textBox1";
-            textBox1.Size = new Size(111, 23);
-            textBox1.TabIndex = 14;
-            // 
             // label6
             // 
             label6.AutoSize = true;
@@ -205,6 +198,13 @@
             label3.TabIndex = 10;
             label3.Text = "Nombre comleto de Visitante:";
             // 
+            // dateTimePicker1
+            // 
+            dateTimePicker1.Location = new Point(59, 22);
+            dateTimePicker1.Name = "dateTimePicker1";
+            dateTimePicker1.Size = new Size(200, 23);
+            dateTimePicker1.TabIndex = 23;
+            // 
             // frmNuevaVisita
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -232,7 +232,6 @@
         private RichTextBox richTextBox1;
         private TextBox textBox3;
         private TextBox textBox2;
-        private TextBox textBox1;
         private Label label6;
         private Label label5;
         private Label label4;
@@ -242,5 +241,6 @@
         private Button button2;
         private TextBox textBox5;
         private Label label8;
+        private DateTimePicker dateTimePicker1;
     }
 }

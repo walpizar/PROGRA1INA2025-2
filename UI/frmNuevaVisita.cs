@@ -30,22 +30,20 @@ namespace UI
 
         private void frmNuevaVisita_Load(object sender, EventArgs e)
         {
-            textBox1.Text = DateTime.Now.ToString("dd/MM/yyyy");//FECHA ACTUAL POR DEFECTO
-            textBox1.ReadOnly = true;
             textBox4.ReadOnly = true;
             textBox5.ReadOnly = true;
 
             if (visitaSelected != null) //SI SE SELECIONA ALGUNO DE LA LISTA
             {
                 label2.Text = "Visita Domiciliaria Hecha";
-                textBox1.Text = visitaSelected.fecha.ToString("dd/MM/yyyy");
+                dateTimePicker1.Value = visitaSelected.fecha;
                 textBox2.Text = visitaSelected.nombreVisitante;
                 textBox3.Text = visitaSelected.nombrePaciente;
                 textBox4.Text = visitaSelected.direccion;
                 textBox5.Text = visitaSelected.telefono.ToString();
                 richTextBox1.Text = visitaSelected.detalles;
 
-                textBox1.ReadOnly = true;//NO PERMITE QUE SE MODIFIQUEN
+                dateTimePicker1.Enabled = false;//NO PERMITE QUE SE MODIFIQUEN
                 textBox2.ReadOnly = true;
                 textBox3.ReadOnly = true;
                 textBox4.ReadOnly = true;
