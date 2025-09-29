@@ -40,6 +40,7 @@
             label5 = new Label();
             label4 = new Label();
             label3 = new Label();
+            dateTimePicker1 = new DateTimePicker();
             groupBox1.SuspendLayout();
             SuspendLayout();
             // 
