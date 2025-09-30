@@ -14,14 +14,14 @@ namespace DAO
         // Entidades mapeadas
         public DbSet<clsPersona> persona { get; set; }
         public DbSet<clsActivos> activos { get; set; }
-        public DbSet<clsDonacionesActivos> donacionesActivos { get; set; }
+        //public DbSet<clsDonacionesActivos> donacionesActivos { get; set; }
         public DbSet<clsCategoriaActivos> categoriaActivos { get; set; }
         public DbSet<clsDepartamentos> departamentos { get; set; }
         public DbSet<clsDevolucion> devolucion { get; set; }
         public DbSet<clsEnfermero> enfermero { get; set; }
         public DbSet<clsEspecialidadMedica> especialidadMedica { get; set; }
         public DbSet<clsMedico> medico { get; set; }
-        public DbSet<clsPermisos> permisos { get; set; }
+        public DbSet<clsPermiso> permisos { get; set; }
         public DbSet<clsPuestos> puestos { get; set; }
         public DbSet<clsRol> rol { get; set; }////
         public DbSet<clsRolPermiso> rolPermiso { get; set; }
@@ -30,7 +30,7 @@ namespace DAO
         public DbSet<clsPaciente> paciente { get; set; }
         //public DbSet<clsDonante> donante { get; set; }
         //public DbSet<clsDonacion> donacion { get; set; }
-        public DbSet<clsCategoriaActivos> categoriaActivos { get; set; }
+        public DbSet<clsCategoriaActivos> categoriasActivos { get; set; }
 
         public DbSet<clsVisitasDomiciliares> visitasDomiciliares { get; set; }
 

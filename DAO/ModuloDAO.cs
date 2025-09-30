@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace DAO
 {
-    public class ModuloDAO : IPermisosRolModulo<clsModulo>
+    public class ModuloDAO : IGenerica<clsModulo>
     {
         private dbContextINA _context;//se le quito el readonly
 
@@ -38,10 +38,20 @@ namespace DAO
             _context.SaveChanges();
         }
 
+        public void eliminar(string id)//ELIMINAR
+        {
+            var prod = consultarPorID(id);
+            _context.modulos.Remove(prod);
+            _context.SaveChanges();
+        } 
         public clsModulo consultarPorID(int id)// CONSULTAR ID
         {
             return _context.modulos.Where(p => p.idModulo == id).SingleOrDefault();//id_rol
 
+            return null;
+        }
+        public clsModulo consultarPorID(string id)// CONSULTAR ID
+        {               
             return null;
         }
 

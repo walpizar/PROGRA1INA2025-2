@@ -223,7 +223,7 @@ namespace UI
             if (cboRol.SelectedItem is Entities.clsRol rolSeleccionado)
                 // Aquí accedes a la "collection item" seleccionada
                 MessageBox.Show("Rol: " + rolSeleccionado.nombreRol + "\nDescripción: " +
-                    rolSeleccionado.descripcion);
+                    rolSeleccionado.descripcionRol);
 
         }
 
@@ -234,7 +234,7 @@ namespace UI
             if (cboRol.SelectedItem is Entities.clsRol rolSeleccionado)
                 // Aquí accedes a la "collection item" seleccionada
                 MessageBox.Show("Rol: " + rolSeleccionado.nombreRol + "\nDescripción: " +
-                    rolSeleccionado.descripcion);
+                    rolSeleccionado.descripcionRol);
 
         }
 

@@ -1,15 +1,17 @@
-﻿using Entities;
-using Common.Interfaces;
+﻿using Common.Interfaces;
+using Entities;
+using DAO;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 
 namespace DAO
 {
-    public class PermisoDAO : IPermisosRolModulo<clsPermiso>
+    public class PermisoDAO : IGenerica<clsPermiso>
     {
         private dbContextINA _context;//se le quito el readonly
 
@@ -19,90 +21,69 @@ namespace DAO
             _context = new dbContextINA();
         }
 
-
-        public void crearPermiso(clsPermiso permi)//
+        public void crear(clsPermiso roool)
         {
-            _context.permisos.Add(permi);
+            _context.permisos.Add(roool);
             _context.SaveChanges();
         }
 
-
-        public void crear(clsPermiso modu)
-        {
-            _context.permisos.Add(modu);
-            _context.SaveChanges();
-        }
-
-        public void modificar(clsPermiso permi)//MODIFICAR//NO SE USA AUN
+        public void modificar(clsPermiso permi)
         {
             _context.permisos.Update(permi);
             _context.SaveChanges();
         }
 
-        public void eliminar(int id)//ELIMINAR//NO SE USA AUN
+        public void eliminar(int id)///NO SE USA
         {
-            var prod = consultarPorID(id);
-            _context.permisos.Remove(prod);
-            _context.SaveChanges();
+            //var prod = consultarPorID(id);
+            //_context.permisos.Remove(prod);
+            //_context.SaveChanges();
         }
 
-        public void eliminarP(clsPermiso permi)//ELIMINAR//NO SE USA AUN
+        public void eliminar(string id)//NO SE USA 
         {
-
-
+            //var prod = consultarPorID(id);
+            //_context.permisos.Remove(prod);
+           // _context.SaveChanges();
+        }
+        public void eliminarPermiso(clsPermiso permi)//ELIMINAR // ELIMINA LA LLAVE COMPUESTA
+        {
             _context.permisos.Remove(permi);
-
             _context.SaveChanges();
         }
-
 
         public clsPermiso consultarPorID(int id)// CONSULTAR ID //NO SE USA
         {
-            //ID ?????LLAVE COMPUESTA
             return null;
         }
 
-        public clsPermiso consultarPorIDs(int idModulo, int idRol)//CONSULTAR LLAVE COMPUESTA/////////////
+        public clsPermiso consultarPorID(string id)// CONSULTAR ID //NO SE USA
         {
-            return _context.permisos
-                           .SingleOrDefault(p => p.idModulo == idModulo && p.idRol == idRol);
+            return null;
         }
-
 
         public clsPermiso consultarPorNombre(string nombre)//NO SE USA
         {
             return null;
         }
-
-        public List<clsPermiso> consultarTodos()//NO SE USA
+        public List<clsPermiso> consultarTodos()//NO SE USA // PORQUE MUESTRA EL NOMBRE DE MODULO Y ROL MEDIANTE PROPIEDADES DE NAVEGACION
         {
             return _context.permisos.ToList();
-      
         }
 
-        public List<clsPermiso> consultarPermisosDos()
+        public clsPermiso consultarPorIDs(int idModulo, int idRol)//CONSULTAR LLAVE COMPUESTA
         {
+            return _context.permisos
+                           .SingleOrDefault(p => p.idModulo == idModulo && p.idRol == idRol);
+        }
+
+        public List<clsPermiso> consultarPermisosDos()//CADA PERMISO ESTA COMPUESTO POR EL ID DE MODULO Y ROL
+        {
+            //MUESTRA NOMBRE POR ID MEDIANTE LA PROPIEDAD DE NAVEGACION
             return _context.permisos
                            .Include(p => p.rol)
                            .Include(p => p.modulo)
                            .ToList();
-        }
-
-        public void consultarPermisos(int idModulo, int idRol)//MASO MENOS//AUN NO SE USA
-        {
-            var permiso = consultarPorIDs(idModulo, idRol); 
-
-            if (permiso != null)
-            {
-                Console.WriteLine($"Consultar: {permiso.consultar}");
-                Console.WriteLine($"Crear: {permiso.crear}");
-                Console.WriteLine($"Editar: {permiso.editar}");
-                Console.WriteLine($"Eliminar: {permiso.eliminar}");
-            }
-            else
-            {
-                Console.WriteLine("No hay permisos asignados.");
-            }
         }
     }
 }

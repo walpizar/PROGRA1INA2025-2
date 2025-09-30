@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace DAO
 {
-    public class RolDAO : IPermisosRolModulo<clsRol>
+    public class RolDAO : IGenerica<clsRol>
     {
         private dbContextINA _context;//se le quito el readonly
 
@@ -40,11 +40,21 @@ namespace DAO
             _context.SaveChanges();
         }
 
+        public void eliminar(string id)//ELIMINAR//NO SE USA
+        {
+
+        }
+
+
         public clsRol consultarPorID(int id)// CONSULTAR ID
         {
             return _context.rol.Where(p => p.idRol == id).SingleOrDefault();//id_rol
         }
 
+        public clsRol consultarPorID(string id)// CONSULTAR ID POR STRING// NO SE USA
+        {
+            return null;
+        }
 
         public clsRol consultarPorNombre(string nombre)
         {
