@@ -1,4 +1,5 @@
-﻿namespace UI
+﻿
+namespace UI
 {
     partial class frmUsuarioLista
     {
@@ -77,6 +78,7 @@
             lstvLista.UseCompatibleStateImageBehavior = false;
             lstvLista.View = View.Details;
             lstvLista.SelectedIndexChanged += lstvLista_SelectedIndexChanged;
+            this.lstvLista.DoubleClick += new System.EventHandler(this.lstvLista_DoubleClick);
             // 
             // colnombreUsuario
             // 
@@ -143,6 +145,11 @@
             gbBusqueda.PerformLayout();
             ResumeLayout(false);
             PerformLayout();
+        }
+
+        private void lstvLista_DoubleClick(object sender, EventArgs e)
+        {
+            throw new NotImplementedException();
         }
 
         #endregion

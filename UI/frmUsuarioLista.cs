@@ -38,8 +38,7 @@ namespace UI
             lstvLista.Items.Clear();
             foreach (clsUsuario usuario in lista)
             {
-                ListViewItem item = new ListViewItem(usuario.id.ToString());
-                item.SubItems.Add(usuario.nombre_Usuario);
+                ListViewItem item = new ListViewItem(usuario.nombre_Usuario);
                 item.SubItems.Add(usuario.contrasena);
                 item.SubItems.Add(usuario.idRol.ToString());
                 lstvLista.Items.Add(item);
@@ -51,11 +50,12 @@ namespace UI
         private void btnNuevo_Click(object sender, EventArgs e)
         {
             frmUsuario frmUsuario = new frmUsuario();
-            frmUsuario.ShowDialog();
 
-            //actualizar la lista
-            this.lista = _usuarioService.consultarTodos();
-            cargarLista(lista);
+            if (frmUsuario.ShowDialog() == DialogResult.OK)
+            {
+                this.lista = _usuarioService.consultarTodos();
+                cargarLista(lista);
+            }
 
         }
 
@@ -63,32 +63,29 @@ namespace UI
         {
             try
             {
-                //validar si hay un elemento seleccionado
                 if (lstvLista.SelectedItems.Count > 0)
                 {
-                    //extraigo el id del usuario seleccionado de la listview
-                    int idRol = int.Parse(lstvLista.SelectedItems[0].SubItems[0].Text);
+                    // Obtener el nombre de usuario de la primera columna
+                    string nombreUsuario = lstvLista.SelectedItems[0].SubItems[0].Text;
 
-                    //consulto el cliente por idRol a la lista
-                    clsUsuario usuario = lista.Where(u => u.idRol == idRol).SingleOrDefault();
+                    // Buscar el usuario en la lista
+                    clsUsuario usuario = lista.FirstOrDefault(u => u.nombre_Usuario == nombreUsuario);
+
                     if (usuario != null)
                     {
-                        //Creo una instancia del formulario de cliente
                         frmUsuario frmUsuario = new frmUsuario();
-                        //Le asigno a la propiedad el usuario seleccionado
                         frmUsuario.usuarioSelected = usuario;
                         frmUsuario.ShowDialog();
 
-                        //actualizar la lista
+                        // Actualizar la lista después de cerrar
                         this.lista = _usuarioService.consultarTodos();
                         cargarLista(lista);
                     }
-
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                MessageBox.Show("Error al seleccionar el usuario de la lista");
+                MessageBox.Show("Error al seleccionar el usuario de la lista: " + ex.Message);
             }
         }
 
@@ -114,5 +111,29 @@ namespace UI
             cargarLista(listaFiltrada);
 
         }
+
+        private void lstv_DoubleClick(object sender, MouseEventArgs e)
+        {
+            if (lstvLista.SelectedItems.Count > 0)
+            {
+                string nombreUsuario = lstvLista.SelectedItems[0].SubItems[0].Text;
+                clsUsuario usuario = lista.FirstOrDefault(u => u.nombre_Usuario == nombreUsuario);
+
+                if (usuario != null)
+                {
+                    frmUsuario frm = new frmUsuario();
+                    frm.usuarioSelected = usuario;
+
+                    // Abrir y esperar resultado
+                    if (frm.ShowDialog() == DialogResult.OK)
+                    {
+                        //Refrescar lista después de eliminar o modificar
+                        this.lista = _usuarioService.consultarTodos();
+                        cargarLista(lista);
+                    }
+                }
+            }
+        }
     }
 }
+
