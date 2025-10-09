@@ -44,15 +44,9 @@ namespace Services
             _usuarioDAO.modificar(usuario);
         }
 
-        public void eliminar(string id)
+        public void eliminar(string nombreUsuario)
         {
-            //validar que el usuario exista
-            if (_usuarioDAO.consultarPorID(id) == null)
-            {
-                throw new Exception("El usuario no existe");
-            }
-
-            _usuarioDAO.eliminar(id);
+            _usuarioDAO.eliminar(nombreUsuario);
         }
 
         public clsUsuario consultarPorID(string id)
@@ -72,12 +66,14 @@ namespace Services
 
         public void eliminar(int id)
         {
-            throw new NotImplementedException();
+            throw new NotImplementedException("Usar eliminar(string nombreUsuario)");
         }
 
         public clsUsuario consultarPorID(int id)
         {
-            throw new NotImplementedException();
+            throw new NotImplementedException("Usar consultarPorID(string nombreUsuario)");
         }
+
+        
     }
 }
