@@ -163,7 +163,7 @@ namespace UI
 
         private void frmDevolucion_Load(object sender, EventArgs e)
         {
-            cargarActivos();
+            //cargarActivos();
 
             if (devolucionSelected != null)
             {
@@ -189,7 +189,7 @@ namespace UI
             }
         }
 
-        private void cargarActivos()
+        /*private void cargarActivos()
         {
             // Mostrar solo activos con estado "Prestado" o "En uso"
             List<clsActivos> activos = _activosService.consultarTodos();
@@ -204,7 +204,7 @@ namespace UI
             cboActivo.DataSource = filtrados;
             cboActivo.DisplayMember = nameof(clsActivos.nombreActivo);
             cboActivo.ValueMember = nameof(clsActivos.idActivo);
-        }
+        }*/
 
         private void btnGuardar_Click(object sender, EventArgs e)
         {

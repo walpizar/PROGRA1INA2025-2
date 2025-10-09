@@ -24,13 +24,14 @@ namespace Services
             if (activo == null)
                 throw new Exception("El activo no existe.");
 
-            // Regla de negocio: el estado del activo debe indicar que está prestado/en uso
+            /*
+             * / Regla de negocio: el estado del activo debe indicar que está prestado/en uso
             var estado = (activo.estado ?? string.Empty).Trim();
             if (!string.Equals(estado, "Prestado", StringComparison.OrdinalIgnoreCase) &&
                 !string.Equals(estado, "En uso", StringComparison.OrdinalIgnoreCase))
             {
                 throw new Exception("El activo no está prestado. No es posible registrar la devolución.");
-            }
+            }*/
 
             // Registrar la devolución
             _devolucionDao.crear(devolucion);

@@ -70,8 +70,8 @@ namespace UI
                 txtIdActivo.Text = activosSelected.idActivo.ToString();
                 txtNombre.Text = activosSelected.nombreActivo;
                 txtDescripcion.Text = activosSelected.descripcion;
-                txtCantidad.Value = activosSelected.cantidadDisponible;
-                txtEstado.Text = activosSelected.estado;
+                //txtCantidad.Value = activosSelected.cantidadDisponible;
+                //txtEstado.Text = activosSelected.estadoUso;
                 txtfecha.Text = activosSelected.fechaAdquisicion.ToString("yyyy-MM-dd");
                 txtProveedor.Text = activosSelected.proveedor;
                 txtUbicacion.Text = activosSelected.ubicacion;
@@ -99,8 +99,8 @@ namespace UI
                     activo.idActivo = Convert.ToInt32(txtIdActivo.Text);
                     activo.nombreActivo = txtNombre.Text;
                     activo.descripcion = txtDescripcion.Text;
-                    activo.cantidadDisponible = (int)txtCantidad.Value;
-                    activo.estado = txtEstado.Text;
+                    //activo.cantidadDisponible = (int)txtCantidad.Value;
+                    //activo.estado = txtEstado.Text;
                     activo.fechaAdquisicion = DateTime.Parse(txtfecha.Text);
                     activo.proveedor = txtProveedor.Text;
                     activo.ubicacion = txtUbicacion.Text;

@@ -33,7 +33,7 @@ namespace Entities
         public int? tipoTransaccion { get; set; } //opcional, lleva enums
         public int? frecuencia { get; set; } //opcional, lleva enums
         public int? tipoMoneda { get; set; } //opcional, lleva enums
-        public DateTime? fechaProximaDonacion { get; set; } //opcional
+        
 
         // Auditoría
         [Required, StringLength(50)]

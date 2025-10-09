@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Entities;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -12,9 +13,17 @@ namespace UI
 {
     public partial class frmDetalleDonacion : Form
     {
+        //parametro
+
+        public clsDonacion donacionsSelected { set; get; }
         public frmDetalleDonacion()
         {
             InitializeComponent();
+        }
+
+        private void frmDetalleDonacion_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

@@ -42,6 +42,7 @@
             donanteTelefono = new ColumnHeader();
             lblBuscarDonante = new Label();
             btnNuevoDonante = new Button();
+            btnDonanteSelect = new Button();
             gbxDonanteLista.SuspendLayout();
             SuspendLayout();
             // 
@@ -102,6 +103,7 @@
             lstvwDonanteLista.TabIndex = 0;
             lstvwDonanteLista.UseCompatibleStateImageBehavior = false;
             lstvwDonanteLista.View = View.Details;
+            lstvwDonanteLista.MouseClick += lstvwDonanteLista_MouseClick;
             lstvwDonanteLista.MouseDoubleClick += lstvwDonanteLista_MouseDoubleClick_1;
             // 
             // donanteID
@@ -163,11 +165,23 @@
             btnNuevoDonante.UseVisualStyleBackColor = true;
             btnNuevoDonante.Click += btnNuevoDonante_Click;
             // 
+            // btnDonanteSelect
+            // 
+            btnDonanteSelect.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btnDonanteSelect.Location = new Point(893, 51);
+            btnDonanteSelect.Name = "btnDonanteSelect";
+            btnDonanteSelect.Size = new Size(151, 29);
+            btnDonanteSelect.TabIndex = 4;
+            btnDonanteSelect.Text = "SELECT";
+            btnDonanteSelect.UseVisualStyleBackColor = true;
+            btnDonanteSelect.Click += btnDonanteSelect_Click;
+            // 
             // frmDonanteLista
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1173, 545);
+            Controls.Add(btnDonanteSelect);
             Controls.Add(btnNuevoDonante);
             Controls.Add(gbxDonanteLista);
             Controls.Add(lblMantDonante);
@@ -195,5 +209,6 @@
         private ColumnHeader donanteTelefono;
         private CheckBox chkbxDonanteActivar;
         private ColumnHeader donanteTipoDon;
+        private Button btnDonanteSelect;
     }
 }

@@ -14,6 +14,16 @@ namespace UI
         //llamo al service
         donanteService donanteService;
 
+        //modo seleccion
+        public bool esSeleccion { get; set; } = false;
+
+        private clsDonante donanteSel; // Campo para almacenar el donante seleccionado
+        
+        public clsDonante donanteSelected { get; set; } // Propiedad pública para acceder al donante seleccionado
+
+
+
+
         public frmDonanteLista()
         {
             //instancio el service
@@ -26,6 +36,18 @@ namespace UI
         {
             try
             {
+                //modo seleccion
+                if (esSeleccion)
+                {
+                    this.Text = "SELECCIONAR DONANTE";
+                    this.lblMantDonante.Text = "SELECCIONAR DONANTE";
+                    this.btnDonanteSelect.Visible = true; //oculto el boton nuevo donante
+                }
+                else
+                {
+                    btnDonanteSelect.Visible = false;
+                }
+
                 donanteLst = donanteService.consultarTodos();
                 cargarLista(donanteLst.Where(d => d.estado == true).ToList());
             }
@@ -112,6 +134,29 @@ namespace UI
                                                        d.persona.email.ToLower().Contains(filtro));
         }
 
-        
+        private void lstvwDonanteLista_MouseClick(object sender, MouseEventArgs e)
+        {
+            if (lstvwDonanteLista.SelectedItems.Count > 0)
+            {
+                //busco el id del donante seleccionado
+                string id = lstvwDonanteLista.SelectedItems[0].Text;
+
+                //busco el donante en la lista y lo guardo en el campo de clase
+                donanteSel = donanteLst.Find(d => d.personaId == id);
+            }
+        }
+
+        private void btnDonanteSelect_Click(object sender, EventArgs e)
+        {
+            //guardo el donante seleccionado en la propiedad publica
+            if (donanteSel == null)
+            {
+                MessageBox.Show("Debe seleccionar un donante de la lista.", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+            this.donanteSelected = donanteSel;
+            esSeleccion = false; //desactivo el modo seleccion
+            this.Close();
+        }
     }
 }

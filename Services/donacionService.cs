@@ -103,5 +103,10 @@ namespace Services
             //si pasa la validacion, se modifica la donacion
             donacionDAO.modificar(entidad);
         }
+
+        public int ObtenerSiguienteID()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

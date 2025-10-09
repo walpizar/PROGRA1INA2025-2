@@ -66,7 +66,6 @@
             gbxDonacionLista.TabIndex = 5;
             gbxDonacionLista.TabStop = false;
             gbxDonacionLista.Text = "LISTA DONACIONES";
-            gbxDonacionLista.Enter += gbxDonacionLista_Enter;
             // 
             // txtbxBuscarDonacion
             // 
@@ -75,6 +74,7 @@
             txtbxBuscarDonacion.Name = "txtbxBuscarDonacion";
             txtbxBuscarDonacion.Size = new Size(563, 30);
             txtbxBuscarDonacion.TabIndex = 2;
+            txtbxBuscarDonacion.TextChanged += txtbxBuscarDonacion_TextChanged;
             // 
             // lstvwDonacionLista
             // 
@@ -88,10 +88,11 @@
             lstvwDonacionLista.TabIndex = 0;
             lstvwDonacionLista.UseCompatibleStateImageBehavior = false;
             lstvwDonacionLista.View = View.Details;
+            lstvwDonacionLista.MouseDoubleClick += lstvwDonacionLista_MouseDoubleClick;
             // 
             // donacionID
             // 
-            donacionID.Text = "ID";
+            donacionID.Text = "ID DONACION";
             donacionID.Width = 100;
             // 
             // donacionDonanteID
@@ -101,7 +102,7 @@
             // 
             // donacionTipo
             // 
-            donacionTipo.Text = "TIPO";
+            donacionTipo.Text = "TIPO DONACION";
             donacionTipo.Width = 175;
             // 
             // donacionFecha
@@ -133,7 +134,6 @@
             lblMantDonacion.Size = new Size(292, 25);
             lblMantDonacion.TabIndex = 4;
             lblMantDonacion.Text = "MANTENIMIENTO DONACIONES";
-            lblMantDonacion.Click += lblMantDonacion_Click;
             // 
             // btnDonacionDetalle
             // 
@@ -157,6 +157,7 @@
             Controls.Add(lblMantDonacion);
             Name = "frmDonacionLista";
             Text = "LISTA DONACION";
+            Load += frmDonacionLista_Load;
             gbxDonacionLista.ResumeLayout(false);
             gbxDonacionLista.PerformLayout();
             ResumeLayout(false);

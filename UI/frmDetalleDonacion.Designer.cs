@@ -68,6 +68,7 @@
             Controls.Add(gbxDetalleDonacionLista);
             Name = "frmDetalleDonacion";
             Text = "DETALLE DONACION";
+            Load += frmDetalleDonacion_Load;
             gbxDetalleDonacionLista.ResumeLayout(false);
             ResumeLayout(false);
         }
