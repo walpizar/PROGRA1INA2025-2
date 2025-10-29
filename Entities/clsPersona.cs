@@ -11,6 +11,8 @@ namespace Entities
     [Table("tbPersonas")]
     public class clsPersona
     {
+        public int personaTipoId;
+
         // atributos con decoradores en camelCase
         public string id { get; set; }
         public int tipoId { get; set; }
