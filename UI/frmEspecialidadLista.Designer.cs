@@ -148,7 +148,7 @@ namespace UI
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = SystemColors.GradientInactiveCaption;
             ClientSize = new Size(990, 800);
-            ClientSize = new Size(990, 686);
+            ClientSize = new Size(990, 800);
             Controls.Add(btnNuevaEspecialidad);
             Controls.Add(gbxListaEspecialidad);
             Controls.Add(lblTitulo);
