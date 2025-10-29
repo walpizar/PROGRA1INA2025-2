@@ -8,7 +8,7 @@ using Entities;
     //reglas de negocio
     public class ProductoService: IGenerica<clsProducto>
     {
-        //capa de servicio viaja o accede a capa de datos    
+        //capa de servicio viaja a capa de datos    
         private readonly ProductoDao _prodDao= new ProductoDao();
 
         public ProductoService() {      
@@ -81,6 +81,16 @@ using Entities;
         }
 
         public clsProducto consultarPorNombre(string nombre)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void eliminar(string id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public clsProducto consultarPorID(string id)
         {
             throw new NotImplementedException();
         }
