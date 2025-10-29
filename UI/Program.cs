@@ -20,14 +20,24 @@ namespace UI
         // see https://aka.ms/applicationconfiguration.
         ApplicationConfiguration.Initialize();
 
-        Application.Run(new frmUsuarioLista());
+        //Application.Run(new frmUsuarioLista());
        
 
         //Application.Run(new frmProductoLista());
 
 
+        //HENRRY LEIBA -- PRUEBA PARA ESPECIALIDADES
+        //Application.Run(new frmEspecialidadLista());
+
+        //HENRRY LEIBA -- PRUEBA PARA SOLICITUD DE APOYO
+        Application.Run(new frmSolicitudApoyoLista());
+        
+
+        //Application.Run(new frmMantenimientoCategoriasActivos());
+
+
         //solo ejemplo
-        Application.Run(new frmPacienteLista());
+        //Application.Run(new frmPacienteLista());
 
         
         //Application.Run(new frmActivos());

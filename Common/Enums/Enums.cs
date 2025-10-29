@@ -78,6 +78,12 @@ namespace Common.Enums
             Cedula_Juridica = 2,
             DIMEX = 3
         }
+        public enum EstadoAprobacionSolicitudApoyo
+        {
+            Pendiente = 1,
+            Aprobada = 2,
+            Rechazada = 3
+        }
 
     }
 }

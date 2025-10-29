@@ -21,10 +21,14 @@ namespace DAO
         public DbSet<clsRolPermiso> rolPermiso { get; set; }
         public DbSet<clsUsuario> usuario { get; set; }
         public DbSet<clsModulo> modulos { get; set; }
+
+        public DbSet<clsSolicitudApoyo> solicitudApoyo { get; set; }
+
         public DbSet<clsPaciente> paciente { get; set; }
         //public DbSet<clsDonante> donante { get; set; }
         //public DbSet<clsDonacion> donacion { get; set; }
         public DbSet<clsCategoriaActivos> categoriaActivos { get; set; }
+
 
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -33,7 +37,7 @@ namespace DAO
             // 🔹 Conexión a SQL Express con autenticación de Windows
             {
                 optionsBuilder.UseSqlServer(
-                    @"Server=.;Database=dbPaleativoGarabito;Trusted_Connection=True;MultipleActiveResultSets=True;TrustServerCertificate=True;");
+                    @"Server=localhost\sqlexpress;Database=dbPaleativoGarabito;Trusted_Connection=True;MultipleActiveResultSets=True;TrustServerCertificate=True;");
             }
         }
 
@@ -121,6 +125,15 @@ namespace DAO
             // Clave primaria compuesta para RolPermiso
             modelBuilder.Entity<clsRolPermiso>()
                 .HasKey(rp => new { rp.idRol, rp.idPermiso });
+
+            // Relación 1 a 1 entre SolicitudApoyo y Paciente
+            modelBuilder.Entity<clsSolicitudApoyo>()
+                .HasOne<clsPaciente>()
+                .WithOne()
+                .HasForeignKey<clsSolicitudApoyo>(s => new { s.idPaciente, s.tipoIdPaciente })
+                .OnDelete(DeleteBehavior.Restrict);
+
+
         }
     }
 }
