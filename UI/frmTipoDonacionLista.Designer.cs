@@ -30,6 +30,7 @@
         {
             btnNuevotipoDonacion = new Button();
             gbxTipoDonacionLista = new GroupBox();
+            chkbxTipoDonacAct = new CheckBox();
             dgrdvwDonacionReq = new DataGridView();
             tipoDonacionReqMonto = new DataGridViewCheckBoxColumn();
             tipoDonacionReqTipoTransac = new DataGridViewCheckBoxColumn();
@@ -42,7 +43,7 @@
             tipoDonacionDesc = new ColumnHeader();
             lblBuscarTipoDonacion = new Label();
             lblManttipoDonacion = new Label();
-            chkbxTipoDonacAct = new CheckBox();
+            btnSelecTipoDonacion = new Button();
             gbxTipoDonacionLista.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dgrdvwDonacionReq).BeginInit();
             SuspendLayout();
@@ -50,9 +51,9 @@
             // btnNuevotipoDonacion
             // 
             btnNuevotipoDonacion.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            btnNuevotipoDonacion.Location = new Point(440, 43);
+            btnNuevotipoDonacion.Location = new Point(495, 46);
             btnNuevotipoDonacion.Name = "btnNuevotipoDonacion";
-            btnNuevotipoDonacion.Size = new Size(151, 29);
+            btnNuevotipoDonacion.Size = new Size(96, 29);
             btnNuevotipoDonacion.TabIndex = 10;
             btnNuevotipoDonacion.Text = "NUEVO";
             btnNuevotipoDonacion.UseVisualStyleBackColor = true;
@@ -72,6 +73,18 @@
             gbxTipoDonacionLista.TabIndex = 9;
             gbxTipoDonacionLista.TabStop = false;
             gbxTipoDonacionLista.Text = "LISTA TIPO DONACIONES";
+            // 
+            // chkbxTipoDonacAct
+            // 
+            chkbxTipoDonacAct.AutoSize = true;
+            chkbxTipoDonacAct.Font = new Font("Segoe UI", 7.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            chkbxTipoDonacAct.Location = new Point(457, 37);
+            chkbxTipoDonacAct.Name = "chkbxTipoDonacAct";
+            chkbxTipoDonacAct.Size = new Size(118, 21);
+            chkbxTipoDonacAct.TabIndex = 4;
+            chkbxTipoDonacAct.Text = "ACTIVAR TIPO";
+            chkbxTipoDonacAct.UseVisualStyleBackColor = true;
+            chkbxTipoDonacAct.CheckedChanged += chkbxTipoDonacAct_CheckedChanged;
             // 
             // dgrdvwDonacionReq
             // 
@@ -171,23 +184,23 @@
             lblManttipoDonacion.TabIndex = 8;
             lblManttipoDonacion.Text = "MANTENIMIENTO TIPO DONACIONES";
             // 
-            // chkbxTipoDonacAct
+            // btnSelecTipoDonacion
             // 
-            chkbxTipoDonacAct.AutoSize = true;
-            chkbxTipoDonacAct.Font = new Font("Segoe UI", 7.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            chkbxTipoDonacAct.Location = new Point(457, 37);
-            chkbxTipoDonacAct.Name = "chkbxTipoDonacAct";
-            chkbxTipoDonacAct.Size = new Size(118, 21);
-            chkbxTipoDonacAct.TabIndex = 4;
-            chkbxTipoDonacAct.Text = "ACTIVAR TIPO";
-            chkbxTipoDonacAct.UseVisualStyleBackColor = true;
-            chkbxTipoDonacAct.CheckedChanged += chkbxTipoDonacAct_CheckedChanged;
+            btnSelecTipoDonacion.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btnSelecTipoDonacion.Location = new Point(393, 46);
+            btnSelecTipoDonacion.Name = "btnSelecTipoDonacion";
+            btnSelecTipoDonacion.Size = new Size(96, 29);
+            btnSelecTipoDonacion.TabIndex = 11;
+            btnSelecTipoDonacion.Text = "SELECT";
+            btnSelecTipoDonacion.UseVisualStyleBackColor = true;
+            btnSelecTipoDonacion.Click += btnSelecTipoDonacion_Click;
             // 
             // frmTipoDonacionLista
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(608, 616);
+            Controls.Add(btnSelecTipoDonacion);
             Controls.Add(btnNuevotipoDonacion);
             Controls.Add(gbxTipoDonacionLista);
             Controls.Add(lblManttipoDonacion);
@@ -218,5 +231,6 @@
         private DataGridViewCheckBoxColumn tipoDonacionReqFrec;
         private DataGridViewCheckBoxColumn tipoDonacionReqTipoMoneda;
         private CheckBox chkbxTipoDonacAct;
+        private Button btnSelecTipoDonacion;
     }
 }

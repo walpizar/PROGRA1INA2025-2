@@ -20,6 +20,16 @@ namespace UI
         List<clsTipoDonacion> tipoDonacionList;
         //llamo a service
         tipoDonacionService tipoDonacionService;
+
+        //modo seleccion
+        public bool esSeleccion { get; set; } = false;
+
+        // Campo para almacenar el tipoDonacion seleccionado
+        private clsTipoDonacion tipoDonacionSel;
+
+        // Propiedad pública para acceder al tipoDonacion seleccionado
+        public clsTipoDonacion tipoDonacionSelected { get; set; }
+
         public frmTipoDonacionLista()
         {
             //instancio el service
@@ -35,9 +45,21 @@ namespace UI
             //inicio un try catch para cargar lista
             try
             {
+                //MODO SELECCION
+                if (esSeleccion)
+                {
+                    this.Text = "SELECCIONAR TIPO DE DONACIÓN";
+                    this.lblManttipoDonacion.Text = "SELECCIONAR TIPO DE DONACIÓN";
+                    this.btnSelecTipoDonacion.Visible = true;
+                }
+                else
+                {
+                    btnSelecTipoDonacion.Visible = false;
+                }
+
                 //cargo la lista de tipoDonacion
                 this.tipoDonacionList = tipoDonacionService.consultarTodos();
-                cargarlista(tipoDonacionList.Where(t=>t.estado==true).ToList());
+                cargarlista(tipoDonacionList.Where(t => t.estado == true).ToList());
             }
             //catch personalizados en common.exceptions
             catch (EntityExistDBException ex) { MessageBox.Show(ex.Message); }
@@ -85,7 +107,7 @@ namespace UI
             catch (EntityActiveDBExeption ex) { MessageBox.Show(ex.Message); }
             catch (PhoneExistDBExeption ex) { MessageBox.Show(ex.Message); }
             catch (PriceNegativeException ex) { MessageBox.Show(ex.Message); }
-            
+
             catch (Exception ex)
             {
                 MessageBox.Show("Error al cargar la lista de tipos de donación: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -99,9 +121,9 @@ namespace UI
             {
                 //seleccionar el item
                 int idTipoDonacion = int.Parse(lstvwTipoDonacionLista.SelectedItems[0].SubItems[0].Text);
-                clsTipoDonacion tipoDonacionSelReq = tipoDonacionList.Find(t => t.idTipoDonacion == idTipoDonacion);
+                tipoDonacionSel = tipoDonacionList.Find(t => t.idTipoDonacion == idTipoDonacion);
 
-                cargarRequerimientos(tipoDonacionSelReq);
+                cargarRequerimientos(tipoDonacionSel);
             }
 
         }
@@ -181,7 +203,7 @@ namespace UI
             if (chkbxTipoDonacAct.Checked)
             {
                 // Mostrar solo inactivos
-               var listaInac = tipoDonacionList.Where(t => t.estado == false).ToList();
+                var listaInac = tipoDonacionList.Where(t => t.estado == false).ToList();
                 cargarlista(listaInac);
             }
             else
@@ -190,8 +212,24 @@ namespace UI
                 var listaAct = tipoDonacionList.Where(t => t.estado == true).ToList();
                 cargarlista(listaAct);
             }
-            
+
+        }
+
+        private void btnSelecTipoDonacion_Click(object sender, EventArgs e)
+        {
+            //GUARDO EL TIPO DE DOANCION EN LA PROPIEDAD TIPO DONACION SELECTED Y CIERRO EL FORMULARIO
+            if (tipoDonacionSel != null)
+            {
+                this.tipoDonacionSelected = tipoDonacionSel;
+                this.DialogResult = DialogResult.OK;
+                this.Close();
+            }
+            else
+            {
+                MessageBox.Show("No se ha seleccionado ningún tipo de donación.", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+
+            }
         }
     }
-    
+
 }

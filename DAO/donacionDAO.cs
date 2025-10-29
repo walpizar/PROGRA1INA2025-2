@@ -41,7 +41,11 @@ namespace DAO
 
         public List<clsDonacion> consultarTodos()
         {
-            return context.donacion.ToList();
+            return context.donacion
+                .Include(d => d.donante)
+                .Include(d => d.tipoDonacion)
+                .Include(d => d.activos)
+                .ToList();
         }
 
         public void crear(clsDonacion entidad)

@@ -180,7 +180,7 @@
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1173, 545);
+            ClientSize = new Size(1164, 545);
             Controls.Add(btnDonanteSelect);
             Controls.Add(btnNuevoDonante);
             Controls.Add(gbxDonanteLista);

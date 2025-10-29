@@ -150,6 +150,7 @@ namespace UI
                         //valores de donante
                         donanteSelected.tipoDonante = (int)(tipoDonante)cboxDonanteTipo.SelectedItem;
                         donanteSelected.personaTipoId = (int)(TipoIdentificacion)cboxDonanteTipoID.SelectedItem;
+                        donanteSelected.estado = true; //si se modifica, queda activo
 
                         donanteService.modificar(donanteSelected);
                         MessageBox.Show("Donante modificado correctamente");
@@ -179,6 +180,7 @@ namespace UI
             {
                 MessageBox.Show("Error al eliminar el donante: " + ex.Message);
             }
+            
         }
 
         private bool validarCampos()

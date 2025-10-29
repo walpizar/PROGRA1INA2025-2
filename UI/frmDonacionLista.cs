@@ -52,13 +52,17 @@ namespace UI
 
             foreach (var donacion in donacionLst)
             {
-                var idTipoDonacionName = donacion.tipoDonacion != null ? donacion.tipoDonacion.nombreTipoDonacion : "Sin tipo";
+                // Usar la instancia actual en lugar de buscarla de nuevo en la lista
+                var tipoDonacion = donacion.tipoDonacion;
+
                 var item = new ListViewItem(donacion.idDonacion.ToString());
-                item.SubItems.Add(donacion.donanteId.ToString());
-                //var tipoDonacionNombre = donacion.tipoDonacion?.nombreTipoDonacion ?? "Sin tipo";
-                item.SubItems.Add(idTipoDonacionName);
+                item.SubItems.Add(donacion.donanteId?.ToString() ?? string.Empty);
+
+                // Si quieres mostrar el nombre del tipo de donación:
+                item.SubItems.Add(tipoDonacion != null ? tipoDonacion.nombreTipoDonacion : "Sin tipo");
+
                 item.SubItems.Add(donacion.fechaDonacion.ToString("dd/MM/yyyy"));
-                item.SubItems.Add(donacion.observaciones);
+                item.SubItems.Add(donacion.observaciones ?? string.Empty);
 
                 lstvwDonacionLista.Items.Add(item);
             }

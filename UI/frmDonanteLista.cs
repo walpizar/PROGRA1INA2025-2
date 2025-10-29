@@ -41,7 +41,7 @@ namespace UI
                 {
                     this.Text = "SELECCIONAR DONANTE";
                     this.lblMantDonante.Text = "SELECCIONAR DONANTE";
-                    this.btnDonanteSelect.Visible = true; //oculto el boton nuevo donante
+                    this.btnDonanteSelect.Visible = true; 
                 }
                 else
                 {
@@ -99,7 +99,7 @@ namespace UI
             //AL CERRAR EL FORMULARIO, ACTUALIZO LA LISTA
             chkbxDonanteActivar.Checked = false; //vuelvo a mostrar los activos
             donanteLst = donanteService.consultarTodos();
-            cargarLista(donanteLst);
+            cargarLista(donanteLst.FindAll(d => d.estado == true));
         }
 
         private void lstvwDonanteLista_MouseDoubleClick_1(object sender, MouseEventArgs e)
@@ -120,7 +120,7 @@ namespace UI
                 //al cerrar el formulario, actualizo la lista
                 chkbxDonanteActivar.Checked = false; //vuelvo a mostrar los activos
                 donanteLst = donanteService.consultarTodos();
-                cargarLista(donanteLst.Where(d => d.estado == true).ToList());
+                cargarLista(donanteLst.FindAll(d => d.estado == true));
             }
         }
 
@@ -128,10 +128,13 @@ namespace UI
         {
             //filtro la lista de donantes por nombre, apellido o email
             var filtro = txtbxBuscarDonante.Text.ToLower();
-            var donanteFiltrado = donanteLst.Where(d => d.persona.nombre.ToLower().Contains(filtro) ||
+            var listaFiltrada = donanteLst.Where(d => d.estado == true).ToList();
+
+            var donanteFiltrado = listaFiltrada.Where(d => d.persona.nombre.ToLower().Contains(filtro) ||
                                                        d.persona.apellido1.ToLower().Contains(filtro) ||
                                                        d.persona.apellido2.ToLower().Contains(filtro) ||
-                                                       d.persona.email.ToLower().Contains(filtro));
+                                                       d.persona.email.ToLower().Contains(filtro)).ToList();
+            cargarLista(donanteFiltrado);
         }
 
         private void lstvwDonanteLista_MouseClick(object sender, MouseEventArgs e)

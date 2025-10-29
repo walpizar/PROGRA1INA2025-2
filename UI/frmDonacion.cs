@@ -17,13 +17,19 @@ namespace UI
     {
         //parametro para saber si estoy en modo creacion o edicion
         public clsDonacion donacionSelected { get; set; }
-        
+
         //instancio el servicio de donacion
         public DonacionService donacionService;
 
-        
+
         //donante tipoId seleccionado       
         private int tipoIdSeleccionado; // Campo privado en el formulario
+
+        // campo privado para almacenar el tipo de donación seleccionado
+        private clsTipoDonacion tipoDonacionSelected;
+
+        //campo privado para donante seleccionado
+        private clsDonante donanteSeleccionado;
 
         public frmDonacion()
         {
@@ -35,6 +41,14 @@ namespace UI
         private void frmDonacion_Load(object sender, EventArgs e)
         {
             cargarCombo();
+
+            //CAMPOS DE SOLO LECTURA
+            txtbxDonacionID.ReadOnly = true;
+            txtbxDonacionDonanteID.ReadOnly = true;
+            txtbxDonacionTipoIdDonante.ReadOnly = true;
+            txtbxDonacionIdTipoDonacion.ReadOnly = true;
+            txtbxDonacionNombTipoDonacion.ReadOnly = true;
+
             if (donacionSelected != null)
             {
                 //estoy en modo edicion
@@ -43,9 +57,7 @@ namespace UI
                 btnGuardarDonacion.Text = "MODIFICAR";
                 lblCrearDonacion.Text = "MODIFICAR DONACION";
                 btnEliminarDonacion.Visible = true;
-                txtbxDonacionID.ReadOnly = true;
-                txtbxDonacionDonanteID.ReadOnly = true;
-                txtbxDonacionTipoIdDonante.ReadOnly = true;
+
 
 
                 //METODO CARGAR FORMULARIO MODIFICAR DONACION
@@ -56,9 +68,7 @@ namespace UI
                 //estoy en modo creacion
                 //oculto el boton eliminar
                 btnEliminarDonacion.Visible = false;
-                txtbxDonacionID.ReadOnly = true;
-                txtbxDonacionDonanteID.ReadOnly = true;
-                txtbxDonacionTipoIdDonante.ReadOnly = true;
+
                 //limpio el formulario
                 limpiarFrom();
 
@@ -93,47 +103,57 @@ namespace UI
 
         private void cargarFormModificarDonacion()
         {
-            //cargo los datos del donacionSelected en el formulario
+            // cargo los datos del donacionSelected en el formulario
             txtbxDonacionID.Text = donacionSelected.idDonacion.ToString();
             txtbxDonacionDonanteID.Text = donacionSelected.donanteId.ToString();
+            txtbxDonacionObservaciones.Text = donacionSelected.observaciones;
+
+            // si la entidad donacion trae el tipo de donacion cargado, lo uso
             if (donacionSelected.tipoDonacion != null)
             {
-                cboxDonacionIdTipoDonacion.SelectedValue = donacionSelected.tipoDonacion.idTipoDonacion;
+                tipoDonacionSelected = donacionSelected.tipoDonacion;
+                txtbxDonacionIdTipoDonacion.Text = tipoDonacionSelected.idTipoDonacion.ToString();
+                txtbxDonacionNombTipoDonacion.Text = tipoDonacionSelected.nombreTipoDonacion;
+
                 ActualizarDatosTipoDonacion();
             }
+            else
+            {
+                // opcional: cargar desde servicio por id si hace falta
+                // tipoDonacionSelected = tipoDonacionService.consultarPorID(donacionSelected.idTipoDonacion);
+                // if (tipoDonacionSelected != null) ActualizarDatosTipoDonacion();
+            }
+        }
 
-
-            //seleccionar el tipo de donacion en el combo
-
+        private void txtbxDonacionIdTipoDonacion_TextChanged(object sender, EventArgs e)
+        {
+            ActualizarDatosTipoDonacion();
         }
         private void ActualizarDatosTipoDonacion()
         {
-            // Obtiene el tipo de donación seleccionado
-            var tipoDonacion=cboxDonacionIdTipoDonacion.SelectedItem as tipoDonacion?;
-            //var tipoDonacion = cboxDonacionIdTipoDonacion.SelectedItem as clsTipoDonacion;
-            if (tipoDonacion == null)
+            // Si no hay tipo seleccionado => ocultar campos opcionales
+            if (tipoDonacionSelected == null)
             {
-                // Si no hay selección, oculta todos los campos opcionales
                 txtbxDonacionMonto.Visible = false;
                 cboxDonacionTipoTrans.Visible = false;
                 cboxDonacionFrecuencia.Visible = false;
                 cboxDonacionTipoMoneda.Visible = false;
-
                 return;
             }
 
-            /*/ Actualiza la visibilidad de los campos según los requerimientos del tipo de donación
-            txtbxDonacionMonto.Visible = tipoDonacion.requiereMonto ?? false;
-            cboxDonacionTipoTrans.Visible = tipoDonacion.requiereTipoTransaccion ?? false;
-            cboxDonacionFrecuencia.Visible = tipoDonacion.requiereFrecuencia ?? false;
-            cboxDonacionTipoMoneda.Visible = tipoDonacion.requiereTipoMoneda ?? false;*/
+            // Uso directamente las propiedades de la entidad (son bool?)
+            txtbxDonacionMonto.Visible = tipoDonacionSelected.requiereMonto ?? false;
+            cboxDonacionTipoTrans.Visible = tipoDonacionSelected.requiereTipoTransaccion ?? false;
+            cboxDonacionTipoMoneda.Visible = tipoDonacionSelected.requiereTipoMoneda ?? false;
 
+
+            // Si oculto un control, limpio su valor para evitar datos inconsistentes al guardar
+            if (!txtbxDonacionMonto.Visible) txtbxDonacionMonto.Clear();
+            if (!cboxDonacionTipoTrans.Visible) cboxDonacionTipoTrans.SelectedIndex = -1;
+            if (!cboxDonacionTipoMoneda.Visible) cboxDonacionTipoMoneda.SelectedIndex = -1;
         }
 
-        private void cboxDonacionIdTipoDonacion_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            ActualizarDatosTipoDonacion();
-        }
+
 
         private void limpiarFrom()
         {
@@ -144,7 +164,6 @@ namespace UI
             txtbxDonacionMonto.Clear();
             txtbxDonacionObservaciones.Clear();
 
-            cboxDonacionIdTipoDonacion.SelectedIndex = -1;
             cboxDonacionTipoTrans.SelectedIndex = -1;
             cboxDonacionFrecuencia.SelectedIndex = -1;
             cboxDonacionTipoMoneda.SelectedIndex = -1;
@@ -154,21 +173,6 @@ namespace UI
 
         private void cargarCombo()
         {
-            //cargo el combo de tipo de donacion
-            //cboxDonacionIdTipoDonacion.DataSource=Enum.GetValues(typeof(tipoDonacion));
-            try
-            {
-                tipoDonacionService tipoDonacionService = new tipoDonacionService();
-                List<clsTipoDonacion> tipoDonacionList = tipoDonacionService.consultarTodos();
-                cboxDonacionIdTipoDonacion.DataSource = tipoDonacionList;
-                cboxDonacionIdTipoDonacion.DisplayMember = "nombreTipoDonacion";
-                cboxDonacionIdTipoDonacion.ValueMember = "idTipoDonacion";
-                cboxDonacionIdTipoDonacion.SelectedIndex = -1; //para que no seleccione nada al cargar
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Error al cargar el combo de tipo de donación: " + ex.Message);
-            }
 
             //cargo combo tipo transaccion
             cboxDonacionTipoTrans.DataSource = Enum.GetValues(typeof(tipoTransaccion));
@@ -183,20 +187,23 @@ namespace UI
 
         private void btnDonacionSelectIdDonante_Click(object sender, EventArgs e)
         {
+            //abro el formulario de donante lista en modo seleccion
             frmDonanteLista formularioDonanteLista = new frmDonanteLista();
             formularioDonanteLista.esSeleccion = true;
             formularioDonanteLista.ShowDialog();
 
-            if (formularioDonanteLista.donanteSelected != null)
+            //al cerrar el formulario, verifico si se selecciono un donante
+            donanteSeleccionado = formularioDonanteLista.donanteSelected;
+
+            if (donanteSeleccionado != null)
             {
+                //cargo los datos del donante seleccionado en el formulario
                 txtbxDonacionDonanteID.Text = formularioDonanteLista.donanteSelected.personaId.ToString();
                 tipoIdSeleccionado = formularioDonanteLista.donanteSelected.personaTipoId;
 
-                string tipo = Enum.IsDefined(typeof(TipoIdentificacion), tipoIdSeleccionado)
-                    ? ((TipoIdentificacion)tipoIdSeleccionado).ToString().Replace("_", " ")
-                    : "DESCONOCIDO";
-
-                txtbxDonacionTipoIdDonante.Text = tipo; // Solo para mostrar
+                //asocio el tipo de identificacion seleccionado con los que tengo en el enum
+                string tipo = Enum.GetName(typeof(TipoIdentificacion), tipoIdSeleccionado)?.Replace("_", " ") ?? "DESCONOCIDO";
+                txtbxDonacionTipoIdDonante.Text = tipo;
             }
         }
 
@@ -226,11 +233,11 @@ namespace UI
             }
         }
 
-        
+
         private void btnGuardarDonacion_Click_1(object sender, EventArgs e)
         {
 
-        
+
             try
             {
                 if (validarCampos())
@@ -239,10 +246,10 @@ namespace UI
                     {
                         clsDonacion nuevaDonacion = new clsDonacion
                         {
-                           // idDonacion = int.Parse(txtbxDonacionID.Text),
+                            // idDonacion = int.Parse(txtbxDonacionID.Text),
                             donanteId = (txtbxDonacionDonanteID.Text),
                             donanteTipoId = tipoIdSeleccionado,
-                            idTipoDonacion = (int)cboxDonacionIdTipoDonacion.SelectedValue,
+                            idTipoDonacion = tipoDonacionSelected.idTipoDonacion,
                             fechaDonacion = datepkDonacionFecha.Value,
                             monto = txtbxDonacionMonto.Visible ? decimal.Parse(txtbxDonacionMonto.Text) : (decimal?)null,
                             tipoTransaccion = (int?)(cboxDonacionTipoTrans.Visible ? (tipoTransaccion?)cboxDonacionTipoTrans.SelectedItem : null),
@@ -251,7 +258,6 @@ namespace UI
                             observaciones = txtbxDonacionObservaciones.Text,
 
                             estado = true
-
                         };
 
                         //llamo al servicio para crear la donacion
@@ -263,7 +269,7 @@ namespace UI
                         //actualizar la donacionSelected con los nuevos valores del formulario
                         donacionSelected.donanteId = (txtbxDonacionDonanteID.Text);
                         donacionSelected.donanteTipoId = tipoIdSeleccionado;
-                        donacionSelected.idTipoDonacion = (int)cboxDonacionIdTipoDonacion.SelectedValue;
+                        donacionSelected.idTipoDonacion = tipoDonacionSelected.idTipoDonacion;
                         donacionSelected.fechaDonacion = datepkDonacionFecha.Value;
                         donacionSelected.monto = txtbxDonacionMonto.Visible ? decimal.Parse(txtbxDonacionMonto.Text) : (decimal?)null;
                         donacionSelected.tipoTransaccion = (int?)(cboxDonacionTipoTrans.Visible ? (tipoTransaccion?)cboxDonacionTipoTrans.SelectedItem : null);
@@ -293,21 +299,22 @@ namespace UI
                 MessageBox.Show("El ID del donante es obligatorio");
                 return false;
             }
-            if (cboxDonacionIdTipoDonacion.SelectedIndex == -1)
+            /*if (cboxDonacionIdTipoDonacion.SelectedIndex == -1)
             {
                 MessageBox.Show("El tipo de donación es obligatorio");
                 return false;
-            }
+            }*/
             if (datepkDonacionFecha.Value > DateTime.Now)
             {
                 MessageBox.Show("La fecha de donación no puede ser mayor a la fecha actual");
                 return false;
             }
-            if (txtbxDonacionMonto.Visible)
+            // ejemplo: validar monto según requerimiento del tipo
+            if ((tipoDonacionSelected?.requiereMonto ?? false))
             {
                 if (string.IsNullOrWhiteSpace(txtbxDonacionMonto.Text))
                 {
-                    MessageBox.Show("El monto es obligatorio");
+                    MessageBox.Show("El monto es obligatorio para este tipo de donación");
                     return false;
                 }
                 if (!decimal.TryParse(txtbxDonacionMonto.Text, out decimal monto) || monto <= 0)
@@ -316,6 +323,8 @@ namespace UI
                     return false;
                 }
             }
+            // validar frecuencia/transaccion/moneda usando tipoDonacionSelected?.requiere...
+
             //si la frecuencia, moneda o tipo de transaccion son visibles, deben estar seleccionadas
             if (cboxDonacionFrecuencia.Visible && cboxDonacionFrecuencia.SelectedIndex == -1)
             {
@@ -337,6 +346,47 @@ namespace UI
             return true;
         }
 
-        
+        private void btnDonacionSelectIdTipoDonac_Click(object sender, EventArgs e)
+        {
+            // abro el formulario de tipo donacion lista en modo seleccion
+            frmTipoDonacionLista formTipoDonacionLista = new frmTipoDonacionLista();
+            formTipoDonacionLista.esSeleccion = true;
+            formTipoDonacionLista.ShowDialog();
+
+            // al cerrar el formulario, verifico si se selecciono un tipo de donacion
+            if (formTipoDonacionLista.tipoDonacionSelected != null)
+            {
+                // guardo la entidad seleccionada (fuertemente tipada)
+                tipoDonacionSelected = formTipoDonacionLista.tipoDonacionSelected;
+
+                // cargo los datos del tipo de donacion seleccionado en el formulario
+                txtbxDonacionIdTipoDonacion.Text = tipoDonacionSelected.idTipoDonacion.ToString();
+                txtbxDonacionNombTipoDonacion.Text = tipoDonacionSelected.nombreTipoDonacion;
+
+                // actualizo la visibilidad de los campos según las reglas del tipo
+                ActualizarDatosTipoDonacion();
+            }
+        }
+
+        private void txtbxDonacionDonanteID_TextChanged(object sender, EventArgs e)
+        {
+            activarDesactivarFrec();
+        }
+
+        private void activarDesactivarFrec()
+        {
+            
+            if (donacionSelected.donante.tipoDonante == 1)
+            {
+                cboxDonacionFrecuencia.Visible = tipoDonacionSelected.requiereFrecuencia ?? false;
+            }
+            else
+            {
+                cboxDonacionFrecuencia.Visible = false;
+            }
+
+            // Si oculto un control, limpio su valor para evitar datos inconsistentes al guardar
+            if (!cboxDonacionFrecuencia.Visible) cboxDonacionFrecuencia.SelectedIndex = -1;
+        }
     }
 }
