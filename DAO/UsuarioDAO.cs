@@ -26,15 +26,12 @@ namespace DAO
 
         }
 
-        public void eliminar(string id)
+        public void eliminar(string nombreUsuario)
         {
-            // Se busca el usuario primero para evitar un error de referencia nula
-            var usua = _context.usuario.SingleOrDefault(u => u.personaId == id);
-            if (usua != null)
-            {
-                _context.usuario.Remove(usua);
-                _context.SaveChanges();
-            }
+            var usua = consultarPorID(nombreUsuario);
+            _context.usuario.Remove(usua);
+            _context.SaveChanges();
+           
         }
 
         public clsUsuario consultarPorID(string id)
@@ -57,12 +54,12 @@ namespace DAO
 
         public void eliminar(int id)
         {
-            throw new NotImplementedException();
+            throw new NotImplementedException("Usar eliminar(string nombreUsuario)");
         }
 
         public clsUsuario consultarPorID(int id)
         {
-            throw new NotImplementedException();
+            throw new NotImplementedException("Usar consultarPorID(string nombreUsuario)");
         }
     }
 }
