@@ -39,15 +39,15 @@ namespace UI
 
                 //MessageBox.Show("Cargando usuario: " + usuarioSelected.nombre_Usuario);
 
-                txtUsuario.Text = usuarioSelected.nombre_Usuario;
+                txtUsuario.Text = usuarioSelected.nombre_usuario;
                 txtPassword.Text = usuarioSelected.contrasena;
                 txtConfirmarContraseña.Text = usuarioSelected.contrasena;
-                cboRol.SelectedValue = usuarioSelected.idRol;
+                cboRol.SelectedValue = usuarioSelected.personaId;
 
                 // Si manejás Persona vinculada al usuario
-                if (!string.IsNullOrEmpty(usuarioSelected.id))
+                if (!string.IsNullOrEmpty(usuarioSelected.personaId))
                 {
-                    cboPersona.SelectedValue = usuarioSelected.id;
+                    cboPersona.SelectedValue = usuarioSelected.personaId;
                 }
             }
 
@@ -96,15 +96,15 @@ namespace UI
                         // Crear o actualizar Usuario
                         clsUsuario usuario = usuarioSelected ?? new clsUsuario();
 
-                        usuario.id = personaSeleccionada.id;
-                        usuario.tipoId = personaSeleccionada.tipoId;
-                        usuario.nombre_Usuario = txtUsuario.Text.Trim();
+                        usuario.personaId = personaSeleccionada.id;
+                        usuario.personaTipoId = personaSeleccionada.tipoId;
+                        usuario.nombre_usuario = txtUsuario.Text.Trim();
                         usuario.contrasena = txtPassword.Text;
-                        usuario.idRol = (int)cboRol.SelectedValue;
+                        usuario.rol = (int)cboRol.SelectedValue;
                         usuario.estado = true;
 
                         var existente = context.usuario
-                            .FirstOrDefault(u => u.nombre_Usuario == usuario.nombre_Usuario);
+                            .FirstOrDefault(u => u.nombre_usuario == usuario.nombre_usuario);
 
                         if (existente != null)
                         {
@@ -116,7 +116,19 @@ namespace UI
                             context.usuario.Add(usuario);
                         }
 
-                        context.SaveChanges();
+                        // Crear nuevo usuario
+                        var nuevoUsuario = new clsUsuario
+                        {
+                            personaId = personaSeleccionada.id,
+                            personaTipoId = personaSeleccionada.tipoId,
+                            nombre_usuario = txtUsuario.Text.Trim(),
+                            contrasena = txtPassword.Text.Trim(),
+                            estado = true,
+                            //idRol = (int)cboRol.SelectedValue
+                        };
+
+                        // Guardar en la BD
+                        context.usuario.Add(nuevoUsuario);
                     }
 
                     MessageBox.Show(usuarioSelected == null
@@ -362,6 +374,7 @@ namespace UI
             {
                 if (usuarioSelected != null)
                 {
+
                     DialogResult resp = MessageBox.Show(
                         "¿Está seguro que desea eliminar el usuario?",
                         "Confirmación",
@@ -371,7 +384,7 @@ namespace UI
 
                     if (resp == DialogResult.Yes)
                     {
-                        _usuarioService.eliminar(usuarioSelected.nombre_Usuario);
+                        _usuarioService.eliminar(usuarioSelected.nombre_usuario);
                         MessageBox.Show("Usuario eliminado correctamente.");
                         this.Close();
                     }
@@ -379,6 +392,7 @@ namespace UI
                 else
                 {
                     MessageBox.Show("No hay un usuario seleccionado.");
+
                 }
             }
             catch (Exception ex)

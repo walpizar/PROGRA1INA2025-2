@@ -38,9 +38,9 @@ namespace UI
             lstvLista.Items.Clear();
             foreach (clsUsuario usuario in lista)
             {
-                ListViewItem item = new ListViewItem(usuario.nombre_Usuario);
+                ListViewItem item = new ListViewItem(usuario.nombre_usuario);
                 item.SubItems.Add(usuario.contrasena);
-                item.SubItems.Add(usuario.idRol.ToString());
+                item.SubItems.Add(usuario.rol.ToString());
                 lstvLista.Items.Add(item);
 
             }
@@ -69,7 +69,7 @@ namespace UI
                     string nombreUsuario = lstvLista.SelectedItems[0].SubItems[0].Text;
 
                     // Buscar el usuario en la lista
-                    clsUsuario usuario = lista.FirstOrDefault(u => u.nombre_Usuario == nombreUsuario);
+                    clsUsuario usuario = lista.FirstOrDefault(u => u.nombre_usuario == nombreUsuario);
 
                     if (usuario != null)
                     {
@@ -102,7 +102,7 @@ namespace UI
             else
             {
                 listaFiltrada = this.lista.Where(u =>
-                    (!string.IsNullOrEmpty(u.nombre_Usuario) && u.nombre_Usuario.ToUpper().Contains(criterio)) ||
+                    (!string.IsNullOrEmpty(u.nombre_usuario) && u.nombre_usuario.ToUpper().Contains(criterio)) ||
                     (!string.IsNullOrEmpty(u.contrasena) && u.contrasena.ToUpper().Contains(criterio)) ||
                     u.idRol.ToString().Contains(criterio)
                 ).ToList();
@@ -117,7 +117,7 @@ namespace UI
             if (lstvLista.SelectedItems.Count > 0)
             {
                 string nombreUsuario = lstvLista.SelectedItems[0].SubItems[0].Text;
-                clsUsuario usuario = lista.FirstOrDefault(u => u.nombre_Usuario == nombreUsuario);
+                clsUsuario usuario = lista.FirstOrDefault(u => u.nombre_usuario == nombreUsuario);
 
                 if (usuario != null)
                 {
