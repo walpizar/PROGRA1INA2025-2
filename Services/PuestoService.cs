@@ -1,9 +1,16 @@
+<<<<<<< HEAD
 ﻿using Entities;
+=======
+﻿using Common.Interfaces;
+using DAO;
+using Entities;
+>>>>>>> 416191829142a4485c7b56ec28b08b69ec2982c4
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+<<<<<<< HEAD
 using DAO;
 using Common.Interfaces;
 
@@ -12,6 +19,12 @@ namespace Services
 {
     public class PuestoService:IGenerica<clsPuestos>
 
+=======
+
+namespace Services
+{
+    public class PuestoService : IGenerica<clsPuestos>
+>>>>>>> 416191829142a4485c7b56ec28b08b69ec2982c4
     {
         private readonly PuestosDao _dao = new PuestosDao();
         private DepartamentosService _depService = new DepartamentosService();
@@ -19,7 +32,11 @@ namespace Services
 
         public clsPuestos consultarPorID(int id)
         {
+<<<<<<< HEAD
             return _dao.consultarPorID(id);
+=======
+           return _dao.consultarPorID(id);
+>>>>>>> 416191829142a4485c7b56ec28b08b69ec2982c4
         }
 
         public clsPuestos consultarPorNombre(string nombre)
@@ -164,10 +181,13 @@ namespace Services
         {
             throw new NotImplementedException();
         }
+<<<<<<< HEAD
 
 
 
 
 
+=======
+>>>>>>> 416191829142a4485c7b56ec28b08b69ec2982c4
     }
 }

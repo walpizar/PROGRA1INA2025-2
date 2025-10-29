@@ -69,5 +69,23 @@ namespace Common.Enums
             // Puedes agregar más tipos si el sistema lo requiere
         }
 
+        public enum EstadoCivil 
+        {
+            Soltero = 1,
+            Casado = 2,
+            Divorciado = 3,
+            Viudo = 4,
+            Union_Libre = 5,
+            No_Aplica = 6
+
+        }
+
+        public enum TipoIdentificacion
+        {
+            Cedula_Fisica = 1,
+            Cedula_Juridica = 2,
+            DIMEX = 3
+        }
+
     }
 }

@@ -30,8 +30,11 @@ namespace UI
 
             //cargarCombos();
 
+<<<<<<< HEAD
            // cargarCombos();
 
+=======
+>>>>>>> 416191829142a4485c7b56ec28b08b69ec2982c4
             if (activosSelected != null) // acción de modificar
             {
                 this.lblTitulo.Text = "Modificar Activos";

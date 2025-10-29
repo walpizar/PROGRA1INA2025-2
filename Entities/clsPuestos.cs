@@ -1,4 +1,10 @@
+<<<<<<< HEAD
 ﻿using System.Collections.Generic;
+=======
+﻿using System;
+// <<<<<<< HEAD
+using System.Collections.Generic;
+>>>>>>> 416191829142a4485c7b56ec28b08b69ec2982c4
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;

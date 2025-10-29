@@ -1,9 +1,16 @@
+<<<<<<< HEAD
 ﻿using Entities;
+=======
+﻿using Common.Interfaces;
+using DAO;
+using Entities;
+>>>>>>> 416191829142a4485c7b56ec28b08b69ec2982c4
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+<<<<<<< HEAD
 using DAO;
 
 namespace Services
@@ -11,6 +18,13 @@ namespace Services
     public class DepartamentosService
     {
 
+=======
+
+namespace Services
+{
+    public class DepartamentosService : IGenerica<clsDepartamentos>
+    {
+>>>>>>> 416191829142a4485c7b56ec28b08b69ec2982c4
         private readonly DepartamentosDao _dao = new DepartamentosDao();
 
         private readonly PuestosDao _puestosDao = new PuestosDao();
@@ -131,7 +145,10 @@ namespace Services
         {
             throw new NotImplementedException();
         }
+<<<<<<< HEAD
 
 
+=======
+>>>>>>> 416191829142a4485c7b56ec28b08b69ec2982c4
     }
 }
