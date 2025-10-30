@@ -541,19 +541,15 @@ namespace DAO.Migrations
 
             modelBuilder.Entity("Entities.clsUsuario", b =>
                 {
-                    b.Property<string>("personaId")
-                        .HasColumnType("nvarchar(20)");
+                    b.Property<string>("id")
+                        .HasColumnType("nvarchar(20)")
+                        .HasColumnName("Id");
 
-                    b.Property<int>("personaTipoId")
-                        .HasMaxLength(50)
-                        .HasColumnType("int");
+                    b.Property<int>("tipoId")
+                        .HasColumnType("int")
+                        .HasColumnName("TipoId");
 
                     b.Property<string>("contrasena")
-                        .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
-
-                    b.Property<string>("email")
                         .IsRequired()
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
@@ -561,11 +557,14 @@ namespace DAO.Migrations
                     b.Property<bool>("estado")
                         .HasColumnType("bit");
 
-                    b.Property<string>("nombre_usuario")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("idRol")
+                        .HasColumnType("int");
 
-                    b.HasKey("personaId", "personaTipoId");
+                    b.Property<string>("nombre_Usuario")
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.HasKey("id", "tipoId");
 
                     b.ToTable("tbUsuarios");
                 });
@@ -666,7 +665,7 @@ namespace DAO.Migrations
                 {
                     b.HasOne("Entities.clsPersona", "persona")
                         .WithOne()
-                        .HasForeignKey("Entities.clsUsuario", "personaId", "personaTipoId")
+                        .HasForeignKey("Entities.clsUsuario", "id", "tipoId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
