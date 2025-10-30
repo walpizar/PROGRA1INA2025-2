@@ -1,55 +1,47 @@
-﻿using Common.Interfaces;
-using DAO;
+﻿using DAO;
 using Entities;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Services
 {
-    public class ActivosServices : IGenerica<clsActivos>
+    public class ActivosServices : IDisposable
     {
-        private readonly ActivosDAO _actiDAO = new ActivosDAO();
+        private readonly ActivosDAO _dao;
 
         public ActivosServices()
         {
-        }
-        public clsActivos consultarPorID(int id)
-        {
-            return _actiDAO.consultarPorID(id);
+            _dao = new ActivosDAO(new dbContextINA());
         }
 
-        public clsActivos consultarPorNombre(string nombre)
+        public void crear(clsActivos activo)
         {
-            throw new NotImplementedException();
+            _dao.crear(activo);
+        }
+
+        public void modificar(clsActivos activo)
+        {
+            _dao.modificar(activo);
         }
 
         public List<clsActivos> consultarTodos()
         {
-            return _actiDAO.consultarTodos();
+            return _dao.consultarTodos();
         }
 
-        public void crear(clsActivos activos)
+        public clsActivos consultarPorID(int id)
         {
-            _actiDAO.crear(activos);
+            return _dao.consultarPorID(id);
         }
 
-        // Borrado lógico: se debe pasar la observación de desecho si aplica
-        public void eliminar(int id, string observacionDesecho = null)
+        public void DarDeBajaActivo(int id)
         {
-            _actiDAO.eliminar(id, observacionDesecho);
+            _dao.EliminarActivo(id);
         }
 
-        public void eliminar(int id)
+        public void Dispose()
         {
-            eliminar(id, null);
-        }
-
-        public void modificar(clsActivos activos)
-        {
-            _actiDAO.modificar(activos);
+            _dao.Dispose();
         }
     }
 }

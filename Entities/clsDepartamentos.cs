@@ -7,7 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace Entities
-{
+{ 
     [Table("tbDepartamento")]
     public class clsDepartamentos
     {

@@ -1,18 +1,17 @@
-﻿using Common.Interfaces;
-using Entities;
-using Microsoft.EntityFrameworkCore;
+﻿using Entities;
 using System.Collections.Generic;
 using System.Linq;
 
 namespace DAO
 {
-    public class EspecialidadDao : IGenerica<clsEspecialidadMedica>
+    public class EspecialidadDao
     {
-        private dbContextINA _context;
+        // CRUD
+        private dbContextINA _context; //CONTEXTO DE BASE DE DATOS
 
         public EspecialidadDao()
         {
-            _context = new dbContextINA();
+            _context = new dbContextINA(); //INICIALIZAR EL CONTEXTO
         }
 
         public void crear(clsEspecialidadMedica especialidad)
@@ -29,9 +28,12 @@ namespace DAO
 
         public void eliminar(int id)
         {
-            var esp = consultarPorID(id);
-            _context.EspecialidadesMedicas.Remove(esp);
-            _context.SaveChanges();
+            var especialidad = consultarPorID(id);
+            if (especialidad != null)
+            {
+                _context.EspecialidadesMedicas.Remove(especialidad);
+                _context.SaveChanges();
+            }
         }
 
         public clsEspecialidadMedica consultarPorID(int id)
@@ -51,16 +53,6 @@ namespace DAO
         public List<clsEspecialidadMedica> consultarTodos()
         {
             return _context.EspecialidadesMedicas.ToList();
-        }
-
-        public void eliminar(string id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public clsEspecialidadMedica consultarPorID(string id)
-        {
-            throw new NotImplementedException();
         }
     }
 }

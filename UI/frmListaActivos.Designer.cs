@@ -28,8 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
-            btnNuevo = new Button();
             gbxLista = new GroupBox();
+            btnCrear = new Button();
             label1 = new Label();
             txtBusqueda = new TextBox();
             lstvListaActivos = new ListView();
@@ -37,33 +37,39 @@
             colNombre = new ColumnHeader();
             colDescripcion = new ColumnHeader();
             colIdCategoria = new ColumnHeader();
+            colNomCategoria = new ColumnHeader();
+            colEstadoUso = new ColumnHeader();
+            colEstado = new ColumnHeader();
+            colfechadesecho = new ColumnHeader();
+            colObservaciones = new ColumnHeader();
             lblTitulo = new Label();
             gbxLista.SuspendLayout();
             SuspendLayout();
             // 
-            // btnNuevo
-            // 
-            btnNuevo.FlatAppearance.BorderColor = Color.Red;
-            btnNuevo.FlatAppearance.BorderSize = 3;
-            btnNuevo.Location = new Point(459, 16);
-            btnNuevo.Name = "btnNuevo";
-            btnNuevo.Size = new Size(120, 40);
-            btnNuevo.TabIndex = 4;
-            btnNuevo.Text = "Salir";
-            btnNuevo.UseVisualStyleBackColor = true;
-            btnNuevo.Click += (s, e) => this.Close();
-            // 
             // gbxLista
             // 
+            gbxLista.Controls.Add(btnCrear);
             gbxLista.Controls.Add(label1);
             gbxLista.Controls.Add(txtBusqueda);
             gbxLista.Controls.Add(lstvListaActivos);
             gbxLista.Location = new Point(12, 61);
             gbxLista.Name = "gbxLista";
-            gbxLista.Size = new Size(637, 387);
+            gbxLista.Size = new Size(1127, 387);
             gbxLista.TabIndex = 5;
             gbxLista.TabStop = false;
             gbxLista.Text = "Lista Activos";
+            // 
+            // btnCrear
+            // 
+            btnCrear.FlatAppearance.BorderColor = Color.Red;
+            btnCrear.FlatAppearance.BorderSize = 3;
+            btnCrear.Location = new Point(790, 27);
+            btnCrear.Name = "btnCrear";
+            btnCrear.Size = new Size(120, 40);
+            btnCrear.TabIndex = 4;
+            btnCrear.Text = "Nuevo";
+            btnCrear.UseVisualStyleBackColor = true;
+            btnCrear.Click += btnCrear_Click_1;
             // 
             // label1
             // 
@@ -80,21 +86,22 @@
             txtBusqueda.Name = "txtBusqueda";
             txtBusqueda.Size = new Size(600, 23);
             txtBusqueda.TabIndex = 3;
-            txtBusqueda.TextChanged += txtBusqueda_TextChanged;
+            txtBusqueda.TextChanged += txtBusqueda_TextChanged_1;
             // 
             // lstvListaActivos
             // 
-            lstvListaActivos.Columns.AddRange(new ColumnHeader[] { colId, colNombre, colDescripcion, colIdCategoria });
+            lstvListaActivos.Columns.AddRange(new ColumnHeader[] { colId, colNombre, colDescripcion, colIdCategoria, colNomCategoria, colEstadoUso, colEstado, colfechadesecho, colObservaciones });
             lstvListaActivos.FullRowSelect = true;
             lstvListaActivos.GridLines = true;
-            lstvListaActivos.Location = new Point(15, 88);
+            lstvListaActivos.Location = new Point(19, 88);
             lstvListaActivos.MultiSelect = false;
             lstvListaActivos.Name = "lstvListaActivos";
-            lstvListaActivos.Size = new Size(603, 293);
+            lstvListaActivos.Size = new Size(1085, 293);
             lstvListaActivos.TabIndex = 0;
             lstvListaActivos.UseCompatibleStateImageBehavior = false;
             lstvListaActivos.View = View.Details;
-            lstvListaActivos.MouseDoubleClick += lstvListaActivos_MouseDoubleClick;
+            
+            lstvListaActivos.MouseDoubleClick += lstvListaActivos_MouseDoubleClick_1;
             // 
             // colId
             // 
@@ -104,7 +111,7 @@
             // colNombre
             // 
             colNombre.Text = "Nombre";
-            colNombre.Width = 200;
+            colNombre.Width = 100;
             // 
             // colDescripcion
             // 
@@ -114,13 +121,38 @@
             // colIdCategoria
             // 
             colIdCategoria.Text = "ID Categoria";
-            colIdCategoria.Width = 150;
+            colIdCategoria.Width = 100;
+            // 
+            // colNomCategoria
+            // 
+            colNomCategoria.Text = "Nombre Categoria";
+            colNomCategoria.Width = 150;
+            // 
+            // colEstadoUso
+            // 
+            colEstadoUso.Text = "Estado de Uso";
+            colEstadoUso.Width = 120;
+            // 
+            // colEstado
+            // 
+            colEstado.Text = "Estado Activo";
+            colEstado.Width = 120;
+            // 
+            // colfechadesecho
+            // 
+            colfechadesecho.Text = "Fecha desecho";
+            colfechadesecho.Width = 90;
+            // 
+            // colObservaciones
+            // 
+            colObservaciones.Text = "Observaciones desecho";
+            colObservaciones.Width = 150;
             // 
             // lblTitulo
             // 
             lblTitulo.AutoSize = true;
             lblTitulo.Font = new Font("Segoe UI", 15.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            lblTitulo.Location = new Point(169, 16);
+            lblTitulo.Location = new Point(401, 18);
             lblTitulo.Name = "lblTitulo";
             lblTitulo.Size = new Size(243, 30);
             lblTitulo.TabIndex = 3;
@@ -130,8 +162,7 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(660, 489);
-            Controls.Add(btnNuevo);
+            ClientSize = new Size(1152, 489);
             Controls.Add(gbxLista);
             Controls.Add(lblTitulo);
             Name = "frmListaActivos";
@@ -144,8 +175,6 @@
         }
 
         #endregion
-
-        private Button btnNuevo;
         private GroupBox gbxLista;
         private Label label1;
         private TextBox txtBusqueda;
@@ -155,5 +184,11 @@
         private ColumnHeader colDescripcion;
         private Label lblTitulo;
         private ColumnHeader colIdCategoria;
+        private Button btnCrear;
+        private ColumnHeader colNomCategoria;
+        private ColumnHeader colEstadoUso;
+        private ColumnHeader colEstado;
+        private ColumnHeader colfechadesecho;
+        private ColumnHeader colObservaciones;
     }
 }

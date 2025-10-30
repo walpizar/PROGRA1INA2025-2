@@ -1,20 +1,18 @@
-﻿using Common.Interfaces;
-using Entities;
+﻿using Entities;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 
 namespace DAO
 {
-    public class ActivosDAO : IGenerica<clsActivos>
+    public class ActivosDAO : IDisposable
     {
-        private dbContextINA _context;
+        private readonly dbContextINA _context;
 
-        public ActivosDAO()
+        public ActivosDAO(dbContextINA context)
         {
-            _context = new dbContextINA();
+            _context = context;
         }
 
         public void crear(clsActivos activo)
@@ -25,58 +23,37 @@ namespace DAO
 
         public void modificar(clsActivos activo)
         {
-            var local = _context.Activos.Local.FirstOrDefault(a => a.idActivo == activo.idActivo);
-            if (local != null)
-            {
-                _context.Entry(local).State = Microsoft.EntityFrameworkCore.EntityState.Detached;
-            }
-            _context.Entry(activo).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
+            _context.Activos.Update(activo);
             _context.SaveChanges();
         }
 
-        // Borrado lógico: solo cambia el estado a false, y si corresponde, marca fecha y observación de desecho
-        public void eliminar(int id, string observacionDesecho = null)
+        public List<clsActivos> consultarTodos()
         {
-            var activo = consultarPorID(id);
-            if (activo != null)
-            {
-                activo.estado = false; // Borrado lógico
-                activo.estadoUso = 2; // 2 = desechado
-                activo.fechaDesecho = DateTime.Now;
-                if (!string.IsNullOrWhiteSpace(observacionDesecho))
-                    activo.observacionDesecho = observacionDesecho;
-                _context.Activos.Update(activo);
-                _context.SaveChanges();
-            }
+            return _context.Activos
+                .Include(a => a.categoria) // Incluye la categoría relacionada
+                .ToList(); // Eliminado el filtro .Where(a => a.Estado) para incluir activos con Estado = false
         }
 
         public clsActivos consultarPorID(int id)
         {
-            return _context.Activos.SingleOrDefault(p => p.idActivo == id);
-        }
-
-        public clsActivos consultarPorNombre(string nombre)
-        {
             return _context.Activos
-                .SingleOrDefault(p => p.nombreActivo.Trim().ToUpper() == nombre.Trim().ToUpper());
+                .Include(a => a.categoria)
+                .FirstOrDefault(a => a.idActivo == id && a.Estado);
         }
 
-        // Solo retorna activos no eliminados lógicamente
-        public List<clsActivos> consultarTodos()
+        public void EliminarActivo(int id)
         {
-            return _context.Activos.ToList(); // Mostrar todos, incluso los dados de baja
+            var activo = _context.Activos.FirstOrDefault(a => a.idActivo == id);
+            if (activo != null)
+            {
+                activo.Estado = false; // Cambia a dado de baja
+                _context.SaveChanges();
+            }
         }
 
-        // Implementación requerida por la interfaz, pero no utilizada
-        public void eliminar(int id)
+        public void Dispose()
         {
-            // Puedes lanzar una excepción o dejarlo vacío si no se usa
-            throw new NotImplementedException();
-        }
-
-        public clsActivos consultarPorID(string id)
-        {
-            throw new NotImplementedException();
+            _context?.Dispose();
         }
     }
 }

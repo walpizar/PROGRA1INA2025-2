@@ -29,7 +29,6 @@
         private void InitializeComponent()
         {
             gbxClientes = new GroupBox();
-            btnLista = new Button();
             cbxCategorias = new ComboBox();
             label6 = new Label();
             txtUbicacion = new TextBox();
@@ -59,7 +58,6 @@
             // 
             // gbxClientes
             // 
-            gbxClientes.Controls.Add(btnLista);
             gbxClientes.Controls.Add(cbxCategorias);
             gbxClientes.Controls.Add(label6);
             gbxClientes.Controls.Add(txtUbicacion);
@@ -90,16 +88,7 @@
             gbxClientes.TabIndex = 5;
             gbxClientes.TabStop = false;
             gbxClientes.Text = "Datos Activos:";
-            // 
-            // btnLista
-            // 
-            btnLista.Location = new Point(400, 280);
-            btnLista.Name = "btnLista";
-            btnLista.Size = new Size(150, 40);
-            btnLista.TabIndex = 38;
-            btnLista.Text = "Listar Activos";
-            btnLista.UseVisualStyleBackColor = true;
-            btnLista.Click += btnLista_Click;
+            gbxClientes.Enter += gbxClientes_Enter;
             // 
             // cbxCategorias
             // 
@@ -163,7 +152,7 @@
             btnEliminar.TabIndex = 36;
             btnEliminar.Text = "Eliminar";
             btnEliminar.UseVisualStyleBackColor = true;
-            btnEliminar.Click += btnEliminar_Click;
+            btnEliminar.Click += btnEliminar_Click_1;
             // 
             // btnGuardar
             // 
@@ -183,7 +172,7 @@
             btnCancelar.TabIndex = 37;
             btnCancelar.Text = "Cancelar";
             btnCancelar.UseVisualStyleBackColor = true;
-            btnCancelar.Click += btnCancelar_Click;
+            btnCancelar.Click += btnCancelar_Click_1;
             // 
             // txtfecha
             // 
@@ -274,7 +263,6 @@
             cbxEstadoUso.Name = "cbxEstadoUso";
             cbxEstadoUso.Size = new Size(180, 29);
             cbxEstadoUso.TabIndex = 16;
-            cbxEstadoUso.SelectedIndexChanged += cbxEstadoUso_SelectedIndexChanged;
             // 
             // lblFechaDesecho
             // 
@@ -368,6 +356,5 @@
         private Label label6;
         private TextBox txtUbicacion;
         private Label label5;
-        private Button btnLista;
     }
 }

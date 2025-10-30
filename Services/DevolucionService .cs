@@ -28,7 +28,7 @@ namespace Services
             // Eliminar el uso de ?? string.Empty y .Trim() sobre bool
             // var estado = (activo.estado ?? string.Empty).Trim();
             // Si necesitas filtrar por estado lógico, usa:
-            bool estado = activo.estado;
+            bool estado = activo.Estado;
             if (estado != true)
             {
                 throw new Exception("El activo no está prestado. No es posible registrar la devolución.");

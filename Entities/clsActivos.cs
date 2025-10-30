@@ -9,7 +9,7 @@ namespace Entities
     public class clsActivos
     {
         [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.None)] // Ya no es autonumérico
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)] // Autogeneración del ID
         public int idActivo { get; set; }
 
         [Required]
@@ -19,14 +19,13 @@ namespace Entities
         [StringLength(200, ErrorMessage = "La descripción no puede tener más de 200 caracteres")]
         public string descripcion { get; set; }
 
-        // Estado lógico: true = activo, false = dado de baja
         [Required]
-        public bool estado { get; set; }
+        public bool Estado { get; set; } // true = Activo, false = Dado de baja
 
-        // Estado de uso: 0 = disponible, 1 = prestado, 2 = desechado, 3 = en uso, etc.
         [Required]
         public int estadoUso { get; set; }
 
+        [Required]
         [Column(TypeName = "date")]
         public DateTime fechaAdquisicion { get; set; }
 
@@ -36,7 +35,7 @@ namespace Entities
         [StringLength(100, ErrorMessage = "La ubicación no puede tener más de 100 caracteres")]
         public string ubicacion { get; set; }
 
-        // Campos de auditoría
+        [Required]
         [Column(TypeName = "datetime")]
         public DateTime fechaCreacion { get; set; }
 
@@ -49,20 +48,17 @@ namespace Entities
         [StringLength(50, ErrorMessage = "El usuario de modificación no puede tener más de 50 caracteres")]
         public string usuarioModificacion { get; set; }
 
-        // Relación con Categoría de Activos (FK)
+        // 🔹 Relación con categoría
         [Required]
         public int idCategoria { get; set; }
 
         [ForeignKey("idCategoria")]
         public clsCategoriaActivos categoria { get; set; }
 
-        // Relación con Devoluciones (uno a muchos)
-        public List<clsDevolucion> devoluciones { get; set; }
+        // 🔹 Relación con devoluciones
+        public List<clsDevolucion> devoluciones { get; set; } = new List<clsDevolucion>();
 
-        // Relación: Un Activo puede estar en muchas DonacionActivos
-        public ICollection<clsDonacionesActivos> donacionActivos { get; set; }
-
-        // Nuevos campos para desecho
+        // Solo pueden ser nulos si estadoUso == 2 (Desechado)
         [Column(TypeName = "date")]
         public DateTime? fechaDesecho { get; set; }
 
@@ -71,8 +67,23 @@ namespace Entities
 
         public clsActivos()
         {
-            this.devoluciones = new List<clsDevolucion>();
             this.fechaCreacion = DateTime.Now;
+            // Inicializar campos de desecho como null
+            this.fechaDesecho = null;
+            this.observacionDesecho = null;
+        }
+
+        /// <summary>
+        /// Validación para asegurar que solo se registren datos de desecho
+        /// si el activo está en estado de uso == 2 (Desechado).
+        /// </summary>
+        public void ValidarDesecho()
+        {
+            if (estadoUso != 2)
+            {
+                fechaDesecho = null;
+                observacionDesecho = null;
+            }
         }
     }
 }
